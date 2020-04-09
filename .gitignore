@@ -1,0 +1,10 @@
+#ignore CMakeFiles
+CMakeFiles
+CMakeFiles/*
+
+#ignore CMakeCache.txt
+CMakeCache.txt
+
+#ignore build folder
+build
+build/*
