@@ -1,4 +1,4 @@
-
+# Table of contents
 
 - [General Information](#general-information)
   - [Sapphire](#sapphire)
@@ -13,6 +13,7 @@
   - [Using Sapphire](#using-sapphire)
 
 --- 
+
 # General Information
 
 ## Sapphire
@@ -75,7 +76,6 @@ where X is the heavy nucleus and a is the projectile. Examples are 25Mg+a or 60F
 # Features
 
 ## Calculate Cross Sections
-
 
 
 # References
