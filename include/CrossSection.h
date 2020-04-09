@@ -64,9 +64,9 @@ class CrossSection {
   static bool residualProton_;
   static bool residualAlpha_;
   static bool calculateGammaCutoff_;
-  const static double minEnergy_ = 0.001;
-  const static double maxEnergy_ = 30.0;
-  const static double dE_ = .1;
+  constexpr static double minEnergy_ = 0.001;
+  constexpr static double maxEnergy_ = 30.0;
+  constexpr static double dE_ = .1;
   bool gammaCutoffSet_;
   bool isValid_;
   bool energiesGiven_;

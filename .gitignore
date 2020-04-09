@@ -10,5 +10,5 @@ build
 build/*
 
 #ignore doxygen configs
-doxygen_config
-doxygen_config/
+#doxygen_config
+#doxygen_config/
