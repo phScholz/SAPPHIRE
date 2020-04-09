@@ -1,3 +1,5 @@
+
+
 - [General Information](#general-information)
   - [About](#about)
   - [Former Contributors](#former-contributors)
@@ -14,7 +16,8 @@
 # General Information
 
 ## About
-***Sapphire*** 
+***Sapphire*** ![alt text](./doxygen_config/logo_small.png "Logo Title Text 1")
+
 * is an independent code which can calculate both radiative capture and inverse cross sections.
 
 * is a new code, written in C++, designed primarily to simulate the decay of excited nuclei via the Monte Carlo technique. 
