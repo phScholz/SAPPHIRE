@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['r0_5f',['r0_',['../d5/d00/classLevelDensity.html#afbfc27a16a0ef3a990dce6ef5acf7863',1,'LevelDensity']]],
+  ['readme',['README',['../d2/d9c/md__afs_crc_8nd_8edu_user_p_pscholz_Private_sapphire-devel_README.html',1,'']]],
+  ['r0_5f',['r0_',['../d5/d00/classLevelDensity.html#a5ec748a62bd8277973d373a8b52292d7',1,'LevelDensity']]],
   ['radiuslast',['radiusLast',['../d7/dde/classCoulFunc.html#a294416dd0757533011ebfd56c9597739',1,'CoulFunc']]],
   ['randomseed',['randomSeed',['../d6/d4d/DecayController_8cpp.html#aeabb5faa1582349612d7747543f6adb8',1,'randomSeed():&#160;Sapphire.cpp'],['../db/d03/Decayer_8cpp.html#aeabb5faa1582349612d7747543f6adb8',1,'randomSeed():&#160;Sapphire.cpp'],['../d9/db2/GammaTransmissionFunc_8cpp.html#aeabb5faa1582349612d7747543f6adb8',1,'randomSeed():&#160;Sapphire.cpp'],['../d6/d1d/ParticleTransmissionFunc_8cpp.html#aeabb5faa1582349612d7747543f6adb8',1,'randomSeed():&#160;Sapphire.cpp'],['../d0/d7c/PreEqDecayer_8cpp.html#aeabb5faa1582349612d7747543f6adb8',1,'randomSeed():&#160;Sapphire.cpp'],['../dc/d62/Sapphire_8cpp.html#aeabb5faa1582349612d7747543f6adb8',1,'randomSeed():&#160;Sapphire.cpp']]],
   ['ratefunc_5f',['rateFunc_',['../d8/d40/classSpinRatePair.html#a707563d58850763b4c67256ed3b36b6e',1,'SpinRatePair::rateFunc_()'],['../d6/d9a/classPreEqSpinRatePair.html#aeb84334cfe9778a95c2b45e99dc4eb43',1,'PreEqSpinRatePair::rateFunc_()']]],

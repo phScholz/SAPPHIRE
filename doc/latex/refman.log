@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.1.15)  9 APR 2020 05:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.1.15)  9 APR 2020 14:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1218,24 +1218,28 @@ LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <7> not available
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 6.29996pt on input line 70.
  [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17]
-[18] [19] [20]
+[18] [19]
+Underfull \hbox (badness 10000) in paragraph at lines 675--675
+ [][] [][][]\T1/phv/m/n/10 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-de
+vel/include/-Mc-Fadden-Satchler-Potential.h File 
+ []
+
+[20] [21]
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 719.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 753.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 10.79993pt on input line 719.
+(Font)              scaled to size 10.79993pt on input line 753.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 719.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 753.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 719.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 753.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 719.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 753.
 )
 \tf@toc=\write5
 \openout5 = `refman.toc'.
 
- [21] [22
-
-]
+ [22]
 Package hyperref Info: Option `pageanchor' set `true' on input line 130.
 
 Chapter 1.
@@ -1247,26 +1251,41 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 18.66588pt on input line 133.
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
 (Font)              scaled to size 18.66588pt on input line 133.
-(./d0/d30/md_README.tex
+
+(./d2/d9c/md__afs_crc_8nd_8edu_user_p_pscholz_Private_sapphire-devel_README.tex
 LaTeX Font Info:    Try loading font information for T1+pcr on input line 1.
 
 (/afs/crc.nd.edu/x86_64_linux/t/texlive/2017/texmf-dist/tex/latex/psnfss/t1pcr.
 fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-)) [1
+)
+LaTeX Font Info:    Try loading font information for TS1+phv on input line 5.
 
-] [2
+(/afs/crc.nd.edu/x86_64_linux/t/texlive/2017/texmf-dist/tex/latex/psnfss/ts1phv
+.fd
+File: ts1phv.fd 2001/06/04 scalable font definitions for TS1/phv.
+)
+LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
+(Font)              scaled to size 8.99994pt on input line 5.
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <14.4> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 18.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 12.9599pt on input line 18.
+LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
+(Font)              scaled to size 12.9599pt on input line 18.
+LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
+(Font)              scaled to size 10.79993pt on input line 24.
+ [1
+
 
 ]
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 59.
+LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
+(Font)              scaled to size 8.99994pt on input line 59.
+) [2]
 Chapter 2.
 (./namespaces.tex
-LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 1.
-LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 12.9599pt on input line 1.
-LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
-(Font)              scaled to size 12.9599pt on input line 1.
-
 
 LaTeX Warning: Reference `d4/da9/namespaceboost' on page 3 undefined on input l
 ine 3.
@@ -1283,7 +1302,9 @@ e 5.
 LaTeX Warning: Reference `d2/db7/namespacestd_1_1tr1' on page 3 undefined on in
 put line 6.
 
-) [3] [4
+) [3
+
+] [4
 
 ]
 Chapter 3.
@@ -1683,12 +1704,12 @@ LaTeX Warning: Reference `de/d22/classXYPair' on page 8 undefined on input line
 Chapter 5.
 (./files.tex
 
-LaTeX Warning: Reference `da/d7a/BrinkAxelGSF_8cpp' on page 9 undefined on inpu
+LaTeX Warning: Reference `db/d7f/feature__tests_8c' on page 9 undefined on inpu
 t line 3.
 
 
-LaTeX Warning: Reference `d7/d44/BrinkAxelGSF_8h' on page 9 undefined on input 
-line 4.
+LaTeX Warning: Reference `dd/d6e/feature__tests_8cxx' on page 9 undefined on in
+put line 4.
 
 
 LaTeX Warning: Reference `d9/d4b/CMakeCCompilerId_8c' on page 9 undefined on in
@@ -1699,317 +1720,379 @@ LaTeX Warning: Reference `d6/d83/CMakeCXXCompilerId_8cpp' on page 9 undefined o
 n input line 6.
 
 
-LaTeX Warning: Reference `dd/ddc/complex__functions_8cpp' on page 9 undefined o
-n input line 7.
+LaTeX Warning: Reference `d0/daa/OpenMPCheckVersion_8c' on page 9 undefined on 
+input line 7.
+
+
+LaTeX Warning: Reference `de/d68/OpenMPCheckVersion_8cpp' on page 9 undefined o
+n input line 8.
+
+
+LaTeX Warning: Reference `d9/dbc/OpenMPTryFlag_8c' on page 9 undefined on input
+ line 9.
+
+
+LaTeX Warning: Reference `d5/d29/OpenMPTryFlag_8cpp' on page 9 undefined on inp
+ut line 10.
+
+
+LaTeX Warning: Reference `df/d68/build_2generated_2Sapphire__config_8h' on page
+ 9 undefined on input line 11.
 
 
 LaTeX Warning: Reference `d3/dca/complex__functions_8H' on page 9 undefined on 
-input line 8.
-
-
-LaTeX Warning: Reference `d1/d45/Constants_8h' on page 9 undefined on input lin
-e 9.
-
-
-LaTeX Warning: Reference `d2/d12/CoulFunc_8cpp' on page 9 undefined on input li
-ne 10.
-
-
-LaTeX Warning: Reference `db/d94/CoulFunc_8h' on page 9 undefined on input line
- 11.
-
-
-LaTeX Warning: Reference `d7/dc8/CrossSection_8cpp' on page 9 undefined on inpu
-t line 12.
-
-
-LaTeX Warning: Reference `d8/d18/CrossSection_8h' on page 9 undefined on input 
-line 13.
-
-
-LaTeX Warning: Reference `d0/d09/cwfcomp_8cpp' on page 9 undefined on input lin
-e 14.
+input line 12.
 
 
 LaTeX Warning: Reference `dd/dac/cwfcomp_8H' on page 9 undefined on input line 
-15.
+13.
 
 
-LaTeX Warning: Reference `d6/d4d/DecayController_8cpp' on page 9 undefined on i
-nput line 16.
+LaTeX Warning: Reference `d9/dd5/ode__int_8H' on page 9 undefined on input line
+ 14.
 
 
-LaTeX Warning: Reference `d8/dd3/DecayController_8h' on page 9 undefined on inp
-ut line 17.
+LaTeX Warning: Reference `dd/ddc/complex__functions_8cpp' on page 9 undefined o
+n input line 15.
 
 
-LaTeX Warning: Reference `db/d03/Decayer_8cpp' on page 9 undefined on input lin
-e 18.
+LaTeX Warning: Reference `d0/d09/cwfcomp_8cpp' on page 9 undefined on input lin
+e 16.
 
 
-LaTeX Warning: Reference `df/d79/Decayer_8h' on page 9 undefined on input line 
-19.
+LaTeX Warning: Reference `df/d06/ode__int_8cpp' on page 9 undefined on input li
+ne 17.
 
 
-LaTeX Warning: Reference `d1/da0/DecayProduct_8h' on page 9 undefined on input 
-line 20.
+LaTeX Warning: Reference `d0/dd4/generated_2Sapphire__config_8h' on page 9 unde
+fined on input line 18.
 
 
-LaTeX Warning: Reference `d8/d08/DecayResults_8cpp' on page 9 undefined on inpu
-t line 21.
+LaTeX Warning: Reference `d7/d44/BrinkAxelGSF_8h' on page 9 undefined on input 
+line 19.
 
 
-LaTeX Warning: Reference `d5/d11/DecayResults_8h' on page 9 undefined on input 
+LaTeX Warning: Reference `d1/d45/Constants_8h' on page 9 undefined on input lin
+e 20.
+
+
+LaTeX Warning: Reference `db/d94/CoulFunc_8h' on page 9 undefined on input line
+ 21.
+
+
+LaTeX Warning: Reference `d8/d18/CrossSection_8h' on page 9 undefined on input 
 line 22.
 
 
+LaTeX Warning: Reference `d8/dd3/DecayController_8h' on page 9 undefined on inp
+ut line 23.
+
+
+LaTeX Warning: Reference `df/d79/Decayer_8h' on page 9 undefined on input line 
+24.
+
+
+LaTeX Warning: Reference `d1/da0/DecayProduct_8h' on page 9 undefined on input 
+line 25.
+
+
+LaTeX Warning: Reference `d5/d11/DecayResults_8h' on page 9 undefined on input 
+line 26.
+
+
 LaTeX Warning: Reference `de/d98/elements_8h' on page 9 undefined on input line
- 23.
-
-
-LaTeX Warning: Reference `d7/d86/EquivSquareWell_8cpp' on page 9 undefined on i
-nput line 24.
+ 27.
 
 
 LaTeX Warning: Reference `dc/d1e/EquivSquareWell_8h' on page 9 undefined on inp
-ut line 25.
-
-
-LaTeX Warning: Reference `d9/db2/GammaTransmissionFunc_8cpp' on page 9 undefine
-d on input line 26.
+ut line 28.
 
 
 LaTeX Warning: Reference `de/d7c/GammaTransmissionFunc_8h' on page 9 undefined 
-on input line 27.
-
-
-LaTeX Warning: Reference `d6/ddf/JLMPotential_8cpp' on page 9 undefined on inpu
-t line 28.
+on input line 29.
 
 
 LaTeX Warning: Reference `de/d31/JLMPotential_8h' on page 9 undefined on input 
-line 29.
-
-
-LaTeX Warning: Reference `d8/db2/KopeckyUhlGSF_8cpp' on page 9 undefined on inp
-ut line 30.
+line 30.
 
 
 LaTeX Warning: Reference `d7/dad/KopeckyUhlGSF_8h' on page 9 undefined on input
  line 31.
 
 
-LaTeX Warning: Reference `d0/d33/LevelDensity_8cpp' on page 9 undefined on inpu
-t line 32.
-
-
 LaTeX Warning: Reference `d4/d69/LevelDensity_8h' on page 9 undefined on input 
-line 33.
-
-
-LaTeX Warning: Reference `d8/d09/McCullaghGSF_8cpp' on page 9 undefined on inpu
-t line 34.
+line 32.
 
 
 LaTeX Warning: Reference `db/d06/McCullaghGSF_8h' on page 9 undefined on input 
-line 35.
-
-
-LaTeX Warning: Reference `d6/d6b/McFaddenSatchlerPotential_8cpp' on page 9 unde
-fined on input line 36.
+line 33.
 
 
 LaTeX Warning: Reference `d3/d6d/McFaddenSatchlerPotential_8h' on page 9 undefi
-ned on input line 37.
-
-
-LaTeX Warning: Reference `d7/d90/NuclearLevels_8cpp' on page 9 undefined on inp
-ut line 38.
+ned on input line 34.
 
 
 LaTeX Warning: Reference `d1/dd8/NuclearLevels_8h' on page 9 undefined on input
- line 39.
-
-
-LaTeX Warning: Reference `d5/d64/NuclearMass_8cpp' on page 9 undefined on input
- line 40.
+ line 35.
 
 
 LaTeX Warning: Reference `d9/dce/NuclearMass_8h' on page 9 undefined on input l
-ine 41.
+ine 36.
+
+
+LaTeX Warning: Reference `d5/d7a/ParticleHoleLevelDensity_8h' on page 9 undefin
+ed on input line 37.
+
+
+LaTeX Warning: Reference `d6/d15/ParticleTransmissionFunc_8h' on page 9 undefin
+ed on input line 38.
+
+
+LaTeX Warning: Reference `d8/d4c/Potential_8h' on page 9 undefined on input lin
+e 39.
+
+
+LaTeX Warning: Reference `d4/df5/PreEqDecayer_8h' on page 9 undefined on input 
+line 40.
 
 [9
 
 ]
 
-LaTeX Warning: Reference `df/d06/ode__int_8cpp' on page 10 undefined on input l
-ine 42.
-
-
-LaTeX Warning: Reference `d9/dd5/ode__int_8H' on page 10 undefined on input lin
-e 43.
-
-
-LaTeX Warning: Reference `d1/d40/ParticleHoleLevelDensity_8cpp' on page 10 unde
-fined on input line 44.
-
-
-LaTeX Warning: Reference `d5/d7a/ParticleHoleLevelDensity_8h' on page 10 undefi
-ned on input line 45.
-
-
-LaTeX Warning: Reference `d6/d1d/ParticleTransmissionFunc_8cpp' on page 10 unde
-fined on input line 46.
-
-
-LaTeX Warning: Reference `d6/d15/ParticleTransmissionFunc_8h' on page 10 undefi
-ned on input line 47.
-
-
-LaTeX Warning: Reference `d4/db1/Potential_8cpp' on page 10 undefined on input 
-line 48.
-
-
-LaTeX Warning: Reference `d8/d4c/Potential_8h' on page 10 undefined on input li
-ne 49.
-
-
-LaTeX Warning: Reference `d0/d7c/PreEqDecayer_8cpp' on page 10 undefined on inp
-ut line 50.
-
-
-LaTeX Warning: Reference `d4/df5/PreEqDecayer_8h' on page 10 undefined on input
- line 51.
-
-
-LaTeX Warning: Reference `d3/dd5/PreEqTransitionRateFunc_8cpp' on page 10 undef
-ined on input line 52.
-
-
 LaTeX Warning: Reference `da/d61/PreEqTransitionRateFunc_8h' on page 10 undefin
-ed on input line 53.
-
-
-LaTeX Warning: Reference `dd/d89/RauscherLevelDensity_8cpp' on page 10 undefine
-d on input line 54.
+ed on input line 41.
 
 
 LaTeX Warning: Reference `d5/d19/RauscherLevelDensity_8h' on page 10 undefined 
-on input line 55.
-
-
-LaTeX Warning: Reference `dc/d62/Sapphire_8cpp' on page 10 undefined on input l
-ine 56.
+on input line 42.
 
 
 LaTeX Warning: Reference `d3/de7/SapphireMPITypes_8h' on page 10 undefined on i
-nput line 57.
-
-
-LaTeX Warning: Reference `d0/d07/Setup_8cpp' on page 10 undefined on input line
- 58.
-
-
-LaTeX Warning: Reference `da/dbb/TransitionRateFunc_8cpp' on page 10 undefined 
-on input line 59.
+nput line 43.
 
 
 LaTeX Warning: Reference `dd/da8/TransitionRateFunc_8h' on page 10 undefined on
- input line 60.
+ input line 44.
 
 
 LaTeX Warning: Reference `dc/d28/TransmissionFunc_8h' on page 10 undefined on i
-nput line 61.
+nput line 45.
+
+
+LaTeX Warning: Reference `da/d7a/BrinkAxelGSF_8cpp' on page 10 undefined on inp
+ut line 46.
+
+
+LaTeX Warning: Reference `d2/d12/CoulFunc_8cpp' on page 10 undefined on input l
+ine 47.
+
+
+LaTeX Warning: Reference `d7/dc8/CrossSection_8cpp' on page 10 undefined on inp
+ut line 48.
+
+
+LaTeX Warning: Reference `d6/d4d/DecayController_8cpp' on page 10 undefined on 
+input line 49.
+
+
+LaTeX Warning: Reference `db/d03/Decayer_8cpp' on page 10 undefined on input li
+ne 50.
+
+
+LaTeX Warning: Reference `d8/d08/DecayResults_8cpp' on page 10 undefined on inp
+ut line 51.
+
+
+LaTeX Warning: Reference `d7/d86/EquivSquareWell_8cpp' on page 10 undefined on 
+input line 52.
+
+
+LaTeX Warning: Reference `d9/db2/GammaTransmissionFunc_8cpp' on page 10 undefin
+ed on input line 53.
+
+
+LaTeX Warning: Reference `d6/ddf/JLMPotential_8cpp' on page 10 undefined on inp
+ut line 54.
+
+
+LaTeX Warning: Reference `d8/db2/KopeckyUhlGSF_8cpp' on page 10 undefined on in
+put line 55.
+
+
+LaTeX Warning: Reference `d0/d33/LevelDensity_8cpp' on page 10 undefined on inp
+ut line 56.
+
+
+LaTeX Warning: Reference `d8/d09/McCullaghGSF_8cpp' on page 10 undefined on inp
+ut line 57.
+
+
+LaTeX Warning: Reference `d6/d6b/McFaddenSatchlerPotential_8cpp' on page 10 und
+efined on input line 58.
+
+
+LaTeX Warning: Reference `d7/d90/NuclearLevels_8cpp' on page 10 undefined on in
+put line 59.
+
+
+LaTeX Warning: Reference `d5/d64/NuclearMass_8cpp' on page 10 undefined on inpu
+t line 60.
+
+
+LaTeX Warning: Reference `d1/d40/ParticleHoleLevelDensity_8cpp' on page 10 unde
+fined on input line 61.
+
+
+LaTeX Warning: Reference `d6/d1d/ParticleTransmissionFunc_8cpp' on page 10 unde
+fined on input line 62.
+
+
+LaTeX Warning: Reference `d4/db1/Potential_8cpp' on page 10 undefined on input 
+line 63.
+
+
+LaTeX Warning: Reference `d0/d7c/PreEqDecayer_8cpp' on page 10 undefined on inp
+ut line 64.
+
+
+LaTeX Warning: Reference `d3/dd5/PreEqTransitionRateFunc_8cpp' on page 10 undef
+ined on input line 65.
+
+
+LaTeX Warning: Reference `dd/d89/RauscherLevelDensity_8cpp' on page 10 undefine
+d on input line 66.
+
+
+LaTeX Warning: Reference `dc/d62/Sapphire_8cpp' on page 10 undefined on input l
+ine 67.
+
+
+LaTeX Warning: Reference `d0/d07/Setup_8cpp' on page 10 undefined on input line
+ 68.
+
+
+LaTeX Warning: Reference `da/dbb/TransitionRateFunc_8cpp' on page 10 undefined 
+on input line 69.
 
 ) [10]
 Chapter 6.
-(./d4/da9/namespaceboost.tex
-LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
-(Font)              scaled to size 10.79993pt on input line 4.
-LaTeX Font Info:    Try loading font information for TS1+phv on input line 7.
-
-(/afs/crc.nd.edu/x86_64_linux/t/texlive/2017/texmf-dist/tex/latex/psnfss/ts1phv
-.fd
-File: ts1phv.fd 2001/06/04 scalable font definitions for TS1/phv.
-)
-LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
-(Font)              scaled to size 8.99994pt on input line 7.
-) (./de/d49/namespaceboost_1_1serialization.tex
+(./d4/da9/namespaceboost.tex) (./de/d49/namespaceboost_1_1serialization.tex
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
 (Font)              scaled to size 8.99994pt on input line 22.
 LaTeX Font Info:    Font shape `T1/phv/bc/it' in size <10> not available
 (Font)              Font shape `T1/phv/bc/sl' tried instead on input line 22.
 LaTeX Font Info:    Font shape `T1/phv/bc/sl' will be
 (Font)              scaled to size 8.99994pt on input line 22.
-) (./d8/dcc/namespacestd.tex) (./d2/db7/namespacestd_1_1tr1.tex) [11
 
-] [12
+Underfull \hbox (badness 6658) in paragraph at lines 34--35
+\T1/phv/m/n/10 References Decay-Product-::-A-_-, Decay-Product-::excitation-Ene
+rgy-_-, Decay-Product-::fragment-Energy-_-, Decay-
+ []
 
-]
+
+Underfull \hbox (badness 10000) in paragraph at lines 34--35
+\T1/phv/m/n/10 Product-::fragment-Energy-C-M-_-, Decay-Product-::fragment-Momen
+tum-X-_-, Decay-Product-::fragment-Momentum-Y-_-,
+ []
+
+
+Underfull \hbox (badness 1087) in paragraph at lines 34--35
+\T1/phv/m/n/10 Momentum-Z-_-, Decay-Product-::particle-Phi-C-M-_-, Decay-Produc
+t-::particle-Theta-C-M-_-, Decay-Product-::particle-Type-_-,
+ []
+
+) (./d8/dcc/namespacestd.tex) (./d2/db7/namespacestd_1_1tr1.tex [11
+
+]) [12]
 Chapter 7.
 (./d1/d51/classBrinkAxelGSF.tex
 
 pdfTeX warning: pdflatex (file ./d1/d51/classBrinkAxelGSF.pdf): PDF inclusion: 
 found PDF version <1.7>, but at most version <1.5> allowed
-<d1/d51/classBrinkAxelGSF.pdf, id=3992, 501.875pt x 369.48038pt>
+<d1/d51/classBrinkAxelGSF.pdf, id=4228, 501.875pt x 369.48038pt>
 File: d1/d51/classBrinkAxelGSF.pdf Graphic file (type pdf)
 <use d1/d51/classBrinkAxelGSF.pdf>
 Package pdftex.def Info: d1/d51/classBrinkAxelGSF.pdf  used on input line 11.
 (pdftex.def)             Requested size: 115.9419pt x 85.35826pt.
 
 LaTeX Font Warning: Font shape `T1/pcr/bc/n' undefined
-(Font)              using `T1/pcr/m/n' instead on input line 51.
+(Font)              using `T1/pcr/m/n' instead on input line 54.
 
-) (./dc/d5e/classCDFEntry.tex [13 <./d1/d51/classBrinkAxelGSF.pdf>])
-(./d7/dde/classCoulFunc.tex [14] [15])
+[13
+
+ <./d1/d51/classBrinkAxelGSF.pdf>]) (./dc/d5e/classCDFEntry.tex)
+(./d7/dde/classCoulFunc.tex [14] [15] [16])
 (./d4/d44/classCoulomb__wave__functions.tex
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 52.
+(hyperref)                removing `math shift' on input line 56.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\sim' on input line 52.
+(hyperref)                removing `\sim' on input line 56.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 52.
+(hyperref)                removing `math shift' on input line 56.
 
-[16]) (./d8/d3e/structCoulWaves.tex) (./df/db7/classCrossSection.tex [17]
+[17]) (./d8/d3e/structCoulWaves.tex [18]
+Underfull \hbox (badness 10000) in paragraph at lines 41--42
+\T1/phv/m/n/10 Referenced by Potential-::-Calc-Transmission(), Coul-Func-::-Cou
+l-Func(), Coul-Func-::operator()(), Coul-Func-::-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 48--49
+\T1/phv/m/n/10 Referenced by Potential-::-Calc-Transmission(), Coul-Func-::-Cou
+l-Func(), Coul-Func-::operator()(), Coul-Func-::-
+ []
+
+) (./df/db7/classCrossSection.tex
 
 LaTeX Font Warning: Font shape `T1/pcr/bc/it' undefined
 (Font)              using `T1/pcr/bc/n' instead on input line 63.
 
-[18]) (./d5/d22/classCrossSectionValues.tex [19])
-(./d2/d84/classDecayController.tex) (./d1/db2/classDecayData.tex [20])
-(./d8/d00/classDecayer.tex [21]
+[19] [20]) (./d5/d22/classCrossSectionValues.tex [21])
+(./d2/d84/classDecayController.tex
+Underfull \hbox (badness 2828) in paragraph at lines 56--57
+\T1/phv/m/n/10 References Decayer-::-Alpha-Entrance-Width(), Decayer-::-Alpha-T
+otal-Width(), Decayer-::-Decay(), Pre-Eq-Decayer-::-
+ []
+
+
+Underfull \hbox (badness 3612) in paragraph at lines 56--57
+\T1/phv/m/n/10 Decay(), Decayer-::-Gamma-Entrance-Width(), Decayer-::-Gamma-Tot
+al-Width(), Decayer-::-Neutron-Entrance-Width(),
+ []
+
+[22]) (./d1/db2/classDecayData.tex [23]) (./d8/d00/classDecayer.tex [24]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 77.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\sim' on input line 77.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 77.
-
-[22]) (./d7/d28/classDecayProduct.tex [23]) (./d5/dd0/classDecayResults.tex
-[24]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 39.
+(hyperref)                removing `math shift' on input line 85.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\sim' on input line 39.
+(hyperref)                removing `\sim' on input line 85.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 39.
+(hyperref)                removing `math shift' on input line 85.
 
-) (./db/dff/structEntrancePairs.tex [25])
+[25]) (./d7/d28/classDecayProduct.tex [26] [27])
+(./d5/dd0/classDecayResults.tex [28]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 43.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\sim' on input line 43.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 43.
+
+) (./db/dff/structEntrancePairs.tex [29])
 (./d3/d67/structstd_1_1equal__to_3_01MassKey_01_4.tex
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 3.
@@ -2038,52 +2121,57 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 pdfTeX warning: pdflatex (file ./d2/d7d/classEquivSquareWell.pdf): PDF inclusio
 n: found PDF version <1.7>, but at most version <1.5> allowed
-<d2/d7d/classEquivSquareWell.pdf, id=4393, 501.875pt x 365.00366pt>
+<d2/d7d/classEquivSquareWell.pdf, id=4645, 501.875pt x 365.00366pt>
 File: d2/d7d/classEquivSquareWell.pdf Graphic file (type pdf)
 <use d2/d7d/classEquivSquareWell.pdf>
 Package pdftex.def Info: d2/d7d/classEquivSquareWell.pdf  used on input line 11
 .
 (pdftex.def)             Requested size: 117.36629pt x 85.35826pt.
+[30 <./d2/d7d/classEquivSquareWell.pdf>]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 54.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\sim' on input line 54.
+(hyperref)                removing `math shift' on input line 58.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 54.
+(hyperref)                removing `\sim' on input line 58.
 
-[26 <./d2/d7d/classEquivSquareWell.pdf>]) (./d2/d04/classGammaTransition.tex)
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 58.
+
+) (./d2/d04/classGammaTransition.tex [31])
 (./dc/d71/classGammaTransmissionFunc.tex
 
 pdfTeX warning: pdflatex (file ./dc/d71/classGammaTransmissionFunc.pdf): PDF in
 clusion: found PDF version <1.7>, but at most version <1.5> allowed
-<dc/d71/classGammaTransmissionFunc.pdf, id=4422, 501.875pt x 123.16013pt>
+<dc/d71/classGammaTransmissionFunc.pdf, id=4686, 501.875pt x 123.16013pt>
 File: dc/d71/classGammaTransmissionFunc.pdf Graphic file (type pdf)
 <use dc/d71/classGammaTransmissionFunc.pdf>
 Package pdftex.def Info: dc/d71/classGammaTransmissionFunc.pdf  used on input l
 ine 11.
 (pdftex.def)             Requested size: 347.84103pt x 85.35826pt.
-[27]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 82.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\sim' on input line 82.
+[32 <./dc/d71/classGammaTransmissionFunc.pdf>]
+Underfull \hbox (badness 1668) in paragraph at lines 78--79
+\T1/phv/m/n/10 References Nuclear-Mass-::-Find-Mass(), fstruc, gdr-Parameters-_
+-, gdr-Table-_-, hbarc, G-D-R-Parameters-::k-Sigma-
+ []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 82.
+(hyperref)                removing `math shift' on input line 86.
 
-[28 <./dc/d71/classGammaTransmissionFunc.pdf>])
-(./d5/de9/classGDRParameters.tex [29])
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\sim' on input line 86.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 86.
+
+[33]) (./d5/de9/classGDRParameters.tex [34])
 (./dc/d1e/structgsl__partfunc__params.tex)
-(./d3/d24/structgsl__reactionrate__params.tex [30])
+(./d3/d24/structgsl__reactionrate__params.tex [35])
 (./d6/dd5/structstd_1_1tr1_1_1hash_3_01MassKey_01_4.tex
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
@@ -2101,51 +2189,56 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 3.
 
-) (./da/dde/classInitialNucleusData.tex [31])
-(./df/d2f/structint__double__pair__compare.tex) (./dc/d98/classJLMPotential.tex
-
+) (./da/dde/classInitialNucleusData.tex [36])
+(./df/d2f/structint__double__pair__compare.tex [37])
+(./dc/d98/classJLMPotential.tex
 
 pdfTeX warning: pdflatex (file ./dc/d98/classJLMPotential.pdf): PDF inclusion: 
 found PDF version <1.7>, but at most version <1.5> allowed
-<dc/d98/classJLMPotential.pdf, id=4579, 501.875pt x 486.6682pt>
+<dc/d98/classJLMPotential.pdf, id=4840, 501.875pt x 486.6682pt>
 File: dc/d98/classJLMPotential.pdf Graphic file (type pdf)
 <use dc/d98/classJLMPotential.pdf>
 Package pdftex.def Info: dc/d98/classJLMPotential.pdf  used on input line 11.
 (pdftex.def)             Requested size: 117.36629pt x 113.81102pt.
-[32]) (./d1/df2/classKopeckyUhlGSF.tex
+[38 <./dc/d98/classJLMPotential.pdf>]) (./d1/df2/classKopeckyUhlGSF.tex
 
 pdfTeX warning: pdflatex (file ./d1/df2/classKopeckyUhlGSF.pdf): PDF inclusion:
  found PDF version <1.7>, but at most version <1.5> allowed
-<d1/df2/classKopeckyUhlGSF.pdf, id=4596, 501.875pt x 369.48038pt>
+<d1/df2/classKopeckyUhlGSF.pdf, id=4870, 501.875pt x 369.48038pt>
 File: d1/df2/classKopeckyUhlGSF.pdf Graphic file (type pdf)
 <use d1/df2/classKopeckyUhlGSF.pdf>
 Package pdftex.def Info: d1/df2/classKopeckyUhlGSF.pdf  used on input line 11.
 (pdftex.def)             Requested size: 115.9419pt x 85.35826pt.
-[33 <./dc/d98/classJLMPotential.pdf>]) (./d2/d9d/classLevel.tex [34 <./d1/df2/c
-lassKopeckyUhlGSF.pdf>]) (./d5/d00/classLevelDensity.tex
+[39 <./d1/df2/classKopeckyUhlGSF.pdf>]) (./d2/d9d/classLevel.tex)
+(./d5/d00/classLevelDensity.tex [40]
 
 pdfTeX warning: pdflatex (file ./d5/d00/classLevelDensity.pdf): PDF inclusion: 
 found PDF version <1.7>, but at most version <1.5> allowed
-<d5/d00/classLevelDensity.pdf, id=4651, 501.875pt x 273.1304pt>
+<d5/d00/classLevelDensity.pdf, id=4912, 501.875pt x 273.1304pt>
 File: d5/d00/classLevelDensity.pdf Graphic file (type pdf)
 <use d5/d00/classLevelDensity.pdf>
 Package pdftex.def Info: d5/d00/classLevelDensity.pdf  used on input line 11.
 (pdftex.def)             Requested size: 104.56213pt x 56.9055pt.
-[35 <./d5/d00/classLevelDensity.pdf>]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 85.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\sim' on input line 85.
+(hyperref)                removing `math shift' on input line 89.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 85.
+(hyperref)                removing `\sim' on input line 89.
 
-[36]) (./d0/de7/classLevelsContainer.tex) (./db/d6b/classMassEntry.tex [37])
-(./d4/d2b/classMassKey.tex
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 89.
+
+[41 <./d5/d00/classLevelDensity.pdf>]
+Underfull \hbox (badness 1389) in paragraph at lines 132--133
+[]\T1/phv/m/n/10 Referenced by Calc-Constant-Temp-Terms(), Kopecky-Uhl-G-S-F-::
+-Kopecky-Uhl-G-S-F(), op-er-a-tor()(), and Total-Level-
+ []
+
+[42]) (./d0/de7/classLevelsContainer.tex [43]) (./db/d6b/classMassEntry.tex
+[44]) (./d4/d2b/classMassKey.tex
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 42.
@@ -2154,11 +2247,11 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 42.
 
-[38]) (./da/d68/classMcCullaghGSF.tex
+[45]) (./da/d68/classMcCullaghGSF.tex
 
 pdfTeX warning: pdflatex (file ./da/d68/classMcCullaghGSF.pdf): PDF inclusion: 
 found PDF version <1.7>, but at most version <1.5> allowed
-<da/d68/classMcCullaghGSF.pdf, id=4764, 501.875pt x 369.48038pt>
+<da/d68/classMcCullaghGSF.pdf, id=5029, 501.875pt x 369.48038pt>
 File: da/d68/classMcCullaghGSF.pdf Graphic file (type pdf)
 <use da/d68/classMcCullaghGSF.pdf>
 Package pdftex.def Info: da/d68/classMcCullaghGSF.pdf  used on input line 11.
@@ -2167,77 +2260,100 @@ Package pdftex.def Info: da/d68/classMcCullaghGSF.pdf  used on input line 11.
 
 pdfTeX warning: pdflatex (file ./da/d23/classMcFaddenSatchlerPotential.pdf): PD
 F inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<da/d23/classMcFaddenSatchlerPotential.pdf, id=4771, 501.875pt x 456.25455pt>
+<da/d23/classMcFaddenSatchlerPotential.pdf, id=5036, 501.875pt x 456.25455pt>
 File: da/d23/classMcFaddenSatchlerPotential.pdf Graphic file (type pdf)
 <use da/d23/classMcFaddenSatchlerPotential.pdf>
 Package pdftex.def Info: da/d23/classMcFaddenSatchlerPotential.pdf  used on inp
 ut line 11.
 (pdftex.def)             Requested size: 125.18509pt x 113.81102pt.
-[39 <./da/d68/classMcCullaghGSF.pdf>]) (./d7/dce/classNuclearLevels.tex
-[40 <./da/d23/classMcFaddenSatchlerPotential.pdf>])
-(./d0/d0f/classNuclearMass.tex [41]) (./d5/d9a/classODE__integration.tex)
-(./de/ddd/classParticleHoleLevelDensity.tex [42])
+[46 <./da/d68/classMcCullaghGSF.pdf>]) (./d7/dce/classNuclearLevels.tex
+[47 <./da/d23/classMcFaddenSatchlerPotential.pdf>])
+(./d0/d0f/classNuclearMass.tex [48]
+Underfull \hbox (badness 1168) in paragraph at lines 215--216
+[]\T1/phv/m/n/10 Referenced by Cross-Section-::-Cross-Section(), Decayer-::-Dec
+ayer(), Highest-Bound-Energy(), Kopecky-Uhl-G-S-F-::-
+ []
+
+[49]) (./d5/d9a/classODE__integration.tex)
+(./de/ddd/classParticleHoleLevelDensity.tex [50])
 (./d3/df3/classParticleTransmissionFunc.tex
 
 pdfTeX warning: pdflatex (file ./d3/df3/classParticleTransmissionFunc.pdf): PDF
  inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<d3/df3/classParticleTransmissionFunc.pdf, id=4885, 501.875pt x 152.08821pt>
+<d3/df3/classParticleTransmissionFunc.pdf, id=5154, 501.875pt x 152.08821pt>
 File: d3/df3/classParticleTransmissionFunc.pdf Graphic file (type pdf)
 <use d3/df3/classParticleTransmissionFunc.pdf>
 Package pdftex.def Info: d3/df3/classParticleTransmissionFunc.pdf  used on inpu
 t line 11.
 (pdftex.def)             Requested size: 375.56294pt x 113.81102pt.
-[43 <./d3/df3/classParticleTransmissionFunc.pdf>]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 92.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\sim' on input line 92.
+[51 <./d3/df3/classParticleTransmissionFunc.pdf>]
+Underfull \hbox (badness 1509) in paragraph at lines 88--89
+\T1/phv/m/n/10 References Nuclear-Mass-::-Find-Mass(), m1-_-, Transmission-Func
+-::m2-_-, p-Type-_-, redmass-_-, uconv, z1-_-, and
+ []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 92.
+(hyperref)                removing `math shift' on input line 96.
 
-[44]) (./dc/d66/classPotential.tex
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\sim' on input line 96.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 96.
+
+[52]
+Underfull \hbox (badness 2689) in paragraph at lines 186--187
+\T1/phv/m/n/10 Width-For-Correction-_-, Transmission-Func-::uncorr-Total-Width-
+For-Correction-_-, and Transmission-Func-::uncorr-Total-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 198--199
+\T1/phv/m/n/10 References Calc-S-L-Dependent-Functions(), Transmission-Func-::p
+revious-_-, Transmission-Func-::total-Width-For-
+ []
+
+[53]) (./dc/d66/classPotential.tex
 
 pdfTeX warning: pdflatex (file ./dc/d66/classPotential.pdf): PDF inclusion: fou
 nd PDF version <1.7>, but at most version <1.5> allowed
-<dc/d66/classPotential.pdf, id=4951, 501.875pt x 228.12227pt>
+<dc/d66/classPotential.pdf, id=5225, 501.875pt x 228.12227pt>
 File: dc/d66/classPotential.pdf Graphic file (type pdf)
 <use dc/d66/classPotential.pdf>
 Package pdftex.def Info: dc/d66/classPotential.pdf  used on input line 11.
 (pdftex.def)             Requested size: 250.3855pt x 113.81102pt.
-[45 <./dc/d66/classPotential.pdf>]
+[54 <./dc/d66/classPotential.pdf>]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 82.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\sim' on input line 82.
+(hyperref)                removing `math shift' on input line 86.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 82.
-
-[46]) (./df/d09/classPreEqCDFEntry.tex) (./dd/d30/classPreEqDecayer.tex
-[47]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 52.
+(hyperref)                removing `\sim' on input line 86.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\sim' on input line 52.
+(hyperref)                removing `math shift' on input line 86.
+
+[55] [56]) (./df/d09/classPreEqCDFEntry.tex) (./dd/d30/classPreEqDecayer.tex
+[57]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 56.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 52.
+(hyperref)                removing `\sim' on input line 56.
 
-) (./d6/d9a/classPreEqSpinRatePair.tex [48])
-(./d6/d6a/classPreEqTransitionRateFunc.tex [49]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 56.
+
+) (./d6/d9a/classPreEqSpinRatePair.tex [58])
+(./d6/d6a/classPreEqTransitionRateFunc.tex [59]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 55.
@@ -2254,57 +2370,58 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 pdfTeX warning: pdflatex (file ./dc/da8/classRauscherLevelDensity.pdf): PDF inc
 lusion: found PDF version <1.7>, but at most version <1.5> allowed
-<dc/da8/classRauscherLevelDensity.pdf, id=5089, 501.875pt x 273.1304pt>
+<dc/da8/classRauscherLevelDensity.pdf, id=5367, 501.875pt x 273.1304pt>
 File: dc/da8/classRauscherLevelDensity.pdf Graphic file (type pdf)
 <use dc/da8/classRauscherLevelDensity.pdf>
 Package pdftex.def Info: dc/da8/classRauscherLevelDensity.pdf  used on input li
 ne 11.
 (pdftex.def)             Requested size: 104.56213pt x 56.9055pt.
+[60 <./dc/da8/classRauscherLevelDensity.pdf>]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 46.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\sim' on input line 46.
+(hyperref)                removing `math shift' on input line 50.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 46.
+(hyperref)                removing `\sim' on input line 50.
 
-[50 <./dc/da8/classRauscherLevelDensity.pdf>]) (./de/d79/classSLPair.tex
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 42.
+(hyperref)                removing `math shift' on input line 50.
 
+) (./de/d79/classSLPair.tex [61]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 42.
 
-[51]) (./d8/d40/classSpinRatePair.tex) (./d4/d14/classTransitionRateFunc.tex
-[52]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 71.
+(hyperref)                removing `math shift' on input line 42.
+
+) (./d8/d40/classSpinRatePair.tex [62]) (./d4/d14/classTransitionRateFunc.tex
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 75.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\sim' on input line 71.
+(hyperref)                removing `\sim' on input line 75.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 71.
+(hyperref)                removing `math shift' on input line 75.
 
-) (./dc/d0d/classTransmissionFunc.tex [53]
+[63]) (./dc/d0d/classTransmissionFunc.tex
 
 pdfTeX warning: pdflatex (file ./dc/d0d/classTransmissionFunc.pdf): PDF inclusi
 on: found PDF version <1.7>, but at most version <1.5> allowed
-<dc/d0d/classTransmissionFunc.pdf, id=5198, 501.875pt x 76.0441pt>
+<dc/d0d/classTransmissionFunc.pdf, id=5475, 501.875pt x 76.0441pt>
 File: dc/d0d/classTransmissionFunc.pdf Graphic file (type pdf)
 <use dc/d0d/classTransmissionFunc.pdf>
 Package pdftex.def Info: dc/d0d/classTransmissionFunc.pdf  used on input line 1
 1.
 (pdftex.def)             Requested size: 398.33012pt x 60.35443pt.
+[64]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 76.
@@ -2317,114 +2434,236 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 76.
 
-[54 <./dc/d0d/classTransmissionFunc.pdf>]) (./de/d22/classXYPair.tex) [55]
-[56]
-Chapter 8.
-(./da/d7a/BrinkAxelGSF_8cpp.tex) (./d7/d44/BrinkAxelGSF_8h.tex
-Underfull \hbox (badness 10000) in paragraph at lines 4--5
-
+[65 <./dc/d0d/classTransmissionFunc.pdf>]
+Underfull \hbox (badness 5954) in paragraph at lines 184--185
+\T1/phv/m/n/10 Referenced by Equiv-Square-Well-::-Equiv-Square-Well(), Gamma-Tr
+ansmission-Func-::-Gamma-Transmission-Func(),
  []
 
-) (./d9/d4b/CMakeCCompilerId_8c.tex [57
+[66]) (./de/d22/classXYPair.tex) [67] [68
 
 ]
+Chapter 8.
+(./d9/d4b/CMakeCCompilerId_8c.tex
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 6.29996pt on input line 59.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 60.
-) (./d6/d83/CMakeCXXCompilerId_8cpp.tex [58] [59]) (./dd/ddc/complex__functions
-_8cpp.tex
+ [69]) (./d6/d83/CMakeCXXCompilerId_8cpp.tex
+[70] [71]) (./db/d7f/feature__tests_8c.tex) (./dd/d6e/feature__tests_8cxx.tex
+[72]) (./d0/daa/OpenMPCheckVersion_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 4--6
+
+ []
+
+[73]) (./de/d68/OpenMPCheckVersion_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 4--6
+
+ []
+
+) (./d9/dbc/OpenMPTryFlag_8c.tex
 Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-[60]) (./d3/dca/complex__functions_8H.tex
-Underfull \hbox (badness 10000) in paragraph at lines 4--7
-
- []
-
-[61] [62]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 227.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\ast' on input line 227.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 227.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 235.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\ast' on input line 235.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 235.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 243.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\ast' on input line 243.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 243.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 251.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\ast' on input line 251.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 251.
-
-[63]) (./d1/d45/Constants_8h.tex
-Underfull \hbox (badness 10000) in paragraph at lines 4--7
-
- []
-
-[64]) (./d2/d12/CoulFunc_8cpp.tex) (./db/d94/CoulFunc_8h.tex)
-(./d7/dc8/CrossSection_8cpp.tex
-Underfull \hbox (badness 10000) in paragraph at lines 4--19
-
- []
-
-[65]) (./d8/d18/CrossSection_8h.tex
-Underfull \hbox (badness 10000) in paragraph at lines 4--7
-
- []
-
-[66]) (./d0/d09/cwfcomp_8cpp.tex) (./dd/dac/cwfcomp_8H.tex
+[74]) (./d5/d29/OpenMPTryFlag_8cpp.tex
 Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-) (./d6/d4d/DecayController_8cpp.tex
-Underfull \hbox (badness 10000) in paragraph at lines 4--13
+) (./df/d68/build_2generated_2Sapphire__config_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-) (./d8/dd3/DecayController_8h.tex
+) (./d0/dd4/generated_2Sapphire__config_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/gen
+erated/-Sapphire-_-config.h
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--5
+
+ []
+
+) (./d3/dca/complex__functions_8H.tex [75]
+Overfull \hbox (21.57954pt too wide) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/cou
+l/include/complex-_-functions.H
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 4--7
 
  []
 
-[67]) (./db/d03/Decayer_8cpp.tex
-Underfull \hbox (badness 10000) in paragraph at lines 4--13
+[76]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 22.16548pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[77]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 287.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\ast' on input line 287.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 287.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 295.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\ast' on input line 295.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 295.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 303.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\ast' on input line 303.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 303.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 311.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\ast' on input line 311.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 311.
+
+[78]) (./dd/dac/cwfcomp_8H.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/cou
+l/include/cwfcomp.H File
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--5
+
+ []
+
+) (./d9/dd5/ode__int_8H.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/cou
+l/include/ode-_-int.H File
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--5
+
+ []
+
+[79]) (./dd/ddc/complex__functions_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 4--5
+
+ []
+
+[80]) (./d0/d09/cwfcomp_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/cou
+l/src/cwfcomp.cpp File
+ []
+
+) (./df/d06/ode__int_8cpp.tex [81]) (./d7/d44/BrinkAxelGSF_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-Brink-Axel-G-S-F.h File
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--10
+
+ []
+
+) (./d1/d45/Constants_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 4--7
+
+ []
+
+[82]
+Underfull \hbox (badness 10000) in paragraph at lines 90--91
+\T1/phv/m/n/10 Referenced by Cross-Section-::-Calculate-Reaction-Rates(), gsl-_
+-partfunc-_-integrand(), and gsl-_-reactionrate-_-
+ []
+
+
+Underfull \hbox (badness 918) in paragraph at lines 100--101
+\T1/phv/m/n/10 Referenced by J-L-M-Potential-::-Calculate(), Mc-Fadden-Satchler
+-Potential-::-Calculate(), Gamma-Transmission-Func-::-
+ []
+
+[83]
+Underfull \hbox (badness 10000) in paragraph at lines 121--122
+\T1/phv/m/n/10 Referenced by Cross-Section-::-Calc-Average-D-Wave-Res-Width(), 
+Cross-Section-::-Calc-Average-P-Wave-Res-Width(),
+ []
+
+
+Underfull \hbox (badness 2111) in paragraph at lines 121--122
+\T1/phv/m/n/10 Transmission(), Cross-Section-::-Calculate-Reaction-Rates(), Cro
+ss-Section-::-Cross-Section(), Gamma-Transmission-
+ []
+
+
+Underfull \hbox (badness 6758) in paragraph at lines 128--129
+\T1/phv/m/n/10 Transmission(), Nuclear-Mass-::-Calculate-L-D-M-Mass(), Cross-Se
+ction-::-Calculate-Reaction-Rates(), Cross-Section-
+ []
+
+
+Underfull \hbox (badness 2050) in paragraph at lines 128--129
+\T1/phv/m/n/10 ::-Cross-Section(), Nuclear-Mass-::-Initialize-Masses(), Level-D
+ensity-::operator()(), Coul-Func-::operator()(), Particle-
+ []
+
+) (./db/d94/CoulFunc_8h.tex
+Underfull \hbox (badness 862) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-Coul-Func.h File Ref-
+ []
+
+) (./d8/d18/CrossSection_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-Cross-Section.h File
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--7
+
+ []
+
+[84]) (./d8/dd3/DecayController_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-Decay-Controller.h
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--7
 
  []
 
@@ -2433,120 +2672,178 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--6
 
  []
 
-) (./d1/da0/DecayProduct_8h.tex) (./d8/d08/DecayResults_8cpp.tex)
-(./d5/d11/DecayResults_8h.tex [68]
+) (./d1/da0/DecayProduct_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-Decay-Product.h File
+ []
+
+) (./d5/d11/DecayResults_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-Decay-Results.h File
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 4--7
 
  []
 
-) (./de/d98/elements_8h.tex) (./d7/d86/EquivSquareWell_8cpp.tex)
-(./dc/d1e/EquivSquareWell_8h.tex
+[85]) (./de/d98/elements_8h.tex) (./dc/d1e/EquivSquareWell_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-Equiv-Square-Well.h
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 4--6
 
  []
 
-) (./d9/db2/GammaTransmissionFunc_8cpp.tex
-Underfull \hbox (badness 10000) in paragraph at lines 4--17
-
- []
-
-[69]) (./de/d7c/GammaTransmissionFunc_8h.tex
+) (./de/d7c/GammaTransmissionFunc_8h.tex
 Underfull \hbox (badness 10000) in paragraph at lines 4--8
 
  []
 
-) (./d6/ddf/JLMPotential_8cpp.tex) (./de/d31/JLMPotential_8h.tex
+) (./de/d31/JLMPotential_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-J-L-M-Potential.h File
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-) (./d8/db2/KopeckyUhlGSF_8cpp.tex) (./d7/dad/KopeckyUhlGSF_8h.tex [70]
+[86]) (./d7/dad/KopeckyUhlGSF_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-Kopecky-Uhl-G-S-F.h
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-) (./d0/d33/LevelDensity_8cpp.tex) (./d4/d69/LevelDensity_8h.tex)
-(./d8/d09/McCullaghGSF_8cpp.tex) (./db/d06/McCullaghGSF_8h.tex
+) (./d4/d69/LevelDensity_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-Level-Density.h File
+ []
+
+) (./db/d06/McCullaghGSF_8h.tex
+Underfull \hbox (badness 2875) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-Mc-Cullagh-G-S-F.h File
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-) (./d6/d6b/McFaddenSatchlerPotential_8cpp.tex)
-(./d3/d6d/McFaddenSatchlerPotential_8h.tex [71]
+) (./d3/d6d/McFaddenSatchlerPotential_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-Mc-Fadden-Satchler-
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-) (./d7/d90/NuclearLevels_8cpp.tex) (./d1/dd8/NuclearLevels_8h.tex
+) (./d1/dd8/NuclearLevels_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-Nuclear-Levels.h File
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 4--7
 
  []
 
-) (./d5/d64/NuclearMass_8cpp.tex
-Underfull \hbox (badness 10000) in paragraph at lines 4--11
-
+[87]) (./d9/dce/NuclearMass_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-Nuclear-Mass.h File
  []
 
-[72]) (./d9/dce/NuclearMass_8h.tex
+
 Underfull \hbox (badness 10000) in paragraph at lines 4--6
 
  []
 
-[73]) (./df/d06/ode__int_8cpp.tex) (./d9/dd5/ode__int_8H.tex
-Underfull \hbox (badness 10000) in paragraph at lines 4--5
-
+[88]) (./d5/d7a/ParticleHoleLevelDensity_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-Particle-Hole-Level-
  []
 
-) (./d1/d40/ParticleHoleLevelDensity_8cpp.tex)
-(./d5/d7a/ParticleHoleLevelDensity_8h.tex)
-(./d6/d1d/ParticleTransmissionFunc_8cpp.tex
-Underfull \hbox (badness 10000) in paragraph at lines 4--13
-
+) (./d6/d15/ParticleTransmissionFunc_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-Particle-Transmission-
  []
 
-[74]) (./d6/d15/ParticleTransmissionFunc_8h.tex
+
 Underfull \hbox (badness 10000) in paragraph at lines 4--8
 
  []
 
-) (./d4/db1/Potential_8cpp.tex) (./d8/d4c/Potential_8h.tex
+) (./d8/d4c/Potential_8h.tex
 Underfull \hbox (badness 10000) in paragraph at lines 4--7
 
  []
 
-) (./d0/d7c/PreEqDecayer_8cpp.tex
-Underfull \hbox (badness 10000) in paragraph at lines 4--13
-
+) (./d4/df5/PreEqDecayer_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-Pre-Eq-Decayer.h File
  []
 
-[75]) (./d4/df5/PreEqDecayer_8h.tex
+
 Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-) (./d3/dd5/PreEqTransitionRateFunc_8cpp.tex)
-(./da/d61/PreEqTransitionRateFunc_8h.tex
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 22.16548pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[89]) (./da/d61/PreEqTransitionRateFunc_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-Pre-Eq-Transition-Rate-
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 4--6
 
  []
 
-) (./dd/d89/RauscherLevelDensity_8cpp.tex)
-(./d5/d19/RauscherLevelDensity_8h.tex [76]
+) (./d5/d19/RauscherLevelDensity_8h.tex
 Underfull \hbox (badness 10000) in paragraph at lines 4--9
 
  []
 
-) (./da/ddd/README_8md.tex) (./dc/d62/Sapphire_8cpp.tex
-Underfull \hbox (badness 10000) in paragraph at lines 4--21
-
+) (./d3/de7/SapphireMPITypes_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-Sapphire-M-P-I-Types.h
  []
 
-[77]) (./d3/de7/SapphireMPITypes_8h.tex
+
 Underfull \hbox (badness 10000) in paragraph at lines 4--10
 
  []
 
-[78]
+[90]
 Underfull \hbox (badness 10000) detected at line 50
 [][][]
  []
@@ -2557,30 +2854,520 @@ LaTeX Font Info:    Font shape `T1/phv/b/it' in size <10> not available
 (Font)              Font shape `T1/phv/b/sl' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/phv/b/sl' will be
 (Font)              scaled to size 8.99994pt on input line 54.
-) (./d0/d07/Setup_8cpp.tex
-Underfull \hbox (badness 10000) in paragraph at lines 4--16
-
+) (./dd/da8/TransitionRateFunc_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-Transition-Rate-Func.h
  []
 
-[79]) (./da/dbb/TransitionRateFunc_8cpp.tex)
-(./dd/da8/TransitionRateFunc_8h.tex
+
 Underfull \hbox (badness 10000) in paragraph at lines 4--7
 
  []
 
-) (./dc/d28/TransmissionFunc_8h.tex) [80] (./refman.ind [81
+) (./dc/d28/TransmissionFunc_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/inc
+lude/-Transmission-Func.h
+ []
 
-] [82] [83] [84]
-[85] [86] [87] [88] [89] [90] [91] [92
+) (./da/ddd/README_8md.tex) (./da/d7a/BrinkAxelGSF_8cpp.tex [91]
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/src
+/-Brink-Axel-G-S-F.cpp File
+ []
+
+) (./d2/d12/CoulFunc_8cpp.tex) (./d7/dc8/CrossSection_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/src
+/-Cross-Section.cpp File
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--19
+
+ []
+
+[92]
+Underfull \hbox (badness 5985) in paragraph at lines 58--59
+\T1/phv/m/n/10 References boltz-Const, gsl-_-reactionrate-_-params-::graph, gsl
+-_-reactionrate-_-params-::temperature, and gsl-_-
+ []
+
+) (./d6/d4d/DecayController_8cpp.tex
+Underfull \hbox (badness 8056) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/src
+/-Decay-Controller.cpp File
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--13
+
+ []
+
+) (./db/d03/Decayer_8cpp.tex
+Underfull \hbox (badness 7504) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/src
+/-Decayer.cpp File Ref-er-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--13
+
+ []
+
+[93]) (./d8/d08/DecayResults_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/src
+/-Decay-Results.cpp File
+ []
+
+) (./d7/d86/EquivSquareWell_8cpp.tex) (./d9/db2/GammaTransmissionFunc_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/src
+/-Gamma-Transmission-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--17
+
+ []
+
+) (./d6/ddf/JLMPotential_8cpp.tex) (./d8/db2/KopeckyUhlGSF_8cpp.tex [94]
+Underfull \hbox (badness 6348) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/src
+/-Kopecky-Uhl-G-S-F.cpp File
+ []
+
+) (./d0/d33/LevelDensity_8cpp.tex) (./d8/d09/McCullaghGSF_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/src
+/-Mc-Cullagh-G-S-F.cpp File
+ []
+
+) (./d6/d6b/McFaddenSatchlerPotential_8cpp.tex
+Overfull \hbox (28.61742pt too wide) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/src
+/-Mc-Fadden-Satchler-Potential.cpp
+ []
+
+) (./d7/d90/NuclearLevels_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/src
+/-Nuclear-Levels.cpp File
+ []
+
+) (./d5/d64/NuclearMass_8cpp.tex [95]
+Underfull \hbox (badness 10000) in paragraph at lines 4--11
+
+ []
+
+) (./d1/d40/ParticleHoleLevelDensity_8cpp.tex
+Overfull \hbox (15.7482pt too wide) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/src
+/-Particle-Hole-Level-Density.cpp
+ []
+
+) (./d6/d1d/ParticleTransmissionFunc_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/src
+/-Particle-Transmission-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--13
+
+ []
+
+
+Underfull \vbox (badness 5331) has occurred while \output is active []
+
+ [96])
+(./d4/db1/Potential_8cpp.tex
+Underfull \hbox (badness 2913) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/src
+/-Potential.cpp File Ref-er-
+ []
+
+) (./d0/d7c/PreEqDecayer_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/src
+/-Pre-Eq-Decayer.cpp File
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--13
+
+ []
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 22.16548pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[97]) (./d3/dd5/PreEqTransitionRateFunc_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/src
+/-Pre-Eq-Transition-Rate-
+ []
+
+) (./dd/d89/RauscherLevelDensity_8cpp.tex) (./dc/d62/Sapphire_8cpp.tex
+Underfull \hbox (badness 2042) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/src
+/-Sapphire.cpp File Ref-er-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--21
+
+ []
+
+[98]
+Underfull \hbox (badness 2556) in paragraph at lines 69--70
+[]\T1/phv/m/n/10 References Cross-Section-::-Create-M-A-C-S-Energies-Vector(), 
+Cross-Section-::-Create-Temp-Vector(), Coul-Func-::-G-S-L-
+ []
+
+
+Underfull \hbox (badness 5939) in paragraph at lines 69--70
+\T1/phv/m/n/10 Decayer-::-Set-Max-L(), Particle-Transmission-Func-::-Set-Neutro
+n-Formalism(), Gamma-Transmission-Func-::-Set-Porter-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 69--70
+\T1/phv/m/n/10 Thomas(), Particle-Transmission-Func-::-Set-Porter-Thomas(), Par
+ticle-Transmission-Func-::-Set-Proton-Formalism(),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 69--70
+\T1/phv/m/n/10 Cross-Section-::-Set-Residual-Alpha(), Cross-Section-::-Set-Resi
+dual-Gamma(), Cross-Section-::-Set-Residual-Neutron(),
+ []
+
+
+Underfull \hbox (badness 7558) in paragraph at lines 85--86
+\T1/phv/m/n/10 References Decay-Results-::-Add-Results(), Cross-Section-::-Calc
+-Average-D-Wave-Res-Width(), Cross-Section-::-Calc-
+ []
+
+
+Underfull \hbox (badness 6944) in paragraph at lines 85--86
+\T1/phv/m/n/10 Average-P-Wave-Res-Width(), Cross-Section-::-Calc-Average-S-Wave
+-Res-Width(), Cross-Section-::-Calculate(), Cross-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 85--86
+\T1/phv/m/n/10 Section-::-Calculate-Reaction-Rates(), Decay-Controller-::-Decay
+(), Decay-Controller-::-Decay-Products(), Ini-tial-ize(),
+ []
+
+
+Underfull \hbox (badness 1163) in paragraph at lines 85--86
+\T1/phv/m/n/10 For-X-S(), Cross-Section-::-Print-Cross-Sections(), Decay-Contro
+ller-::-Print-Decays(), print-Help(), Cross-Section-::-Print-
+ []
+
+
+Underfull \hbox (badness 4556) in paragraph at lines 131--132
+\T1/phv/m/n/10 References Transition-Rate-Func-::-Get-Gamma-Cutoff-Energy(), De
+cayer-::-Get-Max-L(), Particle-Transmission-Func-::-
+ []
+
+
+Underfull \hbox (badness 4156) in paragraph at lines 131--132
+\T1/phv/m/n/10 Set-Alpha-Formalism(), Cross-Section-::-Set-Calculate-Gamma-Cuto
+ff(), Gamma-Transmission-Func-::-Set-E-G-D-R-Type(),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 131--132
+\T1/phv/m/n/10 Transition-Rate-Func-::-Set-Gamma-Cutoff-Energy(), Decayer-::-Se
+t-Max-L(), Particle-Transmission-Func-::-Set-Neutron-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 131--132
+\T1/phv/m/n/10 Formalism(), Gamma-Transmission-Func-::-Set-Porter-Thomas(), Par
+ticle-Transmission-Func-::-Set-Porter-Thomas(),
+ []
+
+[99]) (./d0/d07/Setup_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 4--16
+
+ []
+
+[100]
+Underfull \hbox (badness 2556) in paragraph at lines 33--34
+[]\T1/phv/m/n/10 References Cross-Section-::-Create-M-A-C-S-Energies-Vector(), 
+Cross-Section-::-Create-Temp-Vector(), Coul-Func-::-G-S-L-
+ []
+
+
+Underfull \hbox (badness 5939) in paragraph at lines 33--34
+\T1/phv/m/n/10 Decayer-::-Set-Max-L(), Particle-Transmission-Func-::-Set-Neutro
+n-Formalism(), Gamma-Transmission-Func-::-Set-Porter-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 33--34
+\T1/phv/m/n/10 Thomas(), Particle-Transmission-Func-::-Set-Porter-Thomas(), Par
+ticle-Transmission-Func-::-Set-Proton-Formalism(),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 33--34
+\T1/phv/m/n/10 Cross-Section-::-Set-Residual-Alpha(), Cross-Section-::-Set-Resi
+dual-Gamma(), Cross-Section-::-Set-Residual-Neutron(),
+ []
+
+) (./da/dbb/TransitionRateFunc_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[]\T1/phv/bc/n/14.4 /afs/crc.nd.-edu/user/p/pscholz/-Private/sapphire-devel/src
+/-Transition-Rate-Func.cpp
+ []
+
+)
+Underfull \hbox (badness 10000) in paragraph at lines 4--269
+
+ []
+
+[101] (./refman.ind
+Underfull \hbox (badness 10000) in paragraph at lines 29--31
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/-
+ []
+
+
+Overfull \hbox (77.13513pt too wide) in paragraph at lines 31--33
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/coul/
+include/complex-
+ []
+
+
+Overfull \hbox (81.58994pt too wide) in paragraph at lines 33--35
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/coul/
+include/cwfcomp.-
+ []
+
+
+Overfull \hbox (58.91028pt too wide) in paragraph at lines 35--37
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/coul/
+include/ode-
+ []
+
+
+Overfull \hbox (60.6205pt too wide) in paragraph at lines 37--39
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/coul/
+src/complex-
+ []
+
+
+Overfull \hbox (65.0753pt too wide) in paragraph at lines 39--41
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/coul/
+src/cwfcomp.-
+ []
+
+
+Overfull \hbox (42.39565pt too wide) in paragraph at lines 41--43
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/coul/
+src/ode-
+ []
+
+
+Overfull \hbox (36.8156pt too wide) in paragraph at lines 43--45
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/gener
+ated/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 45--47
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 47--49
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 49--51
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 51--53
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 53--55
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 55--57
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 57--59
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 59--61
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 61--63
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 63--65
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 65--67
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 67--69
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 69--71
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 71--73
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 73--75
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 75--77
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 77--79
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 79--81
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 81--83
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 83--85
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 85--87
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 87--89
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 89--91
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 91--93
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 93--95
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (24.89093pt too wide) in paragraph at lines 95--97
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/-
+ []
+
+
+Overfull \hbox (63.77025pt too wide) in paragraph at lines 97--99
+[]\T1/phv/m/n/10 /afs/crc.-nd.-edu/user/p/pscholz/-Private/sapphire-devel/inclu
+de/elements.-
+ []
+
+[102
+
+] [103]
+Underfull \hbox (badness 10000) in paragraph at lines 245--247
+[]\T1/phv/m/n/10 C-Make-Files/3.-13.-2/-Compiler-Id-C/-C-Make-C-Compiler-Id.-c,
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 251--253
+[]\T1/phv/m/n/10 C-Make-Files/-Find-Open-M-P/-Open-M-P-Check-Version.-cpp,
+ []
+
+[104] [105] [106] [107] [108] [109] [110] [111] [112] [113] [114
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 268.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 268.
- (./refman.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 268.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 268.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 276.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 276.
+
+(./refman.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 276.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 276.
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: 4E43337B7413E518F3E5083E04D564FD;117245.
+(rerunfilecheck)             Checksum: 91327323A51D18DAF9DA4ECD80C525A8;141763.
 
 
 
@@ -2589,31 +3376,59 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 268.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 276.
  ) 
 Here is how much of TeX's memory you used:
- 15663 strings out of 492980
- 272822 string characters out of 6123194
- 297778 words of memory out of 5000000
- 17128 multiletter control sequences out of 15000+600000
- 93135 words of font info for 146 fonts, out of 8000000 for 9000
+ 15860 strings out of 492980
+ 277645 string characters out of 6123194
+ 302221 words of memory out of 5000000
+ 17192 multiletter control sequences out of 15000+600000
+ 96151 words of font info for 148 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 48i,13n,43p,948b,762s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/afs/crc.nd.edu/x86_64_linux/t/texlive/2017/texmf-dist/fonts/enc/dvips/base/
-8r.enc}</afs/crc.nd.edu/x86_64_linux/t/texlive/2017/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmmi10.pfb></afs/crc.nd.edu/x86_64_linux/t/texlive/2017/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy10.pfb></afs/crc.nd.edu/x86_64_linux/t/te
-xlive/2017/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></afs/crc.nd.edu/x86_6
-4_linux/t/texlive/2017/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></afs/crc
-.nd.edu/x86_64_linux/t/texlive/2017/texmf-dist/fonts/type1/urw/helvetic/uhvb8ac
-.pfb></afs/crc.nd.edu/x86_64_linux/t/texlive/2017/texmf-dist/fonts/type1/urw/he
-lvetic/uhvbo8a.pfb></afs/crc.nd.edu/x86_64_linux/t/texlive/2017/texmf-dist/font
-s/type1/urw/helvetic/uhvbo8ac.pfb></afs/crc.nd.edu/x86_64_linux/t/texlive/2017/
-texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on refman.pdf (114 pages, 476145 bytes).
+ 48i,13n,43p,1213b,796s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{using-sapphire} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{about-sapphire} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{references} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{features} has been referenced but does not exist, r
+eplaced by a fixed one
+
+pdfTeX warning (dest): name{run} has been referenced but does not exist, replac
+ed by a fixed one
+
+pdfTeX warning (dest): name{build} has been referenced but does not exist, repl
+aced by a fixed one
+
+pdfTeX warning (dest): name{requirements} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{compilation--execution} has been referenced but doe
+s not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{general-information} has been referenced but does n
+ot exist, replaced by a fixed one
+
+{/afs/crc.nd.edu/x86_64_linux/t/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r
+.enc}</afs/crc.nd.edu/x86_64_linux/t/texlive/2017/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmmi10.pfb></afs/crc.nd.edu/x86_64_linux/t/texlive/2017/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy10.pfb></afs/crc.nd.edu/x86_64_linux/t/texl
+ive/2017/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></afs/crc.nd.edu/x86_64_
+linux/t/texlive/2017/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></afs/crc.n
+d.edu/x86_64_linux/t/texlive/2017/texmf-dist/fonts/type1/urw/helvetic/uhvb8ac.p
+fb></afs/crc.nd.edu/x86_64_linux/t/texlive/2017/texmf-dist/fonts/type1/urw/helv
+etic/uhvbo8a.pfb></afs/crc.nd.edu/x86_64_linux/t/texlive/2017/texmf-dist/fonts/
+type1/urw/helvetic/uhvbo8ac.pfb></afs/crc.nd.edu/x86_64_linux/t/texlive/2017/te
+xmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></afs/crc.nd.edu/x86_64_linux/t/te
+xlive/2017/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
+Output written on refman.pdf (136 pages, 531430 bytes).
 PDF statistics:
- 7252 PDF objects out of 7423 (max. 8388607)
- 7033 compressed objects within 71 object streams
- 1554 named destinations out of 1728 (max. 500000)
- 5813 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 7674 PDF objects out of 8907 (max. 8388607)
+ 7428 compressed objects within 75 object streams
+ 1661 named destinations out of 1728 (max. 500000)
+ 6085 words of extra memory for PDF output out of 10000 (max. 10000000)
 

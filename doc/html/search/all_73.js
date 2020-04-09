@@ -2,6 +2,8 @@ var searchData=
 [
   ['s_5f',['s_',['../de/d79/classSLPair.html#abed67118ece6d1ed90508263fd4bb5e4',1,'SLPair']]],
   ['sapphire_2ecpp',['Sapphire.cpp',['../dc/d62/Sapphire_8cpp.html',1,'']]],
+  ['sapphire_5fconfig_2eh',['Sapphire_config.h',['../df/d68/build_2generated_2Sapphire__config_8h.html',1,'']]],
+  ['sapphire_5fconfig_2eh',['Sapphire_config.h',['../d0/dd4/generated_2Sapphire__config_8h.html',1,'']]],
   ['sapphirempitypes_2eh',['SapphireMPITypes.h',['../d3/de7/SapphireMPITypes_8h.html',1,'']]],
   ['sapphiretagdone',['SapphireTagDone',['../d3/de7/SapphireMPITypes_8h.html#a46b6e88192b697d959c7462d12763abcaa6e590270b4e4dc8c1419df5697e253f',1,'SapphireMPITypes.h']]],
   ['sapphiretagprocess',['SapphireTagProcess',['../d3/de7/SapphireMPITypes_8h.html#a46b6e88192b697d959c7462d12763abca5a57491ed6c111c259ffcee19eb89938',1,'SapphireMPITypes.h']]],
@@ -28,6 +30,7 @@ var searchData=
   ['sin_5fchi_5fcalc',['sin_chi_calc',['../d3/dca/complex__functions_8H.html#a2621b127fade43e337430c56052f03df',1,'sin_chi_calc(const std::complex&lt; double &gt; &amp;l, const std::complex&lt; double &gt; &amp;eta):&#160;complex_functions.cpp'],['../dd/ddc/complex__functions_8cpp.html#a2621b127fade43e337430c56052f03df',1,'sin_chi_calc(const std::complex&lt; double &gt; &amp;l, const std::complex&lt; double &gt; &amp;eta):&#160;complex_functions.cpp']]],
   ['slpair',['SLPair',['../de/d79/classSLPair.html',1,'SLPair'],['../de/d79/classSLPair.html#a9f001d23e5d2408f9b4a76b24fc274f8',1,'SLPair::SLPair()']]],
   ['solve',['Solve',['../dc/d66/classPotential.html#a7af6c51bab5120e99024a73f79c84a37',1,'Potential']]],
+  ['sourcedirectory',['sourceDirectory',['../df/d68/build_2generated_2Sapphire__config_8h.html#a4ffcd5a9fbcdf30ff75f63a9cf1d1625',1,'sourceDirectory():&#160;Sapphire_config.h'],['../d0/dd4/generated_2Sapphire__config_8h.html#a4ffcd5a9fbcdf30ff75f63a9cf1d1625',1,'sourceDirectory():&#160;Sapphire_config.h']]],
   ['spin_5f',['spin_',['../d8/d40/classSpinRatePair.html#ab52ca1bd083db60ceaf8fe58b4647669',1,'SpinRatePair::spin_()'],['../d3/df3/classParticleTransmissionFunc.html#a3143aef2c113158fca1643a2505f0b9a',1,'ParticleTransmissionFunc::spin_()'],['../d6/d9a/classPreEqSpinRatePair.html#af88cd36daa52c5988fb000c0c67e49f9',1,'PreEqSpinRatePair::spin_()']]],
   ['spinratepair',['SpinRatePair',['../d8/d40/classSpinRatePair.html',1,'SpinRatePair'],['../d8/d40/classSpinRatePair.html#a041ba492d89c65a3a08c8ab7043bd56e',1,'SpinRatePair::SpinRatePair()']]],
   ['sqrt_5fprecision',['sqrt_precision',['../d3/dca/complex__functions_8H.html#acee010e7dc0752836d30a2b57075f57b',1,'complex_functions.H']]],

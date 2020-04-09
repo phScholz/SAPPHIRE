@@ -19,5 +19,6 @@ var searchData=
   ['sin_5fchi_5fcalc',['sin_chi_calc',['../d3/dca/complex__functions_8H.html#a2621b127fade43e337430c56052f03df',1,'sin_chi_calc(const std::complex&lt; double &gt; &amp;l, const std::complex&lt; double &gt; &amp;eta):&#160;complex_functions.cpp'],['../dd/ddc/complex__functions_8cpp.html#a2621b127fade43e337430c56052f03df',1,'sin_chi_calc(const std::complex&lt; double &gt; &amp;l, const std::complex&lt; double &gt; &amp;eta):&#160;complex_functions.cpp']]],
   ['slpair',['SLPair',['../de/d79/classSLPair.html#a9f001d23e5d2408f9b4a76b24fc274f8',1,'SLPair']]],
   ['solve',['Solve',['../dc/d66/classPotential.html#a7af6c51bab5120e99024a73f79c84a37',1,'Potential']]],
+  ['sourcedirectory',['sourceDirectory',['../df/d68/build_2generated_2Sapphire__config_8h.html#a4ffcd5a9fbcdf30ff75f63a9cf1d1625',1,'sourceDirectory():&#160;Sapphire_config.h'],['../d0/dd4/generated_2Sapphire__config_8h.html#a4ffcd5a9fbcdf30ff75f63a9cf1d1625',1,'sourceDirectory():&#160;Sapphire_config.h']]],
   ['spinratepair',['SpinRatePair',['../d8/d40/classSpinRatePair.html#a041ba492d89c65a3a08c8ab7043bd56e',1,'SpinRatePair']]]
 ];
