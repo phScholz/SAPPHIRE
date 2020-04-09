@@ -27,9 +27,9 @@ class PreEqTransitionRateFunc {
   void CalcProtonPairConversion();
  private:
   static const int integrationSteps_ = 100;
-  static const double c1_ = 1.;
-  static const double c2_ = 1.;
-  static const double c3_ = 1.;  
+  static constexpr double c1_ = 1.;
+  static constexpr double c2_ = 1.;
+  static constexpr double c3_ = 1.;  
   int z1_;
   int m1_;
   int z2_;

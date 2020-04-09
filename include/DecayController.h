@@ -22,7 +22,7 @@ class DecayController {
  private:
  void CalcKinematics(int,int,int,int,double,double,int,double,TVector3&);
  private:
-  static const double thresholdEnergy_=0.05;
+  static constexpr double thresholdEnergy_=0.05;
   int Z_;
   int A_;
   int piInitial_;

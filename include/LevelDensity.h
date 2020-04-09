@@ -19,8 +19,8 @@ class LevelDensity {
   void CalcConstantTempTerms();
 
  protected:
-  static const double zeta_ = 1.0;
-  static const double r0_ = 1.25;
+  static constexpr double zeta_ = 1.0;
+  static constexpr double r0_ = 1.25;
   int Z_;
   int A_;
   double J_;

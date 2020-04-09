@@ -15,7 +15,7 @@ class JLMPotential : public Potential {
   std::complex<double> Calculate(double,int,double,double,double) const;
   static double GetA(int i, int j) {return a[i][j];};
  private:
-  static const double aRho_ = 0.54;
+  static constexpr double aRho_ = 0.54;
   static const double a[3][3];
   static const double b[3][3];
   static const double c[3][3];

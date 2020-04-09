@@ -25,9 +25,9 @@ class RauscherLevelDensity : public LevelDensity {
   double CalcDensityParam(double);
   double CalcNuclearTemp(double);
  private:  
-  static const double alpha_ = 0.1337;
-  static const double beta_ = -0.06571;
-  static const double gamma_ = 0.04884;
+  static constexpr double alpha_ = 0.1337;
+  static constexpr double beta_ = -0.06571;
+  static constexpr double gamma_ = 0.04884;
   double aTilda_;
   double microEnergyCorr_;
 };
