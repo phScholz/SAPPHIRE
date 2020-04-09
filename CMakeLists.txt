@@ -9,8 +9,7 @@ set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${GSL_PATH})
 set(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${GSL_PATH})
 endif (GSL_PATH) 
 
-option (MPI_BUILD
-       "Build Sapphire for MPI simulations. Note: Cross section calculations are disabled with MPI builds." OFF)
+option (MPI_BUILD "Build Sapphire for MPI simulations. Note: Cross section calculations are disabled with MPI builds." OFF)
 
 #Set the C++ standard to c++11
 set (CMAKE_CXX_STANDARD 11)
@@ -47,4 +46,3 @@ configure_file( include/Sapphire_config.h.in ${CMAKE_BINARY_DIR}/generated/Sapph
 include_directories( ${CMAKE_BINARY_DIR}/generated/ )
 
 add_subdirectory (src)
-
