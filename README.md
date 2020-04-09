@@ -1,8 +1,6 @@
-This is the original version of Sapphire by [Mary Beard](https://isnap.nd.edu/people/group-pages/mary-beard/). 
-Only the README-file has been changed.
-
-
 - [General Information](#general-information)
+  - [About](#about)
+  - [Former Contributors](#former-contributors)
 - [Compilation & Execution](#compilation--execution)
   - [Requirements](#requirements)
   - [Build](#build)
@@ -14,6 +12,24 @@ Only the README-file has been changed.
 
 --- 
 # General Information
+
+## About
+***Sapphire*** 
+* is an independent code which can calculate both radiative capture and inverse cross sections.
+
+* is a new code, written in C++, designed primarily to simulate the decay of excited nuclei via the Monte Carlo technique. 
+
+* generates realistic particle and γ-ray distributions resulting from the statistical decay of a compound nucleus having a predefined excitation energy,with decay probabilities based on the most recent experimental data compilations and state-ofthe-art theoretical models. The code is designed for large-scale multiprocessing and therefore is ideal for the generation of the large theoretical data sets often needed to determine experimental response functions without the need of excessive approximations. The transmission functions needed to form the probability distribution functions forMonte Carlo are identical to those required to calculate HF cross sections; therefore, the code can be used to calculate astrophysical reaction rates. 
+
+* considers a range of projectile nuclei, and include four exit channels, namely: (particle,n), (particle,p), (particle,α), and (particle,γ ). 
+
+* has the additional ability to calculate cross sections for photon induced reactions. 
+
+* when used for cross-section calculations, does not include preequilibrium reactions, which makes them well suited to astrophysical studies because in these environments incident particles have energies that are typically less than approximately 10 MeV.
+
+## Former Contributors
+* original version of Sapphire by [Mary Beard](https://isnap.nd.edu/people/group-pages/mary-beard/). 
+* Ethan Uberseder
 
 # Compilation & Execution
 ## Requirements
