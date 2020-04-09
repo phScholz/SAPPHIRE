@@ -1,7 +1,7 @@
 
 
 - [General Information](#general-information)
-  - [About](#about)
+  - [Sapphire](#sapphire)
   - [Former Contributors](#former-contributors)
 - [Compilation & Execution](#compilation--execution)
   - [Requirements](#requirements)
@@ -15,8 +15,7 @@
 --- 
 # General Information
 
-## About
-***Sapphire*** ![alt text](./doxygen_config/logo_small.png "Logo Title Text 1")
+## Sapphire
 
 * is an independent code which can calculate both radiative capture and inverse cross sections.
 
