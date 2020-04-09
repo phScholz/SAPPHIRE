@@ -1,0 +1,77 @@
+\hypertarget{classMcFaddenSatchlerPotential}{\section{Mc\-Fadden\-Satchler\-Potential Class Reference}
+\label{classMcFaddenSatchlerPotential}\index{Mc\-Fadden\-Satchler\-Potential@{Mc\-Fadden\-Satchler\-Potential}}
+}
+
+
+{\ttfamily \#include $<$Mc\-Fadden\-Satchler\-Potential.\-h$>$}
+
+Inheritance diagram for Mc\-Fadden\-Satchler\-Potential\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{da/d23/classMcFaddenSatchlerPotential}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMcFaddenSatchlerPotential_a24246503ca1d2d9931e93b00099e1577}{Mc\-Fadden\-Satchler\-Potential} (int, int, int, int, double, int, double, int, double, int, double, double, double, double, \hyperlink{classTransmissionFunc}{Transmission\-Func} $\ast$)
+\item 
+\hyperlink{Constants_8h_a1c1b16cc02d518bbe753449171ab7033}{std\-::complex}$<$ double $>$ \hyperlink{classMcFaddenSatchlerPotential_abbdff953b8577365fc0b60844d51ea4b}{Calculate} (double, int, double, double, double) const 
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classMcFaddenSatchlerPotential_a24246503ca1d2d9931e93b00099e1577}{\index{Mc\-Fadden\-Satchler\-Potential@{Mc\-Fadden\-Satchler\-Potential}!Mc\-Fadden\-Satchler\-Potential@{Mc\-Fadden\-Satchler\-Potential}}
+\index{Mc\-Fadden\-Satchler\-Potential@{Mc\-Fadden\-Satchler\-Potential}!McFaddenSatchlerPotential@{Mc\-Fadden\-Satchler\-Potential}}
+\subsubsection[{Mc\-Fadden\-Satchler\-Potential}]{\setlength{\rightskip}{0pt plus 5cm}Mc\-Fadden\-Satchler\-Potential\-::\-Mc\-Fadden\-Satchler\-Potential (
+\begin{DoxyParamCaption}
+\item[{int}]{z1, }
+\item[{int}]{m1, }
+\item[{int}]{z2, }
+\item[{int}]{m2, }
+\item[{double}]{j\-Initial, }
+\item[{int}]{pi\-Initial, }
+\item[{double}]{j\-Final, }
+\item[{int}]{pi\-Final, }
+\item[{double}]{spin, }
+\item[{int}]{parity, }
+\item[{double}]{max\-L, }
+\item[{double}]{total\-Width\-For\-Correction, }
+\item[{double}]{uncorr\-Total\-Width\-For\-Correction, }
+\item[{double}]{uncorr\-Total\-Width\-Sqrd\-For\-Correction, }
+\item[{{\bf Transmission\-Func} $\ast$}]{previous}
+\end{DoxyParamCaption}
+)}}\label{classMcFaddenSatchlerPotential_a24246503ca1d2d9931e93b00099e1577}
+
+
+References Potential\-::boundary\-Radius\-\_\-, Potential\-::coulomb\-Radius\-\_\-, and Transmission\-Func\-::m2\-\_\-.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classMcFaddenSatchlerPotential_abbdff953b8577365fc0b60844d51ea4b}{\index{Mc\-Fadden\-Satchler\-Potential@{Mc\-Fadden\-Satchler\-Potential}!Calculate@{Calculate}}
+\index{Calculate@{Calculate}!McFaddenSatchlerPotential@{Mc\-Fadden\-Satchler\-Potential}}
+\subsubsection[{Calculate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf std\-::complex}$<$ double $>$ Mc\-Fadden\-Satchler\-Potential\-::\-Calculate (
+\begin{DoxyParamCaption}
+\item[{double}]{r, }
+\item[{int}]{l, }
+\item[{double}]{s, }
+\item[{double}]{j, }
+\item[{double}]{energy}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classMcFaddenSatchlerPotential_abbdff953b8577365fc0b60844d51ea4b}
+
+
+Implements \hyperlink{classPotential_af6d2217c4a1f91e7ebb84d5b728d11aa}{Potential}.
+
+
+
+References Potential\-::coulomb\-Radius\-\_\-, fstruc, Potential\-::\-Get\-Z1\-Z2(), and hbarc.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{McFaddenSatchlerPotential_8h}{Mc\-Fadden\-Satchler\-Potential.\-h}\item 
+src/\hyperlink{McFaddenSatchlerPotential_8cpp}{Mc\-Fadden\-Satchler\-Potential.\-cpp}\end{DoxyCompactItemize}

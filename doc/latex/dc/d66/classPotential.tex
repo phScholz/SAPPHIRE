@@ -1,0 +1,277 @@
+\hypertarget{classPotential}{\section{Potential Class Reference}
+\label{classPotential}\index{Potential@{Potential}}
+}
+
+
+{\ttfamily \#include $<$Potential.\-h$>$}
+
+Inheritance diagram for Potential\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{dc/d66/classPotential}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPotential_a4fc0ce6be68500162a02df2175f6a122}{Potential} (int, int, int, int, double, int, double, int, double, int, double, double, double, double, \hyperlink{classTransmissionFunc}{Transmission\-Func} $\ast$)
+\item 
+\hyperlink{classPotential_ad50069dfb8df6538d94c4e3dcce26a6d}{$\sim$\-Potential} ()
+\item 
+int \hyperlink{classPotential_a0703b38c5987f1b81cbafae5a6d1ab0c}{Get\-Z1\-Z2} () const 
+\item 
+double \hyperlink{classPotential_a76d8dff6de0e098d8ec4fdf355363a57}{Get\-Boundary\-Radius} () const 
+\item 
+double \hyperlink{classPotential_a75d7cf1ca990cfe41be3e63caff7b2f1}{Get\-Red\-Mass} () const 
+\item 
+double \hyperlink{classPotential_a154fb8deeab61df6a0b55e2806844246}{Get\-R\-Max} () const 
+\item 
+virtual \hyperlink{Constants_8h_a1c1b16cc02d518bbe753449171ab7033}{std\-::complex}$<$ double $>$ \hyperlink{classPotential_af6d2217c4a1f91e7ebb84d5b728d11aa}{Calculate} (double, int, double, double, double) const =0
+\item 
+\hyperlink{Constants_8h_a1c1b16cc02d518bbe753449171ab7033}{std\-::complex}$<$ double $>$ \hyperlink{classPotential_a4e19e3b9ee8abf94d2c8e072daf46206}{Calc\-Beta} (double, int, double, double, double) const 
+\item 
+double \hyperlink{classPotential_aea8adb2a1783a79985621a899118c967}{Calc\-Transmission} (double, int, double)
+\item 
+void \hyperlink{classPotential_a6ecf02124b7690f05488a5fdde693d76}{Normalize\-Internally} (std\-::vector$<$ \hyperlink{Constants_8h_a1c1b16cc02d518bbe753449171ab7033}{std\-::complex}$<$ double $>$ $>$ \&, double) const 
+\item 
+void \hyperlink{classPotential_afaf287ffc13db37859773d092dcce2d9}{Normalize\-Over\-All\-Space} (std\-::vector$<$ \hyperlink{Constants_8h_a1c1b16cc02d518bbe753449171ab7033}{std\-::complex}$<$ double $>$ $>$ \&, double) const 
+\item 
+std\-::vector$<$ \hyperlink{Constants_8h_a1c1b16cc02d518bbe753449171ab7033}{std\-::complex}\\*
+$<$ double $>$ $>$ \hyperlink{classPotential_a7af6c51bab5120e99024a73f79c84a37}{Solve} (double, int, double, double, double) const 
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCoulFunc}{Coul\-Func} $\ast$ \hyperlink{classPotential_ab4d202d040f1b759ae2ce7ac6f0010e3}{coul\-Func\-\_\-}
+\item 
+double \hyperlink{classPotential_a0f692e07a6215ec4605ae1f04c09a926}{boundary\-Radius\-\_\-}
+\item 
+double \hyperlink{classPotential_a1ca2fe861ed14b351b2f884a6354ce90}{coulomb\-Radius\-\_\-}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classPotential_a4fc0ce6be68500162a02df2175f6a122}{\index{Potential@{Potential}!Potential@{Potential}}
+\index{Potential@{Potential}!Potential@{Potential}}
+\subsubsection[{Potential}]{\setlength{\rightskip}{0pt plus 5cm}Potential\-::\-Potential (
+\begin{DoxyParamCaption}
+\item[{int}]{z1, }
+\item[{int}]{m1, }
+\item[{int}]{z2, }
+\item[{int}]{m2, }
+\item[{double}]{j\-Initial, }
+\item[{int}]{pi\-Initial, }
+\item[{double}]{j\-Final, }
+\item[{int}]{pi\-Final, }
+\item[{double}]{spin, }
+\item[{int}]{parity, }
+\item[{double}]{max\-L, }
+\item[{double}]{total\-Width\-For\-Correction, }
+\item[{double}]{uncorr\-Total\-Width\-For\-Correction, }
+\item[{double}]{uncorr\-Total\-Width\-Sqrd\-For\-Correction, }
+\item[{{\bf Transmission\-Func} $\ast$}]{previous}
+\end{DoxyParamCaption}
+)}}\label{classPotential_a4fc0ce6be68500162a02df2175f6a122}
+
+
+References coul\-Func\-\_\-, and Get\-Red\-Mass().
+
+\hypertarget{classPotential_ad50069dfb8df6538d94c4e3dcce26a6d}{\index{Potential@{Potential}!$\sim$\-Potential@{$\sim$\-Potential}}
+\index{$\sim$\-Potential@{$\sim$\-Potential}!Potential@{Potential}}
+\subsubsection[{$\sim$\-Potential}]{\setlength{\rightskip}{0pt plus 5cm}Potential\-::$\sim$\-Potential (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classPotential_ad50069dfb8df6538d94c4e3dcce26a6d}
+
+
+References coul\-Func\-\_\-.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classPotential_a4e19e3b9ee8abf94d2c8e072daf46206}{\index{Potential@{Potential}!Calc\-Beta@{Calc\-Beta}}
+\index{Calc\-Beta@{Calc\-Beta}!Potential@{Potential}}
+\subsubsection[{Calc\-Beta}]{\setlength{\rightskip}{0pt plus 5cm}{\bf std\-::complex}$<$ double $>$ Potential\-::\-Calc\-Beta (
+\begin{DoxyParamCaption}
+\item[{double}]{energy, }
+\item[{int}]{l, }
+\item[{double}]{s, }
+\item[{double}]{j, }
+\item[{double}]{r\-Step}
+\end{DoxyParamCaption}
+) const}}\label{classPotential_a4e19e3b9ee8abf94d2c8e072daf46206}
+
+
+References Get\-Boundary\-Radius(), Normalize\-Internally(), and Solve().
+
+
+
+Referenced by Calc\-Transmission().
+
+\hypertarget{classPotential_aea8adb2a1783a79985621a899118c967}{\index{Potential@{Potential}!Calc\-Transmission@{Calc\-Transmission}}
+\index{Calc\-Transmission@{Calc\-Transmission}!Potential@{Potential}}
+\subsubsection[{Calc\-Transmission}]{\setlength{\rightskip}{0pt plus 5cm}double Potential\-::\-Calc\-Transmission (
+\begin{DoxyParamCaption}
+\item[{double}]{s, }
+\item[{int}]{l, }
+\item[{double}]{energy}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classPotential_aea8adb2a1783a79985621a899118c967}
+
+
+Implements \hyperlink{classParticleTransmissionFunc_a651cc8a1d96d72e12eaf66506c046856}{Particle\-Transmission\-Func}.
+
+
+
+References Calc\-Beta(), coul\-Func\-\_\-, Coul\-Waves\-::d\-F, Coul\-Waves\-::d\-G, Coul\-Waves\-::\-F, Coul\-Waves\-::\-G, Get\-Boundary\-Radius(), Get\-Red\-Mass(), hbarc, Transmission\-Func\-::j\-Initial\-\_\-, Particle\-Transmission\-Func\-::m1\-\_\-, and uconv.
+
+\hypertarget{classPotential_af6d2217c4a1f91e7ebb84d5b728d11aa}{\index{Potential@{Potential}!Calculate@{Calculate}}
+\index{Calculate@{Calculate}!Potential@{Potential}}
+\subsubsection[{Calculate}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf std\-::complex}$<$double$>$ Potential\-::\-Calculate (
+\begin{DoxyParamCaption}
+\item[{double}]{, }
+\item[{int}]{, }
+\item[{double}]{, }
+\item[{double}]{, }
+\item[{double}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classPotential_af6d2217c4a1f91e7ebb84d5b728d11aa}
+
+
+Implemented in \hyperlink{classJLMPotential_ae9986807ce14a95a6c6214feea1233c8}{J\-L\-M\-Potential}, and \hyperlink{classMcFaddenSatchlerPotential_abbdff953b8577365fc0b60844d51ea4b}{Mc\-Fadden\-Satchler\-Potential}.
+
+
+
+Referenced by Solve().
+
+\hypertarget{classPotential_a76d8dff6de0e098d8ec4fdf355363a57}{\index{Potential@{Potential}!Get\-Boundary\-Radius@{Get\-Boundary\-Radius}}
+\index{Get\-Boundary\-Radius@{Get\-Boundary\-Radius}!Potential@{Potential}}
+\subsubsection[{Get\-Boundary\-Radius}]{\setlength{\rightskip}{0pt plus 5cm}double Potential\-::\-Get\-Boundary\-Radius (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classPotential_a76d8dff6de0e098d8ec4fdf355363a57}
+
+
+References boundary\-Radius\-\_\-.
+
+
+
+Referenced by Calc\-Beta(), Calc\-Transmission(), Normalize\-Internally(), and Solve().
+
+\hypertarget{classPotential_a75d7cf1ca990cfe41be3e63caff7b2f1}{\index{Potential@{Potential}!Get\-Red\-Mass@{Get\-Red\-Mass}}
+\index{Get\-Red\-Mass@{Get\-Red\-Mass}!Potential@{Potential}}
+\subsubsection[{Get\-Red\-Mass}]{\setlength{\rightskip}{0pt plus 5cm}double Potential\-::\-Get\-Red\-Mass (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classPotential_a75d7cf1ca990cfe41be3e63caff7b2f1}
+
+
+References Particle\-Transmission\-Func\-::redmass\-\_\-.
+
+
+
+Referenced by Calc\-Transmission(), Potential(), and Solve().
+
+\hypertarget{classPotential_a154fb8deeab61df6a0b55e2806844246}{\index{Potential@{Potential}!Get\-R\-Max@{Get\-R\-Max}}
+\index{Get\-R\-Max@{Get\-R\-Max}!Potential@{Potential}}
+\subsubsection[{Get\-R\-Max}]{\setlength{\rightskip}{0pt plus 5cm}double Potential\-::\-Get\-R\-Max (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classPotential_a154fb8deeab61df6a0b55e2806844246}
+
+
+References boundary\-Radius\-\_\-.
+
+\hypertarget{classPotential_a0703b38c5987f1b81cbafae5a6d1ab0c}{\index{Potential@{Potential}!Get\-Z1\-Z2@{Get\-Z1\-Z2}}
+\index{Get\-Z1\-Z2@{Get\-Z1\-Z2}!Potential@{Potential}}
+\subsubsection[{Get\-Z1\-Z2}]{\setlength{\rightskip}{0pt plus 5cm}int Potential\-::\-Get\-Z1\-Z2 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classPotential_a0703b38c5987f1b81cbafae5a6d1ab0c}
+
+
+References Particle\-Transmission\-Func\-::z1\-\_\-, and Transmission\-Func\-::z2\-\_\-.
+
+
+
+Referenced by J\-L\-M\-Potential\-::\-Calculate(), and Mc\-Fadden\-Satchler\-Potential\-::\-Calculate().
+
+\hypertarget{classPotential_a6ecf02124b7690f05488a5fdde693d76}{\index{Potential@{Potential}!Normalize\-Internally@{Normalize\-Internally}}
+\index{Normalize\-Internally@{Normalize\-Internally}!Potential@{Potential}}
+\subsubsection[{Normalize\-Internally}]{\setlength{\rightskip}{0pt plus 5cm}void Potential\-::\-Normalize\-Internally (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ {\bf std\-::complex}$<$ double $>$ $>$ \&}]{wave\-Function, }
+\item[{double}]{r\-Step}
+\end{DoxyParamCaption}
+) const}}\label{classPotential_a6ecf02124b7690f05488a5fdde693d76}
+
+
+References Get\-Boundary\-Radius().
+
+
+
+Referenced by Calc\-Beta().
+
+\hypertarget{classPotential_afaf287ffc13db37859773d092dcce2d9}{\index{Potential@{Potential}!Normalize\-Over\-All\-Space@{Normalize\-Over\-All\-Space}}
+\index{Normalize\-Over\-All\-Space@{Normalize\-Over\-All\-Space}!Potential@{Potential}}
+\subsubsection[{Normalize\-Over\-All\-Space}]{\setlength{\rightskip}{0pt plus 5cm}void Potential\-::\-Normalize\-Over\-All\-Space (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ {\bf std\-::complex}$<$ double $>$ $>$ \&}]{wave\-Function, }
+\item[{double}]{r\-Step}
+\end{DoxyParamCaption}
+) const}}\label{classPotential_afaf287ffc13db37859773d092dcce2d9}
+\hypertarget{classPotential_a7af6c51bab5120e99024a73f79c84a37}{\index{Potential@{Potential}!Solve@{Solve}}
+\index{Solve@{Solve}!Potential@{Potential}}
+\subsubsection[{Solve}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ {\bf std\-::complex}$<$ double $>$ $>$ Potential\-::\-Solve (
+\begin{DoxyParamCaption}
+\item[{double}]{energy, }
+\item[{int}]{L, }
+\item[{double}]{S, }
+\item[{double}]{J, }
+\item[{double}]{r\-Step}
+\end{DoxyParamCaption}
+) const}}\label{classPotential_a7af6c51bab5120e99024a73f79c84a37}
+
+
+References Calculate(), Get\-Boundary\-Radius(), Get\-Red\-Mass(), hbarc, and uconv.
+
+
+
+Referenced by Calc\-Beta().
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classPotential_a0f692e07a6215ec4605ae1f04c09a926}{\index{Potential@{Potential}!boundary\-Radius\-\_\-@{boundary\-Radius\-\_\-}}
+\index{boundary\-Radius\-\_\-@{boundary\-Radius\-\_\-}!Potential@{Potential}}
+\subsubsection[{boundary\-Radius\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}double Potential\-::boundary\-Radius\-\_\-\hspace{0.3cm}{\ttfamily [protected]}}}\label{classPotential_a0f692e07a6215ec4605ae1f04c09a926}
+
+
+Referenced by Get\-Boundary\-Radius(), Get\-R\-Max(), J\-L\-M\-Potential\-::\-J\-L\-M\-Potential(), and Mc\-Fadden\-Satchler\-Potential\-::\-Mc\-Fadden\-Satchler\-Potential().
+
+\hypertarget{classPotential_ab4d202d040f1b759ae2ce7ac6f0010e3}{\index{Potential@{Potential}!coul\-Func\-\_\-@{coul\-Func\-\_\-}}
+\index{coul\-Func\-\_\-@{coul\-Func\-\_\-}!Potential@{Potential}}
+\subsubsection[{coul\-Func\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Coul\-Func}$\ast$ Potential\-::coul\-Func\-\_\-\hspace{0.3cm}{\ttfamily [protected]}}}\label{classPotential_ab4d202d040f1b759ae2ce7ac6f0010e3}
+
+
+Referenced by Calc\-Transmission(), Potential(), and $\sim$\-Potential().
+
+\hypertarget{classPotential_a1ca2fe861ed14b351b2f884a6354ce90}{\index{Potential@{Potential}!coulomb\-Radius\-\_\-@{coulomb\-Radius\-\_\-}}
+\index{coulomb\-Radius\-\_\-@{coulomb\-Radius\-\_\-}!Potential@{Potential}}
+\subsubsection[{coulomb\-Radius\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}double Potential\-::coulomb\-Radius\-\_\-\hspace{0.3cm}{\ttfamily [protected]}}}\label{classPotential_a1ca2fe861ed14b351b2f884a6354ce90}
+
+
+Referenced by J\-L\-M\-Potential\-::\-Calculate(), Mc\-Fadden\-Satchler\-Potential\-::\-Calculate(), J\-L\-M\-Potential\-::\-J\-L\-M\-Potential(), and Mc\-Fadden\-Satchler\-Potential\-::\-Mc\-Fadden\-Satchler\-Potential().
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{Potential_8h}{Potential.\-h}\item 
+src/\hyperlink{Potential_8cpp}{Potential.\-cpp}\end{DoxyCompactItemize}

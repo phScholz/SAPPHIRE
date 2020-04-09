@@ -1,0 +1,89 @@
+\hypertarget{classDecayController}{\section{Decay\-Controller Class Reference}
+\label{classDecayController}\index{Decay\-Controller@{Decay\-Controller}}
+}
+
+
+{\ttfamily \#include $<$Decay\-Controller.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDecayController_a76bc752d815a48e34a81c936a677bbc5}{Decay\-Controller} (int Z, int A, double j\-Initial, int pi\-Initial, double energy, int initial\-Neutron\-Number=-\/1, int initial\-Neutron\-Hole\-Number=-\/1, int initial\-Proton\-Number=-\/1, int initial\-Proton\-Hole\-Number=-\/1)
+\item 
+bool \hyperlink{classDecayController_a3b69fa95266fab7801d7f04cc7a571c9}{Decay} (double \&, double \&, double \&, double \&, double \&, double \&, double \&, double \&)
+\item 
+std\-::vector$<$ \hyperlink{classDecayProduct}{Decay\-Product} $>$ \hyperlink{classDecayController_ab6708e92c6be6d09020f714f9d687ac1}{Decay\-Products} () const 
+\item 
+void \hyperlink{classDecayController_a6bab34eb060a99224e8d176c470e8f20}{Print\-Decays} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classDecayController_a76bc752d815a48e34a81c936a677bbc5}{\index{Decay\-Controller@{Decay\-Controller}!Decay\-Controller@{Decay\-Controller}}
+\index{Decay\-Controller@{Decay\-Controller}!DecayController@{Decay\-Controller}}
+\subsubsection[{Decay\-Controller}]{\setlength{\rightskip}{0pt plus 5cm}Decay\-Controller\-::\-Decay\-Controller (
+\begin{DoxyParamCaption}
+\item[{int}]{Z, }
+\item[{int}]{A, }
+\item[{double}]{j\-Initial, }
+\item[{int}]{pi\-Initial, }
+\item[{double}]{energy, }
+\item[{int}]{initial\-Neutron\-Number = {\ttfamily -\/1}, }
+\item[{int}]{initial\-Neutron\-Hole\-Number = {\ttfamily -\/1}, }
+\item[{int}]{initial\-Proton\-Number = {\ttfamily -\/1}, }
+\item[{int}]{initial\-Proton\-Hole\-Number = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classDecayController_a76bc752d815a48e34a81c936a677bbc5}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDecayController_a3b69fa95266fab7801d7f04cc7a571c9}{\index{Decay\-Controller@{Decay\-Controller}!Decay@{Decay}}
+\index{Decay@{Decay}!DecayController@{Decay\-Controller}}
+\subsubsection[{Decay}]{\setlength{\rightskip}{0pt plus 5cm}bool Decay\-Controller\-::\-Decay (
+\begin{DoxyParamCaption}
+\item[{double \&}]{neutron\-Entrance, }
+\item[{double \&}]{proton\-Entrance, }
+\item[{double \&}]{alpha\-Entrance, }
+\item[{double \&}]{gamma\-Entrance, }
+\item[{double \&}]{neutron\-Total\-Width, }
+\item[{double \&}]{proton\-Total\-Width, }
+\item[{double \&}]{alpha\-Total\-Width, }
+\item[{double \&}]{gamma\-Total\-Width}
+\end{DoxyParamCaption}
+)}}\label{classDecayController_a3b69fa95266fab7801d7f04cc7a571c9}
+
+
+References Decayer\-::\-Alpha\-Entrance\-Width(), Decayer\-::\-Alpha\-Total\-Width(), Decayer\-::\-Decay(), Pre\-Eq\-Decayer\-::\-Decay(), Decayer\-::\-Gamma\-Entrance\-Width(), Decayer\-::\-Gamma\-Total\-Width(), Decayer\-::\-Neutron\-Entrance\-Width(), Decayer\-::\-Neutron\-Total\-Width(), Decayer\-::\-Proton\-Entrance\-Width(), and Decayer\-::\-Proton\-Total\-Width().
+
+
+
+Referenced by main().
+
+\hypertarget{classDecayController_ab6708e92c6be6d09020f714f9d687ac1}{\index{Decay\-Controller@{Decay\-Controller}!Decay\-Products@{Decay\-Products}}
+\index{Decay\-Products@{Decay\-Products}!DecayController@{Decay\-Controller}}
+\subsubsection[{Decay\-Products}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Decay\-Product}$>$ Decay\-Controller\-::\-Decay\-Products (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classDecayController_ab6708e92c6be6d09020f714f9d687ac1}
+
+
+Referenced by main().
+
+\hypertarget{classDecayController_a6bab34eb060a99224e8d176c470e8f20}{\index{Decay\-Controller@{Decay\-Controller}!Print\-Decays@{Print\-Decays}}
+\index{Print\-Decays@{Print\-Decays}!DecayController@{Decay\-Controller}}
+\subsubsection[{Print\-Decays}]{\setlength{\rightskip}{0pt plus 5cm}void Decay\-Controller\-::\-Print\-Decays (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDecayController_a6bab34eb060a99224e8d176c470e8f20}
+
+
+Referenced by main().
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{DecayController_8h}{Decay\-Controller.\-h}\item 
+src/\hyperlink{DecayController_8cpp}{Decay\-Controller.\-cpp}\end{DoxyCompactItemize}

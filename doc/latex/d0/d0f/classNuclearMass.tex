@@ -1,0 +1,223 @@
+\hypertarget{classNuclearMass}{\section{Nuclear\-Mass Class Reference}
+\label{classNuclearMass}\index{Nuclear\-Mass@{Nuclear\-Mass}}
+}
+
+
+{\ttfamily \#include $<$Nuclear\-Mass.\-h$>$}
+
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classNuclearMass_a7225a76222f0dd2e466092ef1e5f40dd}{Initialize\-Elements} ()
+\item 
+static void \hyperlink{classNuclearMass_a76145d2def7d6cd40b9524ab9518eff3}{Initialize\-Masses} (std\-::string)
+\item 
+static int \hyperlink{classNuclearMass_ae5b0875835707ce2567529cf88fe33b1}{Find\-Z} (std\-::string)
+\item 
+static std\-::string \hyperlink{classNuclearMass_aaffdbd2dabf1b1216763c32cf0a22a72}{Find\-Element} (int)
+\item 
+static bool \hyperlink{classNuclearMass_a3bf04f82484549832925bf4f2441466d}{Find\-Mass} (int, int, double \&)
+\item 
+static bool \hyperlink{classNuclearMass_a851078a4e77d62f2f272e84bff5a4ee5}{Mass\-Difference} (int, int, int, int, double \&)
+\item 
+static bool \hyperlink{classNuclearMass_a6086c9b206e6a63c9895f7cdd954d5e8}{Q\-Value} (int, int, int, int, double \&)
+\item 
+static bool \hyperlink{classNuclearMass_acea701823ae741db56e908cf0910d3f1}{Neutron\-Pairing\-Gap} (int, int, double \&)
+\item 
+static bool \hyperlink{classNuclearMass_ab85a213db514601c61cf1f00a307e3ea}{Proton\-Pairing\-Gap} (int, int, double \&)
+\item 
+static bool \hyperlink{classNuclearMass_a6d1e15e3b55000fee7dcd9d12a983793}{Micro\-Energy\-Corr} (int, int, double \&)
+\item 
+static bool \hyperlink{classNuclearMass_acac25b099886be862e5e5bf40a6f16ef}{Highest\-Bound\-Energy} (int, int, double \&)
+\item 
+static double \hyperlink{classNuclearMass_a1e07c46a9d3b0f4338b23e8c0f7db99b}{Calculate\-L\-D\-M\-Mass} (int, int)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classNuclearMass_a1e07c46a9d3b0f4338b23e8c0f7db99b}{\index{Nuclear\-Mass@{Nuclear\-Mass}!Calculate\-L\-D\-M\-Mass@{Calculate\-L\-D\-M\-Mass}}
+\index{Calculate\-L\-D\-M\-Mass@{Calculate\-L\-D\-M\-Mass}!NuclearMass@{Nuclear\-Mass}}
+\subsubsection[{Calculate\-L\-D\-M\-Mass}]{\setlength{\rightskip}{0pt plus 5cm}double Nuclear\-Mass\-::\-Calculate\-L\-D\-M\-Mass (
+\begin{DoxyParamCaption}
+\item[{int}]{Z, }
+\item[{int}]{A}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classNuclearMass_a1e07c46a9d3b0f4338b23e8c0f7db99b}
+Calculates liquid drop model mass based on T\-A\-L\-Y\-S parametrization. 
+
+References uconv.
+
+\hypertarget{classNuclearMass_aaffdbd2dabf1b1216763c32cf0a22a72}{\index{Nuclear\-Mass@{Nuclear\-Mass}!Find\-Element@{Find\-Element}}
+\index{Find\-Element@{Find\-Element}!NuclearMass@{Nuclear\-Mass}}
+\subsubsection[{Find\-Element}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Nuclear\-Mass\-::\-Find\-Element (
+\begin{DoxyParamCaption}
+\item[{int}]{Z}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classNuclearMass_aaffdbd2dabf1b1216763c32cf0a22a72}
+
+
+Referenced by Decay\-Results\-::\-Decay\-Results(), Cross\-Section\-::\-Print\-Cross\-Sections(), Cross\-Section\-::\-Print\-Reaction\-Rates(), and Cross\-Section\-::\-Print\-Transmission\-Terms().
+
+\hypertarget{classNuclearMass_a3bf04f82484549832925bf4f2441466d}{\index{Nuclear\-Mass@{Nuclear\-Mass}!Find\-Mass@{Find\-Mass}}
+\index{Find\-Mass@{Find\-Mass}!NuclearMass@{Nuclear\-Mass}}
+\subsubsection[{Find\-Mass}]{\setlength{\rightskip}{0pt plus 5cm}bool Nuclear\-Mass\-::\-Find\-Mass (
+\begin{DoxyParamCaption}
+\item[{int}]{Z, }
+\item[{int}]{A, }
+\item[{double \&}]{M}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classNuclearMass_a3bf04f82484549832925bf4f2441466d}
+
+
+References H\-A\-S\-\_\-\-E\-X\-P\-\_\-\-M\-A\-S\-S, and H\-A\-S\-\_\-\-T\-H\-\_\-\-M\-A\-S\-S.
+
+
+
+Referenced by Gamma\-Transmission\-Func\-::\-Gamma\-Transmission\-Func(), Mass\-Difference(), Particle\-Transmission\-Func\-::\-Particle\-Transmission\-Func(), and Q\-Value().
+
+\hypertarget{classNuclearMass_ae5b0875835707ce2567529cf88fe33b1}{\index{Nuclear\-Mass@{Nuclear\-Mass}!Find\-Z@{Find\-Z}}
+\index{Find\-Z@{Find\-Z}!NuclearMass@{Nuclear\-Mass}}
+\subsubsection[{Find\-Z}]{\setlength{\rightskip}{0pt plus 5cm}int Nuclear\-Mass\-::\-Find\-Z (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{element}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classNuclearMass_ae5b0875835707ce2567529cf88fe33b1}
+
+
+Referenced by parse\-Command\-Line\-For\-Decay(), and parse\-Command\-Line\-For\-X\-S().
+
+\hypertarget{classNuclearMass_acac25b099886be862e5e5bf40a6f16ef}{\index{Nuclear\-Mass@{Nuclear\-Mass}!Highest\-Bound\-Energy@{Highest\-Bound\-Energy}}
+\index{Highest\-Bound\-Energy@{Highest\-Bound\-Energy}!NuclearMass@{Nuclear\-Mass}}
+\subsubsection[{Highest\-Bound\-Energy}]{\setlength{\rightskip}{0pt plus 5cm}bool Nuclear\-Mass\-::\-Highest\-Bound\-Energy (
+\begin{DoxyParamCaption}
+\item[{int}]{Z, }
+\item[{int}]{A, }
+\item[{double \&}]{energy}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classNuclearMass_acac25b099886be862e5e5bf40a6f16ef}
+
+
+References Q\-Value().
+
+
+
+Referenced by Transition\-Rate\-Func\-::\-Transition\-Rate\-Func().
+
+\hypertarget{classNuclearMass_a7225a76222f0dd2e466092ef1e5f40dd}{\index{Nuclear\-Mass@{Nuclear\-Mass}!Initialize\-Elements@{Initialize\-Elements}}
+\index{Initialize\-Elements@{Initialize\-Elements}!NuclearMass@{Nuclear\-Mass}}
+\subsubsection[{Initialize\-Elements}]{\setlength{\rightskip}{0pt plus 5cm}void Nuclear\-Mass\-::\-Initialize\-Elements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classNuclearMass_a7225a76222f0dd2e466092ef1e5f40dd}
+
+
+Referenced by Initialize().
+
+\hypertarget{classNuclearMass_a76145d2def7d6cd40b9524ab9518eff3}{\index{Nuclear\-Mass@{Nuclear\-Mass}!Initialize\-Masses@{Initialize\-Masses}}
+\index{Initialize\-Masses@{Initialize\-Masses}!NuclearMass@{Nuclear\-Mass}}
+\subsubsection[{Initialize\-Masses}]{\setlength{\rightskip}{0pt plus 5cm}void Nuclear\-Mass\-::\-Initialize\-Masses (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{filename}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classNuclearMass_a76145d2def7d6cd40b9524ab9518eff3}
+
+
+References H\-A\-S\-\_\-\-E\-X\-P\-\_\-\-M\-A\-S\-S, H\-A\-S\-\_\-\-T\-H\-\_\-\-M\-A\-S\-S, and uconv.
+
+
+
+Referenced by Initialize().
+
+\hypertarget{classNuclearMass_a851078a4e77d62f2f272e84bff5a4ee5}{\index{Nuclear\-Mass@{Nuclear\-Mass}!Mass\-Difference@{Mass\-Difference}}
+\index{Mass\-Difference@{Mass\-Difference}!NuclearMass@{Nuclear\-Mass}}
+\subsubsection[{Mass\-Difference}]{\setlength{\rightskip}{0pt plus 5cm}bool Nuclear\-Mass\-::\-Mass\-Difference (
+\begin{DoxyParamCaption}
+\item[{int}]{Z1, }
+\item[{int}]{A1, }
+\item[{int}]{Z2, }
+\item[{int}]{A2, }
+\item[{double \&}]{difference}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classNuclearMass_a851078a4e77d62f2f272e84bff5a4ee5}
+
+
+References Find\-Mass().
+
+
+
+Referenced by Neutron\-Pairing\-Gap(), Proton\-Pairing\-Gap(), and Q\-Value().
+
+\hypertarget{classNuclearMass_a6d1e15e3b55000fee7dcd9d12a983793}{\index{Nuclear\-Mass@{Nuclear\-Mass}!Micro\-Energy\-Corr@{Micro\-Energy\-Corr}}
+\index{Micro\-Energy\-Corr@{Micro\-Energy\-Corr}!NuclearMass@{Nuclear\-Mass}}
+\subsubsection[{Micro\-Energy\-Corr}]{\setlength{\rightskip}{0pt plus 5cm}bool Nuclear\-Mass\-::\-Micro\-Energy\-Corr (
+\begin{DoxyParamCaption}
+\item[{int}]{Z, }
+\item[{int}]{A, }
+\item[{double \&}]{correction}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classNuclearMass_a6d1e15e3b55000fee7dcd9d12a983793}
+
+
+Referenced by Rauscher\-Level\-Density\-::\-Rauscher\-Level\-Density().
+
+\hypertarget{classNuclearMass_acea701823ae741db56e908cf0910d3f1}{\index{Nuclear\-Mass@{Nuclear\-Mass}!Neutron\-Pairing\-Gap@{Neutron\-Pairing\-Gap}}
+\index{Neutron\-Pairing\-Gap@{Neutron\-Pairing\-Gap}!NuclearMass@{Nuclear\-Mass}}
+\subsubsection[{Neutron\-Pairing\-Gap}]{\setlength{\rightskip}{0pt plus 5cm}bool Nuclear\-Mass\-::\-Neutron\-Pairing\-Gap (
+\begin{DoxyParamCaption}
+\item[{int}]{Z, }
+\item[{int}]{A, }
+\item[{double \&}]{pairing\-Gap}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classNuclearMass_acea701823ae741db56e908cf0910d3f1}
+
+
+References Mass\-Difference().
+
+
+
+Referenced by Rauscher\-Level\-Density\-::\-Calc\-Back\-Shift().
+
+\hypertarget{classNuclearMass_ab85a213db514601c61cf1f00a307e3ea}{\index{Nuclear\-Mass@{Nuclear\-Mass}!Proton\-Pairing\-Gap@{Proton\-Pairing\-Gap}}
+\index{Proton\-Pairing\-Gap@{Proton\-Pairing\-Gap}!NuclearMass@{Nuclear\-Mass}}
+\subsubsection[{Proton\-Pairing\-Gap}]{\setlength{\rightskip}{0pt plus 5cm}bool Nuclear\-Mass\-::\-Proton\-Pairing\-Gap (
+\begin{DoxyParamCaption}
+\item[{int}]{Z, }
+\item[{int}]{A, }
+\item[{double \&}]{pairing\-Gap}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classNuclearMass_ab85a213db514601c61cf1f00a307e3ea}
+
+
+References Mass\-Difference().
+
+
+
+Referenced by Rauscher\-Level\-Density\-::\-Calc\-Back\-Shift().
+
+\hypertarget{classNuclearMass_a6086c9b206e6a63c9895f7cdd954d5e8}{\index{Nuclear\-Mass@{Nuclear\-Mass}!Q\-Value@{Q\-Value}}
+\index{Q\-Value@{Q\-Value}!NuclearMass@{Nuclear\-Mass}}
+\subsubsection[{Q\-Value}]{\setlength{\rightskip}{0pt plus 5cm}bool Nuclear\-Mass\-::\-Q\-Value (
+\begin{DoxyParamCaption}
+\item[{int}]{Z1, }
+\item[{int}]{A1, }
+\item[{int}]{Z2, }
+\item[{int}]{A2, }
+\item[{double \&}]{q\-Value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classNuclearMass_a6086c9b206e6a63c9895f7cdd954d5e8}
+
+
+References Find\-Mass(), and Mass\-Difference().
+
+
+
+Referenced by Cross\-Section\-::\-Cross\-Section(), Decayer\-::\-Decayer(), Highest\-Bound\-Energy(), Kopecky\-Uhl\-G\-S\-F\-::\-Kopecky\-Uhl\-G\-S\-F(), Particle\-Hole\-Level\-Density\-::\-Particle\-Hole\-Level\-Density(), and Pre\-Eq\-Decayer\-::\-Pre\-Eq\-Decayer().
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{NuclearMass_8h}{Nuclear\-Mass.\-h}\item 
+src/\hyperlink{NuclearMass_8cpp}{Nuclear\-Mass.\-cpp}\item 
+src/\hyperlink{Setup_8cpp}{Setup.\-cpp}\end{DoxyCompactItemize}

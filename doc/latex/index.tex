@@ -1,0 +1,20 @@
+This is the original version of Sapphire by \href{https://isnap.nd.edu/people/group-pages/mary-beard/}{\tt Mary Beard}. Only the R\-E\-A\-D\-M\-E-\/file has been changed.
+
+Compiling Sapphire requires C\-Make,R\-O\-O\-T,and G\-S\-L.
+
+To compile\-:
+
+
+\begin{DoxyEnumerate}
+\item Create a build directory under the main Sapphire directory (i.\-e. mkdir build), and change to that directory (i.\-e. cd build/).
+\item Run C\-Make against the main directory, optionally specifying the desired C++ compiler (i.\-e. cmake -\/\-D\-C\-M\-A\-K\-E\-\_\-\-C\-X\-X\-\_\-\-C\-O\-M\-P\-I\-L\-E\-R=icpc -\/\-D\-C\-M\-A\-K\-E\-\_\-\-C\-\_\-\-C\-O\-M\-P\-I\-L\-E\-R=icc ..).
+\item Type make install to build Sapphire. The executable is put in the build directory.
+\end{DoxyEnumerate}
+
+Be aware that Sapphire links the paths to the needed tables at compile time. While the executable can be moved, the main Sapphire directory should stay in place. If moved, the build process should be repeated.
+
+To execute the code just enter
+
+sapphire X+a
+
+where X is the heavy nucleus and a is the projectile. Examples are 25\-Mg+a or 60\-Fe+n. 

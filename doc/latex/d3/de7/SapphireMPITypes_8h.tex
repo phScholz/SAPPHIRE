@@ -1,0 +1,83 @@
+\hypertarget{SapphireMPITypes_8h}{\section{include/\-Sapphire\-M\-P\-I\-Types.h File Reference}
+\label{SapphireMPITypes_8h}\index{include/\-Sapphire\-M\-P\-I\-Types.\-h@{include/\-Sapphire\-M\-P\-I\-Types.\-h}}
+}
+{\ttfamily \#include $<$boost/serialization/access.\-hpp$>$}\\*
+{\ttfamily \#include $<$boost/serialization/vector.\-hpp$>$}\\*
+{\ttfamily \#include $<$boost/serialization/utility.\-hpp$>$}\\*
+{\ttfamily \#include $<$boost/mpi/datatype.\-hpp$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include \char`\"{}Decay\-Product.\-h\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classInitialNucleusData}{Initial\-Nucleus\-Data}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceboost}{boost}
+\item 
+\hyperlink{namespaceboost_1_1serialization}{boost\-::serialization}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{SapphireMPITypes_8h_a46b6e88192b697d959c7462d12763abc}{Sapphire\-Tags\-\_\-t} \{ \hyperlink{SapphireMPITypes_8h_a46b6e88192b697d959c7462d12763abca5a57491ed6c111c259ffcee19eb89938}{Sapphire\-Tag\-Process}, 
+\hyperlink{SapphireMPITypes_8h_a46b6e88192b697d959c7462d12763abcaa6e590270b4e4dc8c1419df5697e253f}{Sapphire\-Tag\-Done}, 
+\hyperlink{SapphireMPITypes_8h_a46b6e88192b697d959c7462d12763abca512e8c7dca8cb107819e11b5ff2d59f9}{Sapphire\-Tag\-Results}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{SapphireMPITypes_8h_ae00a9a858d01bcb3b3dc52990c8ffbab}{B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E} (\hyperlink{classInitialNucleusData}{Initial\-Nucleus\-Data})
+\item 
+void \hyperlink{namespaceboost_1_1serialization_a352eb7f45a31feaa23a059ef8a2ebfa1}{boost\-::serialization\-::serialize} (Archive \&ar, \hyperlink{classDecayData}{Decay\-Data} \&g, const unsigned int version)
+\item 
+void \hyperlink{namespaceboost_1_1serialization_ad62f81527a5ee0f4136bad82cef04d53}{boost\-::serialization\-::serialize} (Archive \&ar, \hyperlink{classDecayProduct}{Decay\-Product} \&g, const unsigned int version)
+\item 
+\hyperlink{SapphireMPITypes_8h_a74b3b2924cff4ae8084f8d53f2d7c946}{B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E} (\hyperlink{classDecayData}{Decay\-Data})
+\item 
+\hyperlink{SapphireMPITypes_8h_a7eddbfd51f0c01488b799cafc0d01825}{B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E} (\hyperlink{classDecayProduct}{Decay\-Product})
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{SapphireMPITypes_8h_a46b6e88192b697d959c7462d12763abc}{\index{Sapphire\-M\-P\-I\-Types.\-h@{Sapphire\-M\-P\-I\-Types.\-h}!Sapphire\-Tags\-\_\-t@{Sapphire\-Tags\-\_\-t}}
+\index{Sapphire\-Tags\-\_\-t@{Sapphire\-Tags\-\_\-t}!SapphireMPITypes.h@{Sapphire\-M\-P\-I\-Types.\-h}}
+\subsubsection[{Sapphire\-Tags\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Sapphire\-Tags\-\_\-t}}}\label{SapphireMPITypes_8h_a46b6e88192b697d959c7462d12763abc}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Sapphire\-Tag\-Process@{Sapphire\-Tag\-Process}!Sapphire\-M\-P\-I\-Types.\-h@{Sapphire\-M\-P\-I\-Types.\-h}}\index{Sapphire\-M\-P\-I\-Types.\-h@{Sapphire\-M\-P\-I\-Types.\-h}!Sapphire\-Tag\-Process@{Sapphire\-Tag\-Process}}\item[{\em 
+\hypertarget{SapphireMPITypes_8h_a46b6e88192b697d959c7462d12763abca5a57491ed6c111c259ffcee19eb89938}{Sapphire\-Tag\-Process}\label{SapphireMPITypes_8h_a46b6e88192b697d959c7462d12763abca5a57491ed6c111c259ffcee19eb89938}
+}]\index{Sapphire\-Tag\-Done@{Sapphire\-Tag\-Done}!Sapphire\-M\-P\-I\-Types.\-h@{Sapphire\-M\-P\-I\-Types.\-h}}\index{Sapphire\-M\-P\-I\-Types.\-h@{Sapphire\-M\-P\-I\-Types.\-h}!Sapphire\-Tag\-Done@{Sapphire\-Tag\-Done}}\item[{\em 
+\hypertarget{SapphireMPITypes_8h_a46b6e88192b697d959c7462d12763abcaa6e590270b4e4dc8c1419df5697e253f}{Sapphire\-Tag\-Done}\label{SapphireMPITypes_8h_a46b6e88192b697d959c7462d12763abcaa6e590270b4e4dc8c1419df5697e253f}
+}]\index{Sapphire\-Tag\-Results@{Sapphire\-Tag\-Results}!Sapphire\-M\-P\-I\-Types.\-h@{Sapphire\-M\-P\-I\-Types.\-h}}\index{Sapphire\-M\-P\-I\-Types.\-h@{Sapphire\-M\-P\-I\-Types.\-h}!Sapphire\-Tag\-Results@{Sapphire\-Tag\-Results}}\item[{\em 
+\hypertarget{SapphireMPITypes_8h_a46b6e88192b697d959c7462d12763abca512e8c7dca8cb107819e11b5ff2d59f9}{Sapphire\-Tag\-Results}\label{SapphireMPITypes_8h_a46b6e88192b697d959c7462d12763abca512e8c7dca8cb107819e11b5ff2d59f9}
+}]\end{description}
+\end{Desc}
+
+
+\subsection{Function Documentation}
+\hypertarget{SapphireMPITypes_8h_ae00a9a858d01bcb3b3dc52990c8ffbab}{\index{Sapphire\-M\-P\-I\-Types.\-h@{Sapphire\-M\-P\-I\-Types.\-h}!B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E@{B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E}}
+\index{B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E@{B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E}!SapphireMPITypes.h@{Sapphire\-M\-P\-I\-Types.\-h}}
+\subsubsection[{B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E}]{\setlength{\rightskip}{0pt plus 5cm}B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E (
+\begin{DoxyParamCaption}
+\item[{{\bf Initial\-Nucleus\-Data}}]{}
+\end{DoxyParamCaption}
+)}}\label{SapphireMPITypes_8h_ae00a9a858d01bcb3b3dc52990c8ffbab}
+\hypertarget{SapphireMPITypes_8h_a74b3b2924cff4ae8084f8d53f2d7c946}{\index{Sapphire\-M\-P\-I\-Types.\-h@{Sapphire\-M\-P\-I\-Types.\-h}!B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E@{B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E}}
+\index{B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E@{B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E}!SapphireMPITypes.h@{Sapphire\-M\-P\-I\-Types.\-h}}
+\subsubsection[{B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E}]{\setlength{\rightskip}{0pt plus 5cm}B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E (
+\begin{DoxyParamCaption}
+\item[{{\bf Decay\-Data}}]{}
+\end{DoxyParamCaption}
+)}}\label{SapphireMPITypes_8h_a74b3b2924cff4ae8084f8d53f2d7c946}
+\hypertarget{SapphireMPITypes_8h_a7eddbfd51f0c01488b799cafc0d01825}{\index{Sapphire\-M\-P\-I\-Types.\-h@{Sapphire\-M\-P\-I\-Types.\-h}!B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E@{B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E}}
+\index{B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E@{B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E}!SapphireMPITypes.h@{Sapphire\-M\-P\-I\-Types.\-h}}
+\subsubsection[{B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E}]{\setlength{\rightskip}{0pt plus 5cm}B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E (
+\begin{DoxyParamCaption}
+\item[{{\bf Decay\-Product}}]{}
+\end{DoxyParamCaption}
+)}}\label{SapphireMPITypes_8h_a7eddbfd51f0c01488b799cafc0d01825}

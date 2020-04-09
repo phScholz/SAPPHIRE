@@ -1,0 +1,719 @@
+\contentsline {chapter}{\numberline {1}R\-E\-A\-D\-M\-E}{1}{chapter.1}
+\contentsline {chapter}{\numberline {2}Namespace Index}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Namespace List}{3}{section.2.1}
+\contentsline {chapter}{\numberline {3}Hierarchical Index}{5}{chapter.3}
+\contentsline {section}{\numberline {3.1}Class Hierarchy}{5}{section.3.1}
+\contentsline {chapter}{\numberline {4}Class Index}{7}{chapter.4}
+\contentsline {section}{\numberline {4.1}Class List}{7}{section.4.1}
+\contentsline {chapter}{\numberline {5}File Index}{9}{chapter.5}
+\contentsline {section}{\numberline {5.1}File List}{9}{section.5.1}
+\contentsline {chapter}{\numberline {6}Namespace Documentation}{11}{chapter.6}
+\contentsline {section}{\numberline {6.1}boost Namespace Reference}{11}{section.6.1}
+\contentsline {section}{\numberline {6.2}boost\-:\-:serialization Namespace Reference}{11}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Function Documentation}{11}{subsection.6.2.1}
+\contentsline {subsubsection}{\numberline {6.2.1.1}serialize}{11}{subsubsection.6.2.1.1}
+\contentsline {subsubsection}{\numberline {6.2.1.2}serialize}{11}{subsubsection.6.2.1.2}
+\contentsline {section}{\numberline {6.3}std Namespace Reference}{11}{section.6.3}
+\contentsline {section}{\numberline {6.4}std\-:\-:tr1 Namespace Reference}{11}{section.6.4}
+\contentsline {chapter}{\numberline {7}Class Documentation}{13}{chapter.7}
+\contentsline {section}{\numberline {7.1}Brink\-Axel\-G\-S\-F Class Reference}{13}{section.7.1}
+\contentsline {subsection}{\numberline {7.1.1}Constructor \& Destructor Documentation}{13}{subsection.7.1.1}
+\contentsline {subsubsection}{\numberline {7.1.1.1}Brink\-Axel\-G\-S\-F}{13}{subsubsection.7.1.1.1}
+\contentsline {subsection}{\numberline {7.1.2}Member Function Documentation}{13}{subsection.7.1.2}
+\contentsline {subsubsection}{\numberline {7.1.2.1}Calc\-Strength\-Function}{13}{subsubsection.7.1.2.1}
+\contentsline {section}{\numberline {7.2}C\-D\-F\-Entry Class Reference}{14}{section.7.2}
+\contentsline {subsection}{\numberline {7.2.1}Constructor \& Destructor Documentation}{14}{subsection.7.2.1}
+\contentsline {subsubsection}{\numberline {7.2.1.1}C\-D\-F\-Entry}{14}{subsubsection.7.2.1.1}
+\contentsline {subsection}{\numberline {7.2.2}Member Data Documentation}{14}{subsection.7.2.2}
+\contentsline {subsubsection}{\numberline {7.2.2.1}energy\-\_\-}{14}{subsubsection.7.2.2.1}
+\contentsline {subsubsection}{\numberline {7.2.2.2}pair\-Index\-\_\-}{14}{subsubsection.7.2.2.2}
+\contentsline {subsubsection}{\numberline {7.2.2.3}value\-\_\-}{14}{subsubsection.7.2.2.3}
+\contentsline {section}{\numberline {7.3}Coul\-Func Class Reference}{14}{section.7.3}
+\contentsline {subsection}{\numberline {7.3.1}Constructor \& Destructor Documentation}{15}{subsection.7.3.1}
+\contentsline {subsubsection}{\numberline {7.3.1.1}Coul\-Func}{15}{subsubsection.7.3.1.1}
+\contentsline {subsection}{\numberline {7.3.2}Member Function Documentation}{15}{subsection.7.3.2}
+\contentsline {subsubsection}{\numberline {7.3.2.1}coul\-Last}{15}{subsubsection.7.3.2.1}
+\contentsline {subsubsection}{\numberline {7.3.2.2}energy\-Last}{15}{subsubsection.7.3.2.2}
+\contentsline {subsubsection}{\numberline {7.3.2.3}G\-S\-L\-Error\-Handler}{15}{subsubsection.7.3.2.3}
+\contentsline {subsubsection}{\numberline {7.3.2.4}l\-Last}{15}{subsubsection.7.3.2.4}
+\contentsline {subsubsection}{\numberline {7.3.2.5}operator()}{15}{subsubsection.7.3.2.5}
+\contentsline {subsubsection}{\numberline {7.3.2.6}Penetrability}{15}{subsubsection.7.3.2.6}
+\contentsline {subsubsection}{\numberline {7.3.2.7}P\-E\-Shift}{15}{subsubsection.7.3.2.7}
+\contentsline {subsubsection}{\numberline {7.3.2.8}P\-E\-Shift\-\_\-d\-E}{15}{subsubsection.7.3.2.8}
+\contentsline {subsubsection}{\numberline {7.3.2.9}radius\-Last}{15}{subsubsection.7.3.2.9}
+\contentsline {subsubsection}{\numberline {7.3.2.10}redmass}{16}{subsubsection.7.3.2.10}
+\contentsline {subsubsection}{\numberline {7.3.2.11}set\-Last}{16}{subsubsection.7.3.2.11}
+\contentsline {subsubsection}{\numberline {7.3.2.12}z1}{16}{subsubsection.7.3.2.12}
+\contentsline {subsubsection}{\numberline {7.3.2.13}z2}{16}{subsubsection.7.3.2.13}
+\contentsline {section}{\numberline {7.4}Coulomb\-\_\-wave\-\_\-functions Class Reference}{16}{section.7.4}
+\contentsline {subsection}{\numberline {7.4.1}Constructor \& Destructor Documentation}{16}{subsection.7.4.1}
+\contentsline {subsubsection}{\numberline {7.4.1.1}Coulomb\-\_\-wave\-\_\-functions}{16}{subsubsection.7.4.1.1}
+\contentsline {subsubsection}{\numberline {7.4.1.2}$\sim $\-Coulomb\-\_\-wave\-\_\-functions}{16}{subsubsection.7.4.1.2}
+\contentsline {subsection}{\numberline {7.4.2}Member Function Documentation}{17}{subsection.7.4.2}
+\contentsline {subsubsection}{\numberline {7.4.2.1}F\-\_\-d\-F}{17}{subsubsection.7.4.2.1}
+\contentsline {subsubsection}{\numberline {7.4.2.2}F\-\_\-d\-F\-\_\-init}{17}{subsubsection.7.4.2.2}
+\contentsline {subsubsection}{\numberline {7.4.2.3}G\-\_\-d\-G}{17}{subsubsection.7.4.2.3}
+\contentsline {subsubsection}{\numberline {7.4.2.4}H\-\_\-d\-H}{17}{subsubsection.7.4.2.4}
+\contentsline {subsubsection}{\numberline {7.4.2.5}H\-\_\-d\-H\-\_\-scaled}{17}{subsubsection.7.4.2.5}
+\contentsline {subsection}{\numberline {7.4.3}Member Data Documentation}{17}{subsection.7.4.3}
+\contentsline {subsubsection}{\numberline {7.4.3.1}eta}{17}{subsubsection.7.4.3.1}
+\contentsline {subsubsection}{\numberline {7.4.3.2}is\-\_\-it\-\_\-normalized}{17}{subsubsection.7.4.3.2}
+\contentsline {subsubsection}{\numberline {7.4.3.3}l}{17}{subsubsection.7.4.3.3}
+\contentsline {section}{\numberline {7.5}Coul\-Waves Struct Reference}{17}{section.7.5}
+\contentsline {subsection}{\numberline {7.5.1}Member Data Documentation}{17}{subsection.7.5.1}
+\contentsline {subsubsection}{\numberline {7.5.1.1}d\-F}{17}{subsubsection.7.5.1.1}
+\contentsline {subsubsection}{\numberline {7.5.1.2}d\-G}{17}{subsubsection.7.5.1.2}
+\contentsline {subsubsection}{\numberline {7.5.1.3}F}{17}{subsubsection.7.5.1.3}
+\contentsline {subsubsection}{\numberline {7.5.1.4}G}{17}{subsubsection.7.5.1.4}
+\contentsline {section}{\numberline {7.6}Cross\-Section Class Reference}{18}{section.7.6}
+\contentsline {subsection}{\numberline {7.6.1}Constructor \& Destructor Documentation}{18}{subsection.7.6.1}
+\contentsline {subsubsection}{\numberline {7.6.1.1}Cross\-Section}{18}{subsubsection.7.6.1.1}
+\contentsline {subsection}{\numberline {7.6.2}Member Function Documentation}{18}{subsection.7.6.2}
+\contentsline {subsubsection}{\numberline {7.6.2.1}Calc\-Average\-D\-Wave\-Res\-Width}{18}{subsubsection.7.6.2.1}
+\contentsline {subsubsection}{\numberline {7.6.2.2}Calc\-Average\-P\-Wave\-Res\-Width}{18}{subsubsection.7.6.2.2}
+\contentsline {subsubsection}{\numberline {7.6.2.3}Calc\-Average\-S\-Wave\-Res\-Width}{18}{subsubsection.7.6.2.3}
+\contentsline {subsubsection}{\numberline {7.6.2.4}Calculate}{18}{subsubsection.7.6.2.4}
+\contentsline {subsubsection}{\numberline {7.6.2.5}Calculate\-Reaction\-Rates}{18}{subsubsection.7.6.2.5}
+\contentsline {subsubsection}{\numberline {7.6.2.6}Create\-M\-A\-C\-S\-Energies\-Vector}{18}{subsubsection.7.6.2.6}
+\contentsline {subsubsection}{\numberline {7.6.2.7}Create\-Temp\-Vector}{18}{subsubsection.7.6.2.7}
+\contentsline {subsubsection}{\numberline {7.6.2.8}Is\-Valid}{18}{subsubsection.7.6.2.8}
+\contentsline {subsubsection}{\numberline {7.6.2.9}Print\-Cross\-Sections}{18}{subsubsection.7.6.2.9}
+\contentsline {subsubsection}{\numberline {7.6.2.10}Print\-Reaction\-Rates}{19}{subsubsection.7.6.2.10}
+\contentsline {subsubsection}{\numberline {7.6.2.11}Print\-Transmission\-Terms}{19}{subsubsection.7.6.2.11}
+\contentsline {subsubsection}{\numberline {7.6.2.12}Set\-Calculate\-Gamma\-Cutoff}{19}{subsubsection.7.6.2.12}
+\contentsline {subsubsection}{\numberline {7.6.2.13}Set\-Residual\-Alpha}{19}{subsubsection.7.6.2.13}
+\contentsline {subsubsection}{\numberline {7.6.2.14}Set\-Residual\-Gamma}{19}{subsubsection.7.6.2.14}
+\contentsline {subsubsection}{\numberline {7.6.2.15}Set\-Residual\-Neutron}{19}{subsubsection.7.6.2.15}
+\contentsline {subsubsection}{\numberline {7.6.2.16}Set\-Residual\-Proton}{19}{subsubsection.7.6.2.16}
+\contentsline {section}{\numberline {7.7}Cross\-Section\-Values Class Reference}{19}{section.7.7}
+\contentsline {subsection}{\numberline {7.7.1}Constructor \& Destructor Documentation}{19}{subsection.7.7.1}
+\contentsline {subsubsection}{\numberline {7.7.1.1}Cross\-Section\-Values}{19}{subsubsection.7.7.1.1}
+\contentsline {subsection}{\numberline {7.7.2}Member Data Documentation}{19}{subsection.7.7.2}
+\contentsline {subsubsection}{\numberline {7.7.2.1}alpha\-\_\-}{19}{subsubsection.7.7.2.1}
+\contentsline {subsubsection}{\numberline {7.7.2.2}alpha\-Stellar\-\_\-}{19}{subsubsection.7.7.2.2}
+\contentsline {subsubsection}{\numberline {7.7.2.3}gamma\-\_\-}{19}{subsubsection.7.7.2.3}
+\contentsline {subsubsection}{\numberline {7.7.2.4}gamma\-Stellar\-\_\-}{20}{subsubsection.7.7.2.4}
+\contentsline {subsubsection}{\numberline {7.7.2.5}neutron\-\_\-}{20}{subsubsection.7.7.2.5}
+\contentsline {subsubsection}{\numberline {7.7.2.6}neutron\-Stellar\-\_\-}{20}{subsubsection.7.7.2.6}
+\contentsline {subsubsection}{\numberline {7.7.2.7}proton\-\_\-}{20}{subsubsection.7.7.2.7}
+\contentsline {subsubsection}{\numberline {7.7.2.8}proton\-Stellar\-\_\-}{20}{subsubsection.7.7.2.8}
+\contentsline {section}{\numberline {7.8}Decay\-Controller Class Reference}{20}{section.7.8}
+\contentsline {subsection}{\numberline {7.8.1}Constructor \& Destructor Documentation}{20}{subsection.7.8.1}
+\contentsline {subsubsection}{\numberline {7.8.1.1}Decay\-Controller}{20}{subsubsection.7.8.1.1}
+\contentsline {subsection}{\numberline {7.8.2}Member Function Documentation}{20}{subsection.7.8.2}
+\contentsline {subsubsection}{\numberline {7.8.2.1}Decay}{20}{subsubsection.7.8.2.1}
+\contentsline {subsubsection}{\numberline {7.8.2.2}Decay\-Products}{20}{subsubsection.7.8.2.2}
+\contentsline {subsubsection}{\numberline {7.8.2.3}Print\-Decays}{20}{subsubsection.7.8.2.3}
+\contentsline {section}{\numberline {7.9}Decay\-Data Class Reference}{20}{section.7.9}
+\contentsline {subsection}{\numberline {7.9.1}Constructor \& Destructor Documentation}{21}{subsection.7.9.1}
+\contentsline {subsubsection}{\numberline {7.9.1.1}Decay\-Data}{21}{subsubsection.7.9.1.1}
+\contentsline {subsubsection}{\numberline {7.9.1.2}Decay\-Data}{21}{subsubsection.7.9.1.2}
+\contentsline {subsection}{\numberline {7.9.2}Member Function Documentation}{21}{subsection.7.9.2}
+\contentsline {subsubsection}{\numberline {7.9.2.1}alpha\-Entrance\-Width}{21}{subsubsection.7.9.2.1}
+\contentsline {subsubsection}{\numberline {7.9.2.2}alpha\-Total\-Width}{21}{subsubsection.7.9.2.2}
+\contentsline {subsubsection}{\numberline {7.9.2.3}energy}{21}{subsubsection.7.9.2.3}
+\contentsline {subsubsection}{\numberline {7.9.2.4}gamma\-Entrance\-Width}{21}{subsubsection.7.9.2.4}
+\contentsline {subsubsection}{\numberline {7.9.2.5}gamma\-Total\-Width}{21}{subsubsection.7.9.2.5}
+\contentsline {subsubsection}{\numberline {7.9.2.6}neutron\-Entrance\-Width}{21}{subsubsection.7.9.2.6}
+\contentsline {subsubsection}{\numberline {7.9.2.7}neutron\-Total\-Width}{21}{subsubsection.7.9.2.7}
+\contentsline {subsubsection}{\numberline {7.9.2.8}proton\-Entrance\-Width}{21}{subsubsection.7.9.2.8}
+\contentsline {subsubsection}{\numberline {7.9.2.9}proton\-Total\-Width}{21}{subsubsection.7.9.2.9}
+\contentsline {section}{\numberline {7.10}Decayer Class Reference}{21}{section.7.10}
+\contentsline {subsection}{\numberline {7.10.1}Constructor \& Destructor Documentation}{22}{subsection.7.10.1}
+\contentsline {subsubsection}{\numberline {7.10.1.1}Decayer}{22}{subsubsection.7.10.1.1}
+\contentsline {subsubsection}{\numberline {7.10.1.2}$\sim $\-Decayer}{22}{subsubsection.7.10.1.2}
+\contentsline {subsection}{\numberline {7.10.2}Member Function Documentation}{22}{subsection.7.10.2}
+\contentsline {subsubsection}{\numberline {7.10.2.1}Alpha\-Entrance\-Width}{22}{subsubsection.7.10.2.1}
+\contentsline {subsubsection}{\numberline {7.10.2.2}Alpha\-Total\-Width}{22}{subsubsection.7.10.2.2}
+\contentsline {subsubsection}{\numberline {7.10.2.3}Correct\-Width\-Fluctuations}{22}{subsubsection.7.10.2.3}
+\contentsline {subsubsection}{\numberline {7.10.2.4}Decay}{22}{subsubsection.7.10.2.4}
+\contentsline {subsubsection}{\numberline {7.10.2.5}Gamma\-Entrance\-Width}{22}{subsubsection.7.10.2.5}
+\contentsline {subsubsection}{\numberline {7.10.2.6}Gamma\-Total\-Width}{22}{subsubsection.7.10.2.6}
+\contentsline {subsubsection}{\numberline {7.10.2.7}Get\-Max\-L}{22}{subsubsection.7.10.2.7}
+\contentsline {subsubsection}{\numberline {7.10.2.8}Neutron\-Entrance\-Width}{23}{subsubsection.7.10.2.8}
+\contentsline {subsubsection}{\numberline {7.10.2.9}Neutron\-Total\-Width}{23}{subsubsection.7.10.2.9}
+\contentsline {subsubsection}{\numberline {7.10.2.10}Print\-C\-D\-F}{23}{subsubsection.7.10.2.10}
+\contentsline {subsubsection}{\numberline {7.10.2.11}Print\-Functions}{23}{subsubsection.7.10.2.11}
+\contentsline {subsubsection}{\numberline {7.10.2.12}Proton\-Entrance\-Width}{23}{subsubsection.7.10.2.12}
+\contentsline {subsubsection}{\numberline {7.10.2.13}Proton\-Total\-Width}{23}{subsubsection.7.10.2.13}
+\contentsline {subsubsection}{\numberline {7.10.2.14}Set\-Cross\-Section}{23}{subsubsection.7.10.2.14}
+\contentsline {subsubsection}{\numberline {7.10.2.15}Set\-Max\-L}{23}{subsubsection.7.10.2.15}
+\contentsline {subsection}{\numberline {7.10.3}Friends And Related Function Documentation}{23}{subsection.7.10.3}
+\contentsline {subsubsection}{\numberline {7.10.3.1}Cross\-Section}{23}{subsubsection.7.10.3.1}
+\contentsline {section}{\numberline {7.11}Decay\-Product Class Reference}{23}{section.7.11}
+\contentsline {subsection}{\numberline {7.11.1}Constructor \& Destructor Documentation}{24}{subsection.7.11.1}
+\contentsline {subsubsection}{\numberline {7.11.1.1}Decay\-Product}{24}{subsubsection.7.11.1.1}
+\contentsline {subsubsection}{\numberline {7.11.1.2}Decay\-Product}{24}{subsubsection.7.11.1.2}
+\contentsline {subsection}{\numberline {7.11.2}Member Data Documentation}{24}{subsection.7.11.2}
+\contentsline {subsubsection}{\numberline {7.11.2.1}A\-\_\-}{24}{subsubsection.7.11.2.1}
+\contentsline {subsubsection}{\numberline {7.11.2.2}excitation\-Energy\-\_\-}{24}{subsubsection.7.11.2.2}
+\contentsline {subsubsection}{\numberline {7.11.2.3}fragment\-Energy\-\_\-}{24}{subsubsection.7.11.2.3}
+\contentsline {subsubsection}{\numberline {7.11.2.4}fragment\-Energy\-C\-M\-\_\-}{24}{subsubsection.7.11.2.4}
+\contentsline {subsubsection}{\numberline {7.11.2.5}fragment\-Momentum\-X\-\_\-}{24}{subsubsection.7.11.2.5}
+\contentsline {subsubsection}{\numberline {7.11.2.6}fragment\-Momentum\-Y\-\_\-}{24}{subsubsection.7.11.2.6}
+\contentsline {subsubsection}{\numberline {7.11.2.7}fragment\-Momentum\-Z\-\_\-}{24}{subsubsection.7.11.2.7}
+\contentsline {subsubsection}{\numberline {7.11.2.8}J\-\_\-}{24}{subsubsection.7.11.2.8}
+\contentsline {subsubsection}{\numberline {7.11.2.9}particle\-Energy\-\_\-}{24}{subsubsection.7.11.2.9}
+\contentsline {subsubsection}{\numberline {7.11.2.10}particle\-Energy\-C\-M\-\_\-}{24}{subsubsection.7.11.2.10}
+\contentsline {subsubsection}{\numberline {7.11.2.11}particle\-Momentum\-X\-\_\-}{24}{subsubsection.7.11.2.11}
+\contentsline {subsubsection}{\numberline {7.11.2.12}particle\-Momentum\-Y\-\_\-}{24}{subsubsection.7.11.2.12}
+\contentsline {subsubsection}{\numberline {7.11.2.13}particle\-Momentum\-Z\-\_\-}{24}{subsubsection.7.11.2.13}
+\contentsline {subsubsection}{\numberline {7.11.2.14}particle\-Phi\-C\-M\-\_\-}{24}{subsubsection.7.11.2.14}
+\contentsline {subsubsection}{\numberline {7.11.2.15}particle\-Theta\-C\-M\-\_\-}{24}{subsubsection.7.11.2.15}
+\contentsline {subsubsection}{\numberline {7.11.2.16}particle\-Type\-\_\-}{24}{subsubsection.7.11.2.16}
+\contentsline {subsubsection}{\numberline {7.11.2.17}Pi\-\_\-}{24}{subsubsection.7.11.2.17}
+\contentsline {subsubsection}{\numberline {7.11.2.18}Z\-\_\-}{24}{subsubsection.7.11.2.18}
+\contentsline {section}{\numberline {7.12}Decay\-Results Class Reference}{25}{section.7.12}
+\contentsline {subsection}{\numberline {7.12.1}Constructor \& Destructor Documentation}{25}{subsection.7.12.1}
+\contentsline {subsubsection}{\numberline {7.12.1.1}Decay\-Results}{25}{subsubsection.7.12.1.1}
+\contentsline {subsubsection}{\numberline {7.12.1.2}$\sim $\-Decay\-Results}{25}{subsubsection.7.12.1.2}
+\contentsline {subsection}{\numberline {7.12.2}Member Function Documentation}{25}{subsection.7.12.2}
+\contentsline {subsubsection}{\numberline {7.12.2.1}Add\-Results}{25}{subsubsection.7.12.2.1}
+\contentsline {section}{\numberline {7.13}Entrance\-Pairs Struct Reference}{25}{section.7.13}
+\contentsline {subsection}{\numberline {7.13.1}Constructor \& Destructor Documentation}{25}{subsection.7.13.1}
+\contentsline {subsubsection}{\numberline {7.13.1.1}Entrance\-Pairs}{25}{subsubsection.7.13.1.1}
+\contentsline {subsection}{\numberline {7.13.2}Member Data Documentation}{25}{subsection.7.13.2}
+\contentsline {subsubsection}{\numberline {7.13.2.1}A\-\_\-}{25}{subsubsection.7.13.2.1}
+\contentsline {subsubsection}{\numberline {7.13.2.2}p\-Type\-\_\-}{25}{subsubsection.7.13.2.2}
+\contentsline {subsubsection}{\numberline {7.13.2.3}Z\-\_\-}{25}{subsubsection.7.13.2.3}
+\contentsline {section}{\numberline {7.14}std\-:\-:equal\-\_\-to$<$ Mass\-Key $>$ Struct Template Reference}{26}{section.7.14}
+\contentsline {subsection}{\numberline {7.14.1}Member Function Documentation}{26}{subsection.7.14.1}
+\contentsline {subsubsection}{\numberline {7.14.1.1}operator()}{26}{subsubsection.7.14.1.1}
+\contentsline {section}{\numberline {7.15}Equiv\-Square\-Well Class Reference}{26}{section.7.15}
+\contentsline {subsection}{\numberline {7.15.1}Constructor \& Destructor Documentation}{26}{subsection.7.15.1}
+\contentsline {subsubsection}{\numberline {7.15.1.1}Equiv\-Square\-Well}{26}{subsubsection.7.15.1.1}
+\contentsline {subsubsection}{\numberline {7.15.1.2}$\sim $\-Equiv\-Square\-Well}{26}{subsubsection.7.15.1.2}
+\contentsline {subsection}{\numberline {7.15.2}Member Function Documentation}{27}{subsection.7.15.2}
+\contentsline {subsubsection}{\numberline {7.15.2.1}Calc\-Transmission}{27}{subsubsection.7.15.2.1}
+\contentsline {section}{\numberline {7.16}Gamma\-Transition Class Reference}{27}{section.7.16}
+\contentsline {subsection}{\numberline {7.16.1}Constructor \& Destructor Documentation}{27}{subsection.7.16.1}
+\contentsline {subsubsection}{\numberline {7.16.1.1}Gamma\-Transition}{27}{subsubsection.7.16.1.1}
+\contentsline {subsection}{\numberline {7.16.2}Member Data Documentation}{27}{subsection.7.16.2}
+\contentsline {subsubsection}{\numberline {7.16.2.1}energy\-\_\-}{27}{subsubsection.7.16.2.1}
+\contentsline {subsubsection}{\numberline {7.16.2.2}level\-Index\-\_\-}{27}{subsubsection.7.16.2.2}
+\contentsline {subsubsection}{\numberline {7.16.2.3}probability\-\_\-}{27}{subsubsection.7.16.2.3}
+\contentsline {section}{\numberline {7.17}Gamma\-Transmission\-Func Class Reference}{27}{section.7.17}
+\contentsline {subsection}{\numberline {7.17.1}Constructor \& Destructor Documentation}{28}{subsection.7.17.1}
+\contentsline {subsubsection}{\numberline {7.17.1.1}Gamma\-Transmission\-Func}{28}{subsubsection.7.17.1.1}
+\contentsline {subsubsection}{\numberline {7.17.1.2}$\sim $\-Gamma\-Transmission\-Func}{28}{subsubsection.7.17.1.2}
+\contentsline {subsection}{\numberline {7.17.2}Member Function Documentation}{28}{subsection.7.17.2}
+\contentsline {subsubsection}{\numberline {7.17.2.1}Calc\-Strength\-Function}{28}{subsubsection.7.17.2.1}
+\contentsline {subsubsection}{\numberline {7.17.2.2}Create\-Gamma\-Transmission\-Func}{29}{subsubsection.7.17.2.2}
+\contentsline {subsubsection}{\numberline {7.17.2.3}Initialize\-G\-D\-R\-Parameters}{29}{subsubsection.7.17.2.3}
+\contentsline {subsubsection}{\numberline {7.17.2.4}Is\-Valid}{29}{subsubsection.7.17.2.4}
+\contentsline {subsubsection}{\numberline {7.17.2.5}operator()}{29}{subsubsection.7.17.2.5}
+\contentsline {subsubsection}{\numberline {7.17.2.6}Set\-E\-G\-D\-R\-Type}{29}{subsubsection.7.17.2.6}
+\contentsline {subsubsection}{\numberline {7.17.2.7}Set\-Porter\-Thomas}{29}{subsubsection.7.17.2.7}
+\contentsline {subsection}{\numberline {7.17.3}Member Data Documentation}{29}{subsection.7.17.3}
+\contentsline {subsubsection}{\numberline {7.17.3.1}egdr\-Type\-\_\-}{29}{subsubsection.7.17.3.1}
+\contentsline {subsubsection}{\numberline {7.17.3.2}egqr\-Type\-\_\-}{29}{subsubsection.7.17.3.2}
+\contentsline {subsubsection}{\numberline {7.17.3.3}gdr\-Parameters\-\_\-}{29}{subsubsection.7.17.3.3}
+\contentsline {subsubsection}{\numberline {7.17.3.4}gdr\-Table\-\_\-}{29}{subsubsection.7.17.3.4}
+\contentsline {subsubsection}{\numberline {7.17.3.5}mgdr\-Type\-\_\-}{29}{subsubsection.7.17.3.5}
+\contentsline {subsubsection}{\numberline {7.17.3.6}porter\-Thomas\-\_\-}{29}{subsubsection.7.17.3.6}
+\contentsline {section}{\numberline {7.18}G\-D\-R\-Parameters Class Reference}{29}{section.7.18}
+\contentsline {subsection}{\numberline {7.18.1}Constructor \& Destructor Documentation}{30}{subsection.7.18.1}
+\contentsline {subsubsection}{\numberline {7.18.1.1}G\-D\-R\-Parameters}{30}{subsubsection.7.18.1.1}
+\contentsline {subsubsection}{\numberline {7.18.1.2}G\-D\-R\-Parameters}{30}{subsubsection.7.18.1.2}
+\contentsline {subsection}{\numberline {7.18.2}Member Data Documentation}{30}{subsection.7.18.2}
+\contentsline {subsubsection}{\numberline {7.18.2.1}E\-\_\-}{30}{subsubsection.7.18.2.1}
+\contentsline {subsubsection}{\numberline {7.18.2.2}eta\-\_\-}{30}{subsubsection.7.18.2.2}
+\contentsline {subsubsection}{\numberline {7.18.2.3}k\-Sigma\-Gamma\-\_\-}{30}{subsubsection.7.18.2.3}
+\contentsline {subsubsection}{\numberline {7.18.2.4}W\-\_\-}{30}{subsubsection.7.18.2.4}
+\contentsline {section}{\numberline {7.19}gsl\-\_\-partfunc\-\_\-params Struct Reference}{30}{section.7.19}
+\contentsline {subsection}{\numberline {7.19.1}Member Data Documentation}{30}{subsection.7.19.1}
+\contentsline {subsubsection}{\numberline {7.19.1.1}density}{30}{subsubsection.7.19.1.1}
+\contentsline {subsubsection}{\numberline {7.19.1.2}temperature}{30}{subsubsection.7.19.1.2}
+\contentsline {section}{\numberline {7.20}gsl\-\_\-reactionrate\-\_\-params Struct Reference}{30}{section.7.20}
+\contentsline {subsection}{\numberline {7.20.1}Member Data Documentation}{31}{subsection.7.20.1}
+\contentsline {subsubsection}{\numberline {7.20.1.1}graph}{31}{subsubsection.7.20.1.1}
+\contentsline {subsubsection}{\numberline {7.20.1.2}temperature}{31}{subsubsection.7.20.1.2}
+\contentsline {subsubsection}{\numberline {7.20.1.3}use\-Spline}{31}{subsubsection.7.20.1.3}
+\contentsline {section}{\numberline {7.21}std\-:\-:tr1\-:\-:hash$<$ Mass\-Key $>$ Struct Template Reference}{31}{section.7.21}
+\contentsline {subsection}{\numberline {7.21.1}Member Function Documentation}{31}{subsection.7.21.1}
+\contentsline {subsubsection}{\numberline {7.21.1.1}operator()}{31}{subsubsection.7.21.1.1}
+\contentsline {section}{\numberline {7.22}Initial\-Nucleus\-Data Class Reference}{31}{section.7.22}
+\contentsline {subsection}{\numberline {7.22.1}Constructor \& Destructor Documentation}{32}{subsection.7.22.1}
+\contentsline {subsubsection}{\numberline {7.22.1.1}Initial\-Nucleus\-Data}{32}{subsubsection.7.22.1.1}
+\contentsline {subsubsection}{\numberline {7.22.1.2}Initial\-Nucleus\-Data}{32}{subsubsection.7.22.1.2}
+\contentsline {subsection}{\numberline {7.22.2}Member Function Documentation}{32}{subsection.7.22.2}
+\contentsline {subsubsection}{\numberline {7.22.2.1}A}{32}{subsubsection.7.22.2.1}
+\contentsline {subsubsection}{\numberline {7.22.2.2}high\-Energy}{32}{subsubsection.7.22.2.2}
+\contentsline {subsubsection}{\numberline {7.22.2.3}J}{32}{subsubsection.7.22.2.3}
+\contentsline {subsubsection}{\numberline {7.22.2.4}low\-Energy}{32}{subsubsection.7.22.2.4}
+\contentsline {subsubsection}{\numberline {7.22.2.5}Pi}{32}{subsubsection.7.22.2.5}
+\contentsline {subsubsection}{\numberline {7.22.2.6}pre\-Eq}{32}{subsubsection.7.22.2.6}
+\contentsline {subsubsection}{\numberline {7.22.2.7}Z}{32}{subsubsection.7.22.2.7}
+\contentsline {subsection}{\numberline {7.22.3}Friends And Related Function Documentation}{32}{subsection.7.22.3}
+\contentsline {subsubsection}{\numberline {7.22.3.1}boost\-::serialization\-::access}{32}{subsubsection.7.22.3.1}
+\contentsline {section}{\numberline {7.23}int\-\_\-double\-\_\-pair\-\_\-compare Struct Reference}{32}{section.7.23}
+\contentsline {subsection}{\numberline {7.23.1}Member Function Documentation}{32}{subsection.7.23.1}
+\contentsline {subsubsection}{\numberline {7.23.1.1}operator()}{32}{subsubsection.7.23.1.1}
+\contentsline {section}{\numberline {7.24}J\-L\-M\-Potential Class Reference}{32}{section.7.24}
+\contentsline {subsection}{\numberline {7.24.1}Constructor \& Destructor Documentation}{33}{subsection.7.24.1}
+\contentsline {subsubsection}{\numberline {7.24.1.1}J\-L\-M\-Potential}{33}{subsubsection.7.24.1.1}
+\contentsline {subsection}{\numberline {7.24.2}Member Function Documentation}{33}{subsection.7.24.2}
+\contentsline {subsubsection}{\numberline {7.24.2.1}Calculate}{33}{subsubsection.7.24.2.1}
+\contentsline {subsubsection}{\numberline {7.24.2.2}Calculate\-Density}{33}{subsubsection.7.24.2.2}
+\contentsline {subsubsection}{\numberline {7.24.2.3}Get\-A}{33}{subsubsection.7.24.2.3}
+\contentsline {section}{\numberline {7.25}Kopecky\-Uhl\-G\-S\-F Class Reference}{33}{section.7.25}
+\contentsline {subsection}{\numberline {7.25.1}Constructor \& Destructor Documentation}{34}{subsection.7.25.1}
+\contentsline {subsubsection}{\numberline {7.25.1.1}Kopecky\-Uhl\-G\-S\-F}{34}{subsubsection.7.25.1.1}
+\contentsline {subsection}{\numberline {7.25.2}Member Function Documentation}{34}{subsection.7.25.2}
+\contentsline {subsubsection}{\numberline {7.25.2.1}Calc\-Strength\-Function}{34}{subsubsection.7.25.2.1}
+\contentsline {section}{\numberline {7.26}Level Class Reference}{34}{section.7.26}
+\contentsline {subsection}{\numberline {7.26.1}Constructor \& Destructor Documentation}{35}{subsection.7.26.1}
+\contentsline {subsubsection}{\numberline {7.26.1.1}Level}{35}{subsubsection.7.26.1.1}
+\contentsline {subsection}{\numberline {7.26.2}Member Data Documentation}{35}{subsection.7.26.2}
+\contentsline {subsubsection}{\numberline {7.26.2.1}energy\-\_\-}{35}{subsubsection.7.26.2.1}
+\contentsline {subsubsection}{\numberline {7.26.2.2}gammas\-\_\-}{35}{subsubsection.7.26.2.2}
+\contentsline {subsubsection}{\numberline {7.26.2.3}J\-\_\-}{35}{subsubsection.7.26.2.3}
+\contentsline {subsubsection}{\numberline {7.26.2.4}Pi\-\_\-}{35}{subsubsection.7.26.2.4}
+\contentsline {section}{\numberline {7.27}Level\-Density Class Reference}{35}{section.7.27}
+\contentsline {subsection}{\numberline {7.27.1}Constructor \& Destructor Documentation}{36}{subsection.7.27.1}
+\contentsline {subsubsection}{\numberline {7.27.1.1}Level\-Density}{36}{subsubsection.7.27.1.1}
+\contentsline {subsubsection}{\numberline {7.27.1.2}$\sim $\-Level\-Density}{36}{subsubsection.7.27.1.2}
+\contentsline {subsection}{\numberline {7.27.2}Member Function Documentation}{36}{subsection.7.27.2}
+\contentsline {subsubsection}{\numberline {7.27.2.1}Calc\-Back\-Shift}{36}{subsubsection.7.27.2.1}
+\contentsline {subsubsection}{\numberline {7.27.2.2}Calc\-Constant\-Temp\-Terms}{36}{subsubsection.7.27.2.2}
+\contentsline {subsubsection}{\numberline {7.27.2.3}Calc\-Density\-Param}{36}{subsubsection.7.27.2.3}
+\contentsline {subsubsection}{\numberline {7.27.2.4}Calc\-Nuclear\-Temp}{36}{subsubsection.7.27.2.4}
+\contentsline {subsubsection}{\numberline {7.27.2.5}operator()}{36}{subsubsection.7.27.2.5}
+\contentsline {subsubsection}{\numberline {7.27.2.6}Total\-Level\-Density}{36}{subsubsection.7.27.2.6}
+\contentsline {subsection}{\numberline {7.27.3}Friends And Related Function Documentation}{36}{subsection.7.27.3}
+\contentsline {subsubsection}{\numberline {7.27.3.1}Kopecky\-Uhl\-G\-S\-F}{36}{subsubsection.7.27.3.1}
+\contentsline {subsection}{\numberline {7.27.4}Member Data Documentation}{36}{subsection.7.27.4}
+\contentsline {subsubsection}{\numberline {7.27.4.1}A\-\_\-}{36}{subsubsection.7.27.4.1}
+\contentsline {subsubsection}{\numberline {7.27.4.2}backshift\-\_\-}{36}{subsubsection.7.27.4.2}
+\contentsline {subsubsection}{\numberline {7.27.4.3}const\-Ang\-Term\-\_\-}{36}{subsubsection.7.27.4.3}
+\contentsline {subsubsection}{\numberline {7.27.4.4}critical\-U\-\_\-}{36}{subsubsection.7.27.4.4}
+\contentsline {subsubsection}{\numberline {7.27.4.5}e0\-\_\-}{36}{subsubsection.7.27.4.5}
+\contentsline {subsubsection}{\numberline {7.27.4.6}J\-\_\-}{36}{subsubsection.7.27.4.6}
+\contentsline {subsubsection}{\numberline {7.27.4.7}nuclear\-Temp\-\_\-}{37}{subsubsection.7.27.4.7}
+\contentsline {subsubsection}{\numberline {7.27.4.8}r0\-\_\-}{37}{subsubsection.7.27.4.8}
+\contentsline {subsubsection}{\numberline {7.27.4.9}Z\-\_\-}{37}{subsubsection.7.27.4.9}
+\contentsline {subsubsection}{\numberline {7.27.4.10}zeta\-\_\-}{37}{subsubsection.7.27.4.10}
+\contentsline {section}{\numberline {7.28}Levels\-Container Class Reference}{37}{section.7.28}
+\contentsline {subsection}{\numberline {7.28.1}Constructor \& Destructor Documentation}{37}{subsection.7.28.1}
+\contentsline {subsubsection}{\numberline {7.28.1.1}Levels\-Container}{37}{subsubsection.7.28.1.1}
+\contentsline {subsubsection}{\numberline {7.28.1.2}Levels\-Container}{37}{subsubsection.7.28.1.2}
+\contentsline {subsection}{\numberline {7.28.2}Member Data Documentation}{37}{subsection.7.28.2}
+\contentsline {subsubsection}{\numberline {7.28.2.1}levels\-\_\-}{37}{subsubsection.7.28.2.1}
+\contentsline {section}{\numberline {7.29}Mass\-Entry Class Reference}{37}{section.7.29}
+\contentsline {subsection}{\numberline {7.29.1}Constructor \& Destructor Documentation}{38}{subsection.7.29.1}
+\contentsline {subsubsection}{\numberline {7.29.1.1}Mass\-Entry}{38}{subsubsection.7.29.1.1}
+\contentsline {subsubsection}{\numberline {7.29.1.2}Mass\-Entry}{38}{subsubsection.7.29.1.2}
+\contentsline {subsection}{\numberline {7.29.2}Member Data Documentation}{38}{subsection.7.29.2}
+\contentsline {subsubsection}{\numberline {7.29.2.1}exp\-Mass\-\_\-}{38}{subsubsection.7.29.2.1}
+\contentsline {subsubsection}{\numberline {7.29.2.2}mask\-\_\-}{38}{subsubsection.7.29.2.2}
+\contentsline {subsubsection}{\numberline {7.29.2.3}micro\-Energy\-Corr\-\_\-}{38}{subsubsection.7.29.2.3}
+\contentsline {subsubsection}{\numberline {7.29.2.4}th\-Mass\-\_\-}{38}{subsubsection.7.29.2.4}
+\contentsline {section}{\numberline {7.30}Mass\-Key Class Reference}{38}{section.7.30}
+\contentsline {subsection}{\numberline {7.30.1}Constructor \& Destructor Documentation}{38}{subsection.7.30.1}
+\contentsline {subsubsection}{\numberline {7.30.1.1}Mass\-Key}{38}{subsubsection.7.30.1.1}
+\contentsline {subsection}{\numberline {7.30.2}Member Function Documentation}{38}{subsection.7.30.2}
+\contentsline {subsubsection}{\numberline {7.30.2.1}operator$<$}{38}{subsubsection.7.30.2.1}
+\contentsline {subsection}{\numberline {7.30.3}Member Data Documentation}{38}{subsection.7.30.3}
+\contentsline {subsubsection}{\numberline {7.30.3.1}A\-\_\-}{39}{subsubsection.7.30.3.1}
+\contentsline {subsubsection}{\numberline {7.30.3.2}Z\-\_\-}{39}{subsubsection.7.30.3.2}
+\contentsline {section}{\numberline {7.31}Mc\-Cullagh\-G\-S\-F Class Reference}{39}{section.7.31}
+\contentsline {subsection}{\numberline {7.31.1}Constructor \& Destructor Documentation}{39}{subsection.7.31.1}
+\contentsline {subsubsection}{\numberline {7.31.1.1}Mc\-Cullagh\-G\-S\-F}{39}{subsubsection.7.31.1.1}
+\contentsline {subsection}{\numberline {7.31.2}Member Function Documentation}{39}{subsection.7.31.2}
+\contentsline {subsubsection}{\numberline {7.31.2.1}Calc\-Strength\-Function}{39}{subsubsection.7.31.2.1}
+\contentsline {section}{\numberline {7.32}Mc\-Fadden\-Satchler\-Potential Class Reference}{39}{section.7.32}
+\contentsline {subsection}{\numberline {7.32.1}Constructor \& Destructor Documentation}{40}{subsection.7.32.1}
+\contentsline {subsubsection}{\numberline {7.32.1.1}Mc\-Fadden\-Satchler\-Potential}{40}{subsubsection.7.32.1.1}
+\contentsline {subsection}{\numberline {7.32.2}Member Function Documentation}{40}{subsection.7.32.2}
+\contentsline {subsubsection}{\numberline {7.32.2.1}Calculate}{40}{subsubsection.7.32.2.1}
+\contentsline {section}{\numberline {7.33}Nuclear\-Levels Class Reference}{40}{section.7.33}
+\contentsline {subsection}{\numberline {7.33.1}Member Function Documentation}{40}{subsection.7.33.1}
+\contentsline {subsubsection}{\numberline {7.33.1.1}Find\-Levels}{40}{subsubsection.7.33.1.1}
+\contentsline {subsubsection}{\numberline {7.33.1.2}Initialize\-Levels}{40}{subsubsection.7.33.1.2}
+\contentsline {subsubsection}{\numberline {7.33.1.3}Print\-Levels}{41}{subsubsection.7.33.1.3}
+\contentsline {section}{\numberline {7.34}Nuclear\-Mass Class Reference}{41}{section.7.34}
+\contentsline {subsection}{\numberline {7.34.1}Member Function Documentation}{41}{subsection.7.34.1}
+\contentsline {subsubsection}{\numberline {7.34.1.1}Calculate\-L\-D\-M\-Mass}{41}{subsubsection.7.34.1.1}
+\contentsline {subsubsection}{\numberline {7.34.1.2}Find\-Element}{41}{subsubsection.7.34.1.2}
+\contentsline {subsubsection}{\numberline {7.34.1.3}Find\-Mass}{41}{subsubsection.7.34.1.3}
+\contentsline {subsubsection}{\numberline {7.34.1.4}Find\-Z}{41}{subsubsection.7.34.1.4}
+\contentsline {subsubsection}{\numberline {7.34.1.5}Highest\-Bound\-Energy}{41}{subsubsection.7.34.1.5}
+\contentsline {subsubsection}{\numberline {7.34.1.6}Initialize\-Elements}{41}{subsubsection.7.34.1.6}
+\contentsline {subsubsection}{\numberline {7.34.1.7}Initialize\-Masses}{41}{subsubsection.7.34.1.7}
+\contentsline {subsubsection}{\numberline {7.34.1.8}Mass\-Difference}{41}{subsubsection.7.34.1.8}
+\contentsline {subsubsection}{\numberline {7.34.1.9}Micro\-Energy\-Corr}{41}{subsubsection.7.34.1.9}
+\contentsline {subsubsection}{\numberline {7.34.1.10}Neutron\-Pairing\-Gap}{41}{subsubsection.7.34.1.10}
+\contentsline {subsubsection}{\numberline {7.34.1.11}Proton\-Pairing\-Gap}{41}{subsubsection.7.34.1.11}
+\contentsline {subsubsection}{\numberline {7.34.1.12}Q\-Value}{42}{subsubsection.7.34.1.12}
+\contentsline {section}{\numberline {7.35}O\-D\-E\-\_\-integration Class Reference}{42}{section.7.35}
+\contentsline {subsection}{\numberline {7.35.1}Constructor \& Destructor Documentation}{42}{subsection.7.35.1}
+\contentsline {subsubsection}{\numberline {7.35.1.1}O\-D\-E\-\_\-integration}{42}{subsubsection.7.35.1.1}
+\contentsline {subsection}{\numberline {7.35.2}Member Function Documentation}{42}{subsection.7.35.2}
+\contentsline {subsubsection}{\numberline {7.35.2.1}operator()}{42}{subsubsection.7.35.2.1}
+\contentsline {section}{\numberline {7.36}Particle\-Hole\-Level\-Density Class Reference}{42}{section.7.36}
+\contentsline {subsection}{\numberline {7.36.1}Constructor \& Destructor Documentation}{43}{subsection.7.36.1}
+\contentsline {subsubsection}{\numberline {7.36.1.1}Particle\-Hole\-Level\-Density}{43}{subsubsection.7.36.1.1}
+\contentsline {subsection}{\numberline {7.36.2}Member Function Documentation}{43}{subsection.7.36.2}
+\contentsline {subsubsection}{\numberline {7.36.2.1}Finite\-Depth}{43}{subsubsection.7.36.2.1}
+\contentsline {subsubsection}{\numberline {7.36.2.2}g\-Nu}{43}{subsubsection.7.36.2.2}
+\contentsline {subsubsection}{\numberline {7.36.2.3}g\-Pi}{43}{subsubsection.7.36.2.3}
+\contentsline {subsubsection}{\numberline {7.36.2.4}operator()}{43}{subsubsection.7.36.2.4}
+\contentsline {subsubsection}{\numberline {7.36.2.5}Pairing\-Correction}{43}{subsubsection.7.36.2.5}
+\contentsline {subsubsection}{\numberline {7.36.2.6}Pauli\-Correction}{43}{subsubsection.7.36.2.6}
+\contentsline {section}{\numberline {7.37}Particle\-Transmission\-Func Class Reference}{43}{section.7.37}
+\contentsline {subsection}{\numberline {7.37.1}Constructor \& Destructor Documentation}{44}{subsection.7.37.1}
+\contentsline {subsubsection}{\numberline {7.37.1.1}Particle\-Transmission\-Func}{44}{subsubsection.7.37.1.1}
+\contentsline {subsubsection}{\numberline {7.37.1.2}$\sim $\-Particle\-Transmission\-Func}{44}{subsubsection.7.37.1.2}
+\contentsline {subsection}{\numberline {7.37.2}Member Function Documentation}{44}{subsection.7.37.2}
+\contentsline {subsubsection}{\numberline {7.37.2.1}Calc\-S\-L\-Dependent\-Functions}{44}{subsubsection.7.37.2.1}
+\contentsline {subsubsection}{\numberline {7.37.2.2}Calc\-Transmission}{44}{subsubsection.7.37.2.2}
+\contentsline {subsubsection}{\numberline {7.37.2.3}Create\-Particle\-Transmission\-Func}{44}{subsubsection.7.37.2.3}
+\contentsline {subsubsection}{\numberline {7.37.2.4}Is\-Valid}{44}{subsubsection.7.37.2.4}
+\contentsline {subsubsection}{\numberline {7.37.2.5}operator()}{44}{subsubsection.7.37.2.5}
+\contentsline {subsubsection}{\numberline {7.37.2.6}operator()}{45}{subsubsection.7.37.2.6}
+\contentsline {subsubsection}{\numberline {7.37.2.7}Set\-Alpha\-Formalism}{45}{subsubsection.7.37.2.7}
+\contentsline {subsubsection}{\numberline {7.37.2.8}Set\-Neutron\-Formalism}{45}{subsubsection.7.37.2.8}
+\contentsline {subsubsection}{\numberline {7.37.2.9}Set\-Porter\-Thomas}{45}{subsubsection.7.37.2.9}
+\contentsline {subsubsection}{\numberline {7.37.2.10}Set\-Proton\-Formalism}{45}{subsubsection.7.37.2.10}
+\contentsline {subsection}{\numberline {7.37.3}Member Data Documentation}{45}{subsection.7.37.3}
+\contentsline {subsubsection}{\numberline {7.37.3.1}m1\-\_\-}{45}{subsubsection.7.37.3.1}
+\contentsline {subsubsection}{\numberline {7.37.3.2}parity\-\_\-}{45}{subsubsection.7.37.3.2}
+\contentsline {subsubsection}{\numberline {7.37.3.3}p\-Type\-\_\-}{45}{subsubsection.7.37.3.3}
+\contentsline {subsubsection}{\numberline {7.37.3.4}redmass\-\_\-}{45}{subsubsection.7.37.3.4}
+\contentsline {subsubsection}{\numberline {7.37.3.5}spin\-\_\-}{45}{subsubsection.7.37.3.5}
+\contentsline {subsubsection}{\numberline {7.37.3.6}z1\-\_\-}{45}{subsubsection.7.37.3.6}
+\contentsline {section}{\numberline {7.38}Potential Class Reference}{45}{section.7.38}
+\contentsline {subsection}{\numberline {7.38.1}Constructor \& Destructor Documentation}{46}{subsection.7.38.1}
+\contentsline {subsubsection}{\numberline {7.38.1.1}Potential}{46}{subsubsection.7.38.1.1}
+\contentsline {subsubsection}{\numberline {7.38.1.2}$\sim $\-Potential}{46}{subsubsection.7.38.1.2}
+\contentsline {subsection}{\numberline {7.38.2}Member Function Documentation}{46}{subsection.7.38.2}
+\contentsline {subsubsection}{\numberline {7.38.2.1}Calc\-Beta}{46}{subsubsection.7.38.2.1}
+\contentsline {subsubsection}{\numberline {7.38.2.2}Calc\-Transmission}{46}{subsubsection.7.38.2.2}
+\contentsline {subsubsection}{\numberline {7.38.2.3}Calculate}{46}{subsubsection.7.38.2.3}
+\contentsline {subsubsection}{\numberline {7.38.2.4}Get\-Boundary\-Radius}{46}{subsubsection.7.38.2.4}
+\contentsline {subsubsection}{\numberline {7.38.2.5}Get\-Red\-Mass}{46}{subsubsection.7.38.2.5}
+\contentsline {subsubsection}{\numberline {7.38.2.6}Get\-R\-Max}{46}{subsubsection.7.38.2.6}
+\contentsline {subsubsection}{\numberline {7.38.2.7}Get\-Z1\-Z2}{46}{subsubsection.7.38.2.7}
+\contentsline {subsubsection}{\numberline {7.38.2.8}Normalize\-Internally}{46}{subsubsection.7.38.2.8}
+\contentsline {subsubsection}{\numberline {7.38.2.9}Normalize\-Over\-All\-Space}{46}{subsubsection.7.38.2.9}
+\contentsline {subsubsection}{\numberline {7.38.2.10}Solve}{47}{subsubsection.7.38.2.10}
+\contentsline {subsection}{\numberline {7.38.3}Member Data Documentation}{47}{subsection.7.38.3}
+\contentsline {subsubsection}{\numberline {7.38.3.1}boundary\-Radius\-\_\-}{47}{subsubsection.7.38.3.1}
+\contentsline {subsubsection}{\numberline {7.38.3.2}coul\-Func\-\_\-}{47}{subsubsection.7.38.3.2}
+\contentsline {subsubsection}{\numberline {7.38.3.3}coulomb\-Radius\-\_\-}{47}{subsubsection.7.38.3.3}
+\contentsline {section}{\numberline {7.39}Pre\-Eq\-C\-D\-F\-Entry Class Reference}{47}{section.7.39}
+\contentsline {subsection}{\numberline {7.39.1}Constructor \& Destructor Documentation}{47}{subsection.7.39.1}
+\contentsline {subsubsection}{\numberline {7.39.1.1}Pre\-Eq\-C\-D\-F\-Entry}{47}{subsubsection.7.39.1.1}
+\contentsline {subsection}{\numberline {7.39.2}Member Data Documentation}{47}{subsection.7.39.2}
+\contentsline {subsubsection}{\numberline {7.39.2.1}energy\-\_\-}{47}{subsubsection.7.39.2.1}
+\contentsline {subsubsection}{\numberline {7.39.2.2}pair\-Index\-\_\-}{47}{subsubsection.7.39.2.2}
+\contentsline {subsubsection}{\numberline {7.39.2.3}value\-\_\-}{47}{subsubsection.7.39.2.3}
+\contentsline {section}{\numberline {7.40}Pre\-Eq\-Decayer Class Reference}{47}{section.7.40}
+\contentsline {subsection}{\numberline {7.40.1}Constructor \& Destructor Documentation}{48}{subsection.7.40.1}
+\contentsline {subsubsection}{\numberline {7.40.1.1}Pre\-Eq\-Decayer}{48}{subsubsection.7.40.1.1}
+\contentsline {subsubsection}{\numberline {7.40.1.2}$\sim $\-Pre\-Eq\-Decayer}{48}{subsubsection.7.40.1.2}
+\contentsline {subsection}{\numberline {7.40.2}Member Function Documentation}{48}{subsection.7.40.2}
+\contentsline {subsubsection}{\numberline {7.40.2.1}Decay}{48}{subsubsection.7.40.2.1}
+\contentsline {subsubsection}{\numberline {7.40.2.2}Get\-Max\-L}{48}{subsubsection.7.40.2.2}
+\contentsline {subsubsection}{\numberline {7.40.2.3}Print\-C\-D\-F}{48}{subsubsection.7.40.2.3}
+\contentsline {subsubsection}{\numberline {7.40.2.4}Set\-Cross\-Section}{48}{subsubsection.7.40.2.4}
+\contentsline {subsubsection}{\numberline {7.40.2.5}Set\-Max\-L}{48}{subsubsection.7.40.2.5}
+\contentsline {section}{\numberline {7.41}Pre\-Eq\-Spin\-Rate\-Pair Class Reference}{48}{section.7.41}
+\contentsline {subsection}{\numberline {7.41.1}Constructor \& Destructor Documentation}{49}{subsection.7.41.1}
+\contentsline {subsubsection}{\numberline {7.41.1.1}Pre\-Eq\-Spin\-Rate\-Pair}{49}{subsubsection.7.41.1.1}
+\contentsline {subsection}{\numberline {7.41.2}Member Data Documentation}{49}{subsection.7.41.2}
+\contentsline {subsubsection}{\numberline {7.41.2.1}A\-\_\-}{49}{subsubsection.7.41.2.1}
+\contentsline {subsubsection}{\numberline {7.41.2.2}integral\-\_\-}{49}{subsubsection.7.41.2.2}
+\contentsline {subsubsection}{\numberline {7.41.2.3}neutron\-Hole\-Number\-\_\-}{49}{subsubsection.7.41.2.3}
+\contentsline {subsubsection}{\numberline {7.41.2.4}neutron\-Number\-\_\-}{49}{subsubsection.7.41.2.4}
+\contentsline {subsubsection}{\numberline {7.41.2.5}parity\-\_\-}{49}{subsubsection.7.41.2.5}
+\contentsline {subsubsection}{\numberline {7.41.2.6}proton\-Hole\-Number\-\_\-}{49}{subsubsection.7.41.2.6}
+\contentsline {subsubsection}{\numberline {7.41.2.7}proton\-Number\-\_\-}{49}{subsubsection.7.41.2.7}
+\contentsline {subsubsection}{\numberline {7.41.2.8}q\-Value\-\_\-}{49}{subsubsection.7.41.2.8}
+\contentsline {subsubsection}{\numberline {7.41.2.9}rate\-Func\-\_\-}{49}{subsubsection.7.41.2.9}
+\contentsline {subsubsection}{\numberline {7.41.2.10}spin\-\_\-}{49}{subsubsection.7.41.2.10}
+\contentsline {subsubsection}{\numberline {7.41.2.11}Z\-\_\-}{49}{subsubsection.7.41.2.11}
+\contentsline {section}{\numberline {7.42}Pre\-Eq\-Transition\-Rate\-Func Class Reference}{49}{section.7.42}
+\contentsline {subsection}{\numberline {7.42.1}Constructor \& Destructor Documentation}{50}{subsection.7.42.1}
+\contentsline {subsubsection}{\numberline {7.42.1.1}Pre\-Eq\-Transition\-Rate\-Func}{50}{subsubsection.7.42.1.1}
+\contentsline {subsubsection}{\numberline {7.42.1.2}$\sim $\-Pre\-Eq\-Transition\-Rate\-Func}{50}{subsubsection.7.42.1.2}
+\contentsline {subsection}{\numberline {7.42.2}Member Function Documentation}{50}{subsection.7.42.2}
+\contentsline {subsubsection}{\numberline {7.42.2.1}Cumulative\-Sum}{50}{subsubsection.7.42.2.1}
+\contentsline {subsubsection}{\numberline {7.42.2.2}Integral}{50}{subsubsection.7.42.2.2}
+\contentsline {section}{\numberline {7.43}Rauscher\-Level\-Density Class Reference}{50}{section.7.43}
+\contentsline {subsection}{\numberline {7.43.1}Constructor \& Destructor Documentation}{50}{subsection.7.43.1}
+\contentsline {subsubsection}{\numberline {7.43.1.1}Rauscher\-Level\-Density}{51}{subsubsection.7.43.1.1}
+\contentsline {subsubsection}{\numberline {7.43.1.2}$\sim $\-Rauscher\-Level\-Density}{51}{subsubsection.7.43.1.2}
+\contentsline {subsection}{\numberline {7.43.2}Member Function Documentation}{51}{subsection.7.43.2}
+\contentsline {subsubsection}{\numberline {7.43.2.1}Calc\-Back\-Shift}{51}{subsubsection.7.43.2.1}
+\contentsline {subsubsection}{\numberline {7.43.2.2}Calc\-Density\-Param}{51}{subsubsection.7.43.2.2}
+\contentsline {subsubsection}{\numberline {7.43.2.3}Calc\-Nuclear\-Temp}{51}{subsubsection.7.43.2.3}
+\contentsline {section}{\numberline {7.44}S\-L\-Pair Class Reference}{51}{section.7.44}
+\contentsline {subsection}{\numberline {7.44.1}Constructor \& Destructor Documentation}{51}{subsection.7.44.1}
+\contentsline {subsubsection}{\numberline {7.44.1.1}S\-L\-Pair}{51}{subsubsection.7.44.1.1}
+\contentsline {subsection}{\numberline {7.44.2}Member Function Documentation}{51}{subsection.7.44.2}
+\contentsline {subsubsection}{\numberline {7.44.2.1}operator$<$}{51}{subsubsection.7.44.2.1}
+\contentsline {subsection}{\numberline {7.44.3}Member Data Documentation}{51}{subsection.7.44.3}
+\contentsline {subsubsection}{\numberline {7.44.3.1}l\-\_\-}{51}{subsubsection.7.44.3.1}
+\contentsline {subsubsection}{\numberline {7.44.3.2}s\-\_\-}{51}{subsubsection.7.44.3.2}
+\contentsline {section}{\numberline {7.45}Spin\-Rate\-Pair Class Reference}{52}{section.7.45}
+\contentsline {subsection}{\numberline {7.45.1}Constructor \& Destructor Documentation}{52}{subsection.7.45.1}
+\contentsline {subsubsection}{\numberline {7.45.1.1}Spin\-Rate\-Pair}{52}{subsubsection.7.45.1.1}
+\contentsline {subsection}{\numberline {7.45.2}Member Data Documentation}{52}{subsection.7.45.2}
+\contentsline {subsubsection}{\numberline {7.45.2.1}A\-\_\-}{52}{subsubsection.7.45.2.1}
+\contentsline {subsubsection}{\numberline {7.45.2.2}integral\-\_\-}{52}{subsubsection.7.45.2.2}
+\contentsline {subsubsection}{\numberline {7.45.2.3}parity\-\_\-}{52}{subsubsection.7.45.2.3}
+\contentsline {subsubsection}{\numberline {7.45.2.4}q\-Value\-\_\-}{52}{subsubsection.7.45.2.4}
+\contentsline {subsubsection}{\numberline {7.45.2.5}rate\-Func\-\_\-}{52}{subsubsection.7.45.2.5}
+\contentsline {subsubsection}{\numberline {7.45.2.6}spin\-\_\-}{52}{subsubsection.7.45.2.6}
+\contentsline {subsubsection}{\numberline {7.45.2.7}Z\-\_\-}{52}{subsubsection.7.45.2.7}
+\contentsline {section}{\numberline {7.46}Transition\-Rate\-Func Class Reference}{52}{section.7.46}
+\contentsline {subsection}{\numberline {7.46.1}Constructor \& Destructor Documentation}{53}{subsection.7.46.1}
+\contentsline {subsubsection}{\numberline {7.46.1.1}Transition\-Rate\-Func}{53}{subsubsection.7.46.1.1}
+\contentsline {subsubsection}{\numberline {7.46.1.2}$\sim $\-Transition\-Rate\-Func}{53}{subsubsection.7.46.1.2}
+\contentsline {subsection}{\numberline {7.46.2}Member Function Documentation}{53}{subsection.7.46.2}
+\contentsline {subsubsection}{\numberline {7.46.2.1}Calc\-Level\-Density}{53}{subsubsection.7.46.2.1}
+\contentsline {subsubsection}{\numberline {7.46.2.2}Calc\-Total\-Level\-Density}{53}{subsubsection.7.46.2.2}
+\contentsline {subsubsection}{\numberline {7.46.2.3}Calc\-Transmission\-Func}{53}{subsubsection.7.46.2.3}
+\contentsline {subsubsection}{\numberline {7.46.2.4}Cumulative\-Sum}{53}{subsubsection.7.46.2.4}
+\contentsline {subsubsection}{\numberline {7.46.2.5}Exclusive\-Branching}{53}{subsubsection.7.46.2.5}
+\contentsline {subsubsection}{\numberline {7.46.2.6}Function}{53}{subsubsection.7.46.2.6}
+\contentsline {subsubsection}{\numberline {7.46.2.7}Get\-Gamma\-Cutoff\-Energy}{53}{subsubsection.7.46.2.7}
+\contentsline {subsubsection}{\numberline {7.46.2.8}Ground\-State\-Transmission}{53}{subsubsection.7.46.2.8}
+\contentsline {subsubsection}{\numberline {7.46.2.9}Integral}{53}{subsubsection.7.46.2.9}
+\contentsline {subsubsection}{\numberline {7.46.2.10}Set\-Gamma\-Cutoff\-Energy}{53}{subsubsection.7.46.2.10}
+\contentsline {section}{\numberline {7.47}Transmission\-Func Class Reference}{54}{section.7.47}
+\contentsline {subsection}{\numberline {7.47.1}Constructor \& Destructor Documentation}{54}{subsection.7.47.1}
+\contentsline {subsubsection}{\numberline {7.47.1.1}Transmission\-Func}{54}{subsubsection.7.47.1.1}
+\contentsline {subsubsection}{\numberline {7.47.1.2}$\sim $\-Transmission\-Func}{54}{subsubsection.7.47.1.2}
+\contentsline {subsection}{\numberline {7.47.2}Member Function Documentation}{54}{subsection.7.47.2}
+\contentsline {subsubsection}{\numberline {7.47.2.1}Is\-Valid}{54}{subsubsection.7.47.2.1}
+\contentsline {subsubsection}{\numberline {7.47.2.2}operator()}{54}{subsubsection.7.47.2.2}
+\contentsline {subsection}{\numberline {7.47.3}Member Data Documentation}{55}{subsection.7.47.3}
+\contentsline {subsubsection}{\numberline {7.47.3.1}j\-Final\-\_\-}{55}{subsubsection.7.47.3.1}
+\contentsline {subsubsection}{\numberline {7.47.3.2}j\-Initial\-\_\-}{55}{subsubsection.7.47.3.2}
+\contentsline {subsubsection}{\numberline {7.47.3.3}m2\-\_\-}{55}{subsubsection.7.47.3.3}
+\contentsline {subsubsection}{\numberline {7.47.3.4}max\-L\-\_\-}{55}{subsubsection.7.47.3.4}
+\contentsline {subsubsection}{\numberline {7.47.3.5}pi\-Final\-\_\-}{55}{subsubsection.7.47.3.5}
+\contentsline {subsubsection}{\numberline {7.47.3.6}pi\-Initial\-\_\-}{55}{subsubsection.7.47.3.6}
+\contentsline {subsubsection}{\numberline {7.47.3.7}previous\-\_\-}{55}{subsubsection.7.47.3.7}
+\contentsline {subsubsection}{\numberline {7.47.3.8}total\-Width\-For\-Correction\-\_\-}{55}{subsubsection.7.47.3.8}
+\contentsline {subsubsection}{\numberline {7.47.3.9}uncorr\-Total\-Width\-For\-Correction\-\_\-}{55}{subsubsection.7.47.3.9}
+\contentsline {subsubsection}{\numberline {7.47.3.10}uncorr\-Total\-Width\-Sqrd\-For\-Correction\-\_\-}{55}{subsubsection.7.47.3.10}
+\contentsline {subsubsection}{\numberline {7.47.3.11}z2\-\_\-}{55}{subsubsection.7.47.3.11}
+\contentsline {section}{\numberline {7.48}X\-Y\-Pair Class Reference}{55}{section.7.48}
+\contentsline {subsection}{\numberline {7.48.1}Constructor \& Destructor Documentation}{55}{subsection.7.48.1}
+\contentsline {subsubsection}{\numberline {7.48.1.1}X\-Y\-Pair}{55}{subsubsection.7.48.1.1}
+\contentsline {subsection}{\numberline {7.48.2}Member Data Documentation}{55}{subsection.7.48.2}
+\contentsline {subsubsection}{\numberline {7.48.2.1}X\-\_\-}{55}{subsubsection.7.48.2.1}
+\contentsline {subsubsection}{\numberline {7.48.2.2}Y\-\_\-}{55}{subsubsection.7.48.2.2}
+\contentsline {chapter}{\numberline {8}File Documentation}{57}{chapter.8}
+\contentsline {section}{\numberline {8.1}Brink\-Axel\-G\-S\-F.\-cpp File Reference}{57}{section.8.1}
+\contentsline {section}{\numberline {8.2}Brink\-Axel\-G\-S\-F.\-h File Reference}{57}{section.8.2}
+\contentsline {section}{\numberline {8.3}C\-Make\-C\-Compiler\-Id.\-c File Reference}{57}{section.8.3}
+\contentsline {subsection}{\numberline {8.3.1}Macro Definition Documentation}{58}{subsection.8.3.1}
+\contentsline {subsubsection}{\numberline {8.3.1.1}A\-R\-C\-H\-I\-T\-E\-C\-T\-U\-R\-E\-\_\-\-I\-D}{58}{subsubsection.8.3.1.1}
+\contentsline {subsubsection}{\numberline {8.3.1.2}C\-\_\-\-D\-I\-A\-L\-E\-C\-T}{58}{subsubsection.8.3.1.2}
+\contentsline {subsubsection}{\numberline {8.3.1.3}C\-O\-M\-P\-I\-L\-E\-R\-\_\-\-I\-D}{58}{subsubsection.8.3.1.3}
+\contentsline {subsubsection}{\numberline {8.3.1.4}D\-E\-C}{58}{subsubsection.8.3.1.4}
+\contentsline {subsubsection}{\numberline {8.3.1.5}H\-E\-X}{58}{subsubsection.8.3.1.5}
+\contentsline {subsubsection}{\numberline {8.3.1.6}P\-L\-A\-T\-F\-O\-R\-M\-\_\-\-I\-D}{58}{subsubsection.8.3.1.6}
+\contentsline {subsubsection}{\numberline {8.3.1.7}S\-T\-R\-I\-N\-G\-I\-F\-Y}{58}{subsubsection.8.3.1.7}
+\contentsline {subsubsection}{\numberline {8.3.1.8}S\-T\-R\-I\-N\-G\-I\-F\-Y\-\_\-\-H\-E\-L\-P\-E\-R}{58}{subsubsection.8.3.1.8}
+\contentsline {subsection}{\numberline {8.3.2}Function Documentation}{58}{subsection.8.3.2}
+\contentsline {subsubsection}{\numberline {8.3.2.1}main}{58}{subsubsection.8.3.2.1}
+\contentsline {subsection}{\numberline {8.3.3}Variable Documentation}{58}{subsection.8.3.3}
+\contentsline {subsubsection}{\numberline {8.3.3.1}info\-\_\-arch}{58}{subsubsection.8.3.3.1}
+\contentsline {subsubsection}{\numberline {8.3.3.2}info\-\_\-compiler}{58}{subsubsection.8.3.3.2}
+\contentsline {subsubsection}{\numberline {8.3.3.3}info\-\_\-language\-\_\-dialect\-\_\-default}{58}{subsubsection.8.3.3.3}
+\contentsline {subsubsection}{\numberline {8.3.3.4}info\-\_\-platform}{59}{subsubsection.8.3.3.4}
+\contentsline {section}{\numberline {8.4}C\-Make\-C\-X\-X\-Compiler\-Id.\-cpp File Reference}{59}{section.8.4}
+\contentsline {subsection}{\numberline {8.4.1}Macro Definition Documentation}{59}{subsection.8.4.1}
+\contentsline {subsubsection}{\numberline {8.4.1.1}A\-R\-C\-H\-I\-T\-E\-C\-T\-U\-R\-E\-\_\-\-I\-D}{59}{subsubsection.8.4.1.1}
+\contentsline {subsubsection}{\numberline {8.4.1.2}C\-O\-M\-P\-I\-L\-E\-R\-\_\-\-I\-D}{59}{subsubsection.8.4.1.2}
+\contentsline {subsubsection}{\numberline {8.4.1.3}C\-X\-X\-\_\-\-S\-T\-D}{59}{subsubsection.8.4.1.3}
+\contentsline {subsubsection}{\numberline {8.4.1.4}D\-E\-C}{59}{subsubsection.8.4.1.4}
+\contentsline {subsubsection}{\numberline {8.4.1.5}H\-E\-X}{59}{subsubsection.8.4.1.5}
+\contentsline {subsubsection}{\numberline {8.4.1.6}P\-L\-A\-T\-F\-O\-R\-M\-\_\-\-I\-D}{60}{subsubsection.8.4.1.6}
+\contentsline {subsubsection}{\numberline {8.4.1.7}S\-T\-R\-I\-N\-G\-I\-F\-Y}{60}{subsubsection.8.4.1.7}
+\contentsline {subsubsection}{\numberline {8.4.1.8}S\-T\-R\-I\-N\-G\-I\-F\-Y\-\_\-\-H\-E\-L\-P\-E\-R}{60}{subsubsection.8.4.1.8}
+\contentsline {subsection}{\numberline {8.4.2}Function Documentation}{60}{subsection.8.4.2}
+\contentsline {subsubsection}{\numberline {8.4.2.1}main}{60}{subsubsection.8.4.2.1}
+\contentsline {subsection}{\numberline {8.4.3}Variable Documentation}{60}{subsection.8.4.3}
+\contentsline {subsubsection}{\numberline {8.4.3.1}info\-\_\-arch}{60}{subsubsection.8.4.3.1}
+\contentsline {subsubsection}{\numberline {8.4.3.2}info\-\_\-compiler}{60}{subsubsection.8.4.3.2}
+\contentsline {subsubsection}{\numberline {8.4.3.3}info\-\_\-language\-\_\-dialect\-\_\-default}{60}{subsubsection.8.4.3.3}
+\contentsline {subsubsection}{\numberline {8.4.3.4}info\-\_\-platform}{60}{subsubsection.8.4.3.4}
+\contentsline {section}{\numberline {8.5}complex\-\_\-functions.\-cpp File Reference}{60}{section.8.5}
+\contentsline {subsection}{\numberline {8.5.1}Function Documentation}{61}{subsection.8.5.1}
+\contentsline {subsubsection}{\numberline {8.5.1.1}exp\-\_\-\-I\-\_\-omega\-\_\-chi\-\_\-calc}{61}{subsubsection.8.5.1.1}
+\contentsline {subsubsection}{\numberline {8.5.1.2}expm1}{61}{subsubsection.8.5.1.2}
+\contentsline {subsubsection}{\numberline {8.5.1.3}log1p}{61}{subsubsection.8.5.1.3}
+\contentsline {subsubsection}{\numberline {8.5.1.4}log\-\_\-\-Cl\-\_\-eta\-\_\-calc}{61}{subsubsection.8.5.1.4}
+\contentsline {subsubsection}{\numberline {8.5.1.5}log\-\_\-cut\-\_\-constant\-\_\-\-A\-S\-\_\-calc}{61}{subsubsection.8.5.1.5}
+\contentsline {subsubsection}{\numberline {8.5.1.6}log\-\_\-cut\-\_\-constant\-\_\-\-C\-Fa\-\_\-calc}{61}{subsubsection.8.5.1.6}
+\contentsline {subsubsection}{\numberline {8.5.1.7}log\-\_\-cut\-\_\-constant\-\_\-\-C\-Fb\-\_\-calc}{61}{subsubsection.8.5.1.7}
+\contentsline {subsubsection}{\numberline {8.5.1.8}log\-\_\-\-Gamma}{61}{subsubsection.8.5.1.8}
+\contentsline {subsubsection}{\numberline {8.5.1.9}sigma\-\_\-l\-\_\-calc}{61}{subsubsection.8.5.1.9}
+\contentsline {subsubsection}{\numberline {8.5.1.10}sin\-\_\-chi\-\_\-calc}{61}{subsubsection.8.5.1.10}
+\contentsline {section}{\numberline {8.6}complex\-\_\-functions.\-H File Reference}{61}{section.8.6}
+\contentsline {subsection}{\numberline {8.6.1}Macro Definition Documentation}{62}{subsection.8.6.1}
+\contentsline {subsubsection}{\numberline {8.6.1.1}S\-I\-G\-N}{62}{subsubsection.8.6.1.1}
+\contentsline {subsection}{\numberline {8.6.2}Function Documentation}{62}{subsection.8.6.2}
+\contentsline {subsubsection}{\numberline {8.6.2.1}exp\-\_\-\-I\-\_\-omega\-\_\-chi\-\_\-calc}{62}{subsubsection.8.6.2.1}
+\contentsline {subsubsection}{\numberline {8.6.2.2}expm1}{62}{subsubsection.8.6.2.2}
+\contentsline {subsubsection}{\numberline {8.6.2.3}inf\-\_\-norm}{62}{subsubsection.8.6.2.3}
+\contentsline {subsubsection}{\numberline {8.6.2.4}isfinite}{62}{subsubsection.8.6.2.4}
+\contentsline {subsubsection}{\numberline {8.6.2.5}log1p}{63}{subsubsection.8.6.2.5}
+\contentsline {subsubsection}{\numberline {8.6.2.6}log\-\_\-\-Cl\-\_\-eta\-\_\-calc}{63}{subsubsection.8.6.2.6}
+\contentsline {subsubsection}{\numberline {8.6.2.7}log\-\_\-cut\-\_\-constant\-\_\-\-A\-S\-\_\-calc}{63}{subsubsection.8.6.2.7}
+\contentsline {subsubsection}{\numberline {8.6.2.8}log\-\_\-cut\-\_\-constant\-\_\-\-C\-Fa\-\_\-calc}{63}{subsubsection.8.6.2.8}
+\contentsline {subsubsection}{\numberline {8.6.2.9}log\-\_\-cut\-\_\-constant\-\_\-\-C\-Fb\-\_\-calc}{63}{subsubsection.8.6.2.9}
+\contentsline {subsubsection}{\numberline {8.6.2.10}log\-\_\-\-Gamma}{63}{subsubsection.8.6.2.10}
+\contentsline {subsubsection}{\numberline {8.6.2.11}operator!=}{63}{subsubsection.8.6.2.11}
+\contentsline {subsubsection}{\numberline {8.6.2.12}operator!=}{63}{subsubsection.8.6.2.12}
+\contentsline {subsubsection}{\numberline {8.6.2.13}operator!=}{63}{subsubsection.8.6.2.13}
+\contentsline {subsubsection}{\numberline {8.6.2.14}operator!=}{63}{subsubsection.8.6.2.14}
+\contentsline {subsubsection}{\numberline {8.6.2.15}operator$\ast $}{63}{subsubsection.8.6.2.15}
+\contentsline {subsubsection}{\numberline {8.6.2.16}operator$\ast $}{63}{subsubsection.8.6.2.16}
+\contentsline {subsubsection}{\numberline {8.6.2.17}operator$\ast $}{63}{subsubsection.8.6.2.17}
+\contentsline {subsubsection}{\numberline {8.6.2.18}operator$\ast $}{63}{subsubsection.8.6.2.18}
+\contentsline {subsubsection}{\numberline {8.6.2.19}operator+}{63}{subsubsection.8.6.2.19}
+\contentsline {subsubsection}{\numberline {8.6.2.20}operator+}{63}{subsubsection.8.6.2.20}
+\contentsline {subsubsection}{\numberline {8.6.2.21}operator+}{63}{subsubsection.8.6.2.21}
+\contentsline {subsubsection}{\numberline {8.6.2.22}operator+}{63}{subsubsection.8.6.2.22}
+\contentsline {subsubsection}{\numberline {8.6.2.23}operator-\/}{63}{subsubsection.8.6.2.23}
+\contentsline {subsubsection}{\numberline {8.6.2.24}operator-\/}{63}{subsubsection.8.6.2.24}
+\contentsline {subsubsection}{\numberline {8.6.2.25}operator-\/}{63}{subsubsection.8.6.2.25}
+\contentsline {subsubsection}{\numberline {8.6.2.26}operator-\/}{63}{subsubsection.8.6.2.26}
+\contentsline {subsubsection}{\numberline {8.6.2.27}operator/}{63}{subsubsection.8.6.2.27}
+\contentsline {subsubsection}{\numberline {8.6.2.28}operator/}{63}{subsubsection.8.6.2.28}
+\contentsline {subsubsection}{\numberline {8.6.2.29}operator/}{63}{subsubsection.8.6.2.29}
+\contentsline {subsubsection}{\numberline {8.6.2.30}operator/}{63}{subsubsection.8.6.2.30}
+\contentsline {subsubsection}{\numberline {8.6.2.31}operator==}{64}{subsubsection.8.6.2.31}
+\contentsline {subsubsection}{\numberline {8.6.2.32}operator==}{64}{subsubsection.8.6.2.32}
+\contentsline {subsubsection}{\numberline {8.6.2.33}operator==}{64}{subsubsection.8.6.2.33}
+\contentsline {subsubsection}{\numberline {8.6.2.34}operator==}{64}{subsubsection.8.6.2.34}
+\contentsline {subsubsection}{\numberline {8.6.2.35}sigma\-\_\-l\-\_\-calc}{64}{subsubsection.8.6.2.35}
+\contentsline {subsubsection}{\numberline {8.6.2.36}sin\-\_\-chi\-\_\-calc}{64}{subsubsection.8.6.2.36}
+\contentsline {subsection}{\numberline {8.6.3}Variable Documentation}{64}{subsection.8.6.3}
+\contentsline {subsubsection}{\numberline {8.6.3.1}precision}{64}{subsubsection.8.6.3.1}
+\contentsline {subsubsection}{\numberline {8.6.3.2}sqrt\-\_\-precision}{64}{subsubsection.8.6.3.2}
+\contentsline {section}{\numberline {8.7}Constants.\-h File Reference}{64}{section.8.7}
+\contentsline {subsection}{\numberline {8.7.1}Typedef Documentation}{65}{subsection.8.7.1}
+\contentsline {subsubsection}{\numberline {8.7.1.1}complex}{65}{subsubsection.8.7.1.1}
+\contentsline {subsubsection}{\numberline {8.7.1.2}matrix\-\_\-c}{65}{subsubsection.8.7.1.2}
+\contentsline {subsubsection}{\numberline {8.7.1.3}matrix\-\_\-r}{65}{subsubsection.8.7.1.3}
+\contentsline {subsubsection}{\numberline {8.7.1.4}vector\-\_\-c}{65}{subsubsection.8.7.1.4}
+\contentsline {subsubsection}{\numberline {8.7.1.5}vector\-\_\-matrix\-\_\-c}{65}{subsubsection.8.7.1.5}
+\contentsline {subsubsection}{\numberline {8.7.1.6}vector\-\_\-matrix\-\_\-r}{65}{subsubsection.8.7.1.6}
+\contentsline {subsubsection}{\numberline {8.7.1.7}vector\-\_\-r}{65}{subsubsection.8.7.1.7}
+\contentsline {subsection}{\numberline {8.7.2}Variable Documentation}{65}{subsection.8.7.2}
+\contentsline {subsubsection}{\numberline {8.7.2.1}avagadro\-Num}{65}{subsubsection.8.7.2.1}
+\contentsline {subsubsection}{\numberline {8.7.2.2}boltz\-Const}{65}{subsubsection.8.7.2.2}
+\contentsline {subsubsection}{\numberline {8.7.2.3}e\-Mass}{65}{subsubsection.8.7.2.3}
+\contentsline {subsubsection}{\numberline {8.7.2.4}fstruc}{65}{subsubsection.8.7.2.4}
+\contentsline {subsubsection}{\numberline {8.7.2.5}hbarc}{65}{subsubsection.8.7.2.5}
+\contentsline {subsubsection}{\numberline {8.7.2.6}light\-Speed\-In\-Cm\-Per\-S}{65}{subsubsection.8.7.2.6}
+\contentsline {subsubsection}{\numberline {8.7.2.7}pi}{65}{subsubsection.8.7.2.7}
+\contentsline {subsubsection}{\numberline {8.7.2.8}uconv}{65}{subsubsection.8.7.2.8}
+\contentsline {section}{\numberline {8.8}Coul\-Func.\-cpp File Reference}{65}{section.8.8}
+\contentsline {section}{\numberline {8.9}Coul\-Func.\-h File Reference}{65}{section.8.9}
+\contentsline {section}{\numberline {8.10}Cross\-Section.\-cpp File Reference}{66}{section.8.10}
+\contentsline {subsection}{\numberline {8.10.1}Function Documentation}{66}{subsection.8.10.1}
+\contentsline {subsubsection}{\numberline {8.10.1.1}gsl\-\_\-partfunc\-\_\-integrand}{66}{subsubsection.8.10.1.1}
+\contentsline {subsubsection}{\numberline {8.10.1.2}gsl\-\_\-reactionrate\-\_\-integrand}{66}{subsubsection.8.10.1.2}
+\contentsline {section}{\numberline {8.11}Cross\-Section.\-h File Reference}{66}{section.8.11}
+\contentsline {subsection}{\numberline {8.11.1}Typedef Documentation}{67}{subsection.8.11.1}
+\contentsline {subsubsection}{\numberline {8.11.1.1}Decayer\-Vector}{67}{subsubsection.8.11.1.1}
+\contentsline {subsubsection}{\numberline {8.11.1.2}int\-\_\-double\-\_\-pair}{67}{subsubsection.8.11.1.2}
+\contentsline {section}{\numberline {8.12}cwfcomp.\-cpp File Reference}{67}{section.8.12}
+\contentsline {section}{\numberline {8.13}cwfcomp.\-H File Reference}{67}{section.8.13}
+\contentsline {section}{\numberline {8.14}Decay\-Controller.\-cpp File Reference}{67}{section.8.14}
+\contentsline {subsection}{\numberline {8.14.1}Variable Documentation}{67}{subsection.8.14.1}
+\contentsline {subsubsection}{\numberline {8.14.1.1}random\-Seed}{67}{subsubsection.8.14.1.1}
+\contentsline {section}{\numberline {8.15}Decay\-Controller.\-h File Reference}{67}{section.8.15}
+\contentsline {section}{\numberline {8.16}Decayer.\-cpp File Reference}{68}{section.8.16}
+\contentsline {subsection}{\numberline {8.16.1}Variable Documentation}{68}{subsection.8.16.1}
+\contentsline {subsubsection}{\numberline {8.16.1.1}random\-Seed}{68}{subsubsection.8.16.1.1}
+\contentsline {section}{\numberline {8.17}Decayer.\-h File Reference}{68}{section.8.17}
+\contentsline {section}{\numberline {8.18}Decay\-Product.\-h File Reference}{68}{section.8.18}
+\contentsline {section}{\numberline {8.19}Decay\-Results.\-cpp File Reference}{68}{section.8.19}
+\contentsline {section}{\numberline {8.20}Decay\-Results.\-h File Reference}{69}{section.8.20}
+\contentsline {section}{\numberline {8.21}elements.\-h File Reference}{69}{section.8.21}
+\contentsline {section}{\numberline {8.22}Equiv\-Square\-Well.\-cpp File Reference}{69}{section.8.22}
+\contentsline {section}{\numberline {8.23}Equiv\-Square\-Well.\-h File Reference}{69}{section.8.23}
+\contentsline {section}{\numberline {8.24}Gamma\-Transmission\-Func.\-cpp File Reference}{69}{section.8.24}
+\contentsline {subsection}{\numberline {8.24.1}Variable Documentation}{70}{subsection.8.24.1}
+\contentsline {subsubsection}{\numberline {8.24.1.1}random\-Seed}{70}{subsubsection.8.24.1.1}
+\contentsline {section}{\numberline {8.25}Gamma\-Transmission\-Func.\-h File Reference}{70}{section.8.25}
+\contentsline {subsection}{\numberline {8.25.1}Typedef Documentation}{70}{subsection.8.25.1}
+\contentsline {subsubsection}{\numberline {8.25.1.1}G\-D\-R\-Table}{70}{subsubsection.8.25.1.1}
+\contentsline {section}{\numberline {8.26}J\-L\-M\-Potential.\-cpp File Reference}{70}{section.8.26}
+\contentsline {section}{\numberline {8.27}J\-L\-M\-Potential.\-h File Reference}{70}{section.8.27}
+\contentsline {section}{\numberline {8.28}Kopecky\-Uhl\-G\-S\-F.\-cpp File Reference}{71}{section.8.28}
+\contentsline {section}{\numberline {8.29}Kopecky\-Uhl\-G\-S\-F.\-h File Reference}{71}{section.8.29}
+\contentsline {section}{\numberline {8.30}Level\-Density.\-cpp File Reference}{71}{section.8.30}
+\contentsline {section}{\numberline {8.31}Level\-Density.\-h File Reference}{71}{section.8.31}
+\contentsline {section}{\numberline {8.32}Mc\-Cullagh\-G\-S\-F.\-cpp File Reference}{71}{section.8.32}
+\contentsline {section}{\numberline {8.33}Mc\-Cullagh\-G\-S\-F.\-h File Reference}{71}{section.8.33}
+\contentsline {section}{\numberline {8.34}Mc\-Fadden\-Satchler\-Potential.\-cpp File Reference}{71}{section.8.34}
+\contentsline {section}{\numberline {8.35}Mc\-Fadden\-Satchler\-Potential.\-h File Reference}{72}{section.8.35}
+\contentsline {section}{\numberline {8.36}Nuclear\-Levels.\-cpp File Reference}{72}{section.8.36}
+\contentsline {section}{\numberline {8.37}Nuclear\-Levels.\-h File Reference}{72}{section.8.37}
+\contentsline {subsection}{\numberline {8.37.1}Typedef Documentation}{72}{subsection.8.37.1}
+\contentsline {subsubsection}{\numberline {8.37.1.1}Levels\-Table}{72}{subsubsection.8.37.1.1}
+\contentsline {section}{\numberline {8.38}Nuclear\-Mass.\-cpp File Reference}{72}{section.8.38}
+\contentsline {subsection}{\numberline {8.38.1}Macro Definition Documentation}{73}{subsection.8.38.1}
+\contentsline {subsubsection}{\numberline {8.38.1.1}E\-L\-E\-M\-E\-N\-T}{73}{subsubsection.8.38.1.1}
+\contentsline {subsubsection}{\numberline {8.38.1.2}H\-A\-S\-\_\-\-E\-X\-P\-\_\-\-M\-A\-S\-S}{73}{subsubsection.8.38.1.2}
+\contentsline {subsubsection}{\numberline {8.38.1.3}H\-A\-S\-\_\-\-T\-H\-\_\-\-M\-A\-S\-S}{73}{subsubsection.8.38.1.3}
+\contentsline {section}{\numberline {8.39}Nuclear\-Mass.\-h File Reference}{73}{section.8.39}
+\contentsline {subsection}{\numberline {8.39.1}Typedef Documentation}{74}{subsection.8.39.1}
+\contentsline {subsubsection}{\numberline {8.39.1.1}Element\-Table}{74}{subsubsection.8.39.1.1}
+\contentsline {subsubsection}{\numberline {8.39.1.2}Mass\-Table}{74}{subsubsection.8.39.1.2}
+\contentsline {section}{\numberline {8.40}ode\-\_\-int.\-cpp File Reference}{74}{section.8.40}
+\contentsline {section}{\numberline {8.41}ode\-\_\-int.\-H File Reference}{74}{section.8.41}
+\contentsline {section}{\numberline {8.42}Particle\-Hole\-Level\-Density.\-cpp File Reference}{74}{section.8.42}
+\contentsline {section}{\numberline {8.43}Particle\-Hole\-Level\-Density.\-h File Reference}{74}{section.8.43}
+\contentsline {section}{\numberline {8.44}Particle\-Transmission\-Func.\-cpp File Reference}{74}{section.8.44}
+\contentsline {subsection}{\numberline {8.44.1}Variable Documentation}{75}{subsection.8.44.1}
+\contentsline {subsubsection}{\numberline {8.44.1.1}random\-Seed}{75}{subsubsection.8.44.1.1}
+\contentsline {section}{\numberline {8.45}Particle\-Transmission\-Func.\-h File Reference}{75}{section.8.45}
+\contentsline {section}{\numberline {8.46}Potential.\-cpp File Reference}{75}{section.8.46}
+\contentsline {section}{\numberline {8.47}Potential.\-h File Reference}{75}{section.8.47}
+\contentsline {section}{\numberline {8.48}Pre\-Eq\-Decayer.\-cpp File Reference}{75}{section.8.48}
+\contentsline {subsection}{\numberline {8.48.1}Variable Documentation}{76}{subsection.8.48.1}
+\contentsline {subsubsection}{\numberline {8.48.1.1}random\-Seed}{76}{subsubsection.8.48.1.1}
+\contentsline {section}{\numberline {8.49}Pre\-Eq\-Decayer.\-h File Reference}{76}{section.8.49}
+\contentsline {section}{\numberline {8.50}Pre\-Eq\-Transition\-Rate\-Func.\-cpp File Reference}{76}{section.8.50}
+\contentsline {section}{\numberline {8.51}Pre\-Eq\-Transition\-Rate\-Func.\-h File Reference}{76}{section.8.51}
+\contentsline {section}{\numberline {8.52}Rauscher\-Level\-Density.\-cpp File Reference}{77}{section.8.52}
+\contentsline {section}{\numberline {8.53}Rauscher\-Level\-Density.\-h File Reference}{77}{section.8.53}
+\contentsline {section}{\numberline {8.54}R\-E\-A\-D\-M\-E.\-md File Reference}{77}{section.8.54}
+\contentsline {section}{\numberline {8.55}Sapphire.\-cpp File Reference}{77}{section.8.55}
+\contentsline {subsection}{\numberline {8.55.1}Typedef Documentation}{78}{subsection.8.55.1}
+\contentsline {subsubsection}{\numberline {8.55.1.1}Entrance\-Pairs}{78}{subsubsection.8.55.1.1}
+\contentsline {subsection}{\numberline {8.55.2}Function Documentation}{78}{subsection.8.55.2}
+\contentsline {subsubsection}{\numberline {8.55.2.1}Initialize}{78}{subsubsection.8.55.2.1}
+\contentsline {subsubsection}{\numberline {8.55.2.2}main}{78}{subsubsection.8.55.2.2}
+\contentsline {subsubsection}{\numberline {8.55.2.3}parse\-Command\-Line\-For\-Decay}{78}{subsubsection.8.55.2.3}
+\contentsline {subsubsection}{\numberline {8.55.2.4}parse\-Command\-Line\-For\-Options}{78}{subsubsection.8.55.2.4}
+\contentsline {subsubsection}{\numberline {8.55.2.5}parse\-Command\-Line\-For\-X\-S}{78}{subsubsection.8.55.2.5}
+\contentsline {subsubsection}{\numberline {8.55.2.6}print\-Help}{78}{subsubsection.8.55.2.6}
+\contentsline {subsection}{\numberline {8.55.3}Variable Documentation}{78}{subsection.8.55.3}
+\contentsline {subsubsection}{\numberline {8.55.3.1}random\-Seed}{78}{subsubsection.8.55.3.1}
+\contentsline {section}{\numberline {8.56}Sapphire\-M\-P\-I\-Types.\-h File Reference}{78}{section.8.56}
+\contentsline {subsection}{\numberline {8.56.1}Enumeration Type Documentation}{79}{subsection.8.56.1}
+\contentsline {subsubsection}{\numberline {8.56.1.1}Sapphire\-Tags\-\_\-t}{79}{subsubsection.8.56.1.1}
+\contentsline {subsection}{\numberline {8.56.2}Function Documentation}{79}{subsection.8.56.2}
+\contentsline {subsubsection}{\numberline {8.56.2.1}B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E}{79}{subsubsection.8.56.2.1}
+\contentsline {subsubsection}{\numberline {8.56.2.2}B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E}{79}{subsubsection.8.56.2.2}
+\contentsline {subsubsection}{\numberline {8.56.2.3}B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E}{79}{subsubsection.8.56.2.3}
+\contentsline {section}{\numberline {8.57}Setup.\-cpp File Reference}{79}{section.8.57}
+\contentsline {subsection}{\numberline {8.57.1}Function Documentation}{80}{subsection.8.57.1}
+\contentsline {subsubsection}{\numberline {8.57.1.1}Initialize}{80}{subsubsection.8.57.1.1}
+\contentsline {section}{\numberline {8.58}Transition\-Rate\-Func.\-cpp File Reference}{80}{section.8.58}
+\contentsline {section}{\numberline {8.59}Transition\-Rate\-Func.\-h File Reference}{80}{section.8.59}
+\contentsline {section}{\numberline {8.60}Transmission\-Func.\-h File Reference}{80}{section.8.60}
+\contentsline {part}{Index}{81}{section*.159}

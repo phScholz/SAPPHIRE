@@ -1,0 +1,1394 @@
+\begin{theindex}
+
+  \item {$\sim $\-Coulomb\-\_\-wave\-\_\-functions}
+    \subitem {Coulomb\-\_\-wave\-\_\-functions}, \hyperpage{16}
+  \item {$\sim $\-Decay\-Results}
+    \subitem {Decay\-Results}, \hyperpage{25}
+  \item {$\sim $\-Decayer}
+    \subitem {Decayer}, \hyperpage{22}
+  \item {$\sim $\-Equiv\-Square\-Well}
+    \subitem {Equiv\-Square\-Well}, \hyperpage{26}
+  \item {$\sim $\-Gamma\-Transmission\-Func}
+    \subitem {Gamma\-Transmission\-Func}, \hyperpage{28}
+  \item {$\sim $\-Level\-Density}
+    \subitem {Level\-Density}, \hyperpage{36}
+  \item {$\sim $\-Particle\-Transmission\-Func}
+    \subitem {Particle\-Transmission\-Func}, \hyperpage{44}
+  \item {$\sim $\-Potential}
+    \subitem {Potential}, \hyperpage{46}
+  \item {$\sim $\-Pre\-Eq\-Decayer}
+    \subitem {Pre\-Eq\-Decayer}, \hyperpage{48}
+  \item {$\sim $\-Pre\-Eq\-Transition\-Rate\-Func}
+    \subitem {Pre\-Eq\-Transition\-Rate\-Func}, \hyperpage{50}
+  \item {$\sim $\-Rauscher\-Level\-Density}
+    \subitem {Rauscher\-Level\-Density}, \hyperpage{51}
+  \item {$\sim $\-Transition\-Rate\-Func}
+    \subitem {Transition\-Rate\-Func}, \hyperpage{53}
+  \item {$\sim $\-Transmission\-Func}
+    \subitem {Transmission\-Func}, \hyperpage{54}
+
+  \indexspace
+
+  \item {A}
+    \subitem {Initial\-Nucleus\-Data}, \hyperpage{32}
+  \item {A\-\_\-}
+    \subitem {Decay\-Product}, \hyperpage{24}
+    \subitem {Entrance\-Pairs}, \hyperpage{25}
+    \subitem {Level\-Density}, \hyperpage{36}
+    \subitem {Mass\-Key}, \hyperpage{38}
+    \subitem {Pre\-Eq\-Spin\-Rate\-Pair}, \hyperpage{49}
+    \subitem {Spin\-Rate\-Pair}, \hyperpage{52}
+  \item {A\-R\-C\-H\-I\-T\-E\-C\-T\-U\-R\-E\-\_\-\-I\-D}
+    \subitem {C\-Make\-C\-Compiler\-Id.\-c}, \hyperpage{58}
+    \subitem {C\-Make\-C\-X\-X\-Compiler\-Id.\-cpp}, \hyperpage{59}
+  \item {Add\-Results}
+    \subitem {Decay\-Results}, \hyperpage{25}
+  \item {alpha\-\_\-}
+    \subitem {Cross\-Section\-Values}, \hyperpage{19}
+  \item {Alpha\-Entrance\-Width}
+    \subitem {Decayer}, \hyperpage{22}
+  \item {alpha\-Entrance\-Width}
+    \subitem {Decay\-Data}, \hyperpage{21}
+  \item {alpha\-Stellar\-\_\-}
+    \subitem {Cross\-Section\-Values}, \hyperpage{19}
+  \item {Alpha\-Total\-Width}
+    \subitem {Decayer}, \hyperpage{22}
+  \item {alpha\-Total\-Width}
+    \subitem {Decay\-Data}, \hyperpage{21}
+  \item {avagadro\-Num}
+    \subitem {Constants.\-h}, \hyperpage{65}
+
+  \indexspace
+
+  \item {B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E}
+    \subitem {Sapphire\-M\-P\-I\-Types.\-h}, \hyperpage{79}
+  \item {backshift\-\_\-}
+    \subitem {Level\-Density}, \hyperpage{36}
+  \item {boltz\-Const}
+    \subitem {Constants.\-h}, \hyperpage{65}
+  \item {boost}, \hyperpage{11}
+  \item {boost\-::serialization}, \hyperpage{11}
+    \subitem {serialize}, \hyperpage{11}
+  \item {boost\-::serialization\-::access}
+    \subitem {Initial\-Nucleus\-Data}, \hyperpage{32}
+  \item {boundary\-Radius\-\_\-}
+    \subitem {Potential}, \hyperpage{47}
+  \item {Brink\-Axel\-G\-S\-F}, \hyperpage{13}
+    \subitem {Brink\-Axel\-G\-S\-F}, \hyperpage{13}
+    \subitem {Brink\-Axel\-G\-S\-F}, \hyperpage{13}
+    \subitem {Calc\-Strength\-Function}, \hyperpage{13}
+  \item {Brink\-Axel\-G\-S\-F.\-cpp}, \hyperpage{57}
+  \item {Brink\-Axel\-G\-S\-F.\-h}, \hyperpage{57}
+
+  \indexspace
+
+  \item {C\-\_\-\-D\-I\-A\-L\-E\-C\-T}
+    \subitem {C\-Make\-C\-Compiler\-Id.\-c}, \hyperpage{58}
+  \item {C\-D\-F\-Entry}, \hyperpage{14}
+    \subitem {C\-D\-F\-Entry}, \hyperpage{14}
+    \subitem {C\-D\-F\-Entry}, \hyperpage{14}
+    \subitem {energy\-\_\-}, \hyperpage{14}
+    \subitem {pair\-Index\-\_\-}, \hyperpage{14}
+    \subitem {value\-\_\-}, \hyperpage{14}
+  \item {C\-Make\-C\-Compiler\-Id.\-c}, \hyperpage{57}
+    \subitem {A\-R\-C\-H\-I\-T\-E\-C\-T\-U\-R\-E\-\_\-\-I\-D}, 
+		\hyperpage{58}
+    \subitem {C\-\_\-\-D\-I\-A\-L\-E\-C\-T}, \hyperpage{58}
+    \subitem {C\-O\-M\-P\-I\-L\-E\-R\-\_\-\-I\-D}, \hyperpage{58}
+    \subitem {D\-E\-C}, \hyperpage{58}
+    \subitem {H\-E\-X}, \hyperpage{58}
+    \subitem {info\-\_\-arch}, \hyperpage{58}
+    \subitem {info\-\_\-compiler}, \hyperpage{58}
+    \subitem {info\-\_\-language\-\_\-dialect\-\_\-default}, 
+		\hyperpage{58}
+    \subitem {info\-\_\-platform}, \hyperpage{58}
+    \subitem {main}, \hyperpage{58}
+    \subitem {P\-L\-A\-T\-F\-O\-R\-M\-\_\-\-I\-D}, \hyperpage{58}
+    \subitem {S\-T\-R\-I\-N\-G\-I\-F\-Y}, \hyperpage{58}
+    \subitem {S\-T\-R\-I\-N\-G\-I\-F\-Y\-\_\-\-H\-E\-L\-P\-E\-R}, 
+		\hyperpage{58}
+  \item {C\-Make\-C\-X\-X\-Compiler\-Id.\-cpp}, \hyperpage{59}
+    \subitem {A\-R\-C\-H\-I\-T\-E\-C\-T\-U\-R\-E\-\_\-\-I\-D}, 
+		\hyperpage{59}
+    \subitem {C\-O\-M\-P\-I\-L\-E\-R\-\_\-\-I\-D}, \hyperpage{59}
+    \subitem {C\-X\-X\-\_\-\-S\-T\-D}, \hyperpage{59}
+    \subitem {D\-E\-C}, \hyperpage{59}
+    \subitem {H\-E\-X}, \hyperpage{59}
+    \subitem {info\-\_\-arch}, \hyperpage{60}
+    \subitem {info\-\_\-compiler}, \hyperpage{60}
+    \subitem {info\-\_\-language\-\_\-dialect\-\_\-default}, 
+		\hyperpage{60}
+    \subitem {info\-\_\-platform}, \hyperpage{60}
+    \subitem {main}, \hyperpage{60}
+    \subitem {P\-L\-A\-T\-F\-O\-R\-M\-\_\-\-I\-D}, \hyperpage{59}
+    \subitem {S\-T\-R\-I\-N\-G\-I\-F\-Y}, \hyperpage{60}
+    \subitem {S\-T\-R\-I\-N\-G\-I\-F\-Y\-\_\-\-H\-E\-L\-P\-E\-R}, 
+		\hyperpage{60}
+  \item {C\-O\-M\-P\-I\-L\-E\-R\-\_\-\-I\-D}
+    \subitem {C\-Make\-C\-Compiler\-Id.\-c}, \hyperpage{58}
+    \subitem {C\-Make\-C\-X\-X\-Compiler\-Id.\-cpp}, \hyperpage{59}
+  \item {C\-X\-X\-\_\-\-S\-T\-D}
+    \subitem {C\-Make\-C\-X\-X\-Compiler\-Id.\-cpp}, \hyperpage{59}
+  \item {Calc\-Average\-D\-Wave\-Res\-Width}
+    \subitem {Cross\-Section}, \hyperpage{18}
+  \item {Calc\-Average\-P\-Wave\-Res\-Width}
+    \subitem {Cross\-Section}, \hyperpage{18}
+  \item {Calc\-Average\-S\-Wave\-Res\-Width}
+    \subitem {Cross\-Section}, \hyperpage{18}
+  \item {Calc\-Back\-Shift}
+    \subitem {Level\-Density}, \hyperpage{36}
+    \subitem {Rauscher\-Level\-Density}, \hyperpage{51}
+  \item {Calc\-Beta}
+    \subitem {Potential}, \hyperpage{46}
+  \item {Calc\-Constant\-Temp\-Terms}
+    \subitem {Level\-Density}, \hyperpage{36}
+  \item {Calc\-Density\-Param}
+    \subitem {Level\-Density}, \hyperpage{36}
+    \subitem {Rauscher\-Level\-Density}, \hyperpage{51}
+  \item {Calc\-Level\-Density}
+    \subitem {Transition\-Rate\-Func}, \hyperpage{53}
+  \item {Calc\-Nuclear\-Temp}
+    \subitem {Level\-Density}, \hyperpage{36}
+    \subitem {Rauscher\-Level\-Density}, \hyperpage{51}
+  \item {Calc\-S\-L\-Dependent\-Functions}
+    \subitem {Particle\-Transmission\-Func}, \hyperpage{44}
+  \item {Calc\-Strength\-Function}
+    \subitem {Brink\-Axel\-G\-S\-F}, \hyperpage{13}
+    \subitem {Gamma\-Transmission\-Func}, \hyperpage{28}
+    \subitem {Kopecky\-Uhl\-G\-S\-F}, \hyperpage{34}
+    \subitem {Mc\-Cullagh\-G\-S\-F}, \hyperpage{39}
+  \item {Calc\-Total\-Level\-Density}
+    \subitem {Transition\-Rate\-Func}, \hyperpage{53}
+  \item {Calc\-Transmission}
+    \subitem {Equiv\-Square\-Well}, \hyperpage{27}
+    \subitem {Particle\-Transmission\-Func}, \hyperpage{44}
+    \subitem {Potential}, \hyperpage{46}
+  \item {Calc\-Transmission\-Func}
+    \subitem {Transition\-Rate\-Func}, \hyperpage{53}
+  \item {Calculate}
+    \subitem {Cross\-Section}, \hyperpage{18}
+    \subitem {J\-L\-M\-Potential}, \hyperpage{33}
+    \subitem {Mc\-Fadden\-Satchler\-Potential}, \hyperpage{40}
+    \subitem {Potential}, \hyperpage{46}
+  \item {Calculate\-Density}
+    \subitem {J\-L\-M\-Potential}, \hyperpage{33}
+  \item {Calculate\-L\-D\-M\-Mass}
+    \subitem {Nuclear\-Mass}, \hyperpage{41}
+  \item {Calculate\-Reaction\-Rates}
+    \subitem {Cross\-Section}, \hyperpage{18}
+  \item {complex}
+    \subitem {Constants.\-h}, \hyperpage{65}
+  \item {complex\-\_\-functions.\-cpp}, \hyperpage{60}
+    \subitem {exp\-\_\-\-I\-\_\-omega\-\_\-chi\-\_\-calc}, 
+		\hyperpage{61}
+    \subitem {expm1}, \hyperpage{61}
+    \subitem {log1p}, \hyperpage{61}
+    \subitem {log\-\_\-\-Cl\-\_\-eta\-\_\-calc}, \hyperpage{61}
+    \subitem {log\-\_\-\-Gamma}, \hyperpage{61}
+    \subitem {log\-\_\-cut\-\_\-constant\-\_\-\-A\-S\-\_\-calc}, 
+		\hyperpage{61}
+    \subitem {log\-\_\-cut\-\_\-constant\-\_\-\-C\-Fa\-\_\-calc}, 
+		\hyperpage{61}
+    \subitem {log\-\_\-cut\-\_\-constant\-\_\-\-C\-Fb\-\_\-calc}, 
+		\hyperpage{61}
+    \subitem {sigma\-\_\-l\-\_\-calc}, \hyperpage{61}
+    \subitem {sin\-\_\-chi\-\_\-calc}, \hyperpage{61}
+  \item {complex\-\_\-functions.\-H}, \hyperpage{61}
+    \subitem {exp\-\_\-\-I\-\_\-omega\-\_\-chi\-\_\-calc}, 
+		\hyperpage{62}
+    \subitem {expm1}, \hyperpage{62}
+    \subitem {inf\-\_\-norm}, \hyperpage{62}
+    \subitem {isfinite}, \hyperpage{62}
+    \subitem {log1p}, \hyperpage{62}
+    \subitem {log\-\_\-\-Cl\-\_\-eta\-\_\-calc}, \hyperpage{63}
+    \subitem {log\-\_\-\-Gamma}, \hyperpage{63}
+    \subitem {log\-\_\-cut\-\_\-constant\-\_\-\-A\-S\-\_\-calc}, 
+		\hyperpage{63}
+    \subitem {log\-\_\-cut\-\_\-constant\-\_\-\-C\-Fa\-\_\-calc}, 
+		\hyperpage{63}
+    \subitem {log\-\_\-cut\-\_\-constant\-\_\-\-C\-Fb\-\_\-calc}, 
+		\hyperpage{63}
+    \subitem {operator$\ast $}, \hyperpage{63}
+    \subitem {operator+}, \hyperpage{63}
+    \subitem {operator-\/}, \hyperpage{63}
+    \subitem {operator/}, \hyperpage{63}
+    \subitem {operator==}, \hyperpage{63, 64}
+    \subitem {precision}, \hyperpage{64}
+    \subitem {S\-I\-G\-N}, \hyperpage{62}
+    \subitem {sigma\-\_\-l\-\_\-calc}, \hyperpage{64}
+    \subitem {sin\-\_\-chi\-\_\-calc}, \hyperpage{64}
+    \subitem {sqrt\-\_\-precision}, \hyperpage{64}
+  \item {const\-Ang\-Term\-\_\-}
+    \subitem {Level\-Density}, \hyperpage{36}
+  \item {Constants.\-h}, \hyperpage{64}
+    \subitem {avagadro\-Num}, \hyperpage{65}
+    \subitem {boltz\-Const}, \hyperpage{65}
+    \subitem {complex}, \hyperpage{65}
+    \subitem {e\-Mass}, \hyperpage{65}
+    \subitem {fstruc}, \hyperpage{65}
+    \subitem {hbarc}, \hyperpage{65}
+    \subitem {light\-Speed\-In\-Cm\-Per\-S}, \hyperpage{65}
+    \subitem {matrix\-\_\-c}, \hyperpage{65}
+    \subitem {matrix\-\_\-r}, \hyperpage{65}
+    \subitem {pi}, \hyperpage{65}
+    \subitem {uconv}, \hyperpage{65}
+    \subitem {vector\-\_\-c}, \hyperpage{65}
+    \subitem {vector\-\_\-matrix\-\_\-c}, \hyperpage{65}
+    \subitem {vector\-\_\-matrix\-\_\-r}, \hyperpage{65}
+    \subitem {vector\-\_\-r}, \hyperpage{65}
+  \item {Correct\-Width\-Fluctuations}
+    \subitem {Decayer}, \hyperpage{22}
+  \item {Coul\-Func}, \hyperpage{14}
+    \subitem {Coul\-Func}, \hyperpage{15}
+    \subitem {coul\-Last}, \hyperpage{15}
+    \subitem {Coul\-Func}, \hyperpage{15}
+    \subitem {energy\-Last}, \hyperpage{15}
+    \subitem {G\-S\-L\-Error\-Handler}, \hyperpage{15}
+    \subitem {l\-Last}, \hyperpage{15}
+    \subitem {operator()}, \hyperpage{15}
+    \subitem {P\-E\-Shift}, \hyperpage{15}
+    \subitem {P\-E\-Shift\-\_\-d\-E}, \hyperpage{15}
+    \subitem {Penetrability}, \hyperpage{15}
+    \subitem {radius\-Last}, \hyperpage{15}
+    \subitem {redmass}, \hyperpage{15}
+    \subitem {set\-Last}, \hyperpage{16}
+    \subitem {z1}, \hyperpage{16}
+    \subitem {z2}, \hyperpage{16}
+  \item {Coul\-Func.\-cpp}, \hyperpage{65}
+  \item {Coul\-Func.\-h}, \hyperpage{65}
+  \item {coul\-Func\-\_\-}
+    \subitem {Potential}, \hyperpage{47}
+  \item {coul\-Last}
+    \subitem {Coul\-Func}, \hyperpage{15}
+  \item {Coul\-Waves}, \hyperpage{17}
+    \subitem {d\-F}, \hyperpage{17}
+    \subitem {d\-G}, \hyperpage{17}
+    \subitem {F}, \hyperpage{17}
+    \subitem {G}, \hyperpage{17}
+  \item {Coulomb\-\_\-wave\-\_\-functions}, \hyperpage{16}
+    \subitem {$\sim $\-Coulomb\-\_\-wave\-\_\-functions}, 
+		\hyperpage{16}
+    \subitem {Coulomb\-\_\-wave\-\_\-functions}, \hyperpage{16}
+    \subitem {Coulomb\-\_\-wave\-\_\-functions}, \hyperpage{16}
+    \subitem {eta}, \hyperpage{17}
+    \subitem {F\-\_\-d\-F}, \hyperpage{17}
+    \subitem {F\-\_\-d\-F\-\_\-init}, \hyperpage{17}
+    \subitem {G\-\_\-d\-G}, \hyperpage{17}
+    \subitem {H\-\_\-d\-H}, \hyperpage{17}
+    \subitem {H\-\_\-d\-H\-\_\-scaled}, \hyperpage{17}
+    \subitem {is\-\_\-it\-\_\-normalized}, \hyperpage{17}
+    \subitem {l}, \hyperpage{17}
+  \item {coulomb\-Radius\-\_\-}
+    \subitem {Potential}, \hyperpage{47}
+  \item {Create\-Gamma\-Transmission\-Func}
+    \subitem {Gamma\-Transmission\-Func}, \hyperpage{28}
+  \item {Create\-M\-A\-C\-S\-Energies\-Vector}
+    \subitem {Cross\-Section}, \hyperpage{18}
+  \item {Create\-Particle\-Transmission\-Func}
+    \subitem {Particle\-Transmission\-Func}, \hyperpage{44}
+  \item {Create\-Temp\-Vector}
+    \subitem {Cross\-Section}, \hyperpage{18}
+  \item {critical\-U\-\_\-}
+    \subitem {Level\-Density}, \hyperpage{36}
+  \item {Cross\-Section}, \hyperpage{18}
+    \subitem {Calc\-Average\-D\-Wave\-Res\-Width}, \hyperpage{18}
+    \subitem {Calc\-Average\-P\-Wave\-Res\-Width}, \hyperpage{18}
+    \subitem {Calc\-Average\-S\-Wave\-Res\-Width}, \hyperpage{18}
+    \subitem {Calculate}, \hyperpage{18}
+    \subitem {Calculate\-Reaction\-Rates}, \hyperpage{18}
+    \subitem {Create\-M\-A\-C\-S\-Energies\-Vector}, \hyperpage{18}
+    \subitem {Create\-Temp\-Vector}, \hyperpage{18}
+    \subitem {Cross\-Section}, \hyperpage{18}
+    \subitem {Cross\-Section}, \hyperpage{18}
+    \subitem {Decayer}, \hyperpage{23}
+    \subitem {Is\-Valid}, \hyperpage{18}
+    \subitem {Print\-Cross\-Sections}, \hyperpage{18}
+    \subitem {Print\-Reaction\-Rates}, \hyperpage{18}
+    \subitem {Print\-Transmission\-Terms}, \hyperpage{19}
+    \subitem {Set\-Calculate\-Gamma\-Cutoff}, \hyperpage{19}
+    \subitem {Set\-Residual\-Alpha}, \hyperpage{19}
+    \subitem {Set\-Residual\-Gamma}, \hyperpage{19}
+    \subitem {Set\-Residual\-Neutron}, \hyperpage{19}
+    \subitem {Set\-Residual\-Proton}, \hyperpage{19}
+  \item {Cross\-Section.\-cpp}, \hyperpage{66}
+    \subitem {gsl\-\_\-partfunc\-\_\-integrand}, \hyperpage{66}
+    \subitem {gsl\-\_\-reactionrate\-\_\-integrand}, \hyperpage{66}
+  \item {Cross\-Section.\-h}, \hyperpage{66}
+    \subitem {Decayer\-Vector}, \hyperpage{67}
+    \subitem {int\-\_\-double\-\_\-pair}, \hyperpage{67}
+  \item {Cross\-Section\-Values}, \hyperpage{19}
+    \subitem {alpha\-\_\-}, \hyperpage{19}
+    \subitem {alpha\-Stellar\-\_\-}, \hyperpage{19}
+    \subitem {Cross\-Section\-Values}, \hyperpage{19}
+    \subitem {Cross\-Section\-Values}, \hyperpage{19}
+    \subitem {gamma\-\_\-}, \hyperpage{19}
+    \subitem {gamma\-Stellar\-\_\-}, \hyperpage{19}
+    \subitem {neutron\-\_\-}, \hyperpage{20}
+    \subitem {neutron\-Stellar\-\_\-}, \hyperpage{20}
+    \subitem {proton\-\_\-}, \hyperpage{20}
+    \subitem {proton\-Stellar\-\_\-}, \hyperpage{20}
+  \item {Cumulative\-Sum}
+    \subitem {Pre\-Eq\-Transition\-Rate\-Func}, \hyperpage{50}
+    \subitem {Transition\-Rate\-Func}, \hyperpage{53}
+  \item {cwfcomp.\-cpp}, \hyperpage{67}
+  \item {cwfcomp.\-H}, \hyperpage{67}
+
+  \indexspace
+
+  \item {D\-E\-C}
+    \subitem {C\-Make\-C\-Compiler\-Id.\-c}, \hyperpage{58}
+    \subitem {C\-Make\-C\-X\-X\-Compiler\-Id.\-cpp}, \hyperpage{59}
+  \item {d\-F}
+    \subitem {Coul\-Waves}, \hyperpage{17}
+  \item {d\-G}
+    \subitem {Coul\-Waves}, \hyperpage{17}
+  \item {Decay}
+    \subitem {Decay\-Controller}, \hyperpage{20}
+    \subitem {Decayer}, \hyperpage{22}
+    \subitem {Pre\-Eq\-Decayer}, \hyperpage{48}
+  \item {Decay\-Controller}, \hyperpage{20}
+    \subitem {Decay}, \hyperpage{20}
+    \subitem {Decay\-Controller}, \hyperpage{20}
+    \subitem {Decay\-Products}, \hyperpage{20}
+    \subitem {Decay\-Controller}, \hyperpage{20}
+    \subitem {Print\-Decays}, \hyperpage{20}
+  \item {Decay\-Controller.\-cpp}, \hyperpage{67}
+    \subitem {random\-Seed}, \hyperpage{67}
+  \item {Decay\-Controller.\-h}, \hyperpage{67}
+  \item {Decay\-Data}, \hyperpage{20}
+    \subitem {alpha\-Entrance\-Width}, \hyperpage{21}
+    \subitem {alpha\-Total\-Width}, \hyperpage{21}
+    \subitem {Decay\-Data}, \hyperpage{21}
+    \subitem {Decay\-Data}, \hyperpage{21}
+    \subitem {energy}, \hyperpage{21}
+    \subitem {gamma\-Entrance\-Width}, \hyperpage{21}
+    \subitem {gamma\-Total\-Width}, \hyperpage{21}
+    \subitem {neutron\-Entrance\-Width}, \hyperpage{21}
+    \subitem {neutron\-Total\-Width}, \hyperpage{21}
+    \subitem {proton\-Entrance\-Width}, \hyperpage{21}
+    \subitem {proton\-Total\-Width}, \hyperpage{21}
+  \item {Decay\-Product}, \hyperpage{23}
+    \subitem {A\-\_\-}, \hyperpage{24}
+    \subitem {Decay\-Product}, \hyperpage{24}
+    \subitem {Decay\-Product}, \hyperpage{24}
+    \subitem {excitation\-Energy\-\_\-}, \hyperpage{24}
+    \subitem {fragment\-Energy\-\_\-}, \hyperpage{24}
+    \subitem {fragment\-Energy\-C\-M\-\_\-}, \hyperpage{24}
+    \subitem {fragment\-Momentum\-X\-\_\-}, \hyperpage{24}
+    \subitem {fragment\-Momentum\-Y\-\_\-}, \hyperpage{24}
+    \subitem {fragment\-Momentum\-Z\-\_\-}, \hyperpage{24}
+    \subitem {J\-\_\-}, \hyperpage{24}
+    \subitem {particle\-Energy\-\_\-}, \hyperpage{24}
+    \subitem {particle\-Energy\-C\-M\-\_\-}, \hyperpage{24}
+    \subitem {particle\-Momentum\-X\-\_\-}, \hyperpage{24}
+    \subitem {particle\-Momentum\-Y\-\_\-}, \hyperpage{24}
+    \subitem {particle\-Momentum\-Z\-\_\-}, \hyperpage{24}
+    \subitem {particle\-Phi\-C\-M\-\_\-}, \hyperpage{24}
+    \subitem {particle\-Theta\-C\-M\-\_\-}, \hyperpage{24}
+    \subitem {particle\-Type\-\_\-}, \hyperpage{24}
+    \subitem {Pi\-\_\-}, \hyperpage{24}
+    \subitem {Z\-\_\-}, \hyperpage{24}
+  \item {Decay\-Product.\-h}, \hyperpage{68}
+  \item {Decay\-Products}
+    \subitem {Decay\-Controller}, \hyperpage{20}
+  \item {Decay\-Results}, \hyperpage{25}
+    \subitem {$\sim $\-Decay\-Results}, \hyperpage{25}
+    \subitem {Add\-Results}, \hyperpage{25}
+    \subitem {Decay\-Results}, \hyperpage{25}
+    \subitem {Decay\-Results}, \hyperpage{25}
+  \item {Decay\-Results.\-cpp}, \hyperpage{68}
+  \item {Decay\-Results.\-h}, \hyperpage{69}
+  \item {Decayer}, \hyperpage{21}
+    \subitem {$\sim $\-Decayer}, \hyperpage{22}
+    \subitem {Alpha\-Entrance\-Width}, \hyperpage{22}
+    \subitem {Alpha\-Total\-Width}, \hyperpage{22}
+    \subitem {Correct\-Width\-Fluctuations}, \hyperpage{22}
+    \subitem {Cross\-Section}, \hyperpage{23}
+    \subitem {Decay}, \hyperpage{22}
+    \subitem {Decayer}, \hyperpage{22}
+    \subitem {Gamma\-Entrance\-Width}, \hyperpage{22}
+    \subitem {Gamma\-Total\-Width}, \hyperpage{22}
+    \subitem {Get\-Max\-L}, \hyperpage{22}
+    \subitem {Neutron\-Entrance\-Width}, \hyperpage{22}
+    \subitem {Neutron\-Total\-Width}, \hyperpage{23}
+    \subitem {Print\-C\-D\-F}, \hyperpage{23}
+    \subitem {Print\-Functions}, \hyperpage{23}
+    \subitem {Proton\-Entrance\-Width}, \hyperpage{23}
+    \subitem {Proton\-Total\-Width}, \hyperpage{23}
+    \subitem {Set\-Cross\-Section}, \hyperpage{23}
+    \subitem {Set\-Max\-L}, \hyperpage{23}
+  \item {Decayer.\-cpp}, \hyperpage{68}
+    \subitem {random\-Seed}, \hyperpage{68}
+  \item {Decayer.\-h}, \hyperpage{68}
+  \item {Decayer\-Vector}
+    \subitem {Cross\-Section.\-h}, \hyperpage{67}
+  \item {density}
+    \subitem {gsl\-\_\-partfunc\-\_\-params}, \hyperpage{30}
+
+  \indexspace
+
+  \item {e0\-\_\-}
+    \subitem {Level\-Density}, \hyperpage{36}
+  \item {E\-\_\-}
+    \subitem {G\-D\-R\-Parameters}, \hyperpage{30}
+  \item {E\-L\-E\-M\-E\-N\-T}
+    \subitem {Nuclear\-Mass.\-cpp}, \hyperpage{73}
+  \item {e\-Mass}
+    \subitem {Constants.\-h}, \hyperpage{65}
+  \item {egdr\-Type\-\_\-}
+    \subitem {Gamma\-Transmission\-Func}, \hyperpage{29}
+  \item {egqr\-Type\-\_\-}
+    \subitem {Gamma\-Transmission\-Func}, \hyperpage{29}
+  \item {Element\-Table}
+    \subitem {Nuclear\-Mass.\-h}, \hyperpage{74}
+  \item {elements.\-h}, \hyperpage{69}
+  \item {energy}
+    \subitem {Decay\-Data}, \hyperpage{21}
+  \item {energy\-\_\-}
+    \subitem {C\-D\-F\-Entry}, \hyperpage{14}
+    \subitem {Gamma\-Transition}, \hyperpage{27}
+    \subitem {Level}, \hyperpage{35}
+    \subitem {Pre\-Eq\-C\-D\-F\-Entry}, \hyperpage{47}
+  \item {energy\-Last}
+    \subitem {Coul\-Func}, \hyperpage{15}
+  \item {Entrance\-Pairs}, \hyperpage{25}
+    \subitem {A\-\_\-}, \hyperpage{25}
+    \subitem {Entrance\-Pairs}, \hyperpage{25}
+    \subitem {Entrance\-Pairs}, \hyperpage{25}
+    \subitem {p\-Type\-\_\-}, \hyperpage{25}
+    \subitem {Sapphire.\-cpp}, \hyperpage{78}
+    \subitem {Z\-\_\-}, \hyperpage{25}
+  \item {Equiv\-Square\-Well}, \hyperpage{26}
+    \subitem {$\sim $\-Equiv\-Square\-Well}, \hyperpage{26}
+    \subitem {Calc\-Transmission}, \hyperpage{27}
+    \subitem {Equiv\-Square\-Well}, \hyperpage{26}
+    \subitem {Equiv\-Square\-Well}, \hyperpage{26}
+  \item {Equiv\-Square\-Well.\-cpp}, \hyperpage{69}
+  \item {Equiv\-Square\-Well.\-h}, \hyperpage{69}
+  \item {eta}
+    \subitem {Coulomb\-\_\-wave\-\_\-functions}, \hyperpage{17}
+  \item {eta\-\_\-}
+    \subitem {G\-D\-R\-Parameters}, \hyperpage{30}
+  \item {excitation\-Energy\-\_\-}
+    \subitem {Decay\-Product}, \hyperpage{24}
+  \item {Exclusive\-Branching}
+    \subitem {Transition\-Rate\-Func}, \hyperpage{53}
+  \item {exp\-\_\-\-I\-\_\-omega\-\_\-chi\-\_\-calc}
+    \subitem {complex\-\_\-functions.\-cpp}, \hyperpage{61}
+    \subitem {complex\-\_\-functions.\-H}, \hyperpage{62}
+  \item {exp\-Mass\-\_\-}
+    \subitem {Mass\-Entry}, \hyperpage{38}
+  \item {expm1}
+    \subitem {complex\-\_\-functions.\-cpp}, \hyperpage{61}
+    \subitem {complex\-\_\-functions.\-H}, \hyperpage{62}
+
+  \indexspace
+
+  \item {F}
+    \subitem {Coul\-Waves}, \hyperpage{17}
+  \item {F\-\_\-d\-F}
+    \subitem {Coulomb\-\_\-wave\-\_\-functions}, \hyperpage{17}
+  \item {F\-\_\-d\-F\-\_\-init}
+    \subitem {Coulomb\-\_\-wave\-\_\-functions}, \hyperpage{17}
+  \item {Find\-Element}
+    \subitem {Nuclear\-Mass}, \hyperpage{41}
+  \item {Find\-Levels}
+    \subitem {Nuclear\-Levels}, \hyperpage{40}
+  \item {Find\-Mass}
+    \subitem {Nuclear\-Mass}, \hyperpage{41}
+  \item {Find\-Z}
+    \subitem {Nuclear\-Mass}, \hyperpage{41}
+  \item {Finite\-Depth}
+    \subitem {Particle\-Hole\-Level\-Density}, \hyperpage{43}
+  \item {fragment\-Energy\-\_\-}
+    \subitem {Decay\-Product}, \hyperpage{24}
+  \item {fragment\-Energy\-C\-M\-\_\-}
+    \subitem {Decay\-Product}, \hyperpage{24}
+  \item {fragment\-Momentum\-X\-\_\-}
+    \subitem {Decay\-Product}, \hyperpage{24}
+  \item {fragment\-Momentum\-Y\-\_\-}
+    \subitem {Decay\-Product}, \hyperpage{24}
+  \item {fragment\-Momentum\-Z\-\_\-}
+    \subitem {Decay\-Product}, \hyperpage{24}
+  \item {fstruc}
+    \subitem {Constants.\-h}, \hyperpage{65}
+  \item {Function}
+    \subitem {Transition\-Rate\-Func}, \hyperpage{53}
+
+  \indexspace
+
+  \item {G}
+    \subitem {Coul\-Waves}, \hyperpage{17}
+  \item {G\-\_\-d\-G}
+    \subitem {Coulomb\-\_\-wave\-\_\-functions}, \hyperpage{17}
+  \item {G\-D\-R\-Parameters}, \hyperpage{29}
+    \subitem {E\-\_\-}, \hyperpage{30}
+    \subitem {eta\-\_\-}, \hyperpage{30}
+    \subitem {G\-D\-R\-Parameters}, \hyperpage{30}
+    \subitem {G\-D\-R\-Parameters}, \hyperpage{30}
+    \subitem {k\-Sigma\-Gamma\-\_\-}, \hyperpage{30}
+    \subitem {W\-\_\-}, \hyperpage{30}
+  \item {G\-D\-R\-Table}
+    \subitem {Gamma\-Transmission\-Func.\-h}, \hyperpage{70}
+  \item {g\-Nu}
+    \subitem {Particle\-Hole\-Level\-Density}, \hyperpage{43}
+  \item {g\-Pi}
+    \subitem {Particle\-Hole\-Level\-Density}, \hyperpage{43}
+  \item {G\-S\-L\-Error\-Handler}
+    \subitem {Coul\-Func}, \hyperpage{15}
+  \item {gamma\-\_\-}
+    \subitem {Cross\-Section\-Values}, \hyperpage{19}
+  \item {Gamma\-Entrance\-Width}
+    \subitem {Decayer}, \hyperpage{22}
+  \item {gamma\-Entrance\-Width}
+    \subitem {Decay\-Data}, \hyperpage{21}
+  \item {gamma\-Stellar\-\_\-}
+    \subitem {Cross\-Section\-Values}, \hyperpage{19}
+  \item {Gamma\-Total\-Width}
+    \subitem {Decayer}, \hyperpage{22}
+  \item {gamma\-Total\-Width}
+    \subitem {Decay\-Data}, \hyperpage{21}
+  \item {Gamma\-Transition}, \hyperpage{27}
+    \subitem {energy\-\_\-}, \hyperpage{27}
+    \subitem {Gamma\-Transition}, \hyperpage{27}
+    \subitem {Gamma\-Transition}, \hyperpage{27}
+    \subitem {level\-Index\-\_\-}, \hyperpage{27}
+    \subitem {probability\-\_\-}, \hyperpage{27}
+  \item {Gamma\-Transmission\-Func}, \hyperpage{27}
+    \subitem {$\sim $\-Gamma\-Transmission\-Func}, \hyperpage{28}
+    \subitem {Calc\-Strength\-Function}, \hyperpage{28}
+    \subitem {Create\-Gamma\-Transmission\-Func}, \hyperpage{28}
+    \subitem {egdr\-Type\-\_\-}, \hyperpage{29}
+    \subitem {egqr\-Type\-\_\-}, \hyperpage{29}
+    \subitem {Gamma\-Transmission\-Func}, \hyperpage{28}
+    \subitem {Gamma\-Transmission\-Func}, \hyperpage{28}
+    \subitem {gdr\-Parameters\-\_\-}, \hyperpage{29}
+    \subitem {gdr\-Table\-\_\-}, \hyperpage{29}
+    \subitem {Initialize\-G\-D\-R\-Parameters}, \hyperpage{29}
+    \subitem {Is\-Valid}, \hyperpage{29}
+    \subitem {mgdr\-Type\-\_\-}, \hyperpage{29}
+    \subitem {operator()}, \hyperpage{29}
+    \subitem {porter\-Thomas\-\_\-}, \hyperpage{29}
+    \subitem {Set\-E\-G\-D\-R\-Type}, \hyperpage{29}
+    \subitem {Set\-Porter\-Thomas}, \hyperpage{29}
+  \item {Gamma\-Transmission\-Func.\-cpp}, \hyperpage{69}
+    \subitem {random\-Seed}, \hyperpage{70}
+  \item {Gamma\-Transmission\-Func.\-h}, \hyperpage{70}
+    \subitem {G\-D\-R\-Table}, \hyperpage{70}
+  \item {gammas\-\_\-}
+    \subitem {Level}, \hyperpage{35}
+  \item {gdr\-Parameters\-\_\-}
+    \subitem {Gamma\-Transmission\-Func}, \hyperpage{29}
+  \item {gdr\-Table\-\_\-}
+    \subitem {Gamma\-Transmission\-Func}, \hyperpage{29}
+  \item {Get\-A}
+    \subitem {J\-L\-M\-Potential}, \hyperpage{33}
+  \item {Get\-Boundary\-Radius}
+    \subitem {Potential}, \hyperpage{46}
+  \item {Get\-Gamma\-Cutoff\-Energy}
+    \subitem {Transition\-Rate\-Func}, \hyperpage{53}
+  \item {Get\-Max\-L}
+    \subitem {Decayer}, \hyperpage{22}
+    \subitem {Pre\-Eq\-Decayer}, \hyperpage{48}
+  \item {Get\-R\-Max}
+    \subitem {Potential}, \hyperpage{46}
+  \item {Get\-Red\-Mass}
+    \subitem {Potential}, \hyperpage{46}
+  \item {Get\-Z1\-Z2}
+    \subitem {Potential}, \hyperpage{46}
+  \item {graph}
+    \subitem {gsl\-\_\-reactionrate\-\_\-params}, \hyperpage{31}
+  \item {Ground\-State\-Transmission}
+    \subitem {Transition\-Rate\-Func}, \hyperpage{53}
+  \item {gsl\-\_\-partfunc\-\_\-integrand}
+    \subitem {Cross\-Section.\-cpp}, \hyperpage{66}
+  \item {gsl\-\_\-partfunc\-\_\-params}, \hyperpage{30}
+    \subitem {density}, \hyperpage{30}
+    \subitem {temperature}, \hyperpage{30}
+  \item {gsl\-\_\-reactionrate\-\_\-integrand}
+    \subitem {Cross\-Section.\-cpp}, \hyperpage{66}
+  \item {gsl\-\_\-reactionrate\-\_\-params}, \hyperpage{30}
+    \subitem {graph}, \hyperpage{31}
+    \subitem {temperature}, \hyperpage{31}
+    \subitem {use\-Spline}, \hyperpage{31}
+
+  \indexspace
+
+  \item {H\-\_\-d\-H}
+    \subitem {Coulomb\-\_\-wave\-\_\-functions}, \hyperpage{17}
+  \item {H\-\_\-d\-H\-\_\-scaled}
+    \subitem {Coulomb\-\_\-wave\-\_\-functions}, \hyperpage{17}
+  \item {H\-A\-S\-\_\-\-E\-X\-P\-\_\-\-M\-A\-S\-S}
+    \subitem {Nuclear\-Mass.\-cpp}, \hyperpage{73}
+  \item {H\-A\-S\-\_\-\-T\-H\-\_\-\-M\-A\-S\-S}
+    \subitem {Nuclear\-Mass.\-cpp}, \hyperpage{73}
+  \item {H\-E\-X}
+    \subitem {C\-Make\-C\-Compiler\-Id.\-c}, \hyperpage{58}
+    \subitem {C\-Make\-C\-X\-X\-Compiler\-Id.\-cpp}, \hyperpage{59}
+  \item {hbarc}
+    \subitem {Constants.\-h}, \hyperpage{65}
+  \item {high\-Energy}
+    \subitem {Initial\-Nucleus\-Data}, \hyperpage{32}
+  \item {Highest\-Bound\-Energy}
+    \subitem {Nuclear\-Mass}, \hyperpage{41}
+
+  \indexspace
+
+  \item {inf\-\_\-norm}
+    \subitem {complex\-\_\-functions.\-H}, \hyperpage{62}
+  \item {info\-\_\-arch}
+    \subitem {C\-Make\-C\-Compiler\-Id.\-c}, \hyperpage{58}
+    \subitem {C\-Make\-C\-X\-X\-Compiler\-Id.\-cpp}, \hyperpage{60}
+  \item {info\-\_\-compiler}
+    \subitem {C\-Make\-C\-Compiler\-Id.\-c}, \hyperpage{58}
+    \subitem {C\-Make\-C\-X\-X\-Compiler\-Id.\-cpp}, \hyperpage{60}
+  \item {info\-\_\-language\-\_\-dialect\-\_\-default}
+    \subitem {C\-Make\-C\-Compiler\-Id.\-c}, \hyperpage{58}
+    \subitem {C\-Make\-C\-X\-X\-Compiler\-Id.\-cpp}, \hyperpage{60}
+  \item {info\-\_\-platform}
+    \subitem {C\-Make\-C\-Compiler\-Id.\-c}, \hyperpage{58}
+    \subitem {C\-Make\-C\-X\-X\-Compiler\-Id.\-cpp}, \hyperpage{60}
+  \item {Initial\-Nucleus\-Data}, \hyperpage{31}
+    \subitem {A}, \hyperpage{32}
+    \subitem {boost\-::serialization\-::access}, \hyperpage{32}
+    \subitem {high\-Energy}, \hyperpage{32}
+    \subitem {Initial\-Nucleus\-Data}, \hyperpage{32}
+    \subitem {Initial\-Nucleus\-Data}, \hyperpage{32}
+    \subitem {J}, \hyperpage{32}
+    \subitem {low\-Energy}, \hyperpage{32}
+    \subitem {Pi}, \hyperpage{32}
+    \subitem {pre\-Eq}, \hyperpage{32}
+    \subitem {Z}, \hyperpage{32}
+  \item {Initialize}
+    \subitem {Sapphire.\-cpp}, \hyperpage{78}
+    \subitem {Setup.\-cpp}, \hyperpage{80}
+  \item {Initialize\-Elements}
+    \subitem {Nuclear\-Mass}, \hyperpage{41}
+  \item {Initialize\-G\-D\-R\-Parameters}
+    \subitem {Gamma\-Transmission\-Func}, \hyperpage{29}
+  \item {Initialize\-Levels}
+    \subitem {Nuclear\-Levels}, \hyperpage{40}
+  \item {Initialize\-Masses}
+    \subitem {Nuclear\-Mass}, \hyperpage{41}
+  \item {int\-\_\-double\-\_\-pair}
+    \subitem {Cross\-Section.\-h}, \hyperpage{67}
+  \item {int\-\_\-double\-\_\-pair\-\_\-compare}, \hyperpage{32}
+    \subitem {operator()}, \hyperpage{32}
+  \item {Integral}
+    \subitem {Pre\-Eq\-Transition\-Rate\-Func}, \hyperpage{50}
+    \subitem {Transition\-Rate\-Func}, \hyperpage{53}
+  \item {integral\-\_\-}
+    \subitem {Pre\-Eq\-Spin\-Rate\-Pair}, \hyperpage{49}
+    \subitem {Spin\-Rate\-Pair}, \hyperpage{52}
+  \item {is\-\_\-it\-\_\-normalized}
+    \subitem {Coulomb\-\_\-wave\-\_\-functions}, \hyperpage{17}
+  \item {Is\-Valid}
+    \subitem {Cross\-Section}, \hyperpage{18}
+    \subitem {Gamma\-Transmission\-Func}, \hyperpage{29}
+    \subitem {Particle\-Transmission\-Func}, \hyperpage{44}
+    \subitem {Transmission\-Func}, \hyperpage{54}
+  \item {isfinite}
+    \subitem {complex\-\_\-functions.\-H}, \hyperpage{62}
+
+  \indexspace
+
+  \item {J}
+    \subitem {Initial\-Nucleus\-Data}, \hyperpage{32}
+  \item {J\-\_\-}
+    \subitem {Decay\-Product}, \hyperpage{24}
+    \subitem {Level}, \hyperpage{35}
+    \subitem {Level\-Density}, \hyperpage{36}
+  \item {j\-Final\-\_\-}
+    \subitem {Transmission\-Func}, \hyperpage{55}
+  \item {j\-Initial\-\_\-}
+    \subitem {Transmission\-Func}, \hyperpage{55}
+  \item {J\-L\-M\-Potential}, \hyperpage{32}
+    \subitem {Calculate}, \hyperpage{33}
+    \subitem {Calculate\-Density}, \hyperpage{33}
+    \subitem {Get\-A}, \hyperpage{33}
+    \subitem {J\-L\-M\-Potential}, \hyperpage{33}
+    \subitem {J\-L\-M\-Potential}, \hyperpage{33}
+  \item {J\-L\-M\-Potential.\-cpp}, \hyperpage{70}
+  \item {J\-L\-M\-Potential.\-h}, \hyperpage{70}
+
+  \indexspace
+
+  \item {k\-Sigma\-Gamma\-\_\-}
+    \subitem {G\-D\-R\-Parameters}, \hyperpage{30}
+  \item {Kopecky\-Uhl\-G\-S\-F}, \hyperpage{33}
+    \subitem {Calc\-Strength\-Function}, \hyperpage{34}
+    \subitem {Kopecky\-Uhl\-G\-S\-F}, \hyperpage{34}
+    \subitem {Kopecky\-Uhl\-G\-S\-F}, \hyperpage{34}
+    \subitem {Level\-Density}, \hyperpage{36}
+  \item {Kopecky\-Uhl\-G\-S\-F.\-cpp}, \hyperpage{71}
+  \item {Kopecky\-Uhl\-G\-S\-F.\-h}, \hyperpage{71}
+
+  \indexspace
+
+  \item {l}
+    \subitem {Coulomb\-\_\-wave\-\_\-functions}, \hyperpage{17}
+  \item {l\-\_\-}
+    \subitem {S\-L\-Pair}, \hyperpage{51}
+  \item {l\-Last}
+    \subitem {Coul\-Func}, \hyperpage{15}
+  \item {Level}, \hyperpage{34}
+    \subitem {energy\-\_\-}, \hyperpage{35}
+    \subitem {gammas\-\_\-}, \hyperpage{35}
+    \subitem {J\-\_\-}, \hyperpage{35}
+    \subitem {Level}, \hyperpage{35}
+    \subitem {Pi\-\_\-}, \hyperpage{35}
+  \item {Level\-Density}, \hyperpage{35}
+    \subitem {$\sim $\-Level\-Density}, \hyperpage{36}
+    \subitem {A\-\_\-}, \hyperpage{36}
+    \subitem {backshift\-\_\-}, \hyperpage{36}
+    \subitem {Calc\-Back\-Shift}, \hyperpage{36}
+    \subitem {Calc\-Constant\-Temp\-Terms}, \hyperpage{36}
+    \subitem {Calc\-Density\-Param}, \hyperpage{36}
+    \subitem {Calc\-Nuclear\-Temp}, \hyperpage{36}
+    \subitem {const\-Ang\-Term\-\_\-}, \hyperpage{36}
+    \subitem {critical\-U\-\_\-}, \hyperpage{36}
+    \subitem {e0\-\_\-}, \hyperpage{36}
+    \subitem {J\-\_\-}, \hyperpage{36}
+    \subitem {Kopecky\-Uhl\-G\-S\-F}, \hyperpage{36}
+    \subitem {Level\-Density}, \hyperpage{36}
+    \subitem {Level\-Density}, \hyperpage{36}
+    \subitem {nuclear\-Temp\-\_\-}, \hyperpage{36}
+    \subitem {operator()}, \hyperpage{36}
+    \subitem {r0\-\_\-}, \hyperpage{37}
+    \subitem {Total\-Level\-Density}, \hyperpage{36}
+    \subitem {Z\-\_\-}, \hyperpage{37}
+    \subitem {zeta\-\_\-}, \hyperpage{37}
+  \item {Level\-Density.\-cpp}, \hyperpage{71}
+  \item {Level\-Density.\-h}, \hyperpage{71}
+  \item {level\-Index\-\_\-}
+    \subitem {Gamma\-Transition}, \hyperpage{27}
+  \item {levels\-\_\-}
+    \subitem {Levels\-Container}, \hyperpage{37}
+  \item {Levels\-Container}, \hyperpage{37}
+    \subitem {levels\-\_\-}, \hyperpage{37}
+    \subitem {Levels\-Container}, \hyperpage{37}
+    \subitem {Levels\-Container}, \hyperpage{37}
+  \item {Levels\-Table}
+    \subitem {Nuclear\-Levels.\-h}, \hyperpage{72}
+  \item {light\-Speed\-In\-Cm\-Per\-S}
+    \subitem {Constants.\-h}, \hyperpage{65}
+  \item {log1p}
+    \subitem {complex\-\_\-functions.\-cpp}, \hyperpage{61}
+    \subitem {complex\-\_\-functions.\-H}, \hyperpage{62}
+  \item {log\-\_\-\-Cl\-\_\-eta\-\_\-calc}
+    \subitem {complex\-\_\-functions.\-cpp}, \hyperpage{61}
+    \subitem {complex\-\_\-functions.\-H}, \hyperpage{63}
+  \item {log\-\_\-\-Gamma}
+    \subitem {complex\-\_\-functions.\-cpp}, \hyperpage{61}
+    \subitem {complex\-\_\-functions.\-H}, \hyperpage{63}
+  \item {log\-\_\-cut\-\_\-constant\-\_\-\-A\-S\-\_\-calc}
+    \subitem {complex\-\_\-functions.\-cpp}, \hyperpage{61}
+    \subitem {complex\-\_\-functions.\-H}, \hyperpage{63}
+  \item {log\-\_\-cut\-\_\-constant\-\_\-\-C\-Fa\-\_\-calc}
+    \subitem {complex\-\_\-functions.\-cpp}, \hyperpage{61}
+    \subitem {complex\-\_\-functions.\-H}, \hyperpage{63}
+  \item {log\-\_\-cut\-\_\-constant\-\_\-\-C\-Fb\-\_\-calc}
+    \subitem {complex\-\_\-functions.\-cpp}, \hyperpage{61}
+    \subitem {complex\-\_\-functions.\-H}, \hyperpage{63}
+  \item {low\-Energy}
+    \subitem {Initial\-Nucleus\-Data}, \hyperpage{32}
+
+  \indexspace
+
+  \item {m1\-\_\-}
+    \subitem {Particle\-Transmission\-Func}, \hyperpage{45}
+  \item {m2\-\_\-}
+    \subitem {Transmission\-Func}, \hyperpage{55}
+  \item {main}
+    \subitem {C\-Make\-C\-Compiler\-Id.\-c}, \hyperpage{58}
+    \subitem {C\-Make\-C\-X\-X\-Compiler\-Id.\-cpp}, \hyperpage{60}
+    \subitem {Sapphire.\-cpp}, \hyperpage{78}
+  \item {mask\-\_\-}
+    \subitem {Mass\-Entry}, \hyperpage{38}
+  \item {Mass\-Difference}
+    \subitem {Nuclear\-Mass}, \hyperpage{41}
+  \item {Mass\-Entry}, \hyperpage{37}
+    \subitem {exp\-Mass\-\_\-}, \hyperpage{38}
+    \subitem {mask\-\_\-}, \hyperpage{38}
+    \subitem {Mass\-Entry}, \hyperpage{38}
+    \subitem {Mass\-Entry}, \hyperpage{38}
+    \subitem {micro\-Energy\-Corr\-\_\-}, \hyperpage{38}
+    \subitem {th\-Mass\-\_\-}, \hyperpage{38}
+  \item {Mass\-Key}, \hyperpage{38}
+    \subitem {A\-\_\-}, \hyperpage{38}
+    \subitem {Mass\-Key}, \hyperpage{38}
+    \subitem {Mass\-Key}, \hyperpage{38}
+    \subitem {operator$<$}, \hyperpage{38}
+    \subitem {Z\-\_\-}, \hyperpage{39}
+  \item {Mass\-Table}
+    \subitem {Nuclear\-Mass.\-h}, \hyperpage{74}
+  \item {matrix\-\_\-c}
+    \subitem {Constants.\-h}, \hyperpage{65}
+  \item {matrix\-\_\-r}
+    \subitem {Constants.\-h}, \hyperpage{65}
+  \item {max\-L\-\_\-}
+    \subitem {Transmission\-Func}, \hyperpage{55}
+  \item {Mc\-Cullagh\-G\-S\-F}, \hyperpage{39}
+    \subitem {Calc\-Strength\-Function}, \hyperpage{39}
+    \subitem {Mc\-Cullagh\-G\-S\-F}, \hyperpage{39}
+    \subitem {Mc\-Cullagh\-G\-S\-F}, \hyperpage{39}
+  \item {Mc\-Cullagh\-G\-S\-F.\-cpp}, \hyperpage{71}
+  \item {Mc\-Cullagh\-G\-S\-F.\-h}, \hyperpage{71}
+  \item {Mc\-Fadden\-Satchler\-Potential}, \hyperpage{39}
+    \subitem {Calculate}, \hyperpage{40}
+    \subitem {Mc\-Fadden\-Satchler\-Potential}, \hyperpage{40}
+    \subitem {Mc\-Fadden\-Satchler\-Potential}, \hyperpage{40}
+  \item {Mc\-Fadden\-Satchler\-Potential.\-cpp}, \hyperpage{71}
+  \item {Mc\-Fadden\-Satchler\-Potential.\-h}, \hyperpage{72}
+  \item {mgdr\-Type\-\_\-}
+    \subitem {Gamma\-Transmission\-Func}, \hyperpage{29}
+  \item {Micro\-Energy\-Corr}
+    \subitem {Nuclear\-Mass}, \hyperpage{41}
+  \item {micro\-Energy\-Corr\-\_\-}
+    \subitem {Mass\-Entry}, \hyperpage{38}
+
+  \indexspace
+
+  \item {neutron\-\_\-}
+    \subitem {Cross\-Section\-Values}, \hyperpage{20}
+  \item {Neutron\-Entrance\-Width}
+    \subitem {Decayer}, \hyperpage{22}
+  \item {neutron\-Entrance\-Width}
+    \subitem {Decay\-Data}, \hyperpage{21}
+  \item {neutron\-Hole\-Number\-\_\-}
+    \subitem {Pre\-Eq\-Spin\-Rate\-Pair}, \hyperpage{49}
+  \item {neutron\-Number\-\_\-}
+    \subitem {Pre\-Eq\-Spin\-Rate\-Pair}, \hyperpage{49}
+  \item {Neutron\-Pairing\-Gap}
+    \subitem {Nuclear\-Mass}, \hyperpage{41}
+  \item {neutron\-Stellar\-\_\-}
+    \subitem {Cross\-Section\-Values}, \hyperpage{20}
+  \item {Neutron\-Total\-Width}
+    \subitem {Decayer}, \hyperpage{23}
+  \item {neutron\-Total\-Width}
+    \subitem {Decay\-Data}, \hyperpage{21}
+  \item {Normalize\-Internally}
+    \subitem {Potential}, \hyperpage{46}
+  \item {Normalize\-Over\-All\-Space}
+    \subitem {Potential}, \hyperpage{46}
+  \item {Nuclear\-Levels}, \hyperpage{40}
+    \subitem {Find\-Levels}, \hyperpage{40}
+    \subitem {Initialize\-Levels}, \hyperpage{40}
+    \subitem {Print\-Levels}, \hyperpage{40}
+  \item {Nuclear\-Levels.\-cpp}, \hyperpage{72}
+  \item {Nuclear\-Levels.\-h}, \hyperpage{72}
+    \subitem {Levels\-Table}, \hyperpage{72}
+  \item {Nuclear\-Mass}, \hyperpage{41}
+    \subitem {Calculate\-L\-D\-M\-Mass}, \hyperpage{41}
+    \subitem {Find\-Element}, \hyperpage{41}
+    \subitem {Find\-Mass}, \hyperpage{41}
+    \subitem {Find\-Z}, \hyperpage{41}
+    \subitem {Highest\-Bound\-Energy}, \hyperpage{41}
+    \subitem {Initialize\-Elements}, \hyperpage{41}
+    \subitem {Initialize\-Masses}, \hyperpage{41}
+    \subitem {Mass\-Difference}, \hyperpage{41}
+    \subitem {Micro\-Energy\-Corr}, \hyperpage{41}
+    \subitem {Neutron\-Pairing\-Gap}, \hyperpage{41}
+    \subitem {Proton\-Pairing\-Gap}, \hyperpage{41}
+    \subitem {Q\-Value}, \hyperpage{41}
+  \item {Nuclear\-Mass.\-cpp}, \hyperpage{72}
+    \subitem {E\-L\-E\-M\-E\-N\-T}, \hyperpage{73}
+    \subitem {H\-A\-S\-\_\-\-E\-X\-P\-\_\-\-M\-A\-S\-S}, \hyperpage{73}
+    \subitem {H\-A\-S\-\_\-\-T\-H\-\_\-\-M\-A\-S\-S}, \hyperpage{73}
+  \item {Nuclear\-Mass.\-h}, \hyperpage{73}
+    \subitem {Element\-Table}, \hyperpage{74}
+    \subitem {Mass\-Table}, \hyperpage{74}
+  \item {nuclear\-Temp\-\_\-}
+    \subitem {Level\-Density}, \hyperpage{36}
+
+  \indexspace
+
+  \item {O\-D\-E\-\_\-integration}, \hyperpage{42}
+    \subitem {O\-D\-E\-\_\-integration}, \hyperpage{42}
+    \subitem {O\-D\-E\-\_\-integration}, \hyperpage{42}
+    \subitem {operator()}, \hyperpage{42}
+  \item {ode\-\_\-int.\-cpp}, \hyperpage{74}
+  \item {ode\-\_\-int.\-H}, \hyperpage{74}
+  \item {operator$<$}
+    \subitem {Mass\-Key}, \hyperpage{38}
+    \subitem {S\-L\-Pair}, \hyperpage{51}
+  \item {operator$\ast $}
+    \subitem {complex\-\_\-functions.\-H}, \hyperpage{63}
+  \item {operator()}
+    \subitem {Coul\-Func}, \hyperpage{15}
+    \subitem {Gamma\-Transmission\-Func}, \hyperpage{29}
+    \subitem {int\-\_\-double\-\_\-pair\-\_\-compare}, \hyperpage{32}
+    \subitem {Level\-Density}, \hyperpage{36}
+    \subitem {O\-D\-E\-\_\-integration}, \hyperpage{42}
+    \subitem {Particle\-Hole\-Level\-Density}, \hyperpage{43}
+    \subitem {Particle\-Transmission\-Func}, \hyperpage{44}
+    \subitem {std\-::equal\-\_\-to$<$ Mass\-Key $>$}, \hyperpage{26}
+    \subitem {std\-::tr1\-::hash$<$ Mass\-Key $>$}, \hyperpage{31}
+    \subitem {Transmission\-Func}, \hyperpage{54}
+  \item {operator+}
+    \subitem {complex\-\_\-functions.\-H}, \hyperpage{63}
+  \item {operator-\/}
+    \subitem {complex\-\_\-functions.\-H}, \hyperpage{63}
+  \item {operator/}
+    \subitem {complex\-\_\-functions.\-H}, \hyperpage{63}
+  \item {operator==}
+    \subitem {complex\-\_\-functions.\-H}, \hyperpage{63, 64}
+
+  \indexspace
+
+  \item {P\-E\-Shift}
+    \subitem {Coul\-Func}, \hyperpage{15}
+  \item {P\-E\-Shift\-\_\-d\-E}
+    \subitem {Coul\-Func}, \hyperpage{15}
+  \item {P\-L\-A\-T\-F\-O\-R\-M\-\_\-\-I\-D}
+    \subitem {C\-Make\-C\-Compiler\-Id.\-c}, \hyperpage{58}
+    \subitem {C\-Make\-C\-X\-X\-Compiler\-Id.\-cpp}, \hyperpage{59}
+  \item {p\-Type\-\_\-}
+    \subitem {Entrance\-Pairs}, \hyperpage{25}
+    \subitem {Particle\-Transmission\-Func}, \hyperpage{45}
+  \item {pair\-Index\-\_\-}
+    \subitem {C\-D\-F\-Entry}, \hyperpage{14}
+    \subitem {Pre\-Eq\-C\-D\-F\-Entry}, \hyperpage{47}
+  \item {Pairing\-Correction}
+    \subitem {Particle\-Hole\-Level\-Density}, \hyperpage{43}
+  \item {parity\-\_\-}
+    \subitem {Particle\-Transmission\-Func}, \hyperpage{45}
+    \subitem {Pre\-Eq\-Spin\-Rate\-Pair}, \hyperpage{49}
+    \subitem {Spin\-Rate\-Pair}, \hyperpage{52}
+  \item {parse\-Command\-Line\-For\-Decay}
+    \subitem {Sapphire.\-cpp}, \hyperpage{78}
+  \item {parse\-Command\-Line\-For\-Options}
+    \subitem {Sapphire.\-cpp}, \hyperpage{78}
+  \item {parse\-Command\-Line\-For\-X\-S}
+    \subitem {Sapphire.\-cpp}, \hyperpage{78}
+  \item {particle\-Energy\-\_\-}
+    \subitem {Decay\-Product}, \hyperpage{24}
+  \item {particle\-Energy\-C\-M\-\_\-}
+    \subitem {Decay\-Product}, \hyperpage{24}
+  \item {Particle\-Hole\-Level\-Density}, \hyperpage{42}
+    \subitem {Finite\-Depth}, \hyperpage{43}
+    \subitem {g\-Nu}, \hyperpage{43}
+    \subitem {g\-Pi}, \hyperpage{43}
+    \subitem {operator()}, \hyperpage{43}
+    \subitem {Pairing\-Correction}, \hyperpage{43}
+    \subitem {Particle\-Hole\-Level\-Density}, \hyperpage{43}
+    \subitem {Particle\-Hole\-Level\-Density}, \hyperpage{43}
+    \subitem {Pauli\-Correction}, \hyperpage{43}
+  \item {Particle\-Hole\-Level\-Density.\-cpp}, \hyperpage{74}
+  \item {Particle\-Hole\-Level\-Density.\-h}, \hyperpage{74}
+  \item {particle\-Momentum\-X\-\_\-}
+    \subitem {Decay\-Product}, \hyperpage{24}
+  \item {particle\-Momentum\-Y\-\_\-}
+    \subitem {Decay\-Product}, \hyperpage{24}
+  \item {particle\-Momentum\-Z\-\_\-}
+    \subitem {Decay\-Product}, \hyperpage{24}
+  \item {particle\-Phi\-C\-M\-\_\-}
+    \subitem {Decay\-Product}, \hyperpage{24}
+  \item {particle\-Theta\-C\-M\-\_\-}
+    \subitem {Decay\-Product}, \hyperpage{24}
+  \item {Particle\-Transmission\-Func}, \hyperpage{43}
+    \subitem {$\sim $\-Particle\-Transmission\-Func}, \hyperpage{44}
+    \subitem {Calc\-S\-L\-Dependent\-Functions}, \hyperpage{44}
+    \subitem {Calc\-Transmission}, \hyperpage{44}
+    \subitem {Create\-Particle\-Transmission\-Func}, \hyperpage{44}
+    \subitem {Is\-Valid}, \hyperpage{44}
+    \subitem {m1\-\_\-}, \hyperpage{45}
+    \subitem {operator()}, \hyperpage{44}
+    \subitem {p\-Type\-\_\-}, \hyperpage{45}
+    \subitem {parity\-\_\-}, \hyperpage{45}
+    \subitem {Particle\-Transmission\-Func}, \hyperpage{44}
+    \subitem {Particle\-Transmission\-Func}, \hyperpage{44}
+    \subitem {redmass\-\_\-}, \hyperpage{45}
+    \subitem {Set\-Alpha\-Formalism}, \hyperpage{45}
+    \subitem {Set\-Neutron\-Formalism}, \hyperpage{45}
+    \subitem {Set\-Porter\-Thomas}, \hyperpage{45}
+    \subitem {Set\-Proton\-Formalism}, \hyperpage{45}
+    \subitem {spin\-\_\-}, \hyperpage{45}
+    \subitem {z1\-\_\-}, \hyperpage{45}
+  \item {Particle\-Transmission\-Func.\-cpp}, \hyperpage{74}
+    \subitem {random\-Seed}, \hyperpage{75}
+  \item {Particle\-Transmission\-Func.\-h}, \hyperpage{75}
+  \item {particle\-Type\-\_\-}
+    \subitem {Decay\-Product}, \hyperpage{24}
+  \item {Pauli\-Correction}
+    \subitem {Particle\-Hole\-Level\-Density}, \hyperpage{43}
+  \item {Penetrability}
+    \subitem {Coul\-Func}, \hyperpage{15}
+  \item {Pi}
+    \subitem {Initial\-Nucleus\-Data}, \hyperpage{32}
+  \item {pi}
+    \subitem {Constants.\-h}, \hyperpage{65}
+  \item {Pi\-\_\-}
+    \subitem {Decay\-Product}, \hyperpage{24}
+    \subitem {Level}, \hyperpage{35}
+  \item {pi\-Final\-\_\-}
+    \subitem {Transmission\-Func}, \hyperpage{55}
+  \item {pi\-Initial\-\_\-}
+    \subitem {Transmission\-Func}, \hyperpage{55}
+  \item {porter\-Thomas\-\_\-}
+    \subitem {Gamma\-Transmission\-Func}, \hyperpage{29}
+  \item {Potential}, \hyperpage{45}
+    \subitem {$\sim $\-Potential}, \hyperpage{46}
+    \subitem {boundary\-Radius\-\_\-}, \hyperpage{47}
+    \subitem {Calc\-Beta}, \hyperpage{46}
+    \subitem {Calc\-Transmission}, \hyperpage{46}
+    \subitem {Calculate}, \hyperpage{46}
+    \subitem {coul\-Func\-\_\-}, \hyperpage{47}
+    \subitem {coulomb\-Radius\-\_\-}, \hyperpage{47}
+    \subitem {Get\-Boundary\-Radius}, \hyperpage{46}
+    \subitem {Get\-R\-Max}, \hyperpage{46}
+    \subitem {Get\-Red\-Mass}, \hyperpage{46}
+    \subitem {Get\-Z1\-Z2}, \hyperpage{46}
+    \subitem {Normalize\-Internally}, \hyperpage{46}
+    \subitem {Normalize\-Over\-All\-Space}, \hyperpage{46}
+    \subitem {Potential}, \hyperpage{46}
+    \subitem {Solve}, \hyperpage{46}
+  \item {Potential.\-cpp}, \hyperpage{75}
+  \item {Potential.\-h}, \hyperpage{75}
+  \item {pre\-Eq}
+    \subitem {Initial\-Nucleus\-Data}, \hyperpage{32}
+  \item {Pre\-Eq\-C\-D\-F\-Entry}, \hyperpage{47}
+    \subitem {energy\-\_\-}, \hyperpage{47}
+    \subitem {pair\-Index\-\_\-}, \hyperpage{47}
+    \subitem {Pre\-Eq\-C\-D\-F\-Entry}, \hyperpage{47}
+    \subitem {Pre\-Eq\-C\-D\-F\-Entry}, \hyperpage{47}
+    \subitem {value\-\_\-}, \hyperpage{47}
+  \item {Pre\-Eq\-Decayer}, \hyperpage{47}
+    \subitem {$\sim $\-Pre\-Eq\-Decayer}, \hyperpage{48}
+    \subitem {Decay}, \hyperpage{48}
+    \subitem {Get\-Max\-L}, \hyperpage{48}
+    \subitem {Pre\-Eq\-Decayer}, \hyperpage{48}
+    \subitem {Pre\-Eq\-Decayer}, \hyperpage{48}
+    \subitem {Print\-C\-D\-F}, \hyperpage{48}
+    \subitem {Set\-Cross\-Section}, \hyperpage{48}
+    \subitem {Set\-Max\-L}, \hyperpage{48}
+  \item {Pre\-Eq\-Decayer.\-cpp}, \hyperpage{75}
+    \subitem {random\-Seed}, \hyperpage{76}
+  \item {Pre\-Eq\-Decayer.\-h}, \hyperpage{76}
+  \item {Pre\-Eq\-Spin\-Rate\-Pair}, \hyperpage{48}
+    \subitem {A\-\_\-}, \hyperpage{49}
+    \subitem {integral\-\_\-}, \hyperpage{49}
+    \subitem {neutron\-Hole\-Number\-\_\-}, \hyperpage{49}
+    \subitem {neutron\-Number\-\_\-}, \hyperpage{49}
+    \subitem {parity\-\_\-}, \hyperpage{49}
+    \subitem {Pre\-Eq\-Spin\-Rate\-Pair}, \hyperpage{49}
+    \subitem {Pre\-Eq\-Spin\-Rate\-Pair}, \hyperpage{49}
+    \subitem {proton\-Hole\-Number\-\_\-}, \hyperpage{49}
+    \subitem {proton\-Number\-\_\-}, \hyperpage{49}
+    \subitem {q\-Value\-\_\-}, \hyperpage{49}
+    \subitem {rate\-Func\-\_\-}, \hyperpage{49}
+    \subitem {spin\-\_\-}, \hyperpage{49}
+    \subitem {Z\-\_\-}, \hyperpage{49}
+  \item {Pre\-Eq\-Transition\-Rate\-Func}, \hyperpage{49}
+    \subitem {$\sim $\-Pre\-Eq\-Transition\-Rate\-Func}, \hyperpage{50}
+    \subitem {Cumulative\-Sum}, \hyperpage{50}
+    \subitem {Integral}, \hyperpage{50}
+    \subitem {Pre\-Eq\-Transition\-Rate\-Func}, \hyperpage{50}
+    \subitem {Pre\-Eq\-Transition\-Rate\-Func}, \hyperpage{50}
+  \item {Pre\-Eq\-Transition\-Rate\-Func.\-cpp}, \hyperpage{76}
+  \item {Pre\-Eq\-Transition\-Rate\-Func.\-h}, \hyperpage{76}
+  \item {precision}
+    \subitem {complex\-\_\-functions.\-H}, \hyperpage{64}
+  \item {previous\-\_\-}
+    \subitem {Transmission\-Func}, \hyperpage{55}
+  \item {Print\-C\-D\-F}
+    \subitem {Decayer}, \hyperpage{23}
+    \subitem {Pre\-Eq\-Decayer}, \hyperpage{48}
+  \item {Print\-Cross\-Sections}
+    \subitem {Cross\-Section}, \hyperpage{18}
+  \item {Print\-Decays}
+    \subitem {Decay\-Controller}, \hyperpage{20}
+  \item {Print\-Functions}
+    \subitem {Decayer}, \hyperpage{23}
+  \item {print\-Help}
+    \subitem {Sapphire.\-cpp}, \hyperpage{78}
+  \item {Print\-Levels}
+    \subitem {Nuclear\-Levels}, \hyperpage{40}
+  \item {Print\-Reaction\-Rates}
+    \subitem {Cross\-Section}, \hyperpage{18}
+  \item {Print\-Transmission\-Terms}
+    \subitem {Cross\-Section}, \hyperpage{19}
+  \item {probability\-\_\-}
+    \subitem {Gamma\-Transition}, \hyperpage{27}
+  \item {proton\-\_\-}
+    \subitem {Cross\-Section\-Values}, \hyperpage{20}
+  \item {Proton\-Entrance\-Width}
+    \subitem {Decayer}, \hyperpage{23}
+  \item {proton\-Entrance\-Width}
+    \subitem {Decay\-Data}, \hyperpage{21}
+  \item {proton\-Hole\-Number\-\_\-}
+    \subitem {Pre\-Eq\-Spin\-Rate\-Pair}, \hyperpage{49}
+  \item {proton\-Number\-\_\-}
+    \subitem {Pre\-Eq\-Spin\-Rate\-Pair}, \hyperpage{49}
+  \item {Proton\-Pairing\-Gap}
+    \subitem {Nuclear\-Mass}, \hyperpage{41}
+  \item {proton\-Stellar\-\_\-}
+    \subitem {Cross\-Section\-Values}, \hyperpage{20}
+  \item {Proton\-Total\-Width}
+    \subitem {Decayer}, \hyperpage{23}
+  \item {proton\-Total\-Width}
+    \subitem {Decay\-Data}, \hyperpage{21}
+
+  \indexspace
+
+  \item {Q\-Value}
+    \subitem {Nuclear\-Mass}, \hyperpage{41}
+  \item {q\-Value\-\_\-}
+    \subitem {Pre\-Eq\-Spin\-Rate\-Pair}, \hyperpage{49}
+    \subitem {Spin\-Rate\-Pair}, \hyperpage{52}
+
+  \indexspace
+
+  \item {r0\-\_\-}
+    \subitem {Level\-Density}, \hyperpage{37}
+  \item {R\-E\-A\-D\-M\-E.\-md}, \hyperpage{77}
+  \item {radius\-Last}
+    \subitem {Coul\-Func}, \hyperpage{15}
+  \item {random\-Seed}
+    \subitem {Decay\-Controller.\-cpp}, \hyperpage{67}
+    \subitem {Decayer.\-cpp}, \hyperpage{68}
+    \subitem {Gamma\-Transmission\-Func.\-cpp}, \hyperpage{70}
+    \subitem {Particle\-Transmission\-Func.\-cpp}, \hyperpage{75}
+    \subitem {Pre\-Eq\-Decayer.\-cpp}, \hyperpage{76}
+    \subitem {Sapphire.\-cpp}, \hyperpage{78}
+  \item {rate\-Func\-\_\-}
+    \subitem {Pre\-Eq\-Spin\-Rate\-Pair}, \hyperpage{49}
+    \subitem {Spin\-Rate\-Pair}, \hyperpage{52}
+  \item {Rauscher\-Level\-Density}, \hyperpage{50}
+    \subitem {$\sim $\-Rauscher\-Level\-Density}, \hyperpage{51}
+    \subitem {Calc\-Back\-Shift}, \hyperpage{51}
+    \subitem {Calc\-Density\-Param}, \hyperpage{51}
+    \subitem {Calc\-Nuclear\-Temp}, \hyperpage{51}
+    \subitem {Rauscher\-Level\-Density}, \hyperpage{50}
+    \subitem {Rauscher\-Level\-Density}, \hyperpage{50}
+  \item {Rauscher\-Level\-Density.\-cpp}, \hyperpage{77}
+  \item {Rauscher\-Level\-Density.\-h}, \hyperpage{77}
+  \item {redmass}
+    \subitem {Coul\-Func}, \hyperpage{15}
+  \item {redmass\-\_\-}
+    \subitem {Particle\-Transmission\-Func}, \hyperpage{45}
+
+  \indexspace
+
+  \item {s\-\_\-}
+    \subitem {S\-L\-Pair}, \hyperpage{51}
+  \item {S\-I\-G\-N}
+    \subitem {complex\-\_\-functions.\-H}, \hyperpage{62}
+  \item {S\-L\-Pair}, \hyperpage{51}
+    \subitem {l\-\_\-}, \hyperpage{51}
+    \subitem {operator$<$}, \hyperpage{51}
+    \subitem {s\-\_\-}, \hyperpage{51}
+    \subitem {S\-L\-Pair}, \hyperpage{51}
+    \subitem {S\-L\-Pair}, \hyperpage{51}
+  \item {S\-T\-R\-I\-N\-G\-I\-F\-Y}
+    \subitem {C\-Make\-C\-Compiler\-Id.\-c}, \hyperpage{58}
+    \subitem {C\-Make\-C\-X\-X\-Compiler\-Id.\-cpp}, \hyperpage{60}
+  \item {S\-T\-R\-I\-N\-G\-I\-F\-Y\-\_\-\-H\-E\-L\-P\-E\-R}
+    \subitem {C\-Make\-C\-Compiler\-Id.\-c}, \hyperpage{58}
+    \subitem {C\-Make\-C\-X\-X\-Compiler\-Id.\-cpp}, \hyperpage{60}
+  \item {Sapphire.\-cpp}, \hyperpage{77}
+    \subitem {Entrance\-Pairs}, \hyperpage{78}
+    \subitem {Initialize}, \hyperpage{78}
+    \subitem {main}, \hyperpage{78}
+    \subitem {parse\-Command\-Line\-For\-Decay}, \hyperpage{78}
+    \subitem {parse\-Command\-Line\-For\-Options}, \hyperpage{78}
+    \subitem {parse\-Command\-Line\-For\-X\-S}, \hyperpage{78}
+    \subitem {print\-Help}, \hyperpage{78}
+    \subitem {random\-Seed}, \hyperpage{78}
+  \item {Sapphire\-M\-P\-I\-Types.\-h}, \hyperpage{78}
+    \subitem {B\-O\-O\-S\-T\-\_\-\-I\-S\-\_\-\-M\-P\-I\-\_\-\-D\-A\-T\-A\-T\-Y\-P\-E}, 
+		\hyperpage{79}
+    \subitem {Sapphire\-Tag\-Done}, \hyperpage{79}
+    \subitem {Sapphire\-Tag\-Process}, \hyperpage{79}
+    \subitem {Sapphire\-Tag\-Results}, \hyperpage{79}
+    \subitem {Sapphire\-Tags\-\_\-t}, \hyperpage{79}
+  \item {Sapphire\-Tag\-Done}
+    \subitem {Sapphire\-M\-P\-I\-Types.\-h}, \hyperpage{79}
+  \item {Sapphire\-Tag\-Process}
+    \subitem {Sapphire\-M\-P\-I\-Types.\-h}, \hyperpage{79}
+  \item {Sapphire\-Tag\-Results}
+    \subitem {Sapphire\-M\-P\-I\-Types.\-h}, \hyperpage{79}
+  \item {Sapphire\-Tags\-\_\-t}
+    \subitem {Sapphire\-M\-P\-I\-Types.\-h}, \hyperpage{79}
+  \item {serialize}
+    \subitem {boost\-::serialization}, \hyperpage{11}
+  \item {Set\-Alpha\-Formalism}
+    \subitem {Particle\-Transmission\-Func}, \hyperpage{45}
+  \item {Set\-Calculate\-Gamma\-Cutoff}
+    \subitem {Cross\-Section}, \hyperpage{19}
+  \item {Set\-Cross\-Section}
+    \subitem {Decayer}, \hyperpage{23}
+    \subitem {Pre\-Eq\-Decayer}, \hyperpage{48}
+  \item {Set\-E\-G\-D\-R\-Type}
+    \subitem {Gamma\-Transmission\-Func}, \hyperpage{29}
+  \item {Set\-Gamma\-Cutoff\-Energy}
+    \subitem {Transition\-Rate\-Func}, \hyperpage{53}
+  \item {set\-Last}
+    \subitem {Coul\-Func}, \hyperpage{16}
+  \item {Set\-Max\-L}
+    \subitem {Decayer}, \hyperpage{23}
+    \subitem {Pre\-Eq\-Decayer}, \hyperpage{48}
+  \item {Set\-Neutron\-Formalism}
+    \subitem {Particle\-Transmission\-Func}, \hyperpage{45}
+  \item {Set\-Porter\-Thomas}
+    \subitem {Gamma\-Transmission\-Func}, \hyperpage{29}
+    \subitem {Particle\-Transmission\-Func}, \hyperpage{45}
+  \item {Set\-Proton\-Formalism}
+    \subitem {Particle\-Transmission\-Func}, \hyperpage{45}
+  \item {Set\-Residual\-Alpha}
+    \subitem {Cross\-Section}, \hyperpage{19}
+  \item {Set\-Residual\-Gamma}
+    \subitem {Cross\-Section}, \hyperpage{19}
+  \item {Set\-Residual\-Neutron}
+    \subitem {Cross\-Section}, \hyperpage{19}
+  \item {Set\-Residual\-Proton}
+    \subitem {Cross\-Section}, \hyperpage{19}
+  \item {Setup.\-cpp}, \hyperpage{79}
+    \subitem {Initialize}, \hyperpage{80}
+  \item {sigma\-\_\-l\-\_\-calc}
+    \subitem {complex\-\_\-functions.\-cpp}, \hyperpage{61}
+    \subitem {complex\-\_\-functions.\-H}, \hyperpage{64}
+  \item {sin\-\_\-chi\-\_\-calc}
+    \subitem {complex\-\_\-functions.\-cpp}, \hyperpage{61}
+    \subitem {complex\-\_\-functions.\-H}, \hyperpage{64}
+  \item {Solve}
+    \subitem {Potential}, \hyperpage{46}
+  \item {spin\-\_\-}
+    \subitem {Particle\-Transmission\-Func}, \hyperpage{45}
+    \subitem {Pre\-Eq\-Spin\-Rate\-Pair}, \hyperpage{49}
+    \subitem {Spin\-Rate\-Pair}, \hyperpage{52}
+  \item {Spin\-Rate\-Pair}, \hyperpage{52}
+    \subitem {A\-\_\-}, \hyperpage{52}
+    \subitem {integral\-\_\-}, \hyperpage{52}
+    \subitem {parity\-\_\-}, \hyperpage{52}
+    \subitem {q\-Value\-\_\-}, \hyperpage{52}
+    \subitem {rate\-Func\-\_\-}, \hyperpage{52}
+    \subitem {spin\-\_\-}, \hyperpage{52}
+    \subitem {Spin\-Rate\-Pair}, \hyperpage{52}
+    \subitem {Spin\-Rate\-Pair}, \hyperpage{52}
+    \subitem {Z\-\_\-}, \hyperpage{52}
+  \item {sqrt\-\_\-precision}
+    \subitem {complex\-\_\-functions.\-H}, \hyperpage{64}
+  \item {std}, \hyperpage{11}
+  \item {std\-::equal\-\_\-to$<$ Mass\-Key $>$}, \hyperpage{26}
+    \subitem {operator()}, \hyperpage{26}
+  \item {std\-::tr1}, \hyperpage{11}
+  \item {std\-::tr1\-::hash$<$ Mass\-Key $>$}, \hyperpage{31}
+    \subitem {operator()}, \hyperpage{31}
+
+  \indexspace
+
+  \item {temperature}
+    \subitem {gsl\-\_\-partfunc\-\_\-params}, \hyperpage{30}
+    \subitem {gsl\-\_\-reactionrate\-\_\-params}, \hyperpage{31}
+  \item {th\-Mass\-\_\-}
+    \subitem {Mass\-Entry}, \hyperpage{38}
+  \item {Total\-Level\-Density}
+    \subitem {Level\-Density}, \hyperpage{36}
+  \item {total\-Width\-For\-Correction\-\_\-}
+    \subitem {Transmission\-Func}, \hyperpage{55}
+  \item {Transition\-Rate\-Func}, \hyperpage{52}
+    \subitem {$\sim $\-Transition\-Rate\-Func}, \hyperpage{53}
+    \subitem {Calc\-Level\-Density}, \hyperpage{53}
+    \subitem {Calc\-Total\-Level\-Density}, \hyperpage{53}
+    \subitem {Calc\-Transmission\-Func}, \hyperpage{53}
+    \subitem {Cumulative\-Sum}, \hyperpage{53}
+    \subitem {Exclusive\-Branching}, \hyperpage{53}
+    \subitem {Function}, \hyperpage{53}
+    \subitem {Get\-Gamma\-Cutoff\-Energy}, \hyperpage{53}
+    \subitem {Ground\-State\-Transmission}, \hyperpage{53}
+    \subitem {Integral}, \hyperpage{53}
+    \subitem {Set\-Gamma\-Cutoff\-Energy}, \hyperpage{53}
+    \subitem {Transition\-Rate\-Func}, \hyperpage{53}
+    \subitem {Transition\-Rate\-Func}, \hyperpage{53}
+  \item {Transition\-Rate\-Func.\-cpp}, \hyperpage{80}
+  \item {Transition\-Rate\-Func.\-h}, \hyperpage{80}
+  \item {Transmission\-Func}, \hyperpage{54}
+    \subitem {$\sim $\-Transmission\-Func}, \hyperpage{54}
+    \subitem {Is\-Valid}, \hyperpage{54}
+    \subitem {j\-Final\-\_\-}, \hyperpage{55}
+    \subitem {j\-Initial\-\_\-}, \hyperpage{55}
+    \subitem {m2\-\_\-}, \hyperpage{55}
+    \subitem {max\-L\-\_\-}, \hyperpage{55}
+    \subitem {operator()}, \hyperpage{54}
+    \subitem {pi\-Final\-\_\-}, \hyperpage{55}
+    \subitem {pi\-Initial\-\_\-}, \hyperpage{55}
+    \subitem {previous\-\_\-}, \hyperpage{55}
+    \subitem {total\-Width\-For\-Correction\-\_\-}, \hyperpage{55}
+    \subitem {Transmission\-Func}, \hyperpage{54}
+    \subitem {Transmission\-Func}, \hyperpage{54}
+    \subitem {uncorr\-Total\-Width\-For\-Correction\-\_\-}, 
+		\hyperpage{55}
+    \subitem {uncorr\-Total\-Width\-Sqrd\-For\-Correction\-\_\-}, 
+		\hyperpage{55}
+    \subitem {z2\-\_\-}, \hyperpage{55}
+  \item {Transmission\-Func.\-h}, \hyperpage{80}
+
+  \indexspace
+
+  \item {uconv}
+    \subitem {Constants.\-h}, \hyperpage{65}
+  \item {uncorr\-Total\-Width\-For\-Correction\-\_\-}
+    \subitem {Transmission\-Func}, \hyperpage{55}
+  \item {uncorr\-Total\-Width\-Sqrd\-For\-Correction\-\_\-}
+    \subitem {Transmission\-Func}, \hyperpage{55}
+  \item {use\-Spline}
+    \subitem {gsl\-\_\-reactionrate\-\_\-params}, \hyperpage{31}
+
+  \indexspace
+
+  \item {value\-\_\-}
+    \subitem {C\-D\-F\-Entry}, \hyperpage{14}
+    \subitem {Pre\-Eq\-C\-D\-F\-Entry}, \hyperpage{47}
+  \item {vector\-\_\-c}
+    \subitem {Constants.\-h}, \hyperpage{65}
+  \item {vector\-\_\-matrix\-\_\-c}
+    \subitem {Constants.\-h}, \hyperpage{65}
+  \item {vector\-\_\-matrix\-\_\-r}
+    \subitem {Constants.\-h}, \hyperpage{65}
+  \item {vector\-\_\-r}
+    \subitem {Constants.\-h}, \hyperpage{65}
+
+  \indexspace
+
+  \item {W\-\_\-}
+    \subitem {G\-D\-R\-Parameters}, \hyperpage{30}
+
+  \indexspace
+
+  \item {X\-\_\-}
+    \subitem {X\-Y\-Pair}, \hyperpage{55}
+  \item {X\-Y\-Pair}, \hyperpage{55}
+    \subitem {X\-\_\-}, \hyperpage{55}
+    \subitem {X\-Y\-Pair}, \hyperpage{55}
+    \subitem {X\-Y\-Pair}, \hyperpage{55}
+    \subitem {Y\-\_\-}, \hyperpage{55}
+
+  \indexspace
+
+  \item {Y\-\_\-}
+    \subitem {X\-Y\-Pair}, \hyperpage{55}
+
+  \indexspace
+
+  \item {Z}
+    \subitem {Initial\-Nucleus\-Data}, \hyperpage{32}
+  \item {z1}
+    \subitem {Coul\-Func}, \hyperpage{16}
+  \item {z1\-\_\-}
+    \subitem {Particle\-Transmission\-Func}, \hyperpage{45}
+  \item {z2}
+    \subitem {Coul\-Func}, \hyperpage{16}
+  \item {z2\-\_\-}
+    \subitem {Transmission\-Func}, \hyperpage{55}
+  \item {Z\-\_\-}
+    \subitem {Decay\-Product}, \hyperpage{24}
+    \subitem {Entrance\-Pairs}, \hyperpage{25}
+    \subitem {Level\-Density}, \hyperpage{37}
+    \subitem {Mass\-Key}, \hyperpage{39}
+    \subitem {Pre\-Eq\-Spin\-Rate\-Pair}, \hyperpage{49}
+    \subitem {Spin\-Rate\-Pair}, \hyperpage{52}
+  \item {zeta\-\_\-}
+    \subitem {Level\-Density}, \hyperpage{37}
+
+\end{theindex}

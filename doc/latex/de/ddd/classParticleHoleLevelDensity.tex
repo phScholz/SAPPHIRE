@@ -1,0 +1,116 @@
+\hypertarget{classParticleHoleLevelDensity}{\section{Particle\-Hole\-Level\-Density Class Reference}
+\label{classParticleHoleLevelDensity}\index{Particle\-Hole\-Level\-Density@{Particle\-Hole\-Level\-Density}}
+}
+
+
+{\ttfamily \#include $<$Particle\-Hole\-Level\-Density.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classParticleHoleLevelDensity_a47725bc4322c23076475bc4f729c4993}{Particle\-Hole\-Level\-Density} (int, int, double, int, int, int, int)
+\item 
+double \hyperlink{classParticleHoleLevelDensity_a9529125c1d9a033b46ceab05259cfa26}{operator()} (double energy, bool correct=true, bool spin=false)
+\item 
+double \hyperlink{classParticleHoleLevelDensity_a7b3aa8776f1913453389e6fd6172e216}{Pauli\-Correction} (int, int, int, int)
+\item 
+double \hyperlink{classParticleHoleLevelDensity_ac9719244be6c45a25b5dfe208c363bbd}{Pairing\-Correction} (double energy)
+\item 
+double \hyperlink{classParticleHoleLevelDensity_af990f31da2a0bab282762bffea976586}{g\-Nu} () const 
+\item 
+double \hyperlink{classParticleHoleLevelDensity_a2f46edfdc4a2c8257dd6a2ca5ef573b1}{g\-Pi} () const 
+\item 
+double \hyperlink{classParticleHoleLevelDensity_a162ffe8a3e56cca1c3ffc6bc13f45254}{Finite\-Depth} (double)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classParticleHoleLevelDensity_a47725bc4322c23076475bc4f729c4993}{\index{Particle\-Hole\-Level\-Density@{Particle\-Hole\-Level\-Density}!Particle\-Hole\-Level\-Density@{Particle\-Hole\-Level\-Density}}
+\index{Particle\-Hole\-Level\-Density@{Particle\-Hole\-Level\-Density}!ParticleHoleLevelDensity@{Particle\-Hole\-Level\-Density}}
+\subsubsection[{Particle\-Hole\-Level\-Density}]{\setlength{\rightskip}{0pt plus 5cm}Particle\-Hole\-Level\-Density\-::\-Particle\-Hole\-Level\-Density (
+\begin{DoxyParamCaption}
+\item[{int}]{Z, }
+\item[{int}]{A, }
+\item[{double}]{J, }
+\item[{int}]{neutron\-Number, }
+\item[{int}]{neutron\-Hole\-Number, }
+\item[{int}]{proton\-Number, }
+\item[{int}]{proton\-Hole\-Number}
+\end{DoxyParamCaption}
+)}}\label{classParticleHoleLevelDensity_a47725bc4322c23076475bc4f729c4993}
+
+
+References Pauli\-Correction(), and Nuclear\-Mass\-::\-Q\-Value().
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classParticleHoleLevelDensity_a162ffe8a3e56cca1c3ffc6bc13f45254}{\index{Particle\-Hole\-Level\-Density@{Particle\-Hole\-Level\-Density}!Finite\-Depth@{Finite\-Depth}}
+\index{Finite\-Depth@{Finite\-Depth}!ParticleHoleLevelDensity@{Particle\-Hole\-Level\-Density}}
+\subsubsection[{Finite\-Depth}]{\setlength{\rightskip}{0pt plus 5cm}double Particle\-Hole\-Level\-Density\-::\-Finite\-Depth (
+\begin{DoxyParamCaption}
+\item[{double}]{energy}
+\end{DoxyParamCaption}
+)}}\label{classParticleHoleLevelDensity_a162ffe8a3e56cca1c3ffc6bc13f45254}
+
+
+Referenced by operator()().
+
+\hypertarget{classParticleHoleLevelDensity_af990f31da2a0bab282762bffea976586}{\index{Particle\-Hole\-Level\-Density@{Particle\-Hole\-Level\-Density}!g\-Nu@{g\-Nu}}
+\index{g\-Nu@{g\-Nu}!ParticleHoleLevelDensity@{Particle\-Hole\-Level\-Density}}
+\subsubsection[{g\-Nu}]{\setlength{\rightskip}{0pt plus 5cm}double Particle\-Hole\-Level\-Density\-::g\-Nu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classParticleHoleLevelDensity_af990f31da2a0bab282762bffea976586}
+\hypertarget{classParticleHoleLevelDensity_a2f46edfdc4a2c8257dd6a2ca5ef573b1}{\index{Particle\-Hole\-Level\-Density@{Particle\-Hole\-Level\-Density}!g\-Pi@{g\-Pi}}
+\index{g\-Pi@{g\-Pi}!ParticleHoleLevelDensity@{Particle\-Hole\-Level\-Density}}
+\subsubsection[{g\-Pi}]{\setlength{\rightskip}{0pt plus 5cm}double Particle\-Hole\-Level\-Density\-::g\-Pi (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classParticleHoleLevelDensity_a2f46edfdc4a2c8257dd6a2ca5ef573b1}
+\hypertarget{classParticleHoleLevelDensity_a9529125c1d9a033b46ceab05259cfa26}{\index{Particle\-Hole\-Level\-Density@{Particle\-Hole\-Level\-Density}!operator()@{operator()}}
+\index{operator()@{operator()}!ParticleHoleLevelDensity@{Particle\-Hole\-Level\-Density}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}double Particle\-Hole\-Level\-Density\-::operator() (
+\begin{DoxyParamCaption}
+\item[{double}]{energy, }
+\item[{bool}]{correct = {\ttfamily true}, }
+\item[{bool}]{spin = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}}\label{classParticleHoleLevelDensity_a9529125c1d9a033b46ceab05259cfa26}
+
+
+References Finite\-Depth(), and Pairing\-Correction().
+
+\hypertarget{classParticleHoleLevelDensity_ac9719244be6c45a25b5dfe208c363bbd}{\index{Particle\-Hole\-Level\-Density@{Particle\-Hole\-Level\-Density}!Pairing\-Correction@{Pairing\-Correction}}
+\index{Pairing\-Correction@{Pairing\-Correction}!ParticleHoleLevelDensity@{Particle\-Hole\-Level\-Density}}
+\subsubsection[{Pairing\-Correction}]{\setlength{\rightskip}{0pt plus 5cm}double Particle\-Hole\-Level\-Density\-::\-Pairing\-Correction (
+\begin{DoxyParamCaption}
+\item[{double}]{energy}
+\end{DoxyParamCaption}
+)}}\label{classParticleHoleLevelDensity_ac9719244be6c45a25b5dfe208c363bbd}
+
+
+Referenced by operator()().
+
+\hypertarget{classParticleHoleLevelDensity_a7b3aa8776f1913453389e6fd6172e216}{\index{Particle\-Hole\-Level\-Density@{Particle\-Hole\-Level\-Density}!Pauli\-Correction@{Pauli\-Correction}}
+\index{Pauli\-Correction@{Pauli\-Correction}!ParticleHoleLevelDensity@{Particle\-Hole\-Level\-Density}}
+\subsubsection[{Pauli\-Correction}]{\setlength{\rightskip}{0pt plus 5cm}double Particle\-Hole\-Level\-Density\-::\-Pauli\-Correction (
+\begin{DoxyParamCaption}
+\item[{int}]{neutron\-Number, }
+\item[{int}]{neutron\-Hole\-Number, }
+\item[{int}]{proton\-Number, }
+\item[{int}]{proton\-Hole\-Number}
+\end{DoxyParamCaption}
+)}}\label{classParticleHoleLevelDensity_a7b3aa8776f1913453389e6fd6172e216}
+
+
+Referenced by Particle\-Hole\-Level\-Density().
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{ParticleHoleLevelDensity_8h}{Particle\-Hole\-Level\-Density.\-h}\item 
+src/\hyperlink{ParticleHoleLevelDensity_8cpp}{Particle\-Hole\-Level\-Density.\-cpp}\end{DoxyCompactItemize}
