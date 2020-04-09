@@ -12,3 +12,14 @@ build/*
 #ignore doxygen configs
 #doxygen_config
 #doxygen_config/
+#
+Makefile
+coul/Makefile
+coul/cmake_install.cmake
+coul/src/Makefile
+coul/src/cmake_install.cmake
+coul/src/libcoul.a
+generated/
+src/Makefile
+src/cmake_install.cmake
+
