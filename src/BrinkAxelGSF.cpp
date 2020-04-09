@@ -1,3 +1,6 @@
+/**
+ * BrinkAxelGSF.h
+ */
 #include "BrinkAxelGSF.h"
 
 BrinkAxelGSF::BrinkAxelGSF(int z2, int m2, double jInitial, int piInitial,

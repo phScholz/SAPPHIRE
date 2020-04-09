@@ -1,8 +1,15 @@
+/*! \file BrinkAxelGSF.h
+*   \brief Header file for the Brink-Axel-GSF class
+* 
+*/
 #ifndef BRINKAXELGSF_H
 #define BRINKAXELGSF_H
 
 #include "GammaTransmissionFunc.h"
 
+/*! \class BrinkAxelGSF
+*   Class for the Brink-Axel-GSF
+*/
 class BrinkAxelGSF : public GammaTransmissionFunc {
  public:
   BrinkAxelGSF(int,int,double,int,double,int,double, 
