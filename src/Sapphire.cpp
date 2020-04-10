@@ -104,6 +104,7 @@ void PrintHelp(){
 	//std::cout << "Template     - Generate examplary configuration files" << std::endl;
 	std::cout << " help           - Show this help message" << std::endl;
 	std::cout << std::endl;
+  std::cout << " old           - Instruction for the old Sapphire code." << std::endl;
 } 
 
 #ifndef MPI_BUILD
@@ -497,8 +498,12 @@ int main(int argc, char *argv[]) {
   std::string mode(argv[1]);
 	if (mode == "Dump")
 		Module_CrossSection::Go(argc,argv);
-  else if (mode == "help")
+  else if (mode == "help"){
     PrintHelp();
+    return 0;
+  }
+  else if (mode == "old")
+    printhelp();
   else
     printHelp();
   
