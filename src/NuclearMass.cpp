@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <stdlib.h>
+#include <stdexcept>
 
 #define HAS_EXP_MASS 1
 #define HAS_TH_MASS  2
@@ -103,6 +104,15 @@ bool NuclearMass::MassDifference(int Z1, int A1,
   if(!FindMass(Z2,A2,M2)) return false;
   difference = M1-M2;
   return true;
+}
+
+double NuclearMass::MassDifference(int Z1, int A1, 
+				 int Z2, int A2) {
+  difference = 0.;
+  double M1,M2;
+  if(!FindMass(Z1,A1,M1)) throw std::invalid_argument( "Cannot find M1");
+  if(!FindMass(Z2,A2,M2)) throw std::invalid_argument( "Cannot find M1");
+    return difference = M1-M2;
 }
 
 bool NuclearMass::QValue(int Z1, int A1,

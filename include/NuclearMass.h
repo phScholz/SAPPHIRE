@@ -64,15 +64,25 @@ class NuclearMass {
   static bool FindMass(int, int, double&);
 
 /**
-* @brief Calculate the mass difference between two isotopes and writes it in "difference"
+* @brief Calculate the mass difference between two isotopes and writes it in "difference". Returns False if the mass cannot be found.
 * @param Z1 Charge of Isotope 1
 * @param A1 Massnumber of Isotope 1
 * @param Z2 Charge of Isotope 2
 * @param A2 Massnumber of Isotope 2
-* @param difference Address of the difference double
+* @param difference reference to the mass difference double
 * @return Returns a *True* or *False* depending on if the masses of both isotopes have been found by FindMass()
 */
   static bool MassDifference(int,int,int,int,double&);
+
+/**
+* @brief Calculate the mass difference between two isotopes and returns it as double. If the mass cannot be found, an exception is thrown.
+* @param Z1 Charge of Isotope 1
+* @param A1 Massnumber of Isotope 1
+* @param Z2 Charge of Isotope 2
+* @param A2 Massnumber of Isotope 2
+* @return Returns a *True* or *False* depending on if the masses of both isotopes have been found by FindMass()
+*/
+  static double MassDifference(int,int,int,int);
 
 
   static bool QValue(int,int,int,int,double&);
