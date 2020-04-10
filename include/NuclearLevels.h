@@ -1,3 +1,10 @@
+/**
+ * @file NuclearLevels.h
+ * @author Mary Beard, Philipp Scholz
+ * @date 2020
+ * @brief It contains classes and methods, handling the nuclear level scheme
+ */
+
 #ifndef NUCLEARLEVELS_H
 #define NUCLEARLEVELS_H
 
@@ -24,14 +31,18 @@ class Level {
  std::vector<GammaTransition> gammas_;
 };
 
+/**
+ * @class LevelsContainer
+ * @brief A container class for nuclear levels
+ */
 class LevelsContainer {
  public:
-  LevelsContainer() {};
-  LevelsContainer(std::istream&,int,int);
-  std::vector<Level> levels_;
+  LevelsContainer() {};                   /**< Simple constructor */
+  LevelsContainer(std::istream&,int,int); /**< Constructructor from levels file */
+  std::vector<Level> levels_;             /**< One std::vector object which for levels */
 };
 
-typedef std::tr1::unordered_map<MassKey, LevelsContainer> LevelsTable;
+typedef std::tr1::unordered_map<MassKey, LevelsContainer> LevelsTable; /**< One map object which maps MassKey to LevelsContainer */
 
 class NuclearLevels {
  public:
