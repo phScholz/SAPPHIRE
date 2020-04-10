@@ -24,6 +24,11 @@
 #include "ParticleTransmissionFunc.h"
 #include "GammaTransmissionFunc.h"
 
+/**
+ * Now are new includes which differ from the original version
+ */
+#include "Module_CrossSection.h"
+
 extern void Initialize();
 #ifndef MPI_BUILD
 unsigned int randomSeed[12];
@@ -488,6 +493,16 @@ int main(int argc, char *argv[]) {
 		PrintHelp();
 		return 0;
 	}
+
+  std::string mode(argv[1]);
+	if (mode == "Dump")
+		Module_CrossSection::Go(argc,argv);
+  else if (mode == "help")
+    PrintHelp();
+  else
+    printHelp();
+  
+
 
   for(int i=1;i<argc;i++) 
     if(strcmp(argv[i],"--help")==0) {
