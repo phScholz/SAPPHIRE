@@ -91,7 +91,10 @@ int main(int argc, char *argv[]) {
     if(!parseCommandLineForXS(args,Z,A,pType,energyFile,asciiIn)) {
       std::cout << "Initial pair must be given for cross section (i.e. 60Fe+n)." << std::endl;
       return -1;
-    } 
+    }
+    /**
+     * Apparently here is an undocumented option to make calculations for more than one reaction. This is probably enabled by the "--in=" keyword.
+     */
     if(!asciiIn) {
       std::cout << "Input Values For Cross Section:"   << std::endl
 		<< std::setw(14) << "Z:"               << std::setw(12) 

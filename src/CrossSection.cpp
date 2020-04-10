@@ -328,7 +328,7 @@ void CrossSection::Calculate() {
 	  progress+='*';
 	} else progress+=' ';
       } progress+="] ";
-      std::cout << "\r\t" << progress << percent*100 << '%';std::cout.flush();
+      std::cout << "\r\t" << progress << percent*100 << "%"; std::cout.flush();
     }
     double E = crossSections_[i].first+seperationEnergy_;
     double geometricCrossSection = (pType_!=0) ? preFactor_/(E-seperationEnergy_) :
@@ -1375,3 +1375,7 @@ void CrossSection::CalcPartitionFunc() {
     }
   }
 }
+
+void CrossSection::Go();
+void CrossSection::parseCommandLineForOptions();
+void CrossSection::parseCommandLineForXS();

@@ -27,7 +27,7 @@ bool PreEqDecayer::isCrossSection_;
 double Decayer::maxL_;
 double PreEqDecayer::maxL_;
 double TransitionRateFunc::gammaCutoffEnergy_;
-ElementTable NuclearMass::elementTable_;
+ElementTable NuclearMass::elementTable_; 
 MassTable NuclearMass::massTable_;
 GDRTable GammaTransmissionFunc::gdrTable_;
 LevelsTable NuclearLevels::levelsTable_;
