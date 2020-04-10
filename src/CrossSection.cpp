@@ -1376,6 +1376,6 @@ void CrossSection::CalcPartitionFunc() {
   }
 }
 
-void CrossSection::Go();
-void CrossSection::parseCommandLineForOptions();
-void CrossSection::parseCommandLineForXS();
+void CrossSection::Go(){}
+void CrossSection::parseCommandLineForOptions(){}
+void CrossSection::parseCommandLineForXS(){}
