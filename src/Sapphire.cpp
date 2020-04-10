@@ -503,7 +503,7 @@ int main(int argc, char *argv[]) {
     return 0;
   }
   else if (mode == "old")
-    printhelp();
+    printHelp();
   else
     printHelp();
   
