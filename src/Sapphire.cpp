@@ -479,7 +479,7 @@ bool parseCommandLineForXS(std::vector<std::string>& args,int& Z, int&A,
   return (goodA&&goodZ&&goodPType);
 }
 
-
+#endif
 
 #ifndef MPI_BUILD
 int main(int argc, char *argv[]) {
