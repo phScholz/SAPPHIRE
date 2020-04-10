@@ -40,6 +40,67 @@ typedef struct EntrancePairs {
   int pType_;
 } EntrancePairs;
 
+void printHelp() {
+  std::cout  << "Syntax (Cross-Section): sapphire <options> entrance-pair [energies-file]" << std::endl;
+  std::cout  << "Syntax  (Monte-Carlo) : sapphire <options> nucleus spin-parity energy-range events" << std::endl << std::endl
+	     << "Options:" << std::endl
+	     << std::setw(25) << std::left << "\t--opt-alpha" << std::setw(0) << "Sets the alpha transmission coefficients to be" << std::endl
+	     << std::setw(25)  << '\t' << std::setw(0) << "calculated with the optical model from" << std::endl
+	     << std::setw(25)  << '\t' << std::setw(0) << "McFadden-Satchler parameters.  Default calculates" << std::endl
+	     << std::setw(25)  << '\t' << std::setw(0) << "using equivalent square well parametrization." << std::endl
+	     << std::setw(25) << std::left << "\t--l-max=VALUE:" << std::setw(0) << "Sets the maximum value of orbital angular momentum to" << std::endl
+	     <<std::setw(25)  << '\t' << std::setw(0) << "VALUE." << std::endl
+	     << std::setw(25) << std::left << "\t--suffix=VALUE:" << std::setw(0) << "Monte-Carlo mode only.  Sets the suffix for the output" <<std::endl
+	     << std::setw(25)  << '\t' << std::setw(0) << "file name (i.e. Sapphire_*_VALUE.root)." << std::endl
+	     << std::setw(25) << std::left << "\t--pre-eq=pp,ph,np,nh" << std::setw(0) << "Monte-Carlo mode only.  Sets the initial exciton" << std::endl
+	     << std::setw(25)  << '\t' << std::setw(0) << "configuration and simulates the equilibrium" << std::endl
+	     << std::setw(25)  << '\t' << std::setw(0) << "process allowing for pre-equilibrium particle decay." << std::endl
+	     << std::setw(25) << std::left << "\t--gamma-cutoff=VALUE" << std::setw(0) << "Cross section mode only.  Sets the maximum excitation" << std::endl
+	     << std::setw(25)  << '\t' << std::setw(0) << "energy in the compound nucleus where gamma emission is" << std::endl
+	     << std::setw(25)  << '\t' << std::setw(0) << "exclusive.  Transitions to final states above this energy" << std::endl
+	     << std::setw(25)  << '\t' << std::setw(0) << "will not contribute to residual capture cross sections." << std::endl
+	     << std::setw(25) << std::left << "\t--residual-gamma=Y/N" << std::setw(0) << "Cross section mode only.  Toggles if residual or total" << std::endl
+	     << std::setw(25)  << '\t' << std::setw(0) << "capture cross sections are calculated." << std::endl
+	     << std::setw(25) << std::left << "\t--residual-neutron=Y/N" << std::setw(0) << "Cross section mode only.  Toggles if residual or total" << std::endl
+	     << std::setw(25)  << '\t' << std::setw(0) << "neutron cross sections are calculated." << std::endl
+	     << std::setw(25) << std::left << "\t--residual-proton=Y/N" << std::setw(0) << "Cross section mode only.  Toggles if residual or total" << std::endl
+	     << std::setw(25)  << '\t' << std::setw(0) << "proton cross sections are calculated." << std::endl
+	     << std::setw(25) << std::left << "\t--residual-alpha=Y/N" << std::setw(0) << "Cross section mode only.  Toggles if residual or total" << std::endl
+	     << std::setw(25)  << '\t' << std::setw(0) << "alpha cross sections are calculated." << std::endl
+	     << std::setw(25) << std::left << "\t--average-rad-width" << std::setw(0) << "Cross section mode only.  Calculates the average s-wave" << std::endl
+	     << std::setw(25)  << '\t' << std::setw(0) << "radiative width at threshold and exits." << std::endl
+	     << std::setw(25) << std::left << "\t--rates" << std::setw(0) << "Cross section mode only.  Calculates the astrophysical" << std::endl 
+	     << std::setw(25)  << '\t' << std::setw(0) << "reaction rates in addition to cross sections.  If" << std::endl
+	     << std::setw(25)  << '\t' << std::setw(0) << "projectile is a neutron, Maxwellian averaged capture" << std::endl
+	     << std::setw(25)  << '\t' << std::setw(0) << "cross sections are also calculated." << std::endl 
+	     << std::setw(25) << std::left << "\t--EGDR=type" << std::setw(0) << "Sets the EGDR shape.  Variable 'type' can either be" << std::endl 
+	     << std::setw(25)  << '\t' << std::setw(0) << "edslo (SMOKER), slo (BRINK-AXEL), or glo (KOPECKY-UHL)." << std::endl;
+}
+
+/**
+ * @brief Secondary function to print help. This is the first step to reconstruct Sapphire.cpp.
+ */
+void PrintHelp(){
+  std::cout << std::endl;
+	std::cout << "Statistical Analysis for Particle and Photoncapture and decay of HIgh energy REsonances" << std::endl;
+	std::cout << "---------------------------------------------------------------------------------------" << std::endl;
+	#ifndef MPI_BUILD
+  std::cout << " MPI_BUILD is OFF" << std::endl;
+  #endif 
+  #ifdef MPI_BUILD
+  std::cout << " MPI_BUILD is ON" << std::endl;
+  #endif 
+  std::cout << " Supported modes:" << std::endl;
+	std::cout << std::endl;
+  #ifndef MPI_BUILD
+	std::cout << " reaction       - Calculate reaction cross sections and/or rates" << std::endl;
+  #endif 
+	std::cout << " decay          - Calculate Monte-Carlo statistical decay" << std::endl;
+	//std::cout << "Template     - Generate examplary configuration files" << std::endl;
+	std::cout << " help           - Show this help message" << std::endl;
+	std::cout << std::endl;
+} 
+
 #ifndef MPI_BUILD
 void parseCommandLineForOptions(std::vector<std::string>& args, int& suffixNo, bool &preEq,
 				int& numPiParticles, int& numPiHoles, int& numNuParticles, int& numNuHoles,
@@ -838,64 +899,5 @@ int main(int argc, char *argv[]) {
 
 #endif
 
-void printHelp() {
-  std::cout  << "Syntax (Cross-Section): sapphire <options> entrance-pair [energies-file]" << std::endl;
-  std::cout  << "Syntax  (Monte-Carlo) : sapphire <options> nucleus spin-parity energy-range events" << std::endl << std::endl
-	     << "Options:" << std::endl
-	     << std::setw(25) << std::left << "\t--opt-alpha" << std::setw(0) << "Sets the alpha transmission coefficients to be" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "calculated with the optical model from" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "McFadden-Satchler parameters.  Default calculates" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "using equivalent square well parametrization." << std::endl
-	     << std::setw(25) << std::left << "\t--l-max=VALUE:" << std::setw(0) << "Sets the maximum value of orbital angular momentum to" << std::endl
-	     <<std::setw(25)  << '\t' << std::setw(0) << "VALUE." << std::endl
-	     << std::setw(25) << std::left << "\t--suffix=VALUE:" << std::setw(0) << "Monte-Carlo mode only.  Sets the suffix for the output" <<std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "file name (i.e. Sapphire_*_VALUE.root)." << std::endl
-	     << std::setw(25) << std::left << "\t--pre-eq=pp,ph,np,nh" << std::setw(0) << "Monte-Carlo mode only.  Sets the initial exciton" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "configuration and simulates the equilibrium" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "process allowing for pre-equilibrium particle decay." << std::endl
-	     << std::setw(25) << std::left << "\t--gamma-cutoff=VALUE" << std::setw(0) << "Cross section mode only.  Sets the maximum excitation" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "energy in the compound nucleus where gamma emission is" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "exclusive.  Transitions to final states above this energy" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "will not contribute to residual capture cross sections." << std::endl
-	     << std::setw(25) << std::left << "\t--residual-gamma=Y/N" << std::setw(0) << "Cross section mode only.  Toggles if residual or total" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "capture cross sections are calculated." << std::endl
-	     << std::setw(25) << std::left << "\t--residual-neutron=Y/N" << std::setw(0) << "Cross section mode only.  Toggles if residual or total" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "neutron cross sections are calculated." << std::endl
-	     << std::setw(25) << std::left << "\t--residual-proton=Y/N" << std::setw(0) << "Cross section mode only.  Toggles if residual or total" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "proton cross sections are calculated." << std::endl
-	     << std::setw(25) << std::left << "\t--residual-alpha=Y/N" << std::setw(0) << "Cross section mode only.  Toggles if residual or total" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "alpha cross sections are calculated." << std::endl
-	     << std::setw(25) << std::left << "\t--average-rad-width" << std::setw(0) << "Cross section mode only.  Calculates the average s-wave" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "radiative width at threshold and exits." << std::endl
-	     << std::setw(25) << std::left << "\t--rates" << std::setw(0) << "Cross section mode only.  Calculates the astrophysical" << std::endl 
-	     << std::setw(25)  << '\t' << std::setw(0) << "reaction rates in addition to cross sections.  If" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "projectile is a neutron, Maxwellian averaged capture" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "cross sections are also calculated." << std::endl 
-	     << std::setw(25) << std::left << "\t--EGDR=type" << std::setw(0) << "Sets the EGDR shape.  Variable 'type' can either be" << std::endl 
-	     << std::setw(25)  << '\t' << std::setw(0) << "edslo (SMOKER), slo (BRINK-AXEL), or glo (KOPECKY-UHL)." << std::endl;
-}
 
-/**
- * @brief Secondary function to print help. This is the first step to reconstruct Sapphire.cpp.
- */
-/* void PrintHelp(){
-  std::cout << std::endl;
-	std::cout << "Statistical Analysis for Particle and Photoncapture and decay of HIgh energy REsonances" << std::endl;
-	std::cout << "---------------------------------------------------------------------------------------" << std::endl;
-	#ifndef MPI_BUILD
-  std::cout << " MPI_BUILD is OFF" << std::endl;
-  #endif 
-  #ifdef MPI_BUILD
-  std::cout << " MPI_BUILD is ON" << std::endl;
-  #endif 
-  std::cout << " Supported modes:" << std::endl;
-	std::cout << std::endl;
-  #ifndef MPI_BUILD
-	std::cout << " reaction       - Calculate reaction cross sections and/or rates" << std::endl;
-  #endif 
-	std::cout << " decay          - Calculate Monte-Carlo statistical decay" << std::endl;
-	//std::cout << "Template     - Generate examplary configuration files" << std::endl;
-	std::cout << " help           - Show this help message" << std::endl;
-	std::cout << std::endl;
-} */
 
