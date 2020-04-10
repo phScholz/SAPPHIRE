@@ -38,6 +38,10 @@ int GammaTransmissionFunc::egdrType_;
 bool GammaTransmissionFunc::porterThomas_;
 bool ParticleTransmissionFunc::porterThomas_;
 
+/** 
+ * @brief First Function which is called in the Sapphire main() in Sapphire.cpp. Setting default parameters
+ * 
+ */
 void Initialize() {
 #ifndef MPI_BUILD
   CrossSection::SetResidualGamma(true);
