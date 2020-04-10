@@ -108,7 +108,6 @@ bool NuclearMass::MassDifference(int Z1, int A1,
 
 double NuclearMass::MassDifference(int Z1, int A1, 
 				 int Z2, int A2) {
-  difference = 0.;
   double M1,M2;
   if(!FindMass(Z1,A1,M1)) throw std::invalid_argument( "Cannot find M1");
   if(!FindMass(Z2,A2,M2)) throw std::invalid_argument( "Cannot find M1");
