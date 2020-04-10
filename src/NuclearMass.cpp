@@ -13,6 +13,9 @@ void NuclearMass::InitializeElements() {
 #include "elements.h"
 }
 
+/**
+ * @brief
+ */
 void NuclearMass::InitializeMasses(std::string filename) {
 #ifndef MPI_BUILD
   std::cout << "Reading atomic masses..." << std::endl;
@@ -89,6 +92,7 @@ bool NuclearMass::FindMass(int Z, int A, double& M) {
     return true;
   } else return false;
 }
+
 
 bool NuclearMass::MassDifference(int Z1, int A1, 
 				 int Z2, int A2,

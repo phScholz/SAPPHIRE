@@ -1,3 +1,8 @@
+/**
+ * @file NuclearMass.h
+ * 
+ */
+
 #ifndef NUCLEARMASS_H
 #define NUCLEARMASS_H
 
@@ -57,7 +62,19 @@ class NuclearMass {
   static int  FindZ(std::string);
   static std::string FindElement(int);
   static bool FindMass(int, int, double&);
+
+/**
+* @brief Calculate the mass difference between two isotopes and writes it in "difference"
+* @param Z1 Charge of Isotope 1
+* @param A1 Massnumber of Isotope 1
+* @param Z2 Charge of Isotope 2
+* @param A2 Massnumber of Isotope 2
+* @param difference Address of the difference double
+* @return Returns a *True* or *False* depending on if the masses of both isotopes have been found by FindMass()
+*/
   static bool MassDifference(int,int,int,int,double&);
+
+
   static bool QValue(int,int,int,int,double&);
   static bool NeutronPairingGap(int,int,double&);
   static bool ProtonPairingGap(int,int,double&);
