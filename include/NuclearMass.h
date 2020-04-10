@@ -1,6 +1,8 @@
 /**
  * @file NuclearMass.h
- * 
+ * @author Mary Beard, Philipp Scholz
+ * @date 2020
+ * @brief It contains classes and methods, handling the nuclear masses
  */
 
 #ifndef NUCLEARMASS_H
@@ -11,13 +13,13 @@
 
 class MassKey {
  public:
-  MassKey(int Z, int A) : Z_(Z),A_(A) {};
+  MassKey(int Z, int A) : Z_(Z),A_(A) {};         /**< Constructor */
   bool operator<(const MassKey &right) const {
     if ( Z_ == right.Z_ ) return A_ < right.A_;
-    else return Z_< right.Z_;
+    else return Z_< right.Z_;                     /**< Definition of an operator for MassKey */
   };
-  int Z_;
-  int A_;
+  int Z_;                                         /**< Nuclear charge number */
+  int A_;                                         /**< Nuclear mass number */
 };
 
 namespace std {
