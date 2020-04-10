@@ -8,6 +8,7 @@
 
 #ifndef MODULE_CROSSSECTION_H
 #define MODULE_CROSSSECTION_H
+#endif
 #include <vector>
 #include <map>
 #include <string>
