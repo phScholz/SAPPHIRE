@@ -41,6 +41,386 @@ typedef struct EntrancePairs {
 } EntrancePairs;
 
 #ifndef MPI_BUILD
+void parseCommandLineForOptions(std::vector<std::string>& args, int& suffixNo, bool &preEq,
+				int& numPiParticles, int& numPiHoles, int& numNuParticles, int& numNuHoles,
+                                bool& calcAverageWidth, bool& calcRates, bool& asciiIn,
+				std::string& inFile, int& entranceState, std::vector<int>& exitStates,
+				bool& printTrans) {
+#else
+void parseCommandLineForOptions(std::vector<std::string>& args, int& suffixNo, bool &preEq,
+				int& numPiParticles, int& numPiHoles, int& numNuParticles, int& numNuHoles) {
+#endif
+  std::vector<std::string>::iterator it = args.begin();
+  while(it!=args.end()) {
+    if(it->compare(0,8,"--l-max=")==0) {
+      std::istringstream stm(it->substr(8));
+      double maxL;
+      if(stm>>maxL) {
+	Decayer::SetMaxL(maxL);
+	std::cout << "Maximum l-value set to " << int(Decayer::GetMaxL()) 
+		  << "." << std::endl;
+      }
+      it = args.erase(it);
+#ifndef MPI_BUILD
+    } else if(it->compare(0,15,"--gamma-cutoff=")==0) {
+      std::istringstream stm(it->substr(15));
+      double cutoffEnergy;
+      if(stm>>cutoffEnergy) {
+	CrossSection::SetCalculateGammaCutoff(false);
+	TransitionRateFunc::SetGammaCutoffEnergy(cutoffEnergy);
+	std::cout << "Gamma channel integration cutoff energy set to " 
+		  << TransitionRateFunc::GetGammaCutoffEnergy() << "." 
+		  << std::endl;
+      }
+      it = args.erase(it);
+    } else if(it->compare(0,17,"--residual-gamma=")==0) {
+      std::string residual = it->substr(17);
+      if(residual=="Y") {
+        CrossSection::SetResidualGamma(true);
+        std::cout << "Setting calculation of residual gamma cross section." << std::endl;
+      } else if(residual=="N") {
+        CrossSection::SetResidualGamma(false);
+        std::cout << "Unsetting calculation of residual gamma cross section." << std::endl;
+      }
+      it = args.erase(it);
+    } else if(it->compare(0,19,"--residual-neutron=")==0) {
+      std::string residual = it->substr(19);
+      if(residual=="Y") {
+        CrossSection::SetResidualNeutron(true);
+        std::cout << "Setting calculation of residual neutron cross section." << std::endl;
+      } else if(residual=="N") {
+        CrossSection::SetResidualNeutron(false);
+        std::cout << "Unsetting calculation of residual neutron cross section." << std::endl;
+      }
+      it = args.erase(it);
+    } else if(it->compare(0,18,"--residual-proton=")==0) {
+      std::string residual = it->substr(18);
+      if(residual=="Y") {
+        CrossSection::SetResidualProton(true);
+        std::cout << "Setting calculation of residual proton cross section." << std::endl;
+      } else if(residual=="N") {
+        CrossSection::SetResidualProton(false);
+        std::cout << "Unsetting calculation of residual proton cross section." << std::endl;
+      }
+      it = args.erase(it);
+    } else if(it->compare(0,17,"--residual-alpha=")==0) {
+      std::string residual = it->substr(17);
+      if(residual=="Y") {
+        CrossSection::SetResidualAlpha(true);
+        std::cout << "Setting calculation of residual alpha cross section." << std::endl;
+      } else if(residual=="N") {
+        CrossSection::SetResidualAlpha(false);
+        std::cout << "Unsetting calculation of residual alpha cross section." << std::endl;
+      }
+      it = args.erase(it);
+    } else if(it->compare(0,19,"--average-rad-width")==0) {
+      calcAverageWidth = true;
+      it = args.erase(it);
+    } else if(it->compare(0,7,"--rates")==0) {
+      calcRates = true;
+      it = args.erase(it);
+    } else if(it->compare(0,5,"--in=")==0)  {
+      asciiIn = true;
+      inFile = it->substr(5);
+      it = args.erase(it);
+    } else if(it->compare(0,11,"--entrance=")==0)  {
+      std::istringstream stm(it->substr(11));
+       if(!(stm>>entranceState)) entranceState = 0;
+      it = args.erase(it);
+    } else if(it->compare(0,13,"--gamma-exit=")==0)  {
+      std::istringstream stm(it->substr(13));
+      int exit;
+      if(stm>>exit) {
+	exitStates[0]=exit;
+      }
+      it = args.erase(it);
+    } else if(it->compare(0,15,"--neutron-exit=")==0)  {
+      std::istringstream stm(it->substr(15));
+      int exit;
+      if(stm>>exit) {
+	exitStates[1]=exit;
+      }
+      it = args.erase(it);
+    } else if(it->compare(0,14,"--proton-exit=")==0)  {
+      std::istringstream stm(it->substr(14));
+      int exit;
+      if(stm>>exit) {
+	exitStates[2]=exit;
+      }
+      it = args.erase(it);
+    } else if(it->compare(0,13,"--alpha-exit=")==0)  {
+      std::istringstream stm(it->substr(13));
+      int exit;
+      if(stm>>exit) {
+	exitStates[3]=exit;
+      }
+      it = args.erase(it);
+    } else if(it->compare(0,14,"--transmission")==0)  {
+      printTrans=true;
+      it = args.erase(it);
+#endif
+    } else if(it->compare(0,9,"--suffix=")==0) {
+      std::istringstream stm(it->substr(9));
+      if(!(stm>>suffixNo)) suffixNo = 0;
+      it = args.erase(it);
+    } else if(it->compare(0,9,"--pre-eq=")==0) {
+      preEq=true;
+      std::string particleHoleString = it->substr(9);
+      std::string temp;
+      int argNum = 0;
+      for(unsigned char i = 0;i<=particleHoleString.length();++i) {
+        if(particleHoleString[i]==','||i==particleHoleString.length()) {
+          std::istringstream stm(temp);
+          if(argNum == 0) {
+            stm>>numPiParticles;
+          } else if(argNum == 1) {
+            stm>>numPiHoles; 
+          } else if(argNum == 2) {
+            stm>>numNuParticles;
+          } else if(argNum == 3) {
+            stm>>numNuHoles;
+          }
+          temp.clear();
+          argNum++; 
+        } else {
+	  temp.push_back(particleHoleString[i]);
+        }
+      }
+      if(numPiParticles<0||numPiHoles<0||numNuParticles<0||numNuHoles<0) 
+	std::cout << "Error parsing pre-eq options." << std::endl;
+      it = args.erase(it);
+    } else if(it->compare(0,11,"--opt-alpha")==0) {
+      std::cout << "Using optical model for alpha transmission term." << std::endl;
+      ParticleTransmissionFunc::SetAlphaFormalism(1);
+      it = args.erase(it);
+    } else if(it->compare(0,13,"--opt-neutron")==0) {
+      std::cout << "Using optical model for neutron transmission term." << std::endl;
+      ParticleTransmissionFunc::SetNeutronFormalism(1);
+      it = args.erase(it);
+    } else if(it->compare(0,12,"--opt-proton")==0) {
+      std::cout << "Using optical model for proton transmission term." << std::endl;
+      ParticleTransmissionFunc::SetProtonFormalism(1);
+      it = args.erase(it);
+    } else if(it->compare(0,7,"--EGDR=")==0) {
+      std::string type = it->substr(7);
+      std::transform(type.begin(), type.end(),
+		     type.begin(), ::tolower);
+      if(type=="edslo") {
+	std::cout << "Using ED-SLO EGDR shape." << std::endl;
+	GammaTransmissionFunc::SetEGDRType(2);
+      } else if(type=="slo") {
+	std::cout << "Using SLO EGDR shape." << std::endl;
+	GammaTransmissionFunc::SetEGDRType(0);
+      } else if(type=="glo") {
+	std::cout << "Using GLO EGDR shape." << std::endl;
+	GammaTransmissionFunc::SetEGDRType(1);
+      }
+      it = args.erase(it);
+    } else if(it->compare(0,15,"--porter-thomas")==0) {
+      std::cout << "Enabling Porter-Thomas distrbutions." << std::endl;
+      GammaTransmissionFunc::SetPorterThomas(true); 
+      ParticleTransmissionFunc::SetPorterThomas(true); 
+      it = args.erase(it);
+    } else ++it;
+  }
+}
+
+/**
+ * @brief CMD line parameters are parsed for the Decay module
+ * @param args cmd line string
+ * @param Z nuclear charge number
+ * @param A nuclear mass number
+ * @param J Reference to a spin double
+ * @param Pi Reference to a parity int
+ * @param lowEnergy Reference to a lowEnergy double
+ * @param highEnergy  Reference to a highEnergy double
+ * @param events  Reference to the events int.
+ * 
+ * @returns True or False
+ * 
+ * @note This has to move to another class in future. This does not belong in a main file but in the class file of the respective module.
+ * 
+ */
+bool parseCommandLineForDecay(std::vector<std::string>& args, 
+			      int& Z, int& A, double& J, int& Pi, 
+			      double& lowEnergy, double& highEnergy,
+			      int& events) {
+                      
+  if(args.size()<4) return false;
+  
+  bool goodA=false;
+  bool goodZ=false;
+  bool goodPi=false;
+  bool goodJ=false;
+  bool goodEnergy=false;
+  
+  std::string isotopeString(args[1]);
+  std::string massNumberString;
+  for(int i = 0; i<isotopeString.length(); i++) {
+  	std::string nextChar(isotopeString,i,1);
+    std::istringstream stm(nextChar);
+    int nextDigit;
+    if(!(stm>>nextDigit)) break;
+    else massNumberString+=nextChar;
+  }
+  if(massNumberString.length()>0) {
+    A = atoi(massNumberString.c_str());
+    goodA = true;
+  }
+  if(NuclearMass::FindZ(isotopeString.substr(massNumberString.length()))!=-1) {
+    Z = NuclearMass::FindZ(isotopeString.substr(massNumberString.length()));
+    goodZ = true;
+  }
+  
+  std::string jPiString(args[2]);
+  std::string firstString,secondString,parityString,delimiterString;
+  bool foundDelimiter = false;
+  for(int i = 0;i<jPiString.length();i++) {
+  	std::string nextChar(jPiString,i,1);
+  	if(nextChar=='/'||nextChar=='.') {
+  	  foundDelimiter=true;
+  	  delimiterString=nextChar;
+  	  continue;
+  	} else if(nextChar=='+'||nextChar=='-') {
+  	  parityString = nextChar;
+      break;
+    }
+    std::istringstream stm(nextChar);
+    int digit;
+    if(stm>>digit) {
+      if(!foundDelimiter) firstString+=nextChar;
+      else secondString+=nextChar;
+    }
+  }
+  if(parityString.length()>0) {
+    if(parityString=="-") Pi=-1;
+    else if(parityString=="+") Pi=1;
+    goodPi=true;
+  }
+  if(firstString.length()>0) {
+  	if(foundDelimiter&&delimiterString=="/") {
+  	  if(secondString.length()>0) J = atof(firstString.c_str())/atof(secondString.c_str());
+  	  else J = atof(firstString.c_str());
+  	} else if(foundDelimiter&&delimiterString==".") {
+  	  firstString += '.'+secondString;
+  	  J = atof(firstString.c_str());
+  	} else J = atof(firstString.c_str());
+  	double intPart;
+    if(modf(J*2.,&intPart)==0.) goodJ=true; 
+  }
+  
+  std::string energyString(args[3]); 
+  if(energyString.length()>0) {
+    std::string lowEnergyString;
+    std::string highEnergyString;
+    int dashPos = energyString.find_first_of('-');
+    if(dashPos!=std::string::npos) {
+      lowEnergyString = energyString.substr(0,dashPos+1);
+      highEnergyString = energyString.substr(dashPos+1);
+    } else {
+      lowEnergyString = highEnergyString = energyString;
+    }
+    std::istringstream lowEnergyStream(lowEnergyString);
+    std::istringstream highEnergyStream(highEnergyString);
+    if((lowEnergyStream>>lowEnergy)&&
+       (highEnergyStream>>highEnergy)) goodEnergy=true;
+  }
+  
+  if(args.size()>4) {
+    std::string eventsString(args[4]);
+    if(eventsString.length()>0) {
+      std::istringstream stm(eventsString);
+      if(!(stm>>events)) events = 1;
+    }
+  } else events = 1;
+    
+  return (goodA&&goodZ&&goodPi&&goodJ&&goodEnergy);       
+}
+
+#ifndef MPI_BUILD
+/**
+ * @brief CMD line parameters are parsed for the Cross section module
+ * @param args cmd line string
+ * @param Z nuclear charge number
+ * @param A nuclear mass number
+ * @param pType Projectile
+ * @param energyFile Reference to the string for the path to the EnergyFile
+ * @param asciiIn Boolean which shows if there is a asciiFile or not
+ * @param highEnergy  Reference to a highEnergy double
+ * @param events  Reference to the events int.
+ * 
+ * @returns True or False
+ * 
+ * @note This has to move to another class in future. This does not belong in a main file but in the class file of the respective module.
+ * 
+ */
+bool parseCommandLineForXS(std::vector<std::string>& args,int& Z, int&A, 
+			   int& pType, std::string& energyFile, bool asciiIn) {
+
+  if(asciiIn) {
+    if(args.size()==2) energyFile = std::string(args[1]);
+    return true;
+  }
+  
+  if(args.size()<2) return false;
+
+  bool goodA=false;
+  bool goodZ=false;
+  bool goodPType=false;
+
+  std::string reactionString(args[1]);
+  std::string massNumberString;
+  for(int i = 0; i<reactionString.length(); i++) {
+    std::string nextChar(reactionString,i,1);
+    std::istringstream stm(nextChar);
+    int nextDigit;
+    if(!(stm>>nextDigit)) break;
+    else massNumberString+=nextChar;
+  }
+  if(massNumberString.length()>0) {
+    A = atoi(massNumberString.c_str());
+    goodA = true;
+  }
+  reactionString.erase(0,massNumberString.length());
+  std::string atomicNumberString;
+  for(int i = 0; i<reactionString.length(); i++) {
+    std::string nextChar(reactionString,i,1);
+    if(nextChar=="+") break;
+    else atomicNumberString+=nextChar;
+  }
+  if(NuclearMass::FindZ(atomicNumberString) != -1) {
+    Z = NuclearMass::FindZ(atomicNumberString);
+    goodZ = true;
+  }
+  reactionString.erase(0,atomicNumberString.length());
+  std::string projectileString;
+  for(int i = 0; i<reactionString.length(); i++) {
+    std::string nextChar(reactionString,i,1);
+    if(nextChar=="+") continue;
+    else projectileString+=nextChar;
+  }
+  if(projectileString=="g") {
+    pType = 0;
+    goodPType=true;
+  } else if(projectileString=="n") {
+    pType = 1;
+    goodPType=true;
+  } else if(projectileString=="p") {
+    pType = 2;
+    goodPType=true;
+  } else if(projectileString=="a") {
+    pType = 3;
+    goodPType=true;
+  }
+
+  if(args.size()==3) energyFile = std::string(args[2]);
+
+  return (goodA&&goodZ&&goodPType);
+}
+
+
+
+#ifndef MPI_BUILD
 int main(int argc, char *argv[]) {
 
  	if ( argc <=1 ) {
@@ -519,380 +899,3 @@ void printHelp() {
 	std::cout << std::endl;
 } */
 
-#ifndef MPI_BUILD
-void parseCommandLineForOptions(std::vector<std::string>& args, int& suffixNo, bool &preEq,
-				int& numPiParticles, int& numPiHoles, int& numNuParticles, int& numNuHoles,
-                                bool& calcAverageWidth, bool& calcRates, bool& asciiIn,
-				std::string& inFile, int& entranceState, std::vector<int>& exitStates,
-				bool& printTrans) {
-#else
-void parseCommandLineForOptions(std::vector<std::string>& args, int& suffixNo, bool &preEq,
-				int& numPiParticles, int& numPiHoles, int& numNuParticles, int& numNuHoles) {
-#endif
-  std::vector<std::string>::iterator it = args.begin();
-  while(it!=args.end()) {
-    if(it->compare(0,8,"--l-max=")==0) {
-      std::istringstream stm(it->substr(8));
-      double maxL;
-      if(stm>>maxL) {
-	Decayer::SetMaxL(maxL);
-	std::cout << "Maximum l-value set to " << int(Decayer::GetMaxL()) 
-		  << "." << std::endl;
-      }
-      it = args.erase(it);
-#ifndef MPI_BUILD
-    } else if(it->compare(0,15,"--gamma-cutoff=")==0) {
-      std::istringstream stm(it->substr(15));
-      double cutoffEnergy;
-      if(stm>>cutoffEnergy) {
-	CrossSection::SetCalculateGammaCutoff(false);
-	TransitionRateFunc::SetGammaCutoffEnergy(cutoffEnergy);
-	std::cout << "Gamma channel integration cutoff energy set to " 
-		  << TransitionRateFunc::GetGammaCutoffEnergy() << "." 
-		  << std::endl;
-      }
-      it = args.erase(it);
-    } else if(it->compare(0,17,"--residual-gamma=")==0) {
-      std::string residual = it->substr(17);
-      if(residual=="Y") {
-        CrossSection::SetResidualGamma(true);
-        std::cout << "Setting calculation of residual gamma cross section." << std::endl;
-      } else if(residual=="N") {
-        CrossSection::SetResidualGamma(false);
-        std::cout << "Unsetting calculation of residual gamma cross section." << std::endl;
-      }
-      it = args.erase(it);
-    } else if(it->compare(0,19,"--residual-neutron=")==0) {
-      std::string residual = it->substr(19);
-      if(residual=="Y") {
-        CrossSection::SetResidualNeutron(true);
-        std::cout << "Setting calculation of residual neutron cross section." << std::endl;
-      } else if(residual=="N") {
-        CrossSection::SetResidualNeutron(false);
-        std::cout << "Unsetting calculation of residual neutron cross section." << std::endl;
-      }
-      it = args.erase(it);
-    } else if(it->compare(0,18,"--residual-proton=")==0) {
-      std::string residual = it->substr(18);
-      if(residual=="Y") {
-        CrossSection::SetResidualProton(true);
-        std::cout << "Setting calculation of residual proton cross section." << std::endl;
-      } else if(residual=="N") {
-        CrossSection::SetResidualProton(false);
-        std::cout << "Unsetting calculation of residual proton cross section." << std::endl;
-      }
-      it = args.erase(it);
-    } else if(it->compare(0,17,"--residual-alpha=")==0) {
-      std::string residual = it->substr(17);
-      if(residual=="Y") {
-        CrossSection::SetResidualAlpha(true);
-        std::cout << "Setting calculation of residual alpha cross section." << std::endl;
-      } else if(residual=="N") {
-        CrossSection::SetResidualAlpha(false);
-        std::cout << "Unsetting calculation of residual alpha cross section." << std::endl;
-      }
-      it = args.erase(it);
-    } else if(it->compare(0,19,"--average-rad-width")==0) {
-      calcAverageWidth = true;
-      it = args.erase(it);
-    } else if(it->compare(0,7,"--rates")==0) {
-      calcRates = true;
-      it = args.erase(it);
-    } else if(it->compare(0,5,"--in=")==0)  {
-      asciiIn = true;
-      inFile = it->substr(5);
-      it = args.erase(it);
-    } else if(it->compare(0,11,"--entrance=")==0)  {
-      std::istringstream stm(it->substr(11));
-       if(!(stm>>entranceState)) entranceState = 0;
-      it = args.erase(it);
-    } else if(it->compare(0,13,"--gamma-exit=")==0)  {
-      std::istringstream stm(it->substr(13));
-      int exit;
-      if(stm>>exit) {
-	exitStates[0]=exit;
-      }
-      it = args.erase(it);
-    } else if(it->compare(0,15,"--neutron-exit=")==0)  {
-      std::istringstream stm(it->substr(15));
-      int exit;
-      if(stm>>exit) {
-	exitStates[1]=exit;
-      }
-      it = args.erase(it);
-    } else if(it->compare(0,14,"--proton-exit=")==0)  {
-      std::istringstream stm(it->substr(14));
-      int exit;
-      if(stm>>exit) {
-	exitStates[2]=exit;
-      }
-      it = args.erase(it);
-    } else if(it->compare(0,13,"--alpha-exit=")==0)  {
-      std::istringstream stm(it->substr(13));
-      int exit;
-      if(stm>>exit) {
-	exitStates[3]=exit;
-      }
-      it = args.erase(it);
-    } else if(it->compare(0,14,"--transmission")==0)  {
-      printTrans=true;
-      it = args.erase(it);
-#endif
-    } else if(it->compare(0,9,"--suffix=")==0) {
-      std::istringstream stm(it->substr(9));
-      if(!(stm>>suffixNo)) suffixNo = 0;
-      it = args.erase(it);
-    } else if(it->compare(0,9,"--pre-eq=")==0) {
-      preEq=true;
-      std::string particleHoleString = it->substr(9);
-      std::string temp;
-      int argNum = 0;
-      for(unsigned char i = 0;i<=particleHoleString.length();++i) {
-        if(particleHoleString[i]==','||i==particleHoleString.length()) {
-          std::istringstream stm(temp);
-          if(argNum == 0) {
-            stm>>numPiParticles;
-          } else if(argNum == 1) {
-            stm>>numPiHoles; 
-          } else if(argNum == 2) {
-            stm>>numNuParticles;
-          } else if(argNum == 3) {
-            stm>>numNuHoles;
-          }
-          temp.clear();
-          argNum++; 
-        } else {
-	  temp.push_back(particleHoleString[i]);
-        }
-      }
-      if(numPiParticles<0||numPiHoles<0||numNuParticles<0||numNuHoles<0) 
-	std::cout << "Error parsing pre-eq options." << std::endl;
-      it = args.erase(it);
-    } else if(it->compare(0,11,"--opt-alpha")==0) {
-      std::cout << "Using optical model for alpha transmission term." << std::endl;
-      ParticleTransmissionFunc::SetAlphaFormalism(1);
-      it = args.erase(it);
-    } else if(it->compare(0,13,"--opt-neutron")==0) {
-      std::cout << "Using optical model for neutron transmission term." << std::endl;
-      ParticleTransmissionFunc::SetNeutronFormalism(1);
-      it = args.erase(it);
-    } else if(it->compare(0,12,"--opt-proton")==0) {
-      std::cout << "Using optical model for proton transmission term." << std::endl;
-      ParticleTransmissionFunc::SetProtonFormalism(1);
-      it = args.erase(it);
-    } else if(it->compare(0,7,"--EGDR=")==0) {
-      std::string type = it->substr(7);
-      std::transform(type.begin(), type.end(),
-		     type.begin(), ::tolower);
-      if(type=="edslo") {
-	std::cout << "Using ED-SLO EGDR shape." << std::endl;
-	GammaTransmissionFunc::SetEGDRType(2);
-      } else if(type=="slo") {
-	std::cout << "Using SLO EGDR shape." << std::endl;
-	GammaTransmissionFunc::SetEGDRType(0);
-      } else if(type=="glo") {
-	std::cout << "Using GLO EGDR shape." << std::endl;
-	GammaTransmissionFunc::SetEGDRType(1);
-      }
-      it = args.erase(it);
-    } else if(it->compare(0,15,"--porter-thomas")==0) {
-      std::cout << "Enabling Porter-Thomas distrbutions." << std::endl;
-      GammaTransmissionFunc::SetPorterThomas(true); 
-      ParticleTransmissionFunc::SetPorterThomas(true); 
-      it = args.erase(it);
-    } else ++it;
-  }
-}
-
-/**
- * @brief CMD line parameters are parsed for the Decay module
- * @param args cmd line string
- * @param Z nuclear charge number
- * @param A nuclear mass number
- * @param J Reference to a spin double
- * @param Pi Reference to a parity int
- * @param lowEnergy Reference to a lowEnergy double
- * @param highEnergy  Reference to a highEnergy double
- * @param events  Reference to the events int.
- * 
- * @returns True or False
- * 
- * @note This has to move to another class in future. This does not belong in a main file but in the class file of the respective module.
- * 
- */
-bool parseCommandLineForDecay(std::vector<std::string>& args, 
-			      int& Z, int& A, double& J, int& Pi, 
-			      double& lowEnergy, double& highEnergy,
-			      int& events) {
-                      
-  if(args.size()<4) return false;
-  
-  bool goodA=false;
-  bool goodZ=false;
-  bool goodPi=false;
-  bool goodJ=false;
-  bool goodEnergy=false;
-  
-  std::string isotopeString(args[1]);
-  std::string massNumberString;
-  for(int i = 0; i<isotopeString.length(); i++) {
-  	std::string nextChar(isotopeString,i,1);
-    std::istringstream stm(nextChar);
-    int nextDigit;
-    if(!(stm>>nextDigit)) break;
-    else massNumberString+=nextChar;
-  }
-  if(massNumberString.length()>0) {
-    A = atoi(massNumberString.c_str());
-    goodA = true;
-  }
-  if(NuclearMass::FindZ(isotopeString.substr(massNumberString.length()))!=-1) {
-    Z = NuclearMass::FindZ(isotopeString.substr(massNumberString.length()));
-    goodZ = true;
-  }
-  
-  std::string jPiString(args[2]);
-  std::string firstString,secondString,parityString,delimiterString;
-  bool foundDelimiter = false;
-  for(int i = 0;i<jPiString.length();i++) {
-  	std::string nextChar(jPiString,i,1);
-  	if(nextChar=='/'||nextChar=='.') {
-  	  foundDelimiter=true;
-  	  delimiterString=nextChar;
-  	  continue;
-  	} else if(nextChar=='+'||nextChar=='-') {
-  	  parityString = nextChar;
-      break;
-    }
-    std::istringstream stm(nextChar);
-    int digit;
-    if(stm>>digit) {
-      if(!foundDelimiter) firstString+=nextChar;
-      else secondString+=nextChar;
-    }
-  }
-  if(parityString.length()>0) {
-    if(parityString=="-") Pi=-1;
-    else if(parityString=="+") Pi=1;
-    goodPi=true;
-  }
-  if(firstString.length()>0) {
-  	if(foundDelimiter&&delimiterString=="/") {
-  	  if(secondString.length()>0) J = atof(firstString.c_str())/atof(secondString.c_str());
-  	  else J = atof(firstString.c_str());
-  	} else if(foundDelimiter&&delimiterString==".") {
-  	  firstString += '.'+secondString;
-  	  J = atof(firstString.c_str());
-  	} else J = atof(firstString.c_str());
-  	double intPart;
-    if(modf(J*2.,&intPart)==0.) goodJ=true; 
-  }
-  
-  std::string energyString(args[3]); 
-  if(energyString.length()>0) {
-    std::string lowEnergyString;
-    std::string highEnergyString;
-    int dashPos = energyString.find_first_of('-');
-    if(dashPos!=std::string::npos) {
-      lowEnergyString = energyString.substr(0,dashPos+1);
-      highEnergyString = energyString.substr(dashPos+1);
-    } else {
-      lowEnergyString = highEnergyString = energyString;
-    }
-    std::istringstream lowEnergyStream(lowEnergyString);
-    std::istringstream highEnergyStream(highEnergyString);
-    if((lowEnergyStream>>lowEnergy)&&
-       (highEnergyStream>>highEnergy)) goodEnergy=true;
-  }
-  
-  if(args.size()>4) {
-    std::string eventsString(args[4]);
-    if(eventsString.length()>0) {
-      std::istringstream stm(eventsString);
-      if(!(stm>>events)) events = 1;
-    }
-  } else events = 1;
-    
-  return (goodA&&goodZ&&goodPi&&goodJ&&goodEnergy);       
-}
-
-#ifndef MPI_BUILD
-/**
- * @brief CMD line parameters are parsed for the Cross section module
- * @param args cmd line string
- * @param Z nuclear charge number
- * @param A nuclear mass number
- * @param pType Projectile
- * @param energyFile Reference to the string for the path to the EnergyFile
- * @param asciiIn Boolean which shows if there is a asciiFile or not
- * @param highEnergy  Reference to a highEnergy double
- * @param events  Reference to the events int.
- * 
- * @returns True or False
- * 
- * @note This has to move to another class in future. This does not belong in a main file but in the class file of the respective module.
- * 
- */
-bool parseCommandLineForXS(std::vector<std::string>& args,int& Z, int&A, 
-			   int& pType, std::string& energyFile, bool asciiIn) {
-
-  if(asciiIn) {
-    if(args.size()==2) energyFile = std::string(args[1]);
-    return true;
-  }
-  
-  if(args.size()<2) return false;
-
-  bool goodA=false;
-  bool goodZ=false;
-  bool goodPType=false;
-
-  std::string reactionString(args[1]);
-  std::string massNumberString;
-  for(int i = 0; i<reactionString.length(); i++) {
-    std::string nextChar(reactionString,i,1);
-    std::istringstream stm(nextChar);
-    int nextDigit;
-    if(!(stm>>nextDigit)) break;
-    else massNumberString+=nextChar;
-  }
-  if(massNumberString.length()>0) {
-    A = atoi(massNumberString.c_str());
-    goodA = true;
-  }
-  reactionString.erase(0,massNumberString.length());
-  std::string atomicNumberString;
-  for(int i = 0; i<reactionString.length(); i++) {
-    std::string nextChar(reactionString,i,1);
-    if(nextChar=="+") break;
-    else atomicNumberString+=nextChar;
-  }
-  if(NuclearMass::FindZ(atomicNumberString) != -1) {
-    Z = NuclearMass::FindZ(atomicNumberString);
-    goodZ = true;
-  }
-  reactionString.erase(0,atomicNumberString.length());
-  std::string projectileString;
-  for(int i = 0; i<reactionString.length(); i++) {
-    std::string nextChar(reactionString,i,1);
-    if(nextChar=="+") continue;
-    else projectileString+=nextChar;
-  }
-  if(projectileString=="g") {
-    pType = 0;
-    goodPType=true;
-  } else if(projectileString=="n") {
-    pType = 1;
-    goodPType=true;
-  } else if(projectileString=="p") {
-    pType = 2;
-    goodPType=true;
-  } else if(projectileString=="a") {
-    pType = 3;
-    goodPType=true;
-  }
-
-  if(args.size()==3) energyFile = std::string(args[2]);
-
-  return (goodA&&goodZ&&goodPType);
-}
