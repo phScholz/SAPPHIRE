@@ -6,8 +6,14 @@
 - [Compilation & Execution](#compilation--execution)
   - [Requirements](#requirements)
   - [Build](#build)
+    - [Automatically](#automatically)
+    - [Manually](#manually)
   - [Run](#run)
-- [Features](#features)
+- [Modules](#modules)
+    - [reaction](#reaction)
+    - [decayer](#decayer)
+    - [old](#old)
+    - [help](#help)
 - [References](#references)
   - [About Sapphire](#about-sapphire)
   - [Using Sapphire](#using-sapphire)
@@ -43,7 +49,18 @@ For an `automized generation of documentation files`, one needs [doxygen](http:/
 For the `Message Passing Interface (MPI)` build, `boost 1.4` libraries are required. The MPI build is optional and can be enabled in the `CMakeLists.txt`.
 
 ## Build
+## Automatically
+A simple bash script has been written, does the steps below automatically for you. Since it uses relative paths you need to be in your Sapphire main directory and then simply execute:
+```bash
+bash build.sh
+```
 
+To delete the directories which have been created during the build process, simply run the following command in your Sapphire main directory:
+```bash
+bash clean.sh
+```
+
+## Manually
 1. Create a build directory under the main Sapphire directory and change to that directory. 
    ```bash
    mkdir build
@@ -73,9 +90,15 @@ To execute the code just enter
 
 where X is the heavy nucleus and a is the projectile. Examples are 25Mg+a or 60Fe+n.  
 
-# Features
+# Modules
 
-## Calculate Cross Sections
+## reaction
+
+## decayer
+
+## old
+
+## help
 
 
 # References
