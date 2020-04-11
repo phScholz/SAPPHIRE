@@ -108,7 +108,7 @@ namespace Module_OldSapphire{
     bool parseCommandLineForDecay(std::vector<std::string>& args, 
 			      int& Z, int& A, double& J, int& Pi, 
 			      double& lowEnergy, double& highEnergy,
-			      int& events)
+			      int& events);
 
     #ifdef MPI_BUILD
     void masterProcess(boost::mpi::communicator& world,InitialNucleusData initalNucleus, int suffixNo,int events);
