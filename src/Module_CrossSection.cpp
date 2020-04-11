@@ -30,7 +30,7 @@ namespace Module_CrossSection{
         }
         
         if(fexists(argv[2])){
-            std::ccout << "Now I would handle the input-File." << std::endl;
+            std::cout << "Now I would handle the input-File." << std::endl;
         }
         else{
             std::vector<EntrancePairs> entrancePairs;
@@ -38,7 +38,7 @@ namespace Module_CrossSection{
             int Z = atomicNumberIntFromString(argv[2]);
             int pType = pTypeFromIntString(argv[2]);
             std::string energyFile;
-            bool forRates = False;
+            bool forRates = false;
             int entranceState = 0;
             std::vector<int> exitStates(4,-1);
             
@@ -55,6 +55,7 @@ namespace Module_CrossSection{
                 std::cout << "Could not calculate cross section." << std::endl;    
             }            
             delete xs;
+        }
     }
 
     void Run(int argc,char *argv[]){}
