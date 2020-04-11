@@ -68,7 +68,7 @@ place.  If moved, the build process should be repeated.
 To execute the code just enter
 
 ```
-./sapphire X+a
+./sapphire old X+a
 ```
 
 where X is the heavy nucleus and a is the projectile. Examples are 25Mg+a or 60Fe+n.  
