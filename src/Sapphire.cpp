@@ -16,20 +16,23 @@
  */
 #include "Module_CrossSection.h"
 #include "Module_OldSapphire.h"
+#include "Module_Decayer.h"
 
 /**
  * @brief Secondary function to print help. This is the first step to reconstruct Sapphire.cpp.
  */
 void PrintHelp(){
   std::cout << std::endl;
-	std::cout << "Statistical Analysis for Particle and Photoncapture and decay of HIgh energy REsonances" << std::endl;
-	std::cout << "---------------------------------------------------------------------------------------" << std::endl;
-	#ifndef MPI_BUILD
+	std::cout << "Sapphire" << std::endl;
+	std::cout << "--------" << std::endl;
+	std::cout << std::endl;
+  #ifndef MPI_BUILD
   std::cout << " MPI_BUILD is OFF" << std::endl;
   #endif 
   #ifdef MPI_BUILD
   std::cout << " MPI_BUILD is ON" << std::endl;
   #endif 
+  std::cout << std::endl;
   std::cout << " Supported modes:" << std::endl;
 	std::cout << std::endl;
   #ifndef MPI_BUILD
@@ -37,12 +40,16 @@ void PrintHelp(){
   #endif 
 	std::cout << " decay         - Calculate Monte-Carlo statistical decay" << std::endl;
   std::cout << " old           - Instruction for the old Sapphire code." << std::endl;
-	//std::cout << "Template     - Generate examplary configuration files" << std::endl;
 	std::cout << " help           - Show this help message" << std::endl;
 	std::cout << std::endl;
   
 } 
 
+/**
+ * @brief Check the first cmd parameter give and decide which module is responsible. Then run the respective module.
+ * @param argc Number of cmd line parameters.
+ * @param argv Array of cmd line parameters. 
+ */
 int main(int argc, char *argv[]) {
 
   if (argc <=1 ) {
@@ -55,7 +62,8 @@ int main(int argc, char *argv[]) {
   if (mode == "reaction")
 		Module_CrossSection::Go(argc,argv);
   
-  //else if (mode == "decay")
+  else if (mode == "decay")
+    Module_Decayer::Go(argc,argv);
 
   else if (mode == "old")
     Module_OldSapphire::Go(argc, argv);
