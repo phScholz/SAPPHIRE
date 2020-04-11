@@ -36,7 +36,7 @@ namespace Module_CrossSection{
             std::vector<EntrancePairs> entrancePairs;
             int A = massNumberIntFromString(argv[2]);
             int Z = atomicNumberIntFromString(argv[2]);
-            int pType = pTypeFromIntString(argv[2]);
+            int pType = pTypeIntFromString(argv[2]);
             std::string energyFile;
             bool forRates = false;
             int entranceState = 0;
