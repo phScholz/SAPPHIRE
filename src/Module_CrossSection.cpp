@@ -2,12 +2,59 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <vector>
 
 #include "NuclearMass.h"
+#include "CrossSection.h"
+
+#include "Setup.cpp"
+
+extern void Initialize();
 
 namespace Module_CrossSection{
+
+    typedef struct EntrancePairs {
+        EntrancePairs(int Z,int A,int pType) {
+            Z_=Z;
+            A_=A;
+            pType_=pType;
+        };
+        int Z_;
+        int A_;
+        int pType_;
+    } EntrancePairs;
+
     void Go(int argc,char *argv[]){
-       printHelp();
+        if(argc < 3){
+            printHelp();
+        }
+        
+        if(fexists(argv[2])){
+            std::ccout << "Now I would handle the input-File." << std::endl;
+        }
+        else{
+            std::vector<EntrancePairs> entrancePairs;
+            int A = massNumberIntFromString(argv[2]);
+            int Z = atomicNumberIntFromString(argv[2]);
+            int pType = pTypeFromIntString(argv[2]);
+            std::string energyFile;
+            bool forRates = False;
+            int entranceState = 0;
+            std::vector<int> exitStates(4,-1);
+            
+
+
+            CrossSection* xs = new CrossSection(Z,A,pType,energyFile,forRates,entranceState,exitStates);
+            if(xs->IsValid())
+            {
+                xs->Calculate();
+                xs->PrintCrossSections();
+            }
+            else
+            {
+                std::cout << "Could not calculate cross section." << std::endl;    
+            }            
+            delete xs;
     }
 
     void Run(int argc,char *argv[]){}
@@ -17,7 +64,26 @@ namespace Module_CrossSection{
     return (bool)ifile;
     }
 
-    int pTypeFromString(const char* projectileString){
+    std::string pTypeStringFromString(std::string reactionString){
+        massNumberString=massNumberStringFromString(reactionString);
+        atomicNumberString=atomicNumberStringFromString(reactionString);
+
+        reactionString.erase(0,massNumberString.length());
+        reactionString.erase(0,atomicNumberString.length());
+      
+        std::string projectileString;
+        for(int i = 0; i<reactionString.length(); i++) {
+            std::string nextChar(reactionString,i,1);
+            if(nextChar=="+") continue;
+            else projectileString+=nextChar;
+        }
+
+        return projectileString;
+    }
+
+    int pTypeIntFromString(std::string reactionString){
+        std::string projectileString = pTypeStringFromString(reactionString);
+
         if(projectileString=="g")
             return 0;
         else if(projectileString=="n") 

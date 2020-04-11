@@ -20,24 +20,28 @@ CrossSection::CrossSection(int Z, int A, int pType, std::string energyFile, bool
 
   groundStateJ_ =-1.;
   std::vector<Level> knownLevels = NuclearLevels::FindLevels(Z,A);
+  
   if(knownLevels.size()>entranceState) {
     Level groundState = knownLevels[entranceState];
     std::string parity = (groundState.Pi_<0) ? "-" : "+";
-    if(entranceState!=0) std::cout << "Initial state: E=" << groundState.energy_
-				   << " MeV, J=" << groundState.J_ << parity << std::endl;
-    if(entranceState>0||groundState.energy_==0.) {
-      groundStateJ_ = groundState.J_;
-      groundStatePi_ = groundState.Pi_;
-    }
+      if(entranceState!=0) std::cout << "Initial state: E=" << groundState.energy_
+				                          << " MeV, J=" << groundState.J_ << parity << std::endl;
+    
+      if(entranceState>0||groundState.energy_==0.) {
+        groundStateJ_ = groundState.J_;
+        groundStatePi_ = groundState.Pi_;
+      }
   } else {
     std::cout << "Initial state not known." << std::endl;
   }
+  
   if(groundStateJ_==-1.) {
     isValid_=false;
     return;
   }
 
   double qValue;
+  
   if(pType_ == 0) {
     qValue=0.;
     compoundZ_ = Z;
@@ -45,6 +49,7 @@ CrossSection::CrossSection(int Z, int A, int pType, std::string energyFile, bool
     double spinNorm=2.*(2.*groundStateJ_+1.); 
     preFactor_=hbarc*hbarc/100.*pi/spinNorm;
   } else if(pType_ == 1) {
+    
     if(!NuclearMass::QValue(Z,A+1,Z,A,qValue)) {
       isValid_=false;
       return;
@@ -54,7 +59,9 @@ CrossSection::CrossSection(int Z, int A, int pType, std::string energyFile, bool
     double reducedMass =double(A)/double(A+1);
     double spinNorm=2.*(2.*groundStateJ_+1.);
     preFactor_ = hbarc*hbarc/200.*pi/uconv/reducedMass/spinNorm;
+  
   } else if(pType_ == 2) {
+    
     if(!NuclearMass::QValue(Z+1,A+1,Z,A,qValue)) {
       isValid_=false;
       return;
@@ -64,67 +71,76 @@ CrossSection::CrossSection(int Z, int A, int pType, std::string energyFile, bool
     double reducedMass=double(A)/double(A+1);
     double spinNorm=2.*(2.*groundStateJ_+1.);
     preFactor_ = hbarc*hbarc/200.*pi/uconv/reducedMass/spinNorm;
-  }  else if(pType_ ==3) {
+  
+  } else if(pType_ ==3) {
+    
     if(!NuclearMass::QValue(Z+2,A+4,Z,A,qValue)) {
       isValid_=false;
       return;
     }
+  
     compoundZ_ = Z+2;
     compoundA_ = A+4;
     double reducedMass=double(A)*4./double(A+4);
     double spinNorm=(2.*groundStateJ_+1.);
     preFactor_ = hbarc*hbarc/200.*pi/uconv/reducedMass/spinNorm;
   }
+  
   seperationEnergy_ = -qValue+knownLevels[entranceState].energy_;
 
   specifiedExitSepE_ = std::vector<double>(4,0.);
   specifiedExitJ_ = std::vector<double>(4,-1.);
   specifiedExitPi_ = std::vector<int>(4,0);
+  
   for(int i =0;i<exitStates.size();i++) {
     if(exitStates[i]>=0) {
       std::vector<Level> levels;  
       double qVal;
+      
       if(i==0) {
-	levels = NuclearLevels::FindLevels(compoundZ_,compoundA_);
-	qVal = 0.;
+	      levels = NuclearLevels::FindLevels(compoundZ_,compoundA_);
+	      qVal = 0.;
       } else if(i==1) {
-	levels = NuclearLevels::FindLevels(compoundZ_,compoundA_-1);
-	if(!NuclearMass::QValue(compoundZ_,compoundA_,compoundZ_,compoundA_-1,qVal)) {
-	  exitStates_[i]=-1;
-	  continue;
-	}
-     } else if(i==2) {
-	levels = NuclearLevels::FindLevels(compoundZ_-1,compoundA_-1);
-	if(!NuclearMass::QValue(compoundZ_,compoundA_,compoundZ_-1,compoundA_-1,qVal)) {
-	  exitStates_[i]=-1;
-	  continue;
-	}
+	      levels = NuclearLevels::FindLevels(compoundZ_,compoundA_-1);
+	      if(!NuclearMass::QValue(compoundZ_,compoundA_,compoundZ_,compoundA_-1,qVal)) {
+	        exitStates_[i]=-1;
+	        continue;
+	      }
+      } else if(i==2) {
+	        levels = NuclearLevels::FindLevels(compoundZ_-1,compoundA_-1);
+	        
+          if(!NuclearMass::QValue(compoundZ_,compoundA_,compoundZ_-1,compoundA_-1,qVal)) {
+	          exitStates_[i]=-1;
+	          continue;
+	        }
       } else if(i==3) {
-	levels = NuclearLevels::FindLevels(compoundZ_-2,compoundA_-4);
-	if(!NuclearMass::QValue(compoundZ_,compoundA_,compoundZ_-2,compoundA_-4,qVal)) {
-	  exitStates_[i]=-1;
-	  continue;
-	}
+	      levels = NuclearLevels::FindLevels(compoundZ_-2,compoundA_-4);
+	        if(!NuclearMass::QValue(compoundZ_,compoundA_,compoundZ_-2,compoundA_-4,qVal)) {
+	          exitStates_[i]=-1;
+	          continue;
+	        }
       }
+      
       if(levels.size()<=exitStates[i]) {
-	 if(i==0) std::cout << "Cannot find specified gamma residual state.  Calculating total." << std::endl;
-	 else if(i==1) std::cout << "Cannot find specified neutron residual state.  Calculating total." << std::endl;
-	 else if(i==2) std::cout << "Cannot find specified proton residual state.  Calculating total." << std::endl;
-	 else if(i==3) std::cout << "Cannot find specified alpha residual state.  Calculating total." << std::endl;
-	 exitStates_[i]=-1;
-     } else {
-	specifiedExitJ_[i] = levels[exitStates[i]].J_;
-	specifiedExitPi_[i] = levels[exitStates[i]].Pi_;
-	specifiedExitSepE_[i] = -qVal+levels[exitStates[i]].energy_;
-	std::string parity = (levels[exitStates[i]].Pi_<0) ? "-" : "+";
-	if(i==0) std::cout << "Gamma residual state: E=" << levels[exitStates[i]].energy_ 
-			   << " MeV J=" << levels[exitStates[i]].J_ << parity << std::endl;
-	else if(i==1) std::cout << "Neutron residual state: E=" << levels[exitStates[i]].energy_ 
-			   << " MeV J=" << levels[exitStates[i]].J_ << parity << std::endl;
-	else if(i==2) std::cout << "Proton residual state: E=" << levels[exitStates[i]].energy_ 
-			   << " MeV J=" << levels[exitStates[i]].J_ << parity << std::endl;
-	else if(i==3) std::cout << "Alpha residual state: E=" << levels[exitStates[i]].energy_ 
-			   << " MeV J=" << levels[exitStates[i]].J_ << parity << std::endl;
+	      if(i==0) std::cout << "Cannot find specified gamma residual state.  Calculating total." << std::endl;
+	      else if(i==1) std::cout << "Cannot find specified neutron residual state.  Calculating total." << std::endl;
+	      else if(i==2) std::cout << "Cannot find specified proton residual state.  Calculating total." << std::endl;
+	      else if(i==3) std::cout << "Cannot find specified alpha residual state.  Calculating total." << std::endl;
+	      exitStates_[i]=-1;
+      } else {
+	      specifiedExitJ_[i] = levels[exitStates[i]].J_;
+	      specifiedExitPi_[i] = levels[exitStates[i]].Pi_;
+	      specifiedExitSepE_[i] = -qVal+levels[exitStates[i]].energy_;
+	      std::string parity = (levels[exitStates[i]].Pi_<0) ? "-" : "+";
+	      
+        if(i==0) std::cout << "Gamma residual state: E=" << levels[exitStates[i]].energy_ 
+			                    << " MeV J=" << levels[exitStates[i]].J_ << parity << std::endl;
+	      else if(i==1) std::cout << "Neutron residual state: E=" << levels[exitStates[i]].energy_ 
+			                    << " MeV J=" << levels[exitStates[i]].J_ << parity << std::endl;
+	      else if(i==2) std::cout << "Proton residual state: E=" << levels[exitStates[i]].energy_ 
+			                    << " MeV J=" << levels[exitStates[i]].J_ << parity << std::endl;
+	      else if(i==3) std::cout << "Alpha residual state: E=" << levels[exitStates[i]].energy_ 
+			                    << " MeV J=" << levels[exitStates[i]].J_ << parity << std::endl;
       }
     }
   }
@@ -133,15 +149,16 @@ CrossSection::CrossSection(int Z, int A, int pType, std::string energyFile, bool
     std::cout << "Calculating Partition Function..." << std::endl;
     CalcPartitionFunc();
   }
+  
   if(!CalcAllowedJPi(forRates)) isValid_=false;
   else isValid_=true;
 
   energiesGiven_=false;
-  if(energyFile.length()==0||!FillEnergies(energyFile)) {
+  if(energyFile.length()==0 || !FillEnergies(energyFile)) {
     if(pType_!=0) CalculateEnergyGrid();
     else {
       for(double E = minEnergy_+seperationEnergy_; E<=maxEnergy_+seperationEnergy_; E+=dE_) {
-	crossSections_.push_back(std::pair<double,CrossSectionValues>(E-seperationEnergy_,
+	      crossSections_.push_back(std::pair<double,CrossSectionValues>(E-seperationEnergy_,
 								      CrossSectionValues(0.,0.,0.,0.,0.,0.,0.,0.)));
       }
     }
@@ -1386,6 +1403,3 @@ void CrossSection::CalcPartitionFunc() {
   }
 }
 
-void CrossSection::Go(){}
-void CrossSection::parseCommandLineForOptions(){}
-void CrossSection::parseCommandLineForXS(){}

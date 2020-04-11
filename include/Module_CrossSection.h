@@ -39,11 +39,18 @@ namespace Module_CrossSection{
     int massNumberIntFromString(std::string reactionString);
 
     /**
+     * @brief Get the pTypeString from the reactionString.
+     * @param reactionString A string from the cmd line which represents the reaction, e.g., 60Fe+p
+     * @returns The pType part of the reactionString, e.g. "p"
+     */
+    std::string pTypeStringFromString(std::string reactionString);
+
+    /**
      * @brief Get a projectile integer from a projectile string
      * @param projectileString The part of the reactionString which defines the projectile.
      * @return Integer which represents the pType: 0 = gamma, 1 = neutron, 2 = proton, 3 = alpha.
      */
-    int pTypeFromString(const char* projectileString);
+    int pTypeIntFromString(const char* projectileString);
 
     /**
      * @brief Get the atomic number as string from reactionString.

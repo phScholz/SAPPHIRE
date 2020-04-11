@@ -37,9 +37,7 @@ class CrossSection {
   bool IsValid() const {
     return isValid_;
   }
-  void Go();                         /**< Placeholder for the separation of Modules */
-  void parseCommandLineForOptions(); /**< Placeholder for the separation of Modules */
-  void parseCommandLineForXS(); /**< Placeholder for the separation of Modules */
+  
   void Calculate();
   void PrintCrossSections();
   void PrintTransmissionTerms();
