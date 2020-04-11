@@ -37,8 +37,8 @@
 
 namespace Module_OldSapphire{
     void Go(int argc,char *argv[]); /**< Top level function to call from main*/
-    int oldSapphire_MPI(); /**< Top level function to call from main*/
-    int oldSapphire(); /**< Top level function to call from main*/
+    int oldSapphire_MPI(int argc,char *argv[]); /**< Top level function to call from main*/
+    int oldSapphire(int argc,char *argv[]); /**< Top level function to call from main*/
 
     #ifdef MPI_BUILD
     void parseCommandLineForOptions(std::vector<std::string>& args,

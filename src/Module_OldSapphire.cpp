@@ -60,499 +60,203 @@ namespace Module_OldSapphire{
         #endif
     }
     
-    int oldSapphire(int argc, char *argv[]){
-
-        for(int i=1;i<argc;i++){ 
-            if(strcmp(argv[i],"--help")==0) {
-                printHelp();
-                exit(0);
-            }
-        }
-
-        if(argc<3) {
-            std::cout << "Too few arguments given."  << std::endl;
-            return -1;
-        }
-
-        /** Calling the Initialize() function from Setup.cpp*/
-        Initialize();
-  
-        /** Create a vector which containts the cmd parameter. 
-         *  Now int i starts at 1, the first parameter is "old" now.
-        */
-        std::vector<std::string> args; 
-        for(int i = 1;i<argc;i++) args.push_back(std::string(argv[i])); 
-
-        /** Define sum variables which will be needed for the cmd line parsing*/
-        int suffixNo=0;
-        int entranceState=0;
-        bool preEq = false;
-        bool calcAverageWidth = false;
-        bool calcRates = false;
-        bool asciiIn = false;
-        bool printTrans = false;
-        int numPiParticles=-1,numPiHoles=-1,numNuParticles=-1,numNuHoles=-1;
-        std::string inFile;
-        std::vector<int> exitStates(4,-1);
-        
-        /** Parse optional cmd line arguments*/
-        parseCommandLineForOptions( args,
-                                    suffixNo,
-                                    preEq,
-                                    numPiParticles,
-                                    numPiHoles,
-                                    numNuParticles,
-                                    numNuHoles,
-                                    calcAverageWidth,
-                                    calcRates,
-                                    asciiIn,
-                                    inFile,
-                                    entranceState,
-                                    exitStates,
-                                    printTrans);
-
-        /** Random number generator seeding?*/
-        time_t seed = time(NULL);
-        seed+=473879*suffixNo;
-        srand ( seed );
-
-        /** Fill the randomSeed array with 12 random numbers*/
-        for(unsigned char i = 0;i<12;i++) randomSeed[i]=rand();
-
-        /*
-        * This here was in the old Sapphire code the test which mode should be run.
-        * Calculations of cross sections or decay?
-        * In the new version of this code, this will be handled by the choice of the module.
-        * So, now ... this should start a cross section calculation.
-        * CROSS_SECTION CALCULATION STARTS HERE
-        */
-        
-        if(args.size()<4) {
-            int Z,A,pType;
-            std::string energyFile;
-            std::vector<EntrancePairs> entrancePairs;
-            if(!parseCommandLineForXS(args,Z,A,pType,energyFile,asciiIn)) {
-                std::cout << "Initial pair must be given for cross section (i.e. 60Fe+n)." << std::endl;
-                return -1;
-            }
-        /**
-         * Apparently here is an undocumented option to make calculations for more than one reaction. 
-         * This is probably enabled by the "--in=" keyword. See parseCommandLineForOptions().
-         */
-            if(!asciiIn) {
-                /*
-                * If no ascii file was given, cross section is only calculated for one reaction.
-                * Target nucleus and projectile are written into std::cout
-                */
-                std::cout << "Input Values For Cross Section:"   << std::endl
-		            << std::setw(14) << "Z:"               << std::setw(12) 
-		            << Z      << std::setw(0) << std::endl
-		            << std::setw(14) << "A:"               << std::setw(12) 
-		            << A      << std::setw(0) << std::endl;
-                
-                
-                if(pType==0) 
-	                std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "g" << std::setw(0) << std::endl;
-                else if(pType==1) 
-	                std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "n" << std::setw(0) << std::endl;
-                else if(pType==2) 
-	                std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "p" << std::setw(0) << std::endl;
-                else if(pType==3) 
-	                std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "a" << std::setw(0) << std::endl;
-                
-                std::cout << "Starting Cross Section Calculation..." << std::endl;
-            } else {
-                /** 
-                * Apparently, a file was given with for than one reaction.
-                * So, now it will be checked if the file can be read. 
-                * If not, the program exits.
-                * If, then EntrancePairs will be generated and pushed back in entrancePairs.
-                */
-                std::ifstream in(inFile.c_str());
-                if(!in) {
-	                std::cout << "Could not open " << inFile << " for reading." << std::endl;
-	                return -1;
-                } else {
-	                std::cout << "Reading nuclei from " << inFile << "." << std::endl;
-
-	                while(!in.eof()) {
-	                    std::string line;
-	                    std::getline(in,line);
-	                    if(!in.eof()) {
-	                        std::istringstream stm(line);
-	                        if(stm >> Z >> A >> pType)
-	                        entrancePairs.push_back(EntrancePairs(Z,A,pType));
-	                    }
-	                }
-	                
-                    in.close();
-                }
-            }
     
-            /**
-             * The Decayer is informed, that a CrossSection calculation will happen.
-             */
-            Decayer::SetCrossSection(true);  
-            /** 
-             * If no ascii-file was given, then the length of the following loop is 1.
-             */
-            int loopMax = (asciiIn) ? entrancePairs.size() : 1;
+
     
-            for(int i = 0;i<loopMax;++i) {
-                if(asciiIn) std::cout << "Calculating for Z: "
-			                    << entrancePairs[i].Z_ << " A: " << entrancePairs[i].A_ 
-			                    << " and Particle Type: " << entrancePairs[i].pType_ << std::endl;
-                /**
-                 * If an ascii-file was given
-                 */
-                CrossSection* crossSection = (asciiIn) ? new CrossSection(entrancePairs[i].Z_,entrancePairs[i].A_, entrancePairs[i].pType_,energyFile,calcRates) : new CrossSection(Z,A,pType,energyFile,calcRates,entranceState,exitStates);
-                if(crossSection->IsValid()) {
-	                if(calcAverageWidth) {
-	                    std::pair<double,double> sWave = crossSection->CalcAverageSWaveResWidth();
-	                    std::pair<double,double> pWave = crossSection->CalcAveragePWaveResWidth();
-	                    std::pair<double,double> dWave = crossSection->CalcAverageDWaveResWidth();
-	                    std::cout << "  Average S-Wave Radiative Width [meV]: " 
-	                    	    << 1.e9*sWave.first
-	                    	    << std::endl;
-	                    std::cout << "Average S-Wave Resonance Spacing [keV]: " 
-	                    	    << 1.e3*sWave.second
-	                    	    << std::endl;	
-	                    std::cout << "  Average P-Wave Radiative Width [meV]: " 
-	                    	    << 1.e9*pWave.first 
-	                    	    << std::endl;
-	                    std::cout << "Average P-Wave Resonance Spacing [keV]: " 
-	                    	    << 1.e3*pWave.second
-	                    	    << std::endl;	
-	                    std::cout << "  Average D-Wave Radiative Width [meV]: " 
-	                    	    << 1.e9*dWave.first 
-	                    	    << std::endl;
-	                    std::cout << "Average D-Wave Resonance Spacing [keV]: " 
-		                << 1.e3*dWave.second
-		                << std::endl;	
-	                } else {
-	                    crossSection->Calculate();
-	                    crossSection->PrintCrossSections();
-	                    if(printTrans) crossSection->PrintTransmissionTerms();
-	                    
-                        if(calcRates) {
-	                        if(pType==1) {
-	                            crossSection->CalculateReactionRates(true);
-	                            crossSection->PrintReactionRates(true);
-	                        }
-	                        crossSection->CalculateReactionRates(false);
-	                        crossSection->PrintReactionRates(false);	  
-	                    }
-	                }
-                } else {
-	            std::cout << "Could not calculate cross section." << std::endl;
-                }
-                delete crossSection;
-            }
-            return 0;
+    /**
+     * @brief CMD line parameters are parsed for the Decay module
+     * @param args cmd line string
+     * @param Z nuclear charge number
+     * @param A nuclear mass number
+     * @param J Reference to a spin double
+     * @param Pi Reference to a parity int
+     * @param lowEnergy Reference to a lowEnergy double
+     * @param highEnergy  Reference to a highEnergy double
+     * @param events  Reference to the events int.
+     * 
+     * @returns True or False
+     * 
+     * @note This has to move to another class in future. This does not belong in a main file but in the class file of the respective module.
+     * 
+     */
+    bool parseCommandLineForDecay(std::vector<std::string>& args, 
+    			      int& Z, int& A, double& J, int& Pi, 
+    			      double& lowEnergy, double& highEnergy,
+    			      int& events) {
+
+      if(args.size()<4) return false;
+    
+      bool goodA=false;
+      bool goodZ=false;
+      bool goodPi=false;
+      bool goodJ=false;
+      bool goodEnergy=false;
+    
+      std::string isotopeString(args[1]);
+      std::string massNumberString;
+      for(int i = 0; i<isotopeString.length(); i++) {
+      	std::string nextChar(isotopeString,i,1);
+        std::istringstream stm(nextChar);
+        int nextDigit;
+        if(!(stm>>nextDigit)) break;
+        else massNumberString+=nextChar;
+      }
+      if(massNumberString.length()>0) {
+        A = atoi(massNumberString.c_str());
+        goodA = true;
+      }
+      if(NuclearMass::FindZ(isotopeString.substr(massNumberString.length()))!=-1) {
+        Z = NuclearMass::FindZ(isotopeString.substr(massNumberString.length()));
+        goodZ = true;
+      }
+    
+      std::string jPiString(args[2]);
+      std::string firstString,secondString,parityString,delimiterString;
+      bool foundDelimiter = false;
+      for(int i = 0;i<jPiString.length();i++) {
+      	std::string nextChar(jPiString,i,1);
+      	if(nextChar=='/'||nextChar=='.') {
+      	  foundDelimiter=true;
+      	  delimiterString=nextChar;
+      	  continue;
+      	} else if(nextChar=='+'||nextChar=='-') {
+      	  parityString = nextChar;
+          break;
         }
-
-        /** 
-         * If there are more arguments, then we are apparently in
-         * the statistical decay calculations, right?
-         * This needs to change. This can be made much more readable and maintainable.
-         */
-
-        int chunkSize = 10000; /** Not sure what this is*/
-
-        int A,Z,Pi,events; /** Apparently placeholders for cmd line parameters*/
-        double J,lowEnergy,highEnergy; /** Apparently placeholders for cmd line parameters*/
-        
-        /**
-         * Cmd line parameters for the decay mode will be read.
-         */
-        if(!parseCommandLineForDecay(args,Z,A,J,Pi,lowEnergy,highEnergy,events)) {
-            std::cout << "Isotope, J-Pi, and Energy must be specified for decay (i.e. 60Fe 1- 15)." << std::endl;
-            return -1;
+        std::istringstream stm(nextChar);
+        int digit;
+        if(stm>>digit) {
+          if(!foundDelimiter) firstString+=nextChar;
+          else secondString+=nextChar;
+        }
+      }
+      if(parityString.length()>0) {
+        if(parityString=="-") Pi=-1;
+        else if(parityString=="+") Pi=1;
+        goodPi=true;
+      }
+      if(firstString.length()>0) {
+      	if(foundDelimiter&&delimiterString=="/") {
+      	  if(secondString.length()>0) J = atof(firstString.c_str())/atof(secondString.c_str());
+      	  else J = atof(firstString.c_str());
+      	} else if(foundDelimiter&&delimiterString==".") {
+      	  firstString += '.'+secondString;
+      	  J = atof(firstString.c_str());
+      	} else J = atof(firstString.c_str());
+      	double intPart;
+        if(modf(J*2.,&intPart)==0.) goodJ=true; 
+      }
+    
+      std::string energyString(args[3]); 
+      if(energyString.length()>0) {
+        std::string lowEnergyString;
+        std::string highEnergyString;
+        int dashPos = energyString.find_first_of('-');
+        if(dashPos!=std::string::npos) {
+          lowEnergyString = energyString.substr(0,dashPos+1);
+          highEnergyString = energyString.substr(dashPos+1);
         } else {
-  	        std::cout << "Input Values For Parent Nucleus:" << std::endl
-  	          << std::setw(15) << "Z:"             << std::setw(12) << Z          
-  	          << std::setw(0) << std::endl
-  	          << std::setw(15) << "A:"             << std::setw(12) << A          
-  	          << std::setw(0) << std::endl
-  	          << std::setw(15) << "J:"             << std::setw(12) << J          
-  	          << std::setw(0) << std::endl
-  	          << std::setw(15) << "Pi:"            << std::setw(12) << Pi         
-  	          << std::setw(0) << std::endl
-  	          << std::setw(15) << "energy (low):"  << std::setw(12) << lowEnergy  
-  	          << std::setw(0) << std::endl
-  	          << std::setw(15) << "energy (high):" << std::setw(12) << highEnergy 
-  	          << std::setw(0) << std::endl
-  	          << std::setw(15) << "events:"        << std::setw(12) << events     
-  	          << std::setw(0) << std::endl;
+          lowEnergyString = highEnergyString = energyString;
         }
-
-        /**
-         * Ah, I see. The total events will be divided in chunks.
-         */
-        int remainder = events%chunkSize;
-        int chunks = (events-remainder)/chunkSize;
-
-        std::cout << "Starting Decay Simulation..." << std::endl;
-
-        int numDecayed = 0; /** Initialize the counting of decays.*/
-        DecayResults* results = NULL;
-        if(events>1) results = new DecayResults(Z,A,J,Pi,lowEnergy,highEnergy,suffixNo);
-        
-        for(int i = 0;i<=chunks;i++) {
-            int numInChunk = (i==chunks) ? remainder : chunkSize;
-            if(numInChunk==0) continue;
-            std::vector<std::pair<DecayData,std::vector<DecayProduct> > > chunkResults;
-            chunkResults.resize(numInChunk);
-            /**
-             * Using Open Multiprocessing (OMP) for the parallel execution of the following for-loop.
-             * Nice.
-             */
-            #pragma omp parallel for
-            for(int j = 0;j<numInChunk;j++) {
-
-                int localNumDecayed = numDecayed++;
-
-                if(localNumDecayed%1000==0&&localNumDecayed>0) 
+        std::istringstream lowEnergyStream(lowEnergyString);
+        std::istringstream highEnergyStream(highEnergyString);
+        if((lowEnergyStream>>lowEnergy)&&
+           (highEnergyStream>>highEnergy)) goodEnergy=true;
+      }
     
-                std::cout << "Decayed " << localNumDecayed 
-	    	            << " of " << events << " nuclei..." << std::endl;
+      if(args.size()>4) {
+        std::string eventsString(args[4]);
+        if(eventsString.length()>0) {
+          std::istringstream stm(eventsString);
+          if(!(stm>>events)) events = 1;
+        }
+      } else events = 1;
 
-                double energy = (lowEnergy==highEnergy) ? lowEnergy :
-    
-                lowEnergy+(highEnergy-lowEnergy)*double(rand_r(&randomSeed[omp_get_thread_num()]))/double(RAND_MAX);
-
-                DecayController* controller;
-
-                if(preEq) {
-	               controller= new DecayController(Z,A,J,Pi,energy,numNuParticles,numNuHoles,numPiParticles,numPiHoles);
-                } else controller = new DecayController(Z,A,J,Pi,energy);
-
-                double neutronEntranceWidth = 0.;
-                double protonEntranceWidth = 0.;
-                double gammaEntranceWidth = 0.;
-                double alphaEntranceWidth = 0.;
-                double neutronTotalWidth = 0.;
-                double protonTotalWidth = 0.;
-                double gammaTotalWidth = 0.;
-                double alphaTotalWidth = 0.;
-
-                controller->Decay(neutronEntranceWidth,protonEntranceWidth,alphaEntranceWidth,gammaEntranceWidth,
-	    		    neutronTotalWidth,protonTotalWidth,alphaTotalWidth,gammaTotalWidth); 
-                chunkResults[j] = 
-	            std::pair<DecayData,std::vector<DecayProduct> >(DecayData(energy,neutronEntranceWidth,protonEntranceWidth,
-	    							       alphaEntranceWidth,gammaEntranceWidth,
-	    							       neutronTotalWidth,protonTotalWidth,
-	    							       alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
-                if(events==1) controller->PrintDecays();
-                delete controller;
-            }
-            
-            if(events>1){
-                std::cout << "Writing ROOT Tree..." << std::endl;
-                results->AddResults(chunkResults);
-            }
-        }   
-
-        if(results) delete results;
-  
-        return 0;
+      return (goodA&&goodZ&&goodPi&&goodJ&&goodEnergy);       
     }
-
-    
-/**
- * @brief CMD line parameters are parsed for the Decay module
- * @param args cmd line string
- * @param Z nuclear charge number
- * @param A nuclear mass number
- * @param J Reference to a spin double
- * @param Pi Reference to a parity int
- * @param lowEnergy Reference to a lowEnergy double
- * @param highEnergy  Reference to a highEnergy double
- * @param events  Reference to the events int.
- * 
- * @returns True or False
- * 
- * @note This has to move to another class in future. This does not belong in a main file but in the class file of the respective module.
- * 
- */
-bool parseCommandLineForDecay(std::vector<std::string>& args, 
-			      int& Z, int& A, double& J, int& Pi, 
-			      double& lowEnergy, double& highEnergy,
-			      int& events) {
-                      
-  if(args.size()<4) return false;
-  
-  bool goodA=false;
-  bool goodZ=false;
-  bool goodPi=false;
-  bool goodJ=false;
-  bool goodEnergy=false;
-  
-  std::string isotopeString(args[1]);
-  std::string massNumberString;
-  for(int i = 0; i<isotopeString.length(); i++) {
-  	std::string nextChar(isotopeString,i,1);
-    std::istringstream stm(nextChar);
-    int nextDigit;
-    if(!(stm>>nextDigit)) break;
-    else massNumberString+=nextChar;
-  }
-  if(massNumberString.length()>0) {
-    A = atoi(massNumberString.c_str());
-    goodA = true;
-  }
-  if(NuclearMass::FindZ(isotopeString.substr(massNumberString.length()))!=-1) {
-    Z = NuclearMass::FindZ(isotopeString.substr(massNumberString.length()));
-    goodZ = true;
-  }
-  
-  std::string jPiString(args[2]);
-  std::string firstString,secondString,parityString,delimiterString;
-  bool foundDelimiter = false;
-  for(int i = 0;i<jPiString.length();i++) {
-  	std::string nextChar(jPiString,i,1);
-  	if(nextChar=='/'||nextChar=='.') {
-  	  foundDelimiter=true;
-  	  delimiterString=nextChar;
-  	  continue;
-  	} else if(nextChar=='+'||nextChar=='-') {
-  	  parityString = nextChar;
-      break;
-    }
-    std::istringstream stm(nextChar);
-    int digit;
-    if(stm>>digit) {
-      if(!foundDelimiter) firstString+=nextChar;
-      else secondString+=nextChar;
-    }
-  }
-  if(parityString.length()>0) {
-    if(parityString=="-") Pi=-1;
-    else if(parityString=="+") Pi=1;
-    goodPi=true;
-  }
-  if(firstString.length()>0) {
-  	if(foundDelimiter&&delimiterString=="/") {
-  	  if(secondString.length()>0) J = atof(firstString.c_str())/atof(secondString.c_str());
-  	  else J = atof(firstString.c_str());
-  	} else if(foundDelimiter&&delimiterString==".") {
-  	  firstString += '.'+secondString;
-  	  J = atof(firstString.c_str());
-  	} else J = atof(firstString.c_str());
-  	double intPart;
-    if(modf(J*2.,&intPart)==0.) goodJ=true; 
-  }
-  
-  std::string energyString(args[3]); 
-  if(energyString.length()>0) {
-    std::string lowEnergyString;
-    std::string highEnergyString;
-    int dashPos = energyString.find_first_of('-');
-    if(dashPos!=std::string::npos) {
-      lowEnergyString = energyString.substr(0,dashPos+1);
-      highEnergyString = energyString.substr(dashPos+1);
-    } else {
-      lowEnergyString = highEnergyString = energyString;
-    }
-    std::istringstream lowEnergyStream(lowEnergyString);
-    std::istringstream highEnergyStream(highEnergyString);
-    if((lowEnergyStream>>lowEnergy)&&
-       (highEnergyStream>>highEnergy)) goodEnergy=true;
-  }
-  
-  if(args.size()>4) {
-    std::string eventsString(args[4]);
-    if(eventsString.length()>0) {
-      std::istringstream stm(eventsString);
-      if(!(stm>>events)) events = 1;
-    }
-  } else events = 1;
-    
-  return (goodA&&goodZ&&goodPi&&goodJ&&goodEnergy);       
-}
 
     #ifndef MPI_BUILD
-/**
- * @brief CMD line parameters are parsed for the Cross section module
- * @param args cmd line string
- * @param Z nuclear charge number
- * @param A nuclear mass number
- * @param pType Projectile
- * @param energyFile Reference to the string for the path to the EnergyFile
- * @param asciiIn Boolean which shows if there is a asciiFile or not
- * @param highEnergy  Reference to a highEnergy double
- * @param events  Reference to the events int.
- * 
- * @returns True or False
- * 
- * @note This has to move to another class in future. This does not belong in a main file but in the class file of the respective module.
- * 
- */
-bool parseCommandLineForXS(std::vector<std::string>& args,int& Z, int&A, 
-			   int& pType, std::string& energyFile, bool asciiIn) {
+    /**
+    * @brief CMD line parameters are parsed for the Cross section module
+    * @param args cmd line string
+    * @param Z nuclear charge number
+    * @param A nuclear mass number
+    * @param pType Projectile
+    * @param energyFile Reference to the string for the path to the EnergyFile
+    * @param asciiIn Boolean which shows if there is a asciiFile or not
+    * @param highEnergy  Reference to a highEnergy double
+    * @param events  Reference to the events int.
+    * 
+    * @returns True or False
+    * 
+    * @note This has to move to another class in future. This does not belong in a main file but in the class file of the respective module.
+    * 
+    */
+    bool parseCommandLineForXS(std::vector<std::string>& args,int& Z, int&A, 
+    			   int& pType, std::string& energyFile, bool asciiIn) {
 
-  if(asciiIn) {
-    if(args.size()==2) energyFile = std::string(args[1]);
-    return true;
-  }
-  
-  if(args.size()<2) return false;
+      if(asciiIn) {
+        if(args.size()==2) energyFile = std::string(args[1]);
+        return true;
+      }
+    
+      if(args.size()<2) return false;
 
-  bool goodA=false;
-  bool goodZ=false;
-  bool goodPType=false;
+      bool goodA=false;
+      bool goodZ=false;
+      bool goodPType=false;
 
-  std::string reactionString(args[1]);
-  std::string massNumberString;
-  for(int i = 0; i<reactionString.length(); i++) {
-    std::string nextChar(reactionString,i,1);
-    std::istringstream stm(nextChar);
-    int nextDigit;
-    if(!(stm>>nextDigit)) break;
-    else massNumberString+=nextChar;
-  }
-  if(massNumberString.length()>0) {
-    A = atoi(massNumberString.c_str());
-    goodA = true;
-  }
-  reactionString.erase(0,massNumberString.length());
-  std::string atomicNumberString;
-  for(int i = 0; i<reactionString.length(); i++) {
-    std::string nextChar(reactionString,i,1);
-    if(nextChar=="+") break;
-    else atomicNumberString+=nextChar;
-  }
-  if(NuclearMass::FindZ(atomicNumberString) != -1) {
-    Z = NuclearMass::FindZ(atomicNumberString);
-    goodZ = true;
-  }
-  reactionString.erase(0,atomicNumberString.length());
-  std::string projectileString;
-  for(int i = 0; i<reactionString.length(); i++) {
-    std::string nextChar(reactionString,i,1);
-    if(nextChar=="+") continue;
-    else projectileString+=nextChar;
-  }
-  if(projectileString=="g") {
-    pType = 0;
-    goodPType=true;
-  } else if(projectileString=="n") {
-    pType = 1;
-    goodPType=true;
-  } else if(projectileString=="p") {
-    pType = 2;
-    goodPType=true;
-  } else if(projectileString=="a") {
-    pType = 3;
-    goodPType=true;
-  }
+      std::string reactionString(args[1]);
+      std::string massNumberString;
+      for(int i = 0; i<reactionString.length(); i++) {
+        std::string nextChar(reactionString,i,1);
+        std::istringstream stm(nextChar);
+        int nextDigit;
+        if(!(stm>>nextDigit)) break;
+        else massNumberString+=nextChar;
+      }
+      if(massNumberString.length()>0) {
+        A = atoi(massNumberString.c_str());
+        goodA = true;
+      }
+      reactionString.erase(0,massNumberString.length());
+      std::string atomicNumberString;
+      for(int i = 0; i<reactionString.length(); i++) {
+        std::string nextChar(reactionString,i,1);
+        if(nextChar=="+") break;
+        else atomicNumberString+=nextChar;
+      }
+      if(NuclearMass::FindZ(atomicNumberString) != -1) {
+        Z = NuclearMass::FindZ(atomicNumberString);
+        goodZ = true;
+      }
+      reactionString.erase(0,atomicNumberString.length());
+      std::string projectileString;
+      for(int i = 0; i<reactionString.length(); i++) {
+        std::string nextChar(reactionString,i,1);
+        if(nextChar=="+") continue;
+        else projectileString+=nextChar;
+      }
+      if(projectileString=="g") {
+        pType = 0;
+        goodPType=true;
+      } else if(projectileString=="n") {
+        pType = 1;
+        goodPType=true;
+      } else if(projectileString=="p") {
+        pType = 2;
+        goodPType=true;
+      } else if(projectileString=="a") {
+        pType = 3;
+        goodPType=true;
+      }
 
-  if(args.size()==3) energyFile = std::string(args[2]);
+      if(args.size()==3) energyFile = std::string(args[2]);
 
-  return (goodA&&goodZ&&goodPType);
-}
+      return (goodA&&goodZ&&goodPType);
+    }
 
-#endif
+    #endif
 
     #ifndef MPI_BUILD
     void parseCommandLineForOptions(std::vector<std::string>& args, int& suffixNo, bool &preEq,
@@ -1008,5 +712,303 @@ void slaveProcess(boost::mpi::communicator& world,InitialNucleusData initialNucl
 	     << std::setw(25)  << '\t' << std::setw(0) << "cross sections are also calculated." << std::endl 
 	     << std::setw(25) << std::left << "\t--EGDR=type" << std::setw(0) << "Sets the EGDR shape.  Variable 'type' can either be" << std::endl 
 	     << std::setw(25)  << '\t' << std::setw(0) << "edslo (SMOKER), slo (BRINK-AXEL), or glo (KOPECKY-UHL)." << std::endl;
+    }
+
+    int oldSapphire(int argc, char *argv[]){
+
+        for(int i=1;i<argc;i++){ 
+            if(strcmp(argv[i],"--help")==0) {
+                printHelp();
+                exit(0);
+            }
+        }
+
+        if(argc<3) {
+            std::cout << "Too few arguments given."  << std::endl;
+            return -1;
+        }
+
+        /** Calling the Initialize() function from Setup.cpp*/
+        Initialize();
+  
+        /** Create a vector which containts the cmd parameter. 
+         *  Now int i starts at 1, the first parameter is "old" now.
+        */
+        std::vector<std::string> args; 
+        for(int i = 1;i<argc;i++) args.push_back(std::string(argv[i])); 
+
+        /** Define sum variables which will be needed for the cmd line parsing*/
+        int suffixNo=0;
+        int entranceState=0;
+        bool preEq = false;
+        bool calcAverageWidth = false;
+        bool calcRates = false;
+        bool asciiIn = false;
+        bool printTrans = false;
+        int numPiParticles=-1,numPiHoles=-1,numNuParticles=-1,numNuHoles=-1;
+        std::string inFile;
+        std::vector<int> exitStates(4,-1);
+        
+        /** Parse optional cmd line arguments*/
+        parseCommandLineForOptions( args,
+                                    suffixNo,
+                                    preEq,
+                                    numPiParticles,
+                                    numPiHoles,
+                                    numNuParticles,
+                                    numNuHoles,
+                                    calcAverageWidth,
+                                    calcRates,
+                                    asciiIn,
+                                    inFile,
+                                    entranceState,
+                                    exitStates,
+                                    printTrans);
+
+        /** Random number generator seeding?*/
+        time_t seed = time(NULL);
+        seed+=473879*suffixNo;
+        srand ( seed );
+
+        /** Fill the randomSeed array with 12 random numbers*/
+        for(unsigned char i = 0;i<12;i++) randomSeed[i]=rand();
+
+        /*
+        * This here was in the old Sapphire code the test which mode should be run.
+        * Calculations of cross sections or decay?
+        * In the new version of this code, this will be handled by the choice of the module.
+        * So, now ... this should start a cross section calculation.
+        * CROSS_SECTION CALCULATION STARTS HERE
+        */
+        
+        if(args.size()<4) {
+            int Z,A,pType;
+            std::string energyFile;
+            std::vector<EntrancePairs> entrancePairs;
+            if(!parseCommandLineForXS(args,Z,A,pType,energyFile,asciiIn)) {
+                std::cout << "Initial pair must be given for cross section (i.e. 60Fe+n)." << std::endl;
+                return -1;
+            }
+        /**
+         * Apparently here is an undocumented option to make calculations for more than one reaction. 
+         * This is probably enabled by the "--in=" keyword. See parseCommandLineForOptions().
+         */
+            if(!asciiIn) {
+                /*
+                * If no ascii file was given, cross section is only calculated for one reaction.
+                * Target nucleus and projectile are written into std::cout
+                */
+                std::cout << "Input Values For Cross Section:"   << std::endl
+		            << std::setw(14) << "Z:"               << std::setw(12) 
+		            << Z      << std::setw(0) << std::endl
+		            << std::setw(14) << "A:"               << std::setw(12) 
+		            << A      << std::setw(0) << std::endl;
+                
+                
+                if(pType==0) 
+	                std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "g" << std::setw(0) << std::endl;
+                else if(pType==1) 
+	                std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "n" << std::setw(0) << std::endl;
+                else if(pType==2) 
+	                std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "p" << std::setw(0) << std::endl;
+                else if(pType==3) 
+	                std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "a" << std::setw(0) << std::endl;
+                
+                std::cout << "Starting Cross Section Calculation..." << std::endl;
+            } else {
+                /** 
+                * Apparently, a file was given with for than one reaction.
+                * So, now it will be checked if the file can be read. 
+                * If not, the program exits.
+                * If, then EntrancePairs will be generated and pushed back in entrancePairs.
+                */
+                std::ifstream in(inFile.c_str());
+                if(!in) {
+	                std::cout << "Could not open " << inFile << " for reading." << std::endl;
+	                return -1;
+                } else {
+	                std::cout << "Reading nuclei from " << inFile << "." << std::endl;
+
+	                while(!in.eof()) {
+	                    std::string line;
+	                    std::getline(in,line);
+	                    if(!in.eof()) {
+	                        std::istringstream stm(line);
+	                        if(stm >> Z >> A >> pType)
+	                        entrancePairs.push_back(EntrancePairs(Z,A,pType));
+	                    }
+	                }
+	                
+                    in.close();
+                }
+            }
+    
+            /**
+             * The Decayer is informed, that a CrossSection calculation will happen.
+             */
+            Decayer::SetCrossSection(true);  
+            /** 
+             * If no ascii-file was given, then the length of the following loop is 1.
+             */
+            int loopMax = (asciiIn) ? entrancePairs.size() : 1;
+    
+            for(int i = 0;i<loopMax;++i) {
+                if(asciiIn) std::cout << "Calculating for Z: "
+			                    << entrancePairs[i].Z_ << " A: " << entrancePairs[i].A_ 
+			                    << " and Particle Type: " << entrancePairs[i].pType_ << std::endl;
+                /**
+                 * If an ascii-file was given
+                 */
+                CrossSection* crossSection = (asciiIn) ? new CrossSection(entrancePairs[i].Z_,entrancePairs[i].A_, entrancePairs[i].pType_,energyFile,calcRates) : new CrossSection(Z,A,pType,energyFile,calcRates,entranceState,exitStates);
+                if(crossSection->IsValid()) {
+	                if(calcAverageWidth) {
+	                    std::pair<double,double> sWave = crossSection->CalcAverageSWaveResWidth();
+	                    std::pair<double,double> pWave = crossSection->CalcAveragePWaveResWidth();
+	                    std::pair<double,double> dWave = crossSection->CalcAverageDWaveResWidth();
+	                    std::cout << "  Average S-Wave Radiative Width [meV]: " 
+	                    	    << 1.e9*sWave.first
+	                    	    << std::endl;
+	                    std::cout << "Average S-Wave Resonance Spacing [keV]: " 
+	                    	    << 1.e3*sWave.second
+	                    	    << std::endl;	
+	                    std::cout << "  Average P-Wave Radiative Width [meV]: " 
+	                    	    << 1.e9*pWave.first 
+	                    	    << std::endl;
+	                    std::cout << "Average P-Wave Resonance Spacing [keV]: " 
+	                    	    << 1.e3*pWave.second
+	                    	    << std::endl;	
+	                    std::cout << "  Average D-Wave Radiative Width [meV]: " 
+	                    	    << 1.e9*dWave.first 
+	                    	    << std::endl;
+	                    std::cout << "Average D-Wave Resonance Spacing [keV]: " 
+		                << 1.e3*dWave.second
+		                << std::endl;	
+	                } else {
+	                    crossSection->Calculate();
+	                    crossSection->PrintCrossSections();
+	                    if(printTrans) crossSection->PrintTransmissionTerms();
+	                    
+                        if(calcRates) {
+	                        if(pType==1) {
+	                            crossSection->CalculateReactionRates(true);
+	                            crossSection->PrintReactionRates(true);
+	                        }
+	                        crossSection->CalculateReactionRates(false);
+	                        crossSection->PrintReactionRates(false);	  
+	                    }
+	                }
+                } else {
+	            std::cout << "Could not calculate cross section." << std::endl;
+                }
+                delete crossSection;
+            }
+            return 0;
+        }
+
+        /** 
+         * If there are more arguments, then we are apparently in
+         * the statistical decay calculations, right?
+         * This needs to change. This can be made much more readable and maintainable.
+         */
+
+        int chunkSize = 10000; /** Not sure what this is*/
+
+        int A,Z,Pi,events; /** Apparently placeholders for cmd line parameters*/
+        double J,lowEnergy,highEnergy; /** Apparently placeholders for cmd line parameters*/
+        
+        /**
+         * Cmd line parameters for the decay mode will be read.
+         */
+        if(!parseCommandLineForDecay(args,Z,A,J,Pi,lowEnergy,highEnergy,events)) {
+            std::cout << "Isotope, J-Pi, and Energy must be specified for decay (i.e. 60Fe 1- 15)." << std::endl;
+            return -1;
+        } else {
+  	        std::cout << "Input Values For Parent Nucleus:" << std::endl
+  	          << std::setw(15) << "Z:"             << std::setw(12) << Z          
+  	          << std::setw(0) << std::endl
+  	          << std::setw(15) << "A:"             << std::setw(12) << A          
+  	          << std::setw(0) << std::endl
+  	          << std::setw(15) << "J:"             << std::setw(12) << J          
+  	          << std::setw(0) << std::endl
+  	          << std::setw(15) << "Pi:"            << std::setw(12) << Pi         
+  	          << std::setw(0) << std::endl
+  	          << std::setw(15) << "energy (low):"  << std::setw(12) << lowEnergy  
+  	          << std::setw(0) << std::endl
+  	          << std::setw(15) << "energy (high):" << std::setw(12) << highEnergy 
+  	          << std::setw(0) << std::endl
+  	          << std::setw(15) << "events:"        << std::setw(12) << events     
+  	          << std::setw(0) << std::endl;
+        }
+
+        /**
+         * Ah, I see. The total events will be divided in chunks.
+         */
+        int remainder = events%chunkSize;
+        int chunks = (events-remainder)/chunkSize;
+
+        std::cout << "Starting Decay Simulation..." << std::endl;
+
+        int numDecayed = 0; /** Initialize the counting of decays.*/
+        DecayResults* results = NULL;
+        if(events>1) results = new DecayResults(Z,A,J,Pi,lowEnergy,highEnergy,suffixNo);
+        
+        for(int i = 0;i<=chunks;i++) {
+            int numInChunk = (i==chunks) ? remainder : chunkSize;
+            if(numInChunk==0) continue;
+            std::vector<std::pair<DecayData,std::vector<DecayProduct> > > chunkResults;
+            chunkResults.resize(numInChunk);
+            /**
+             * Using Open Multiprocessing (OMP) for the parallel execution of the following for-loop.
+             * Nice.
+             */
+            #pragma omp parallel for
+            for(int j = 0;j<numInChunk;j++) {
+
+                int localNumDecayed = numDecayed++;
+
+                if(localNumDecayed%1000==0&&localNumDecayed>0) 
+    
+                std::cout << "Decayed " << localNumDecayed 
+	    	            << " of " << events << " nuclei..." << std::endl;
+
+                double energy = (lowEnergy==highEnergy) ? lowEnergy :
+    
+                lowEnergy+(highEnergy-lowEnergy)*double(rand_r(&randomSeed[omp_get_thread_num()]))/double(RAND_MAX);
+
+                DecayController* controller;
+
+                if(preEq) {
+	               controller= new DecayController(Z,A,J,Pi,energy,numNuParticles,numNuHoles,numPiParticles,numPiHoles);
+                } else controller = new DecayController(Z,A,J,Pi,energy);
+
+                double neutronEntranceWidth = 0.;
+                double protonEntranceWidth = 0.;
+                double gammaEntranceWidth = 0.;
+                double alphaEntranceWidth = 0.;
+                double neutronTotalWidth = 0.;
+                double protonTotalWidth = 0.;
+                double gammaTotalWidth = 0.;
+                double alphaTotalWidth = 0.;
+
+                controller->Decay(neutronEntranceWidth,protonEntranceWidth,alphaEntranceWidth,gammaEntranceWidth,
+	    		    neutronTotalWidth,protonTotalWidth,alphaTotalWidth,gammaTotalWidth); 
+                chunkResults[j] = 
+	            std::pair<DecayData,std::vector<DecayProduct> >(DecayData(energy,neutronEntranceWidth,protonEntranceWidth,
+	    							       alphaEntranceWidth,gammaEntranceWidth,
+	    							       neutronTotalWidth,protonTotalWidth,
+	    							       alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
+                if(events==1) controller->PrintDecays();
+                delete controller;
+            }
+            
+            if(events>1){
+                std::cout << "Writing ROOT Tree..." << std::endl;
+                results->AddResults(chunkResults);
+            }
+        }   
+
+        if(results) delete results;
+  
+        return 0;
     }
 }
