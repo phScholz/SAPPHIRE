@@ -93,13 +93,19 @@ where X is the heavy nucleus and a is the projectile. Examples are 25Mg+a or 60F
 # Modules
 
 ## reaction
+Not yet fully implemented.
 
 ## decayer
+Not yet fully implemented.
 
 ## old
+This module provides the same functionallity as the original Sapphire code. Everything stays the same except the keyword ```old```. 
+Thus instead of running ```./sapphire 60Fe+a``` one needs to run ```./sapphire old 60Fe+a```.
+
+In future more and more of the features of the original Sapphire code will be reimplemented as modules. This part of the code can still be used but won't be maintained in future.
 
 ## help
-
+Print the help text for the different modules.
 
 # References
 ## About Sapphire
