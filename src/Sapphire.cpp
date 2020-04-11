@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
   if (mode == "reaction")
 		Module_CrossSection::Go(argc,argv);
   
-  else if (mode == "decay")
+  //else if (mode == "decay")
 
   else if (mode == "old")
     Module_oldSapphire::Go(argc, argv)
