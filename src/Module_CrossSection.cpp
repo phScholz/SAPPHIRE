@@ -66,8 +66,8 @@ namespace Module_CrossSection{
     }
 
     std::string pTypeStringFromString(std::string reactionString){
-        massNumberString=massNumberStringFromString(reactionString);
-        atomicNumberString=atomicNumberStringFromString(reactionString);
+        std::string massNumberString=massNumberStringFromString(reactionString);
+        std::string atomicNumberString=atomicNumberStringFromString(reactionString);
 
         reactionString.erase(0,massNumberString.length());
         reactionString.erase(0,atomicNumberString.length());
