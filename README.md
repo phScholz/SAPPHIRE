@@ -6,8 +6,14 @@
 - [Compilation & Execution](#compilation--execution)
   - [Requirements](#requirements)
   - [Build](#build)
+    - [Automatically](#automatically)
+    - [Manually](#manually)
   - [Run](#run)
-- [Features](#features)
+- [Modules](#modules)
+    - [reaction](#reaction)
+    - [decayer](#decayer)
+    - [old](#old)
+    - [help](#help)
 - [References](#references)
   - [About Sapphire](#about-sapphire)
   - [Using Sapphire](#using-sapphire)
@@ -43,7 +49,18 @@ For an `automized generation of documentation files`, one needs [doxygen](http:/
 For the `Message Passing Interface (MPI)` build, `boost 1.4` libraries are required. The MPI build is optional and can be enabled in the `CMakeLists.txt`.
 
 ## Build
+## Automatically
+A simple bash script has been written, does the steps below automatically for you. Since it uses relative paths you need to be in your Sapphire main directory and then simply execute:
+```bash
+bash build.sh
+```
 
+To delete the directories which have been created during the build process, simply run the following command in your Sapphire main directory:
+```bash
+bash clean.sh
+```
+
+## Manually
 1. Create a build directory under the main Sapphire directory and change to that directory. 
    ```bash
    mkdir build
@@ -68,15 +85,27 @@ place.  If moved, the build process should be repeated.
 To execute the code just enter
 
 ```
-./sapphire X+a
+./sapphire old X+a
 ```
 
 where X is the heavy nucleus and a is the projectile. Examples are 25Mg+a or 60Fe+n.  
 
-# Features
+# Modules
 
-## Calculate Cross Sections
+## reaction
+Not yet fully implemented.
 
+## decayer
+Not yet fully implemented.
+
+## old
+This module provides the same functionallity as the original Sapphire code. Everything stays the same except the keyword ```old```. 
+Thus instead of running ```./sapphire 60Fe+a``` one needs to run ```./sapphire old 60Fe+a```.
+
+In future more and more of the features of the original Sapphire code will be reimplemented as modules. This part of the code can still be used but won't be maintained in future.
+
+## help
+Print the help text for the different modules.
 
 # References
 ## About Sapphire
