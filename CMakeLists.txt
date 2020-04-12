@@ -23,6 +23,7 @@ set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 #Set parallel building
 set(CMAKE_BUILD_PARALLEL_LEVEL "4")
 set(CMAKE_CXX_FLAGS "-j 20")
+set (OpenMP_CXX_FLAGS "-fopenmp")
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
