@@ -33,8 +33,9 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ROOT_CXX_FLAGS}")
 include_directories(${ROOT_INCLUDE_DIR})
 link_directories(${ROOT_LIBRARY_DIR})
 
-set(CMAKE_BUILD_PARALLEL_LEVEL "4")
-set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -j 20")
+#set(CMAKE_BUILD_PARALLEL_LEVEL "4")
+#set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -j 20")
+
 
 if (MPI_BUILD)
 add_definitions(-DMPI_BUILD)
