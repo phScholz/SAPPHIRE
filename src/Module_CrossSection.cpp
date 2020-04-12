@@ -7,7 +7,6 @@
 #include "NuclearMass.h"
 #include "CrossSection.h"
 
-#include "Setup.cpp"
 
 namespace Module_CrossSection{
 
