@@ -14,6 +14,12 @@ option (MPI_BUILD "Build Sapphire for MPI simulations. Note: Cross section calcu
 #Set the C++ standard to c++11
 set (CMAKE_CXX_STANDARD 11)
 
+#Set optimization to 3
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
+#Set compilation warnings
+set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 message("Checking if GNU SCIENTIFIC LIBRARY (GSL) can be found ...")
