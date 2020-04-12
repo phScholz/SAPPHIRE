@@ -61,18 +61,17 @@ int main(int argc, char *argv[]) {
 		return 0;
 	}
 
+  Initialize();
+
   std::string mode(argv[1]);
 	
   if (mode == "reaction"){
-    Initialize();
-		Module_CrossSection::Go(argc,argv);
+    Module_CrossSection::Go(argc,argv);
   }
   else if (mode == "decay"){
-    Initialize();
     Module_Decayer::Go(argc,argv);
   }
   else if (mode == "old"){
-    Initialize();
     Module_OldSapphire::Go(argc, argv);
   }
   else if (mode == "help")
