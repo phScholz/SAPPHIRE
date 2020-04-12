@@ -31,9 +31,9 @@
 #include "TransitionRateFunc.h"
 #include "ParticleTransmissionFunc.h"
 #include "GammaTransmissionFunc.h"
-#include "Setup.cpp"
+/* #include "Setup.cpp"
 
-extern void Initialize();
+extern void Initialize(); */
 #ifndef MPI_BUILD
 unsigned int randomSeed[12];
 #endif 
@@ -730,7 +730,7 @@ void slaveProcess(boost::mpi::communicator& world,InitialNucleusData initialNucl
         }
 
         /** Calling the Initialize() function from Setup.cpp*/
-        Initialize();
+/*         Initialize(); */
   
         /** Create a vector which containts the cmd parameter. 
          *  Now int i starts at 1, the first parameter is "old" now.

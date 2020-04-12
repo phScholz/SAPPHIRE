@@ -18,7 +18,9 @@
 #include "Module_OldSapphire.h"
 #include "Module_Decayer.h"
 
-//#include "Setup.cpp"
+#include "Setup.cpp"
+
+extern void Initialize();
 
 /**
  * @brief Secondary function to print help. This is the first step to reconstruct Sapphire.cpp.
@@ -61,15 +63,18 @@ int main(int argc, char *argv[]) {
 
   std::string mode(argv[1]);
 	
-  if (mode == "reaction")
+  if (mode == "reaction"){
+    Initialize();
 		Module_CrossSection::Go(argc,argv);
-  
-  else if (mode == "decay")
+  }
+  else if (mode == "decay"){
+    Initialize();
     Module_Decayer::Go(argc,argv);
-
-  else if (mode == "old")
+  }
+  else if (mode == "old"){
+    Initialize();
     Module_OldSapphire::Go(argc, argv);
-  
+  }
   else if (mode == "help")
     PrintHelp();
    
