@@ -13,7 +13,50 @@
 #include <map>
 #include <string>
 
+/* Includes from Setup.cpp*/
+#include "NuclearMass.h"
+#include "GammaTransmissionFunc.h"
+#include "NuclearLevels.h"
+#include "Decayer.h"
+#include "Sapphire_config.h"
+#include "TransitionRateFunc.h"
+#ifndef MPI_BUILD
+#include "CrossSection.h"
+#endif
+#include "PreEqDecayer.h"
+#include "ParticleTransmissionFunc.h"
+#include "CoulFunc.h"
+#include <iostream>
+#include <gsl/gsl_errno.h>
+
 namespace Module_CrossSection{
+
+    bool CrossSection::residualGamma_;
+    bool CrossSection::residualNeutron_;
+    bool CrossSection::residualProton_;
+    bool CrossSection::residualAlpha_;
+    bool CrossSection::calculateGammaCutoff_;
+    std::vector<double> CrossSection::rateTemps_;
+    std::vector<double> CrossSection::macsEnergies_;
+    #endif
+    bool Decayer::isCrossSection_;
+    bool PreEqDecayer::isCrossSection_;
+    double Decayer::maxL_;
+    double PreEqDecayer::maxL_;
+    double TransitionRateFunc::gammaCutoffEnergy_;
+    ElementTable NuclearMass::elementTable_; 
+    MassTable NuclearMass::massTable_;
+    GDRTable GammaTransmissionFunc::gdrTable_;
+    LevelsTable NuclearLevels::levelsTable_;
+    int ParticleTransmissionFunc::alphaFormalism_;
+    int ParticleTransmissionFunc::neutronFormalism_;
+    int ParticleTransmissionFunc::protonFormalism_;
+    int GammaTransmissionFunc::egdrType_;
+    bool GammaTransmissionFunc::porterThomas_;
+    bool ParticleTransmissionFunc::porterThomas_;
+
+    void Initialize(); /**< Initialize default options*/
+
     void Go(int argc,char *argv[]); /**< Top level function to call from main*/
     void Run(int argc,char *argv[]); /**< Declaration of the main function of the CrossSection Module*/
 
