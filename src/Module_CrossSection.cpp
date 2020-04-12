@@ -129,7 +129,7 @@ namespace Module_CrossSection{
     }
 
     int atomicNumberIntFromString(std::string reactionString){
-        std::string atomin = atomicNumberStringFromString(reactionString);
+        std::string atomicNumberString = atomicNumberStringFromString(reactionString);
         if(NuclearMass::FindZ(atomicNumberString) != -1) 
             return NuclearMass::FindZ(atomicNumberString);
         else
