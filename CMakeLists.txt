@@ -20,10 +20,6 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 #Set compilation warnings
 set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 
-#Set parallel building
-set(CMAKE_BUILD_PARALLEL_LEVEL "4")
-set(CMAKE_CXX_FLAGS "-j 20")
-set (OpenMP_CXX_FLAGS "-fopenmp")
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
@@ -37,6 +33,11 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ROOT_CXX_FLAGS}")
 include_directories(${ROOT_INCLUDE_DIR})
 link_directories(${ROOT_LIBRARY_DIR})
 
+find_package ( Open_MP  REQUIRED)
+#Set parallel building
+set(CMAKE_BUILD_PARALLEL_LEVEL "4")
+set(CMAKE_CXX_FLAGS "-j 20")
+set (OpenMP_CXX_FLAGS "-fopenmp")
 
 if (MPI_BUILD)
 add_definitions(-DMPI_BUILD)
