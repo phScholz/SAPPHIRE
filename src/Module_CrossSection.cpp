@@ -10,35 +10,7 @@
 
 
 namespace Module_CrossSection{
-
-    void Initialize(){
-        #ifndef MPI_BUILD
-            CrossSection::SetResidualGamma(true);
-            CrossSection::SetResidualNeutron(false);
-            CrossSection::SetResidualProton(false);
-            CrossSection::SetResidualAlpha(false);
-            CrossSection::SetCalculateGammaCutoff(true);
-            CrossSection::CreateTempVector();
-            CrossSection::CreateMACSEnergiesVector();
-        #endif
-        Decayer::SetCrossSection(false);
-        PreEqDecayer::SetCrossSection(false);
-        Decayer::SetMaxL(8.);
-        PreEqDecayer::SetMaxL(8.);
-        TransitionRateFunc::SetGammaCutoffEnergy(10000.);
-        NuclearMass::InitializeElements();
-        NuclearMass::InitializeMasses(sourceDirectory()+"/tables/masses.dat");
-        GammaTransmissionFunc::InitializeGDRParameters(sourceDirectory()+"/tables/ripl3_gdr_parameters.dat");
-        NuclearLevels::InitializeLevels(sourceDirectory()+"/levels/",sourceDirectory()+"/tables/spinod.dat");
-        ParticleTransmissionFunc::SetAlphaFormalism(0);
-        ParticleTransmissionFunc::SetNeutronFormalism(0);
-        ParticleTransmissionFunc::SetProtonFormalism(0);
-        GammaTransmissionFunc::SetEGDRType(1);
-        GammaTransmissionFunc::SetPorterThomas(false);
-        ParticleTransmissionFunc::SetPorterThomas(false);
-        gsl_set_error_handler (&CoulFunc::GSLErrorHandler);
-    }   
-
+ 
     typedef struct EntrancePairs {
         EntrancePairs(int Z,int A,int pType) {
             Z_=Z;
