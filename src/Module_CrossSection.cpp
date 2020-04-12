@@ -118,7 +118,6 @@ namespace Module_CrossSection{
             std::cout << "Now I would handle the input-File." << std::endl;
         }
         else{
-            Initialize();
             std::vector<EntrancePairs> entrancePairs;
             int A = massNumberIntFromString(argv[2]);
             int Z = atomicNumberIntFromString(argv[2]);
