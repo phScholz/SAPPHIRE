@@ -35,7 +35,6 @@ link_directories(${ROOT_LIBRARY_DIR})
 
 set(CMAKE_BUILD_PARALLEL_LEVEL "4")
 set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -j 20")
-set (OpenMP_CXX_FLAGS "${CMAKE_C_FLAGS} -fopenmp")
 
 if (MPI_BUILD)
 add_definitions(-DMPI_BUILD)
