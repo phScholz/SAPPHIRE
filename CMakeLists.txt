@@ -20,6 +20,10 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 #Set compilation warnings
 set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 
+#Set parallel building
+set(CMAKE_BUILD_PARALLEL_LEVEL "4")
+set(CMAKE_CXX_FLAGS "-j 20")
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 message("Checking if GNU SCIENTIFIC LIBRARY (GSL) can be found ...")
