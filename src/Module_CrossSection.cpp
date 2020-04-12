@@ -114,7 +114,7 @@ namespace Module_CrossSection{
     }
 
     void Go(int argc,char *argv[]){
-        auto start = std::chrono::system_clock::now()
+        auto start = std::chrono::system_clock::now();
 
         if(argc < 3){
             printHelp();
@@ -146,7 +146,7 @@ namespace Module_CrossSection{
             }            
             delete xs;
 
-            auto stop = std::chrono::system_clock::now()
+            auto stop = std::chrono::system_clock::now();
 
             std::chrono::duration<double> elapsed_seconds = end - start; 
             std::time_t end_time = std::chrono::system_clock::to_time_t(end); 
