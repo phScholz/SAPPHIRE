@@ -7,6 +7,8 @@
 #include "NuclearMass.h"
 #include "CrossSection.h"
 
+#include "Setup.cpp"
+extern void Initialize(); /**< Initialize default options*/
 
 namespace Module_CrossSection{
 
