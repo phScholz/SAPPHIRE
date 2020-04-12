@@ -18,7 +18,7 @@
 #include "Module_OldSapphire.h"
 #include "Module_Decayer.h"
 
-#include "Setup.cpp"
+//#include "Setup.cpp"
 
 extern void Initialize();
 
