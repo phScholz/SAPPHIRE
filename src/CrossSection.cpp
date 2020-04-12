@@ -15,6 +15,19 @@
 #include <algorithm>
 #include "omp.h"
 
+/* CrossSection::CrossSection_simple(int Z, int A, int pType, std::string energyFile, bool forRates, int entranceState, std::vector<int> exitStates)
+{ 
+  // FindLevels in the levels data table 
+  std::vector<Level> knownLevels = NuclearLevels::FindLevels(Z,A);
+
+  if(!knownLevels.size()>entranceState){
+    std::cout << "Initial state not known." << std::endl;
+  }
+
+
+
+}
+ */
 CrossSection::CrossSection(int Z, int A, int pType, std::string energyFile, bool forRates,
 			   int entranceState, std::vector<int> exitStates) : 
   Z_(Z), A_(A), pType_(pType), skipEnergy_(1000.), entranceState_(entranceState), exitStates_(exitStates) {
@@ -376,23 +389,28 @@ void CrossSection::Calculate() {
     double neutronStellarSum = 0.;
     double protonStellarSum = 0.;
     double alphaStellarSum = 0.;
+    
     for(int j = 0;j<decayerVector.size();j++) {
       std::vector<SpinRatePair*> entrancePairs = decayerVector[j].second;
       Decayer* decayer = decayerVector[j].first->widthCorrectedDecayer_;
       double entranceTransmission=0.;
+      
       for(int k = 0;k<entrancePairs.size();k++) {
-	entranceTransmission += entrancePairs[k]->rateFunc_->CalcTransmissionFunc(E-seperationEnergy_);
+	      entranceTransmission += entrancePairs[k]->rateFunc_->CalcTransmissionFunc(E-seperationEnergy_);
       }
+
       double gammaExitTransmission=0.;
       double neutronExitTransmission=0.;
       double protonExitTransmission=0.;
       double alphaExitTransmission=0.;
+
       for(int k = 0;k<decayer->spinRatePairs_.size();k++) {
-	if(decayer->spinRatePairs_[k].A_==compoundA_&&
-	   decayer->spinRatePairs_[k].Z_==compoundZ_) {
-	  if(exitStates_[0]<0) {
-	    double branching = 
-	      (residualGamma_) ? decayer->spinRatePairs_[k].rateFunc_->ExclusiveBranching() : 1.;
+	      if(decayer->spinRatePairs_[k].A_==compoundA_&&
+	        decayer->spinRatePairs_[k].Z_==compoundZ_) {
+	  
+          if(exitStates_[0]<0) {
+	          double branching = 
+	            (residualGamma_) ? decayer->spinRatePairs_[k].rateFunc_->ExclusiveBranching() : 1.;
 	    gammaExitTransmission+=decayer->spinRatePairs_[k].integral_*branching;
 	  } else {
 	    if(decayer->spinRatePairs_[k].spin_==specifiedExitJ_[0]&&

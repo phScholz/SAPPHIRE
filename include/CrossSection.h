@@ -34,6 +34,8 @@ class CrossSectionValues {
 class CrossSection {
  public:
   CrossSection(int,int,int,std::string,bool,int entranceState = 0, std::vector<int> exitStates = std::vector<int>(4,-1));
+  CrossSection_simple(int,int,int,std::string,bool,int entranceState = 0, std::vector<int> exitStates = std::vector<int>(4,-1));
+
   bool IsValid() const {
     return isValid_;
   }
@@ -53,6 +55,7 @@ class CrossSection {
   static void SetCalculateGammaCutoff(bool calc) {calculateGammaCutoff_=calc;};
   static void CreateTempVector();
   static void CreateMACSEnergiesVector();
+
  private:
   bool FillEnergies(std::string);
   bool CalcAllowedJPi(bool);
