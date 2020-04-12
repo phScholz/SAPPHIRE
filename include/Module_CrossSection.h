@@ -50,7 +50,7 @@ namespace Module_CrossSection{
      * @param projectileString The part of the reactionString which defines the projectile.
      * @return Integer which represents the pType: 0 = gamma, 1 = neutron, 2 = proton, 3 = alpha.
      */
-    int pTypeIntFromString(const char* projectileString);
+    int pTypeIntFromString(std::string reactionString);
 
     /**
      * @brief Get the atomic number as string from reactionString.
