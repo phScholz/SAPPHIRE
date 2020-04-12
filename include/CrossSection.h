@@ -37,7 +37,7 @@ class CrossSection {
   bool IsValid() const {
     return isValid_;
   }
-  
+
   void Calculate();
   void PrintCrossSections();
   void PrintTransmissionTerms();
@@ -66,7 +66,7 @@ class CrossSection {
   static bool residualAlpha_;
   static bool calculateGammaCutoff_;
   constexpr static double minEnergy_ = 0.001;
-  constexpr static double maxEnergy_ = 30.0;
+  constexpr static double maxEnergy_ = 15.0;
   constexpr static double dE_ = .1;
   bool gammaCutoffSet_;
   bool isValid_;
