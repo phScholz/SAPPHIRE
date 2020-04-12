@@ -18,6 +18,8 @@
 #include "Module_OldSapphire.h"
 #include "Module_Decayer.h"
 
+#include "Setup.cpp"
+
 /**
  * @brief Secondary function to print help. This is the first step to reconstruct Sapphire.cpp.
  */

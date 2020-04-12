@@ -116,7 +116,8 @@ namespace Module_CrossSection{
         if(fexists(argv[2])){
             std::cout << "Now I would handle the input-File." << std::endl;
         }
-        else{
+        else{            
+            Initialize();
             std::vector<EntrancePairs> entrancePairs;
             int A = massNumberIntFromString(argv[2]);
             int Z = atomicNumberIntFromString(argv[2]);
@@ -124,8 +125,7 @@ namespace Module_CrossSection{
             std::string energyFile;
             bool forRates = false;
             int entranceState = 0;
-            std::vector<int> exitStates(4,-1);
-            
+            std::vector<int> exitStates(4,-1);           
 
 
             CrossSection* xs = new CrossSection(Z,A,pType,energyFile,forRates,entranceState,exitStates);
