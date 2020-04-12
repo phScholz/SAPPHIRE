@@ -13,23 +13,6 @@
 #include <map>
 #include <string>
 
-/* Includes from Setup.cpp*/
-#include "NuclearMass.h"
-#include "GammaTransmissionFunc.h"
-#include "NuclearLevels.h"
-#include "Decayer.h"
-#include "Sapphire_config.h"
-#include "TransitionRateFunc.h"
-#ifndef MPI_BUILD
-#include "CrossSection.h"
-#endif
-#include "PreEqDecayer.h"
-#include "ParticleTransmissionFunc.h"
-#include "CoulFunc.h"
-#include <iostream>
-#include <gsl/gsl_errno.h>
-
-
 namespace Module_CrossSection{
 
 
