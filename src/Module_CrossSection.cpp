@@ -132,6 +132,7 @@ namespace Module_CrossSection{
             Input->Initialize();
             std::cout << "Reading input file ..." << argv[2] << std::endl;
             Input->ReadInputFile(argv[2]);
+            Input->printIntputParameters();
 
         }
         else{            

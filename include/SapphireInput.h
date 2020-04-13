@@ -41,6 +41,11 @@ class SapphireInput{
          */
         void printIntputFile(std::string filename);
 
+        /**
+         * @brief Print Inputparameters to std::cout
+         */
+        void printIntputParameters();
+
         //Setter
         void CalcRates(bool x){calcRates=x;}                         /**< Setter for bool calcRates*/
         void CalcAverageWidth(bool x){calcAverageWidth=x;}           /**< Setter for bool calcAverageWidth*/
