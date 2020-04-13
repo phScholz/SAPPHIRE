@@ -35,6 +35,8 @@
     void SapphireInput::ReadInputFile(std::string InputFile){
         boost::property_tree::ptree pt;
         boost::property_tree::ini_parser::read_ini(InputFile, pt);
-        std::cout << pt.get<std::string>("CrossSection.a") << std::endl;        
+        std::cout << pt.get<std::string>("CrossSection.CalcRates") << std::endl;
+        std::cout << pt.get<std::string>("CrossSection.CalcAverageWidth") << std::endl;
+        std::cout << pt.get<std::string>("CrossSection.ResidualNeutron") << std::endl;                                
     }
 
