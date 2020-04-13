@@ -56,13 +56,13 @@
         std::cout << "INPUT PARAMETERS" << std::endl;
         std::cout << std::endl;
 
-        std::cout << std::setw(25) << "\tCrossSection.CalcRates" << std::setw(0)  << SapphireInput::CalcRates() << std::endl;
-        std::cout << std::setw(25) << "\tCrossSection.CalcAverageWidth" << std::setw(0) << SapphireInput::CalcAverageWidth() << std::endl;
-        std::cout << std::setw(25) << "\tCrossSection.ResidualGamma" << std::setw(0) << SapphireInput::ResidualGamma() << std::endl;
-        std::cout << std::setw(25) << "\tCrossSection.ResidualNeutron" << std::setw(0) << SapphireInput::ResidualNeutron() << std::endl;
-        std::cout << std::setw(25) << "\tCrossSection.ResidualProton" << std::setw(0) << SapphireInput::ResidualProton() << std::endl;
-        std::cout << std::setw(25) << "\tCrossSection.ResidualAlpha" << std::setw(0) << SapphireInput::ResidualAlpha() << std::endl;
-        std::cout << std::setw(25) << "\tCrossSection.CalculateGammaCutoff" << std::setw(0) << SapphireInput::CalculateGammaCutoff() << std::endl;
+        std::cout << "\tCrossSection.CalcRates            = "             << SapphireInput::CalcRates() << std::endl;
+        std::cout << "\tCrossSection.CalcAverageWidth     = "      << SapphireInput::CalcAverageWidth() << std::endl;
+        std::cout << "\tCrossSection.ResidualGamma        = "         << SapphireInput::ResidualGamma() << std::endl;
+        std::cout << "\tCrossSection.ResidualNeutron      = "       << SapphireInput::ResidualNeutron() << std::endl;
+        std::cout << "\tCrossSection.ResidualProton       = "        << SapphireInput::ResidualProton() << std::endl;
+        std::cout << "\tCrossSection.ResidualAlpha        = "         << SapphireInput::ResidualAlpha() << std::endl;
+        std::cout << "\tCrossSection.CalculateGammaCutoff = "  << SapphireInput::CalculateGammaCutoff() << std::endl;
     }
 
     void SapphireInput::ReadInputFile(std::string InputFile){
