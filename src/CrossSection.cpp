@@ -13,7 +13,6 @@
 #include <gsl/gsl_integration.h>
 #include <TGraph.h>
 #include <algorithm>
-#include "omp.h"
 
 /* CrossSection::CrossSection_simple(int Z, int A, int pType, std::string energyFile, bool forRates, int entranceState, std::vector<int> exitStates)
 { 
@@ -337,7 +336,7 @@ void CrossSection::Calculate() {
   time_t startTime = time(NULL);
   int skipCounter = 0;
 
-  #pragma omp parallel for
+
   for(int i=0;i<numPoints;i++) {
     if(i>0&&!energiesGiven_) {
       skipCounter++;
