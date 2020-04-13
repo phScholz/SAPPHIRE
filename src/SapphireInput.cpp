@@ -7,28 +7,34 @@
  */
 
 #include "SapphireInput.h"
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/ini_parser.hpp>
 
-namespace SapphireInput{
-    
-    void SapphireInput(){
-        Initialize();
+
+   
+    void SapphireInput::SapphireInput(){
+        SapphireInput::Initialize();
     }
 
-    void Initialize(){
+    void SapphireInput::Initialize(){
 
-        CalcRates(false);           
-        CalcAverageWidth(false);
-        ResiudalGamma(false);               
-        ResiudalNeutron(false);           
-        ResiudalProton(false);
-        ResiudalAlpha(false);
-        CalculateGammaCutoff(false);
+        SapphireInput::CalcRates(false);           
+        SapphireInput::CalcAverageWidth(false);
+        SapphireInput::ResiudalGamma(false);               
+        SapphireInput::ResiudalNeutron(false);           
+        SapphireInput::ResiudalProton(false);
+        SapphireInput::ResiudalAlpha(false);
+        SapphireInput::CalculateGammaCutoff(false);
 
-        EntranceState(0);
-        
-        EnergyFile("");
-        ReactionFile("");
+        SapphireInput::EntranceState(0);
+
+        SapphireInput::EnergyFile("");
+        SapphireInput::ReactionFile("");
     }
 
+    void SapphireInput::ReadInputFile(InputFile){
+        boost::property_tree::ptree pt;
+        boost::property_tree::ini_parser::read_ini(InputFile, pt);
+        std::cout << pt.get<std::string>("CrossSection.a") << std::endl;        
+    }
 
-}

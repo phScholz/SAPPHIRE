@@ -10,6 +10,7 @@
 
 #include "NuclearMass.h"
 #include "CrossSection.h"
+#include "SapphireInput.h"
 
 
 
@@ -122,6 +123,9 @@ namespace Module_CrossSection{
         
         if(fexists(argv[2])){
             std::cout << "Now I would handle the input-File." << std::endl;
+            SapphireInput* Input = new SapphireInput();
+            Input->Initialize();
+            Input->ReadInputFile(argv[2]);
         }
         else{            
             std::vector<EntrancePairs> entrancePairs;
