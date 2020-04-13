@@ -53,7 +53,7 @@ class SapphireInput{
         
         //Getter
         bool CalcRates(){return calcRates;}                     /**<Getter for calcrates*/    
-        bool CalcAverageWidht(){return calcAverageWidth;}       /**<Getter for calcAverageWidth*/    
+        bool CalcAverageWidth(){return calcAverageWidth;}       /**<Getter for calcAverageWidth*/    
         bool ResidualGamma(){return residualGamma;}             /**<Getter for residualGamma*/    
         bool ResidualNeutron(){return residualNeutron;}         /**<Getter for residualNeutron*/    
         bool ResidualProton(){return residualProton;}           /**<Getter for residualProton*/
