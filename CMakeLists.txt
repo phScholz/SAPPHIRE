@@ -15,10 +15,11 @@ option (MPI_BUILD "Build Sapphire for MPI simulations. Note: Cross section calcu
 set (CMAKE_CXX_STANDARD 11)
 
 #Set optimization to 3
-set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -O3")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 
 #Set compilation warnings
-set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp=libomp")
 
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
