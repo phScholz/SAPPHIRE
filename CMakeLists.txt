@@ -1,6 +1,6 @@
 #CMakeLists.txt
 
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required (VERSION 2.8)
 project (Sapphire)
 message("Using CMAKE version ${CMAKE_VERSION}")
 
@@ -19,7 +19,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 
 #Set compilation warnings
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp=libomp")
 
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
@@ -40,9 +39,9 @@ message("Checking if Boost 1.4 COMPONENTS mpi serialization can be found ...")
 FIND_PACKAGE(Boost 1.4 COMPONENTS mpi serialization REQUIRED)
 INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
 else (MPI_BUILD)
-#message("Checking if OpenMP can be found ...")
-#find_package (OpenMP REQUIRED)
-#set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+message("Checking if OpenMP can be found ...")
+find_package (OpenMP REQUIRED)
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 endif (MPI_BUILD)
 
 include_directories(${Sapphire_SOURCE_DIR}/coul/include)

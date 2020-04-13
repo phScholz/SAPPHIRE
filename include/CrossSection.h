@@ -34,7 +34,7 @@ class CrossSectionValues {
 class CrossSection {
  public:
   CrossSection(int,int,int,std::string,bool,int entranceState = 0, std::vector<int> exitStates = std::vector<int>(4,-1));
-  CrossSection_simple(int,int,int,std::string,bool,int entranceState = 0, std::vector<int> exitStates = std::vector<int>(4,-1));
+  void CrossSection_simple(int,int,int,std::string,bool,int entranceState = 0, std::vector<int> exitStates = std::vector<int>(4,-1));
 
   bool IsValid() const {
     return isValid_;
