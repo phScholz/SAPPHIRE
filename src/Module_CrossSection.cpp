@@ -123,9 +123,13 @@ namespace Module_CrossSection{
         
         if(fexists(argv[2])){
             std::cout << "Now I would handle the input-File." << std::endl;
+            
             SapphireInput* Input = new SapphireInput();
+            std:cout << "Setting default values..." << std::endl;        
             Input->Initialize();
+            std::cout << "Reading input file ..." << argv[2] << std::endl;
             Input->ReadInputFile(argv[2]);
+            
         }
         else{            
             std::vector<EntrancePairs> entrancePairs;
