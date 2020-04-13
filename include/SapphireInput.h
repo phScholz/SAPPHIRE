@@ -79,4 +79,4 @@ class SapphireInput{
 
         std::string energyFile;     /**< String with the path to the energyFile*/
         std::string reactionFile;   /**< String with the path to the reactionFile*/
-}
+};

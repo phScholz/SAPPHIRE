@@ -12,7 +12,7 @@
 
 
    
-    void SapphireInput::SapphireInput(){
+    SapphireInput::SapphireInput(){
         SapphireInput::Initialize();
     }
 
@@ -32,7 +32,7 @@
         SapphireInput::ReactionFile("");
     }
 
-    void SapphireInput::ReadInputFile(InputFile){
+    void SapphireInput::ReadInputFile(std::string InputFile){
         boost::property_tree::ptree pt;
         boost::property_tree::ini_parser::read_ini(InputFile, pt);
         std::cout << pt.get<std::string>("CrossSection.a") << std::endl;        
