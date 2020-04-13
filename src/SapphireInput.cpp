@@ -10,6 +10,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 #include <iostream>
+#include <ifstream>
 
 
    
@@ -35,12 +36,29 @@
 
     void SapphireInput::ReadInputFile(std::string InputFile){
         std::cout << std::endl;
+        std::cout << "INPUT File" << std::endl;
+        std::cout << std::endl;
+        std::string line;
+        std::ifstream myfile (InputFile);
+        if (myfile.is_open())
+        {
+            while ( getline (myfile,line) )
+            {
+                std::cout << line << std::endl;
+            }
+        myfile.close();
+        }
+
+        std::cout << std::endl;
         std::cout << "INPUT PARAMETERS" << std::endl;
         std::cout << std::endl;
         boost::property_tree::ptree pt;
         boost::property_tree::ini_parser::read_ini(InputFile, pt);
-        std::cout << "CrossSection.CalcRates" << pt.get<bool>("CrossSection.CalcRates", SapphireInput::CalcRates()) << std::endl;
-        std::cout << "CrossSection.CalcAverageWidth" << pt.get<bool>("CrossSection.CalcAverageWidth", SapphireInput::CalcAverageWidth()) << std::endl;
-        std::cout << "CrossSection.ResidualNeutron" << pt.get<bool>("CrossSection.ResidualNeutron", SapphireInput::ResidualNeutron()) << std::endl;                                
+
+        Sapphire::CalcRates(pt.get<bool>("CrossSection.CalcRates", SapphireInput::CalcRates()))
+        std::cout << "CrossSection.CalcRates = " << pt.get<bool>("CrossSection.CalcRates", SapphireInput::CalcRates()) << std::endl;
+        
+        std::cout << "CrossSection.CalcAverageWidth = " << pt.get<bool>("CrossSection.CalcAverageWidth", SapphireInput::CalcAverageWidth()) << std::endl;
+        std::cout << "CrossSection.ResidualNeutron = " << pt.get<bool>("CrossSection.ResidualNeutron", SapphireInput::ResidualNeutron()) << std::endl;                                
     }
 

@@ -116,6 +116,9 @@ namespace Module_CrossSection{
 
     void Go(int argc,char *argv[]){
         auto start = std::chrono::steady_clock::now();
+        std::cout << std::endl;
+        std::cout << "Sapphire reaction" << std::endl;
+        std::cout << "*****************" << std::endl;
 
         if(argc < 3){
             printHelp();
