@@ -56,8 +56,8 @@
         boost::property_tree::ptree pt;
         boost::property_tree::ini_parser::read_ini(InputFile, pt);
 
-        Sapphire::CalcRates(pt.get<bool>("CrossSection.CalcRates", SapphireInput::CalcRates()));
-        std::cout << "CrossSection.CalcRates = " << Sapphire::CalcRates() << std::endl;
+        SapphireInput::CalcRates(pt.get<bool>("CrossSection.CalcRates", SapphireInput::CalcRates()));
+        std::cout << "CrossSection.CalcRates = " << SapphireInput::CalcRates() << std::endl;
         Sapphire::CalcAverageWidth(pt.get<bool>("CrossSection.CalcRates", SapphireInput::CalcAverageWidth()));
         std::cout << "CrossSection.CalcAverageWidth = " << pt.get<bool>("CrossSection.CalcAverageWidth", SapphireInput::CalcAverageWidth()) << std::endl;
         std::cout << "CrossSection.ResidualNeutron = " << pt.get<bool>("CrossSection.ResidualNeutron", SapphireInput::ResidualNeutron()) << std::endl;                                
