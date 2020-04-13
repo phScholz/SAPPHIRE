@@ -35,6 +35,11 @@ class SapphireInput{
          * @brief Read ini file and set the variables
          */
         void ReadInputFile(std::string filename);
+        
+        /**
+         * @brief Print InputFile to std::cout
+         */
+        void printIntputFile(std::string filename);
 
         //Setter
         void CalcRates(bool x){calcRates=x;}                         /**< Setter for bool calcRates*/

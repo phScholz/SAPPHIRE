@@ -34,7 +34,7 @@
         SapphireInput::ReactionFile("");
     }
 
-    void SapphireInput::ReadInputFile(std::string InputFile){
+    void SapphireInput::printIntputFile(std::string InputFile){
         std::cout << std::endl;
         std::cout << "INPUT File" << std::endl;
         std::cout << std::endl;
@@ -49,6 +49,10 @@
             
             myfile.close();
         }
+    }
+
+    void SapphireInput::ReadInputFile(std::string InputFile){
+        SapphireInput::printIntputFile(InputFile);
 
         std::cout << std::endl;
         std::cout << "INPUT PARAMETERS" << std::endl;
@@ -58,7 +62,7 @@
 
         SapphireInput::CalcRates(pt.get<bool>("CrossSection.CalcRates", SapphireInput::CalcRates()));
         std::cout << "CrossSection.CalcRates = " << SapphireInput::CalcRates() << std::endl;
-        Sapphire::CalcAverageWidth(pt.get<bool>("CrossSection.CalcRates", SapphireInput::CalcAverageWidth()));
+        SapphireInput::CalcAverageWidth(pt.get<bool>("CrossSection.CalcRates", SapphireInput::CalcAverageWidth()));
         std::cout << "CrossSection.CalcAverageWidth = " << pt.get<bool>("CrossSection.CalcAverageWidth", SapphireInput::CalcAverageWidth()) << std::endl;
         std::cout << "CrossSection.ResidualNeutron = " << pt.get<bool>("CrossSection.ResidualNeutron", SapphireInput::ResidualNeutron()) << std::endl;                                
     }
