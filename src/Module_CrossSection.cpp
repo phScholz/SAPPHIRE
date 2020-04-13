@@ -122,6 +122,7 @@ namespace Module_CrossSection{
 
         if(argc < 3){
             printHelp();
+            exit(0);
         }
         
         if(fexists(argv[2])){
