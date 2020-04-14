@@ -1,3 +1,5 @@
+#pragma once
+
 /**
  * @file SapphireInput.h
  * @brief Option class for Sapphire.

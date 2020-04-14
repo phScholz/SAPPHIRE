@@ -106,7 +106,7 @@ namespace Module_CrossSection{
         std::cout << " InputFile      - InputFile (not yet implemented)" << std::endl;
     }
 
-    void readEntrancePairs(std::vector>EntrancePairs & entrancePairs, std::string reactionFile){
+    void readEntrancePairs(std::vector<EntrancePairs> & entrancePairs, std::string reactionFile){
         std::ifstream in(reactionFile.c_str());
         if(!in) {
 	        std::cout << "Could not open " << reactionFile << " for reading." << std::endl;
@@ -236,12 +236,10 @@ namespace Module_CrossSection{
             //LevelsTable NuclearLevels::levelsTable_;
 
             if(fexists(Input->ReactionFile()))
-                SapphireInput::Run(Input);
+                Run(Input);
             else
-            {
                 RunSingleReaction(Input);
-            }
-            
+                       
             delete Input;           
         }
         else{
