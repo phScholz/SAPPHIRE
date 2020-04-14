@@ -280,7 +280,7 @@ namespace Module_CrossSection{
             }
             else
             {
-                std::cout << std::endl << "No valid reactionFile was given...\nUsing " << Input->Reaction <<"..." << std::endl;
+                std::cout << std::endl << "No valid reactionFile was given...\nUsing " << Input->Reaction() <<"..." << std::endl;
                 RunSingleReaction(Input);
             }          
             delete Input;           
