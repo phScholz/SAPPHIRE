@@ -36,11 +36,13 @@ class SapphireInput{
         
         /**
          * @brief Read ini file and set the variables
+         * @param filename File name of the ini-File
          */
         void ReadInputFile(std::string filename);
         
         /**
          * @brief Print InputFile to std::cout
+         * @param filename File name of the ini-File
          */
         void printIntputFile(std::string filename);
 

@@ -26,7 +26,7 @@ extern std::string sourceDirectory();
     }
 
     void SapphireInput::Initialize(){
-
+        std::cout << "Setting default values..." << std::endl;
         SapphireInput::g_ExitStates(-1);
         SapphireInput::n_ExitStates(-1);
         SapphireInput::p_ExitStates(-1);
@@ -113,8 +113,7 @@ extern std::string sourceDirectory();
     }
 
     void SapphireInput::ReadInputFile(std::string InputFile){
-        SapphireInput::printIntputFile(InputFile);
-
+        std::cout << "Reading input file ..." << InputFile << std::endl;
         boost::property_tree::ptree pt;
 
         try{

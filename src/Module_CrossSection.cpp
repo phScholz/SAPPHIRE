@@ -161,7 +161,20 @@ namespace Module_CrossSection{
         std::vector<EntrancePairs> entrancePairs;
         readEntrancePairs(entrancePairs,input->ReactionFile());
 
-        //CrossSection* xs =new
+        for(auto it = std::begin(entrancePairs); it != std::end(entrancePairs); ++it){}
+            CrossSection* xs = new CrossSection(it.Z_,it.A_, it.pType_,input->EnergyFile(),input->CalcRates());
+            if(xs->IsValid())
+            {
+                std::cout << "Calculating for Z: " << it[i].Z_ << " A: " << it[i].A_ << " and Particle Type: " << it[i].pType_ << std::endl;
+                xs->Calculate();
+                xs->PrintCrossSections();
+            }
+            else
+            {
+                std::cout << "Could not calculate cross section." << std::endl;    
+            }            
+            delete xs;
+        }
     }
 
     void RunSingleReaction(SapphireInput * input){
@@ -249,10 +262,8 @@ namespace Module_CrossSection{
         }
         
         if(fexists(argv[2])){              
-            SapphireInput* Input = new SapphireInput();
-            std::cout << "Setting default values..." << std::endl;        
-            //Input->Initialize();
-            std::cout << "Reading input file ..." << argv[2] << std::endl;
+            SapphireInput* Input = new SapphireInput();            
+            Input->printIntputFile();
             Input->ReadInputFile(argv[2]);
             Input->printIntputParameters();
 
@@ -269,7 +280,7 @@ namespace Module_CrossSection{
             }
             else
             {
-                std::cout << std::endl << argv[2] << " ... is no valid reactionFile.\nAssuming it is an reactionString..." << std::endl;
+                std::cout << std::endl << "No valid reactionFile was given...\nUsing " << Input->Reaction <<"..." << std::endl;
                 RunSingleReaction(Input);
             }          
             delete Input;           
