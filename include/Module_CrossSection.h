@@ -26,7 +26,7 @@ namespace Module_CrossSection{
     /**
      * @brief method to read in the Entrance Pairs given in the reactionFile
      */
-    void readEntrancePairs(std::vector>EntrancePairs & entrancePairs, std::string reactionFile);
+    void readEntrancePairs(std::vector<EntrancePairs> & entrancePairs, std::string reactionFile);
 
     /**
      * @brief Check wheter a string represents an actual file.
