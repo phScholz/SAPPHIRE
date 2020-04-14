@@ -1,3 +1,4 @@
+#pragma once
 #ifndef STATDECAY_CONFIG_H
 #define STATDECAY_CONFIG_H
 
