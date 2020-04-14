@@ -238,11 +238,14 @@ namespace Module_CrossSection{
             //LevelsTable NuclearLevels::levelsTable_;
 
             if(fexists(Input->ReactionFile().c_str()))
+            {
                 std::cout << "Starting calculations for reactions in file ... " << argv[2] << std::endl;
                 Run(Input);
+            }
             else
+            {
                 RunSingleReaction(Input);
-                       
+            }          
             delete Input;           
         }
         else{
@@ -251,6 +254,6 @@ namespace Module_CrossSection{
 
         auto end = std::chrono::steady_clock::now();
         std::chrono::duration<double> elapsed_seconds = end-start;
-        std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";
+        std::cout << std::endl << "elapsed time: " << elapsed_seconds.count() << "s\n";
     } 
 }
