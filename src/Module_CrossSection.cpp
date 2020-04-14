@@ -130,7 +130,7 @@ namespace Module_CrossSection{
         }
     }
 
-    void Run(SapphireInput& input){
+    void Run(SapphireInput * input){
         //Copy the input parameters to respective classes
         //I know, this is still not really intuitive ... but I am working on it.
         CrossSection::SetResidualAlpha(input.ResidualAlpha());
@@ -162,7 +162,7 @@ namespace Module_CrossSection{
         //CrossSection* xs =new
     }
 
-    void RunSingleReaction(SapphireInput & input){
+    void RunSingleReaction(SapphireInput * input){
             int A = massNumberIntFromString(input.Reaction());
             int Z = atomicNumberIntFromString(input.Reaction());
             int pType = pTypeIntFromString(input.Reaction());
