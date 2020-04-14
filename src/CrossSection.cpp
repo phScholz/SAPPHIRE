@@ -32,6 +32,7 @@ CrossSection::CrossSection(int Z, int A, int pType, std::string energyFile, bool
   Z_(Z), A_(A), pType_(pType), skipEnergy_(1000.), entranceState_(entranceState), exitStates_(exitStates) {
 
   groundStateJ_ =-1.;
+  std::cout << "Searching Levels for ... Z = " << Z << " A = " << A << std::endl;
   std::vector<Level> knownLevels = NuclearLevels::FindLevels(Z,A);
   
   if(knownLevels.size()>entranceState) {
