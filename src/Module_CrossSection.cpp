@@ -244,6 +244,7 @@ namespace Module_CrossSection{
             }
             else
             {
+                std::cout << argv[2] << " ... is no valid reactionFile.\nAssuming it is an reactionString..." << std::endl;
                 RunSingleReaction(Input);
             }          
             delete Input;           
