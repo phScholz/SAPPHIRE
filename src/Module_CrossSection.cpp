@@ -164,8 +164,15 @@ namespace Module_CrossSection{
     }
 
     void RunSingleReaction(SapphireInput * input){
+        std::cout<< std::endl << "Starting calculations for reaction ... " << input->Reaction() << std::endl;
             int A = massNumberIntFromString(input->Reaction());
             int Z = atomicNumberIntFromString(input->Reaction());
+
+            if(!Z && !A){
+                std::cout<< std::endl << "Could not get a valid target nucleus from reaction ... "  << std::endl;
+                exit(1);
+            }
+
             int pType = pTypeIntFromString(input->Reaction());
             std::string energyFile = input->EnergyFile();
             bool forRates = input->CalcRates();
@@ -175,7 +182,24 @@ namespace Module_CrossSection{
             exitStates[1]=input->n_ExitStates();
             exitStates[2]=input->p_ExitStates();
             exitStates[3]=input->a_ExitStates();
-                                                
+
+            std::cout << "Input Values For Cross Section:"   << std::endl
+		            << std::setw(14) << "Z:"               << std::setw(12) 
+		            << Z      << std::setw(0) << std::endl
+		            << std::setw(14) << "A:"               << std::setw(12) 
+		            << A      << std::setw(0) << std::endl;
+                
+                
+            if(pType==0) 
+	            std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "g" << std::setw(0) << std::endl;
+            else if(pType==1) 
+	            std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "n" << std::setw(0) << std::endl;
+            else if(pType==2) 
+	            std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "p" << std::setw(0) << std::endl;
+            else if(pType==3) 
+	            std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "a" << std::setw(0) << std::endl;
+                
+            std::cout << "Starting Cross Section Calculation..." << std::endl;           
 
             CrossSection* xs = new CrossSection(Z,A,pType,energyFile,forRates,entranceState,exitStates);
             if(xs->IsValid())
@@ -239,12 +263,12 @@ namespace Module_CrossSection{
 
             if(fexists(Input->ReactionFile().c_str()))
             {
-                std::cout << "Starting calculations for reactions in file ... " << argv[2] << std::endl;
+                std::cout << std::endl << "Starting calculations for reactions in file ... " << argv[2] << std::endl;
                 Run(Input);
             }
             else
             {
-                std::cout << argv[2] << " ... is no valid reactionFile.\nAssuming it is an reactionString..." << std::endl;
+                std::cout << std::endl << argv[2] << " ... is no valid reactionFile.\nAssuming it is an reactionString..." << std::endl;
                 RunSingleReaction(Input);
             }          
             delete Input;           
