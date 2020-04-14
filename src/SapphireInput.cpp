@@ -26,6 +26,11 @@
 
     void SapphireInput::Initialize(){
 
+        SapphireInput::g_ExitStates(-1);
+        SapphireInput::n_ExitStates(-1);
+        SapphireInput::p_ExitStates(-1);
+        SapphireInput::a_ExitStates(-1);
+        
         SapphireInput::CalcRates(false);           
         SapphireInput::CalcAverageWidth(false);
 

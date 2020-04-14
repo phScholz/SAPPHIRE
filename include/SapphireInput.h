@@ -161,6 +161,4 @@ class SapphireInput{
         std::string gdrParams;      /**< String for the path to the GDR parameter file*/
         std::string levelDir;       /**< String for the path to the levels directory*/
         std::string spinFile;       /**< String for the path tot the spinFile*/
-
-        std::vector<int> exitStates(4); /**< Vector of 4 Ints for number of exit states*/
 };
