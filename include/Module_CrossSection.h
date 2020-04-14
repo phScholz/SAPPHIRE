@@ -12,12 +12,21 @@
 #include <vector>
 #include <map>
 #include <string>
+#include "SapphireInput.h"
 
 namespace Module_CrossSection{
 
 
     void Go(int argc,char *argv[]); /**< Top level function to call from main*/
-    void Run(int argc,char *argv[]); /**< Declaration of the main function of the CrossSection Module*/
+    void Run(SapphireInput&); /**< Declaration of the main function of the CrossSection Module*/
+
+    void RunSingleReaction(SapphireInput & input);
+    void RunSingleReaction(std::string reactionfile);
+
+    /**
+     * @brief method to read in the Entrance Pairs given in the reactionFile
+     */
+    void readEntrancePairs(std::vector>EntrancePairs & entrancePairs, std::string reactionFile);
 
     /**
      * @brief Check wheter a string represents an actual file.

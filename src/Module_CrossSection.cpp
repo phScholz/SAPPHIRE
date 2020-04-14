@@ -11,6 +11,10 @@
 #include "NuclearMass.h"
 #include "CrossSection.h"
 #include "SapphireInput.h"
+#include "Decayer.h"
+#include "TransitionRateFunc.h"
+#include "ParticleTransmissionFunc.h"
+#include "GammaTransmissionFunc.h"
 
 
 
@@ -26,8 +30,6 @@ namespace Module_CrossSection{
         int A_;
         int pType_;
     } EntrancePairs;
-
-    void Run(int argc,char *argv[]){}
 
     bool fexists(const char *filename) {
         std::ifstream ifile(filename);
@@ -114,38 +116,74 @@ namespace Module_CrossSection{
         std::cout << " InputFile      - InputFile (not yet implemented)" << std::endl;
     }
 
-    void Go(int argc,char *argv[]){
-        auto start = std::chrono::steady_clock::now();
-        std::cout << std::endl;
-        std::cout << "Sapphire reaction" << std::endl;
-        std::cout << "*****************" << std::endl;
+    void readEntrancePairs(std::vector>EntrancePairs & entrancePairs, std::string reactionFile){
+        std::ifstream in(reactionFile.c_str());
+        if(!in) {
+	        std::cout << "Could not open " << reactionFile << " for reading." << std::endl;
+	        exit(1);
+        } else {
+	        std::cout << "Reading nuclei from " << reactionFile << "." << std::endl;
 
-        if(argc < 3){
-            printHelp();
-            exit(0);
+	        while(!in.eof()) {
+	            std::string line;
+	            std::getline(in,line);
+	            
+                if(!in.eof()) {
+	                std::istringstream stm(line);
+	                if(stm >> Z >> A >> pType)
+	                    entrancePairs.push_back(EntrancePairs(Z,A,pType));
+	            }
+	        }
+	                
+        in.close();
         }
+    }
+
+    void Run(SapphireInput& input){
+        //Copy the input parameters to respective classes
+        //I know, this is still not really intuitive ... but I am working on it.
+        CrossSection::SetResidualAlpha(input.ResidualAlpha());
+        CrossSection::SetResidualProton(input.ResidualProton());
+        CrossSection::SetResidualNeutron(input.ResidualNeutron());
+        CrossSection::SetResidualGamma(input.ResidualGamma());
+        CrossSection::SetCalculateGammaCutoff(input.CalculateGammaCutoff());
+        TransitionRateFunc::SetGammaCutoffEnergy(input.g_CutoffEnergy());
+        Decayer::SetCrossSection(true);
+        Decayer::SetMaxL(input.DecayerMaxL());
         
-        if(fexists(argv[2])){
-            std::cout << "Now I would handle the input-File." << std::endl;
-            
-            SapphireInput* Input = new SapphireInput();
-            std::cout << "Setting default values..." << std::endl;        
-            Input->Initialize();
-            std::cout << "Reading input file ..." << argv[2] << std::endl;
-            Input->ReadInputFile(argv[2]);
-            Input->printIntputParameters();
+        std::vector<int>(4,-1) exitStates;
+        exitStates[0]=input.g_ExitStates();
+        exitStates[1]=input.n_ExitStates();
+        exitStates[2]=input.p_ExitStates();
+        exitStates[3]=input.a_ExitStates();
+        
+        ParticleTransmissionFunc::SetAlphaFormalism(input.a_Formalism());
+        ParticleTransmissionFunc::SetProtonFormalism(input.p_Formalism());
+        ParticleTransmissionFunc::SetNeutronFormalism(input.n_Formalism());
+        ParticleTransmissionFunc::SetPorterThomas(input.PorterThomas_p());
 
-        }
-        else{            
-            std::vector<EntrancePairs> entrancePairs;
-            int A = massNumberIntFromString(argv[2]);
-            int Z = atomicNumberIntFromString(argv[2]);
-            int pType = pTypeIntFromString(argv[2]);
-            std::string energyFile;
-            bool forRates = false;
-            int entranceState = 0;
-            std::vector<int> exitStates(4,-1);           
+        GammaTransmissionFunc::SetEGDRType(input.g_Formalism());
+        GammaTransmissionFunc::SetPorterThomas(input.PorterThomas_g());
 
+        std::vector<EntrancePairs> entrancePairs;
+        readEntrancePairs(entrancePairs,input.ReactionFile());
+
+        CrossSection* xs =new
+    }
+
+    void RunSingleReaction(SapphireInput & input){
+            int A = massNumberIntFromString(input.Reaction());
+            int Z = atomicNumberIntFromString(input.Reaction());
+            int pType = pTypeIntFromString(input.Reaction());
+            std::string energyFile = input.EnergyFile();
+            bool forRates = input.CalcRates();
+            int entranceState = input.EntranceState();
+            std::vector<int> exitStates;
+            exitStates[0]=input.g_ExitStates();
+            exitStates[1]=input.n_ExitStates();
+            exitStates[2]=input.p_ExitStates();
+            exitStates[3]=input.a_ExitStates();
+                                                
 
             CrossSection* xs = new CrossSection(Z,A,pType,energyFile,forRates,entranceState,exitStates);
             if(xs->IsValid())
@@ -158,11 +196,70 @@ namespace Module_CrossSection{
                 std::cout << "Could not calculate cross section." << std::endl;    
             }            
             delete xs;
+    }
 
+    void RunSingleReaction(std::string reactionString){
+        int A = massNumberIntFromString(reactionString);
+        int Z = atomicNumberIntFromString(reactionString);
+        int pType = pTypeIntFromString(reactionString);
+        std::string energyFile;
+        bool forRates = false;
+        int entranceState = 0;
+        std::vector<int> exitStates(4,-1);
+
+        CrossSection* xs = new CrossSection(Z,A,pType,energyFile,forRates,entranceState,exitStates);
+        if(xs->IsValid())
+        {
+            xs->Calculate();
+            xs->PrintCrossSections();
+        }
+        else
+        {
+            std::cout << "Could not calculate cross section." << std::endl;    
+        }            
+        delete xs;
+    }
+
+    void Go(int argc,char *argv[]){
+        auto start = std::chrono::steady_clock::now();
+        std::cout << std::endl;
+        std::cout << "Sapphire reaction" << std::endl;
+        std::cout << "*****************" << std::endl;
+
+        if(argc < 3){
+            printHelp();
+            exit(0);
+        }
+        
+        if(fexists(argv[2])){              
+            SapphireInput* Input = new SapphireInput();
+            std::cout << "Setting default values..." << std::endl;        
+            Input->Initialize();
+            std::cout << "Reading input file ..." << argv[2] << std::endl;
+            Input->ReadInputFile(argv[2]);
+            Input->printIntputParameters();
+
+            /*Defined in Setup.cpp ... Should not be in another file*/
+            //ElementTable NuclearMass::elementTable_; 
+            //MassTable NuclearMass::massTable_;
+            //GDRTable GammaTransmissionFunc::gdrTable_;
+            //LevelsTable NuclearLevels::levelsTable_;
+
+            if(fexists(Input->ReactionFile()))
+                SapphireInput::Run(Input);
+            else
+            {
+                RunSingleReaction(Input);
+            }
+            
+            delete Input;           
+        }
+        else{
+            RunSingleReaction(argv[2]);
         }
 
         auto end = std::chrono::steady_clock::now();
         std::chrono::duration<double> elapsed_seconds = end-start;
         std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";
-    }    
+    } 
 }
