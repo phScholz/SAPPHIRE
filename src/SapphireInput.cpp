@@ -13,6 +13,7 @@
 #include <boost/throw_exception.hpp>
 
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <stdexcept>
 #include <vector>
