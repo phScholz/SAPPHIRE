@@ -178,7 +178,7 @@ namespace Module_CrossSection{
             std::string energyFile = input->EnergyFile();
             bool forRates = input->CalcRates();
             int entranceState = input->EntranceState();
-            std::vector<int> exitStates;
+            std::vector<int> exitStates(4,-1);
             exitStates[0]=input->g_ExitStates();
             exitStates[1]=input->n_ExitStates();
             exitStates[2]=input->p_ExitStates();
