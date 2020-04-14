@@ -15,6 +15,7 @@
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
+#include <vector>
 #include "Sapphire_config.h"
 
 
@@ -27,31 +28,28 @@
 
         SapphireInput::CalcRates(false);           
         SapphireInput::CalcAverageWidth(false);
-        SapphireInput::ResiudalGamma(false);               
+
+        SapphireInput::ResiudalGamma(true);               
         SapphireInput::ResiudalNeutron(false);           
         SapphireInput::ResiudalProton(false);
         SapphireInput::ResiudalAlpha(false);
+
         SapphireInput::CalculateGammaCutoff(false);   
         SapphireInput::PorterThomas_g(false);
         SapphireInput::PorterThomas_p(false);
 
         SapphireInput::EntranceState(0);
 
-        SapphireInput::a_formalism(0);
-        SapphireInput::p_formalism(0);
-        SapphireInput::n_formalism(0);
-        SapphireInput::g_formalism(1);
+        SapphireInput::a_Formalism(0);
+        SapphireInput::p_Formalism(0);
+        SapphireInput::n_Formalism(0);
+        SapphireInput::g_Formalism(1);
 
         SapphireInput::DecayerMaxL(8.);
         SapphireInput::PreEqMaxL(8.);
         SapphireInput::g_CutoffEnergy(10000.);
 
-        SapphireInput::ResidualAlpha(false);
-        SapphireInput::ResidualGamma(true);
-        SapphireInput::ResidualProton(false);
-        SapphireInput::ResidualNeutron(false);
-
-        SapphireInput::Reaction("25Mg+a")
+        SapphireInput::Reaction("25Mg+a");
         SapphireInput::EnergyFile("");
         SapphireInput::ReactionFile("");
         SapphireInput::MassTable(sourceDirectory()+"/tables/masses.dat");
@@ -92,7 +90,7 @@
         std::cout << "\tSuffix               = "             << SapphireInput::Suffix() << std::endl;
 
         std::cout << "[CrossSection]" << std::endl;
-        std::cout << "\Reaction              = "             << SapphireInput::Reaction() << std::endl;
+        std::cout << "\tReaction             = "             << SapphireInput::Reaction() << std::endl;
         std::cout << "\tEnergyFile           = "             << SapphireInput::EnergyFile() << std::endl;
         std::cout << "\tReactionFile         = "             << SapphireInput::ReactionFile() << std::endl;
         std::cout << "\tCalcRates            = "             << SapphireInput::CalcRates() << std::endl;

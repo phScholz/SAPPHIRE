@@ -49,10 +49,12 @@ class SapphireInput{
         //Setter
         void CalcRates(bool x){calcRates=x;}                         /**< Setter for bool calcRates*/
         void CalcAverageWidth(bool x){calcAverageWidth=x;}           /**< Setter for bool calcAverageWidth*/
-        void ResiudalGamma(bool x){residualGamma=x;}                 /**< Setter for bool residualGamma*/
-        void ResiudalNeutron(bool x){residualNeutron=x;}             /**< Setter for bool residualNeutron*/
-        void ResiudalProton(bool x){residualProton=x;}               /**< Setter for bool residualProton*/
-        void ResiudalAlpha(bool x){residualAlpha=x;}                 /**< Setter for bool residualAlpha*/
+       
+        void ResidualGamma(bool x){residualGamma=x;}                 /**< Setter for bool residualGamma*/
+        void ResidualNeutron(bool x){residualNeutron=x;}             /**< Setter for bool residualNeutron*/
+        void ResidualProton(bool x){residualProton=x;}               /**< Setter for bool residualProton*/
+        void ResidualAlpha(bool x){residualAlpha=x;}                 /**< Setter for bool residualAlpha*/
+        
         void CalculateGammaCutoff(bool x){calculateGammaCutoff=x;}   /**< Setter for bool calculateGammaCutoff*/
         void PorterThomas_g(bool x){porterThomas_g=x;}                  /**<Setter for bool porterThomas_g*/
         void PorterThomas_p(bool x){porterThomas_p=x;}                  /**<Setter for bool porterThomas_p*/
