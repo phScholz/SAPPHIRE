@@ -133,47 +133,47 @@ namespace Module_CrossSection{
     void Run(SapphireInput * input){
         //Copy the input parameters to respective classes
         //I know, this is still not really intuitive ... but I am working on it.
-        CrossSection::SetResidualAlpha(input.ResidualAlpha());
-        CrossSection::SetResidualProton(input.ResidualProton());
-        CrossSection::SetResidualNeutron(input.ResidualNeutron());
-        CrossSection::SetResidualGamma(input.ResidualGamma());
-        CrossSection::SetCalculateGammaCutoff(input.CalculateGammaCutoff());
-        TransitionRateFunc::SetGammaCutoffEnergy(input.g_CutoffEnergy());
+        CrossSection::SetResidualAlpha(input->ResidualAlpha());
+        CrossSection::SetResidualProton(input->ResidualProton());
+        CrossSection::SetResidualNeutron(input->ResidualNeutron());
+        CrossSection::SetResidualGamma(input->ResidualGamma());
+        CrossSection::SetCalculateGammaCutoff(input->CalculateGammaCutoff());
+        TransitionRateFunc::SetGammaCutoffEnergy(input->g_CutoffEnergy());
         Decayer::SetCrossSection(true);
-        Decayer::SetMaxL(input.DecayerMaxL());
+        Decayer::SetMaxL(input->DecayerMaxL());
         
         std::vector<int> exitStates(4,-1);
-        exitStates[0]=input.g_ExitStates();
-        exitStates[1]=input.n_ExitStates();
-        exitStates[2]=input.p_ExitStates();
-        exitStates[3]=input.a_ExitStates();
+        exitStates[0]=input->g_ExitStates();
+        exitStates[1]=input->n_ExitStates();
+        exitStates[2]=input->p_ExitStates();
+        exitStates[3]=input->a_ExitStates();
         
-        ParticleTransmissionFunc::SetAlphaFormalism(input.a_Formalism());
-        ParticleTransmissionFunc::SetProtonFormalism(input.p_Formalism());
-        ParticleTransmissionFunc::SetNeutronFormalism(input.n_Formalism());
-        ParticleTransmissionFunc::SetPorterThomas(input.PorterThomas_p());
+        ParticleTransmissionFunc::SetAlphaFormalism(input->a_Formalism());
+        ParticleTransmissionFunc::SetProtonFormalism(input->p_Formalism());
+        ParticleTransmissionFunc::SetNeutronFormalism(input->n_Formalism());
+        ParticleTransmissionFunc::SetPorterThomas(input->PorterThomas_p());
 
-        GammaTransmissionFunc::SetEGDRType(input.g_Formalism());
-        GammaTransmissionFunc::SetPorterThomas(input.PorterThomas_g());
+        GammaTransmissionFunc::SetEGDRType(input->g_Formalism());
+        GammaTransmissionFunc::SetPorterThomas(input->PorterThomas_g());
 
         std::vector<EntrancePairs> entrancePairs;
-        readEntrancePairs(entrancePairs,input.ReactionFile());
+        readEntrancePairs(entrancePairs,input->ReactionFile());
 
         //CrossSection* xs =new
     }
 
     void RunSingleReaction(SapphireInput * input){
-            int A = massNumberIntFromString(input.Reaction());
-            int Z = atomicNumberIntFromString(input.Reaction());
-            int pType = pTypeIntFromString(input.Reaction());
-            std::string energyFile = input.EnergyFile();
-            bool forRates = input.CalcRates();
-            int entranceState = input.EntranceState();
+            int A = massNumberIntFromString(input->Reaction());
+            int Z = atomicNumberIntFromString(input->Reaction());
+            int pType = pTypeIntFromString(input->Reaction());
+            std::string energyFile = input->EnergyFile();
+            bool forRates = input->CalcRates();
+            int entranceState = input->EntranceState();
             std::vector<int> exitStates;
-            exitStates[0]=input.g_ExitStates();
-            exitStates[1]=input.n_ExitStates();
-            exitStates[2]=input.p_ExitStates();
-            exitStates[3]=input.a_ExitStates();
+            exitStates[0]=input->g_ExitStates();
+            exitStates[1]=input->n_ExitStates();
+            exitStates[2]=input->p_ExitStates();
+            exitStates[3]=input->a_ExitStates();
                                                 
 
             CrossSection* xs = new CrossSection(Z,A,pType,energyFile,forRates,entranceState,exitStates);
