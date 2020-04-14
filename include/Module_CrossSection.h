@@ -15,7 +15,16 @@
 #include "SapphireInput.h"
 
 namespace Module_CrossSection{
-
+    typedef struct EntrancePairs {
+        EntrancePairs(int Z,int A,int pType) {
+            Z_=Z;
+            A_=A;
+            pType_=pType;
+        };
+        int Z_;
+        int A_;
+        int pType_;
+    } EntrancePairs;
 
     void Go(int argc,char *argv[]); /**< Top level function to call from main*/
     void Run(SapphireInput&); /**< Declaration of the main function of the CrossSection Module*/
