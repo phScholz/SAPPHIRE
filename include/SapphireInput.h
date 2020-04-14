@@ -11,6 +11,7 @@
 #endif
 
 #include <string>
+#include <vector>
 
 
 class SapphireInput{

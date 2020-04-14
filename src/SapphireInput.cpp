@@ -29,10 +29,10 @@
         SapphireInput::CalcRates(false);           
         SapphireInput::CalcAverageWidth(false);
 
-        SapphireInput::ResiudalGamma(true);               
-        SapphireInput::ResiudalNeutron(false);           
-        SapphireInput::ResiudalProton(false);
-        SapphireInput::ResiudalAlpha(false);
+        SapphireInput::ResidualGamma(true);               
+        SapphireInput::ResidualNeutron(false);           
+        SapphireInput::ResidualProton(false);
+        SapphireInput::ResidualAlpha(false);
 
         SapphireInput::CalculateGammaCutoff(false);   
         SapphireInput::PorterThomas_g(false);
