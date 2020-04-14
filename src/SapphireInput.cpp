@@ -18,7 +18,7 @@
 #include <vector>
 
 
-
+extern std::string sourceDirectory();
    
     SapphireInput::SapphireInput(){
         SapphireInput::Initialize();
