@@ -27,9 +27,9 @@ namespace Module_CrossSection{
     } EntrancePairs;
 
     void Go(int argc,char *argv[]); /**< Top level function to call from main*/
-    void Run(SapphireInput&); /**< Declaration of the main function of the CrossSection Module*/
+    void Run(SapphireInput* input); /**< Declaration of the main function of the CrossSection Module*/
 
-    void RunSingleReaction(SapphireInput & input);
+    void RunSingleReaction(SapphireInput * input);
     void RunSingleReaction(std::string reactionfile);
 
     /**

@@ -108,6 +108,7 @@ namespace Module_CrossSection{
 
     void readEntrancePairs(std::vector<EntrancePairs> & entrancePairs, std::string reactionFile){
         std::ifstream in(reactionFile.c_str());
+        int Z,A,pType =0;
         if(!in) {
 	        std::cout << "Could not open " << reactionFile << " for reading." << std::endl;
 	        exit(1);
@@ -141,7 +142,7 @@ namespace Module_CrossSection{
         Decayer::SetCrossSection(true);
         Decayer::SetMaxL(input.DecayerMaxL());
         
-        std::vector<int>(4,-1) exitStates;
+        std::vector<int> exitStates(4,-1);
         exitStates[0]=input.g_ExitStates();
         exitStates[1]=input.n_ExitStates();
         exitStates[2]=input.p_ExitStates();
@@ -158,7 +159,7 @@ namespace Module_CrossSection{
         std::vector<EntrancePairs> entrancePairs;
         readEntrancePairs(entrancePairs,input.ReactionFile());
 
-        CrossSection* xs =new
+        //CrossSection* xs =new
     }
 
     void RunSingleReaction(SapphireInput & input){
@@ -235,7 +236,7 @@ namespace Module_CrossSection{
             //GDRTable GammaTransmissionFunc::gdrTable_;
             //LevelsTable NuclearLevels::levelsTable_;
 
-            if(fexists(Input->ReactionFile()))
+            if(fexists(Input->ReactionFile().c_str()))
                 Run(Input);
             else
                 RunSingleReaction(Input);
