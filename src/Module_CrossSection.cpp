@@ -102,8 +102,9 @@ namespace Module_CrossSection{
         std::cout << std::endl;
         std::cout << "Options:" << std::endl;
         std::cout << std::endl;
-        std::cout << " AX+y           - reaction string, e.g. 60Fe+p (not yet implemented)" << std::endl;
-        std::cout << " InputFile      - InputFile (not yet implemented)" << std::endl;
+        std::cout << "\tAX+y           - reaction string, e.g. 60Fe+p (not yet implemented)" << std::endl;
+        std::cout << "\tInputFile      - InputFile (not yet implemented)" << std::endl;
+        std::cout << std::endl;
     }
 
     void readEntrancePairs(std::vector<EntrancePairs> & entrancePairs, std::string reactionFile){
@@ -225,7 +226,7 @@ namespace Module_CrossSection{
         if(fexists(argv[2])){              
             SapphireInput* Input = new SapphireInput();
             std::cout << "Setting default values..." << std::endl;        
-            Input->Initialize();
+            //Input->Initialize();
             std::cout << "Reading input file ..." << argv[2] << std::endl;
             Input->ReadInputFile(argv[2]);
             Input->printIntputParameters();
@@ -237,6 +238,7 @@ namespace Module_CrossSection{
             //LevelsTable NuclearLevels::levelsTable_;
 
             if(fexists(Input->ReactionFile().c_str()))
+                std::cout << "Starting calculations for reactions in file ... " << argv[2] << std::endl;
                 Run(Input);
             else
                 RunSingleReaction(Input);
