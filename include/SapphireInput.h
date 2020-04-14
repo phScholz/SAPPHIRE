@@ -117,7 +117,7 @@ class SapphireInput{
         std::string EnergyFile(){return energyFile;}            /**<Getter for energyFile*/ 
         std::string ReactionFile(){return reactionFile;}        /**<Getter for reactionFile*/
         std::string Suffix(){return suffix;}                    /**<Getter for suffix*/
-        std::string Reaction(){return suffix;}                    /**<Getter for reaction*/
+        std::string Reaction(){return reaction;}                    /**<Getter for reaction*/
         
         std::string MassTable(){return massTable;}                    /**<Getter for massTable*/
         std::string GdrParams(){return gdrParams;}                    /**<Getter for gdrParams*/

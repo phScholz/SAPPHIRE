@@ -98,17 +98,17 @@ extern std::string sourceDirectory();
         std::cout << "\t\tEnergyFile           = "             << SapphireInput::EnergyFile() << std::endl;
         std::cout << "\t\tReactionFile         = "             << SapphireInput::ReactionFile() << std::endl;
         std::cout << "\t\tCalcRates            = "             << SapphireInput::CalcRates() << std::endl;
-        std::cout << "\t\tCalcAverageWidth     = "      << SapphireInput::CalcAverageWidth() << std::endl;
-        std::cout << "\t\tResidualGamma        = "         << SapphireInput::ResidualGamma() << std::endl;
-        std::cout << "\t\tResidualNeutron      = "       << SapphireInput::ResidualNeutron() << std::endl;
-        std::cout << "\t\tResidualProton       = "        << SapphireInput::ResidualProton() << std::endl;
-        std::cout << "\t\tResidualAlpha        = "         << SapphireInput::ResidualAlpha() << std::endl;
-        std::cout << "\t\tCalculateGammaCutoff = "  << SapphireInput::CalculateGammaCutoff() << std::endl;
-        std::cout << "\t\tEntranceState        = "  << SapphireInput::EntranceState() << std::endl;
-        std::cout << "\t\tg_ExitStates         = "  << SapphireInput::g_ExitStates() << std::endl;
-        std::cout << "\t\tn_ExitStates         = "  << SapphireInput::n_ExitStates() << std::endl;
-        std::cout << "\t\tp_ExitStates         = "  << SapphireInput::p_ExitStates() << std::endl;
-        std::cout << "\t\ta_ExitStates         = "  << SapphireInput::a_ExitStates() << std::endl;
+        std::cout << "\t\tCalcAverageWidth     = "             << SapphireInput::CalcAverageWidth() << std::endl;
+        std::cout << "\t\tResidualGamma        = "             << SapphireInput::ResidualGamma() << std::endl;
+        std::cout << "\t\tResidualNeutron      = "             << SapphireInput::ResidualNeutron() << std::endl;
+        std::cout << "\t\tResidualProton       = "             << SapphireInput::ResidualProton() << std::endl;
+        std::cout << "\t\tResidualAlpha        = "             << SapphireInput::ResidualAlpha() << std::endl;
+        std::cout << "\t\tCalculateGammaCutoff = "             << SapphireInput::CalculateGammaCutoff() << std::endl;
+        std::cout << "\t\tEntranceState        = "             << SapphireInput::EntranceState() << std::endl;
+        std::cout << "\t\tg_ExitStates         = "             << SapphireInput::g_ExitStates() << std::endl;
+        std::cout << "\t\tn_ExitStates         = "             << SapphireInput::n_ExitStates() << std::endl;
+        std::cout << "\t\tp_ExitStates         = "             << SapphireInput::p_ExitStates() << std::endl;
+        std::cout << "\t\ta_ExitStates         = "             << SapphireInput::a_ExitStates() << std::endl;
     }
 
     void SapphireInput::ReadInputFile(std::string InputFile){
