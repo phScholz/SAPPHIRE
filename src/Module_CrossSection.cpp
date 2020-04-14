@@ -264,7 +264,7 @@ namespace Module_CrossSection{
         if(fexists(argv[2])){              
             SapphireInput* Input = new SapphireInput();            
             Input->printIntputFile();
-            Input->ReadInputFile(argv[2]);
+            Input->ReadInputFile(str(argv[2]));
             Input->printIntputParameters();
 
             /*Defined in Setup.cpp ... Should not be in another file*/
