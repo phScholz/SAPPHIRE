@@ -38,6 +38,11 @@ namespace Module_CrossSection{
     void readEntrancePairs(std::vector<EntrancePairs> & entrancePairs, std::string reactionFile);
 
     /**
+    * @brief method to print the Entrance Pairsto stdout
+    */
+    void PrintEntrancePairs(std::vector<EntrancePairs> & entrancePairs);
+
+    /**
      * @brief Check wheter a string represents an actual file.
      * @param filename String whith the supposedly path to a file.
      * @return True if the file exists; False if it doesn't.

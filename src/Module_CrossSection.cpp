@@ -108,7 +108,7 @@ namespace Module_CrossSection{
         std::cout << std::endl;
     }
 
-    void readEntrancePairs(std::vector<EntrancePairs> & entrancePairs, std::string reactionFile){
+    void readEntrancePairs(std::vector<EntrancePairs> * entrancePairs, std::string reactionFile){
         std::ifstream in(reactionFile.c_str());
         int Z,A,pType =0;
         if(!in) {
@@ -117,18 +117,29 @@ namespace Module_CrossSection{
         } else {
 	        std::cout << "Reading nuclei from " << reactionFile << "." << std::endl;
 
-	        while(!in.eof()) {
-	            std::string line;
-	            std::getline(in,line);
+	    while(!in.eof()) {
+	        std::string line;
+	        std::getline(in,line);
 	            
-                if(!in.eof()) {
-	                std::istringstream stm(line);
-	                if(stm >> Z >> A >> pType)
-	                    entrancePairs.push_back(EntrancePairs(Z,A,pType));
-	            }
+            if(!in.eof()) {
+	            std::istringstream stm(line);
+	            if(stm >> Z >> A >> pType)
+                {
+                    entrancePairs->push_back(EntrancePairs(Z,A,pType));
+                }
+                else{
+                    std::cout << "Cannot interpret line: " << line << std::endl;
+                }
 	        }
+	    }
 	                
         in.close();
+        }
+    }
+
+    void PrintEntrancePairs(std::vector<EntrancePairs> & entrancePairs){
+        for(auto it = std::begin(entrancePairs); it != std::end(entrancePairs); ++it){
+            std::cout << "Z: " << it->Z_ << " A: " << it->A_ << " Particle Type: " << it->pType_ << std::endl;
         }
     }
 
@@ -159,13 +170,16 @@ namespace Module_CrossSection{
         GammaTransmissionFunc::SetPorterThomas(input->PorterThomas_g());
 
         std::vector<EntrancePairs> entrancePairs;
-        readEntrancePairs(entrancePairs,input->ReactionFile());
+        readEntrancePairs(&entrancePairs,input->ReactionFile());
+        std::vector<EntrancePairs>::iterator it;
 
-        for(auto it = std::begin(entrancePairs); it != std::end(entrancePairs); ++it){}
-            CrossSection* xs = new CrossSection(it.Z_,it.A_, it.pType_,input->EnergyFile(),input->CalcRates());
+        //PrintEntrancePairs(entrancePairs);
+
+        for(it = std::begin(entrancePairs); it != std::end(entrancePairs); ++it){
+            CrossSection* xs = new CrossSection(it->Z_,it->A_, it->pType_,input->EnergyFile(),input->CalcRates());
             if(xs->IsValid())
             {
-                std::cout << "Calculating for Z: " << it[i].Z_ << " A: " << it[i].A_ << " and Particle Type: " << it[i].pType_ << std::endl;
+                std::cout << "Calculating for Z: " << it->Z_ << " A: " << it->A_ << " and Particle Type: " << it->pType_ << std::endl;
                 xs->Calculate();
                 xs->PrintCrossSections();
             }
@@ -176,10 +190,11 @@ namespace Module_CrossSection{
             delete xs;
         }
     }
+    
 
     void RunSingleReaction(SapphireInput * input){
         std::cout<< std::endl << "Starting calculations for reaction ... " << input->Reaction() << std::endl;
-            int A = massNumberIntFromString(input->Reaction());
+            int A = massNumberIntFromString(input->Reaction());                    
             int Z = atomicNumberIntFromString(input->Reaction());
 
             if(!Z && !A){
@@ -262,9 +277,10 @@ namespace Module_CrossSection{
         }
         
         if(fexists(argv[2])){              
-            SapphireInput* Input = new SapphireInput();            
-            Input->printIntputFile();
-            Input->ReadInputFile(str(argv[2]));
+            SapphireInput* Input = new SapphireInput();    
+            std::string str(argv[2]);
+            Input->printIntputFile(str);
+            Input->ReadInputFile(str);
             Input->printIntputParameters();
 
             /*Defined in Setup.cpp ... Should not be in another file*/
@@ -275,7 +291,7 @@ namespace Module_CrossSection{
 
             if(fexists(Input->ReactionFile().c_str()))
             {
-                std::cout << std::endl << "Starting calculations for reactions in file ... " << argv[2] << std::endl;
+                std::cout << std::endl << "Starting calculations for reactions in file ... " << Input->ReactionFile().c_str() << std::endl;
                 Run(Input);
             }
             else
