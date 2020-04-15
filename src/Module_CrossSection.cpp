@@ -99,12 +99,11 @@ namespace Module_CrossSection{
     }
 
     void printHelp(){
-        std::cout << "sapphire reaction <options>" << std::endl;
+        std::cout  << "\tSyntax:        sapphire reaction <options>" << std::endl;        
+	    std::cout << std::endl << "Options:" << std::endl;
         std::cout << std::endl;
-        std::cout << "Options:" << std::endl;
-        std::cout << std::endl;
-        std::cout << "\tAX+y           - reaction string, e.g. 60Fe+p (not yet implemented)" << std::endl;
-        std::cout << "\tInputFile      - InputFile (not yet implemented)" << std::endl;
+        std::cout << "\tAX+y           - reaction string, e.g. 60Fe+p, running calculations with default settings." << std::endl;
+        std::cout << "\tInputFile      - determine input parameters from InputFile and run calculations." << std::endl;
         std::cout << std::endl;
     }
 
@@ -252,6 +251,8 @@ namespace Module_CrossSection{
         int entranceState = 0;
         std::vector<int> exitStates(4,-1);
 
+        std::cout << "Calculate cross section for reaction: " << reactionString << std:endl;
+
         CrossSection* xs = new CrossSection(Z,A,pType,energyFile,forRates,entranceState,exitStates);
         if(xs->IsValid())
         {
@@ -267,9 +268,8 @@ namespace Module_CrossSection{
 
     void Go(int argc,char *argv[]){
         auto start = std::chrono::steady_clock::now();
+        std::cout << "Module: reaction" << std::endl;
         std::cout << std::endl;
-        std::cout << "Sapphire reaction" << std::endl;
-        std::cout << "*****************" << std::endl;
 
         if(argc < 3){
             printHelp();
@@ -307,6 +307,6 @@ namespace Module_CrossSection{
 
         auto end = std::chrono::steady_clock::now();
         std::chrono::duration<double> elapsed_seconds = end-start;
-        std::cout << std::endl << "elapsed time: " << elapsed_seconds.count() << "s\n";
+        std::cout << std::endl << "Total calculation time: " << elapsed_seconds.count() << "s\n";
     } 
 }

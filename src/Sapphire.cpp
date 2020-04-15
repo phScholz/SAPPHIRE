@@ -26,10 +26,6 @@ extern void Initialize();
  * @brief Secondary function to print help. This is the first step to reconstruct Sapphire.cpp.
  */
 void PrintHelp(){
-  std::cout << std::endl;
-	std::cout << "Sapphire" << std::endl;
-	std::cout << "--------" << std::endl;
-	std::cout << std::endl;
   #ifndef MPI_BUILD
   std::cout << " MPI_BUILD is OFF" << std::endl;
   #endif 
@@ -55,6 +51,10 @@ void PrintHelp(){
  * @param argv Array of cmd line parameters. 
  */
 int main(int argc, char *argv[]) {
+  std::cout << std::endl;
+	std::cout << "Sapphire - A statistical nuclear reaction and decay code" << std::endl;
+	std::cout << "********************************************************" << std::endl;
+  std::cout << std::endl;
 
   if (argc <=1 ) {
 	  PrintHelp();
@@ -78,7 +78,7 @@ int main(int argc, char *argv[]) {
     PrintHelp();
    
   else
-    PrintHelp();
+    Module_OldSapphire::printHelp();
   
   return 0;
 }

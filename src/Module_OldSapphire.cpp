@@ -679,8 +679,10 @@ void slaveProcess(boost::mpi::communicator& world,InitialNucleusData initialNucl
 #endif
 
     void printHelp() {
-        std::cout  << "Syntax (Cross-Section): sapphire <options> entrance-pair [energies-file]" << std::endl;
-        std::cout  << "Syntax  (Monte-Carlo) : sapphire <options> nucleus spin-parity energy-range events" << std::endl << std::endl
+        std::cout << "Module: old" << std::endl;
+        std::cout << std::endl;
+        std::cout  << "\tSyntax (Cross-Section): sapphire old <options> entrance-pair [energies-file]" << std::endl;
+        std::cout  << "\tSyntax  (Monte-Carlo) : sapphire old <options> nucleus spin-parity energy-range events" << std::endl << std::endl
 	     << "Options:" << std::endl
 	     << std::setw(25) << std::left << "\t--opt-alpha" << std::setw(0) << "Sets the alpha transmission coefficients to be" << std::endl
 	     << std::setw(25)  << '\t' << std::setw(0) << "calculated with the optical model from" << std::endl
@@ -726,6 +728,7 @@ void slaveProcess(boost::mpi::communicator& world,InitialNucleusData initialNucl
 
         if(argc<3) {
             std::cout << "Too few arguments given."  << std::endl;
+            printHelp();
             return -1;
         }
 
