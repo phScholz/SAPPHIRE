@@ -125,7 +125,7 @@ For a more detailed calculations, one should use the possibility to parse an inp
 ./sapphire reaction inputFile.ini
 ```
 
-The file `inputFile.ini` will be parsed by the [Boost.PropertyTree](https://www.boost.org/doc/libs/1_72_0/doc/html/property_tree.html) library. The gneral format and keyword descriptions can be found [here](INPUTFILE.MD).
+The file `inputFile.ini` will be parsed by the [Boost.PropertyTree](https://www.boost.org/doc/libs/1_72_0/doc/html/property_tree.html) library. The gneral format and keyword descriptions can be found [here](INPUTFILE.md).
 
 
 ### decayer
