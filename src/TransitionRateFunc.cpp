@@ -5,6 +5,7 @@
 #include "NuclearLevels.h"
 #include <iostream>
 #include <stdlib.h>
+#include <omp.h>
 
 TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
 				       double jInitial, int piInitial, 
