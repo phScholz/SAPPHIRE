@@ -40,7 +40,7 @@
 * Ethan Uberseder
 
 ### License
-Sapphire is currently published under the [GNU General Public License](GPL3.md).
+Sapphire is currently published under the [GNU General Public License](LICENSE.md).
 
 ## Compilation & Execution
 ### Requirements
