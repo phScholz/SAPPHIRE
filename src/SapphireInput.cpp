@@ -56,6 +56,7 @@ extern std::string sourceDirectory();
         SapphireInput::g_CutoffEnergy(10000.);
 
         SapphireInput::Reaction("25Mg+a");
+        SapphireInput::Energies("25Mg+a");
         SapphireInput::EnergyFile("");
         SapphireInput::ReactionFile("");
         SapphireInput::MassTable(sourceDirectory()+"/tables/masses.dat");
@@ -88,28 +89,30 @@ extern std::string sourceDirectory();
         std::cout << std::endl;
 
         std::cout << "\t[General]" << std::endl;
-        std::cout << "\t\tMassTable            = "             << SapphireInput::MassTable() << std::endl;
-        std::cout << "\t\tGDRParams            = "             << SapphireInput::GdrParams() << std::endl;
-        std::cout << "\t\tLeveldir             = "             << SapphireInput::LevelDir() << std::endl;
-        std::cout << "\t\tSpinFile             = "             << SapphireInput::SpinFile() << std::endl;
-        std::cout << "\t\tSuffix               = "             << SapphireInput::Suffix() << std::endl;
+        std::cout << "\tMassTable            = "             << SapphireInput::MassTable() << std::endl;
+        std::cout << "\tGDRParams            = "             << SapphireInput::GdrParams() << std::endl;
+        std::cout << "\tLeveldir             = "             << SapphireInput::LevelDir() << std::endl;
+        std::cout << "\tSpinFile             = "             << SapphireInput::SpinFile() << std::endl;
+        std::cout << "\tSuffix               = "             << SapphireInput::Suffix() << std::endl;
         std::cout << std::endl;
         std::cout << "\t[CrossSection]" << std::endl;
-        std::cout << "\t\tReaction             = "             << SapphireInput::Reaction() << std::endl;
-        std::cout << "\t\tEnergyFile           = "             << SapphireInput::EnergyFile() << std::endl;
-        std::cout << "\t\tReactionFile         = "             << SapphireInput::ReactionFile() << std::endl;
-        std::cout << "\t\tCalcRates            = "             << SapphireInput::CalcRates() << std::endl;
-        std::cout << "\t\tCalcAverageWidth     = "             << SapphireInput::CalcAverageWidth() << std::endl;
-        std::cout << "\t\tResidualGamma        = "             << SapphireInput::ResidualGamma() << std::endl;
-        std::cout << "\t\tResidualNeutron      = "             << SapphireInput::ResidualNeutron() << std::endl;
-        std::cout << "\t\tResidualProton       = "             << SapphireInput::ResidualProton() << std::endl;
-        std::cout << "\t\tResidualAlpha        = "             << SapphireInput::ResidualAlpha() << std::endl;
-        std::cout << "\t\tCalculateGammaCutoff = "             << SapphireInput::CalculateGammaCutoff() << std::endl;
-        std::cout << "\t\tEntranceState        = "             << SapphireInput::EntranceState() << std::endl;
-        std::cout << "\t\tg_ExitStates         = "             << SapphireInput::g_ExitStates() << std::endl;
-        std::cout << "\t\tn_ExitStates         = "             << SapphireInput::n_ExitStates() << std::endl;
-        std::cout << "\t\tp_ExitStates         = "             << SapphireInput::p_ExitStates() << std::endl;
-        std::cout << "\t\ta_ExitStates         = "             << SapphireInput::a_ExitStates() << std::endl;
+        std::cout << "\tReaction             = "             << SapphireInput::Reaction() << std::endl;
+        std::cout << "\tEnergyFile           = "             << SapphireInput::EnergyFile() << std::endl;
+        std::cout << "\tReactionFile         = "             << SapphireInput::ReactionFile() << std::endl;
+        std::cout << "\tCalcRates            = "             << SapphireInput::CalcRates() << std::endl;
+        std::cout << "\tCalcAverageWidth     = "             << SapphireInput::CalcAverageWidth() << std::endl;
+        std::cout << "\tResidualGamma        = "             << SapphireInput::ResidualGamma() << std::endl;
+        std::cout << "\tResidualNeutron      = "             << SapphireInput::ResidualNeutron() << std::endl;
+        std::cout << "\tResidualProton       = "             << SapphireInput::ResidualProton() << std::endl;
+        std::cout << "\tResidualAlpha        = "             << SapphireInput::ResidualAlpha() << std::endl;
+        std::cout << "\tCalculateGammaCutoff = "             << SapphireInput::CalculateGammaCutoff() << std::endl;
+        std::cout << "\tEntranceState        = "             << SapphireInput::EntranceState() << std::endl;
+        std::cout << "\tg_ExitStates         = "             << SapphireInput::g_ExitStates() << std::endl;
+        std::cout << "\tn_ExitStates         = "             << SapphireInput::n_ExitStates() << std::endl;
+        std::cout << "\tp_ExitStates         = "             << SapphireInput::p_ExitStates() << std::endl;
+        std::cout << "\ta_ExitStates         = "             << SapphireInput::a_ExitStates() << std::endl;
+        std::cout << std::endl;
+        std::cout << "\t[Decayer]" << std::endl;
     }
 
     void SapphireInput::ReadInputFile(std::string InputFile){
@@ -135,6 +138,7 @@ extern std::string sourceDirectory();
         SapphireInput::Suffix(pt.get<std::string>("General.Suffix", SapphireInput::Suffix()));
         //Reading CrossSection Input
         SapphireInput::Reaction(pt.get<std::string>("CrossSection.Reaction", SapphireInput::Reaction()));
+        SapphireInput::Energies(pt.get<std::string>("CrossSection.Energies", SapphireInput::Energies()));
         SapphireInput::EnergyFile(pt.get<std::string>("CrossSection.EnergyFile", SapphireInput::EnergyFile()));
         SapphireInput::ReactionFile(pt.get<std::string>("CrossSection.ReactionFile", SapphireInput::ReactionFile()));
         SapphireInput::CalcRates(pt.get<bool>("CrossSection.CalcRates", SapphireInput::CalcRates()));

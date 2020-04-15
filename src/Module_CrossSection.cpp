@@ -251,7 +251,7 @@ namespace Module_CrossSection{
         int entranceState = 0;
         std::vector<int> exitStates(4,-1);
 
-        std::cout << "Calculate cross section for reaction: " << reactionString << std:endl;
+        std::cout << "Calculate cross section for reaction: " << reactionString << std::endl;
 
         CrossSection* xs = new CrossSection(Z,A,pType,energyFile,forRates,entranceState,exitStates);
         if(xs->IsValid())

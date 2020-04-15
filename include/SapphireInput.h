@@ -80,6 +80,7 @@ class SapphireInput{
         void g_CutoffEnergy(double x){g_cutoffEnergy=x;}    /**<Setter for g_CutoffEnergy*/ 
 
         void EnergyFile(std::string x){energyFile=x;}                       /**< Setter for string energyFile*/
+        void Energies(std::string x){energies=x;}                       /**< Setter for string energies*/
         void ReactionFile(std::string x){reactionFile=x;}                   /**< Setter for string reactionFile*/
         void Suffix(std::string x){suffix=x;}                               /**< Setter for string module*/
         void Reaction(std::string x){reaction=x;}                    /**<Setter for reaction*/
@@ -117,6 +118,7 @@ class SapphireInput{
         double g_CutoffEnergy(){return g_cutoffEnergy;}    /**<Getter for g_CutoffEnergy*/ 
 
         std::string EnergyFile(){return energyFile;}            /**<Getter for energyFile*/ 
+        std::string Energies(){return energies;}            /**<Getter for energies*/ 
         std::string ReactionFile(){return reactionFile;}        /**<Getter for reactionFile*/
         std::string Suffix(){return suffix;}                    /**<Getter for suffix*/
         std::string Reaction(){return reaction;}                    /**<Getter for reaction*/
@@ -160,6 +162,7 @@ class SapphireInput{
         std::string reactionFile;   /**< String with the path to the reactionFile*/
         std::string suffix;         /**< Suffix for output*/
         std::string reaction;         /**< String for reaction*/
+        std::string energies;         /**< String for reaction*/
 
         std::string massTable;      /**< String for the path to the mass tables*/
         std::string gdrParams;      /**< String for the path to the GDR parameter file*/

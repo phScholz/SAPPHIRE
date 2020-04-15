@@ -71,9 +71,8 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
   double oddSum=0.;
   double firstTerm=0.;
   double lastTerm=0.;
-#ifndef MPI_BUILD
+
 #pragma omp parallel for if(isCrossSection) reduction(+:sum,exclusiveSum,oddSum,evenSum)
-#endif
   for(int i=0;i<=numSteps;++i) {
     double ep = lowEnergy+dE*i;
     double rate = CalcLevelDensity(compoundE+qValue-ep)*
@@ -99,9 +98,9 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
   double continuousSum = dE/3.*(firstTerm + 2.*evenSum + 4.*oddSum + lastTerm);
   double discreteSum=0.;
   double groundStateTransmission = 0.;
-#ifndef MPI_BUILD
+
+
 #pragma omp parallel for if(isCrossSection) reduction(+:sum,exclusiveSum,discreteSum)
-#endif
  for(int i=knownLevels.size()-1;i>=0;--i) {
     if(knownLevels[i].J_==jFinal&&knownLevels[i].Pi_==piFinal) {
       double ep = compoundE+qValue-knownLevels[i].energy_;
@@ -111,8 +110,8 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
       sum+=rate;
       exclusiveSum+=rate;
       if(!isCrossSection){
-	function_.push_back(XYPair(ep,rate));
-	cumulativeSum_.push_back(XYPair(ep,sum));     
+	      function_.push_back(XYPair(ep,rate));
+	      cumulativeSum_.push_back(XYPair(ep,sum));     
       }
       if(knownLevels[i].energy_==0.) groundStateTransmission = rate;
    }

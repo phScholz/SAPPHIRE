@@ -35,12 +35,11 @@ void PrintHelp(){
   std::cout << std::endl;
   std::cout << " Supported modes:" << std::endl;
 	std::cout << std::endl;
-  #ifndef MPI_BUILD
-	std::cout << " reaction      - Calculate reaction cross sections and/or rates" << std::endl;
-  #endif 
-	std::cout << " decay         - Calculate Monte-Carlo statistical decay" << std::endl;
-  std::cout << " old           - Instruction for the old Sapphire code." << std::endl;
-	std::cout << " help           - Show this help message" << std::endl;
+  std::cout << "\treaction      - Calculate reaction cross sections and/or rates" << std::endl;
+  std::cout << "\tdecayer       - Calculate Monte-Carlo statistical decay" << std::endl;
+  std::cout << "\told           - Instruction for the old Sapphire code." << std::endl;
+	std::cout << std::endl;
+  std::cout << "\thelp          - Show this help message" << std::endl;
 	std::cout << std::endl;
   
 } 
@@ -68,7 +67,7 @@ int main(int argc, char *argv[]) {
   if (mode == "reaction"){
     Module_CrossSection::Go(argc,argv);
   }
-  else if (mode == "decay"){
+  else if (mode == "decayer"){
     Module_Decayer::Go(argc,argv);
   }
   else if (mode == "old"){

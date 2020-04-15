@@ -4,16 +4,15 @@
 #include "Decayer.h"
 #include "Sapphire_config.h"
 #include "TransitionRateFunc.h"
-#ifndef MPI_BUILD
+
 #include "CrossSection.h"
-#endif
+
 #include "PreEqDecayer.h"
 #include "ParticleTransmissionFunc.h"
 #include "CoulFunc.h"
 #include <iostream>
 #include <gsl/gsl_errno.h>
 
-#ifndef MPI_BUILD
 bool CrossSection::residualGamma_;
 bool CrossSection::residualNeutron_;
 bool CrossSection::residualProton_;
@@ -21,7 +20,7 @@ bool CrossSection::residualAlpha_;
 bool CrossSection::calculateGammaCutoff_;
 std::vector<double> CrossSection::rateTemps_;
 std::vector<double> CrossSection::macsEnergies_;
-#endif
+
 bool Decayer::isCrossSection_;
 bool PreEqDecayer::isCrossSection_;
 double Decayer::maxL_;
@@ -43,7 +42,7 @@ bool ParticleTransmissionFunc::porterThomas_;
  * 
  */
 void Initialize() {
-#ifndef MPI_BUILD
+
   CrossSection::SetResidualGamma(true);
   CrossSection::SetResidualNeutron(false);
   CrossSection::SetResidualProton(false);
@@ -51,7 +50,7 @@ void Initialize() {
   CrossSection::SetCalculateGammaCutoff(true);
   CrossSection::CreateTempVector();
   CrossSection::CreateMACSEnergiesVector();
-#endif
+
   Decayer::SetCrossSection(false);
   PreEqDecayer::SetCrossSection(false);
   Decayer::SetMaxL(8.);

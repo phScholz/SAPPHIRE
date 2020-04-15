@@ -33,16 +33,24 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ROOT_CXX_FLAGS}")
 include_directories(${ROOT_INCLUDE_DIR})
 link_directories(${ROOT_LIBRARY_DIR})
 
-if (MPI_BUILD)
 add_definitions(-DMPI_BUILD)
-message("Checking if Boost 1.4 COMPONENTS mpi serialization can be found ...")
-FIND_PACKAGE(Boost 1.4 COMPONENTS mpi serialization REQUIRED)
+message("Checking if Boost can be found ...")
+FIND_PACKAGE(Boost REQUIRED)
 INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
-else (MPI_BUILD)
+
+##ifdef MPI_BUILD
+#message("Checking for MPI can be found ...")
+#find_package(MPI REQUIRED)
+#if (MPI_FOUND)
+#    include_directories(SYSTEM ${MPI_INCLUDE_PATH})
+#else (MPI_FOUND)
+#    message(SEND_ERROR "This application cannot compile without MPI")
+#endif (MPI_FOUND)
+##endif
+
 message("Checking if OpenMP can be found ...")
 find_package (OpenMP REQUIRED)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-endif (MPI_BUILD)
 
 include_directories(${Sapphire_SOURCE_DIR}/coul/include)
 add_subdirectory (coul)

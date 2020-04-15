@@ -21,22 +21,22 @@
 #include "DecayController.h"
 #include "NuclearMass.h"
 #include "DecayResults.h"
-#ifndef MPI_BUILD
+
 #include "CrossSection.h"
 #include "omp.h" /** Currently only used for the Decayer*/
-#else
+
 #include "SapphireMPITypes.h"
-#include <boost/mpi.hpp>
-#endif
+//#include <boost/mpi.hpp>
+
 #include "TransitionRateFunc.h"
 #include "ParticleTransmissionFunc.h"
 #include "GammaTransmissionFunc.h"
 /* #include "Setup.cpp"
 
 extern void Initialize(); */
-#ifndef MPI_BUILD
+
 unsigned int randomSeed[12];
-#endif 
+
 
 namespace Module_OldSapphire{
     
@@ -54,11 +54,7 @@ namespace Module_OldSapphire{
 
     void Go(int argc,char *argv[]){
        //std::cout << "Not yet working."  << std::endl;
-        #ifndef MPI_BUILD
         oldSapphire(argc, argv);
-        #else
-        oldSapphire_MPI(argc, argv);
-        #endif
     }
     
     
@@ -176,7 +172,7 @@ namespace Module_OldSapphire{
       return (goodA&&goodZ&&goodPi&&goodJ&&goodEnergy);       
     }
 
-    #ifndef MPI_BUILD
+    
     /**
     * @brief CMD line parameters are parsed for the Cross section module
     * @param args cmd line string
@@ -257,18 +253,18 @@ namespace Module_OldSapphire{
       return (goodA&&goodZ&&goodPType);
     }
 
-    #endif
+    
 
-    #ifndef MPI_BUILD
+    
     void parseCommandLineForOptions(std::vector<std::string>& args, int& suffixNo, bool &preEq,
 				int& numPiParticles, int& numPiHoles, int& numNuParticles, int& numNuHoles,
                                 bool& calcAverageWidth, bool& calcRates, bool& asciiIn,
 				std::string& inFile, int& entranceState, std::vector<int>& exitStates,
 				bool& printTrans) {
-    #else
-    void parseCommandLineForOptions(std::vector<std::string>& args, int& suffixNo, bool &preEq,
+    
+    /* void parseCommandLineForOptions(std::vector<std::string>& args, int& suffixNo, bool &preEq,
 				int& numPiParticles, int& numPiHoles, int& numNuParticles, int& numNuHoles) {
-    #endif
+     */
         std::vector<std::string>::iterator it = args.begin();
         while(it!=args.end()) {
             if(it->compare(0,8,"--l-max=")==0) {
@@ -284,7 +280,7 @@ namespace Module_OldSapphire{
       
             it = args.erase(it);
             
-            #ifndef MPI_BUILD
+
             } else if(it->compare(0,15,"--gamma-cutoff=")==0) {
                 std::istringstream stm(it->substr(15));
                 double cutoffEnergy;
@@ -410,7 +406,7 @@ namespace Module_OldSapphire{
             } else if(it->compare(0,14,"--transmission")==0)  {
                 printTrans=true;
                 it = args.erase(it);
-            #endif
+
             } else if(it->compare(0,9,"--suffix=")==0) {
                 std::istringstream stm(it->substr(9));
                 if(!(stm>>suffixNo)) suffixNo = 0;
@@ -485,7 +481,7 @@ namespace Module_OldSapphire{
         }
     }
 
-#ifdef MPI_BUILD
+/* #ifdef MPI_BUILD
 int oldSapphire_MPI(int argc, char *argv[]) {
   for(int i=1;i<argc;i++) 
     if(strcmp(argv[i],"--help")==0) {
@@ -555,10 +551,10 @@ int oldSapphire_MPI(int argc, char *argv[]) {
 
   return 0;
 }
-#endif
+#endif */
 
     
-#ifdef MPI_BUILD
+/* #ifdef MPI_BUILD
 void masterProcess(boost::mpi::communicator& world,InitialNucleusData initalNucleus,
                    int suffixNo,int events) {
   
@@ -625,9 +621,9 @@ void masterProcess(boost::mpi::communicator& world,InitialNucleusData initalNucl
   }
   if(results) delete results;
 }
-#endif
+#endif */
 
-#ifdef MPI_BUILD
+/* #ifdef MPI_BUILD
 void slaveProcess(boost::mpi::communicator& world,InitialNucleusData initialNucleus) {
   srand ( time(NULL) + world.rank());
   
@@ -676,46 +672,46 @@ void slaveProcess(boost::mpi::communicator& world,InitialNucleusData initialNucl
     }
   }
 }
-#endif
+#endif */
 
-    void printHelp() {
-        std::cout << "Module: old" << std::endl;
-        std::cout << std::endl;
-        std::cout  << "\tSyntax (Cross-Section): sapphire old <options> entrance-pair [energies-file]" << std::endl;
-        std::cout  << "\tSyntax  (Monte-Carlo) : sapphire old <options> nucleus spin-parity energy-range events" << std::endl << std::endl
-	     << "Options:" << std::endl
-	     << std::setw(25) << std::left << "\t--opt-alpha" << std::setw(0) << "Sets the alpha transmission coefficients to be" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "calculated with the optical model from" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "McFadden-Satchler parameters.  Default calculates" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "using equivalent square well parametrization." << std::endl
-	     << std::setw(25) << std::left << "\t--l-max=VALUE:" << std::setw(0) << "Sets the maximum value of orbital angular momentum to" << std::endl
-	     <<std::setw(25)  << '\t' << std::setw(0) << "VALUE." << std::endl
-	     << std::setw(25) << std::left << "\t--suffix=VALUE:" << std::setw(0) << "Monte-Carlo mode only.  Sets the suffix for the output" <<std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "file name (i.e. Sapphire_*_VALUE.root)." << std::endl
-	     << std::setw(25) << std::left << "\t--pre-eq=pp,ph,np,nh" << std::setw(0) << "Monte-Carlo mode only.  Sets the initial exciton" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "configuration and simulates the equilibrium" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "process allowing for pre-equilibrium particle decay." << std::endl
-	     << std::setw(25) << std::left << "\t--gamma-cutoff=VALUE" << std::setw(0) << "Cross section mode only.  Sets the maximum excitation" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "energy in the compound nucleus where gamma emission is" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "exclusive.  Transitions to final states above this energy" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "will not contribute to residual capture cross sections." << std::endl
-	     << std::setw(25) << std::left << "\t--residual-gamma=Y/N" << std::setw(0) << "Cross section mode only.  Toggles if residual or total" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "capture cross sections are calculated." << std::endl
-	     << std::setw(25) << std::left << "\t--residual-neutron=Y/N" << std::setw(0) << "Cross section mode only.  Toggles if residual or total" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "neutron cross sections are calculated." << std::endl
-	     << std::setw(25) << std::left << "\t--residual-proton=Y/N" << std::setw(0) << "Cross section mode only.  Toggles if residual or total" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "proton cross sections are calculated." << std::endl
-	     << std::setw(25) << std::left << "\t--residual-alpha=Y/N" << std::setw(0) << "Cross section mode only.  Toggles if residual or total" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "alpha cross sections are calculated." << std::endl
-	     << std::setw(25) << std::left << "\t--average-rad-width" << std::setw(0) << "Cross section mode only.  Calculates the average s-wave" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "radiative width at threshold and exits." << std::endl
-	     << std::setw(25) << std::left << "\t--rates" << std::setw(0) << "Cross section mode only.  Calculates the astrophysical" << std::endl 
-	     << std::setw(25)  << '\t' << std::setw(0) << "reaction rates in addition to cross sections.  If" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "projectile is a neutron, Maxwellian averaged capture" << std::endl
-	     << std::setw(25)  << '\t' << std::setw(0) << "cross sections are also calculated." << std::endl 
-	     << std::setw(25) << std::left << "\t--EGDR=type" << std::setw(0) << "Sets the EGDR shape.  Variable 'type' can either be" << std::endl 
-	     << std::setw(25)  << '\t' << std::setw(0) << "edslo (SMOKER), slo (BRINK-AXEL), or glo (KOPECKY-UHL)." << std::endl;
-    }
+void printHelp() {
+    std::cout << "Module: old" << std::endl;
+    std::cout << std::endl;
+    std::cout  << "\tSyntax (Cross-Section): sapphire old <options> entrance-pair [energies-file]" << std::endl;
+    std::cout  << "\tSyntax  (Monte-Carlo) : sapphire old <options> nucleus spin-parity energy-range events" << std::endl << std::endl
+   << "Options:" << std::endl
+   << std::setw(25) << std::left << "\t--opt-alpha" << std::setw(0) << "Sets the alpha transmission coefficients to be" << std::endl
+   << std::setw(25)  << '\t' << std::setw(0) << "calculated with the optical model from" << std::endl
+   << std::setw(25)  << '\t' << std::setw(0) << "McFadden-Satchler parameters.  Default calculates" << std::endl
+   << std::setw(25)  << '\t' << std::setw(0) << "using equivalent square well parametrization." << std::endl
+   << std::setw(25) << std::left << "\t--l-max=VALUE:" << std::setw(0) << "Sets the maximum value of orbital angular momentum to" << std::endl
+   <<std::setw(25)  << '\t' << std::setw(0) << "VALUE." << std::endl
+   << std::setw(25) << std::left << "\t--suffix=VALUE:" << std::setw(0) << "Monte-Carlo mode only.  Sets the suffix for the output" <<std::endl
+   << std::setw(25)  << '\t' << std::setw(0) << "file name (i.e. Sapphire_*_VALUE.root)." << std::endl
+   << std::setw(25) << std::left << "\t--pre-eq=pp,ph,np,nh" << std::setw(0) << "Monte-Carlo mode only.  Sets the initial exciton" << std::endl
+   << std::setw(25)  << '\t' << std::setw(0) << "configuration and simulates the equilibrium" << std::endl
+   << std::setw(25)  << '\t' << std::setw(0) << "process allowing for pre-equilibrium particle decay." << std::endl
+   << std::setw(25) << std::left << "\t--gamma-cutoff=VALUE" << std::setw(0) << "Cross section mode only.  Sets the maximum excitation" << std::endl
+   << std::setw(25)  << '\t' << std::setw(0) << "energy in the compound nucleus where gamma emission is" << std::endl
+   << std::setw(25)  << '\t' << std::setw(0) << "exclusive.  Transitions to final states above this energy" << std::endl
+   << std::setw(25)  << '\t' << std::setw(0) << "will not contribute to residual capture cross sections." << std::endl
+   << std::setw(25) << std::left << "\t--residual-gamma=Y/N" << std::setw(0) << "Cross section mode only.  Toggles if residual or total" << std::endl
+   << std::setw(25)  << '\t' << std::setw(0) << "capture cross sections are calculated." << std::endl
+   << std::setw(25) << std::left << "\t--residual-neutron=Y/N" << std::setw(0) << "Cross section mode only.  Toggles if residual or total" << std::endl
+   << std::setw(25)  << '\t' << std::setw(0) << "neutron cross sections are calculated." << std::endl
+   << std::setw(25) << std::left << "\t--residual-proton=Y/N" << std::setw(0) << "Cross section mode only.  Toggles if residual or total" << std::endl
+   << std::setw(25)  << '\t' << std::setw(0) << "proton cross sections are calculated." << std::endl
+   << std::setw(25) << std::left << "\t--residual-alpha=Y/N" << std::setw(0) << "Cross section mode only.  Toggles if residual or total" << std::endl
+   << std::setw(25)  << '\t' << std::setw(0) << "alpha cross sections are calculated." << std::endl
+   << std::setw(25) << std::left << "\t--average-rad-width" << std::setw(0) << "Cross section mode only.  Calculates the average s-wave" << std::endl
+   << std::setw(25)  << '\t' << std::setw(0) << "radiative width at threshold and exits." << std::endl
+   << std::setw(25) << std::left << "\t--rates" << std::setw(0) << "Cross section mode only.  Calculates the astrophysical" << std::endl 
+   << std::setw(25)  << '\t' << std::setw(0) << "reaction rates in addition to cross sections.  If" << std::endl
+   << std::setw(25)  << '\t' << std::setw(0) << "projectile is a neutron, Maxwellian averaged capture" << std::endl
+   << std::setw(25)  << '\t' << std::setw(0) << "cross sections are also calculated." << std::endl 
+   << std::setw(25) << std::left << "\t--EGDR=type" << std::setw(0) << "Sets the EGDR shape.  Variable 'type' can either be" << std::endl 
+   << std::setw(25)  << '\t' << std::setw(0) << "edslo (SMOKER), slo (BRINK-AXEL), or glo (KOPECKY-UHL)." << std::endl;
+}
 
     int oldSapphire(int argc, char *argv[]){
 
@@ -733,7 +729,7 @@ void slaveProcess(boost::mpi::communicator& world,InitialNucleusData initialNucl
         }
 
         /** Calling the Initialize() function from Setup.cpp*/
-/*         Initialize(); */
+        /* Initialize(); */
   
         /** Create a vector which containts the cmd parameter. 
          *  Now int i starts at 1, the first parameter is "old" now.

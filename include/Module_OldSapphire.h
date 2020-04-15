@@ -24,13 +24,9 @@
 #include "DecayController.h"
 #include "NuclearMass.h"
 #include "DecayResults.h"
-#ifndef MPI_BUILD
 #include "CrossSection.h"
 #include "omp.h" /** Currently only used for the Decayer*/
-#else
 #include "SapphireMPITypes.h"
-#include <boost/mpi.hpp>
-#endif
 #include "TransitionRateFunc.h"
 #include "ParticleTransmissionFunc.h"
 #include "GammaTransmissionFunc.h"
@@ -110,13 +106,11 @@ namespace Module_OldSapphire{
 			      double& lowEnergy, double& highEnergy,
 			      int& events);
 
-    #ifdef MPI_BUILD
-    void masterProcess(boost::mpi::communicator& world,InitialNucleusData initalNucleus, int suffixNo,int events);
-    #endif
-
-    #ifdef MPI_BUILD
-    void slaveProcess(boost::mpi::communicator& world,InitialNucleusData initialNucleus);
-    #endif
+    
+//    void masterProcess(boost::mpi::communicator& world,InitialNucleusData initalNucleus, int suffixNo,int events);
+  
+//    void slaveProcess(boost::mpi::communicator& world,InitialNucleusData initialNucleus);
+    
 
     void printHelp(); /**< The old printHelp() function*/
 }
