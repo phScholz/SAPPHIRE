@@ -1019,6 +1019,7 @@ void printHelp() {
                         
             if(events>1){
                 std::cout << std::endl << "Writing ROOT Tree..." << std::endl;
+                
                 results->AddResults(chunkResults);
             }
         }   

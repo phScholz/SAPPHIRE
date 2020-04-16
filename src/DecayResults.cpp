@@ -3,6 +3,7 @@
 #include "NuclearMass.h"
 #include <fstream>
 #include <iostream>
+#include "omp.h"
 
 DecayResults::DecayResults(int Z, int A, double J, int Pi,
                            double initialEnergyLow, double initialEnergyHigh,
@@ -99,6 +100,10 @@ DecayResults::DecayResults(int Z, int A, double J, int Pi,
 }
 
 DecayResults::~DecayResults() {
+  std::cout << "Waiting on threads to be finished..." << std::endl;
+  while(omp_get_num_threads()!=1){
+    std::this_thread::sleep_for(std::chrono::seconds(0.1));
+  }
   outputFile_->Write();
   outputFile_->Close();
   delete outputFile_;
