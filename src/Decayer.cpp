@@ -6,13 +6,10 @@
 #include <fstream>
 #include <stdlib.h>
 #include <math.h>
-#ifndef MPI_BUILD
 #include <omp.h>
-#endif
 
-#ifndef MPI_BUILD
 extern unsigned int randomSeed[12];
-#endif
+
 
 Decayer::Decayer(int Z, int A, double jInitial, int piInitial, double energy,
 		 double totalWidthForCorrection,
