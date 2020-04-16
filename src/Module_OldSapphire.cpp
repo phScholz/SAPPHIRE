@@ -997,6 +997,7 @@ void printHelp() {
 	    							       alphaEntranceWidth,gammaEntranceWidth,
 	    							       neutronTotalWidth,protonTotalWidth,
 	    							       alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
+                           
                 if(events==1) controller->PrintDecays();
                 delete controller;
             }

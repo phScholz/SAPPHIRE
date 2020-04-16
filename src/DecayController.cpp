@@ -216,13 +216,13 @@ void DecayController::CalcKinematics(int daughterZ, int daughterA,
 	 pow(decayEnergy,3.)/mTotal+
 	 pow(decayEnergy,2.)*(1.+m1*m2/pow(mTotal,2.))+
 	 2.*decayEnergy*m1*m2/mTotal);
-#ifndef MPI_BUILD
+
   double phiCM = 2.*pi*double(rand_r(&randomSeed[omp_get_thread_num()]))/double(RAND_MAX);
   double thetaCM = acos(2.*double(rand_r(&randomSeed[omp_get_thread_num()]))/double(RAND_MAX)-1.);
-#else
-  double phiCM = 2.*pi*double(rand())/double(RAND_MAX);
-  double thetaCM = acos(2.*double(rand())/double(RAND_MAX)-1.);
-#endif
+
+  //double phiCM = 2.*pi*double(rand())/double(RAND_MAX);
+  //double thetaCM = acos(2.*double(rand())/double(RAND_MAX)-1.);
+
   TVector3 decayDirectionCM = TVector3(sin(thetaCM)*cos(phiCM),
 				       sin(thetaCM)*sin(phiCM),
 				       cos(thetaCM));
