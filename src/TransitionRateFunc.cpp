@@ -61,7 +61,7 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
     if(compoundE+qValue-highestBoundEnergy>exclusiveLowEnergy) 
       exclusiveLowEnergy = compoundE+qValue-highestBoundEnergy;
   }
-  int numSteps = (highEnergy>lowEnergy) ? 100 : -100;//int((highEnergy-lowEnergy)/dE);
+  int numSteps = (highEnergy>lowEnergy) ? 50 : -50;//int((highEnergy-lowEnergy)/dE);
   if(numSteps>0) {
     if(numSteps%2!=0) {
       numSteps+=1;
