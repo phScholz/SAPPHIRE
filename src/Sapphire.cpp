@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
     PrintHelp();
    
   else
-    Module_OldSapphire::printHelp();
+    PrintHelp();
   
   return 0;
 }

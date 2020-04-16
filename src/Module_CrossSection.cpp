@@ -116,6 +116,7 @@ namespace Module_CrossSection{
         } else {
 	        std::cout << "Reading nuclei from " << reactionFile << "." << std::endl;
 
+
 	    while(!in.eof()) {
 	        std::string line;
 	        std::getline(in,line);
@@ -281,7 +282,7 @@ namespace Module_CrossSection{
             std::string str(argv[2]);
             Input->printIntputFile(str);
             Input->ReadInputFile(str);
-            Input->printIntputParameters();
+            
 
             /*Defined in Setup.cpp ... Should not be in another file*/
             //ElementTable NuclearMass::elementTable_; 
@@ -292,6 +293,8 @@ namespace Module_CrossSection{
             if(fexists(Input->ReactionFile().c_str()))
             {
                 std::cout << std::endl << "Starting calculations for reactions in file ... " << Input->ReactionFile().c_str() << std::endl;
+                Input->Reaction("");
+                Input->printIntputParameters();
                 Run(Input);
             }
             else

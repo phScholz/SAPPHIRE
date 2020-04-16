@@ -93,7 +93,11 @@ extern std::string sourceDirectory();
         std::cout << "\tGDRParams            = "             << SapphireInput::GdrParams() << std::endl;
         std::cout << "\tLeveldir             = "             << SapphireInput::LevelDir() << std::endl;
         std::cout << "\tSpinFile             = "             << SapphireInput::SpinFile() << std::endl;
-        std::cout << "\tSuffix               = "             << SapphireInput::Suffix() << std::endl;
+        std::cout << "\tprotonOMP            = "             << SapphireInput::p_Formalism() << std::endl;
+        std::cout << "\tneutronOMP           = "             << SapphireInput::n_Formalism() << std::endl;
+        std::cout << "\talphaOMP             = "             << SapphireInput::a_Formalism() << std::endl;
+        std::cout << "\tstrength             = "             << SapphireInput::g_Formalism() << std::endl;
+        
         std::cout << std::endl;
         std::cout << "\t[CrossSection]" << std::endl;
         std::cout << "\tReaction             = "             << SapphireInput::Reaction() << std::endl;
@@ -113,6 +117,7 @@ extern std::string sourceDirectory();
         std::cout << "\ta_ExitStates         = "             << SapphireInput::a_ExitStates() << std::endl;
         std::cout << std::endl;
         std::cout << "\t[Decayer]" << std::endl;
+        std::cout << "\tSuffix               = "             << SapphireInput::Suffix() << std::endl;
     }
 
     void SapphireInput::ReadInputFile(std::string InputFile){
@@ -135,7 +140,8 @@ extern std::string sourceDirectory();
         SapphireInput::GdrParams(pt.get<std::string>("General.GDRParams", SapphireInput::GdrParams()));
         SapphireInput::LevelDir(pt.get<std::string>("General.LevelDir", SapphireInput::LevelDir()));
         SapphireInput::SpinFile(pt.get<std::string>("General.SpinFile", SapphireInput::SpinFile()));
-        SapphireInput::Suffix(pt.get<std::string>("General.Suffix", SapphireInput::Suffix()));
+        SapphireInput::SpinFile(pt.get<std::string>("General.SpinFile", SapphireInput::SpinFile()));
+        
         //Reading CrossSection Input
         SapphireInput::Reaction(pt.get<std::string>("CrossSection.Reaction", SapphireInput::Reaction()));
         SapphireInput::Energies(pt.get<std::string>("CrossSection.Energies", SapphireInput::Energies()));
@@ -149,5 +155,7 @@ extern std::string sourceDirectory();
         SapphireInput::ResidualAlpha(pt.get<bool>("CrossSection.ResidualAlpha", SapphireInput::ResidualAlpha()));
         SapphireInput::CalculateGammaCutoff(pt.get<bool>("CrossSection.CalculateGammaCutoff", SapphireInput::CalculateGammaCutoff()));
 
+        //Reading Decayer Input
+        SapphireInput::Suffix(pt.get<std::string>("Decayer.Suffix", SapphireInput::Suffix()));
     }
 

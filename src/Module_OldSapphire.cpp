@@ -966,7 +966,7 @@ void printHelp() {
 
                 int localNumDecayed = numDecayed++;
 
-                if(localNumDecayed%1000==0&&localNumDecayed>0) 
+                if(localNumDecayed%(events/100)==0&&localNumDecayed>0) 
     
                 std::cout << "Decayed " << localNumDecayed 
 	    	            << " of " << events << " nuclei..." << std::endl;

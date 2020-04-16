@@ -333,11 +333,11 @@ void Decayer::PrintCDF() {
 bool Decayer::Decay(int& Z, int& A, double& jFinal, int& piFinal, 
 		    double& excitationEnergy, double& decayEnergy) {
   double randomNumber=0.;
-#ifndef MPI_BUILD
+
   while(randomNumber==0.) randomNumber = double(rand_r(&randomSeed[omp_get_thread_num()]))/double(RAND_MAX);
-#else
-  while(randomNumber==0.) randomNumber = double(rand())/double(RAND_MAX);
-#endif
+
+//MPI_BUILD  while(randomNumber==0.) randomNumber = double(rand())/double(RAND_MAX);
+
   bool found = false;
   double previousValue = 0.;
   for(std::vector<CDFEntry>::const_iterator it = cdf_.begin();it<cdf_.end();it++) {

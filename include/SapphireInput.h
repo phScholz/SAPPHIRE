@@ -140,6 +140,7 @@ class SapphireInput{
         bool porterThomas_g;             /**< Bool for PorterThomas usage gamma*/  
         bool porterThomas_p;           /**< Bool for PorterThomas usage particle*/
         bool printTrans;            /**< Bool if transmission should be printed*/
+        bool preEq;                 /**< Bool for preEq.*/
 
         int entranceState;          /**< Int for the number of level, which should be the entrance State*/
         int g_exitStates;           /**< Int for the number of exitStates for gamma residual**/

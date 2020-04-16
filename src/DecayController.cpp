@@ -15,146 +15,140 @@ extern unsigned int randomSeed[12];
 #endif
 
 bool DecayController::Decay(double& neutronEntrance,
-			    double& protonEntrance,
-			    double& alphaEntrance,
-			    double& gammaEntrance,
-			    double& neutronTotalWidth,
-			    double& protonTotalWidth,
-			    double& alphaTotalWidth,
-			    double& gammaTotalWidth) {
-  bool returnValue = true;
-  int parentA = A_;
-  int parentZ = Z_;
-  int parentPi = piInitial_;
-  double parentJ = jInitial_;
-  double parentEnergy = energy_;
-  TVector3 parentBeta = TVector3(0.,0.,0.);  
-  int parentNeutronNumber = initialNeutronNumber_;
-  int parentNeutronHoleNumber = initialNeutronHoleNumber_;
-  int parentProtonNumber = initialProtonNumber_;
-  int parentProtonHoleNumber = initialProtonHoleNumber_;
+			                      double& protonEntrance,
+			                      double& alphaEntrance,
+			                      double& gammaEntrance,
+			                      double& neutronTotalWidth,
+			                      double& protonTotalWidth,
+			                      double& alphaTotalWidth,
+			                      double& gammaTotalWidth) 
+  {
+    bool returnValue = true;
+    int parentA = A_;
+    int parentZ = Z_;
+    int parentPi = piInitial_;
+    double parentJ = jInitial_;
+    double parentEnergy = energy_;
+    TVector3 parentBeta = TVector3(0.,0.,0.);  
+    int parentNeutronNumber = initialNeutronNumber_;
+    int parentNeutronHoleNumber = initialNeutronHoleNumber_;
+    int parentProtonNumber = initialProtonNumber_;
+    int parentProtonHoleNumber = initialProtonHoleNumber_;
     
-  Decayer *initialEqDecayer = new Decayer(parentZ,parentA,parentJ,parentPi,parentEnergy);
-  neutronEntrance=initialEqDecayer->NeutronEntranceWidth();
-  protonEntrance=initialEqDecayer->ProtonEntranceWidth();
-  alphaEntrance=initialEqDecayer->AlphaEntranceWidth();
-  gammaEntrance=initialEqDecayer->GammaEntranceWidth();
-  gammaTotalWidth=initialEqDecayer->GammaTotalWidth();
-  neutronTotalWidth=initialEqDecayer->NeutronTotalWidth();
-  alphaTotalWidth=initialEqDecayer->AlphaTotalWidth();
-  protonTotalWidth=initialEqDecayer->ProtonTotalWidth();
-  delete initialEqDecayer;
+    Decayer *initialEqDecayer = new Decayer(parentZ,parentA,parentJ,parentPi,parentEnergy);
 
-  bool decay = true;
-  if(initialNeutronNumber_>0||
-     initialNeutronHoleNumber_>0||
-     initialProtonNumber_>0||
-     initialProtonHoleNumber_>0) {
-    bool preEq = true;
-    int numSameExciton = 0;
-    while(preEq) {
-      PreEqDecayer* decayer = new PreEqDecayer(parentNeutronNumber,parentNeutronHoleNumber,
-					       parentProtonNumber,parentProtonHoleNumber,
-					       parentZ,parentA,parentJ,parentPi,parentEnergy);
-      int daughterZ,daughterA,daughterPi;
-      int daughterNeutronNumber;
-      int daughterNeutronHoleNumber;
-      int daughterProtonNumber;
-      int daughterProtonHoleNumber;
-      double daughterJ, daughterEnergy, decayEnergy;
-      if(decayer->Decay(daughterZ,daughterA,daughterJ,daughterPi,
-			daughterNeutronNumber,daughterNeutronHoleNumber,
-			daughterProtonNumber,daughterProtonHoleNumber,
-			daughterEnergy,decayEnergy)) {
+    neutronEntrance=initialEqDecayer->NeutronEntranceWidth();
+    protonEntrance=initialEqDecayer->ProtonEntranceWidth();
+    alphaEntrance=initialEqDecayer->AlphaEntranceWidth();
+    gammaEntrance=initialEqDecayer->GammaEntranceWidth();
+    gammaTotalWidth=initialEqDecayer->GammaTotalWidth();
+    neutronTotalWidth=initialEqDecayer->NeutronTotalWidth();
+    alphaTotalWidth=initialEqDecayer->AlphaTotalWidth();
+    protonTotalWidth=initialEqDecayer->ProtonTotalWidth();
+    delete initialEqDecayer;
+
+    bool decay = true;
+    if(initialNeutronNumber_>0||initialNeutronHoleNumber_>0||initialProtonNumber_>0||initialProtonHoleNumber_>0)
+    {
+      bool preEq = true;
+      int numSameExciton = 0;
+      while(preEq) {
+        PreEqDecayer* decayer = new PreEqDecayer(parentNeutronNumber,parentNeutronHoleNumber,
+					                                       parentProtonNumber,parentProtonHoleNumber,
+					                                      parentZ,parentA,parentJ,parentPi,parentEnergy);
+        int daughterZ,daughterA,daughterPi;
+        int daughterNeutronNumber;
+        int daughterNeutronHoleNumber;
+        int daughterProtonNumber;
+        int daughterProtonHoleNumber;
+        double daughterJ, daughterEnergy, decayEnergy;
+        
+        if(decayer->Decay(daughterZ,daughterA,daughterJ,daughterPi,daughterNeutronNumber,daughterNeutronHoleNumber,daughterProtonNumber,daughterProtonHoleNumber,daughterEnergy,decayEnergy))
+        {
+	        int daughterTotalExcitonNumber = daughterNeutronNumber+daughterNeutronHoleNumber+daughterProtonNumber+daughterProtonHoleNumber;
+          int parentTotalExcitonNumber = parentNeutronNumber+parentNeutronHoleNumber+parentProtonNumber+parentProtonHoleNumber;
+
+	        /*decayer->PrintCDF();
+	        preEq = false;
+	        decay = false;
+	        continue;*/
+
+	        if(daughterTotalExcitonNumber==parentTotalExcitonNumber) numSameExciton++;
+	        else numSameExciton=0;
 	
-	int daughterTotalExcitonNumber = daughterNeutronNumber+daughterNeutronHoleNumber+
-	  daughterProtonNumber+daughterProtonHoleNumber;
-	int parentTotalExcitonNumber = parentNeutronNumber+parentNeutronHoleNumber+
-	  parentProtonNumber+parentProtonHoleNumber;
+          if(numSameExciton>2||(daughterNeutronNumber>5&&daughterProtonNumber>5)|| daughterTotalExcitonNumber==1) 
+	          preEq=false;
 
-	/*decayer->PrintCDF();
-	preEq = false;
-	decay = false;
-	continue;*/
+	        if(daughterEnergy<=thresholdEnergy_) {
+	          decayEnergy+=daughterEnergy;
+	          daughterEnergy = 0.;
+	          preEq = false;
+	          decay = false;
+	        }
 
-	if(daughterTotalExcitonNumber==parentTotalExcitonNumber) numSameExciton++;
-	else numSameExciton=0;
-	if(numSameExciton>2||
-	   (daughterNeutronNumber>5&&daughterProtonNumber>5)||
-	   daughterTotalExcitonNumber==1) 
-	  preEq=false;
+	        CalcKinematics(daughterZ,daughterA,parentZ,parentA,daughterEnergy,daughterJ,daughterPi,decayEnergy,parentBeta);
 
-	if(daughterEnergy<=thresholdEnergy_) {
-	  decayEnergy+=daughterEnergy;
-	  daughterEnergy = 0.;
-	  preEq = false;
-	  decay = false;
-	}
+	        if(preEq) {
+	          parentNeutronNumber=daughterNeutronNumber;
+	          parentNeutronHoleNumber=daughterNeutronHoleNumber;
+	          parentProtonNumber=daughterProtonNumber;
+	          parentProtonHoleNumber=daughterProtonHoleNumber;
+	        }
 
-	CalcKinematics(daughterZ,daughterA,parentZ,parentA,
-		       daughterEnergy,daughterJ,daughterPi,
-		       decayEnergy,parentBeta);
+	        if(decay) {
+	          parentZ = daughterZ;
+	          parentA = daughterA;
+	          parentJ = daughterJ;
+	          parentPi = daughterPi;
+	          parentEnergy = daughterEnergy;
+	        }
+        } else {    
+	        returnValue = false;
+	        decay = false;
+	        preEq=false;
+        }
+        delete decayer;
+      } 
+    }
 
-	if(preEq) {
-	  parentNeutronNumber=daughterNeutronNumber;
-	  parentNeutronHoleNumber=daughterNeutronHoleNumber;
-	  parentProtonNumber=daughterProtonNumber;
-	  parentProtonHoleNumber=daughterProtonHoleNumber;
-	}
-	if(decay) {
-	  parentZ = daughterZ;
-	  parentA = daughterA;
-	  parentJ = daughterJ;
-	  parentPi = daughterPi;
-	  parentEnergy = daughterEnergy;
-	}
-      } else {    
-	returnValue = false;
-	decay = false;
-	preEq=false;
+    while (decay) {
+      Decayer *decayer = new Decayer(parentZ,parentA,parentJ,parentPi,parentEnergy);
+      int daughterZ,daughterA,daughterPi;
+      double daughterJ, daughterEnergy, decayEnergy;
+    
+      if(decayer->Decay(daughterZ,daughterA,daughterJ,daughterPi,daughterEnergy,decayEnergy))
+      {
+        /*
+        decayer->PrintFunctions();
+        decayer->PrintCDF();
+        decay = false;
+        continue;
+        */
+
+        if(daughterEnergy<=thresholdEnergy_){
+	        daughterEnergy = 0.;
+	        decayEnergy+=daughterEnergy;
+	        decay = false;
+        }
+
+        CalcKinematics(daughterZ,daughterA,parentZ,parentA,daughterEnergy,daughterJ,daughterPi,decayEnergy,parentBeta);
+
+        if(decay){
+	        parentZ = daughterZ;
+	        parentA = daughterA;
+	        parentJ = daughterJ;
+	        parentPi = daughterPi;
+	        parentEnergy = daughterEnergy;
+        }
+      } else {
+        returnValue = false;
+        decay = false;
       }
       delete decayer;
     }
+    
+    return returnValue;
   }
-  while (decay) {
-    Decayer *decayer = new Decayer(parentZ,parentA,parentJ,parentPi,parentEnergy);
-    int daughterZ,daughterA,daughterPi;
-    double daughterJ, daughterEnergy, decayEnergy;
-    if(decayer->Decay(daughterZ,daughterA,daughterJ,daughterPi,
-		      daughterEnergy,decayEnergy)){
-      /*
-      decayer->PrintFunctions();
-      decayer->PrintCDF();
-      decay = false;
-      continue;
-      */
-
-      if(daughterEnergy<=thresholdEnergy_) {
-	daughterEnergy = 0.;
-	decayEnergy+=daughterEnergy;
-	decay = false;
-      }      
-
-      CalcKinematics(daughterZ,daughterA,parentZ,parentA,
-		     daughterEnergy,daughterJ,daughterPi,
-		     decayEnergy,parentBeta);
-
-      if(decay) {
-	parentZ = daughterZ;
-	parentA = daughterA;
-	parentJ = daughterJ;
-	parentPi = daughterPi;
-	parentEnergy = daughterEnergy;
-      }
-    } else {
-      returnValue = false;
-      decay = false;
-    }
-    delete decayer;
-  }
- 
-  return returnValue;
-}
 
 void DecayController::PrintDecays() {
   std::cout << std::endl
