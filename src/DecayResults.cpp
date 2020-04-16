@@ -3,6 +3,7 @@
 #include "NuclearMass.h"
 #include <fstream>
 #include <iostream>
+#include <chrono>
 #include "omp.h"
 
 DecayResults::DecayResults(int Z, int A, double J, int Pi,
