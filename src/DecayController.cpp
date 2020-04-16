@@ -6,13 +6,10 @@
 #include <iomanip>
 #include <TVector3.h>
 #include <stdlib.h>
-#ifndef MPI_BUILD
 #include <omp.h>
-#endif
 
-#ifndef MPI_BUILD
 extern unsigned int randomSeed[12];
-#endif
+
 
 bool DecayController::Decay(double& neutronEntrance,
 			                      double& protonEntrance,
