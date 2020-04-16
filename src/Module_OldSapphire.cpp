@@ -9,6 +9,7 @@
  */
 
 #include "Module_OldSapphire.h"
+#include "Progressbar.h"
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -714,6 +715,7 @@ void printHelp() {
 }
 
     int oldSapphire(int argc, char *argv[]){
+        
 
         for(int i=1;i<argc;i++){ 
             if(strcmp(argv[i],"--help")==0) {
@@ -910,8 +912,8 @@ void printHelp() {
          * the statistical decay calculations, right?
          * This needs to change. This can be made much more readable and maintainable.
          */
-
-        int chunkSize = 10000; /** Not sure what this is*/
+        auto start = std::chrono::steady_clock::now();
+        int chunkSize = 100000; /**< Portion of events which are written to the root tree.*/
 
         int A,Z,Pi,events; /** Apparently placeholders for cmd line parameters*/
         double J,lowEnergy,highEnergy; /** Apparently placeholders for cmd line parameters*/
@@ -952,25 +954,37 @@ void printHelp() {
         DecayResults* results = NULL;
         if(events>1) results = new DecayResults(Z,A,J,Pi,lowEnergy,highEnergy,suffixNo);
         
+  
+
         for(int i = 0;i<=chunks;i++) {
+
+          
             int numInChunk = (i==chunks) ? remainder : chunkSize;
             if(numInChunk==0) continue;
+            std::cout << "Decay chunk " << i+1 << " of " << chunks << " started ..." << std::endl;
             std::vector<std::pair<DecayData,std::vector<DecayProduct> > > chunkResults;
             chunkResults.resize(numInChunk);
             /**
              * Using Open Multiprocessing (OMP) for the parallel execution of the following for-loop.
              * Nice.
              */
+            
+            
+            ProgressBar pg;
+            pg.start(numInChunk); 
+            
             #pragma omp parallel for
             for(int j = 0;j<numInChunk;j++) {
-
+                
+                //std::this_thread::sleep_for(std::chrono::seconds(1));
                 int localNumDecayed = numDecayed++;
 
-                if(localNumDecayed%(events/100)==0&&localNumDecayed>0) 
-    
-                std::cout << "Decayed " << localNumDecayed 
-	    	            << " of " << events << " nuclei..." << std::endl;
-
+                //if(localNumDecayed%(events/20)==0&&localNumDecayed>0){
+                  //if(j%(numInChunk/20)==0)
+                    pg.update(j);
+                //std::cout << "Decayed " << localNumDecayed 
+	    	        //  << " of " << events << " nuclei..." << std::endl;
+                //}
                 double energy = (lowEnergy==highEnergy) ? lowEnergy :
     
                 lowEnergy+(highEnergy-lowEnergy)*double(rand_r(&randomSeed[omp_get_thread_num()]))/double(RAND_MAX);
@@ -997,19 +1011,24 @@ void printHelp() {
 	    							       alphaEntranceWidth,gammaEntranceWidth,
 	    							       neutronTotalWidth,protonTotalWidth,
 	    							       alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
-                           
+
                 if(events==1) controller->PrintDecays();
                 delete controller;
             }
             
+                        
             if(events>1){
-                std::cout << "Writing ROOT Tree..." << std::endl;
+                std::cout << std::endl << "Writing ROOT Tree..." << std::endl;
                 results->AddResults(chunkResults);
             }
         }   
 
         if(results) delete results;
-  
+
+        auto end = std::chrono::steady_clock::now();
+        std::chrono::duration<double> elapsed_seconds = end-start;
+        std::cout << std::endl << "Total calculation time: " << elapsed_seconds.count() << "s\n";
+    
         return 0;
     }
 }

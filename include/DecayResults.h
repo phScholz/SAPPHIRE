@@ -51,7 +51,7 @@ class DecayResults {
   Double_t protonMomentumX_[100];
   Double_t protonMomentumY_[100];
   Double_t protonMomentumZ_[100];
-  Double_t gammaEnergy_[100];
+  Double_t gammaEnergy_[16000];
   Double_t gammaMomentumX_[100];
   Double_t gammaMomentumY_[100];
   Double_t gammaMomentumZ_[100];
