@@ -105,6 +105,7 @@ DecayResults::~DecayResults() {
   std::cout << "Waiting on threads to be finished..." << std::endl;
   while(omp_get_num_threads()!=1){
     std::this_thread::sleep_for(std::chrono::seconds(1));
+    std::cout << "Waiting ..." << std::endl;
   }
   outputFile_->Write();
   outputFile_->Close();
