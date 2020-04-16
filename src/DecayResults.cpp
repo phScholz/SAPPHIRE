@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <chrono>
+#include <thread>
 #include "omp.h"
 
 DecayResults::DecayResults(int Z, int A, double J, int Pi,
@@ -103,7 +104,7 @@ DecayResults::DecayResults(int Z, int A, double J, int Pi,
 DecayResults::~DecayResults() {
   std::cout << "Waiting on threads to be finished..." << std::endl;
   while(omp_get_num_threads()!=1){
-    std::this_thread::sleep_for(std::chrono::seconds(0.1));
+    std::this_thread::sleep_for(std::chrono::seconds(1));
   }
   outputFile_->Write();
   outputFile_->Close();
