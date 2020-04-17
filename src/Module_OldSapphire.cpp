@@ -1017,11 +1017,10 @@ void printHelp() {
                 double gammaTotalWidth = 0.;
                 double alphaTotalWidth = 0.;
 
-                controller->Decay(neutronEntranceWidth,protonEntranceWidth,alphaEntranceWidth,gammaEntranceWidth,
-	    		    neutronTotalWidth,protonTotalWidth,alphaTotalWidth,gammaTotalWidth); 
+                controller->Decay(neutronEntranceWidth,protonEntranceWidth,alphaEntranceWidth,gammaEntranceWidth,neutronTotalWidth,protonTotalWidth,alphaTotalWidth,gammaTotalWidth); 
 
-                #pragma omp atomic update
-                chunkResults[j] = std::pair<DecayData,std::vector<DecayProduct> >(DecayData(energy,neutronEntranceWidth,protonEntranceWidth, alphaEntranceWidth,gammaEntranceWidth, neutronTotalWidth,protonTotalWidth, alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
+                #pragma omp atomic write
+                chunkResults[j] = std::pair<DecayData,std::vector<DecayProduct>>(DecayData(energy,neutronEntranceWidth,protonEntranceWidth, alphaEntranceWidth,gammaEntranceWidth, neutronTotalWidth,protonTotalWidth, alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
 
                 if(events==1) controller->PrintDecays();
                 delete controller;
