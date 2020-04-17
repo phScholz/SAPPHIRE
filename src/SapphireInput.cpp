@@ -30,48 +30,52 @@ extern std::string sourceDirectory();
     }
 
     void SapphireInput::Initialize(){
+        /** Setting default configurations for the SapphireInput class. */
         std::cout << "Setting default values..." << std::endl;
         SapphireInput::g_ExitStates(-1);
         SapphireInput::n_ExitStates(-1);
         SapphireInput::p_ExitStates(-1);
-        SapphireInput::a_ExitStates(-1);
-        
+        SapphireInput::a_ExitStates(-1);        
         SapphireInput::CalcRates(false);           
         SapphireInput::CalcAverageWidth(false);
-
         SapphireInput::ResidualGamma(true);               
         SapphireInput::ResidualNeutron(false);           
         SapphireInput::ResidualProton(false);
         SapphireInput::ResidualAlpha(false);
-
         SapphireInput::CalculateGammaCutoff(false);   
         SapphireInput::PorterThomas_g(false);
         SapphireInput::PorterThomas_p(false);
-
         SapphireInput::EntranceState(0);
-
         SapphireInput::a_Formalism(0);
         SapphireInput::p_Formalism(0);
         SapphireInput::n_Formalism(0);
         SapphireInput::g_Formalism(1);
-
         SapphireInput::DecayerMaxL(8.);
         SapphireInput::PreEqMaxL(8.);
         SapphireInput::g_CutoffEnergy(10000.);
-
         SapphireInput::Reaction("25Mg+a");
         SapphireInput::EnergyFile("/examples/energyFile");
         SapphireInput::ReactionFile("/examples/reactionFile");
-
         SapphireInput::MassTable(sourceDirectory()+"/tables/masses.dat");
         SapphireInput::GdrParams(sourceDirectory()+"/tables/ripl3_gdr_parameters.dat");
         SapphireInput::LevelDir(sourceDirectory()+"/levels/");
-        SapphireInput::SpinFile(sourceDirectory()+"/tables/spinod.dat");
-        
+        SapphireInput::SpinFile(sourceDirectory()+"/tables/spinod.dat");        
         SapphireInput::Isotope("60Ni");
+        SapphireInput::PorterThomas_p(false);
+        SapphireInput::PorterThomas_g(false);
+        
+        SapphireInput::PreEq(false);
+        SapphireInput::PreEqConf("");
+
     }
 
     void SapphireInput::printIntputFile(std::string InputFile){
+        /** 
+        * Printing the inputfile as read by Sapphire. 
+        * The InputFile is read in the same way here as for reading
+        * the inputFile. So, if something is off with the input,
+        * one can possibly see it from the output of this function.
+        */
         std::cout << std::endl;
         std::cout << "INPUT File" << std::endl;
         std::cout << std::endl;
@@ -89,6 +93,12 @@ extern std::string sourceDirectory();
     }
 
     void SapphireInput::printIntputParameters(){
+        /**
+        * This function prints out the current status of the input parameters,
+        * in a way, which can be used as input file template for other calculations.
+        * In comparison to a given input file, it can be double-checked if the 
+        * parameters have been set as intended. 
+        */
         std::cout << std::endl;
         std::cout << "INPUT PARAMETERS" << std::endl;
         std::cout << std::endl;
@@ -126,9 +136,14 @@ extern std::string sourceDirectory();
         std::cout << "\t[Decayer]" << std::endl;
         std::cout << "\tSuffix               = "             << SapphireInput::Suffix() << std::endl;
         std::cout << "\tIsotope              = "             << SapphireInput::Isotope() << std::endl;
+        std::cout << "\tPreequillibrium      = "             << SapphireInput::PreEq() << std::endl;
+        std::cout << "\tPreEqConfiguration   = "             << SapphireInput::PreEqConf() << std::endl;
+        std::cout << std::endl;
     }
 
     void SapphireInput::ReadInputFile(std::string InputFile){
+        /**
+        */
         std::cout << "Reading input file ..." << InputFile << std::endl;
         boost::property_tree::ptree pt;
 
@@ -137,8 +152,7 @@ extern std::string sourceDirectory();
         }
         catch (const boost::exception& e)
         {
-            std::string diag = diagnostic_information(e);
-            // display your error message here, then do whatever you need to, e.g.        
+            std::string diag = diagnostic_information(e);                   
             std::cout << "Can't init settings." << diag << std::endl;
             exit(1);
         }
@@ -171,5 +185,7 @@ extern std::string sourceDirectory();
         //Reading Decayer Input
         SapphireInput::Suffix(pt.get<std::string>("Decayer.Suffix", SapphireInput::Suffix()));
         SapphireInput::Isotope(pt.get<std::string>("Decayer.Isotope", SapphireInput::Isotope()));
+        SapphireInput::PreEq(pt.get<bool>("Decayer.Preequillibrium", SapphireInput::PreEq()));
+        SapphireInput::PreEqConf(pt.get<std::string>("Decayer.PreEqConfiguration", SapphireInput::PreEqConf()));
     }
 

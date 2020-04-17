@@ -27,12 +27,6 @@ extern void Initialize();
  * @brief Secondary function to print help. This is the first step to reconstruct Sapphire.cpp.
  */
 void PrintHelp(){
-  #ifndef MPI_BUILD
-  std::cout << " MPI_BUILD is OFF" << std::endl;
-  #endif 
-  #ifdef MPI_BUILD
-  std::cout << " MPI_BUILD is ON" << std::endl;
-  #endif 
   std::cout << std::endl;
   std::cout << " Supported modes:" << std::endl;
 	std::cout << std::endl;

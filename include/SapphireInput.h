@@ -59,15 +59,14 @@ class SapphireInput{
         //Setter
         void CalcRates(bool x){calcRates=x;}                         /**< Setter for bool calcRates*/
         void CalcAverageWidth(bool x){calcAverageWidth=x;}           /**< Setter for bool calcAverageWidth*/
-       
         void ResidualGamma(bool x){residualGamma=x;}                 /**< Setter for bool residualGamma*/
         void ResidualNeutron(bool x){residualNeutron=x;}             /**< Setter for bool residualNeutron*/
         void ResidualProton(bool x){residualProton=x;}               /**< Setter for bool residualProton*/
         void ResidualAlpha(bool x){residualAlpha=x;}                 /**< Setter for bool residualAlpha*/
-        
         void CalculateGammaCutoff(bool x){calculateGammaCutoff=x;}   /**< Setter for bool calculateGammaCutoff*/
         void PorterThomas_g(bool x){porterThomas_g=x;}                  /**<Setter for bool porterThomas_g*/
         void PorterThomas_p(bool x){porterThomas_p=x;}                  /**<Setter for bool porterThomas_p*/
+        void PreEq(bool x){preEq=x;}                                    /**<Setter for bool preEq*/
 
         void EntranceState(int x){entranceState=x;}                  /**< Setter for entranceState*/
         void g_ExitStates(int x){g_exitStates=x;}              /**<Setter for g_exitStates*/ 
@@ -90,6 +89,7 @@ class SapphireInput{
         void Suffix(std::string x){suffix=x;}                               /**< Setter for string module*/
         void Reaction(std::string x){reaction=x;}                    /**<Setter for reaction*/
         void Isotope(std::string x){isotope=x;}                    /**<Setter for isotope*/
+        void PreEqConf(std::string x){preEqConf=x;}                    /**<Setter for preEqConf*/
         
         void MassTable(std::string x){massTable=x;}                               /**< Setter for string module*/
         void GdrParams(std::string x){gdrParams=x;}                               /**< Setter for string module*/
@@ -107,6 +107,7 @@ class SapphireInput{
         bool CalculateGammaCutoff(){return calculateGammaCutoff;} /**<Getter for calculateGammaCutoff*/
         bool PorterThomas_g(){return porterThomas_g;}             /**<Getter for bool porterThomas_g*/
         bool PorterThomas_p(){return porterThomas_p;}             /**<Getter for bool porterThomas_p*/
+        bool PreEq(){return preEq;}                                /**<Getter for bool preEq*/
 
         int EntranceState(){return entranceState;}              /**<Getter for entranceState*/ 
         int g_ExitStates(){return g_exitStates;}              /**<Getter for g_exitStates*/ 
@@ -129,6 +130,8 @@ class SapphireInput{
         std::string Suffix(){return suffix;}                    /**<Getter for suffix*/
         std::string Reaction(){return reaction;}                    /**<Getter for reaction*/
         std::string Isotope(){return isotope;}                    /**<Getter for isotope*/
+        std::string PreEqConf(){return preEqConf;}                    /**<Getter for preEqConf*/
+        
         
         std::string MassTable(){return massTable;}                    /**<Getter for massTable*/
         std::string GdrParams(){return gdrParams;}                    /**<Getter for gdrParams*/
@@ -172,6 +175,7 @@ class SapphireInput{
         std::string reaction;         /**< String for reaction*/
         std::string energies;         /**< String for reaction*/
         std::string isotope;        /**< String for the istope for the decay simulation*/
+        std::string preEqConf;      /**< Preequillibrium exciton configuration of the initial state (pp,ph,np,nh)*/
 
         std::string massTable;      /**< String for the path to the mass tables*/
         std::string gdrParams;      /**< String for the path to the GDR parameter file*/

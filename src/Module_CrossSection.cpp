@@ -102,7 +102,7 @@ namespace Module_CrossSection{
         std::cout  << "\tSyntax:        sapphire reaction <options>" << std::endl;        
 	    std::cout << std::endl << "Options:" << std::endl;
         std::cout << std::endl;
-        std::cout << "\tAX+y           - reaction string, e.g. 60Fe+p, running calculations with default settings." << std::endl;
+        std::cout << "\tAX+y           - reaction string, e.g. 60Fe+p, running with default settings." << std::endl;
         std::cout << "\tInputFile      - determine input parameters from InputFile and run calculations." << std::endl;
         std::cout << std::endl;
     }

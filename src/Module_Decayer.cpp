@@ -45,7 +45,7 @@ namespace Module_Decayer{
 
     void Go(int argc,char *argv[]){
         auto start = std::chrono::steady_clock::now();
-        std::cout << "Module: decay" << std::endl;
+        std::cout << "Module: decayer" << std::endl;
         std::cout << std::endl;
 
         if(argc < 3){
