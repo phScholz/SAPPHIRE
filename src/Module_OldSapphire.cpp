@@ -913,7 +913,7 @@ void printHelp() {
          * This needs to change. This can be made much more readable and maintainable.
          */
         auto start = std::chrono::steady_clock::now();
-        int chunkSize = 100000; /**< Portion of events which are written to the root tree.*/
+        int chunkSize = 10000; /**< Portion of events which are written to the root tree.*/
 
         int A,Z,Pi,events; /** Apparently placeholders for cmd line parameters*/
         double J,lowEnergy,highEnergy; /** Apparently placeholders for cmd line parameters*/
@@ -939,6 +939,8 @@ void printHelp() {
   	          << std::setw(15) << "energy (high):" << std::setw(12) << highEnergy 
   	          << std::setw(0) << std::endl
   	          << std::setw(15) << "events:"        << std::setw(12) << events     
+  	          << std::setw(0) << std::endl
+              << std::setw(15) << "chunk size:"    << std::setw(12) << chunkSize     
   	          << std::setw(0) << std::endl;
         }
 
@@ -954,6 +956,9 @@ void printHelp() {
         DecayResults* results = NULL;
         if(events>1) results = new DecayResults(Z,A,J,Pi,lowEnergy,highEnergy,suffixNo);
         
+        
+        omp_lock_t writelock;
+        omp_init_lock(&writelock);
   
 
         for(int i = 0;i<=chunks;i++) {
@@ -961,7 +966,10 @@ void printHelp() {
           
             int numInChunk = (i==chunks) ? remainder : chunkSize;
             if(numInChunk==0) continue;
-            std::cout << "Decay chunk " << i+1 << " of " << chunks << " started ..." << std::endl;
+            if(events>=chunkSize)
+              std::cout << "Decay chunk " << i+1 << " of " << chunks << " started ..." << std::endl;
+            else
+              std::cout << "Decay of " << numInChunk << " nuclei started ..." << std::endl;
             std::vector<std::pair<DecayData,std::vector<DecayProduct> > > chunkResults;
             chunkResults.resize(numInChunk);
             /**
@@ -969,9 +977,12 @@ void printHelp() {
              * Nice.
              */
             
-            
+
+
+
             ProgressBar pg;
             pg.start(numInChunk); 
+
             
             #pragma omp parallel for
             for(int j = 0;j<numInChunk;j++) {
@@ -1006,6 +1017,7 @@ void printHelp() {
 
                 controller->Decay(neutronEntranceWidth,protonEntranceWidth,alphaEntranceWidth,gammaEntranceWidth,
 	    		    neutronTotalWidth,protonTotalWidth,alphaTotalWidth,gammaTotalWidth); 
+
                 chunkResults[j] = 
 	            std::pair<DecayData,std::vector<DecayProduct> >(DecayData(energy,neutronEntranceWidth,protonEntranceWidth,
 	    							       alphaEntranceWidth,gammaEntranceWidth,
@@ -1016,13 +1028,16 @@ void printHelp() {
                 delete controller;
             }
             
-                        
+            omp_set_lock(&writelock);            
             if(events>1){
                 std::cout << std::endl << "Writing ROOT Tree..." << std::endl;
                 
                 results->AddResults(chunkResults);
             }
+            omp_unset_lock(&writelock);
         }   
+        omp_destroy_lock(&writelock);
+        
 
         if(results) delete results;
 
