@@ -42,6 +42,7 @@ bool DecayController::Decay(double& neutronEntrance,
     neutronTotalWidth=initialEqDecayer->NeutronTotalWidth();
     alphaTotalWidth=initialEqDecayer->AlphaTotalWidth();
     protonTotalWidth=initialEqDecayer->ProtonTotalWidth();
+
     delete initialEqDecayer;
 
     bool decay = true;
@@ -183,11 +184,7 @@ void DecayController::PrintDecays() {
   }
 }
 
-void DecayController::CalcKinematics(int daughterZ, int daughterA,
-				     int parentZ, int parentA,
-				     double daughterEnergy, double daughterJ,
-				     int daughterPi, double decayEnergy, 
-				     TVector3 &parentBeta) {
+void DecayController::CalcKinematics(int daughterZ, int daughterA, int parentZ, int parentA, double daughterEnergy, double daughterJ, int daughterPi, double decayEnergy, TVector3 &parentBeta) {
 
   int decayType;
   if((parentA-daughterA)==0&&(parentZ-daughterZ)==0) decayType=0;
@@ -220,11 +217,10 @@ void DecayController::CalcKinematics(int daughterZ, int daughterA,
   //double phiCM = 2.*pi*double(rand())/double(RAND_MAX);
   //double thetaCM = acos(2.*double(rand())/double(RAND_MAX)-1.);
 
-  TVector3 decayDirectionCM = TVector3(sin(thetaCM)*cos(phiCM),
-				       sin(thetaCM)*sin(phiCM),
-				       cos(thetaCM));
+  TVector3 decayDirectionCM = TVector3(sin(thetaCM)*cos(phiCM),sin(thetaCM)*sin(phiCM),cos(thetaCM));
   TVector3 decayMomentumCM = momentumCM*decayDirectionCM;
   TVector3 daughterMomentumCM = -momentumCM*decayDirectionCM;
+
   double decayEnergyTotalCM = sqrt(momentumCM*momentumCM+m2*m2);
   double daughterEnergyTotalCM = sqrt(momentumCM*momentumCM+m1*m1);
 

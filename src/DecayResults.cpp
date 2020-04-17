@@ -106,7 +106,7 @@ DecayResults::~DecayResults() {
   while(omp_get_num_threads()!=1){
     std::this_thread::sleep_for(std::chrono::seconds(1));
     std::cout << "Waiting ..." << std::endl;
-  }
+  }  
   outputFile_->Write();
   outputFile_->Close();
   delete outputFile_;
@@ -127,7 +127,7 @@ void DecayResults::AddResults(std::vector<std::pair<DecayData, std::vector<Decay
 
     numSteps_=numNeutrons_=numGammas_=numProtons_=numAlphas_=0;
     for(std::vector<DecayProduct>::const_iterator it = results[i].second.begin();
-	it<results[i].second.end();++it) {
+	    it<results[i].second.end();++it) {
       Z_[numSteps_] = it->Z_;
       A_[numSteps_] = it->A_;
       fragmentEnergy_[numSteps_] = it->fragmentEnergy_;
@@ -135,34 +135,35 @@ void DecayResults::AddResults(std::vector<std::pair<DecayData, std::vector<Decay
       fragmentMomentumX_[numSteps_] = it->fragmentMomentumX_;
       fragmentMomentumY_[numSteps_] = it->fragmentMomentumY_;
       fragmentMomentumZ_[numSteps_] = it->fragmentMomentumZ_; 
+      
       if(it->particleType_==0) {
-	gammaStepIndex_[numGammas_] = numSteps_;
-	gammaEnergy_[numGammas_]=it->particleEnergy_;
-	gammaMomentumX_[numGammas_]=it->particleMomentumX_;
-	gammaMomentumY_[numGammas_]=it->particleMomentumY_;
-	gammaMomentumZ_[numGammas_]=it->particleMomentumZ_;
-	++numGammas_;
+	      gammaStepIndex_[numGammas_] = numSteps_;
+	      gammaEnergy_[numGammas_]=it->particleEnergy_;
+	      gammaMomentumX_[numGammas_]=it->particleMomentumX_;
+	      gammaMomentumY_[numGammas_]=it->particleMomentumY_;
+	      gammaMomentumZ_[numGammas_]=it->particleMomentumZ_;
+	      ++numGammas_;
       } else if(it->particleType_==1) {
-	neutronStepIndex_[numNeutrons_] = numSteps_;
-	neutronEnergy_[numNeutrons_]=it->particleEnergy_;
-	neutronMomentumX_[numNeutrons_]=it->particleMomentumX_;
-	neutronMomentumY_[numNeutrons_]=it->particleMomentumY_;
-	neutronMomentumZ_[numNeutrons_]=it->particleMomentumZ_;
-	++numNeutrons_;
+	      neutronStepIndex_[numNeutrons_] = numSteps_;
+	      neutronEnergy_[numNeutrons_]=it->particleEnergy_;
+	      neutronMomentumX_[numNeutrons_]=it->particleMomentumX_;
+	      neutronMomentumY_[numNeutrons_]=it->particleMomentumY_;
+	      neutronMomentumZ_[numNeutrons_]=it->particleMomentumZ_;
+	      ++numNeutrons_;
       } else if(it->particleType_==2) {
-	protonStepIndex_[numProtons_] = numSteps_;
-	protonEnergy_[numProtons_]=it->particleEnergy_;
-	protonMomentumX_[numProtons_]=it->particleMomentumX_;
-	protonMomentumY_[numProtons_]=it->particleMomentumY_;
-	protonMomentumZ_[numProtons_]=it->particleMomentumZ_;
-	++numProtons_;
+	      protonStepIndex_[numProtons_] = numSteps_;
+	      protonEnergy_[numProtons_]=it->particleEnergy_;
+	      protonMomentumX_[numProtons_]=it->particleMomentumX_;
+	      protonMomentumY_[numProtons_]=it->particleMomentumY_;
+	      protonMomentumZ_[numProtons_]=it->particleMomentumZ_;
+	      ++numProtons_;
       } else if(it->particleType_==3) {
-	alphaStepIndex_[numAlphas_] = numSteps_;
-	alphaEnergy_[numAlphas_]=it->particleEnergy_;
-	alphaMomentumX_[numAlphas_]=it->particleMomentumX_;
-	alphaMomentumY_[numAlphas_]=it->particleMomentumY_;
-	alphaMomentumZ_[numAlphas_]=it->particleMomentumZ_;
-	++numAlphas_;
+	      alphaStepIndex_[numAlphas_] = numSteps_;
+	      alphaEnergy_[numAlphas_]=it->particleEnergy_;
+	      alphaMomentumX_[numAlphas_]=it->particleMomentumX_;
+	      alphaMomentumY_[numAlphas_]=it->particleMomentumY_;
+	      alphaMomentumZ_[numAlphas_]=it->particleMomentumZ_;
+	      ++numAlphas_;
       }
       ++numSteps_;
     }

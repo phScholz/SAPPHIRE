@@ -55,7 +55,7 @@ void Initialize() {
   PreEqDecayer::SetCrossSection(false);
   Decayer::SetMaxL(8.);
   PreEqDecayer::SetMaxL(8.);
-  TransitionRateFunc::SetGammaCutoffEnergy(10000.);
+  TransitionRateFunc::SetGammaCutoffEnergy(15000.);
   NuclearMass::InitializeElements();
   NuclearMass::InitializeMasses(sourceDirectory()+"/tables/masses.dat");
   GammaTransmissionFunc::InitializeGDRParameters(sourceDirectory()+"/tables/ripl3_gdr_parameters.dat");

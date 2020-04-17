@@ -688,14 +688,14 @@ void printHelp() {
    << std::setw(25) << std::left << "\t--l-max=VALUE:" << std::setw(0) << "Sets the maximum value of orbital angular momentum to" << std::endl
    <<std::setw(25)  << '\t' << std::setw(0) << "VALUE." << std::endl
    << std::setw(25) << std::left << "\t--suffix=VALUE:" << std::setw(0) << "Monte-Carlo mode only.  Sets the suffix for the output" <<std::endl
-   << std::setw(25)  << '\t' << std::setw(0) << "file name (i.e. Sapphire_*_VALUE.root)." << std::endl
-   << std::setw(25) << std::left << "\t--pre-eq=pp,ph,np,nh" << std::setw(0) << "Monte-Carlo mode only.  Sets the initial exciton" << std::endl
-   << std::setw(25)  << '\t' << std::setw(0) << "configuration and simulates the equilibrium" << std::endl
-   << std::setw(25)  << '\t' << std::setw(0) << "process allowing for pre-equilibrium particle decay." << std::endl
+   << std::setw(25)                             << '\t' << std::setw(0) << "file name (i.e. Sapphire_*_VALUE.root)." << std::endl
+   << std::setw(25)  << std::left << "\t--pre-eq=pp,ph,np,nh" << std::setw(0) << "Monte-Carlo mode only.  Sets the initial exciton" << std::endl
+   << std::setw(25)                             << '\t' << std::setw(0) << "configuration and simulates the equilibrium" << std::endl
+   << std::setw(25)                             << '\t' << std::setw(0) << "process allowing for pre-equilibrium particle decay." << std::endl
    << std::setw(25) << std::left << "\t--gamma-cutoff=VALUE" << std::setw(0) << "Cross section mode only.  Sets the maximum excitation" << std::endl
-   << std::setw(25)  << '\t' << std::setw(0) << "energy in the compound nucleus where gamma emission is" << std::endl
-   << std::setw(25)  << '\t' << std::setw(0) << "exclusive.  Transitions to final states above this energy" << std::endl
-   << std::setw(25)  << '\t' << std::setw(0) << "will not contribute to residual capture cross sections." << std::endl
+   << std::setw(25)                                   << '\t' << std::setw(0) << "energy in the compound nucleus where gamma emission is" << std::endl
+   << std::setw(25)                                   << '\t' << std::setw(0) << "exclusive.  Transitions to final states above this energy" << std::endl
+   << std::setw(25)                                   << '\t' << std::setw(0) << "will not contribute to residual capture cross sections." << std::endl
    << std::setw(25) << std::left << "\t--residual-gamma=Y/N" << std::setw(0) << "Cross section mode only.  Toggles if residual or total" << std::endl
    << std::setw(25)  << '\t' << std::setw(0) << "capture cross sections are calculated." << std::endl
    << std::setw(25) << std::left << "\t--residual-neutron=Y/N" << std::setw(0) << "Cross section mode only.  Toggles if residual or total" << std::endl
@@ -912,6 +912,8 @@ void printHelp() {
          * the statistical decay calculations, right?
          * This needs to change. This can be made much more readable and maintainable.
          */
+
+        Decayer::SetCrossSection(false);
         auto start = std::chrono::steady_clock::now();
         int chunkSize = 10000; /**< Portion of events which are written to the root tree.*/
 
@@ -941,7 +943,7 @@ void printHelp() {
   	          << std::setw(15) << "events:"        << std::setw(12) << events     
   	          << std::setw(0) << std::endl
               << std::setw(15) << "chunk size:"    << std::setw(12) << chunkSize     
-  	          << std::setw(0) << std::endl;
+  	          << std::setw(0) << std::endl << std::endl;
         }
 
         /**
@@ -1018,11 +1020,8 @@ void printHelp() {
                 controller->Decay(neutronEntranceWidth,protonEntranceWidth,alphaEntranceWidth,gammaEntranceWidth,
 	    		    neutronTotalWidth,protonTotalWidth,alphaTotalWidth,gammaTotalWidth); 
 
-                chunkResults[j] = 
-	            std::pair<DecayData,std::vector<DecayProduct> >(DecayData(energy,neutronEntranceWidth,protonEntranceWidth,
-	    							       alphaEntranceWidth,gammaEntranceWidth,
-	    							       neutronTotalWidth,protonTotalWidth,
-	    							       alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
+                #pragma omp atomic update
+                chunkResults[j] = std::pair<DecayData,std::vector<DecayProduct> >(DecayData(energy,neutronEntranceWidth,protonEntranceWidth, alphaEntranceWidth,gammaEntranceWidth, neutronTotalWidth,protonTotalWidth, alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
 
                 if(events==1) controller->PrintDecays();
                 delete controller;

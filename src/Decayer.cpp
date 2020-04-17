@@ -11,16 +11,8 @@
 extern unsigned int randomSeed[12];
 
 
-Decayer::Decayer(int Z, int A, double jInitial, int piInitial, double energy,
-		 double totalWidthForCorrection,
-		 double uncorrTotalWidthForCorrection,
-		 double uncorrTotalWidthSqrdForCorrection,
-		 Decayer* widthCorrectedDecayer) :
-  Z_(Z), A_(A), piInitial_(piInitial), jInitial_(jInitial), energy_(energy),
-  totalWidthForCorrection_(totalWidthForCorrection), 
-  uncorrTotalWidthForCorrection_(uncorrTotalWidthForCorrection),
-  uncorrTotalWidthSqrdForCorrection_(uncorrTotalWidthSqrdForCorrection),
-  widthCorrectedDecayer_(widthCorrectedDecayer) {
+Decayer::Decayer(int Z, int A, double jInitial, int piInitial, double energy, double totalWidthForCorrection, double uncorrTotalWidthForCorrection, double uncorrTotalWidthSqrdForCorrection,		 Decayer* widthCorrectedDecayer) :
+  Z_(Z), A_(A), piInitial_(piInitial), jInitial_(jInitial), energy_(energy), totalWidthForCorrection_(totalWidthForCorrection), uncorrTotalWidthForCorrection_(uncorrTotalWidthForCorrection), uncorrTotalWidthSqrdForCorrection_(uncorrTotalWidthSqrdForCorrection), widthCorrectedDecayer_(widthCorrectedDecayer) {
 
   neutronEntrance_=0.;
   gammaEntrance_=0.;
@@ -103,43 +95,38 @@ Decayer::Decayer(int Z, int A, double jInitial, int piInitial, double energy,
       }
     }
     if(qValueNeutron+energy>0||qValueProton+energy>0) {
-      for(double l=0;l<=maxL_;l+=1.) {
-	int piFinal = (int(l)%2==0) ? piInitial : -1*piInitial;
-	for(double s = fabs(l-0.5); s<=l+0.5; s+=1.) {
-	  for(double jFinal = fabs(s-jInitial); jFinal<=s+jInitial;jFinal+=1.) {
-	    if(qValueNeutron+energy>0) {
-	      bool exists = false;
-	      for(int i =0;i<spinRatePairs_.size();i++) {
-		if(spinRatePairs_[i].Z_==Z&&
-		   spinRatePairs_[i].A_==A-1&&
-		   spinRatePairs_[i].spin_==jFinal&&
-		   spinRatePairs_[i].parity_==piFinal) {
-		  exists=true;
-		  break;
-		}
-	      }
-	      if(!exists) {
-		TransitionRateFunc* previous = 
-		  (widthCorrectedDecayer_) ? 
-		  widthCorrectedDecayer_->spinRatePairs_[spinRatePairs_.size()].rateFunc_ :
-		  NULL;
-		TransitionRateFunc* newFunc = 
-		  new TransitionRateFunc(0,1,Z,A-1,jInitial,piInitial,
-					 jFinal,piFinal,0.5,1,maxL_,energy,
-					 qValueNeutron,totalWidthForCorrection_,uncorrTotalWidthForCorrection_,
-					 uncorrTotalWidthSqrdForCorrection_,previous, isCrossSection_);
-		spinRatePairs_.push_back(SpinRatePair(Z,A-1,jFinal,piFinal,qValueNeutron,
-						      newFunc,newFunc->Integral()));
-		totalIntegral_+=newFunc->Integral();
-		totalIntegralSqrd_+=newFunc->Integral()*newFunc->Integral();
-		if(newFunc->GroundStateTransmission()!=0.) 
-		  neutronEntrance_ = newFunc->GroundStateTransmission();
-		neutronTotalWidth_+=newFunc->Integral();
-	      }
-	    }
-	    if(qValueProton+energy>0) {
-	      bool exists = false;
-	      for(int i =0;i<spinRatePairs_.size();i++) {
+        for(double l=0;l<=maxL_;l+=1.) {
+	          int piFinal = (int(l)%2==0) ? piInitial : -1*piInitial;
+	          for(double s = fabs(l-0.5); s<=l+0.5; s+=1.) {
+	            for(double jFinal = fabs(s-jInitial); jFinal<=s+jInitial;jFinal+=1.) {
+	              if(qValueNeutron+energy>0) {
+	                bool exists = false;
+	                  for(int i =0;i<spinRatePairs_.size();i++) {
+		                  if(spinRatePairs_[i].Z_==Z&&
+		                     spinRatePairs_[i].A_==A-1&&
+		                     spinRatePairs_[i].spin_==jFinal&&
+		                     spinRatePairs_[i].parity_==piFinal) {
+		                    exists=true;
+		                    break;
+		                  }
+	                  }
+	              
+                  if(!exists) {
+		                TransitionRateFunc* previous = (widthCorrectedDecayer_) ? widthCorrectedDecayer_->spinRatePairs_[spinRatePairs_.size()].rateFunc_ : NULL;
+		                TransitionRateFunc* newFunc =  new TransitionRateFunc(0,1,Z,A-1,jInitial,piInitial, jFinal,piFinal,0.5,1,maxL_,energy, qValueNeutron,totalWidthForCorrection_,uncorrTotalWidthForCorrection_, uncorrTotalWidthSqrdForCorrection_,previous, isCrossSection_);
+                    spinRatePairs_.push_back(SpinRatePair(Z,A-1,jFinal,piFinal,qValueNeutron, newFunc,newFunc->Integral()));
+		                totalIntegral_+=newFunc->Integral();
+		                totalIntegralSqrd_+=newFunc->Integral()*newFunc->Integral();
+		              
+                    if(newFunc->GroundStateTransmission()!=0.) neutronEntrance_ = newFunc->GroundStateTransmission();
+		              
+                    neutronTotalWidth_+=newFunc->Integral();
+	                }
+	              }
+	            
+                if(qValueProton+energy>0) {
+	                bool exists = false;
+	                for(int i =0;i<spinRatePairs_.size();i++) {
 		if(spinRatePairs_[i].Z_==Z-1&&
 		   spinRatePairs_[i].A_==A-1&&
 		   spinRatePairs_[i].spin_==jFinal&&
@@ -233,9 +220,7 @@ Decayer::~Decayer(){
 }
 
 void Decayer::PrintFunctions() {
-  for(std::vector<SpinRatePair>::const_iterator spinRatePair = 
-	spinRatePairs_.begin();
-      spinRatePair<spinRatePairs_.end();spinRatePair++) {
+  for(std::vector<SpinRatePair>::const_iterator spinRatePair = spinRatePairs_.begin(); spinRatePair<spinRatePairs_.end();spinRatePair++) {
     if(spinRatePair->rateFunc_==NULL) continue;
     char filename[256];
     char filename2[256];
@@ -253,20 +238,12 @@ void Decayer::PrintFunctions() {
     std::ofstream rateOut(filename3);
     std::ofstream totalLevelOut(filename4);
     std::vector<XYPair> function = spinRatePair->rateFunc_->Function();
-    for(std::vector<XYPair>::const_iterator it = function.begin();
-	it<function.end();it++) {
-      levelOut << std::scientific << energy_+spinRatePair->qValue_-it->X_ << ' ' 
-	  << spinRatePair->rateFunc_->CalcLevelDensity(energy_+spinRatePair->qValue_-it->X_) 
-	  << std::endl;
-      totalLevelOut << std::scientific << energy_+spinRatePair->qValue_-it->X_ << ' ' 
-	  << spinRatePair->rateFunc_->CalcTotalLevelDensity(energy_+spinRatePair->qValue_-it->X_) 
-	  << std::endl;
-      transOut << std::scientific << it->X_ << ' ' 
-	       << spinRatePair->rateFunc_->CalcTransmissionFunc(it->X_)
-	       << std::endl;
-      rateOut << std::scientific << it->X_ << ' ' 
-	      << it->Y_/totalIntegral_ << ' ' 
-	      << std::endl;
+    
+    for(std::vector<XYPair>::const_iterator it = function.begin(); it<function.end();it++) {
+      levelOut << std::scientific << energy_+spinRatePair->qValue_-it->X_ << ' ' << spinRatePair->rateFunc_->CalcLevelDensity(energy_+spinRatePair->qValue_-it->X_)  << std::endl;
+      totalLevelOut << std::scientific << energy_+spinRatePair->qValue_-it->X_ << ' '  << spinRatePair->rateFunc_->CalcTotalLevelDensity(energy_+spinRatePair->qValue_-it->X_) << std::endl;
+      transOut << std::scientific << it->X_ << ' ' << spinRatePair->rateFunc_->CalcTransmissionFunc(it->X_) << std::endl;
+      rateOut << std::scientific << it->X_ << ' '  << it->Y_/totalIntegral_ << ' ' << std::endl;
     }
     levelOut.flush();
     levelOut.close();
@@ -282,8 +259,7 @@ void Decayer::PrintFunctions() {
 void Decayer::BuildCDF() {
   double offSet=0.;
   for(int pair = 0;pair<spinRatePairs_.size();pair++) {
-    std::vector<XYPair> cumulativeSum = 
-       spinRatePairs_[pair].rateFunc_->CumulativeSum();
+    std::vector<XYPair> cumulativeSum = spinRatePairs_[pair].rateFunc_->CumulativeSum();
     for(int e = 0;e<cumulativeSum.size();e++) {
       double cdfValue = (cumulativeSum[e].Y_+offSet)/totalIntegral_;
       cdf_.push_back(CDFEntry(pair,cumulativeSum[e].X_,cdfValue));
@@ -319,9 +295,7 @@ void Decayer::PrintCDF() {
   std::ofstream out("cdf.out");
   for(int i=0;i<cdf_.size();i++) {
     int pairIndex = cdf_[i].pairIndex_;
-    out << std::fixed << spinRatePairs_[pairIndex].Z_ <<  ' ' << spinRatePairs_[pairIndex].A_ << ' '
-	<< spinRatePairs_[pairIndex].spin_ << ' ' << spinRatePairs_[pairIndex].parity_ << ' '
-	<< std::scientific << cdf_[i].energy_ << ' ' <<  cdf_[i].value_ << std::endl;
+    out << std::fixed << spinRatePairs_[pairIndex].Z_ <<  ' ' << spinRatePairs_[pairIndex].A_ << ' '	<< spinRatePairs_[pairIndex].spin_ << ' ' << spinRatePairs_[pairIndex].parity_ << ' '	<< std::scientific << cdf_[i].energy_ << ' ' <<  cdf_[i].value_ << std::endl;
   }
   out.flush();
   out.close();
