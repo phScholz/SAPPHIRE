@@ -33,6 +33,11 @@ class SapphireInput{
          * @brief Initialize default values
          */
         void Initialize();
+
+        /**
+        *   @brief Function which can be called from Sapphire.cpp to print out an example InputFile.
+        */
+        void Go(int argc, char* argv[]);
         
         /**
          * @brief Read ini file and set the variables
@@ -84,6 +89,7 @@ class SapphireInput{
         void ReactionFile(std::string x){reactionFile=x;}                   /**< Setter for string reactionFile*/
         void Suffix(std::string x){suffix=x;}                               /**< Setter for string module*/
         void Reaction(std::string x){reaction=x;}                    /**<Setter for reaction*/
+        void Isotope(std::string x){isotope=x;}                    /**<Setter for isotope*/
         
         void MassTable(std::string x){massTable=x;}                               /**< Setter for string module*/
         void GdrParams(std::string x){gdrParams=x;}                               /**< Setter for string module*/
@@ -122,6 +128,7 @@ class SapphireInput{
         std::string ReactionFile(){return reactionFile;}        /**<Getter for reactionFile*/
         std::string Suffix(){return suffix;}                    /**<Getter for suffix*/
         std::string Reaction(){return reaction;}                    /**<Getter for reaction*/
+        std::string Isotope(){return isotope;}                    /**<Getter for isotope*/
         
         std::string MassTable(){return massTable;}                    /**<Getter for massTable*/
         std::string GdrParams(){return gdrParams;}                    /**<Getter for gdrParams*/
@@ -164,6 +171,7 @@ class SapphireInput{
         std::string suffix;         /**< Suffix for output*/
         std::string reaction;         /**< String for reaction*/
         std::string energies;         /**< String for reaction*/
+        std::string isotope;        /**< String for the istope for the decay simulation*/
 
         std::string massTable;      /**< String for the path to the mass tables*/
         std::string gdrParams;      /**< String for the path to the GDR parameter file*/

@@ -17,6 +17,7 @@
 #include "Module_CrossSection.h"
 #include "Module_OldSapphire.h"
 #include "Module_Decayer.h"
+#include "SapphireInput.h"
 
 //#include "Setup.cpp"
 
@@ -35,11 +36,13 @@ void PrintHelp(){
   std::cout << std::endl;
   std::cout << " Supported modes:" << std::endl;
 	std::cout << std::endl;
-  std::cout << "\treaction      - Calculate reaction cross sections and/or rates" << std::endl;
-  std::cout << "\tdecayer       - Calculate Monte-Carlo statistical decay" << std::endl;
+  std::cout << "\treaction      - Calculate reaction cross sections and/or rates." << std::endl;
+  std::cout << "\tdecayer       - Calculate Monte-Carlo statistical decay." << std::endl;
+  std::cout << std::endl;
   std::cout << "\told           - Instruction for the old Sapphire code." << std::endl;
 	std::cout << std::endl;
-  std::cout << "\thelp          - Show this help message" << std::endl;
+  std::cout << "\thelp          - Show this help message." << std::endl;
+  std::cout << "\ttemplate      - Print template input file." << std::endl;
 	std::cout << std::endl;
   
 } 
@@ -72,6 +75,11 @@ int main(int argc, char *argv[]) {
   }
   else if (mode == "old"){
     Module_OldSapphire::Go(argc, argv);
+  }
+  else if (mode == "template"){
+    SapphireInput *input = new SapphireInput();
+    input->Go(argc,argv);
+    delete input;
   }
   else if (mode == "help")
     PrintHelp();

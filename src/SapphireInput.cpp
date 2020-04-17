@@ -25,6 +25,10 @@ extern std::string sourceDirectory();
         SapphireInput::Initialize();
     }
 
+    void SapphireInput::Go(int argc, char* argv[]){
+        SapphireInput::printIntputParameters();
+    }
+
     void SapphireInput::Initialize(){
         std::cout << "Setting default values..." << std::endl;
         SapphireInput::g_ExitStates(-1);
@@ -56,14 +60,15 @@ extern std::string sourceDirectory();
         SapphireInput::g_CutoffEnergy(10000.);
 
         SapphireInput::Reaction("25Mg+a");
-        SapphireInput::Energies("25Mg+a");
-        SapphireInput::EnergyFile("");
-        SapphireInput::ReactionFile("");
+        SapphireInput::EnergyFile("/examples/energyFile");
+        SapphireInput::ReactionFile("/examples/reactionFile");
+
         SapphireInput::MassTable(sourceDirectory()+"/tables/masses.dat");
         SapphireInput::GdrParams(sourceDirectory()+"/tables/ripl3_gdr_parameters.dat");
         SapphireInput::LevelDir(sourceDirectory()+"/levels/");
         SapphireInput::SpinFile(sourceDirectory()+"/tables/spinod.dat");
         
+        SapphireInput::Isotope("60Ni");
     }
 
     void SapphireInput::printIntputFile(std::string InputFile){
@@ -93,10 +98,12 @@ extern std::string sourceDirectory();
         std::cout << "\tGDRParams            = "             << SapphireInput::GdrParams() << std::endl;
         std::cout << "\tLeveldir             = "             << SapphireInput::LevelDir() << std::endl;
         std::cout << "\tSpinFile             = "             << SapphireInput::SpinFile() << std::endl;
-        std::cout << "\tprotonOMP            = "             << SapphireInput::p_Formalism() << std::endl;
-        std::cout << "\tneutronOMP           = "             << SapphireInput::n_Formalism() << std::endl;
-        std::cout << "\talphaOMP             = "             << SapphireInput::a_Formalism() << std::endl;
-        std::cout << "\tstrength             = "             << SapphireInput::g_Formalism() << std::endl;
+        std::cout << "\tProtonModel          = "             << SapphireInput::p_Formalism() << std::endl;
+        std::cout << "\tNeutronModel         = "             << SapphireInput::n_Formalism() << std::endl;
+        std::cout << "\tAlphaModel           = "             << SapphireInput::a_Formalism() << std::endl;
+        std::cout << "\tGammaModel           = "             << SapphireInput::g_Formalism() << std::endl;
+        std::cout << "\tPorterThomasParticle = "             << SapphireInput::PorterThomas_p() << std::endl;
+        std::cout << "\tPorterThomasGamma    = "             << SapphireInput::PorterThomas_g() << std::endl;
         
         std::cout << std::endl;
         std::cout << "\t[CrossSection]" << std::endl;
@@ -118,6 +125,7 @@ extern std::string sourceDirectory();
         std::cout << std::endl;
         std::cout << "\t[Decayer]" << std::endl;
         std::cout << "\tSuffix               = "             << SapphireInput::Suffix() << std::endl;
+        std::cout << "\tIsotope              = "             << SapphireInput::Isotope() << std::endl;
     }
 
     void SapphireInput::ReadInputFile(std::string InputFile){
@@ -140,8 +148,13 @@ extern std::string sourceDirectory();
         SapphireInput::GdrParams(pt.get<std::string>("General.GDRParams", SapphireInput::GdrParams()));
         SapphireInput::LevelDir(pt.get<std::string>("General.LevelDir", SapphireInput::LevelDir()));
         SapphireInput::SpinFile(pt.get<std::string>("General.SpinFile", SapphireInput::SpinFile()));
-        SapphireInput::SpinFile(pt.get<std::string>("General.SpinFile", SapphireInput::SpinFile()));
-        
+        SapphireInput::p_Formalism(pt.get<int>("General.ProtonModel", SapphireInput::p_Formalism()));
+        SapphireInput::n_Formalism(pt.get<int>("General.NeutronModel", SapphireInput::n_Formalism()));
+        SapphireInput::a_Formalism(pt.get<int>("General.AlphaModel", SapphireInput::a_Formalism()));
+        SapphireInput::g_Formalism(pt.get<int>("General.GammaModel", SapphireInput::g_Formalism()));
+        SapphireInput::PorterThomas_p(pt.get<bool>("General.PorterThomasParticle", SapphireInput::PorterThomas_p()));
+        SapphireInput::PorterThomas_g(pt.get<bool>("General.PorterThomasGamma", SapphireInput::PorterThomas_g()));
+
         //Reading CrossSection Input
         SapphireInput::Reaction(pt.get<std::string>("CrossSection.Reaction", SapphireInput::Reaction()));
         SapphireInput::Energies(pt.get<std::string>("CrossSection.Energies", SapphireInput::Energies()));
@@ -157,5 +170,6 @@ extern std::string sourceDirectory();
 
         //Reading Decayer Input
         SapphireInput::Suffix(pt.get<std::string>("Decayer.Suffix", SapphireInput::Suffix()));
+        SapphireInput::Isotope(pt.get<std::string>("Decayer.Isotope", SapphireInput::Isotope()));
     }
 
