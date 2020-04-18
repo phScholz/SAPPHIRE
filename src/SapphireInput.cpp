@@ -66,6 +66,12 @@ extern std::string sourceDirectory();
         
         SapphireInput::PreEq(false);
         SapphireInput::PreEqConf("");
+        SapphireInput::Spin(1.0);
+        SapphireInput::Parity(-1);
+        SapphireInput::LowEnergy(6.0);
+        SapphireInput::HighEnergy(6.0);
+        SapphireInput::Events(100000);
+        SapphireInput::ChunkSize(10000);
 
     }
 
@@ -136,6 +142,12 @@ extern std::string sourceDirectory();
         std::cout << "\t[Decayer]" << std::endl;
         std::cout << "\tSuffix               = "             << SapphireInput::Suffix() << std::endl;
         std::cout << "\tIsotope              = "             << SapphireInput::Isotope() << std::endl;
+        std::cout << "\tSpin                 = "             << SapphireInput::Spin() << std::endl;
+        std::cout << "\tParity               = "             << SapphireInput::Parity() << std::endl;
+        std::cout << "\tEnergyLow            = "             << SapphireInput::LowEnergy() << std::endl;
+        std::cout << "\tEnergyHigh           = "             << SapphireInput::HighEnergy() << std::endl;
+        std::cout << "\tEvents               = "             << SapphireInput::Events() << std::endl;
+        std::cout << "\tChunkSize            = "             << SapphireInput::ChunkSize() << std::endl;        
         std::cout << "\tPreequillibrium      = "             << SapphireInput::PreEq() << std::endl;
         std::cout << "\tPreEqConfiguration   = "             << SapphireInput::PreEqConf() << std::endl;
         std::cout << std::endl;
@@ -185,6 +197,13 @@ extern std::string sourceDirectory();
         //Reading Decayer Input
         SapphireInput::Suffix(pt.get<std::string>("Decayer.Suffix", SapphireInput::Suffix()));
         SapphireInput::Isotope(pt.get<std::string>("Decayer.Isotope", SapphireInput::Isotope()));
+        SapphireInput::Spin(pt.get<double>("Decayer.Spin", SapphireInput::Spin()));
+        SapphireInput::Parity(pt.get<double>("Decayer.Parity", SapphireInput::Parity()));
+        SapphireInput::LowEnergy(pt.get<double>("Decayer.EnergyLow", SapphireInput::LowEnergy()));
+        SapphireInput::HighEnergy(pt.get<double>("Decayer.EnergyHigh", SapphireInput::HighEnergy()));
+        SapphireInput::Events(pt.get<int>("Decayer.Events", SapphireInput::Events()));
+        SapphireInput::ChunkSize(pt.get<int>("Decayer.ChunkSize", SapphireInput::ChunkSize()));
+
         SapphireInput::PreEq(pt.get<bool>("Decayer.Preequillibrium", SapphireInput::PreEq()));
         SapphireInput::PreEqConf(pt.get<std::string>("Decayer.PreEqConfiguration", SapphireInput::PreEqConf()));
     }

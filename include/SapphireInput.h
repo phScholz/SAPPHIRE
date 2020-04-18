@@ -73,15 +73,23 @@ class SapphireInput{
         void n_ExitStates(int x){n_exitStates=x;}              /**<Setter for n_exitStates*/ 
         void p_ExitStates(int x){p_exitStates=x;}              /**<Setter for p_exitStates*/ 
         void a_ExitStates(int x){a_exitStates=x;}              /**<Setter for a_exitStates*/ 
-
         void g_Formalism(int x){g_formalism=x;}              /**<Setter for g_formalism*/
         void n_Formalism(int x){n_formalism=x;}              /**<Setter for n_formalism*/
         void p_Formalism(int x){p_formalism=x;}              /**<Setter for p_formalism*/
         void a_Formalism(int x){a_formalism=x;}              /**<Setter for a_formalism*/
+        void Events(int x){events=x;}              /**<Setter for events*/
+        void ChunkSize(int x){chunkSize=x;}              /**<Setter for chunkSize*/
+        void Parity(int x){parity=x;}              /**<Setter for parity*/
+        void PType(int x){pType=x;}              /**<Setter for pType*/
+        void MassNumber(int x){massNumber=x;}              /**<Setter for massNumber*/
+        void ChargeNumber(int x){chargeNumber=x;}              /**<Setter for chargeNumber*/
         
         void DecayerMaxL(double x){decayerMaxL=x;}              /**<Setter for decayerMaxL*/ 
-        void PreEqMaxL(double x){preEqMaxL=x;}              /**<Setter for preEqMaxL*/ 
-        void g_CutoffEnergy(double x){g_cutoffEnergy=x;}    /**<Setter for g_CutoffEnergy*/ 
+        void PreEqMaxL(double x){preEqMaxL=x;}                  /**<Setter for preEqMaxL*/ 
+        void g_CutoffEnergy(double x){g_cutoffEnergy=x;}        /**<Setter for g_CutoffEnergy*/ 
+        void LowEnergy(double x){lowEnergy=x;}                 /**<Setter for lowEnergy*/ 
+        void HighEnergy(double x){highEnergy=x;}                /**<Setter for highEnergy*/ 
+        void Spin(double x){spin=x;}                            /**<Setter for spin*/        
 
         void EnergyFile(std::string x){energyFile=x;}                       /**< Setter for string energyFile*/
         void Energies(std::string x){energies=x;}                       /**< Setter for string energies*/
@@ -89,8 +97,7 @@ class SapphireInput{
         void Suffix(std::string x){suffix=x;}                               /**< Setter for string module*/
         void Reaction(std::string x){reaction=x;}                    /**<Setter for reaction*/
         void Isotope(std::string x){isotope=x;}                    /**<Setter for isotope*/
-        void PreEqConf(std::string x){preEqConf=x;}                    /**<Setter for preEqConf*/
-        
+        void PreEqConf(std::string x){preEqConf=x;}                    /**<Setter for preEqConf*/        
         void MassTable(std::string x){massTable=x;}                               /**< Setter for string module*/
         void GdrParams(std::string x){gdrParams=x;}                               /**< Setter for string module*/
         void LevelDir(std::string x){levelDir=x;}                               /**< Setter for string module*/
@@ -114,15 +121,23 @@ class SapphireInput{
         int n_ExitStates(){return n_exitStates;}              /**<Getter for n_exitStates*/ 
         int p_ExitStates(){return p_exitStates;}              /**<Getter for p_exitStates*/ 
         int a_ExitStates(){return a_exitStates;}              /**<Getter for a_exitStates*/ 
-
         int g_Formalism(){return g_formalism;}              /**<Getter for g_formalism*/ 
         int n_Formalism(){return n_formalism;}              /**<Getter for n_formalism*/ 
         int p_Formalism(){return p_formalism;}              /**<Getter for p_formalism*/ 
         int a_Formalism(){return a_formalism;}              /**<Getter for a_formalism*/ 
+        int Events(){return events;}              /**<Getter for events*/ 
+        int ChunkSize(){return chunkSize;}              /**<Getter for chunkSize*/ 
+        int Parity(){return parity;}                    /**<Getter for parity*/
+        int PType(){return pType;}                      /**<Getter for pType*/
+        int ChargeNumber(){return chargeNumber;}        /**<Getter for chargeNumber*/
+        int MassNumber(){return massNumber;}        /**<Getter for massNumber*/
 
         double DecayerMaxL(){return decayerMaxL;}              /**<Getter for decayerMaxL*/
         double PreEqMaxL(){return preEqMaxL;}              /**<Getter for preEqMaxL*/ 
         double g_CutoffEnergy(){return g_cutoffEnergy;}    /**<Getter for g_CutoffEnergy*/ 
+        double LowEnergy(){return lowEnergy;}              /**<Getter for lowEnergy*/ 
+        double HighEnergy(){return highEnergy;}             /**<Getter for highEnergy*/ 
+        double Spin(){return spin;}                         /**<Getter for spin*/
 
         std::string EnergyFile(){return energyFile;}            /**<Getter for energyFile*/ 
         std::string Energies(){return energies;}            /**<Getter for energies*/ 
@@ -130,9 +145,7 @@ class SapphireInput{
         std::string Suffix(){return suffix;}                    /**<Getter for suffix*/
         std::string Reaction(){return reaction;}                    /**<Getter for reaction*/
         std::string Isotope(){return isotope;}                    /**<Getter for isotope*/
-        std::string PreEqConf(){return preEqConf;}                    /**<Getter for preEqConf*/
-        
-        
+        std::string PreEqConf(){return preEqConf;}                    /**<Getter for preEqConf*/        
         std::string MassTable(){return massTable;}                    /**<Getter for massTable*/
         std::string GdrParams(){return gdrParams;}                    /**<Getter for gdrParams*/
         std::string LevelDir(){return levelDir;}                    /**<Getter for levelDir*/
@@ -146,7 +159,7 @@ class SapphireInput{
         bool residualNeutron;      /**< Bool if residual cross section for neutron should be calculated*/
         bool residualProton;       /**< Bool if residual cross section for proton should be calculated*/
         bool residualAlpha;        /**< Bool if residual cross section for alpha should be calculated*/
-        bool calculateGammaCutoff; /**< */
+        bool calculateGammaCutoff; /**< Bool if the GammaCutoffenergy should be calculated or not.*/
         bool porterThomas_g;             /**< Bool for PorterThomas usage gamma*/  
         bool porterThomas_p;           /**< Bool for PorterThomas usage particle*/
         bool printTrans;            /**< Bool if transmission should be printed*/
@@ -157,18 +170,24 @@ class SapphireInput{
         int n_exitStates;           /**< Int for the number of exitStates for neutron residual**/
         int p_exitStates;           /**< Int for the number of exitStates for proton residual**/
         int a_exitStates;           /**< Int for the number of exitStates for alpha residual**/
-
         int n_formalism;            /**< Choose neutron OMP*/
         int a_formalism;            /**< Choose alpha OMP*/
         int p_formalism;            /**< Choose proton OMP*/
         int g_formalism;            /**< Choose gamma strength function*/
+        int events;                 /**< Number of decays*/
+        int chunkSize;              /**< Portion of the total numbers of decays which is calculated at once.*/
+        int parity;                     /**< Parity of the high energy resonance*/
+        int pType;                  /**< Type of projectile*/
+        int chargeNumber;                      /**< Charge number*/
+        int massNumber;                      /**< Mass number*/
 
         double decayerMaxL;            /**< Maximum l-value for the decayer*/
         double preEqMaxL;            /**< Maximum l-value for the preEq*/
-
         double g_cutoffEnergy;       /**< Double for the Gamma Cutoff energy*/
-
-        
+        double lowEnergy;           /**< lower limit for initial energy*/
+        double highEnergy;          /**< higher limit for initial energy*/
+        double spin;                /**< Spin of the decaying resonance*/
+                
         std::string energyFile;     /**< String with the path to the energyFile*/
         std::string reactionFile;   /**< String with the path to the reactionFile*/
         std::string suffix;         /**< Suffix for output*/
@@ -176,7 +195,6 @@ class SapphireInput{
         std::string energies;         /**< String for reaction*/
         std::string isotope;        /**< String for the istope for the decay simulation*/
         std::string preEqConf;      /**< Preequillibrium exciton configuration of the initial state (pp,ph,np,nh)*/
-
         std::string massTable;      /**< String for the path to the mass tables*/
         std::string gdrParams;      /**< String for the path to the GDR parameter file*/
         std::string levelDir;       /**< String for the path to the levels directory*/
