@@ -7,6 +7,8 @@
  */
 
 #include "SapphireInput.h"
+#include "NuclearMass.h"
+
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/exception/all.hpp>
@@ -15,11 +17,12 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <sstream>
 #include <stdexcept>
 #include <vector>
 
 
-extern std::string sourceDirectory();
+    extern std::string sourceDirectory();
    
     SapphireInput::SapphireInput(){
         SapphireInput::Initialize();
@@ -53,7 +56,7 @@ extern std::string sourceDirectory();
         SapphireInput::DecayerMaxL(8.);
         SapphireInput::PreEqMaxL(8.);
         SapphireInput::g_CutoffEnergy(10000.);
-        SapphireInput::Reaction("25Mg+a");
+        SapphireInput::Reaction("25Mg+a");        
         SapphireInput::EnergyFile("/examples/energyFile");
         SapphireInput::ReactionFile("/examples/reactionFile");
         SapphireInput::MassTable(sourceDirectory()+"/tables/masses.dat");
@@ -206,3 +209,109 @@ extern std::string sourceDirectory();
         SapphireInput::PreEqConf(pt.get<std::string>("Decayer.PreEqConfiguration", SapphireInput::PreEqConf()));
     }
 
+    std::string SapphireInput::pTypeStringFromReactionString(std::string reactionString){
+        std::string massNumberString=SapphireInput::massNumberStringFromReactionString(reactionString);
+        std::string atomicNumberString=SapphireInput::atomicNumberStringFromReactionString(reactionString);
+
+        reactionString.erase(0,massNumberString.length());
+        reactionString.erase(0,atomicNumberString.length());
+      
+        std::string projectileString;
+        for(unsigned int i = 0; i<reactionString.length(); i++) {
+            std::string nextChar(reactionString,i,1);
+            if(nextChar=="+") continue;
+            else projectileString+=nextChar;
+        }
+
+        return projectileString;
+    }
+
+    int SapphireInput::pTypeIntFromReactionString(std::string reactionString){
+        std::string projectileString = SapphireInput::pTypeStringFromReactionString(reactionString);
+
+        if(projectileString=="g")
+            return 0;
+        else if(projectileString=="n") 
+            return 1;      
+        else if(projectileString=="p")
+            return 2;
+        else if(projectileString=="a")
+            return 3;
+        
+        /** Return "neutron" by default*/
+        return 1;
+    }
+
+    std::string SapphireInput::massNumberStringFromReactionString(std::string reactionString){
+        std::string massNumberS;
+        for(unsigned int i = 0; i<reactionString.length(); i++) {
+            std::string nextChar(reactionString,i,1);
+            std::istringstream stm(nextChar);
+            int nextDigit;
+            if(!(stm>>nextDigit)) break;
+                else massNumberS+=nextChar;
+        }
+
+        return massNumberS;
+    }
+
+    int SapphireInput::massNumberIntFromReactionString(std::string reactionString){
+        std::string massNumberS = SapphireInput::massNumberStringFromReactionString(reactionString);
+        if(massNumberS.length()>0)
+            return atoi(massNumberS.c_str());
+        else
+            return 0;
+    }
+
+    std::string SapphireInput::atomicNumberStringFromReactionString(std::string reactionString){
+        std::string massNumberS = SapphireInput::massNumberStringFromReactionString(reactionString);
+        reactionString.erase(0,massNumberS.length());
+        std::string atomicNumberString;
+        for(unsigned int i = 0; i<reactionString.length(); i++) {
+            std::string nextChar(reactionString,i,1);
+            if(nextChar=="+") break;
+                else atomicNumberString+=nextChar;
+            }        
+        return atomicNumberString;
+    }
+
+    int SapphireInput::atomicNumberIntFromReactionString(std::string reactionString){
+        std::string atomicNumberString = SapphireInput::atomicNumberStringFromReactionString(reactionString);
+        if(NuclearMass::FindZ(atomicNumberString) != -1) 
+            return NuclearMass::FindZ(atomicNumberString);
+        else
+            return 0;
+    }
+
+    std::string SapphireInput::massNumberStringFromIsotopeString(std::string isotopeString){
+        std::string massNumberString;
+
+        for(unsigned int i = 0; i<isotopeString.length(); i++) {
+      	    std::string nextChar(isotopeString,i,1);
+            std::istringstream stm(nextChar);
+            int nextDigit;
+            if(!(stm>>nextDigit)) break;
+            else massNumberString+=nextChar;
+      }
+      return massNumberString;
+    }
+
+    int SapphireInput::massNumberIntFromIsotopeString(std::string isotopeString){
+        std::string massNumberString = SapphireInput::massNumberStringFromIsotopeString(isotopeString);
+        if(massNumberString.length()>0)
+            return atoi(massNumberString.c_str());
+        else
+            return 0;
+    }
+
+    std::string SapphireInput::atomicNumberStringFromIsotopeString(std::string isotopeString){
+        std::string massNumberString = SapphireInput::massNumberStringFromIsotopeString(isotopeString);
+        std::string atomicNumberString = isotopeString.substr(massNumberString.length());
+        return atomicNumberString;
+    }
+
+    int SapphireInput::atomicNumberIntFromIsotopeString(std::string isotopeString){
+        std::string atomicNumberString = SapphireInput::atomicNumberStringFromIsotopeString(isotopeString);
+        int Z = NuclearMass::FindZ(atomicNumberString);
+        return Z;
+    }

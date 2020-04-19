@@ -23,14 +23,35 @@ namespace Module_CrossSection{
         int pType_;
     } EntrancePairs;
 
-    void Go(int argc,char *argv[]); /**< Top level function to call from main*/
-    void Run(const SapphireInput & input); /**< Declaration of the main function of the CrossSection Module*/
-
-    void RunSingleReaction(const SapphireInput & input);
-    void RunSingleReaction(std::string reactionfile);
+    /** 
+    *   @brief Top level function to call from main for the reaction Module.
+    *   @param argc Number of cmd line parameters of Sapphire.
+    *   @param argv The array which contains the cmd line parameters of Sapphire.
+    */
+    void Go(int argc,char *argv[]); 
 
     /**
-     * @brief method to read in the Entrance Pairs given in the reactionFile
+    *   @brief Function to perform cross section calculations on the basis of a SapphireInput object.
+    *   @param input This is a SapphireInput object which should contain all parameters for the calculation of the cross section.
+    */
+    void Run(const SapphireInput & input); 
+
+    /**
+    *   @brief Function to perform a single reaction cross section calculations on the basis of a SapphireInput object.
+    *   @param input This is a SapphireInput object which should contain all parameters for the calculation of the cross section.
+    */
+    void RunSingleReaction(const SapphireInput & input);
+
+    /**
+    *   @brief Function to perform a single reaction cross section calculations on the basis of a reactionString with default parameters.
+    *   @param reactionString This is a std::string object which contains the reaction in a format similar to "60Fe+p".
+    */
+    void RunSingleReaction(std::string reactionString);
+
+    /**
+     * @brief Method to read in the Entrance Pairs given in the reactionFile
+     * @param entrancePair A std::vector object which contains entrancePairs
+     * @param reactionFile The file which contains a list of target charge and mass, as well as projectile type.
      */
     void readEntrancePairs(std::vector<EntrancePairs> & entrancePairs, std::string reactionFile);
 
@@ -41,7 +62,7 @@ namespace Module_CrossSection{
 
     /**
      * @brief Check wheter a string represents an actual file.
-     * @param filename String whith the supposedly path to a file.
+     * @param filename String with the supposedly path to a file.
      * @return True if the file exists; False if it doesn't.
      */
     bool fexists(const char *filename);
@@ -88,5 +109,8 @@ namespace Module_CrossSection{
      */
     int atomicNumberIntFromString(std::string reactionString);
 
+    /**
+    *   @brief Funtion to print out the help information for the reaction module.
+    */
     void printHelp();
 }

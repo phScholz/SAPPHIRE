@@ -13,26 +13,24 @@
 #include <gsl/gsl_integration.h>
 #include <TGraph.h>
 #include <algorithm>
+#include "SapphireInput.h"
 
-/* CrossSection::CrossSection_simple(int Z, int A, int pType, std::string energyFile, bool forRates, int entranceState, std::vector<int> exitStates)
-{ 
-  // FindLevels in the levels data table 
-  std::vector<Level> knownLevels = NuclearLevels::FindLevels(Z,A);
-
-  if(!knownLevels.size()>entranceState){
-    std::cout << "Initial state not known." << std::endl;
-  }
-
-
-
+CrossSection::CrossSection(SapphireInput & input){
+  
 }
- */
+
+bool FindInitialState(SapphireInput & input){
+  //std::vector<Level> knownLevels = NuclearLevels::FindLevels()
+}
+
 CrossSection::CrossSection(int Z, int A, int pType, std::string energyFile, bool forRates,
 			   int entranceState, std::vector<int> exitStates) : 
   Z_(Z), A_(A), pType_(pType), skipEnergy_(1000.), entranceState_(entranceState), exitStates_(exitStates) {
 
+  /** The groundState is set to -1.*/
   groundStateJ_ =-1.;
   
+  /** The levels of the target nucleus are read via the NuclearLevels::FindLevels() method into a std::vector<Level>*/
   std::vector<Level> knownLevels = NuclearLevels::FindLevels(Z,A);
   
   if(knownLevels.size()>entranceState) {

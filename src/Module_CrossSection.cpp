@@ -254,6 +254,7 @@ namespace Module_CrossSection{
     }
 
     void RunSingleReaction(std::string reactionString){
+        /** This method will invoke a cross section calculation for a reaction given as reactionString .*/
         int A = massNumberIntFromString(reactionString);
         int Z = atomicNumberIntFromString(reactionString);
         int pType = pTypeIntFromString(reactionString);
@@ -278,27 +279,31 @@ namespace Module_CrossSection{
     }
 
     void Go(int argc,char *argv[]){
+         
+        /** At the beginning of the Go() method a clock is started for the measurement of the total calculation time.*/
         auto start = std::chrono::steady_clock::now();
         std::cout << "Module: reaction" << std::endl;
         std::cout << std::endl;
-
+        /** It'll be checked, whether enough cmd line parameters are given, otherwise the printHelp() method is called. */
         if(argc < 3){
             printHelp();
             exit(0);
         }
-        
+        /** If enough cmd line parameters are given, then it'll be checked if the inputFile given is an actual file.*/
         if(fexists(argv[2])){              
+            /** If the inputFile can be found, a SapphireInput object is created, the inputFile will be printed out
+            * via SapphireInput::printInputFile() and the content will be read into the SapphireInput object via
+            * SapphireInput::ReadInputFile().
+            */
             SapphireInput Input;    
             std::string str(argv[2]);
             Input.printIntputFile(str);
             Input.ReadInputFile(str);
             
-
-            /*Defined in Setup.cpp ... Should not be in another file*/
-            //ElementTable NuclearMass::elementTable_; 
-            //MassTable NuclearMass::massTable_;
-            //GDRTable GammaTransmissionFunc::gdrTable_;
-            //LevelsTable NuclearLevels::levelsTable_;
+            /** The next step is to test if a single reaction calculation, or a calculations for reactions given in a
+            * reactionFile need to be performed. If the reactionFile is a actual file, the calculation continues with Run().
+            * If the reactionFile is not a regular file, then the calculations will be performed with RunSingleReaction().
+            * This means, if both keywords are set, the reactionFile option will overwrite the reaction keyword. */
 
             if(fexists(Input.ReactionFile().c_str()))
             {
@@ -315,9 +320,15 @@ namespace Module_CrossSection{
                      
         }
         else{
+            /** If no regular inputFile is given in the first place, the code assumes that the cmd line parameter is a
+            * reactionString. In this case RunSingleReaction will be called by passing the cmd line parameter.*/
             RunSingleReaction(argv[2]);
         }
 
+        /** At the end of the Go() method, the clock is stopped and the total calculation time is printed to std::cout.
+        * 
+        * ---
+        */
         auto end = std::chrono::steady_clock::now();
         std::chrono::duration<double> elapsed_seconds = end-start;
         std::cout << std::endl << "Total calculation time: " << elapsed_seconds.count() << "s\n";

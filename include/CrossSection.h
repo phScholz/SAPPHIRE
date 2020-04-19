@@ -3,6 +3,7 @@
 #include <vector>
 #include <map>
 #include <string>
+#include "SapphireInput.h"
 #pragma once
 class Decayer;
 class SpinRatePair;
@@ -34,11 +35,9 @@ class CrossSectionValues {
 class CrossSection {
  public:
   CrossSection(int,int,int,std::string,bool,int entranceState = 0, std::vector<int> exitStates = std::vector<int>(4,-1));
-  void CrossSection_simple(int,int,int,std::string,bool,int entranceState = 0, std::vector<int> exitStates = std::vector<int>(4,-1));
+  CrossSection(SapphireInput & input);
 
-  bool IsValid() const {
-    return isValid_;
-  }
+  bool IsValid() const {return isValid_;}
 
   void Calculate();
   void PrintCrossSections();
@@ -60,8 +59,17 @@ class CrossSection {
   bool FillEnergies(std::string);
   bool CalcAllowedJPi(bool);
   bool CalcDecayerVector(double,DecayerVector&,bool forAverageWidth=false);
+  
+  /**
+  * @brief Method to find the attributes of the entrance state and pass them to private member variables by reference.
+  * @param entranceState The number of the intial state in the levelscheme of the target nucleus.
+  * @return True or false depending on if the initial state is known or not.
+  */
+  bool FindInitalState(SapphireInput & input);
+
   void CalculateEnergyGrid();
   void CalcPartitionFunc();
+
  private:
   static bool residualGamma_;
   static bool residualNeutron_;

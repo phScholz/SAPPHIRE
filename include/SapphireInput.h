@@ -56,6 +56,76 @@ class SapphireInput{
          */
         void printIntputParameters();
 
+        /**
+         * @brief Get the massNumberString from the reactionString.
+         * @param reactionString A string from the cmd line which represents the reaction, e.g., 60Fe+p
+         * @returns The mass number part of the reactionString, e.g. "60"
+         */
+        std::string massNumberStringFromReactionString(std::string reactionString);
+
+        /**
+         * @brief Get the massNumberInt from the reactionString.
+         * @param reactionString A string from the cmd line which represents the reaction, e.g., 60Fe+p
+         * @returns The mass number part of the reactionString, e.g. 60, if successful. Otherwise returns 0.
+         */
+        int massNumberIntFromReactionString(std::string reactionString);
+
+        /**
+         * @brief Get the pTypeString from the reactionString.
+         * @param reactionString A string from the cmd line which represents the reaction, e.g., 60Fe+p
+         * @returns The pType part of the reactionString, e.g. "p"
+         */
+        std::string pTypeStringFromReactionString(std::string reactionString);
+
+        /**
+         * @brief Get a projectile integer from a projectile string
+         * @param projectileString The part of the reactionString which defines the projectile.
+         * @return Integer which represents the pType: 0 = gamma, 1 = neutron, 2 = proton, 3 = alpha.
+         */
+        int pTypeIntFromReactionString(std::string reactionString);
+
+        /**
+         * @brief Get the atomic number as string from reactionString.
+         * @param reactionString A string from the cmd line which represents the reaction, e.g., 60Fe+p
+         * @returns The atomic number part of the reactionString, e.g. Fe
+        */
+        std::string atomicNumberStringFromReactionString(std::string reactionString);
+
+        /**
+         * @brief Get the atomic number as int from reactionString.
+         * @param reactionString A string from the cmd line which represents the reaction, e.g., 60Fe+p
+         * @returns The atomic number part of the reactionString, e.g. 28 other wise returns 0.
+         */
+        int atomicNumberIntFromReactionString(std::string reactionString);
+
+        /**
+         * @brief Get the atomic number as string from isotopeString.
+         * @param isotopeString A string from the cmd line which represents the reaction, e.g., 60Fe+p
+         * @returns The atomic number part of the isotopeString, e.g. Fe
+         */
+        std::string atomicNumberStringFromIsotopeString(std::string isotopeString);
+
+        /**
+         * @brief Get the atomic number as int from isotopeString.
+         * @param isotopeString A string from the cmd line which represents the reaction, e.g., 60Fe+p
+         * @returns The atomic number part of the isotopeString, e.g. 28 other wise returns 0.
+         */
+        int atomicNumberIntFromIsotopeString(std::string isotopeString);
+
+        /**
+         * @brief Get the massNumberString from the isotopeString.
+         * @param isotopeString A string from the cmd line which represents the reaction, e.g., 60Fe+p
+         * @returns The mass number part of the isotopeString, e.g. "60"
+         */
+        std::string massNumberStringFromIsotopeString(std::string isotopeString);
+
+        /**
+         * @brief Get the massNumberInt from the isotopeString.
+         * @param isotopeString A string from the cmd line which represents the reaction, e.g., 60Fe+p
+         * @returns The mass number part of the isotopeString, e.g. 60, if successful. Otherwise returns 0.
+         */
+        int massNumberIntFromIsotopeString(std::string isotopeString);
+
         //Setter
         void CalcRates(bool x){calcRates=x;}                         /**< Setter for bool calcRates*/
         void CalcAverageWidth(bool x){calcAverageWidth=x;}           /**< Setter for bool calcAverageWidth*/
@@ -81,9 +151,11 @@ class SapphireInput{
         void ChunkSize(int x){chunkSize=x;}              /**<Setter for chunkSize*/
         void Parity(int x){parity=x;}              /**<Setter for parity*/
         void PType(int x){pType=x;}              /**<Setter for pType*/
-        void MassNumber(int x){massNumber=x;}              /**<Setter for massNumber*/
-        void ChargeNumber(int x){chargeNumber=x;}              /**<Setter for chargeNumber*/
         void Suffix(int x){suffix=x;}                               /**< Setter for string module*/
+        void XsZ(int x) {xsZ=x;}                    /**<Setter for xsZ*/
+        void XsA(int x) {xsA=x;}                    /**<Setter for xsA*/
+        void DcZ(int x) {dcZ=x;}                    /**<Setter for dcZ*/
+        void DcA(int x) {dcA=x;}                    /**<Setter for dcA*/
 
         void DecayerMaxL(double x){decayerMaxL=x;}              /**<Setter for decayerMaxL*/ 
         void PreEqMaxL(double x){preEqMaxL=x;}                  /**<Setter for preEqMaxL*/ 
@@ -95,10 +167,19 @@ class SapphireInput{
         void EnergyFile(std::string x){energyFile=x;}                       /**< Setter for string energyFile*/
         void Energies(std::string x){energies=x;}                       /**< Setter for string energies*/
         void ReactionFile(std::string x){reactionFile=x;}                   /**< Setter for string reactionFile*/
-        void Reaction(std::string x){reaction=x;}                    /**<Setter for reaction*/
-        void Isotope(std::string x){isotope=x;}                    /**<Setter for isotope*/
-        void PreEqConf(std::string x){preEqConf=x;}                    /**<Setter for preEqConf*/        
-        void MassTable(std::string x){massTable=x;}                               /**< Setter for string module*/
+        void Reaction(std::string x){                                   /**<Setter for reaction*/
+            reaction=x; 
+            PType(pTypeIntFromReactionString(x));
+            XsZ(atomicNumberIntFromReactionString(x));
+            XsA(massNumberIntFromReactionString(x));
+        }
+        void Isotope(std::string x){                    /**<Setter for isotope*/
+            isotope=x;
+            DcZ(atomicNumberIntFromIsotopeString(x));
+            DcA(massNumberIntFromIsotopeString(x));
+        }
+        void PreEqConf(std::string x){preEqConf=x;}                /**<Setter for preEqConf*/        
+        void MassTable(std::string x){massTable=x;}                /**< Setter for string module*/
         void GdrParams(std::string x){gdrParams=x;}                               /**< Setter for string module*/
         void LevelDir(std::string x){levelDir=x;}                               /**< Setter for string module*/
         void SpinFile(std::string x){spinFile=x;}                               /**< Setter for string module*/
@@ -129,9 +210,13 @@ class SapphireInput{
         int ChunkSize() const {return chunkSize;}              /**<Getter for chunkSize*/ 
         int Parity() const {return parity;}                    /**<Getter for parity*/
         int PType() const {return pType;}                      /**<Getter for pType*/
-        int ChargeNumber() const {return chargeNumber;}        /**<Getter for chargeNumber*/
-        int MassNumber() const {return massNumber;}        /**<Getter for massNumber*/
         int Suffix() const {return suffix;}                    /**<Getter for suffix*/
+        int XsZ() const {return xsZ;}                    /**<Getter for xsZ*/
+        int XsA() const {return xsA;}                    /**<Getter for xsA*/
+        int DcZ() const {return dcZ;}                    /**<Getter for dcZ*/
+        int DcA() const {return dcA;}                    /**<Getter for dcA*/
+
+        
 
         double DecayerMaxL() const {return decayerMaxL;}              /**<Getter for decayerMaxL*/
         double PreEqMaxL() const {return preEqMaxL;}              /**<Getter for preEqMaxL*/ 
@@ -161,8 +246,8 @@ class SapphireInput{
         bool residualProton;       /**< Bool if residual cross section for proton should be calculated*/
         bool residualAlpha;        /**< Bool if residual cross section for alpha should be calculated*/
         bool calculateGammaCutoff; /**< Bool if the GammaCutoffenergy should be calculated or not.*/
-        bool porterThomas_g;             /**< Bool for PorterThomas usage gamma*/  
-        bool porterThomas_p;           /**< Bool for PorterThomas usage particle*/
+        bool porterThomas_g;       /**< Bool for PorterThomas usage gamma*/  
+        bool porterThomas_p;       /**< Bool for PorterThomas usage particle*/
         bool printTrans;            /**< Bool if transmission should be printed*/
         bool preEq;                 /**< Bool for preEq.*/
 
@@ -177,11 +262,15 @@ class SapphireInput{
         int g_formalism;            /**< Choose gamma strength function*/
         int events;                 /**< Number of decays*/
         int chunkSize;              /**< Portion of the total numbers of decays which is calculated at once.*/
-        int parity;                     /**< Parity of the high energy resonance*/
+        int parity;                 /**< Parity of the high energy resonance*/
         int pType;                  /**< Type of projectile*/
-        int chargeNumber;                      /**< Charge number*/
-        int massNumber;                      /**< Mass number*/
-        int suffix;         /**< Suffix for output*/
+        int chargeNumber;           /**< Charge number*/
+        int massNumber;             /**< Mass number*/
+        int suffix;                 /**< Suffix for output*/
+        int xsZ;                    /** Integer for the charge number of the isotope in reaction module*/
+        int xsA;                    /** Integer for the mass number of the isotope in reaction module*/
+        int dcZ;                    /** Integer for the charge number of the isotope in decayer module*/
+        int dcA;                    /** Integer for the mass number of the isotope in decayer module*/
 
         double decayerMaxL;            /**< Maximum l-value for the decayer*/
         double preEqMaxL;            /**< Maximum l-value for the preEq*/
