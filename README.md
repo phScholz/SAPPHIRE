@@ -52,7 +52,7 @@ Compiling Sapphire requires
 
 Check the find_packages in `cmake/Modules` whether cmake is looking for these packages in the right place if cmake cannot find them.
 
-For an `automized generation of documentation files`, one needs [doxygen](http://doxygen.nl/) installed on the system. If its not installed, documentation is not automatically generated. 
+For an `automatix generation of documentation files`, one needs [doxygen](http://doxygen.nl/) installed on the system. If its not installed, documentation is not automatically generated. 
 
 ### Build
 #### Automatically
@@ -125,7 +125,7 @@ For a more detailed calculations, one should use the possibility to parse an inp
 ./sapphire reaction inputFile.ini
 ```
 
-The file `inputFile.ini` will be parsed by the [Boost.PropertyTree](https://www.boost.org/doc/libs/1_72_0/doc/html/property_tree.html) library. The gneral format and keyword descriptions can be found [here](INPUTFILE.md).
+The file `inputFile.ini` will be parsed by the [Boost.PropertyTree](https://www.boost.org/doc/libs/1_72_0/doc/html/property_tree.html) library. The gneral format and keyword descriptions can be found in [INPUTFILE.md](INPUTFILE.md).
 
 
 ### decayer

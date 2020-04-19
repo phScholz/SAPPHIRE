@@ -9,9 +9,15 @@ class TransitionRateFunc;
 class SpinRatePair {
  public:
  SpinRatePair(int Z, int A, double spin, int parity, double qValue,
-	      TransitionRateFunc* rateFunc, double integral) :
-  Z_(Z), A_(A), rateFunc_(rateFunc),parity_(parity),spin_(spin),
-  qValue_(qValue),integral_(integral) {};
+	      TransitionRateFunc* rateFunc, double integral){
+          Z_=Z;
+          A_=A;
+          parity_=parity;
+          spin_=spin;
+          qValue_=qValue;
+          rateFunc_=rateFunc;
+          integral_=integral;
+        };
  TransitionRateFunc* rateFunc_;
  int Z_;
  int A_;

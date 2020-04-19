@@ -18,7 +18,7 @@ namespace Module_Decayer{
     std::string massNumberStringFromString(std::string isotopeString){
         std::string massNumberString;
 
-        for(int i = 0; i<isotopeString.length(); i++) {
+        for(unsigned int i = 0; i<isotopeString.length(); i++) {
       	    std::string nextChar(isotopeString,i,1);
             std::istringstream stm(nextChar);
             int nextDigit;
@@ -100,6 +100,11 @@ namespace Module_Decayer{
     }
     
     void Run(const SapphireInput &input){
+        /**
+        * At first the parameters needed to be initialized for the old Sapphire code
+        * are obtained from the SapphireInput object passed by reference to the Module_Decayer::Run()
+        * method.
+        */
         Decayer::SetCrossSection(false);
         int chunkSize = input.ChunkSize();
         int A = massNumberIntFromString(input.Isotope());
@@ -116,7 +121,18 @@ namespace Module_Decayer{
         int numNuHoles =0;
         int numNuParticles =0;
 
+        /**
+        *   Because of the "segmentation fault on more than 10 threads" bug,
+        *   the system is asked via omp_get_max_threads() what the maximum numbers of threads are.
+        *   If this value is larger than 10, then the maximum number of threads used for the calculation
+        *   is fixed at 10 to prevent the "segmentation fault" bug. 
+        *   Once this issue is fixed, this can be removed.
+        */
         if(omp_get_max_threads() > 10) omp_set_num_threads(10);
+
+        /**
+        *   In a next step, the input parameters for the Decayer are printed to std::ccout.
+        */
 
         std::cout << "Input Values For Parent Nucleus:" << std::endl
   	    << std::setw(15) << "Z:"             << std::setw(12) << Z          
@@ -136,13 +152,21 @@ namespace Module_Decayer{
         << std::setw(15) << "chunk size:"    << std::setw(12) << chunkSize     
   	    << std::setw(0) << std::endl << std::endl;
 
+        /**
+        * If the number of events is not a multiple of the chunkSize,
+        * then the number of remainder is calculated from the modulo.
+        * The number of maximum chunks is then derived from the ratio (events-remainder)/chunkSize.
+        */
         int remainder = events%chunkSize;
         int chunks = (events-remainder)/chunkSize;
+
+        /**
+        * For the Monte-Carlo decay, a unsigned int randomSeed[12] array is initialized.
+        */
         unsigned int randomSeed[12];
 
         std::cout << "Starting Decay Simulation..." << std::endl;
 
-        int numDecayed = 0; /** Initialize the counting of decays.*/
         DecayResults* results = NULL;
         if(events>1) results = new DecayResults(Z,A,J,Pi,lowEnergy,highEnergy,suffixNo);
         
@@ -162,14 +186,11 @@ namespace Module_Decayer{
               std::cout << "Decay of " << numInChunk << " nuclei started ..." << std::endl;
             std::vector<std::pair<DecayData,std::vector<DecayProduct> > > chunkResults;
             chunkResults.resize(numInChunk);
-            /**
-             * Using Open Multiprocessing (OMP) for the parallel execution of the following for-loop.
-             * Nice.
-             */
             
-
-
-
+            /**
+            *   Now a ProgressBar object is generated from Progressbar.h, initialized with numInChunk, which ist the 
+            *   number of decays in the current chunk.
+            */
             ProgressBar pg;
             pg.start(numInChunk); 
 
@@ -177,15 +198,7 @@ namespace Module_Decayer{
             #pragma omp parallel for
             for(int j = 0;j<numInChunk;j++) {
                 
-                //std::this_thread::sleep_for(std::chrono::seconds(1));
-                int localNumDecayed = numDecayed++;
-
-                //if(localNumDecayed%(events/20)==0&&localNumDecayed>0){
-                  //if(j%(numInChunk/20)==0)
-                    pg.update(j);
-                //std::cout << "Decayed " << localNumDecayed 
-	    	        //  << " of " << events << " nuclei..." << std::endl;
-                //}
+                pg.update(j);
                 double energy = (lowEnergy==highEnergy) ? lowEnergy :
     
                 lowEnergy+(highEnergy-lowEnergy)*double(rand_r(&randomSeed[omp_get_thread_num()]))/double(RAND_MAX);

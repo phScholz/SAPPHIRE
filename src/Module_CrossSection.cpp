@@ -35,7 +35,7 @@ namespace Module_CrossSection{
         reactionString.erase(0,atomicNumberString.length());
       
         std::string projectileString;
-        for(int i = 0; i<reactionString.length(); i++) {
+        for(unsigned int i = 0; i<reactionString.length(); i++) {
             std::string nextChar(reactionString,i,1);
             if(nextChar=="+") continue;
             else projectileString+=nextChar;
@@ -55,11 +55,14 @@ namespace Module_CrossSection{
             return 2;
         else if(projectileString=="a")
             return 3;
+        
+        /** Return "neutron" by default*/
+        return 1;
     }
 
     std::string massNumberStringFromString(std::string reactionString){
         std::string massNumberS;
-        for(int i = 0; i<reactionString.length(); i++) {
+        for(unsigned int i = 0; i<reactionString.length(); i++) {
             std::string nextChar(reactionString,i,1);
             std::istringstream stm(nextChar);
             int nextDigit;
@@ -82,7 +85,7 @@ namespace Module_CrossSection{
         std::string massNumberS = massNumberStringFromString(reactionString);
         reactionString.erase(0,massNumberS.length());
         std::string atomicNumberString;
-        for(int i = 0; i<reactionString.length(); i++) {
+        for(unsigned int i = 0; i<reactionString.length(); i++) {
             std::string nextChar(reactionString,i,1);
             if(nextChar=="+") break;
                 else atomicNumberString+=nextChar;
