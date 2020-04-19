@@ -1,6 +1,6 @@
 #ifndef MCCULLAGHGSF_H
 #define MCCULLAGHGSF_H
-
+#pragma once
 #include "GammaTransmissionFunc.h"
 
 class McCullaghGSF : public GammaTransmissionFunc {

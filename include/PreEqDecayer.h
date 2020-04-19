@@ -1,5 +1,4 @@
-#ifndef PREEQDECAYER_H
-#define PREEQDECAYER_H
+#pragma once
 
 #include <vector>
 
@@ -73,4 +72,3 @@ class PreEqDecayer {
   std::vector<PreEqCDFEntry> cdf_;
 };
 
-#endif

@@ -1,6 +1,6 @@
 #ifndef LEVELDENSITY_H
 #define LEVELDENSITY_H
-
+#pragma once
 class LevelDensity {
  public:
  LevelDensity(int Z, int A, double J) :

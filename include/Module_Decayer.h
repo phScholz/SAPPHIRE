@@ -6,9 +6,7 @@
  * 
  */
 
-#ifndef MODULE_DECAYER_H
-#define MODULE_DECAYER_H
-#endif
+#pragma once
 #include <vector>
 #include <map>
 #include <string>

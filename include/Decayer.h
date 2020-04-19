@@ -1,6 +1,6 @@
 #ifndef DECAYER_H
 #define DECAYER_H
-
+#pragma once
 #include <vector>
 #include <cstdlib>
 

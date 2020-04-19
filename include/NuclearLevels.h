@@ -5,9 +5,7 @@
  * @brief It contains classes and methods, handling the nuclear level scheme
  */
 
-#ifndef NUCLEARLEVELS_H
-#define NUCLEARLEVELS_H
-
+#pragma once
 #include "NuclearMass.h"
 #include <vector>
 #include <string>
@@ -53,4 +51,4 @@ class NuclearLevels {
  private:
   static LevelsTable levelsTable_;
 };
-#endif
+

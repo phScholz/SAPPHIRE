@@ -47,20 +47,32 @@ void PrintHelp(){
  * @param argv Array of cmd line parameters. 
  */
 int main(int argc, char *argv[]) {
+  /**
+  * At the beginning of `main()` a header is printed and the cmd line arguments are checked.
+  */
   std::cout << std::endl;
 	std::cout << "Sapphire - A statistical nuclear reaction and decay code" << std::endl;
 	std::cout << "********************************************************" << std::endl;
   std::cout << std::endl;
 
+  /** If no argument is given at all, the PrintHelp() method is invoked and the program exits. */
   if (argc <=1 ) {
 	  PrintHelp();
 		return 0;
 	}
 
+  /** The Initializer function of Setup.cpp is called, to set some default values. */ 
   Initialize();
 
+  /** The second cmd line parameter defines the module, which should be started, therefore it is stored in the std::string mode.*/
   std::string mode(argv[1]);
 	
+  /** 
+  * Now it'll be checked if "mode" matches any of the available keywords: reaction, decayer, old, template, or help.
+  * Depending on the matching, the respective Go() methods are called from Module_CrossSection.cpp, Module_Decayer.cpp, Module_OldSapphire.cpp, 
+  * or the SapphireInput class.
+  * If mode doesn't match any of the keywords, the PrintHelp() function is called.
+  */
   if (mode == "reaction"){
     Module_CrossSection::Go(argc,argv);
   }

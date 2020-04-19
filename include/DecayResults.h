@@ -1,6 +1,6 @@
 #ifndef DECAYRESULTS_H
 #define DECAYRESULTS_H
-
+#pragma once
 #include <TTree.h>
 #include <TFile.h>
 #include <vector>

@@ -1,5 +1,4 @@
-#ifndef TRANSMISSIONFUNC_H
-#define TRANSMISSIONFUNC_H
+#pragma once
 
 class TransmissionFunc {
  public:
@@ -32,4 +31,4 @@ class TransmissionFunc {
   TransmissionFunc* previous_;
 };
 
-#endif
+

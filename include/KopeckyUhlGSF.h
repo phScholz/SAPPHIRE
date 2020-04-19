@@ -1,6 +1,6 @@
 #ifndef KOPECKYUHL_H
 #define KOPECKYUHL_H
-
+#pragma once
 #include "GammaTransmissionFunc.h"
 
 class LevelDensity;

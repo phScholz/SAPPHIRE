@@ -1,5 +1,4 @@
-#ifndef PREEQTRANSITIONRATEFUNC_H
-#define PREEQTRANSITIONRATEFUNC_H
+#pragma once
 
 #include "TransitionRateFunc.h"
 #include "ParticleHoleLevelDensity.h"
@@ -57,4 +56,3 @@ class PreEqTransitionRateFunc {
   std::vector<XYPair> cumulativeSum_;
 };
 
-#endif

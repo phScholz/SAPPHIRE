@@ -1,3 +1,10 @@
+/**
+ * @file Sapphire.cpp
+ * @brief Entry point for the reaction module.
+ * 
+ * 
+ * 
+ */
 #include "Module_CrossSection.h"
 #include <iostream>
 #include <iomanip>

@@ -5,9 +5,7 @@
  * @brief It contains classes and methods, handling the nuclear masses
  */
 
-#ifndef NUCLEARMASS_H
-#define NUCLEARMASS_H
-
+#pragma once
 #include <tr1/unordered_map>
 #include <string>
 
@@ -98,4 +96,3 @@ class NuclearMass {
   static ElementTable elementTable_;
 };
 
-#endif

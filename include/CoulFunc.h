@@ -1,6 +1,6 @@
 #ifndef COULFUNC_H
 #define COULFUNC_H
-
+#pragma once
 struct CoulWaves {
   double F; 
   double dF;

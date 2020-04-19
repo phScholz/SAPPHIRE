@@ -6,9 +6,7 @@
  * 
  */
 
-#ifndef MODULE_OLDSAPPHIRE_H
-#define MODULE_OLDSAPPHIRE_H
-#endif
+#pragma once
 #include <vector>
 #include <map>
 #include <string>
@@ -36,7 +34,6 @@ namespace Module_OldSapphire{
     int oldSapphire_MPI(int argc,char *argv[]); /**< Top level function to call from main*/
     int oldSapphire(int argc,char *argv[]); /**< Top level function to call from main*/
 
-    #ifdef MPI_BUILD
     void parseCommandLineForOptions(std::vector<std::string>& args,
                                         int& suffixNo,
                                         bool &preEq,
@@ -44,9 +41,9 @@ namespace Module_OldSapphire{
                                         int& numPiHoles,
                                         int& numNuParticles,
                                         int& numNuHoles);
-    #endif
 
-    #ifndef MPI_BUILD
+
+/*     #ifndef MPI_BUILD
     void parseCommandLineForOptions(std::vector<std::string>& args,
                                     int& suffixNo,
                                     bool &preEq,
@@ -61,9 +58,9 @@ namespace Module_OldSapphire{
                                     int& entranceState,
                                     std::vector<int>& exitStates,
 				                    bool& printTrans);
-    #endif
+    #endif */
 
-    #ifndef MPI_BUILD
+
     /**
     * @brief CMD line parameters are parsed for the Cross section module
     * @param args cmd line string
@@ -82,7 +79,7 @@ namespace Module_OldSapphire{
     */
     bool parseCommandLineForXS(std::vector<std::string>& args,int& Z, int&A, 
 			   int& pType, std::string& energyFile, bool asciiIn);
-    #endif
+
 
     
     /**

@@ -1,5 +1,4 @@
-#ifndef POTENTIAL_H
-#define POTENTIAL_H
+#pragma once
 
 #include <vector>
 #include <complex>
@@ -29,4 +28,4 @@ class Potential : public ParticleTransmissionFunc {
   double coulombRadius_;
 };
 
-#endif
+

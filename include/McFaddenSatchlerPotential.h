@@ -1,6 +1,6 @@
 #ifndef MCFADDENSATCHLERPOTENTIAL_H
 #define MCFADDENSATCHLERPOTENTIAL_H
-
+#pragma once
 #include "Potential.h"
 
 class TransmissionFunc;

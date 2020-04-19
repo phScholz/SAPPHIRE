@@ -1,3 +1,12 @@
+/**
+ * @file Sapphire.cpp
+ * @brief Entry point for the decayer module.
+ * 
+ * 
+ * 
+ */
+
+
 #include "Module_Decayer.h"
 #include <iostream>
 #include <fstream>

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef STATDECAY_CONFIG_H
-#define STATDECAY_CONFIG_H
 
 #include <string>
 
@@ -8,4 +6,4 @@ std::string sourceDirectory() {
   return std::string("@Sapphire_SOURCE_DIR@");
 }
 
-#endif
+

@@ -2,6 +2,7 @@
 *   \brief Header file for the Brink-Axel-GSF class
 * 
 */
+#pragma once
 #ifndef BRINKAXELGSF_H
 #define BRINKAXELGSF_H
 

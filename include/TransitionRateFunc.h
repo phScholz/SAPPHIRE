@@ -1,5 +1,4 @@
-#ifndef TRANSITIONRATEFUNC_H
-#define TRANSITIONRATEFUNC_H
+#pragma once
 
 #include <vector>
 #include "LevelDensity.h"
@@ -65,4 +64,3 @@ class TransitionRateFunc {
   TransmissionFunc* transmissionFunc_;
 };
 
-#endif

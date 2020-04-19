@@ -1,6 +1,7 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#pragma once
 #include <complex>
 #include <vector>
 #include <cstdlib>

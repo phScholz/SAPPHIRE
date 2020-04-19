@@ -5,7 +5,7 @@
 #include "Constants.h"
 #include "NuclearMass.h"
 #include <math.h>
-
+#pragma once
 class GDRParameters {
  public:
   GDRParameters() : eta_(0.) {

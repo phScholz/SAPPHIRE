@@ -1,6 +1,6 @@
 #ifndef JLMPOTENTIAL_H
 #define JLMPOTENTIAL_H
-
+#pragma once
 #include "Potential.h"
 
 class TransmissionFunc;

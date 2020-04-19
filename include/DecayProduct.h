@@ -1,6 +1,6 @@
 #ifndef DECAYPRODUCT_H
 #define DECAYPRODUCT_H
-
+#pragma once
 class DecayData {
   double energy_;
   double neutronEntranceWidth_;

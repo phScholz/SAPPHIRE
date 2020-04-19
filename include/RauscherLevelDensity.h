@@ -1,5 +1,4 @@
-#ifndef RAUSCHERLEVELDENSITY_H
-#define RAUSCHERLEVELDENSITY_H
+#pragma once
 
 #include "LevelDensity.h"
 #include "NuclearMass.h"
@@ -32,4 +31,4 @@ class RauscherLevelDensity : public LevelDensity {
   double microEnergyCorr_;
 };
 
-#endif
+

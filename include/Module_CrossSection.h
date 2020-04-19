@@ -5,10 +5,7 @@
  * @author Philipp Scholz, <pscholz@outlook.de>
  * 
  */
-
-#ifndef MODULE_CROSSSECTION_H
-#define MODULE_CROSSSECTION_H
-#endif
+#pragma once
 #include <vector>
 #include <map>
 #include <string>

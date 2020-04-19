@@ -3,7 +3,7 @@
 #include <vector>
 #include <map>
 #include <string>
-
+#pragma once
 class Decayer;
 class SpinRatePair;
 

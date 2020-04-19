@@ -1,6 +1,6 @@
 #ifndef DECAYCONTROLLER_H
 #define DECAYCONTROLLER_H
-
+#pragma once
 #include <vector>
 #include "Decayer.h"
 #include "DecayProduct.h"

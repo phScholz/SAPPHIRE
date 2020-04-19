@@ -1,5 +1,4 @@
-#ifndef PARTICLEHOLELEVELDENSITY_H
-#define PARTICLEHOLELEVELDENSITY_H
+#pragma once
 
 class ParticleHoleLevelDensity {
  public:
@@ -27,4 +26,4 @@ class ParticleHoleLevelDensity {
   double gNu_;
 };
 
-#endif
+

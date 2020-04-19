@@ -1,6 +1,6 @@
 #ifndef EQUIVSQUAREWELL_H
 #define EQUIVSQUAREWELL_H
-
+#pragma once
 #include "CoulFunc.h"
 #include "ParticleTransmissionFunc.h"
 

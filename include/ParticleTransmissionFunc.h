@@ -1,5 +1,4 @@
-#ifndef PARTICLETRANSMISSIONFUNC_H
-#define PARTICLETRANSMISSIONFUNC_H
+#pragma once
 
 #include "TransmissionFunc.h"
 #include "NuclearMass.h"
@@ -72,4 +71,4 @@ class ParticleTransmissionFunc : public TransmissionFunc {
   static int neutronFormalism_;
 };
 
-#endif
+

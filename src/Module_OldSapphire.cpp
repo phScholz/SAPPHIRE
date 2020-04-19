@@ -1,10 +1,8 @@
 /**
  * @file Sapphire.cpp
- * @brief Entry point for the Module_OldSapphire 
- * @author Mary Beard, Philipp Scholz <pscholz@outlook.de>
- * @date 2020
+ * @brief Entry point for the Sapphire code
  * 
- * The content of this file is basically the original version of Sapphire.cpp.
+ * This file contains basically the original Sapphire code.
  * 
  */
 
