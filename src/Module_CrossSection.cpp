@@ -143,40 +143,40 @@ namespace Module_CrossSection{
         }
     }
 
-    void Run(SapphireInput * input){
+    void Run(const SapphireInput & input){
         //Copy the input parameters to respective classes
         //I know, this is still not really intuitive ... but I am working on it.
-        CrossSection::SetResidualAlpha(input->ResidualAlpha());
-        CrossSection::SetResidualProton(input->ResidualProton());
-        CrossSection::SetResidualNeutron(input->ResidualNeutron());
-        CrossSection::SetResidualGamma(input->ResidualGamma());
-        CrossSection::SetCalculateGammaCutoff(input->CalculateGammaCutoff());
-        TransitionRateFunc::SetGammaCutoffEnergy(input->g_CutoffEnergy());
+        CrossSection::SetResidualAlpha(input.ResidualAlpha());
+        CrossSection::SetResidualProton(input.ResidualProton());
+        CrossSection::SetResidualNeutron(input.ResidualNeutron());
+        CrossSection::SetResidualGamma(input.ResidualGamma());
+        CrossSection::SetCalculateGammaCutoff(input.CalculateGammaCutoff());
+        TransitionRateFunc::SetGammaCutoffEnergy(input.g_CutoffEnergy());
         Decayer::SetCrossSection(true);
-        Decayer::SetMaxL(input->DecayerMaxL());
+        Decayer::SetMaxL(input.DecayerMaxL());
         
         std::vector<int> exitStates(4,-1);
-        exitStates[0]=input->g_ExitStates();
-        exitStates[1]=input->n_ExitStates();
-        exitStates[2]=input->p_ExitStates();
-        exitStates[3]=input->a_ExitStates();
+        exitStates[0]=input.g_ExitStates();
+        exitStates[1]=input.n_ExitStates();
+        exitStates[2]=input.p_ExitStates();
+        exitStates[3]=input.a_ExitStates();
         
-        ParticleTransmissionFunc::SetAlphaFormalism(input->a_Formalism());
-        ParticleTransmissionFunc::SetProtonFormalism(input->p_Formalism());
-        ParticleTransmissionFunc::SetNeutronFormalism(input->n_Formalism());
-        ParticleTransmissionFunc::SetPorterThomas(input->PorterThomas_p());
+        ParticleTransmissionFunc::SetAlphaFormalism(input.a_Formalism());
+        ParticleTransmissionFunc::SetProtonFormalism(input.p_Formalism());
+        ParticleTransmissionFunc::SetNeutronFormalism(input.n_Formalism());
+        ParticleTransmissionFunc::SetPorterThomas(input.PorterThomas_p());
 
-        GammaTransmissionFunc::SetEGDRType(input->g_Formalism());
-        GammaTransmissionFunc::SetPorterThomas(input->PorterThomas_g());
+        GammaTransmissionFunc::SetEGDRType(input.g_Formalism());
+        GammaTransmissionFunc::SetPorterThomas(input.PorterThomas_g());
 
         std::vector<EntrancePairs> entrancePairs;
-        readEntrancePairs(&entrancePairs,input->ReactionFile());
+        readEntrancePairs(&entrancePairs,input.ReactionFile());
         std::vector<EntrancePairs>::iterator it;
 
         //PrintEntrancePairs(entrancePairs);
 
         for(it = std::begin(entrancePairs); it != std::end(entrancePairs); ++it){
-            CrossSection* xs = new CrossSection(it->Z_,it->A_, it->pType_,input->EnergyFile(),input->CalcRates());
+            CrossSection* xs = new CrossSection(it->Z_,it->A_, it->pType_,input.EnergyFile(),input.CalcRates());
             if(xs->IsValid())
             {
                 std::cout << "Calculating for Z: " << it->Z_ << " A: " << it->A_ << " and Particle Type: " << it->pType_ << std::endl;
@@ -192,25 +192,25 @@ namespace Module_CrossSection{
     }
     
 
-    void RunSingleReaction(SapphireInput * input){
-        std::cout<< std::endl << "Starting calculations for reaction ... " << input->Reaction() << std::endl;
-            int A = massNumberIntFromString(input->Reaction());                    
-            int Z = atomicNumberIntFromString(input->Reaction());
+    void RunSingleReaction(const SapphireInput & input){
+        std::cout<< std::endl << "Starting calculations for reaction ... " << input.Reaction() << std::endl;
+            int A = massNumberIntFromString(input.Reaction());                    
+            int Z = atomicNumberIntFromString(input.Reaction());
 
             if(!Z && !A){
                 std::cout<< std::endl << "Could not get a valid target nucleus from reaction ... "  << std::endl;
                 exit(1);
             }
 
-            int pType = pTypeIntFromString(input->Reaction());
-            std::string energyFile = input->EnergyFile();
-            bool forRates = input->CalcRates();
-            int entranceState = input->EntranceState();
+            int pType = pTypeIntFromString(input.Reaction());
+            std::string energyFile = input.EnergyFile();
+            bool forRates = input.CalcRates();
+            int entranceState = input.EntranceState();
             std::vector<int> exitStates(4,-1);
-            exitStates[0]=input->g_ExitStates();
-            exitStates[1]=input->n_ExitStates();
-            exitStates[2]=input->p_ExitStates();
-            exitStates[3]=input->a_ExitStates();
+            exitStates[0]=input.g_ExitStates();
+            exitStates[1]=input.n_ExitStates();
+            exitStates[2]=input.p_ExitStates();
+            exitStates[3]=input.a_ExitStates();
 
             std::cout << "Input Values For Cross Section:"   << std::endl
 		            << std::setw(14) << "Z:"               << std::setw(12) 
@@ -278,10 +278,10 @@ namespace Module_CrossSection{
         }
         
         if(fexists(argv[2])){              
-            SapphireInput* Input = new SapphireInput();    
+            SapphireInput Input;    
             std::string str(argv[2]);
-            Input->printIntputFile(str);
-            Input->ReadInputFile(str);
+            Input.printIntputFile(str);
+            Input.ReadInputFile(str);
             
 
             /*Defined in Setup.cpp ... Should not be in another file*/
@@ -290,19 +290,19 @@ namespace Module_CrossSection{
             //GDRTable GammaTransmissionFunc::gdrTable_;
             //LevelsTable NuclearLevels::levelsTable_;
 
-            if(fexists(Input->ReactionFile().c_str()))
+            if(fexists(Input.ReactionFile().c_str()))
             {
-                std::cout << std::endl << "Starting calculations for reactions in file ... " << Input->ReactionFile().c_str() << std::endl;
-                Input->Reaction("");
-                Input->printIntputParameters();
+                std::cout << std::endl << "Starting calculations for reactions in file ... " << Input.ReactionFile().c_str() << std::endl;
+                Input.Reaction("");
+                Input.printIntputParameters();
                 Run(Input);
             }
             else
             {
-                std::cout << std::endl << "No valid reactionFile was given...\nUsing " << Input->Reaction() <<"..." << std::endl;
+                std::cout << std::endl << "No valid reactionFile was given...\nUsing " << Input.Reaction() <<"..." << std::endl;
                 RunSingleReaction(Input);
             }          
-            delete Input;           
+                     
         }
         else{
             RunSingleReaction(argv[2]);

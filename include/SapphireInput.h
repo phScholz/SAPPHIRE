@@ -83,7 +83,8 @@ class SapphireInput{
         void PType(int x){pType=x;}              /**<Setter for pType*/
         void MassNumber(int x){massNumber=x;}              /**<Setter for massNumber*/
         void ChargeNumber(int x){chargeNumber=x;}              /**<Setter for chargeNumber*/
-        
+        void Suffix(int x){suffix=x;}                               /**< Setter for string module*/
+
         void DecayerMaxL(double x){decayerMaxL=x;}              /**<Setter for decayerMaxL*/ 
         void PreEqMaxL(double x){preEqMaxL=x;}                  /**<Setter for preEqMaxL*/ 
         void g_CutoffEnergy(double x){g_cutoffEnergy=x;}        /**<Setter for g_CutoffEnergy*/ 
@@ -94,7 +95,6 @@ class SapphireInput{
         void EnergyFile(std::string x){energyFile=x;}                       /**< Setter for string energyFile*/
         void Energies(std::string x){energies=x;}                       /**< Setter for string energies*/
         void ReactionFile(std::string x){reactionFile=x;}                   /**< Setter for string reactionFile*/
-        void Suffix(std::string x){suffix=x;}                               /**< Setter for string module*/
         void Reaction(std::string x){reaction=x;}                    /**<Setter for reaction*/
         void Isotope(std::string x){isotope=x;}                    /**<Setter for isotope*/
         void PreEqConf(std::string x){preEqConf=x;}                    /**<Setter for preEqConf*/        
@@ -105,51 +105,52 @@ class SapphireInput{
 
         
         //Getter
-        bool CalcRates(){return calcRates;}                     /**<Getter for calcrates*/    
-        bool CalcAverageWidth(){return calcAverageWidth;}       /**<Getter for calcAverageWidth*/    
-        bool ResidualGamma(){return residualGamma;}             /**<Getter for residualGamma*/    
-        bool ResidualNeutron(){return residualNeutron;}         /**<Getter for residualNeutron*/    
-        bool ResidualProton(){return residualProton;}           /**<Getter for residualProton*/
-        bool ResidualAlpha(){return residualAlpha;}             /**<Getter for residualAlpha*/
-        bool CalculateGammaCutoff(){return calculateGammaCutoff;} /**<Getter for calculateGammaCutoff*/
-        bool PorterThomas_g(){return porterThomas_g;}             /**<Getter for bool porterThomas_g*/
-        bool PorterThomas_p(){return porterThomas_p;}             /**<Getter for bool porterThomas_p*/
-        bool PreEq(){return preEq;}                                /**<Getter for bool preEq*/
+        bool CalcRates() const {return calcRates;}                     /**<Getter for calcrates*/    
+        bool CalcAverageWidth() const {return calcAverageWidth;}       /**<Getter for calcAverageWidth*/    
+        bool ResidualGamma() const {return residualGamma;}             /**<Getter for residualGamma*/    
+        bool ResidualNeutron() const {return residualNeutron;}         /**<Getter for residualNeutron*/    
+        bool ResidualProton() const {return residualProton;}           /**<Getter for residualProton*/
+        bool ResidualAlpha() const {return residualAlpha;}             /**<Getter for residualAlpha*/
+        bool CalculateGammaCutoff() const {return calculateGammaCutoff;} /**<Getter for calculateGammaCutoff*/
+        bool PorterThomas_g() const {return porterThomas_g;}             /**<Getter for bool porterThomas_g*/
+        bool PorterThomas_p() const {return porterThomas_p;}             /**<Getter for bool porterThomas_p*/
+        bool PreEq() const {return preEq;}                                /**<Getter for bool preEq*/
 
-        int EntranceState(){return entranceState;}              /**<Getter for entranceState*/ 
-        int g_ExitStates(){return g_exitStates;}              /**<Getter for g_exitStates*/ 
-        int n_ExitStates(){return n_exitStates;}              /**<Getter for n_exitStates*/ 
-        int p_ExitStates(){return p_exitStates;}              /**<Getter for p_exitStates*/ 
-        int a_ExitStates(){return a_exitStates;}              /**<Getter for a_exitStates*/ 
-        int g_Formalism(){return g_formalism;}              /**<Getter for g_formalism*/ 
-        int n_Formalism(){return n_formalism;}              /**<Getter for n_formalism*/ 
-        int p_Formalism(){return p_formalism;}              /**<Getter for p_formalism*/ 
-        int a_Formalism(){return a_formalism;}              /**<Getter for a_formalism*/ 
-        int Events(){return events;}              /**<Getter for events*/ 
-        int ChunkSize(){return chunkSize;}              /**<Getter for chunkSize*/ 
-        int Parity(){return parity;}                    /**<Getter for parity*/
-        int PType(){return pType;}                      /**<Getter for pType*/
-        int ChargeNumber(){return chargeNumber;}        /**<Getter for chargeNumber*/
-        int MassNumber(){return massNumber;}        /**<Getter for massNumber*/
+        int EntranceState() const {return entranceState;}              /**<Getter for entranceState*/ 
+        int g_ExitStates() const {return g_exitStates;}              /**<Getter for g_exitStates*/ 
+        int n_ExitStates() const {return n_exitStates;}              /**<Getter for n_exitStates*/ 
+        int p_ExitStates() const {return p_exitStates;}              /**<Getter for p_exitStates*/ 
+        int a_ExitStates() const {return a_exitStates;}              /**<Getter for a_exitStates*/ 
+        int g_Formalism() const {return g_formalism;}              /**<Getter for g_formalism*/ 
+        int n_Formalism() const {return n_formalism;}              /**<Getter for n_formalism*/ 
+        int p_Formalism() const {return p_formalism;}              /**<Getter for p_formalism*/ 
+        int a_Formalism() const {return a_formalism;}              /**<Getter for a_formalism*/ 
+        int Events() const {return events;}              /**<Getter for events*/ 
+        int ChunkSize() const {return chunkSize;}              /**<Getter for chunkSize*/ 
+        int Parity() const {return parity;}                    /**<Getter for parity*/
+        int PType() const {return pType;}                      /**<Getter for pType*/
+        int ChargeNumber() const {return chargeNumber;}        /**<Getter for chargeNumber*/
+        int MassNumber() const {return massNumber;}        /**<Getter for massNumber*/
+        int Suffix() const {return suffix;}                    /**<Getter for suffix*/
 
-        double DecayerMaxL(){return decayerMaxL;}              /**<Getter for decayerMaxL*/
-        double PreEqMaxL(){return preEqMaxL;}              /**<Getter for preEqMaxL*/ 
-        double g_CutoffEnergy(){return g_cutoffEnergy;}    /**<Getter for g_CutoffEnergy*/ 
-        double LowEnergy(){return lowEnergy;}              /**<Getter for lowEnergy*/ 
-        double HighEnergy(){return highEnergy;}             /**<Getter for highEnergy*/ 
-        double Spin(){return spin;}                         /**<Getter for spin*/
+        double DecayerMaxL() const {return decayerMaxL;}              /**<Getter for decayerMaxL*/
+        double PreEqMaxL() const {return preEqMaxL;}              /**<Getter for preEqMaxL*/ 
+        double g_CutoffEnergy() const {return g_cutoffEnergy;}    /**<Getter for g_CutoffEnergy*/ 
+        double LowEnergy() const {return lowEnergy;}              /**<Getter for lowEnergy*/ 
+        double HighEnergy() const {return highEnergy;}             /**<Getter for highEnergy*/ 
+        double Spin() const {return spin;}                         /**<Getter for spin*/
 
-        std::string EnergyFile(){return energyFile;}            /**<Getter for energyFile*/ 
-        std::string Energies(){return energies;}            /**<Getter for energies*/ 
-        std::string ReactionFile(){return reactionFile;}        /**<Getter for reactionFile*/
-        std::string Suffix(){return suffix;}                    /**<Getter for suffix*/
-        std::string Reaction(){return reaction;}                    /**<Getter for reaction*/
-        std::string Isotope(){return isotope;}                    /**<Getter for isotope*/
-        std::string PreEqConf(){return preEqConf;}                    /**<Getter for preEqConf*/        
-        std::string MassTable(){return massTable;}                    /**<Getter for massTable*/
-        std::string GdrParams(){return gdrParams;}                    /**<Getter for gdrParams*/
-        std::string LevelDir(){return levelDir;}                    /**<Getter for levelDir*/
-        std::string SpinFile(){return spinFile;}                    /**<Getter for spinFile*/
+        std::string EnergyFile() const {return energyFile;}            /**<Getter for energyFile*/ 
+        std::string Energies() const {return energies;}            /**<Getter for energies*/ 
+        std::string ReactionFile() const {return reactionFile;}        /**<Getter for reactionFile*/
+        
+        std::string Reaction() const {return reaction;}                    /**<Getter for reaction*/
+        std::string Isotope() const {return isotope;}                    /**<Getter for isotope*/
+        std::string PreEqConf() const {return preEqConf;}                    /**<Getter for preEqConf*/        
+        std::string MassTable() const {return massTable;}                    /**<Getter for massTable*/
+        std::string GdrParams() const {return gdrParams;}                    /**<Getter for gdrParams*/
+        std::string LevelDir() const {return levelDir;}                    /**<Getter for levelDir*/
+        std::string SpinFile() const {return spinFile;}                    /**<Getter for spinFile*/
 
         
     private:
@@ -180,6 +181,7 @@ class SapphireInput{
         int pType;                  /**< Type of projectile*/
         int chargeNumber;                      /**< Charge number*/
         int massNumber;                      /**< Mass number*/
+        int suffix;         /**< Suffix for output*/
 
         double decayerMaxL;            /**< Maximum l-value for the decayer*/
         double preEqMaxL;            /**< Maximum l-value for the preEq*/
@@ -190,7 +192,6 @@ class SapphireInput{
                 
         std::string energyFile;     /**< String with the path to the energyFile*/
         std::string reactionFile;   /**< String with the path to the reactionFile*/
-        std::string suffix;         /**< Suffix for output*/
         std::string reaction;         /**< String for reaction*/
         std::string energies;         /**< String for reaction*/
         std::string isotope;        /**< String for the istope for the decay simulation*/

@@ -62,8 +62,7 @@ extern std::string sourceDirectory();
         SapphireInput::SpinFile(sourceDirectory()+"/tables/spinod.dat");        
         SapphireInput::Isotope("60Ni");
         SapphireInput::PorterThomas_p(false);
-        SapphireInput::PorterThomas_g(false);
-        
+        SapphireInput::PorterThomas_g(false);        
         SapphireInput::PreEq(false);
         SapphireInput::PreEqConf("");
         SapphireInput::Spin(1.0);
@@ -195,7 +194,7 @@ extern std::string sourceDirectory();
         SapphireInput::CalculateGammaCutoff(pt.get<bool>("CrossSection.CalculateGammaCutoff", SapphireInput::CalculateGammaCutoff()));
 
         //Reading Decayer Input
-        SapphireInput::Suffix(pt.get<std::string>("Decayer.Suffix", SapphireInput::Suffix()));
+        SapphireInput::Suffix(pt.get<int>("Decayer.Suffix", SapphireInput::Suffix()));
         SapphireInput::Isotope(pt.get<std::string>("Decayer.Isotope", SapphireInput::Isotope()));
         SapphireInput::Spin(pt.get<double>("Decayer.Spin", SapphireInput::Spin()));
         SapphireInput::Parity(pt.get<double>("Decayer.Parity", SapphireInput::Parity()));
@@ -203,7 +202,6 @@ extern std::string sourceDirectory();
         SapphireInput::HighEnergy(pt.get<double>("Decayer.EnergyHigh", SapphireInput::HighEnergy()));
         SapphireInput::Events(pt.get<int>("Decayer.Events", SapphireInput::Events()));
         SapphireInput::ChunkSize(pt.get<int>("Decayer.ChunkSize", SapphireInput::ChunkSize()));
-
         SapphireInput::PreEq(pt.get<bool>("Decayer.Preequillibrium", SapphireInput::PreEq()));
         SapphireInput::PreEqConf(pt.get<std::string>("Decayer.PreEqConfiguration", SapphireInput::PreEqConf()));
     }

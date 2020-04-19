@@ -7,6 +7,11 @@
 #include "NuclearMass.h"
 #include <chrono>
 #include <sstream>
+#include "Decayer.h"
+#include "omp.h"
+#include "DecayController.h"
+#include "DecayResults.h"
+#include "Progressbar.h"
 
 namespace Module_Decayer{
 
@@ -44,34 +49,190 @@ namespace Module_Decayer{
     }
 
     void Go(int argc,char *argv[]){
+        /**
+        *   A clock is started at the beginning of Go() 
+        *   to measure the total calculation time. 
+        */
         auto start = std::chrono::steady_clock::now();
         std::cout << "Module: decayer" << std::endl;
         std::cout << std::endl;
-
+        /** 
+        * If too few arguments are given for the decayer, being "program module inputFile",
+        * then the printHelp() method is called and the program exits.
+        */
         if(argc < 3){
             printHelp();
             exit(0);
         }
         
-        if(fexists(argv[2])){              
-            SapphireInput* Input = new SapphireInput();    
+        /**
+        * In a next step it'll checked if the filename points to an actual file.
+        * If yes, the calculation can start. If not, the program exits.
+        */
+        if(fexists(argv[2])){     
+            /**
+            * If the inputFile exists:
+            * - an SapphireInput object is created
+            * - the content of the inputFile is printed to std::cout via printInputFile()
+            * - the inputFile is read by ReadInputFile()
+            * - the parameters in the Sapphire Input Object are printed via printInputParameters()
+            * - the Run() method is called, passing the SapphireInput object by reference
+            */
+            SapphireInput Input;    
             std::string str(argv[2]);
-            Input->printIntputFile(str);
-            Input->ReadInputFile(str);
-            Input->printIntputParameters();
-
-            delete Input;
+            Input.printIntputFile(str);
+            Input.ReadInputFile(str);
+            Input.printIntputParameters();
+            Run(Input);
+            
         }else{
             std::cout << "No valid input file was given." << std::endl;
             exit(1);
         }
 
+        /** 
+        * At the end of the Go() method the clock is stopped and the total calculation time
+        * is printed. 
+        */
         auto end = std::chrono::steady_clock::now();
         std::chrono::duration<double> elapsed_seconds = end-start;
         std::cout << std::endl << "Total calculation time: " << elapsed_seconds.count() << "s\n";
     }
     
-    void Run(int argc,char *argv[]){}
+    void Run(const SapphireInput &input){
+        Decayer::SetCrossSection(false);
+        int chunkSize = input.ChunkSize();
+        int A = massNumberIntFromString(input.Isotope());
+        int Z = atomicNumberIntFromString(input.Isotope());
+        int Pi = input.Parity();
+        int events = input.Events();
+        double J = input.Spin();
+        double lowEnergy = input.LowEnergy();
+        double highEnergy = input.HighEnergy();
+        int suffixNo = input.Suffix();
+        bool preEq = input.PreEq();
+        int numPiHoles = 0;
+        int numPiParticles =0;
+        int numNuHoles =0;
+        int numNuParticles =0;
+
+        if(omp_get_max_threads() > 10) omp_set_num_threads(10);
+
+        std::cout << "Input Values For Parent Nucleus:" << std::endl
+  	    << std::setw(15) << "Z:"             << std::setw(12) << Z          
+  	    << std::setw(0) << std::endl
+  	    << std::setw(15) << "A:"             << std::setw(12) << A          
+  	    << std::setw(0) << std::endl
+  	    << std::setw(15) << "J:"             << std::setw(12) << J          
+  	    << std::setw(0) << std::endl
+  	    << std::setw(15) << "Pi:"            << std::setw(12) << Pi         
+  	    << std::setw(0) << std::endl
+  	    << std::setw(15) << "energy (low):"  << std::setw(12) << lowEnergy  
+  	    << std::setw(0) << std::endl
+  	    << std::setw(15) << "energy (high):" << std::setw(12) << highEnergy 
+  	    << std::setw(0) << std::endl
+  	    << std::setw(15) << "events:"        << std::setw(12) << events     
+  	    << std::setw(0) << std::endl
+        << std::setw(15) << "chunk size:"    << std::setw(12) << chunkSize     
+  	    << std::setw(0) << std::endl << std::endl;
+
+        int remainder = events%chunkSize;
+        int chunks = (events-remainder)/chunkSize;
+        unsigned int randomSeed[12];
+
+        std::cout << "Starting Decay Simulation..." << std::endl;
+
+        int numDecayed = 0; /** Initialize the counting of decays.*/
+        DecayResults* results = NULL;
+        if(events>1) results = new DecayResults(Z,A,J,Pi,lowEnergy,highEnergy,suffixNo);
+        
+        
+        omp_lock_t writelock;
+        omp_init_lock(&writelock);
+  
+
+        for(int i = 0;i<=chunks;i++) {
+
+          
+            int numInChunk = (i==chunks) ? remainder : chunkSize;
+            if(numInChunk==0) continue;
+            if(events>=chunkSize)
+              std::cout << "Decay chunk " << i+1 << " of " << chunks << " started ..." << std::endl;
+            else
+              std::cout << "Decay of " << numInChunk << " nuclei started ..." << std::endl;
+            std::vector<std::pair<DecayData,std::vector<DecayProduct> > > chunkResults;
+            chunkResults.resize(numInChunk);
+            /**
+             * Using Open Multiprocessing (OMP) for the parallel execution of the following for-loop.
+             * Nice.
+             */
+            
+
+
+
+            ProgressBar pg;
+            pg.start(numInChunk); 
+
+            
+            #pragma omp parallel for
+            for(int j = 0;j<numInChunk;j++) {
+                
+                //std::this_thread::sleep_for(std::chrono::seconds(1));
+                int localNumDecayed = numDecayed++;
+
+                //if(localNumDecayed%(events/20)==0&&localNumDecayed>0){
+                  //if(j%(numInChunk/20)==0)
+                    pg.update(j);
+                //std::cout << "Decayed " << localNumDecayed 
+	    	        //  << " of " << events << " nuclei..." << std::endl;
+                //}
+                double energy = (lowEnergy==highEnergy) ? lowEnergy :
+    
+                lowEnergy+(highEnergy-lowEnergy)*double(rand_r(&randomSeed[omp_get_thread_num()]))/double(RAND_MAX);
+
+                DecayController* controller;
+
+                if(preEq) {
+	               controller= new DecayController(Z,A,J,Pi,energy,numNuParticles,numNuHoles,numPiParticles,numPiHoles);
+                } else controller = new DecayController(Z,A,J,Pi,energy);
+
+                double neutronEntranceWidth = 0.;
+                double protonEntranceWidth = 0.;
+                double gammaEntranceWidth = 0.;
+                double alphaEntranceWidth = 0.;
+                double neutronTotalWidth = 0.;
+                double protonTotalWidth = 0.;
+                double gammaTotalWidth = 0.;
+                double alphaTotalWidth = 0.;
+
+                controller->Decay(neutronEntranceWidth,protonEntranceWidth,alphaEntranceWidth,gammaEntranceWidth,neutronTotalWidth,protonTotalWidth,alphaTotalWidth,gammaTotalWidth); 
+                
+                #pragma omp critical
+                chunkResults[j] = std::pair<DecayData,std::vector<DecayProduct>>(DecayData(energy,neutronEntranceWidth,protonEntranceWidth, alphaEntranceWidth,gammaEntranceWidth, neutronTotalWidth,protonTotalWidth, alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
+
+                if(events==1) controller->PrintDecays();
+                delete controller;
+            }
+            
+            omp_set_lock(&writelock);            
+            if(events>1){
+                std::cout << std::endl << "Writing ROOT Tree..." << std::endl;
+                
+                results->AddResults(chunkResults);
+            }
+            omp_unset_lock(&writelock);
+        }   
+        omp_destroy_lock(&writelock);
+        
+
+        if(results) delete results;
+                
+        while(omp_get_num_threads()>1){
+          std::this_thread::sleep_for(std::chrono::seconds(1));
+          std::cout << "Waiting ..." << std::endl;
+        }
+
+    }
 
     bool fexists(const char *filename) {
         std::ifstream ifile(filename);
@@ -82,8 +243,6 @@ namespace Module_Decayer{
         std::cout  << "\tSyntax:        sapphire decayer <options>" << std::endl;        
 	    std::cout << std::endl << "Options:" << std::endl;
         std::cout << std::endl;
-        /* std::cout << "\tAX+y           - reaction string, e.g. 60Fe+p, running calculations with default settings." << std::endl;
-        std::cout << "\tInputFile      - determine input parameters from InputFile and run calculations." << std::endl;
-        std::cout << std::endl; */
+        std::cout << "\tInputFile      - determine input parameters from InputFile and run calculations." << std::endl;        std::cout << std::endl; 
     }
 }
