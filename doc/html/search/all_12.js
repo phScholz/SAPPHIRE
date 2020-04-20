@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['sapphire_20_2d_20a_20statistical_20nuclear_20reaction_20and_20decay_20code',['Sapphire - a statistical nuclear reaction and decay code',['../index.html',1,'']]],
+  ['sapphire_20_2d_20a_20statistical_20nuclear_20reaction_20and_20decay_20code',['Sapphire - A statistical nuclear reaction and decay code',['../index.html',1,'']]],
   ['s_5f',['s_',['../d6/db8/a00376.html#abed67118ece6d1ed90508263fd4bb5e4',1,'SLPair']]],
   ['sapphire_2ecpp',['Sapphire.cpp',['../dd/d52/a00221.html',1,'']]],
   ['sapphire_5fconfig_2eh',['Sapphire_config.h',['../d5/d16/a00029.html',1,'']]],

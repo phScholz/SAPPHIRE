@@ -14,7 +14,7 @@ build/*
 doxygen_config/
 #
 *.root
-#doc/*
+doc/*
 .vscode/
 Makefile
 coul/Makefile
