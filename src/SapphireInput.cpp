@@ -35,10 +35,12 @@
     void SapphireInput::Initialize(){
         /** Setting default configurations for the SapphireInput class. */
         std::cout << "Setting default values..." << std::endl;
+        SapphireInput::exitStates = std::vector<int>(4,-1);
         SapphireInput::g_ExitStates(-1);
         SapphireInput::n_ExitStates(-1);
         SapphireInput::p_ExitStates(-1);
-        SapphireInput::a_ExitStates(-1);        
+        SapphireInput::a_ExitStates(-1);           
+        
         SapphireInput::CalcRates(false);           
         SapphireInput::CalcAverageWidth(false);
         SapphireInput::ResidualGamma(true);               

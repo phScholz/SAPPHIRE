@@ -15,31 +15,46 @@
 #include <algorithm>
 #include "SapphireInput.h"
 
-CrossSection::CrossSection(SapphireInput & input){
+CrossSection::CrossSection(SapphireInput & input):
+  Z_(input.XsZ()), A_(input.XsA()), calcRates_(input.CalcRates()), pType_(input.PType()), skipEnergy_(1000.), entranceState_(input.EntranceState()), exitStates_(input.exitStates) {
+
+  std::string energyFile=input.EnergyFile();
+  if(!FindInitialState()) return;
+
+  InitializeSeperationEnergies();
+  CheckChannels();
+
+  if(calcRates_) CalcPartitionFunc();
   
+  if(!CalcAllowedJPi(calcRates_)) isValid_=false;
+  else isValid_=true;
+
+  energiesGiven_=false;
+  if(energyFile.length()==0 || !FillEnergies(energyFile)) {
+    if(pType_!=0) CalculateEnergyGrid();
+    else {
+      for(double E = minEnergy_+seperationEnergy_; E<=maxEnergy_+seperationEnergy_; E+=dE_) {
+	      crossSections_.push_back(std::pair<double,CrossSectionValues>(E-seperationEnergy_,
+								      CrossSectionValues(0.,0.,0.,0.,0.,0.,0.,0.)));
+      }
+    }
+  } 
 }
 
-bool FindInitialState(SapphireInput & input){
-  //std::vector<Level> knownLevels = NuclearLevels::FindLevels()
-}
-
-CrossSection::CrossSection(int Z, int A, int pType, std::string energyFile, bool forRates,
-			   int entranceState, std::vector<int> exitStates) : 
-  Z_(Z), A_(A), pType_(pType), skipEnergy_(1000.), entranceState_(entranceState), exitStates_(exitStates) {
-
+bool CrossSection::FindInitialState(){
   /** The groundState is set to -1.*/
   groundStateJ_ =-1.;
   
   /** The levels of the target nucleus are read via the NuclearLevels::FindLevels() method into a std::vector<Level>*/
-  std::vector<Level> knownLevels = NuclearLevels::FindLevels(Z,A);
+  std::vector<Level> knownLevels = NuclearLevels::FindLevels(Z_,A_);
   
-  if(knownLevels.size()>entranceState) {
-    Level groundState = knownLevels[entranceState];
+  if(knownLevels.size()>entranceState_) {
+    Level groundState = knownLevels[entranceState_];
     std::string parity = (groundState.Pi_<0) ? "-" : "+";
-      if(entranceState!=0) std::cout << "Initial state: E=" << groundState.energy_
+      if(entranceState_!=0) std::cout << "Initial state: E=" << groundState.energy_
 				                          << " MeV, J=" << groundState.J_ << parity << std::endl;
     
-      if(entranceState>0||groundState.energy_==0.) {
+      if(entranceState_>0||groundState.energy_==0.) {
         groundStateJ_ = groundState.J_;
         groundStatePi_ = groundState.Pi_;
       }
@@ -49,63 +64,14 @@ CrossSection::CrossSection(int Z, int A, int pType, std::string energyFile, bool
   
   if(groundStateJ_==-1.) {
     isValid_=false;
-    return;
+    return false;
   }
+  return true;
+}
 
-  double qValue;
-  
-  if(pType_ == 0) {
-    qValue=0.;
-    compoundZ_ = Z;
-    compoundA_ = A;
-    double spinNorm=2.*(2.*groundStateJ_+1.); 
-    preFactor_=hbarc*hbarc/100.*pi/spinNorm;
-  } else if(pType_ == 1) {
-    
-    if(!NuclearMass::QValue(Z,A+1,Z,A,qValue)) {
-      isValid_=false;
-      return;
-    }
-    compoundZ_ = Z;
-    compoundA_ = A+1;
-    double reducedMass =double(A)/double(A+1);
-    double spinNorm=2.*(2.*groundStateJ_+1.);
-    preFactor_ = hbarc*hbarc/200.*pi/uconv/reducedMass/spinNorm;
-  
-  } else if(pType_ == 2) {
-    
-    if(!NuclearMass::QValue(Z+1,A+1,Z,A,qValue)) {
-      isValid_=false;
-      return;
-    }
-    compoundZ_ = Z+1;
-    compoundA_ = A+1;
-    double reducedMass=double(A)/double(A+1);
-    double spinNorm=2.*(2.*groundStateJ_+1.);
-    preFactor_ = hbarc*hbarc/200.*pi/uconv/reducedMass/spinNorm;
-  
-  } else if(pType_ ==3) {
-    
-    if(!NuclearMass::QValue(Z+2,A+4,Z,A,qValue)) {
-      isValid_=false;
-      return;
-    }
-  
-    compoundZ_ = Z+2;
-    compoundA_ = A+4;
-    double reducedMass=double(A)*4./double(A+4);
-    double spinNorm=(2.*groundStateJ_+1.);
-    preFactor_ = hbarc*hbarc/200.*pi/uconv/reducedMass/spinNorm;
-  }
-  
-  seperationEnergy_ = -qValue+knownLevels[entranceState].energy_;
-
-  specifiedExitSepE_ = std::vector<double>(4,0.);
-  specifiedExitJ_ = std::vector<double>(4,-1.);
-  specifiedExitPi_ = std::vector<int>(4,0);
-  
-  for(int i =0;i<exitStates.size();i++) {
-    if(exitStates[i]>=0) {
+void CrossSection::CheckChannels(){
+  for(int i =0;i<exitStates_.size();i++) {
+    if(exitStates_[i]>=0) {
       std::vector<Level> levels;  
       double qVal;
       
@@ -133,34 +99,98 @@ CrossSection::CrossSection(int Z, int A, int pType, std::string energyFile, bool
 	        }
       }
       
-      if(levels.size()<=exitStates[i]) {
+      if(levels.size()<=exitStates_[i]) {
 	      if(i==0) std::cout << "Cannot find specified gamma residual state.  Calculating total." << std::endl;
 	      else if(i==1) std::cout << "Cannot find specified neutron residual state.  Calculating total." << std::endl;
 	      else if(i==2) std::cout << "Cannot find specified proton residual state.  Calculating total." << std::endl;
 	      else if(i==3) std::cout << "Cannot find specified alpha residual state.  Calculating total." << std::endl;
 	      exitStates_[i]=-1;
       } else {
-	      specifiedExitJ_[i] = levels[exitStates[i]].J_;
-	      specifiedExitPi_[i] = levels[exitStates[i]].Pi_;
-	      specifiedExitSepE_[i] = -qVal+levels[exitStates[i]].energy_;
-	      std::string parity = (levels[exitStates[i]].Pi_<0) ? "-" : "+";
+	      specifiedExitJ_[i] = levels[exitStates_[i]].J_;
+	      specifiedExitPi_[i] = levels[exitStates_[i]].Pi_;
+	      specifiedExitSepE_[i] = -qVal+levels[exitStates_[i]].energy_;
+	      std::string parity = (levels[exitStates_[i]].Pi_<0) ? "-" : "+";
 	      
-        if(i==0) std::cout << "Gamma residual state: E=" << levels[exitStates[i]].energy_ 
-			                    << " MeV J=" << levels[exitStates[i]].J_ << parity << std::endl;
-	      else if(i==1) std::cout << "Neutron residual state: E=" << levels[exitStates[i]].energy_ 
-			                    << " MeV J=" << levels[exitStates[i]].J_ << parity << std::endl;
-	      else if(i==2) std::cout << "Proton residual state: E=" << levels[exitStates[i]].energy_ 
-			                    << " MeV J=" << levels[exitStates[i]].J_ << parity << std::endl;
-	      else if(i==3) std::cout << "Alpha residual state: E=" << levels[exitStates[i]].energy_ 
-			                    << " MeV J=" << levels[exitStates[i]].J_ << parity << std::endl;
+        if(i==0) std::cout << "Gamma residual state: E=" << levels[exitStates_[i]].energy_ 
+			                    << " MeV J=" << levels[exitStates_[i]].J_ << parity << std::endl;
+	      else if(i==1) std::cout << "Neutron residual state: E=" << levels[exitStates_[i]].energy_ 
+			                    << " MeV J=" << levels[exitStates_[i]].J_ << parity << std::endl;
+	      else if(i==2) std::cout << "Proton residual state: E=" << levels[exitStates_[i]].energy_ 
+			                    << " MeV J=" << levels[exitStates_[i]].J_ << parity << std::endl;
+	      else if(i==3) std::cout << "Alpha residual state: E=" << levels[exitStates_[i]].energy_ 
+			                    << " MeV J=" << levels[exitStates_[i]].J_ << parity << std::endl;
       }
     }
   }
+}
 
-  if(forRates) {
-    std::cout << "Calculating Partition Function..." << std::endl;
-    CalcPartitionFunc();
+bool CrossSection::PreSetCompound(){
+  if(pType_ == 0) {
+    qValue_=0.;
+    compoundZ_ = Z_;
+    compoundA_ = A_;
+    double spinNorm=2.*(2.*groundStateJ_+1.); 
+    preFactor_=hbarc*hbarc/100.*pi/spinNorm;
+  } else if(pType_ == 1) {
+    
+    if(!NuclearMass::QValue(Z_,A_+1,Z_,A_,qValue_)) {
+      isValid_=false;
+      return false;
+    }
+    compoundZ_ = Z_;
+    compoundA_ = A_+1;
+    double reducedMass =double(A_)/double(A_+1);
+    double spinNorm=2.*(2.*groundStateJ_+1.);
+    preFactor_ = hbarc*hbarc/200.*pi/uconv/reducedMass/spinNorm;
+  
+  } else if(pType_ == 2) {
+    
+    if(!NuclearMass::QValue(Z_+1,A_+1,Z_,A_,qValue_)) {
+      isValid_=false;
+      return false;
+    }
+    compoundZ_ = Z_+1;
+    compoundA_ = A_+1;
+    double reducedMass=double(A_)/double(A_+1);
+    double spinNorm=2.*(2.*groundStateJ_+1.);
+    preFactor_ = hbarc*hbarc/200.*pi/uconv/reducedMass/spinNorm;
+  
+  } else if(pType_ ==3) {
+    
+    if(!NuclearMass::QValue(Z_+2,A_+4,Z_,A_,qValue_)) {
+      isValid_=false;
+      return false;
+    }
+  
+    compoundZ_ = Z_+2;
+    compoundA_ = A_+4;
+    double reducedMass=double(A_)*4./double(A_+4);
+    double spinNorm=(2.*groundStateJ_+1.);
+    preFactor_ = hbarc*hbarc/200.*pi/uconv/reducedMass/spinNorm;
   }
+  
+}
+
+void CrossSection::InitializeSeperationEnergies(){
+  /** The levels of the target nucleus are read via the NuclearLevels::FindLevels() method into a std::vector<Level>*/
+  std::vector<Level> knownLevels = NuclearLevels::FindLevels(Z_,A_);
+  seperationEnergy_ = -qValue_+knownLevels[entranceState_].energy_;
+
+  specifiedExitSepE_ = std::vector<double>(4,0.);
+  specifiedExitJ_ = std::vector<double>(4,-1.);
+  specifiedExitPi_ = std::vector<int>(4,0);
+}
+
+CrossSection::CrossSection(int Z, int A, int pType, std::string energyFile, bool forRates,
+			   int entranceState, std::vector<int> exitStates) : 
+  Z_(Z), A_(A), pType_(pType), skipEnergy_(1000.), entranceState_(entranceState), exitStates_(exitStates) {
+
+  if(!FindInitialState()) return;
+
+  InitializeSeperationEnergies();
+  CheckChannels();
+
+  if(forRates) CalcPartitionFunc();
   
   if(!CalcAllowedJPi(forRates)) isValid_=false;
   else isValid_=true;
@@ -198,90 +228,99 @@ bool CrossSection::FillEnergies(std::string energyFile) {
 }
 
 bool CrossSection::CalcAllowedJPi(bool forRates) {
+  //For rates calculations, transitions to all J-Pi combinations must be calculated since everything is possible, because of reactions on excited states.
   if(forRates) {
-    if((pType_==1 || pType_==2)&&A_%2==0) {
+    if((pType_==1 || pType_==2)&&A_%2==0) { //even-even nuclei with proton and neutron
       for(int i =0;i<10;i++) {
-	allowedJPi_.push_back(std::pair<double,int>(0.5+i,-1));
-	allowedJPi_.push_back(std::pair<double,int>(0.5+i,1));
+	      allowedJPi_.push_back(std::pair<double,int>(0.5+i,-1));
+	      allowedJPi_.push_back(std::pair<double,int>(0.5+i,1));
       }
-    } else {
+    } else { //everything else
       for(int i =0;i<10;i++) {
-	allowedJPi_.push_back(std::pair<double,int>(i,-1));
-	allowedJPi_.push_back(std::pair<double,int>(i,1));
+	      allowedJPi_.push_back(std::pair<double,int>(i,-1));
+	      allowedJPi_.push_back(std::pair<double,int>(i,1));
       }
     }
     return true;
   }
+
   if(pType_ == 1 || pType_ ==2) {
+    //The for loops are creating entries for allowedJPi which are pairs of J and Pi for possible compound states.
     for(double s = fabs(groundStateJ_-0.5);s<=groundStateJ_+0.5;s+=1.) {
+      //The angular momentums are capped by Decayer::maxL_
       for(double l = 0.; l<=Decayer::maxL_;l+=1.) {
-	int piCompound = (int(l)%2==0) ? groundStatePi_ : -1*groundStatePi_;
-	for(double jCompound = fabs(s-l);jCompound<=s+l;jCompound+=1.) {
-	  bool found = false;
-	  for(int i = 0;i<allowedJPi_.size();i++) {
-	    if(allowedJPi_[i].first==jCompound&&
-	       allowedJPi_[i].second==piCompound) {
-	      found=true;
-	      break;
-	    }
-	  }
-	  if(!found) 	      
-	    allowedJPi_.push_back(std::pair<double,int>(jCompound,piCompound));
-	}
+	      int piCompound = (int(l)%2==0) ? groundStatePi_ : -1*groundStatePi_;
+	      
+        for(double jCompound = fabs(s-l);jCompound<=s+l;jCompound+=1.) {
+	        bool found = false;
+	        
+          //It will be checked for possible combinations if they are already in allowedJPi
+          for(int i = 0;i<allowedJPi_.size();i++) {
+	          if(allowedJPi_[i].first==jCompound && allowedJPi_[i].second==piCompound) {
+	            found=true;
+	            break;
+	          }
+	        }
+	        
+          //If they are not found, then a new entry will be pushed back
+          if(!found) 	      
+	          allowedJPi_.push_back(std::pair<double,int>(jCompound,piCompound));
+	        }
       }
     }
-  } else if(pType_==3) {
+  } else if(pType_==3) { //Now the same thing for alphas
     for(double l = 0.;l<=Decayer::maxL_;l+=1.) {
       int piCompound = (int(l)%2==0) ? groundStatePi_ : -1*groundStatePi_;
+      
       for(double jCompound = fabs(groundStateJ_-l);jCompound<=groundStateJ_+l;jCompound+=1.) {
-	bool found = false;
-	for(int i = 0;i<allowedJPi_.size();i++) {
-	  if(allowedJPi_[i].first==jCompound&&
-	     allowedJPi_[i].second==piCompound) {
-	    found=true;
-	    break;
-	  }
-	}
-	if(!found) 	      
-	  allowedJPi_.push_back(std::pair<double,int>(jCompound,piCompound));
+	      bool found = false;
+	        for(int i = 0;i<allowedJPi_.size();i++) {
+	          if(allowedJPi_[i].first==jCompound && allowedJPi_[i].second==piCompound) {
+	            found=true;
+	            break;
+	          }
+	        }
+	      if(!found) allowedJPi_.push_back(std::pair<double,int>(jCompound,piCompound));
       }
     }
-  } else {
+  } else { //Now the same thing for gammas
     for(double jCompound = fabs(groundStateJ_-1.); jCompound<=groundStateJ_+1.;jCompound+=1.) {
       bool found = false;
       for(int i = 0;i<allowedJPi_.size();i++) {
-	if(allowedJPi_[i].first==jCompound&&
-	   allowedJPi_[i].second==-1*groundStatePi_) {
-	  found = true;
-	  break;
-	}
+	      if(allowedJPi_[i].first==jCompound&&
+	         allowedJPi_[i].second==-1*groundStatePi_) {
+	        found = true;
+	        break;
+	      }
       }
-      if(!found) 
-	allowedJPi_.push_back(std::pair<double,int>(jCompound,-1*groundStatePi_));
+      
+      if(!found) allowedJPi_.push_back(std::pair<double,int>(jCompound,-1*groundStatePi_));
+      
       found = false;
+      
       for(int i = 0;i<allowedJPi_.size();i++) {
-	if(allowedJPi_[i].first==jCompound&&
-	   allowedJPi_[i].second==groundStatePi_) {
-	  found=true;
-	  break;
-	}
+	      if(allowedJPi_[i].first==jCompound && allowedJPi_[i].second==groundStatePi_) {
+	        found=true;
+	        break;
+	      }
       }
-      if(!found) 
-      	allowedJPi_.push_back(std::pair<double,int>(jCompound,groundStatePi_));
+      
+      if(!found) allowedJPi_.push_back(std::pair<double,int>(jCompound,groundStatePi_));
     }
+
     for(double jCompound = fabs(groundStateJ_-2.); jCompound<=groundStateJ_+2.;jCompound+=1.) {
       bool found = false;
       for(int i = 0;i<allowedJPi_.size();i++) {
-	if(allowedJPi_[i].first==jCompound&&
-	   allowedJPi_[i].second==groundStatePi_) {
-	  found=true;
-	  break;
-	}
+	      if(allowedJPi_[i].first==jCompound&& allowedJPi_[i].second==groundStatePi_) {
+	        found=true;
+	        break;
+	      }
       }
       if(!found) 
        	allowedJPi_.push_back(std::pair<double,int>(jCompound,groundStatePi_));
     }
   }
+  //Initialization of double vectors for transmission coefficients.
   for(int i = 0;i<allowedJPi_.size();i++) {
     entranceTrans_[i]=std::vector<double>();
     gExitTrans_[i]=std::vector<double>();
@@ -1096,13 +1135,13 @@ void CrossSection::CreateTempVector() {
   rateTemps_.push_back(0.0005);
   rateTemps_.push_back(0.001);
   rateTemps_.push_back(0.005);
+  */
   rateTemps_.push_back(0.01);
   rateTemps_.push_back(0.05);
-  */
   rateTemps_.push_back(0.10);
   rateTemps_.push_back(0.15);
   rateTemps_.push_back(0.20);
-  //rateTemps_.push_back(0.25);
+  rateTemps_.push_back(0.25);
   rateTemps_.push_back(0.30);
   rateTemps_.push_back(0.40);
   rateTemps_.push_back(0.50);
@@ -1119,10 +1158,15 @@ void CrossSection::CreateTempVector() {
   rateTemps_.push_back(4.00);
   rateTemps_.push_back(4.50);
   rateTemps_.push_back(5.00);
+  rateTemps_.push_back(5.50);
   rateTemps_.push_back(6.00);
+  rateTemps_.push_back(6.50);
   rateTemps_.push_back(7.00);
+  rateTemps_.push_back(7.50);
   rateTemps_.push_back(8.00);
+  rateTemps_.push_back(8.50);
   rateTemps_.push_back(9.00);
+  rateTemps_.push_back(9.50);
   rateTemps_.push_back(10.00);
 }
 
@@ -1133,10 +1177,19 @@ void CrossSection::CreateMACSEnergiesVector() {
   macsEnergies_.push_back(0.020);
   macsEnergies_.push_back(0.025);
   macsEnergies_.push_back(0.030);
+  macsEnergies_.push_back(0.035);
   macsEnergies_.push_back(0.040);
+  macsEnergies_.push_back(0.045);
   macsEnergies_.push_back(0.050);
+  macsEnergies_.push_back(0.055);
   macsEnergies_.push_back(0.060);
+  macsEnergies_.push_back(0.065);
+  macsEnergies_.push_back(0.070);
+  macsEnergies_.push_back(0.075);
   macsEnergies_.push_back(0.080);
+  macsEnergies_.push_back(0.085);
+  macsEnergies_.push_back(0.090);
+  macsEnergies_.push_back(0.095);
   macsEnergies_.push_back(0.100);
 }
 
@@ -1389,32 +1442,40 @@ double gsl_partfunc_integrand(double x, void * p) {
 }
 
 void CrossSection::CalcPartitionFunc() {
+  std::cout << "Calculating Partition Function..." << std::endl;
   std::vector<Level> knownLevels = NuclearLevels::FindLevels(Z_,A_);
   double highestLevel = (knownLevels.size()) ? knownLevels[knownLevels.size()-1].energy_ : 0.;
   double spinOffset = (A_%2==0) ? 0. : 0.5;
+  
+  //Iteration will be performed twice. 1. over rateTemps. 2. over macsEnergies temps.
   for(int i=0;i<2;++i) {
     std::vector<double>::const_iterator end = (i==0) ? rateTemps_.end() : macsEnergies_.end();
+    
     for(std::vector<double>::const_iterator it = (i==0) ? rateTemps_.begin() : macsEnergies_.begin();it<end;++it) {
       double sum = 0.;
       double temperature = (i==0) ? (*it) : (*it)/boltzConst;
+      
       for(int k=0; k<knownLevels.size();k++) {
-	sum+=exp(-knownLevels[k].energy_/temperature/boltzConst)*(2.*knownLevels[k].J_+1.);
+        //Sum of boltzmann factors for states which are degenerated by the factor (2*J+1) for known levels
+	      sum+=exp(-knownLevels[k].energy_/temperature/boltzConst)*(2.*knownLevels[k].J_+1.);
       }
+
       for(double j=0.;j<10.0;j+=1.) {	
-	double jValue = spinOffset+j;
-	LevelDensity* den = new RauscherLevelDensity(Z_,A_,jValue);
-	gsl_integration_workspace * w 
-	  = gsl_integration_workspace_alloc (1000);
-	gsl_function F;
-	F.function = &gsl_partfunc_integrand;  
-	double error,value;
-	struct gsl_partfunc_params params = {temperature,den};
-	F.params=&params;
-	gsl_integration_qagiu(&F,highestLevel,0.0,1e-3,1000,w,&value,&error);
-	gsl_integration_workspace_free (w);
-	sum+=2.*(2.*jValue+1.)*value;
-	delete den; 
+	      double jValue = spinOffset+j;
+	      LevelDensity* den = new RauscherLevelDensity(Z_,A_,jValue);
+	      gsl_integration_workspace * w 
+	      = gsl_integration_workspace_alloc (1000);
+	      gsl_function F;
+	      F.function = &gsl_partfunc_integrand;  
+	      double error,value;
+	      struct gsl_partfunc_params params = {temperature,den};
+	      F.params=&params;
+	      gsl_integration_qagiu(&F,highestLevel,0.0,1e-3,1000,w,&value,&error);
+	      gsl_integration_workspace_free (w);
+	      sum+=2.*(2.*jValue+1.)*value;
+	      delete den; 
       }
+      
       if(i==0) partFunc_.push_back(std::pair<double,double>(temperature,sum/(2.*groundStateJ_+1.)));
       else partFuncMACS_.push_back(std::pair<double,double>(temperature,sum/(2.*groundStateJ_+1.)));
     }

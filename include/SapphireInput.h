@@ -136,13 +136,26 @@ class SapphireInput{
         void CalculateGammaCutoff(bool x){calculateGammaCutoff=x;}   /**< Setter for bool calculateGammaCutoff*/
         void PorterThomas_g(bool x){porterThomas_g=x;}                  /**<Setter for bool porterThomas_g*/
         void PorterThomas_p(bool x){porterThomas_p=x;}                  /**<Setter for bool porterThomas_p*/
+        void PrintTrans(bool x){printTrans=x;}                      /**<Setter for bool printTrans*/
         void PreEq(bool x){preEq=x;}                                    /**<Setter for bool preEq*/
 
         void EntranceState(int x){entranceState=x;}                  /**< Setter for entranceState*/
-        void g_ExitStates(int x){g_exitStates=x;}              /**<Setter for g_exitStates*/ 
-        void n_ExitStates(int x){n_exitStates=x;}              /**<Setter for n_exitStates*/ 
-        void p_ExitStates(int x){p_exitStates=x;}              /**<Setter for p_exitStates*/ 
-        void a_ExitStates(int x){a_exitStates=x;}              /**<Setter for a_exitStates*/ 
+        void g_ExitStates(int x){               /**<Setter for g_exitStates*/ 
+            g_exitStates=x;
+            exitStates[0]=x;
+        }              
+        void n_ExitStates(int x){              /**<Setter for n_exitStates*/ 
+            n_exitStates=x;
+            exitStates[1]=x;
+        }
+        void p_ExitStates(int x){               /**<Setter for p_exitStates*/ 
+            p_exitStates=x;
+            exitStates[2]=x;
+        }             
+        void a_ExitStates(int x){              /**<Setter for a_exitStates*/ 
+            a_exitStates=x;
+            exitStates[3]=x;
+        }
         void g_Formalism(int x){g_formalism=x;}              /**<Setter for g_formalism*/
         void n_Formalism(int x){n_formalism=x;}              /**<Setter for n_formalism*/
         void p_Formalism(int x){p_formalism=x;}              /**<Setter for p_formalism*/
@@ -151,6 +164,9 @@ class SapphireInput{
         void ChunkSize(int x){chunkSize=x;}              /**<Setter for chunkSize*/
         void Parity(int x){parity=x;}              /**<Setter for parity*/
         void PType(int x){pType=x;}              /**<Setter for pType*/
+        void CompoundZ(int x){compoundZ=x;}              /**<Setter for compoundZ*/
+        void CompoundA(int x){compoundA=x;}              /**<Setter for compoundA*/
+        void GroundstatePi(int x){groundstatePi=x;}          /**<Setter for groundstatePi*/
         void Suffix(int x){suffix=x;}                               /**< Setter for string module*/
         void XsZ(int x) {xsZ=x;}                    /**<Setter for xsZ*/
         void XsA(int x) {xsA=x;}                    /**<Setter for xsA*/
@@ -163,6 +179,9 @@ class SapphireInput{
         void LowEnergy(double x){lowEnergy=x;}                 /**<Setter for lowEnergy*/ 
         void HighEnergy(double x){highEnergy=x;}                /**<Setter for highEnergy*/ 
         void Spin(double x){spin=x;}                            /**<Setter for spin*/        
+        void GroundstateJ(double x){groundstateJ=x;}            /**<Setter for groundstateJ*/        
+        void QValue(double x){qValue=x;}                        /**<Setter for qValue*/  
+
 
         void EnergyFile(std::string x){energyFile=x;}                       /**< Setter for string energyFile*/
         void Energies(std::string x){energies=x;}                       /**< Setter for string energies*/
@@ -195,6 +214,7 @@ class SapphireInput{
         bool CalculateGammaCutoff() const {return calculateGammaCutoff;} /**<Getter for calculateGammaCutoff*/
         bool PorterThomas_g() const {return porterThomas_g;}             /**<Getter for bool porterThomas_g*/
         bool PorterThomas_p() const {return porterThomas_p;}             /**<Getter for bool porterThomas_p*/
+        bool PrintTrans() const {return printTrans;}                       /**Getter for bool printTrans*/
         bool PreEq() const {return preEq;}                                /**<Getter for bool preEq*/
 
         int EntranceState() const {return entranceState;}              /**<Getter for entranceState*/ 
@@ -210,13 +230,14 @@ class SapphireInput{
         int ChunkSize() const {return chunkSize;}              /**<Getter for chunkSize*/ 
         int Parity() const {return parity;}                    /**<Getter for parity*/
         int PType() const {return pType;}                      /**<Getter for pType*/
+        int CompoundA() const {return compoundA;}                 /**<Getter for compoundA*/
+        int CompoundZ() const {return compoundZ;}                /**<Getter for compoundZ*/
+        int GroundstatePi() const {return groundstatePi;}       /**<Getter for groundstatePi*/
         int Suffix() const {return suffix;}                    /**<Getter for suffix*/
         int XsZ() const {return xsZ;}                    /**<Getter for xsZ*/
         int XsA() const {return xsA;}                    /**<Getter for xsA*/
         int DcZ() const {return dcZ;}                    /**<Getter for dcZ*/
         int DcA() const {return dcA;}                    /**<Getter for dcA*/
-
-        
 
         double DecayerMaxL() const {return decayerMaxL;}              /**<Getter for decayerMaxL*/
         double PreEqMaxL() const {return preEqMaxL;}              /**<Getter for preEqMaxL*/ 
@@ -224,6 +245,8 @@ class SapphireInput{
         double LowEnergy() const {return lowEnergy;}              /**<Getter for lowEnergy*/ 
         double HighEnergy() const {return highEnergy;}             /**<Getter for highEnergy*/ 
         double Spin() const {return spin;}                         /**<Getter for spin*/
+        double GroundstateJ() const {return groundstateJ;}              /**<Getter for groundstateJ*/
+        double QValue() const {return qValue;}                         /**<Getter for qValue*/
 
         std::string EnergyFile() const {return energyFile;}            /**<Getter for energyFile*/ 
         std::string Energies() const {return energies;}            /**<Getter for energies*/ 
@@ -237,7 +260,7 @@ class SapphireInput{
         std::string LevelDir() const {return levelDir;}                    /**<Getter for levelDir*/
         std::string SpinFile() const {return spinFile;}                    /**<Getter for spinFile*/
 
-        
+        std::vector<int> exitStates;  /**< Vector of integer for the number of exitStates*/
     private:
         bool calcRates;             /**< Bool if rates should be calculated*/
         bool calcAverageWidth;      /**< Bool if average widths should be calculated*/
@@ -264,8 +287,9 @@ class SapphireInput{
         int chunkSize;              /**< Portion of the total numbers of decays which is calculated at once.*/
         int parity;                 /**< Parity of the high energy resonance*/
         int pType;                  /**< Type of projectile*/
-        int chargeNumber;           /**< Charge number*/
-        int massNumber;             /**< Mass number*/
+        int compoundA;             /**< Int for the mass of the compound nuclei*/
+        int compoundZ;             /**< Int for the charge of the compound nuclei*/
+        int groundstatePi;          /**< Int for the parity of the groundstate*/
         int suffix;                 /**< Suffix for output*/
         int xsZ;                    /** Integer for the charge number of the isotope in reaction module*/
         int xsA;                    /** Integer for the mass number of the isotope in reaction module*/
@@ -278,6 +302,8 @@ class SapphireInput{
         double lowEnergy;           /**< lower limit for initial energy*/
         double highEnergy;          /**< higher limit for initial energy*/
         double spin;                /**< Spin of the decaying resonance*/
+        double groundstateJ;        /**< Spin of the groundstate*/
+        double qValue;              /**< double for the qvalue of the reaction*/
                 
         std::string energyFile;     /**< String with the path to the energyFile*/
         std::string reactionFile;   /**< String with the path to the reactionFile*/
@@ -289,4 +315,6 @@ class SapphireInput{
         std::string gdrParams;      /**< String for the path to the GDR parameter file*/
         std::string levelDir;       /**< String for the path to the levels directory*/
         std::string spinFile;       /**< String for the path tot the spinFile*/
+
+        
 };
