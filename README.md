@@ -14,6 +14,7 @@
     - [old](#old)
     - [help](#help)
 - [References](#references)
+  - [Documentation](#documentation)
   - [About Sapphire](#about-sapphire)
   - [Using Sapphire](#using-sapphire)
 
@@ -143,6 +144,10 @@ Print the help text for the different modules.
 ---
 
 ## References
+
+### Documentation
+The documentation of the code can be found in [./docs/html/index.html](./docs/html/index.html).
+
 ### About Sapphire
 If you are using *Sapphire* you should cite one or more of the references below.
 
