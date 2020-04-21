@@ -1,7 +1,7 @@
 var searchData=
 [
   ['n_5fexitstates',['n_ExitStates',['../d9/d72/a00412.html#ac083076d15dc69c93fd096fe4bdc6516',1,'SapphireInput::n_ExitStates(int x)'],['../d9/d72/a00412.html#add8499e04ca928cf29abe59f22552818',1,'SapphireInput::n_ExitStates() const'],['../d9/d72/a00412.html#aed17c31afb503008ec23c0681bad170a',1,'SapphireInput::n_exitStates()']]],
-  ['n_5fformalism',['n_Formalism',['../d9/d72/a00412.html#a932aab84a9a911778c04047a659279fd',1,'SapphireInput::n_Formalism(int x)'],['../d9/d72/a00412.html#a791da79fa66a585f5e7fd570af39025d',1,'SapphireInput::n_Formalism() const'],['../d9/d72/a00412.html#abd699049db7ab8645b6881700ae4dc90',1,'SapphireInput::n_formalism()']]],
+  ['n_5fformalism',['n_formalism',['../d9/d72/a00412.html#abd699049db7ab8645b6881700ae4dc90',1,'SapphireInput::n_formalism()'],['../d9/d72/a00412.html#a932aab84a9a911778c04047a659279fd',1,'SapphireInput::n_Formalism(int x)'],['../d9/d72/a00412.html#a791da79fa66a585f5e7fd570af39025d',1,'SapphireInput::n_Formalism() const']]],
   ['ncritical_5f',['nCritical_',['../db/d7e/a00372.html#a714441202c0e24c151671a1910e88a33',1,'ParticleHoleLevelDensity']]],
   ['neutron_5f',['neutron_',['../d3/dcc/a00264.html#a2d27c6bad11726cd2a93aba6d68e65ff',1,'CrossSectionValues']]],
   ['neutronenergy_5f',['neutronEnergy_',['../db/d7b/a00296.html#a3e93c690e3ab01b5ffe32782b3211baf',1,'DecayResults']]],

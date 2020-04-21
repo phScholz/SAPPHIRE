@@ -37,10 +37,10 @@ var searchData=
   ['specifiedexitj_5f',['specifiedExitJ_',['../db/d12/a00268.html#a9dfa2db3b9f59293359e79ee6cc3b20f',1,'CrossSection']]],
   ['specifiedexitpi_5f',['specifiedExitPi_',['../db/d12/a00268.html#a8c8a4b66955f5e6dad5f80a40fb685e5',1,'CrossSection']]],
   ['specifiedexitsepe_5f',['specifiedExitSepE_',['../db/d12/a00268.html#a7a752c28fd0f5418e0c5136391792d41',1,'CrossSection']]],
-  ['spin',['Spin',['../d9/d72/a00412.html#adbcba22a9ded657aaeb919ab465f73a3',1,'SapphireInput::Spin(double x)'],['../d9/d72/a00412.html#a3d8f04da7da3c55ac335d4d334487f61',1,'SapphireInput::Spin() const'],['../d9/d72/a00412.html#af4d1495e1067fbddf7b0daa874139c59',1,'SapphireInput::spin()']]],
+  ['spin',['spin',['../d9/d72/a00412.html#af4d1495e1067fbddf7b0daa874139c59',1,'SapphireInput::spin()'],['../d9/d72/a00412.html#adbcba22a9ded657aaeb919ab465f73a3',1,'SapphireInput::Spin(double x)'],['../d9/d72/a00412.html#a3d8f04da7da3c55ac335d4d334487f61',1,'SapphireInput::Spin() const']]],
   ['spin_5f',['spin_',['../dc/d28/a00276.html#ab52ca1bd083db60ceaf8fe58b4647669',1,'SpinRatePair::spin_()'],['../d8/ddd/a00380.html#a3143aef2c113158fca1643a2505f0b9a',1,'ParticleTransmissionFunc::spin_()'],['../d9/dc1/a00388.html#af88cd36daa52c5988fb000c0c67e49f9',1,'PreEqSpinRatePair::spin_()'],['../d9/d95/a00400.html#a28cc0f76ab593e02207150533174395f',1,'PreEqTransitionRateFunc::spin_()']]],
   ['spinfactor_5f',['spinFactor_',['../db/d7e/a00372.html#a9f070528193fa9324ba24e9f31186dc4',1,'ParticleHoleLevelDensity']]],
-  ['spinfile',['SpinFile',['../d9/d72/a00412.html#abd910bd14843db7f61e61e73e118feae',1,'SapphireInput::SpinFile(std::string x)'],['../d9/d72/a00412.html#a4a8beee54b05db342cdfc7404815b1d1',1,'SapphireInput::SpinFile() const'],['../d9/d72/a00412.html#a3846b65d2473cf4d2597c74c00bc29a9',1,'SapphireInput::spinFile()']]],
+  ['spinfile',['spinFile',['../d9/d72/a00412.html#a3846b65d2473cf4d2597c74c00bc29a9',1,'SapphireInput::spinFile()'],['../d9/d72/a00412.html#abd910bd14843db7f61e61e73e118feae',1,'SapphireInput::SpinFile(std::string x)'],['../d9/d72/a00412.html#a4a8beee54b05db342cdfc7404815b1d1',1,'SapphireInput::SpinFile() const']]],
   ['spinratepair',['SpinRatePair',['../dc/d28/a00276.html',1,'SpinRatePair'],['../dc/d28/a00276.html#a041ba492d89c65a3a08c8ab7043bd56e',1,'SpinRatePair::SpinRatePair()']]],
   ['spinratepairs_5f',['spinRatePairs_',['../db/dc3/a00284.html#a0db418f928e6d0d23bd825a32e940b0e',1,'Decayer::spinRatePairs_()'],['../d9/da1/a00396.html#af638aab2b57a5c14d986bf0484290364',1,'PreEqDecayer::spinRatePairs_()']]],
   ['start',['start',['../d9/de6/a00404.html#ad68cc10b670e57ec3a13df2d3b80a9d1',1,'ProgressBar::start()'],['../df/d15/a00416.html#a3a8b5272198d029779dc9302a54305a8',1,'Timer::start()']]],
@@ -49,6 +49,6 @@ var searchData=
   ['stop',['stop',['../d9/de6/a00404.html#af73563e4933737023a553c2c528146a6',1,'ProgressBar::stop()'],['../df/d15/a00416.html#a988f79aa183d9d5473c13106f5babe48',1,'Timer::stop()']]],
   ['stringify',['STRINGIFY',['../d7/d46/a00002.html#a43e1cad902b6477bec893cb6430bd6c8',1,'STRINGIFY():&#160;CMakeCCompilerId.c'],['../dd/dad/a00005.html#a43e1cad902b6477bec893cb6430bd6c8',1,'STRINGIFY():&#160;CMakeCXXCompilerId.cpp']]],
   ['stringify_5fhelper',['STRINGIFY_HELPER',['../d7/d46/a00002.html#a2ae9b72bb13abaabfcf2ee0ba7d3fa1d',1,'STRINGIFY_HELPER():&#160;CMakeCCompilerId.c'],['../dd/dad/a00005.html#a2ae9b72bb13abaabfcf2ee0ba7d3fa1d',1,'STRINGIFY_HELPER():&#160;CMakeCXXCompilerId.cpp']]],
-  ['suffix',['Suffix',['../d9/d72/a00412.html#ac22986dfd45f0dd2b56035c0a24ddbad',1,'SapphireInput::Suffix(int x)'],['../d9/d72/a00412.html#ab85d2c1b041b0ac7b8cd3a84e5607f49',1,'SapphireInput::Suffix() const'],['../d9/d72/a00412.html#a924c7aa1a5475f49dc9172728dd952c4',1,'SapphireInput::suffix()']]],
+  ['suffix',['suffix',['../d9/d72/a00412.html#a924c7aa1a5475f49dc9172728dd952c4',1,'SapphireInput::suffix()'],['../d9/d72/a00412.html#ac22986dfd45f0dd2b56035c0a24ddbad',1,'SapphireInput::Suffix(int x)'],['../d9/d72/a00412.html#ab85d2c1b041b0ac7b8cd3a84e5607f49',1,'SapphireInput::Suffix() const']]],
   ['tr1',['tr1',['../d9/d21/a00240.html',1,'std']]]
 ];

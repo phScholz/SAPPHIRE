@@ -47,11 +47,12 @@ class CrossSection {
   * The following steps will be taken:
   * 1. FindInitialState() will be called, which finds the entrance state in the list of known levels and stores the properties of 
   * spin and parity of this state into private member variables (CrossSection::groundstateJ_ and groundstatePi_).  
-  * 2. Then the method InitializeSeperationEnergies() will be called which initializes the seperationEnergy_ as well as the 
+  * 2. PreSetCompound() is called to set the internal mass and atomic numbers for the compound nucleus and to calculate the prefactor of the cross section.
+  * 3. Then the method InitializeSeperationEnergies() will be called which initializes the seperationEnergy_ as well as the 
   * properties of the exitStates.
-  * 3. The validity of the exitStates will be checked via CheckChannels().
-  * 4. If the input parameter was set to calculate reaction rates, then the normalized partition function \f$ G_0(T) = \frac{G(T)}{g_0} \f$ will be calculated via CalcPartitionFunc().
-  * 5. CalcAllowedJPi() is called to fill the std::vector `allowedJPi_` with all allowed combinations of spin and parity for compoundstates accessible via the selection rules. Additionally, maps for the transmission coefficients are initialized.
+  * 4. The validity of the exitStates will be checked via CheckChannels().
+  * 5. If the input parameter was set to calculate reaction rates, then the normalized partition function \f$ G_0(T) = \frac{G(T)}{g_0} \f$ will be calculated via CalcPartitionFunc().
+  * 6. CalcAllowedJPi() is called to fill the std::vector `allowedJPi_` with all allowed combinations of spin and parity for compoundstates accessible via the selection rules. Additionally, maps for the transmission coefficients are initialized.
   */
   CrossSection(int Z,int A,int pType,std::string energyFile,bool forRates,int entranceState = 0, std::vector<int> exitStates = std::vector<int>(4,-1));
 
@@ -166,6 +167,7 @@ class CrossSection {
   bool isValid_;
   bool energiesGiven_;
   bool calcRates_;
+  bool verbose_=true;
   int Z_; /**< The atomic number of the target nucleus*/
   int A_; /**< The mass number of the target nucleus*/
   int pType_; /**< Integer which defines the type of the projectile*/

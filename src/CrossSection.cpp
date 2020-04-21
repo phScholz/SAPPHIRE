@@ -43,6 +43,7 @@ CrossSection::CrossSection(SapphireInput & input):
 
 bool CrossSection::FindInitialState(){
   /** The groundState is set to -1.*/
+  std::cout << "Find initial state ..." <<std::endl;
   groundStateJ_ =-1.;
   
   /** The levels of the target nucleus are read via the NuclearLevels::FindLevels() method into a std::vector<Level>*/
@@ -70,6 +71,7 @@ bool CrossSection::FindInitialState(){
 }
 
 void CrossSection::CheckChannels(){
+  if (verbose_) std::cout << "Checking channels ..." <<std::endl;
   for(int i =0;i<exitStates_.size();i++) {
     if(exitStates_[i]>=0) {
       std::vector<Level> levels;  
@@ -125,6 +127,7 @@ void CrossSection::CheckChannels(){
 }
 
 bool CrossSection::PreSetCompound(){
+  if(verbose_) std::cout << "Pre set compound ..." <<std::endl;
   if(pType_ == 0) {
     qValue_=0.;
     compoundZ_ = Z_;
@@ -172,6 +175,7 @@ bool CrossSection::PreSetCompound(){
 }
 
 void CrossSection::InitializeSeperationEnergies(){
+  if(verbose_) std::cout << "Initialize seperation energies ..." <<std::endl;
   /** The levels of the target nucleus are read via the NuclearLevels::FindLevels() method into a std::vector<Level>*/
   std::vector<Level> knownLevels = NuclearLevels::FindLevels(Z_,A_);
   seperationEnergy_ = -qValue_+knownLevels[entranceState_].energy_;
@@ -181,19 +185,23 @@ void CrossSection::InitializeSeperationEnergies(){
   specifiedExitPi_ = std::vector<int>(4,0);
 }
 
-CrossSection::CrossSection(int Z, int A, int pType, std::string energyFile, bool forRates,
-			   int entranceState, std::vector<int> exitStates) : 
+CrossSection::CrossSection(int Z, int A, int pType, std::string energyFile, bool forRates, int entranceState, std::vector<int> exitStates) : 
   Z_(Z), A_(A), pType_(pType), skipEnergy_(1000.), entranceState_(entranceState), exitStates_(exitStates) {
 
+  isValid_=true;
+  
   if(!FindInitialState()) return;
+  
+  PreSetCompound();
 
   InitializeSeperationEnergies();
-  CheckChannels();
+
+  CheckChannels();  
 
   if(forRates) CalcPartitionFunc();
   
-  if(!CalcAllowedJPi(forRates)) isValid_=false;
-  else isValid_=true;
+  if(!CalcAllowedJPi(forRates)){ isValid_=false; std::cout << "Abort ..." << std::endl;}
+  else{ isValid_=true;}
 
   energiesGiven_=false;
   if(energyFile.length()==0 || !FillEnergies(energyFile)) {
@@ -204,10 +212,11 @@ CrossSection::CrossSection(int Z, int A, int pType, std::string energyFile, bool
 								      CrossSectionValues(0.,0.,0.,0.,0.,0.,0.,0.)));
       }
     }
-  }
+  }  
 }
 
 bool CrossSection::FillEnergies(std::string energyFile) {
+  if(verbose_) std::cout << "Trying to read energyFile ..." <<std::endl;
   std::ifstream in(energyFile.c_str());
   if(!in) return false;
   while(!in.eof()) {
@@ -228,6 +237,7 @@ bool CrossSection::FillEnergies(std::string energyFile) {
 }
 
 bool CrossSection::CalcAllowedJPi(bool forRates) {
+  if(verbose_) std::cout << "Calculate allowed spin and parity ..." <<std::endl;
   //For rates calculations, transitions to all J-Pi combinations must be calculated since everything is possible, because of reactions on excited states.
   if(forRates) {
     if((pType_==1 || pType_==2)&&A_%2==0) { //even-even nuclei with proton and neutron
@@ -360,6 +370,7 @@ bool CrossSection::CalcDecayerVector(double E, DecayerVector& decayerVector, boo
 }
 
 void CrossSection::Calculate() {
+  if(verbose_) std::cout << "Calculate ..." << std::endl;
   if(calculateGammaCutoff_) {
     TransitionRateFunc::SetGammaCutoffEnergy(10000.);
     gammaCutoffSet_ = false;
@@ -859,7 +870,7 @@ std::pair<double,double> CrossSection::CalcAverageDWaveResWidth() {
  * Creates SMOKER-like energy grid. A bit crazy.
  */
 void CrossSection::CalculateEnergyGrid() {
-  
+  if(verbose_) std::cout << "Calculate energy grid ..." <<std::endl;
   double neutronSepE;
   double protonSepE;
   double alphaSepE;
@@ -867,16 +878,19 @@ void CrossSection::CalculateEnergyGrid() {
   if(!NuclearMass::QValue(compoundZ_,compoundA_,
 			  compoundZ_,compoundA_-1,neutronSepE)) {
     isValid_=false;
+    if(verbose_) std::cout << "Cannot find Qvalue for neutron decay!!!" <<std::endl;
     return;
   } else neutronSepE *= -1.;
   if(!NuclearMass::QValue(compoundZ_,compoundA_,
 			  compoundZ_-1,compoundA_-1,protonSepE)) {
     isValid_=false;
+    if(verbose_) std::cout << "Cannot find Qvalue for proton decay !!!" <<std::endl;
     return;
   } else protonSepE *= -1.;
   if(!NuclearMass::QValue(compoundZ_,compoundA_,
 			  compoundZ_-2,compoundA_-4,alphaSepE)) {
     isValid_=false;
+    if(verbose_) std::cout << "Cannot find Qvalue for alpha decay !!!" <<std::endl;
     return;
   } else alphaSepE *= -1.;
 

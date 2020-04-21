@@ -1,7 +1,7 @@
 var searchData=
 [
   ['m1_5f',['m1_',['../d8/ddd/a00380.html#ac63f83f460c222601d628856ed409a2b',1,'ParticleTransmissionFunc::m1_()'],['../d9/d95/a00400.html#acae4b0c7035f43dd47396e821dd403c7',1,'PreEqTransitionRateFunc::m1_()']]],
-  ['m2_5f',['M2_',['../d9/d95/a00400.html#a5e8f728c32b0eda22dfe8725c828245a',1,'PreEqTransitionRateFunc::M2_()'],['../d9/d95/a00400.html#a2fbfc2be7b0b0b7f8a6541ae090a9d98',1,'PreEqTransitionRateFunc::m2_()'],['../d4/dd3/a00428.html#a67cef3345cf8acb114f843cf151bc787',1,'TransmissionFunc::m2_()']]],
+  ['m2_5f',['m2_',['../d9/d95/a00400.html#a2fbfc2be7b0b0b7f8a6541ae090a9d98',1,'PreEqTransitionRateFunc::m2_()'],['../d4/dd3/a00428.html#a67cef3345cf8acb114f843cf151bc787',1,'TransmissionFunc::m2_()'],['../d9/d95/a00400.html#a5e8f728c32b0eda22dfe8725c828245a',1,'PreEqTransitionRateFunc::M2_()']]],
   ['macsenergies_5f',['macsEnergies_',['../db/d12/a00268.html#a1b23ca7018a36ae790dd9fc646cdff74',1,'CrossSection']]],
   ['mask_5f',['mask_',['../dc/d59/a00364.html#a22d01d36521f35952e3b605a4f201ffb',1,'MassEntry']]],
   ['masstable',['massTable',['../d9/d72/a00412.html#aa7459a40e35293a0ed32ec55c2c6938f',1,'SapphireInput']]],

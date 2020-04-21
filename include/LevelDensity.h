@@ -1,5 +1,3 @@
-#ifndef LEVELDENSITY_H
-#define LEVELDENSITY_H
 #pragma once
 class LevelDensity {
  public:
@@ -31,4 +29,4 @@ class LevelDensity {
   double e0_;
 };
 
-#endif
+
