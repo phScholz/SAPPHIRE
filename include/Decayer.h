@@ -10,6 +10,7 @@
 class Decayer{
 
   public:
+  
     /**
      * @brief Constructor of the Decayer class
      * @param Z Charge/atomic number of the decaying nucleus
@@ -54,7 +55,16 @@ class Decayer{
      */
     ~Decayer();
 
-    bool Decay(int&,int&,double&,int&,double&,double&);
+    /**
+     * @brief Drawing a randmomNumber and use that to determine the state to decay to via the CDF
+     * @param Z Charge/atomic number of the daughter nucleus.
+     * @param A Mass number of the daughter nucleus.
+     * @param jFinal Spin of the daughter nucleus.
+     * @param piFinal Parity of the daughter nucleus.
+     * @param excitationEnergy Excitation energy of the daughter nucleus.
+     * @param decayEnergy Decay energy.
+     */
+    bool Decay(int& Z,int& A,double& jFinal,int& piFinal,double& excitationEnergy,double& decayEnergy);
     
 
     /**
@@ -135,6 +145,27 @@ class Decayer{
      * @brief Check if the initial state is a bound state and if yes build the CDF via BuildKnownCDF().
      */
     bool BoundStateCheck();
+
+    /**
+     * @brief Adding SpinRatePairs entries for alpha decay.
+     */
+    void SetAlphaSpinRatePairs();
+
+    /**
+     * @brief Adding SpinRatePairs entries for proton or neutron decay.
+     */
+    void SetProtonNeutronSpinRatePairs();
+
+    /**
+     * @brief Adding SpinRatePairs entries for E1 or M1 transitions.
+     */
+    void SetE1M1SpinRatePairs();
+
+    /**
+     * @brief Adding SpinRatePairs entries for E2 transitions.
+    */
+    void SetE2SpinRatePairs();
+
    private:
     static bool isCrossSection_; /**< Boolean to indicate whether this Decayer is part of a CrossSection calculation or not.*/
     static double maxL_; /**< The maximum angular momentum*/

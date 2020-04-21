@@ -116,12 +116,12 @@ bool DecayController::Decay(double& neutronEntrance,
     
       if(decayer->Decay(daughterZ,daughterA,daughterJ,daughterPi,daughterEnergy,decayEnergy))
       {
-        /*
+        
         decayer->PrintFunctions();
         decayer->PrintCDF();
         decay = false;
         continue;
-        */
+        
 
         if(daughterEnergy<=thresholdEnergy_){
 	        daughterEnergy = 0.;

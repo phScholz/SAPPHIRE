@@ -8,7 +8,7 @@
 #include <math.h>
 #include <omp.h>
 
-extern unsigned int randomSeed[12];
+extern unsigned int randomSeed[32];
 
 bool Decayer::BoundStateCheck(){
   bool knownCDFBuilt = false;
@@ -66,20 +66,8 @@ void Decayer::InitializeWidths(){
   totalIntegralSqrd_=0.; 
 }
 
-Decayer::Decayer(int Z, int A, double jInitial, int piInitial, double energy, double totalWidthForCorrection, double uncorrTotalWidthForCorrection, double uncorrTotalWidthSqrdForCorrection,		 Decayer* widthCorrectedDecayer) :
-  Z_(Z), A_(A), piInitial_(piInitial), jInitial_(jInitial), energy_(energy), totalWidthForCorrection_(totalWidthForCorrection), uncorrTotalWidthForCorrection_(uncorrTotalWidthForCorrection), uncorrTotalWidthSqrdForCorrection_(uncorrTotalWidthSqrdForCorrection), widthCorrectedDecayer_(widthCorrectedDecayer) {
-
-  InitializeWidths();
-
-  InitializeQValues();
-
-  //Check whether it is a bound state, then construct a knownCDF
-  if(!BoundStateCheck()) {
-    //otherwise  consider transition from the continuum
-    
-    //If Alphadecay is energetically possible
-    if(qValueAlpha_+energy_>0) {
-      for(double l=0;l<=maxL_;l+=1.) {
+void Decayer::SetAlphaSpinRatePairs(){
+  for(double l=0;l<=maxL_;l+=1.) {
         int piFinal = (int(l)%2==0) ? piInitial_ : -1*piInitial_;
 
 	      for(double jFinal = fabs(l-jInitial_); jFinal<=l+jInitial_;jFinal+=1.) {
@@ -98,7 +86,7 @@ Decayer::Decayer(int Z, int A, double jInitial, int piInitial, double energy, do
           if(!exists) {
 	            TransitionRateFunc* previous = (widthCorrectedDecayer_) ? widthCorrectedDecayer_->spinRatePairs_[spinRatePairs_.size()].rateFunc_ : NULL;
               TransitionRateFunc* newFunc = new TransitionRateFunc(2,4,Z_-2,A_-4,jInitial_,piInitial_, jFinal,piFinal,0,1,maxL_,energy_,qValueAlpha_, totalWidthForCorrection_,uncorrTotalWidthForCorrection_, uncorrTotalWidthSqrdForCorrection_, previous, isCrossSection_);
-              spinRatePairs_.push_back(SpinRatePair(Z-2,A-4,jFinal,piFinal, qValueAlpha_,newFunc,newFunc->Integral()));
+              spinRatePairs_.push_back(SpinRatePair(Z_-2,A_-4,jFinal,piFinal, qValueAlpha_,newFunc,newFunc->Integral()));
               totalIntegral_+=newFunc->Integral();
               totalIntegralSqrd_+=newFunc->Integral()*newFunc->Integral();
 	    
@@ -107,15 +95,14 @@ Decayer::Decayer(int Z, int A, double jInitial, int piInitial, double energy, do
 	              alphaTotalWidth_+=newFunc->Integral();
           }
         }  
-      }
-    }
+  }
+}
 
-    //If neutron OR proton decay is energetically possible
-    if(qValueNeutron_+energy_>0||qValueProton_+energy>0) {
+void Decayer::SetProtonNeutronSpinRatePairs(){
         for(double l=0;l<=maxL_;l+=1.) {
 	          int piFinal = (int(l)%2==0) ? piInitial_ : -1*piInitial_;
 	          for(double s = fabs(l-0.5); s<=l+0.5; s+=1.) {
-	            for(double jFinal = fabs(s-jInitial); jFinal<=s+jInitial;jFinal+=1.) {
+	            for(double jFinal = fabs(s-jInitial_); jFinal<=s+jInitial_;jFinal+=1.) {
 	              //if neutron decay is  energetically possible
                 if(qValueNeutron_+energy_>0) {
 	                bool exists = false;
@@ -131,8 +118,8 @@ Decayer::Decayer(int Z, int A, double jInitial, int piInitial, double energy, do
 	              
                   if(!exists) {
 		                TransitionRateFunc* previous = (widthCorrectedDecayer_) ? widthCorrectedDecayer_->spinRatePairs_[spinRatePairs_.size()].rateFunc_ : NULL;
-		                TransitionRateFunc* newFunc =  new TransitionRateFunc(0,1,Z,A-1,jInitial,piInitial, jFinal,piFinal,0.5,1,maxL_,energy, qValueNeutron_,totalWidthForCorrection_,uncorrTotalWidthForCorrection_, uncorrTotalWidthSqrdForCorrection_,previous, isCrossSection_);
-                    spinRatePairs_.push_back(SpinRatePair(Z,A-1,jFinal,piFinal,qValueNeutron_, newFunc,newFunc->Integral()));
+		                TransitionRateFunc* newFunc =  new TransitionRateFunc(0,1,Z_,A_-1,jInitial_,piInitial_, jFinal,piFinal,0.5,1,maxL_,energy_, qValueNeutron_,totalWidthForCorrection_,uncorrTotalWidthForCorrection_, uncorrTotalWidthSqrdForCorrection_,previous, isCrossSection_);
+                    spinRatePairs_.push_back(SpinRatePair(Z_,A_-1,jFinal,piFinal,qValueNeutron_, newFunc,newFunc->Integral()));
 		                totalIntegral_+=newFunc->Integral();
 		                totalIntegralSqrd_+=newFunc->Integral()*newFunc->Integral();
 		              
@@ -170,9 +157,9 @@ Decayer::Decayer(int Z, int A, double jInitial, int piInitial, double energy, do
 	            }
 	          }
         }
-    }  
-    
-    //This is now for gammas with L=1 -> E1, M1
+}
+
+void Decayer::SetE1M1SpinRatePairs(){
     for(double jFinal = fabs(jInitial_-1.); jFinal<=jInitial_+1.;jFinal+=1.) {
       //Define transitionRateFuncs for M1
       TransitionRateFunc* previous_m1 = (widthCorrectedDecayer_) ? widthCorrectedDecayer_->spinRatePairs_[spinRatePairs_.size()].rateFunc_ : NULL;
@@ -187,7 +174,7 @@ Decayer::Decayer(int Z, int A, double jInitial, int piInitial, double energy, do
 
       //Define transitionRateFuncs for E1
       TransitionRateFunc* previous_e1 = (widthCorrectedDecayer_) ? widthCorrectedDecayer_->spinRatePairs_[spinRatePairs_.size()].rateFunc_ : NULL;
-      TransitionRateFunc* e1Func = new TransitionRateFunc(0,0,Z_,A_,jInitial_,piInitial_,jFinal,-1*piInitial_,1.,-1, 0.,energy,0.,totalWidthForCorrection_, uncorrTotalWidthForCorrection_,uncorrTotalWidthSqrdForCorrection_, previous_e1,isCrossSection_);
+      TransitionRateFunc* e1Func = new TransitionRateFunc(0,0,Z_,A_,jInitial_,piInitial_,jFinal,-1*piInitial_,1.,-1, 0.,energy_,0.,totalWidthForCorrection_, uncorrTotalWidthForCorrection_,uncorrTotalWidthSqrdForCorrection_, previous_e1,isCrossSection_);
       
       //Push back allowed transitions
       spinRatePairs_.push_back(SpinRatePair(Z_,A_,jFinal,-1*piInitial_,0.,e1Func,e1Func->Integral()));  	
@@ -196,20 +183,49 @@ Decayer::Decayer(int Z, int A, double jInitial, int piInitial, double energy, do
       gammaEntrance_+= e1Func->GroundStateTransmission();
       gammaTotalWidth_+=e1Func->Integral();
     }
+}
 
-    //This is now for gammas with L=2 -> E2, M2
+void Decayer::SetE2SpinRatePairs(){
     for(double jFinal = fabs(jInitial_-2.); jFinal<=jInitial_+2.;jFinal+=1.) {
       //Define TransitionRateFuncs for E2
       TransitionRateFunc* previous_e2 =	(widthCorrectedDecayer_) ? widthCorrectedDecayer_->spinRatePairs_[spinRatePairs_.size()].rateFunc_ : NULL;
-      TransitionRateFunc* e2Func = new TransitionRateFunc(0,0,Z_,A_,jInitial_,piInitial_,jFinal,piInitial_,1.,-1, 2.,energy,0.,totalWidthForCorrection_, uncorrTotalWidthForCorrection_,uncorrTotalWidthSqrdForCorrection_, previous_e2,isCrossSection_);
+      TransitionRateFunc* e2Func = new TransitionRateFunc(0,0,Z_,A_,jInitial_,piInitial_,jFinal,piInitial_,1.,-1, 2.,energy_,0.,totalWidthForCorrection_, uncorrTotalWidthForCorrection_,uncorrTotalWidthSqrdForCorrection_, previous_e2,isCrossSection_);
       
       //Push back allowed transitions
-      spinRatePairs_.push_back(SpinRatePair(Z,A,jFinal,piInitial_,0.,e2Func,e2Func->Integral()));
+      spinRatePairs_.push_back(SpinRatePair(Z_,A_,jFinal,piInitial_,0.,e2Func,e2Func->Integral()));
       totalIntegral_+=e2Func->Integral();
       totalIntegralSqrd_+=e2Func->Integral()*e2Func->Integral();
       gammaEntrance_+= e2Func->GroundStateTransmission();
       gammaTotalWidth_+=e2Func->Integral();
     }
+}
+
+Decayer::Decayer(int Z, int A, double jInitial, int piInitial, double energy, double totalWidthForCorrection, double uncorrTotalWidthForCorrection, double uncorrTotalWidthSqrdForCorrection,		 Decayer* widthCorrectedDecayer) :
+  Z_(Z), A_(A), piInitial_(piInitial), jInitial_(jInitial), energy_(energy), totalWidthForCorrection_(totalWidthForCorrection), uncorrTotalWidthForCorrection_(uncorrTotalWidthForCorrection), uncorrTotalWidthSqrdForCorrection_(uncorrTotalWidthSqrdForCorrection), widthCorrectedDecayer_(widthCorrectedDecayer) {
+
+  InitializeWidths();
+
+  InitializeQValues();
+
+  //Check whether it is a bound state, then construct a knownCDF
+  if(!BoundStateCheck()) {
+    //otherwise  consider transition from the continuum
+    
+    //If Alphadecay is energetically possible
+    if(qValueAlpha_+energy_>0) {
+      SetAlphaSpinRatePairs();
+    }
+
+    //If neutron OR proton decay is energetically possible
+    if(qValueNeutron_+energy_>0||qValueProton_+energy>0) {
+      SetProtonNeutronSpinRatePairs();    
+    }  
+    
+    //This is now for gammas with L=1 -> E1, M1
+    SetE1M1SpinRatePairs();
+
+    //This is now for gammas with L=2 -> E2, M2
+    SetE2SpinRatePairs();
     
     //Build the cummulative distribution function, if this is not a cross section calculation
     if(!isCrossSection_) BuildCDF();
@@ -319,17 +335,15 @@ bool Decayer::Decay(int& Z, int& A, double& jFinal, int& piFinal,
 
   while(randomNumber==0.) randomNumber = double(rand_r(&randomSeed[omp_get_thread_num()]))/double(RAND_MAX);
 
-//MPI_BUILD  while(randomNumber==0.) randomNumber = double(rand())/double(RAND_MAX);
-
   bool found = false;
   double previousValue = 0.;
-  for(std::vector<CDFEntry>::const_iterator it = cdf_.begin();it<cdf_.end();it++) {
-    if(previousValue<randomNumber&&randomNumber<=it->value_) {
+  for(std::vector<CDFEntry>::const_iterator it = cdf_.begin(); it<cdf_.end();it++) {
+    if(previousValue<randomNumber && randomNumber<=it->value_) {
       Z = spinRatePairs_[it->pairIndex_].Z_;
       A = spinRatePairs_[it->pairIndex_].A_;
       jFinal = spinRatePairs_[it->pairIndex_].spin_;
       piFinal = spinRatePairs_[it->pairIndex_].parity_;
-      excitationEnergy = energy_+spinRatePairs_[it->pairIndex_].qValue_-it->energy_;
+      excitationEnergy = energy_ + spinRatePairs_[it->pairIndex_].qValue_ - it->energy_;
       decayEnergy = it->energy_;
       found = true;
       break;
