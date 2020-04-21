@@ -10,6 +10,10 @@
 #include <vector>
 #include <string>
 
+/**
+ * @class GammaTransition
+ * @brief Class which represents a gamma-ray transition, with probability, energy and a level index.
+ */
 class GammaTransition {
  public:
  GammaTransition(int levelIndex, double energy, double probability) :
@@ -19,6 +23,10 @@ class GammaTransition {
  double probability_;
 };
 
+/**
+ * @class Level
+ * @brief Class which represents a nuclear level with spin, parity, energy, and gamma transitions.
+ */
 class Level {
  public:
  Level(double J, int Pi, double energy) :
@@ -36,7 +44,7 @@ class Level {
 class LevelsContainer {
  public:
   LevelsContainer() {};                   /**< Simple constructor */
-  LevelsContainer(std::istream&,int,int); /**< Constructructor from levels file */
+  LevelsContainer(std::istream& in,int numLevels,int numComplete); /**< Constructructor from levels file */
   std::vector<Level> levels_;             /**< One std::vector object which for levels */
 };
 

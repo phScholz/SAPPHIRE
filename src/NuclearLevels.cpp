@@ -40,33 +40,38 @@ LevelsContainer::LevelsContainer(std::istream& in, int numLevels, int numComplet
 
 void NuclearLevels::InitializeLevels(std::string levelsDirectory,
 				     std::string spinFile) {
-#ifndef MPI_BUILD
+
   std::cout << "Reading known nuclear levels..." << std::endl;
-#endif
+
   for(int Z = 0; Z<=118; Z++) {
     char isotopeFile[256];
     sprintf(isotopeFile,"%sz%03d.dat",levelsDirectory.c_str(),Z);
     std::ifstream in(isotopeFile);
     if(!in) continue;
+    
     while(!in.eof()) {
       std::string line;
       std::getline(in,line);
       if(!in.eof()) {
-	int A, numLevels, numComplete;
-	std::string dummy;
-	std::istringstream stm;
-	stm.str(line);
-	stm >> dummy >> A >> dummy >> numLevels >> dummy >> numComplete;
-	if(numLevels!=0) levelsTable_[MassKey(Z,A)]=LevelsContainer(in,numLevels,numComplete);
+	      int A, numLevels, numComplete;
+	      std::string dummy;
+	      std::istringstream stm;
+	      stm.str(line);
+	      stm >> dummy >> A >> dummy >> numLevels >> dummy >> numComplete;
+	      
+        if(numLevels!=0) levelsTable_[MassKey(Z,A)]=LevelsContainer(in,numLevels,numComplete);
       }
     }
     in.close();
   }
+
   std::ifstream in(spinFile.c_str());
   if(!in) return;
+  
   while(!in.eof()) {
     std::string line;
     std::getline(in,line);
+    
     if(!in.eof()) {
       int Z,N,A,parityZ,parityN;
       int spinZ,spinN;
@@ -75,66 +80,76 @@ void NuclearLevels::InitializeLevels(std::string levelsDirectory,
       char spinZString[8];
       lineStream.read(spinZString,7);
       spinZString[7]='\0';
+      
       if(Z%2==0) {
-	spinZ=0;
-	parityZ=1;
+	      spinZ=0;
+	      parityZ=1;
       } else {
-	char* pch = strtok(spinZString,"/");
-	std::istringstream spinZStringStream(pch);
-	spinZStringStream>>spinZ;
-	pch = strtok(NULL,"/");
-	if(pch[1]=='+') parityZ=1;
-	else parityZ=-1;
+	      char* pch = strtok(spinZString,"/");
+	      std::istringstream spinZStringStream(pch);
+	      spinZStringStream>>spinZ;
+	      pch = strtok(NULL,"/");
+	      if(pch[1]=='+') parityZ=1;
+	      else parityZ=-1;
       }
+
       lineStream >> N;
       char spinNString[8];
       lineStream.read(spinNString,7);
       spinNString[7]='\0';
+      
       if(N%2==0) {
-	spinN=0;
-	parityN=1;
+	      spinN=0;
+	      parityN=1;
       } else {
-	char* pch = strtok(spinNString,"/");
-	std::istringstream spinNStringStream(pch);
-	spinNStringStream>>spinN;
-	pch = strtok(NULL,"/");
-	if(pch[1]=='+') parityN=1;
-	else parityN=-1;
+	      char* pch = strtok(spinNString,"/");
+	      std::istringstream spinNStringStream(pch);
+	      spinNStringStream>>spinN;
+	      pch = strtok(NULL,"/");
+	      if(pch[1]=='+') parityN=1;
+	      else parityN=-1;
       }
+
       lineStream >> A;
       double spin;
+      
       if(spinZ==0||spinN==0) spin = double(spinZ+spinN)/2.; 
       else {
-	bool parallelZ = false;
-	bool parallelN = false;
-	if(parityZ>0) {
-	  if(((spinZ+1)/2)%2!=0) parallelZ = true;
-	} else  {
-	  if(((spinZ+1)/2)%2==0) parallelZ = true;
-	}
-	if(parityN>0) {
-	  if(((spinN+1)/2)%2!=0) parallelN = true;
-	} else  {
-	  if(((spinN+1)/2)%2==0) parallelN = true;
-	}
-	spin = (parallelZ&&parallelN) ? double(spinZ+spinN)/2. :
-	  fabs(double(spinZ-spinN))/2.;
-      }
-      int parity = parityZ*parityN;
-      LevelsTable::iterator it = levelsTable_.find(MassKey(Z,A));
-      if(it==levelsTable_.end()) {
-	LevelsContainer levelsContainer;
-	levelsContainer.levels_.push_back(Level(spin,parity,0.));
-	levelsTable_[MassKey(Z,A)] = levelsContainer;
-      } else if(it->second.levels_.size() == 0) {
-	it->second.levels_.push_back(Level(spin,parity,0.));
-      } else if(it->second.levels_.size() > 0 &&
-		it->second.levels_[0].energy_ != 0.) {
-	it->second.levels_.insert(it->second.levels_.begin(),
-				  Level(spin,parity,0.));
-      }
-      it = levelsTable_.find(MassKey(Z,A));
-      if(it->second.levels_[0].Pi_==0) it->second.levels_[0].Pi_=parity;
+	      bool parallelZ = false;
+	      bool parallelN = false;
+	
+      if(parityZ>0) {
+	      if(((spinZ+1)/2)%2!=0) parallelZ = true;
+	    } else  {
+	      if(((spinZ+1)/2)%2==0) parallelZ = true;
+    	}
+	
+      if(parityN>0) {
+	      if(((spinN+1)/2)%2!=0) parallelN = true;
+	    } else  {
+	      if(((spinN+1)/2)%2==0) parallelN = true;
+	    }
+	
+      spin = (parallelZ&&parallelN) ? double(spinZ+spinN)/2. :
+	    fabs(double(spinZ-spinN))/2.;
+    }
+
+    int parity = parityZ*parityN;
+    LevelsTable::iterator it = levelsTable_.find(MassKey(Z,A));
+    
+    if(it==levelsTable_.end()) {
+	    LevelsContainer levelsContainer;
+	    levelsContainer.levels_.push_back(Level(spin,parity,0.));
+	    levelsTable_[MassKey(Z,A)] = levelsContainer;
+    } else if(it->second.levels_.size() == 0) {
+	    it->second.levels_.push_back(Level(spin,parity,0.));
+    } else if(it->second.levels_.size() > 0 && it->second.levels_[0].energy_ != 0.) {
+	    it->second.levels_.insert(it->second.levels_.begin(),Level(spin,parity,0.));
+    }
+    
+    it = levelsTable_.find(MassKey(Z,A));
+    
+    if(it->second.levels_[0].Pi_==0) it->second.levels_[0].Pi_=parity;
     }
   }
 }

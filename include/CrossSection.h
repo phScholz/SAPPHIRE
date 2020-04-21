@@ -1,12 +1,12 @@
-#ifndef CROSSSECTION_H
-#define CROSSSECTION_H
+#pragma once
 #include <vector>
 #include <map>
 #include <string>
 #include "SapphireInput.h"
-#pragma once
+#include "SpinRatePair.h"
+
 class Decayer;
-class SpinRatePair;
+
 
 typedef std::vector<std::pair<Decayer*,std::vector<SpinRatePair*> > > DecayerVector;
 typedef std::pair<int,double> int_double_pair;
@@ -199,5 +199,3 @@ class CrossSection {
   static std::vector<double> macsEnergies_;
 };
 
-
-#endif
