@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <stdexcept>
 #include "Timer.h"
+#include "omp.h"
 
 class ProgressBar{
  private:

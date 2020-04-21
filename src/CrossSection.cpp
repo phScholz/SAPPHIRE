@@ -14,6 +14,8 @@
 #include <TGraph.h>
 #include <algorithm>
 #include "SapphireInput.h"
+#include "Progressbar.h"
+#include "omp.h"
 
 CrossSection::CrossSection(SapphireInput & input):
   Z_(input.XsZ()), A_(input.XsA()), calcRates_(input.CalcRates()), pType_(input.PType()), skipEnergy_(1000.), entranceState_(input.EntranceState()), exitStates_(input.exitStates) {
@@ -378,45 +380,31 @@ void CrossSection::Calculate() {
     gammaCutoffSet_ = true;
   }
 
-  std::cout <<  "\t [                         ] 0%";std::cout.flush();
-  
+  ProgressBar pg;
+    
   int pointIndex=0;
   int numPoints=crossSections_.size();
-  time_t startTime = time(NULL);
+  std::cout<<std::endl;
+  pg.start(numPoints);
+  
   int skipCounter = 0;
 
 
   for(int i=0;i<numPoints;i++) {
+    pg.update(i);
     if(i>0&&!energiesGiven_) {
       skipCounter++;
       
       if((crossSections_[i-1].second.neutron_==0.|| crossSections_[i-1].second.alpha_==0.|| crossSections_[i-1].second.proton_==0.)&& !skipped_[i-1]) skipCounter=0;
       
-      if(crossSections_[i].first>skipEnergy_&&i!=numPoints-1 && (i+1)%3!=0 && skipCounter>8) {
+      if(crossSections_[i].first>skipEnergy_&& i!=numPoints-1 && (i+1)%3!=0 && skipCounter>8) {
         skipped_.push_back(true);
         continue;
       }
     }
 
     skipped_.push_back(false);
-    ++pointIndex;
-    
-    if(difftime(time(NULL),startTime)>0.25) {
-      startTime=time(NULL);
-      std::string progress=" [";
-      double percent=0.;
-      
-      for(int j = 1;j<=25;j++) {
-	      if(pointIndex>=percent*numPoints&&percent<1.) {
-	        percent+=0.04;
-	        progress+='*';
-	      } else progress+=' ';
-      } 
-      
-      progress+="] ";
-      
-      std::cout << "\r\t" << progress << percent*100 << "%"; std::cout.flush();
-    }
+
     
     double E = crossSections_[i].first+seperationEnergy_;
     double geometricCrossSection = (pType_!=0) ? preFactor_/(E-seperationEnergy_) : preFactor_/E/E;
@@ -561,7 +549,7 @@ void CrossSection::Calculate() {
     crossSections_[i].second.neutronStellar_=neutronStellarSum*geometricCrossSection;
     crossSections_[i].second.alphaStellar_=alphaStellarSum*geometricCrossSection;
   }
-  std::cout  << "\r\t" << " [*************************] 100%" << std::endl;
+ 
 }
 
 void CrossSection::PrintCrossSections() {
