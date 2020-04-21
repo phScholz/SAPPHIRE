@@ -5,12 +5,16 @@
 #include <cstdlib>
 #include "SpinRatePair.h"
 #include "TransitionRateFunc.h"
+#include "SapphireInput.h"
 
+/**
+ * 
+ */
 class CDFEntry {
  public:
  CDFEntry(int pairIndex,double energy,double value) :
   pairIndex_(pairIndex), energy_(energy), value_(value) {};
-  int pairIndex_;
+  int pairIndex_; 
   double energy_;
   double value_;
 };
@@ -20,11 +24,43 @@ class Level;
 class Decayer{
 
   public:
+    /**
+     * @brief Constructor of the Decayer class
+     * @param Z Charge/atomic number of the decaying nucleus
+     * @param A Mass number of the decaying nucleus
+     * @param jInitial The initial spin of the decaying nucleus
+     * @param piInitial The initial parity of the decaying nucleus
+     * @param energy The excitation energy of the decaying nucleus
+     * @param totalWidthForCorrection By default 0.
+     * @param uncorrTotalWidthForCorrection By default 0.
+     * @param uncorrTotalWidthSqrdForCorrection By default 0.
+     * @param widthCorrectedDecayer By default NULL.
+     * @details 
+     * 1. The following member variables will be initialized in the constructor:
+     *  + Z_
+     *  + A_
+     *  + piInitial_
+     *  + jInitial_
+     *  + energy_
+     *  + totalWidthForCorrection_
+     *  + uncorrTotalWidthForCorrection_
+     *  + uncorrTotalWidthSqrdForCorrection_
+     *  + widthCorrectedDecayer_
+     * 2. Calling of InitializeWidths() to initialize entrance and total widths for neutron, gamma, proton, and alpha are set to 0.
+     * 3. 
+     */
     Decayer(int Z, int A, double jInitial, 
   	  int piInitial, double energy, double totalWidthForCorrection = 0.,
   	  double uncorrTotalWidthForCorrection = 0.,
   	  double uncorrTotalWidthSqrdForCorrection = 0.,
   	  Decayer* widthCorrectedDecayer=NULL);
+    
+    /**
+     * @brief Constructor of Decayer on the basis of a SapphireInput onject
+     * @param input A SapphireInput object with input-parameters
+     * @details See Decayer()
+     */
+    Decayer(SapphireInput & input);
     ~Decayer();
     bool Decay(int&,int&,double&,int&,double&,double&);
     void PrintFunctions();
@@ -60,8 +96,18 @@ class Decayer{
     }
 
   private:
+    /**
+     * @brief Initializes the member variables for partial and total widths.
+     */
+    void InitializeWidths();
     void BuildCDF();
-    bool BuildKnownCDF(int,std::vector<Level>&);
+    /**
+     * @brief Building the cummulative distribution function (CDF) for known levels of the decaying nucleus.
+     * @param levelIndex The level number of a bound level until which the levelscheme should be built.
+     * @param knownLevels A std::vector of Level entries of the known levels of the decaying nucleus
+     * @return True or false
+     */
+    bool BuildKnownCDF(int levelIndex,std::vector<Level>& knownLevels);
    private:
     static bool isCrossSection_;
     static double maxL_;

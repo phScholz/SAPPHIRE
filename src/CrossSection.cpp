@@ -346,18 +346,21 @@ bool CrossSection::CalcAllowedJPi(bool forRates) {
 }
 
 bool CrossSection::CalcDecayerVector(double E, DecayerVector& decayerVector, bool forAverageWidth) {
+  if(verbose_) std::cout << "\tCalcDecayerVector() for energy: " << E<<std::endl;
+  
+  //for loop to create a Decayer for every spin-parity pair given in allowedJPi
   for(int i = 0;i<allowedJPi_.size();i++) {
-    Decayer* newDecayer = new Decayer(compoundZ_,compoundA_,allowedJPi_[i].first,
-				      allowedJPi_[i].second,E);
+    Decayer* newDecayer = new Decayer(compoundZ_,compoundA_,allowedJPi_[i].first, allowedJPi_[i].second,E);
     newDecayer->CorrectWidthFluctuations();
     std::vector<SpinRatePair*> entrancePairs;
-    for(int i = 0;i<newDecayer->widthCorrectedDecayer_->spinRatePairs_.size();
-	i++) {
-      if(newDecayer->widthCorrectedDecayer_->spinRatePairs_[i].Z_==Z_&&
-	 newDecayer->widthCorrectedDecayer_->spinRatePairs_[i].A_==A_&&
-	 newDecayer->widthCorrectedDecayer_->spinRatePairs_[i].spin_==groundStateJ_&&
-	 newDecayer->widthCorrectedDecayer_->spinRatePairs_[i].parity_==groundStatePi_)  {
-	entrancePairs.push_back(&newDecayer->widthCorrectedDecayer_->spinRatePairs_[i]);
+    
+    for(int i = 0;i<newDecayer->widthCorrectedDecayer_->spinRatePairs_.size(); i++) {
+      if( newDecayer->widthCorrectedDecayer_->spinRatePairs_[i].Z_==Z_&&
+	        newDecayer->widthCorrectedDecayer_->spinRatePairs_[i].A_==A_&&
+	        newDecayer->widthCorrectedDecayer_->spinRatePairs_[i].spin_==groundStateJ_&&
+	        newDecayer->widthCorrectedDecayer_->spinRatePairs_[i].parity_==groundStatePi_){
+	    
+        entrancePairs.push_back(&newDecayer->widthCorrectedDecayer_->spinRatePairs_[i]);
       }
     }
     /*
@@ -373,6 +376,7 @@ bool CrossSection::CalcDecayerVector(double E, DecayerVector& decayerVector, boo
 
 void CrossSection::Calculate() {
   if(verbose_) std::cout << "Calculate ..." << std::endl;
+  
   if(calculateGammaCutoff_) {
     TransitionRateFunc::SetGammaCutoffEnergy(10000.);
     gammaCutoffSet_ = false;
@@ -380,6 +384,7 @@ void CrossSection::Calculate() {
     gammaCutoffSet_ = true;
   }
 
+  //Creating ProgressBar object
   ProgressBar pg;
     
   int pointIndex=0;
@@ -389,15 +394,18 @@ void CrossSection::Calculate() {
   
   int skipCounter = 0;
 
-
-  for(int i=0;i<numPoints;i++) {
+  //For loop over all energies
+  for(unsigned int i=0; i < crossSections_.size(); i++){
+    //update progressbar
     pg.update(i);
+
+    //I dont understand this yet ... Its something about counting, which energies were skipped in the calculations ...
     if(i>0&&!energiesGiven_) {
       skipCounter++;
       
       if((crossSections_[i-1].second.neutron_==0.|| crossSections_[i-1].second.alpha_==0.|| crossSections_[i-1].second.proton_==0.)&& !skipped_[i-1]) skipCounter=0;
       
-      if(crossSections_[i].first>skipEnergy_&& i!=numPoints-1 && (i+1)%3!=0 && skipCounter>8) {
+      if(( crossSections_[i].first>skipEnergy_ ) && (i!=crossSections_.size()-1) && ( (i+1)%3!=0 ) && ( skipCounter>8 ) ) {
         skipped_.push_back(true);
         continue;
       }
@@ -405,8 +413,9 @@ void CrossSection::Calculate() {
 
     skipped_.push_back(false);
 
-    
+    // E = center of mass energy + qvalue (seperationEnergy)
     double E = crossSections_[i].first+seperationEnergy_;
+    // Here the prefactor is divided by the energy
     double geometricCrossSection = (pType_!=0) ? preFactor_/(E-seperationEnergy_) : preFactor_/E/E;
     
     DecayerVector decayerVector;

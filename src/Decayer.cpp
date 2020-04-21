@@ -10,10 +10,7 @@
 
 extern unsigned int randomSeed[12];
 
-
-Decayer::Decayer(int Z, int A, double jInitial, int piInitial, double energy, double totalWidthForCorrection, double uncorrTotalWidthForCorrection, double uncorrTotalWidthSqrdForCorrection,		 Decayer* widthCorrectedDecayer) :
-  Z_(Z), A_(A), piInitial_(piInitial), jInitial_(jInitial), energy_(energy), totalWidthForCorrection_(totalWidthForCorrection), uncorrTotalWidthForCorrection_(uncorrTotalWidthForCorrection), uncorrTotalWidthSqrdForCorrection_(uncorrTotalWidthSqrdForCorrection), widthCorrectedDecayer_(widthCorrectedDecayer) {
-
+void Decayer::InitializeWidths(){
   neutronEntrance_=0.;
   gammaEntrance_=0.;
   protonEntrance_=0.;
@@ -22,6 +19,12 @@ Decayer::Decayer(int Z, int A, double jInitial, int piInitial, double energy, do
   alphaTotalWidth_=0.;
   gammaTotalWidth_=0.;
   protonTotalWidth_=0.;
+}
+
+Decayer::Decayer(int Z, int A, double jInitial, int piInitial, double energy, double totalWidthForCorrection, double uncorrTotalWidthForCorrection, double uncorrTotalWidthSqrdForCorrection,		 Decayer* widthCorrectedDecayer) :
+  Z_(Z), A_(A), piInitial_(piInitial), jInitial_(jInitial), energy_(energy), totalWidthForCorrection_(totalWidthForCorrection), uncorrTotalWidthForCorrection_(uncorrTotalWidthForCorrection), uncorrTotalWidthSqrdForCorrection_(uncorrTotalWidthSqrdForCorrection), widthCorrectedDecayer_(widthCorrectedDecayer) {
+
+  InitializeWidths();
 
   //Check if state is a known bound state
   double qValueProton,qValueNeutron,qValueAlpha;
@@ -37,21 +40,28 @@ Decayer::Decayer(int Z, int A, double jInitial, int piInitial, double energy, do
     std::cout << "Unknown masses requested.  Aborting." << std::endl;
     exit(1);
   }
+
+  //Looking for known levels of the nucleus
   std::vector<Level> knownLevels = NuclearLevels::FindLevels(Z,A);
+
+  //Check if the state is a known state ... accuracy +/- 1.e-10 MeV and store the level in foundLevel
+  //Otherwise foundLevel will be the last known level
   std::vector<Level>::const_iterator foundLevel = knownLevels.end();
   if(qValueAlpha+energy<=0.&&qValueProton+energy<=0.&&qValueNeutron+energy<=0.) {
-    for(std::vector<Level>::const_iterator it = knownLevels.begin();
-	it<knownLevels.end();++it) {
-      if((it->energy_-1.e-10<=energy&&energy<=it->energy_+1.e-10)&&
-	 jInitial==it->J_&&piInitial==it->Pi_) {
-	foundLevel = it;
-	break;
+    for(std::vector<Level>::const_iterator it = knownLevels.begin(); it<knownLevels.end();++it) {
+      if((it->energy_-1.e-10<=energy&&energy<=it->energy_+1.e-10) && jInitial==it->J_&&piInitial==it->Pi_){
+	      foundLevel = it;
+	      break;
       }
     }  
   }
+
+  //total integrals and the square are set to 0
   totalIntegral_=0.;    
   totalIntegralSqrd_=0.;  
+
   bool knownCDFBuilt = false;
+
   if(foundLevel!=knownLevels.end()&&foundLevel->gammas_.size()>0) {
     //if level is known, and has a known decay scheme use it
      knownCDFBuilt = BuildKnownCDF(int(foundLevel-knownLevels.begin()),knownLevels);
@@ -269,23 +279,25 @@ void Decayer::BuildCDF() {
 }
 
 bool Decayer::BuildKnownCDF(int levelIndex, std::vector<Level>& knownLevels) {
+  //Create a vector for all the gamma transitions known for the specific level.
   std::vector<GammaTransition> gammas = knownLevels[levelIndex].gammas_;
-  for(std::vector<GammaTransition>::const_iterator it = gammas.begin();
-      it<gammas.end();it++) {
+
+  //For loop to calculate the totaldecay width and its squared for all the known gamma transitions of the level
+  for(std::vector<GammaTransition>::const_iterator it = gammas.begin(); it<gammas.end(); it++) {
     totalIntegral_+=it->probability_;
     totalIntegralSqrd_+=it->probability_*it->probability_;
   }
+
+  //Return false if the totalwidth is 0.
   if(totalIntegral_==0.) return false;
+
   double offSet =0;
-  for(std::vector<GammaTransition>::const_iterator it = gammas.begin();
-      it<gammas.end();it++) {
-    spinRatePairs_.push_back(SpinRatePair(Z_,A_,knownLevels[it->levelIndex_-1].J_,
-					 knownLevels[it->levelIndex_-1].Pi_,0.,
-					 NULL,it->probability_));
+
+  //For all the known gammatransitions, 
+  for(std::vector<GammaTransition>::const_iterator it = gammas.begin(); it<gammas.end();it++) {
+    spinRatePairs_.push_back(SpinRatePair(Z_,A_,knownLevels[it->levelIndex_-1].J_, knownLevels[it->levelIndex_-1].Pi_,0., NULL, it->probability_));
     double cdfValue = (it->probability_+offSet)/totalIntegral_;
-    cdf_.push_back(CDFEntry(spinRatePairs_.size()-1,
-			    energy_-knownLevels[it->levelIndex_-1].energy_,
-			    cdfValue));
+    cdf_.push_back(CDFEntry(spinRatePairs_.size()-1, energy_-knownLevels[it->levelIndex_-1].energy_, cdfValue));
     offSet+=it->probability_;
   }
   return true;
@@ -332,10 +344,10 @@ void Decayer::CorrectWidthFluctuations() {
   double total = totalIntegral_;
   double uncorrTotal = total; 
   double uncorrTotalSqrd = totalIntegralSqrd_; 
+
   for(int i = 0;i<maxIt;i++) {
-    widthCorrectedDecayer_ = new Decayer(Z_,A_,jInitial_,piInitial_,energy_,
-					 total,uncorrTotal,uncorrTotalSqrd,previous);
-    previous = widthCorrectedDecayer_;
+    widthCorrectedDecayer_ = new Decayer(Z_,A_,jInitial_,piInitial_,energy_, total,uncorrTotal,uncorrTotalSqrd,previous);
+    previous = widthCorrectedDecayer_;    
     total = widthCorrectedDecayer_->totalIntegral_;
   }
 }

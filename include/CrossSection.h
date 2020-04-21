@@ -167,7 +167,7 @@ class CrossSection {
   bool isValid_;
   bool energiesGiven_;
   bool calcRates_;
-  bool verbose_=false;
+  bool verbose_= false; /**< Bool to increase the output for debugging purposes*/
   int Z_; /**< The atomic number of the target nucleus*/
   int A_; /**< The mass number of the target nucleus*/
   int pType_; /**< Integer which defines the type of the projectile*/
