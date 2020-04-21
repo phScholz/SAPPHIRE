@@ -1,25 +1,11 @@
-#ifndef DECAYER_H
-#define DECAYER_H
 #pragma once
 #include <vector>
 #include <cstdlib>
 #include "SpinRatePair.h"
 #include "TransitionRateFunc.h"
 #include "SapphireInput.h"
-
-/**
- * 
- */
-class CDFEntry {
- public:
- CDFEntry(int pairIndex,double energy,double value) :
-  pairIndex_(pairIndex), energy_(energy), value_(value) {};
-  int pairIndex_; 
-  double energy_;
-  double value_;
-};
-
-class Level;
+#include "CDFEntry.h"
+#include "NuclearLevels.h"
 
 class Decayer{
 
@@ -133,6 +119,3 @@ class Decayer{
     std::vector<CDFEntry> cdf_;
     Decayer* widthCorrectedDecayer_;
 };
-
-
-#endif
