@@ -111,7 +111,12 @@ class Decayer{
      * @brief Looks up the QValues via NuclearMass::QValue() and writes it into qValueNeutron_, qValueProton_, and qValueAlpha_
      */
     void InitializeQValues();
+
+    /**
+     * 
+     */
     void BuildCDF();
+    
     /**
      * @brief Building the cummulative distribution function (CDF) for known levels of the decaying nucleus.
      * @param levelIndex The level number of a bound level until which the levelscheme should be built.

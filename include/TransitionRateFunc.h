@@ -52,6 +52,7 @@ class TransitionRateFunc {
   static double GetGammaCutoffEnergy() {
     return gammaCutoffEnergy_;
   };
+  
  private:
   static const int numCrossSectionSteps_=20;
   static double gammaCutoffEnergy_;
