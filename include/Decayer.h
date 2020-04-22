@@ -34,8 +34,9 @@ class Decayer{
      *  + uncorrTotalWidthSqrdForCorrection_
      *  + widthCorrectedDecayer_
      * 2. Calling of InitializeWidths() to initialize entrance and total widths for neutron, gamma, proton, and alpha are set to 0.
-     * 3. Checking if the initial state is a bound state of the nucleus and if yes -> build a cummulative probability distribution function (CDF) with BuildKnownCDF().
-     * 4. If the state is not bound or no gamma-ray transitions are known from this state, 
+     * 3. Checking if the initial state is a bound state (BoundStateCheck()) of the nucleus and if yes -> build a cummulative probability distribution function (CDF) with BuildKnownCDF().
+     * 4. If the state is not bound or no gamma-ray transitions are known from this state, proceed to use transitions from the continuum.
+     * 5. The vec 
      */
     Decayer(int Z, int A, double jInitial, 
   	  int piInitial, double energy, double totalWidthForCorrection = 0.,

@@ -47,7 +47,7 @@ void NuclearLevels::InitializeLevels(std::string levelsDirectory,
     char isotopeFile[256];
     sprintf(isotopeFile,"%sz%03d.dat",levelsDirectory.c_str(),Z);
     std::ifstream in(isotopeFile);
-    if(!in) continue;
+    if(!in){std::cout << "!!! Cannot read levels file: " << isotopeFile << " !!!" << std::endl; continue;}
     
     while(!in.eof()) {
       std::string line;
@@ -66,8 +66,9 @@ void NuclearLevels::InitializeLevels(std::string levelsDirectory,
   }
 
   std::ifstream in(spinFile.c_str());
-  if(!in) return;
+  if(!in){std::cout << "!!! Cannot read spinFile !!!" << std::endl; return;}
   
+  //Is this only to find the ground state spins, if no groundstate is known?
   while(!in.eof()) {
     std::string line;
     std::getline(in,line);
@@ -132,24 +133,25 @@ void NuclearLevels::InitializeLevels(std::string levelsDirectory,
 	
       spin = (parallelZ&&parallelN) ? double(spinZ+spinN)/2. :
 	    fabs(double(spinZ-spinN))/2.;
-    }
+      }
 
-    int parity = parityZ*parityN;
-    LevelsTable::iterator it = levelsTable_.find(MassKey(Z,A));
+      int parity = parityZ*parityN;
+
+      LevelsTable::iterator it = levelsTable_.find(MassKey(Z,A));
     
-    if(it==levelsTable_.end()) {
-	    LevelsContainer levelsContainer;
-	    levelsContainer.levels_.push_back(Level(spin,parity,0.));
-	    levelsTable_[MassKey(Z,A)] = levelsContainer;
-    } else if(it->second.levels_.size() == 0) {
-	    it->second.levels_.push_back(Level(spin,parity,0.));
-    } else if(it->second.levels_.size() > 0 && it->second.levels_[0].energy_ != 0.) {
-	    it->second.levels_.insert(it->second.levels_.begin(),Level(spin,parity,0.));
-    }
+      if(it==levelsTable_.end()) {
+	      LevelsContainer levelsContainer;
+	      levelsContainer.levels_.push_back(Level(spin,parity,0.));
+	      levelsTable_[MassKey(Z,A)] = levelsContainer;
+      } else if(it->second.levels_.size() == 0) {
+	      it->second.levels_.push_back(Level(spin,parity,0.));
+      } else if(it->second.levels_.size() > 0 && it->second.levels_[0].energy_ != 0.) {
+	      it->second.levels_.insert(it->second.levels_.begin(),Level(spin,parity,0.));
+      }
     
-    it = levelsTable_.find(MassKey(Z,A));
+      it = levelsTable_.find(MassKey(Z,A));
     
-    if(it->second.levels_[0].Pi_==0) it->second.levels_[0].Pi_=parity;
+      if(it->second.levels_[0].Pi_==0) it->second.levels_[0].Pi_=parity;
     }
   }
 }

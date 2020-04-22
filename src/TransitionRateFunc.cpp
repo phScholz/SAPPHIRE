@@ -17,9 +17,14 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
 				                              double uncorrTotalWidthSqrdForCorrection, 
 				                              TransitionRateFunc* previous,
 				                              bool isCrossSection) {
-                                        
+
+  //Choose a level density function                                      
   levelDensity_ = new RauscherLevelDensity(z2,m2,jFinal);
+
+
   TransmissionFunc* previousTransmissionFunc = (previous) ? previous->transmissionFunc_ : NULL;
+
+  //Choose a transmission function deciding between particle and gamma
   if(m1!=0) {
     transmissionFunc_ =  
       ParticleTransmissionFunc::CreateParticleTransmissionFunc(z1,m1,z2,m2,
@@ -38,12 +43,14 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
 							 uncorrTotalWidthSqrdForCorrection,
 							 previousTransmissionFunc,compoundE);
   }
+
   if(!transmissionFunc_->IsValid()) {
     std::cout << "An problem occurred creating transmission function. Aborting."
 	      << std::endl;
     delete transmissionFunc_;
     exit(1);
   }
+  
   double sum=0.;
   double exclusiveSum=0.;
   std::vector<Level> knownLevels = NuclearLevels::FindLevels(z2,m2);

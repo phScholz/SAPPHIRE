@@ -1,6 +1,9 @@
 #pragma once
 #include "TransitionRateFunc.h"
 
+/**
+ * @brief 
+ */
 class SpinRatePair {
  public:
  SpinRatePair(int Z, int A, double spin, int parity, double qValue,

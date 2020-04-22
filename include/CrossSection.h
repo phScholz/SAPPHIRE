@@ -4,9 +4,7 @@
 #include <string>
 #include "SapphireInput.h"
 #include "SpinRatePair.h"
-
-class Decayer;
-
+#include "Decayer.h"
 
 typedef std::vector<std::pair<Decayer*,std::vector<SpinRatePair*> > > DecayerVector;
 typedef std::pair<int,double> int_double_pair;
@@ -16,6 +14,10 @@ struct int_double_pair_compare {
   }
 };
 
+
+/**
+ * @brief A class which represents an object of cross section data for all reactions on a nucleus at one energy.
+ */
 class CrossSectionValues {
  public:
  CrossSectionValues(double gamma, double neutron, double proton, double alpha,
@@ -32,6 +34,9 @@ class CrossSectionValues {
   double alphaStellar_;
 };
 
+/**
+ * @brief Class to perform the calculations for cross sections and reaction rates
+ */
 class CrossSection {
  public:
   /**
@@ -63,7 +68,7 @@ class CrossSection {
   */
   CrossSection(SapphireInput & input);
 
-  bool IsValid() const {return isValid_;}
+  bool IsValid() const {return isValid_;}                                       /**< Getter for isValid_*/
 
   void Calculate();
   void PrintCrossSections();
@@ -73,11 +78,11 @@ class CrossSection {
   std::pair<double,double> CalcAverageDWaveResWidth();
   void CalculateReactionRates(bool);
   void PrintReactionRates(bool);
-  static void SetResidualGamma(bool residual) {residualGamma_=residual;};
-  static void SetResidualNeutron(bool residual) {residualNeutron_=residual;};
-  static void SetResidualProton(bool residual) {residualProton_=residual;};
-  static void SetResidualAlpha(bool residual) {residualAlpha_=residual;};
-  static void SetCalculateGammaCutoff(bool calc) {calculateGammaCutoff_=calc;};
+  static void SetResidualGamma(bool residual) {residualGamma_=residual;};         /**< Setter for residualGamma_*/
+  static void SetResidualNeutron(bool residual) {residualNeutron_=residual;};     /**< Setter for residualNeutron_*/
+  static void SetResidualProton(bool residual) {residualProton_=residual;};       /**< Setter for residualProton_*/
+  static void SetResidualAlpha(bool residual) {residualAlpha_=residual;};         /**< Setter for residualAlpha_*/
+  static void SetCalculateGammaCutoff(bool calc) {calculateGammaCutoff_=calc;};   /**< Setter for calculateGammaCutoff_*/
   static void CreateTempVector();
   static void CreateMACSEnergiesVector();
 
@@ -159,23 +164,23 @@ class CrossSection {
   static bool residualNeutron_;               /**< Bool if residualNeutron should be toggled*/
   static bool residualProton_;                /**< Bool if residualProton should be toggled*/
   static bool residualAlpha_;                 /**< Bool if residualAlpha should be toggled*/
-  static bool calculateGammaCutoff_;
+  static bool calculateGammaCutoff_;          
   constexpr static double minEnergy_ = 0.001;
   constexpr static double maxEnergy_ = 15.0;
   constexpr static double dE_ = .1;
   bool gammaCutoffSet_;
-  bool isValid_;
+  bool isValid_;                              /**< Boolean to control, whether the input is correct or not*/
   bool energiesGiven_;
   bool calcRates_;
-  bool verbose_= false; /**< Bool to increase the output for debugging purposes*/
-  int Z_; /**< The atomic number of the target nucleus*/
-  int A_; /**< The mass number of the target nucleus*/
-  int pType_; /**< Integer which defines the type of the projectile*/
-  int compoundA_; /**< The mass number of the compound nucleus*/
-  int compoundZ_; /**< The charge number of the compound nucleus*/
-  int groundStatePi_; /**< The parit of the groundState*/
-  int entranceState_; /**< The number of the entranceState in the level scheme*/
-  double preFactor_; /**< */
+  bool verbose_= false;                       /**< Bool to increase the output for debugging purposes*/
+  int Z_;                                     /**< The atomic number of the target nucleus*/
+  int A_;                                     /**< The mass number of the target nucleus*/
+  int pType_;                                 /**< Integer which defines the type of the projectile*/
+  int compoundA_;                             /**< The mass number of the compound nucleus*/
+  int compoundZ_;                             /**< The charge number of the compound nucleus*/
+  int groundStatePi_;                         /**< The parit of the groundState*/
+  int entranceState_;                         /**< The number of the entranceState in the level scheme*/
+  double preFactor_;  	                      /**< The prefactor for the crosssection without energy. See PreSetCompound().*/
   double groundStateJ_;
   double seperationEnergy_;
   double skipEnergy_;

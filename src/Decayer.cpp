@@ -73,6 +73,7 @@ void Decayer::SetAlphaSpinRatePairs(){
 	      for(double jFinal = fabs(l-jInitial_); jFinal<=l+jInitial_;jFinal+=1.) {
           bool exists = false;
           
+          //Check if this spin rate pair already exists or not
           for(int i = 0;i<spinRatePairs_.size();i++) {
  	     	    if(spinRatePairs_[i].Z_==Z_-2&&
 		          spinRatePairs_[i].A_==A_-4&&
@@ -83,6 +84,7 @@ void Decayer::SetAlphaSpinRatePairs(){
 		        }
           }
           
+          //If this pair doesn't exist yet, create it
           if(!exists) {
 	            TransitionRateFunc* previous = (widthCorrectedDecayer_) ? widthCorrectedDecayer_->spinRatePairs_[spinRatePairs_.size()].rateFunc_ : NULL;
               TransitionRateFunc* newFunc = new TransitionRateFunc(2,4,Z_-2,A_-4,jInitial_,piInitial_, jFinal,piFinal,0,1,maxL_,energy_,qValueAlpha_, totalWidthForCorrection_,uncorrTotalWidthForCorrection_, uncorrTotalWidthSqrdForCorrection_, previous, isCrossSection_);

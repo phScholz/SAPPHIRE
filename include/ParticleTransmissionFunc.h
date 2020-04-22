@@ -1,3 +1,7 @@
+/**
+ * @file ParticleTransmissionFunc.h
+ * @brief Declaration of the SLPair and ParticleTransmissionFuncs.
+ */
 #pragma once
 
 #include "TransmissionFunc.h"
@@ -5,6 +9,9 @@
 #include "Constants.h"
 #include <map>
 
+/**
+ * @brief Class for a pair of spin and angular momentum
+ */
 class SLPair {
  public: 
   SLPair(double s, int l) : s_(s), l_(l) {};
@@ -16,8 +23,32 @@ class SLPair {
   int l_;
 };
 
+/**
+ * @brief Class for the particle transmission function. Child of TransmissionFunc.
+ */
 class ParticleTransmissionFunc : public TransmissionFunc {
  public:
+
+ /**
+  * @brief Constructor of ParticleTransmissionFunc
+  * @param z1 Charge of the projectile
+  * @param m1 Mass of the projectile
+  * @param z2 Charge of the target nucleus
+  * @param m2 Mass of the target nucleus
+  * @param jInitial Initial spin of the target nucleus
+  * @param piInitial Initial parity of the target nucleus
+  * @param jFinal Final spin of the nucleus
+  * @param piFinal Final parity of the nucleus
+  * @param maxL Maximum of considered angular momentums
+  * @param totalWidthForCorrection
+  * @param uncorrTotalWidthForCorrection
+  * @param uncorrTotalWidthSqrdForCorrection
+  * @param previous
+  * @details
+  * 1. Initializes member variables 
+  * 2. Calculates reduced mass, but only if the masses can be found via NuclearMass:FindMass()
+  * 2. Selects type of projectile from z1 and m1
+  */
   ParticleTransmissionFunc(int z1, int m1, int z2, int m2, 
 			   double jInitial, int piInitial,
 			   double jFinal, int piFinal,
@@ -31,32 +62,78 @@ class ParticleTransmissionFunc : public TransmissionFunc {
 		   uncorrTotalWidthSqrdForCorrection,previous),
     z1_(z1),m1_(m1),parity_(parity),spin_(spin) {
     double mass1, mass2;
-    if(!NuclearMass::FindMass(z1_,m1_,mass1)||
-       !NuclearMass::FindMass(z2_,m2_,mass2)) redmass_=0.;
+    if(!NuclearMass::FindMass(z1_,m1_,mass1) || !NuclearMass::FindMass(z2_,m2_,mass2)) redmass_=0.;
     else redmass_=mass1*mass2/(mass1+mass2)/uconv;
-    if(z1_==0&&m1_==1) pType_=0;
-    else if(z1_==1&&m1_==1) pType_=1;
-    else if(z1_==2&&m1_==4) pType_=2;
+    if(z1_==0&&m1_==1) pType_=0;        //neutron
+    else if(z1_==1&&m1_==1) pType_=1;   //proton
+    else if(z1_==2&&m1_==4) pType_=2;   //alpha
     else pType_=-1;
   };
+
+  /**
+   * @brief Destructor of ParticleTransmissionFunc
+   */
   virtual ~ParticleTransmissionFunc() {};
+
+  /**
+   * @brief Function to check whether the input is valid or not.
+   * @details
+   * Returns True only if the reduced mass is non-zero and the projectile a neutron, proton or alpha.
+   */
   bool IsValid() {
     if(redmass_==0.||pType_==-1) return false;
     else return true;
   };
-  double operator()(double);
-  double operator()(double,int);
+
+  /**
+   * @brief Operator(double)
+   * @param energy 
+   * @returns 
+   */
+  double operator()(double energy);
+
+  /**
+   * @brief Operator(double,int)
+   * @param energy
+   * @param which
+   */
+  double operator()(double energy,int which);
   void CalcSLDependentFunctions(double,std::map<SLPair,double>&);
-  static ParticleTransmissionFunc* 
-    CreateParticleTransmissionFunc(int,int,int,int,double,int,
-				   double,int,double,int,double,
+
+  /**
+   * @brief Create a ParticleTransmissionFunc. Will be called from TransitionRateFunc().
+   * @param z1
+   * @param m1
+   * @param z2
+   * @param m2
+   * @param jInitial
+   * @param piInitial
+   * @param jFinal
+   * @param piFinal
+   * @param spin,
+   * @param parity
+   * @param maxL
+   * @param totalWidthForCorrection
+   * @param uncorrTotalWidthForCorrection
+   * @param uncorrTotalWidthSqrdForCorrection
+   * @param previous
+   * @return ParticleTransmissionFunc object.
+   * @details
+   * 1. Check the projectile according to z1 and m1
+   * 2. Creates a new TransmissionFunc object based on the input-parameter of the formalism
+   * 3. Returns the created TransmissionFunc
+   */
+  static ParticleTransmissionFunc* CreateParticleTransmissionFunc(int,int,int,int,double,int, double,int,double,int,double,
 				   double,double,double,TransmissionFunc*);
-  static void SetAlphaFormalism(int formalism) {alphaFormalism_ = formalism;};
-  static void SetNeutronFormalism(int formalism) {neutronFormalism_ = formalism;};
-  static void SetProtonFormalism(int formalism) {protonFormalism_ = formalism;};
-  static void SetPorterThomas(bool);
+  
+  static void SetAlphaFormalism(int formalism) {alphaFormalism_ = formalism;};      /**< Setter for AlphaFormalism*/
+  static void SetNeutronFormalism(int formalism) {neutronFormalism_ = formalism;};  /**< Setter for NeutronFormalism*/
+  static void SetProtonFormalism(int formalism) {protonFormalism_ = formalism;};    /**< Setter for ProtonFormalism*/
+  static void SetPorterThomas(bool yn){ porterThomas_=yn;} /**< Setter for porterThomas_*/
+ 
  protected:
   virtual double CalcTransmission(double,int,double) = 0;
+ 
  protected:
   int z1_;
   int m1_;

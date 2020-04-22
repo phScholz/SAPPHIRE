@@ -6,20 +6,12 @@
 #include <iostream>
 #include <gsl/gsl_rng.h>
 #include <gsl/gsl_randist.h>
-#ifndef MPI_BUILD
 #include <omp.h>
-#endif
 
-#ifndef MPI_BUILD
 extern unsigned int randomSeed[12];
-#endif
 
-void ParticleTransmissionFunc::SetPorterThomas(bool yn) {
-  porterThomas_ = yn;
-}
 
-ParticleTransmissionFunc* 
-ParticleTransmissionFunc::CreateParticleTransmissionFunc(int z1, int m1, int z2, int m2, 
+ParticleTransmissionFunc* ParticleTransmissionFunc::CreateParticleTransmissionFunc(int z1, int m1, int z2, int m2, 
 							 double jInitial, int piInitial,
 							 double jFinal, int piFinal,
 							 double spin, int parity, double maxL,
@@ -28,52 +20,58 @@ ParticleTransmissionFunc::CreateParticleTransmissionFunc(int z1, int m1, int z2,
 							 double uncorrTotalWidthSqrdForCorrection,
 							 TransmissionFunc* previous) {
   ParticleTransmissionFunc* transmissionFunc;
+
+  //If Alpha
   if(z1==2&&m1==4) { 	
     if(alphaFormalism_==0) {
       transmissionFunc = new EquivSquareWell(z1,m1,z2,m2, 
-					     jInitial, piInitial,jFinal,piFinal,
-					     spin,parity,maxL,
-					     totalWidthForCorrection,
-					     uncorrTotalWidthForCorrection,
-					     uncorrTotalWidthSqrdForCorrection,
-					     previous);
+					                                  jInitial, piInitial,jFinal,piFinal,
+					                                  spin,parity,maxL,
+					                                  totalWidthForCorrection,
+					                                  uncorrTotalWidthForCorrection,
+					                                  uncorrTotalWidthSqrdForCorrection,
+					                                  previous);
     } else if(alphaFormalism_==1) {
       transmissionFunc = new McFaddenSatchlerPotential(z1,m1,z2,m2, 
-						       jInitial, piInitial,jFinal,piFinal,
-						       spin,parity,maxL,
-						       totalWidthForCorrection,
-						       uncorrTotalWidthForCorrection,
-						       uncorrTotalWidthSqrdForCorrection,
-						       previous);
+						                                          jInitial, piInitial,jFinal,piFinal,
+						                                          spin,parity,maxL,
+						                                          totalWidthForCorrection,
+						                                          uncorrTotalWidthForCorrection,
+						                                          uncorrTotalWidthSqrdForCorrection,
+						                                          previous);
     } else {
       std::cout << "Specified alpha transmission formalism doesn't exist.  Exiting." << std::endl;
       exit(1);	
     }
-  } else {
-    if((z1==1&&m1==1&&protonFormalism_==1)||
-       (z1==0&&m1==1&&neutronFormalism_==1)) {
-      transmissionFunc = new JLMPotential(z1,m1,z2,m2, 
-					  jInitial, piInitial,jFinal,piFinal,
-					  spin,parity,maxL,
-					  totalWidthForCorrection,
-					  uncorrTotalWidthForCorrection,
-					  uncorrTotalWidthSqrdForCorrection,
-					  previous);
-    } else {
-      transmissionFunc = new EquivSquareWell(z1,m1,z2,m2, 
-					     jInitial, piInitial,jFinal,piFinal,
-					     spin,parity,maxL,
-					     totalWidthForCorrection,
-					     uncorrTotalWidthForCorrection,
-					     uncorrTotalWidthSqrdForCorrection,
-					     previous);
-    }
   }
+  
+  //If Proton or Neutron
+  if((z1==1&&m1==1&&protonFormalism_==1) || (z1==0&&m1==1&&neutronFormalism_==1)) {
+      transmissionFunc = new JLMPotential(z1,m1,z2,m2, 
+					                                jInitial, piInitial,jFinal,piFinal,
+					                                spin,parity,maxL,
+					                                totalWidthForCorrection,
+					                                uncorrTotalWidthForCorrection,
+					                                uncorrTotalWidthSqrdForCorrection,
+					                                previous);
+  } else if ((z1==1&&m1==1&&protonFormalism_==0) || (z1==0&&m1==1&&neutronFormalism_==0)) {
+      transmissionFunc = new EquivSquareWell(z1,m1,z2,m2, 
+					                                jInitial, piInitial,jFinal,piFinal,
+					                                spin,parity,maxL,
+					                                totalWidthForCorrection,
+					                                uncorrTotalWidthForCorrection,
+					                                uncorrTotalWidthSqrdForCorrection,
+					                                previous);
+  } else {
+      std::cout << "Specified proton/neutron transmission formalism doesn't exist.  Exiting." << std::endl;
+      exit(1);	
+  }
+  
   return transmissionFunc;
 }
 
 
-double ParticleTransmissionFunc::operator()(double energy) {
+double ParticleTransmissionFunc::operator()(double energy){
   gsl_rng *r;
   if(porterThomas_) {
     const gsl_rng_type *T = gsl_rng_default;
