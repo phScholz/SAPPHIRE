@@ -1,3 +1,8 @@
+/**
+ * @file SpinRatePair.h
+ * @date 2020-04-21
+ * @brief Declaration of the class SpinRatePair
+ */
 #pragma once
 #include "TransitionRateFunc.h"
 

@@ -1,5 +1,6 @@
 /**
- * BrinkAxelGSF.h
+ * @file BrinkAxelsGSF.cpp
+ * @date 2020
  */
 #include "BrinkAxelGSF.h"
 

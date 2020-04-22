@@ -10,40 +10,42 @@
 #define HAS_TH_MASS  2
 
 void NuclearMass::InitializeElements() {
-#define ELEMENT(Z,EL) {elementTable_[std::string(EL)]=Z;}
-#include "elements.h"
+  #define ELEMENT(Z,EL) {elementTable_[std::string(EL)]=Z;}
+  #include "elements.h"
 }
 
-/**
- * @brief
- */
 void NuclearMass::InitializeMasses(std::string filename) {
-#ifndef MPI_BUILD
+
   std::cout << "Reading atomic masses..." << std::endl;
-#endif
+
   std::ifstream in(filename.c_str());
   if(!in) {
     std::cout << "Could not read atomic masses data file." << std::endl;
     exit(1);
   }
   std::string line;
+
+  //skip the first four lines
   for(int i = 0;i<4;++i) std::getline(in,line);
+
   while(!in.eof()) {
     std::getline(in,line);
+    
     if(in.eof()) continue;
     std::istringstream lineStream(line);
     unsigned int mask = 0;
     int Z,A; lineStream>>Z>>A;
-//  double atomicBindingE=(14.4381*pow(double(Z),2.39)+1.55468e-6*pow(double(Z),5.35))/1.e6;
+    //double atomicBindingE=(14.4381*pow(double(Z),2.39)+1.55468e-6*pow(double(Z),5.35))/1.e6;
     lineStream.ignore(5);
     char expMassExcessString[11];
     lineStream.read(expMassExcessString,10);
     expMassExcessString[10]='\0';
     std::istringstream expMassExcessStream(expMassExcessString);
     double expMassExcess;
+    
     if(!(expMassExcessStream>>expMassExcess)) expMassExcess=0.;
     else mask |= HAS_EXP_MASS;
-//  double expMass = (expMassExcess!=0.) ? A*uconv+expMassExcess-Z*eMass*uconv/1.e6+atomicBindingE : 0.;
+    //double expMass = (expMassExcess!=0.) ? A*uconv+expMassExcess-Z*eMass*uconv/1.e6+atomicBindingE : 0.;
     double expMass = (!!(mask&HAS_EXP_MASS)) ? A*uconv+expMassExcess : 0.;
     lineStream.ignore(10);
     char thMassExcessString[11];
@@ -51,15 +53,17 @@ void NuclearMass::InitializeMasses(std::string filename) {
     thMassExcessString[10]='\0';
     std::istringstream thMassExcessStream(thMassExcessString);
     double thMassExcess; 
+    
     if(!(thMassExcessStream>>thMassExcess)) thMassExcess=0.;
     else mask |= HAS_TH_MASS;
-//  double thMass = (thMassExcess !=0.) ? A*uconv+thMassExcess-Z*eMass*uconv/1.e6+atomicBindingE : 0.;
+    //double thMass = (thMassExcess !=0.) ? A*uconv+thMassExcess-Z*eMass*uconv/1.e6+atomicBindingE : 0.;
     double thMass = (!!(mask&HAS_TH_MASS)) ? A*uconv+thMassExcess : 0.;
     char microCorrString[11];
     lineStream.read(microCorrString,10);
     microCorrString[10]='\0';
     std::istringstream microCorrStream(microCorrString);
     double microCorr; 
+    
     if(!(microCorrStream>>microCorr)) microCorr=0.;
     massTable_[MassKey(Z,A)]=MassEntry(expMass,thMass,microCorr,mask);
   }
@@ -114,9 +118,7 @@ double NuclearMass::MassDifference(int Z1, int A1,
     return M1-M2;
 }
 
-bool NuclearMass::QValue(int Z1, int A1,
-			 int Z2, int A2,
-			 double &qValue) {
+bool NuclearMass::QValue(int Z1, int A1, int Z2, int A2, double &qValue) {
   double massDifference;
   double decayMass;
   if(!MassDifference(Z1,A1,Z2,A2,massDifference)) return false;
@@ -166,10 +168,6 @@ bool NuclearMass::HighestBoundEnergy(int Z, int A, double& energy) {
     if(-1.*qValue[i]<energy) energy=-1.*qValue[i];
   return (energy!=1000.) ? true : false;
 }
-
-/*!
- *  Calculates liquid drop model mass based on TALYS parametrization.
- */
 
 double NuclearMass::CalculateLDMMass(int Z, int A) {
 	int N = A-Z;

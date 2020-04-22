@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * @brief Basic class for transmission functions. Parent of ParticleTransmissionFunc and GammaTransmissionfunc.
+ * @brief Basic class for transmission functions. Parent of ParticleTransmissionFunc and GammaTransmissionFunc.
  */
 class TransmissionFunc {
  public:

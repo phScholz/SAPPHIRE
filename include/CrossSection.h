@@ -7,7 +7,9 @@
 #include "Decayer.h"
 
 typedef std::vector<std::pair<Decayer*,std::vector<SpinRatePair*> > > DecayerVector;
+
 typedef std::pair<int,double> int_double_pair;
+
 struct int_double_pair_compare {
   bool operator()(const int_double_pair &lhs, int_double_pair const  &rhs) {
         return lhs.second < rhs.second;

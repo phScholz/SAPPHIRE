@@ -108,6 +108,8 @@ namespace Module_OldSapphire{
   
 //    void slaveProcess(boost::mpi::communicator& world,InitialNucleusData initialNucleus);
     
-
+    /**
+     * @brief Print help for the OldSapphire Module to std::cout.
+     */
     void printHelp(); /**< The old printHelp() function*/
 }

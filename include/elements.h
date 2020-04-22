@@ -1,3 +1,8 @@
+/**
+ * @file elements.h
+ * @brief Map entries for atomic number and element symbol
+ * @date 2020-04-22
+ */
 ELEMENT(  0,"n" )
 ELEMENT(  1,"H" )
 ELEMENT(  2,"He")

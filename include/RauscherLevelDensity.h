@@ -1,3 +1,9 @@
+/**
+ * @file RauscherLevelDensity.h
+ * @brief Contains RauscherLevelDensity as a child of LevelDensity.
+ * @date 2020-04-22
+ */
+
 #pragma once
 
 #include "LevelDensity.h"
@@ -6,6 +12,9 @@
 #include <stdlib.h>
 #include <math.h>
 
+/**
+ * @brief Class for the level density model by T. Rauscher. Child of LevelDensity.
+ */
 class RauscherLevelDensity : public LevelDensity {
  public:
   RauscherLevelDensity(int Z, int A, double J) : LevelDensity(Z,A,J) {

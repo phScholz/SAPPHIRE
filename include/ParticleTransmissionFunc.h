@@ -1,27 +1,15 @@
 /**
  * @file ParticleTransmissionFunc.h
- * @brief Declaration of the SLPair and ParticleTransmissionFuncs.
+ * @brief Declaration of ParticleTransmissionFuncs.
  */
 #pragma once
 
 #include "TransmissionFunc.h"
 #include "NuclearMass.h"
 #include "Constants.h"
+#include "SLPair.h"
 #include <map>
 
-/**
- * @brief Class for a pair of spin and angular momentum
- */
-class SLPair {
- public: 
-  SLPair(double s, int l) : s_(s), l_(l) {};
-  bool operator<(const SLPair& right) const {
-    if(s_ == right.s_ ) return l_ < right.l_;
-    else return s_ < right.s_;
-  };
-  double s_;
-  int l_;
-};
 
 /**
  * @brief Class for the particle transmission function. Child of TransmissionFunc.
@@ -47,7 +35,8 @@ class ParticleTransmissionFunc : public TransmissionFunc {
   * @details
   * 1. Initializes member variables 
   * 2. Calculates reduced mass, but only if the masses can be found via NuclearMass:FindMass()
-  * 2. Selects type of projectile from z1 and m1
+  * 3. Selects type of projectile from z1 and m1
+  * 4. Return transmissionFunc depending the chosen input for formalism
   */
   ParticleTransmissionFunc(int z1, int m1, int z2, int m2, 
 			   double jInitial, int piInitial,
@@ -57,13 +46,16 @@ class ParticleTransmissionFunc : public TransmissionFunc {
 			   double uncorrTotalWidthForCorrection,
 			   double uncorrTotalWidthSqrdForCorrection,
 			   TransmissionFunc* previous) : 
-  TransmissionFunc(z2,m2,jInitial,piInitial,jFinal,piFinal,maxL,
-		   totalWidthForCorrection,uncorrTotalWidthForCorrection,
-		   uncorrTotalWidthSqrdForCorrection,previous),
-    z1_(z1),m1_(m1),parity_(parity),spin_(spin) {
+          TransmissionFunc(z2,m2,jInitial,piInitial,jFinal,piFinal,maxL,
+		      totalWidthForCorrection,uncorrTotalWidthForCorrection,
+		      uncorrTotalWidthSqrdForCorrection,previous),
+          z1_(z1),m1_(m1),parity_(parity),spin_(spin) {
+    
     double mass1, mass2;
+    
     if(!NuclearMass::FindMass(z1_,m1_,mass1) || !NuclearMass::FindMass(z2_,m2_,mass2)) redmass_=0.;
     else redmass_=mass1*mass2/(mass1+mass2)/uconv;
+    
     if(z1_==0&&m1_==1) pType_=0;        //neutron
     else if(z1_==1&&m1_==1) pType_=1;   //proton
     else if(z1_==2&&m1_==4) pType_=2;   //alpha

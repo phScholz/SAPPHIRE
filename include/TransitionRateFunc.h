@@ -14,7 +14,7 @@ class XYPair {
 class TransitionRateFunc {
  public:
  /**
-  * @brief
+  * @brief Constructor of a TransitionRateFunc
   * @param z1
   * @param m1
   * @param z2
@@ -34,12 +34,21 @@ class TransitionRateFunc {
   * @param previous
   * @param isCrossSection
   * @details
+  * 1. Choose level density model (only Rauscher atm)
+  * 2. Initialize a transmissionFunc_ depending on the projectile
+  * 3. Read in levels of nucleus via NuclearLevels::FindLevels()
+  * 4. 
   */
-  TransitionRateFunc(int,int,int,int,
-		     double,int,double,int,
-		     double,int,double,double,
-		     double,double,double,double,
-		     TransitionRateFunc*,bool);
+  TransitionRateFunc(int z1, int m1, int z2, int m2,
+				             double jInitial, int piInitial, 
+				             double jFinal, int piFinal,
+				             double spin, int parity, double maxL,
+				             double compoundE, double qValue,
+				             double totalWidthForCorrection, 
+				             double uncorrTotalWidthForCorrection, 
+				             double uncorrTotalWidthSqrdForCorrection, 
+				             TransitionRateFunc* previous,
+				             bool isCrossSection);
   ~TransitionRateFunc() {
     delete transmissionFunc_;
     delete levelDensity_;
@@ -83,7 +92,7 @@ class TransitionRateFunc {
   double groundStateTransmission_;
   std::vector<XYPair> function_;
   std::vector<XYPair> cumulativeSum_;
-  LevelDensity* levelDensity_;
-  TransmissionFunc* transmissionFunc_;
+  LevelDensity* levelDensity_;          /**< LevelDensity model*/
+  TransmissionFunc* transmissionFunc_; /**< Particle or GammaTransmissionFunc*/
 };
 

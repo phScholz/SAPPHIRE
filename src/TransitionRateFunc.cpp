@@ -21,7 +21,6 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
   //Choose a level density function                                      
   levelDensity_ = new RauscherLevelDensity(z2,m2,jFinal);
 
-
   TransmissionFunc* previousTransmissionFunc = (previous) ? previous->transmissionFunc_ : NULL;
 
   //Choose a transmission function deciding between particle and gamma
@@ -50,17 +49,21 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
     delete transmissionFunc_;
     exit(1);
   }
-  
+
   double sum=0.;
   double exclusiveSum=0.;
+
   std::vector<Level> knownLevels = NuclearLevels::FindLevels(z2,m2);
+
   double highestKnownLevel = (knownLevels.size()) ? knownLevels[knownLevels.size()-1].energy_ : 0.;
   double lowEnergy=0.001; 
   double highEnergy = compoundE+qValue-highestKnownLevel;
   double dE  = (!isCrossSection) ? 0.01 : 0.05;
   double exclusiveLowEnergy = lowEnergy;
+
   if(isCrossSection) {
     double highestBoundEnergy=1000.;
+    
     if(m1==0&&gammaCutoffEnergy_>0.) highestBoundEnergy = gammaCutoffEnergy_;
     else if(!NuclearMass::HighestBoundEnergy(z2,m2,highestBoundEnergy)) {
       //std::cout << "Could not calculate highest bound energy.  Aborting." << std::endl;
@@ -69,13 +72,16 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
     if(compoundE+qValue-highestBoundEnergy>exclusiveLowEnergy) 
       exclusiveLowEnergy = compoundE+qValue-highestBoundEnergy;
   }
+
   int numSteps = (highEnergy>lowEnergy) ? 50 : -50;//int((highEnergy-lowEnergy)/dE);
   if(numSteps>0) {
     if(numSteps%2!=0) {
       numSteps+=1;
     }
+
     dE = (highEnergy-lowEnergy)/double(numSteps);
   }
+
   double evenSum=0.;
   double oddSum=0.;
   double firstTerm=0.;
