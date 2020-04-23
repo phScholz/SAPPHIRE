@@ -66,7 +66,7 @@ void NuclearLevels::InitializeLevels(std::string levelsDirectory,
   }
 
   std::ifstream in(spinFile.c_str());
-  if(!in){std::cout << "!!! Cannot read spinFile !!!" << std::endl; return;}
+  if(!in){/**std::cout << "!!! Cannot read spinFile !!!" << std::endl;*/ return;}
   
   //Is this only to find the ground state spins, if no groundstate is known?
   while(!in.eof()) {
