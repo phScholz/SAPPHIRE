@@ -41,8 +41,8 @@
 * when used for cross-section calculations, does not include preequilibrium reactions, which makes them well suited to astrophysical studies because in these environments incident particles have energies that are typically less than approximately 10 MeV.
 
 ### 1.2. Former Contributors
-* original version of Sapphire by [Mary Beard](https://isnap.nd.edu/people/group-pages/mary-beard/). 
-* Ethan Uberseder
+* [Mary Beard](https://isnap.nd.edu/people/group-pages/mary-beard/). 
+* original version of Sapphire by [Ethan Uberseder](https://www.linkedin.com/in/euberseder/)
 
 ### 1.3. License
 Sapphire is currently published under the [GNU General Public License](LICENSE.md).
@@ -57,7 +57,7 @@ Compiling Sapphire requires
 
 Check the find_packages in `cmake/Modules` whether cmake is looking for these packages in the right place if cmake cannot find them.
 
-For an `automatix generation of documentation files`, one needs [doxygen](http://doxygen.nl/) installed on the system. If its not installed, documentation is not automatically generated. 
+For an `automatic generation of documentation files`, one needs [doxygen](http://doxygen.nl/) installed on the system. If its not installed, documentation is not automatically generated. 
 
 ### 2.2. Build
 #### 2.2.1. Automatically
