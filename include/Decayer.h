@@ -85,6 +85,10 @@ class Decayer{
     void CorrectWidthFluctuations();
     static void SetCrossSection(bool isCrossSection) {isCrossSection_=isCrossSection;};
     static void SetMaxL(double maxL) {maxL_=maxL;};
+    static void SetAlphaDecay(bool x){alphaDecay_=x;}     /**<Setter for alphaDecay_*/
+    static void SetProtonDecay(bool x){protonDecay_=x;}   /**<Setter for protonDecay_*/
+    static void SetNeutronDecay(bool x){neutronDecay_=x;} /**<Setter for neutronDecay_*/
+    static void SetGammaDecay(bool x){gammaDecay_=x;}     /**<Setter for gammaDecay_*/
     static double GetMaxL() {return maxL_;};
     friend class CrossSection;
     double NeutronEntranceWidth() const {
@@ -116,12 +120,12 @@ class Decayer{
     /**
      * @brief Initializes the member variables for partial and total widths.
      */
-    void InitializeWidths();
+    inline void InitializeWidths();
 
     /**
      * @brief Looks up the QValues via NuclearMass::QValue() and writes it into qValueNeutron_, qValueProton_, and qValueAlpha_
      */
-    void InitializeQValues();
+    inline void InitializeQValues();
 
     /**
      * 
@@ -145,31 +149,35 @@ class Decayer{
     /**
      * @brief Check if the initial state is a bound state and if yes build the CDF via BuildKnownCDF().
      */
-    bool BoundStateCheck();
+    inline bool BoundStateCheck();
 
     /**
      * @brief Adding SpinRatePairs entries for alpha decay.
      */
-    void SetAlphaSpinRatePairs();
+    inline void SetAlphaSpinRatePairs();
 
     /**
      * @brief Adding SpinRatePairs entries for proton or neutron decay.
      */
-    void SetProtonNeutronSpinRatePairs();
+    inline void SetProtonNeutronSpinRatePairs();
 
     /**
      * @brief Adding SpinRatePairs entries for E1 or M1 transitions.
      */
-    void SetE1M1SpinRatePairs();
+    inline void SetE1M1SpinRatePairs();
 
     /**
      * @brief Adding SpinRatePairs entries for E2 transitions.
     */
-    void SetE2SpinRatePairs();
+    inline void SetE2SpinRatePairs();
 
    private:
     static bool isCrossSection_; /**< Boolean to indicate whether this Decayer is part of a CrossSection calculation or not.*/
     static double maxL_; /**< The maximum angular momentum*/
+    static bool alphaDecay_; /**< Toggle alpha decay*/
+    static bool protonDecay_; /**< Toggle proton decay*/
+    static bool neutronDecay_; /**< Toggle neutron decay*/
+    static bool gammaDecay_; /**< Toggle gamma decay*/
     int Z_; /**< The charge/atomic number of the decaying nucleus*/
     int A_; /**< The mass number of the decaying nucleus*/
     int piInitial_; /**< The parity of the intital state*/

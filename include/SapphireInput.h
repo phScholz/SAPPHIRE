@@ -138,6 +138,10 @@ class SapphireInput{
         void PorterThomas_p(bool x){porterThomas_p=x;}                  /**<Setter for bool porterThomas_p*/
         void PrintTrans(bool x){printTrans=x;}                      /**<Setter for bool printTrans*/
         void PreEq(bool x){preEq=x;}                                    /**<Setter for bool preEq*/
+        void AlphaChannel(bool x){alphaChannel=x;}                /**<Setter for bool alphaChannel*/
+        void ProtonChannel(bool x){protonChannel=x;}                /**<Setter for bool protonChannel*/
+        void NeutronChannel(bool x){neutronChannel=x;}                /**<Setter for bool neutronChannel*/
+        void GammaChannel(bool x){gammaChannel=x;}                /**<Setter for bool gammaChannel*/
 
         void EntranceState(int x){entranceState=x;}                  /**< Setter for entranceState*/
         void g_ExitStates(int x){               /**<Setter for g_exitStates*/ 
@@ -216,6 +220,10 @@ class SapphireInput{
         bool PorterThomas_p() const {return porterThomas_p;}             /**<Getter for bool porterThomas_p*/
         bool PrintTrans() const {return printTrans;}                       /**Getter for bool printTrans*/
         bool PreEq() const {return preEq;}                                /**<Getter for bool preEq*/
+        bool AlphaChannel() const {return alphaChannel;}              /**<Getter for bool alphaChannel*/
+        bool ProtonChannel() const {return protonChannel;}              /**<Getter for bool protonChannel*/
+        bool NeutronChannel() const {return neutronChannel;}              /**<Getter for bool neutronChannel*/
+        bool GammaChannel() const {return gammaChannel;}              /**<Getter for bool gammaChannel*/
 
         int EntranceState() const {return entranceState;}              /**<Getter for entranceState*/ 
         int g_ExitStates() const {return g_exitStates;}              /**<Getter for g_exitStates*/ 
@@ -273,6 +281,10 @@ class SapphireInput{
         bool porterThomas_p;       /**< Bool for PorterThomas usage particle*/
         bool printTrans;            /**< Bool if transmission should be printed*/
         bool preEq;                 /**< Bool for preEq.*/
+        bool alphaChannel;          /**< Toggle alpha channel*/
+        bool protonChannel;          /**< Toggle proton channel*/
+        bool neutronChannel;          /**< Toggle neutron channel*/
+        bool gammaChannel;          /**< Toggle gamma channel*/
 
         int entranceState;          /**< Int for the number of level, which should be the entrance State*/
         int g_exitStates;           /**< Int for the number of exitStates for gamma residual**/

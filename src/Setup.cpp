@@ -21,6 +21,11 @@ bool CrossSection::calculateGammaCutoff_;
 std::vector<double> CrossSection::rateTemps_;
 std::vector<double> CrossSection::macsEnergies_;
 
+bool Decayer::alphaDecay_;
+bool Decayer::protonDecay_;
+bool Decayer::neutronDecay_;
+bool Decayer::gammaDecay_;
+
 bool Decayer::isCrossSection_;
 bool PreEqDecayer::isCrossSection_;
 double Decayer::maxL_;
@@ -50,9 +55,16 @@ void Initialize() {
   CrossSection::SetCalculateGammaCutoff(true);
   CrossSection::CreateTempVector();
   CrossSection::CreateMACSEnergiesVector();
+  
+  //By default all decay channels are allowed if energetically possible
+  Decayer::SetAlphaDecay(true);
+  Decayer::SetProtonDecay(true);
+  Decayer::SetNeutronDecay(true);
+  Decayer::SetGammaDecay(true);
 
   Decayer::SetCrossSection(false);
   PreEqDecayer::SetCrossSection(false);
+  
   Decayer::SetMaxL(8.);
   PreEqDecayer::SetMaxL(8.);
   TransitionRateFunc::SetGammaCutoffEnergy(10000.);

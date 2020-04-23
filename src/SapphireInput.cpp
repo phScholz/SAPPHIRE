@@ -76,6 +76,10 @@
         SapphireInput::HighEnergy(6.0);
         SapphireInput::Events(100000);
         SapphireInput::ChunkSize(10000);
+        SapphireInput::AlphaChannel(true);
+        SapphireInput::ProtonChannel(true);
+        SapphireInput::NeutronChannel(true);
+        SapphireInput::GammaChannel(true);
 
     }
 
@@ -124,6 +128,10 @@
         std::cout << "\tGammaModel           = "             << SapphireInput::g_Formalism() << std::endl;
         std::cout << "\tPorterThomasParticle = "             << SapphireInput::PorterThomas_p() << std::endl;
         std::cout << "\tPorterThomasGamma    = "             << SapphireInput::PorterThomas_g() << std::endl;
+        std::cout << "\tGammaChannel         = "             << SapphireInput::GammaChannel() << std::endl;
+        std::cout << "\tNeutronChannel       = "             << SapphireInput::NeutronChannel() << std::endl;
+        std::cout << "\tProtonChannel        = "             << SapphireInput::ProtonChannel() << std::endl;
+        std::cout << "\tAlphaChannel         = "             << SapphireInput::AlphaChannel() << std::endl;
         
         std::cout << std::endl;
         std::cout << "\t[CrossSection]" << std::endl;
@@ -184,6 +192,10 @@
         SapphireInput::g_Formalism(pt.get<int>("General.GammaModel", SapphireInput::g_Formalism()));
         SapphireInput::PorterThomas_p(pt.get<bool>("General.PorterThomasParticle", SapphireInput::PorterThomas_p()));
         SapphireInput::PorterThomas_g(pt.get<bool>("General.PorterThomasGamma", SapphireInput::PorterThomas_g()));
+        SapphireInput::GammaChannel(pt.get<bool>("General.GammaChannel", SapphireInput::GammaChannel()));
+        SapphireInput::AlphaChannel(pt.get<bool>("General.AlphaChannel", SapphireInput::AlphaChannel()));
+        SapphireInput::ProtonChannel(pt.get<bool>("General.ProtonChannel", SapphireInput::ProtonChannel()));
+        SapphireInput::NeutronChannel(pt.get<bool>("General.NeutronChannel", SapphireInput::NeutronChannel()));
 
         //Reading CrossSection Input
         SapphireInput::Reaction(pt.get<std::string>("CrossSection.Reaction", SapphireInput::Reaction()));

@@ -43,10 +43,7 @@ ParticleTransmissionFunc* ParticleTransmissionFunc::CreateParticleTransmissionFu
       std::cout << "Specified alpha transmission formalism doesn't exist.  Exiting." << std::endl;
       exit(1);	
     }
-  }
-  
-  //If Proton or Neutron
-  if((z1==1&&m1==1&&protonFormalism_==1) || (z1==0&&m1==1&&neutronFormalism_==1)) {
+  }else if((z1==1&&m1==1&&protonFormalism_==1) || (z1==0&&m1==1&&neutronFormalism_==1)) {
       transmissionFunc = new JLMPotential(z1,m1,z2,m2, 
 					                                jInitial, piInitial,jFinal,piFinal,
 					                                spin,parity,maxL,

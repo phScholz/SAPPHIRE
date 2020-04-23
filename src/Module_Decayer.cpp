@@ -21,6 +21,8 @@
 #include "DecayController.h"
 #include "DecayResults.h"
 #include "Progressbar.h"
+#include "ParticleTransmissionFunc.h"
+#include "GammaTransmissionFunc.h"
 
 namespace Module_Decayer{
 
@@ -115,6 +117,16 @@ namespace Module_Decayer{
         * method.
         */
         Decayer::SetCrossSection(false);
+
+        Decayer::SetAlphaDecay(input.AlphaChannel());
+        Decayer::SetProtonDecay(input.ProtonChannel());
+        Decayer::SetNeutronDecay(input.NeutronChannel());
+        Decayer::SetGammaDecay(input.GammaChannel());
+
+        ParticleTransmissionFunc::SetAlphaFormalism(input.a_Formalism());
+        ParticleTransmissionFunc::SetNeutronFormalism(input.n_Formalism());
+        ParticleTransmissionFunc::SetProtonFormalism(input.p_Formalism());
+        GammaTransmissionFunc::SetEGDRType(input.g_Formalism());
         int chunkSize = input.ChunkSize();
         int A = massNumberIntFromString(input.Isotope());
         int Z = atomicNumberIntFromString(input.Isotope());

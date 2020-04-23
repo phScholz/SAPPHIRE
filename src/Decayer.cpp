@@ -67,7 +67,8 @@ void Decayer::InitializeWidths(){
 }
 
 void Decayer::SetAlphaSpinRatePairs(){
-  for(double l=0;l<=maxL_;l+=1.) {
+  if(alphaDecay_){
+    for(double l=0;l<=maxL_;l+=1.) {
         int piFinal = (int(l)%2==0) ? piInitial_ : -1*piInitial_;
 
 	      for(double jFinal = fabs(l-jInitial_); jFinal<=l+jInitial_;jFinal+=1.) {
@@ -97,6 +98,7 @@ void Decayer::SetAlphaSpinRatePairs(){
 	              alphaTotalWidth_+=newFunc->Integral();
           }
         }  
+    }
   }
 }
 
@@ -106,7 +108,7 @@ void Decayer::SetProtonNeutronSpinRatePairs(){
 	          for(double s = fabs(l-0.5); s<=l+0.5; s+=1.) {
 	            for(double jFinal = fabs(s-jInitial_); jFinal<=s+jInitial_;jFinal+=1.) {
 	              //if neutron decay is  energetically possible
-                if(qValueNeutron_+energy_>0) {
+                if(qValueNeutron_+energy_>0 && neutronDecay_) {
 	                bool exists = false;
 	                  for(int i =0;i<spinRatePairs_.size();i++) {
 		                  if(spinRatePairs_[i].Z_==Z_&&
@@ -131,7 +133,7 @@ void Decayer::SetProtonNeutronSpinRatePairs(){
 	                }
 	              }
                 //If proton decay is energetically possible
-                if(qValueProton_+energy_>0) {
+                if(qValueProton_+energy_>0 && protonDecay_) {
 	                bool exists = false;
 	                for(int i =0;i<spinRatePairs_.size();i++) {
 		                if(spinRatePairs_[i].Z_==Z_-1&&
@@ -162,6 +164,7 @@ void Decayer::SetProtonNeutronSpinRatePairs(){
 }
 
 void Decayer::SetE1M1SpinRatePairs(){
+  if(gammaDecay_){
     for(double jFinal = fabs(jInitial_-1.); jFinal<=jInitial_+1.;jFinal+=1.) {
       //Define transitionRateFuncs for M1
       TransitionRateFunc* previous_m1 = (widthCorrectedDecayer_) ? widthCorrectedDecayer_->spinRatePairs_[spinRatePairs_.size()].rateFunc_ : NULL;
@@ -185,9 +188,11 @@ void Decayer::SetE1M1SpinRatePairs(){
       gammaEntrance_+= e1Func->GroundStateTransmission();
       gammaTotalWidth_+=e1Func->Integral();
     }
+  }
 }
 
 void Decayer::SetE2SpinRatePairs(){
+  if(gammaDecay_){
     for(double jFinal = fabs(jInitial_-2.); jFinal<=jInitial_+2.;jFinal+=1.) {
       //Define TransitionRateFuncs for E2
       TransitionRateFunc* previous_e2 =	(widthCorrectedDecayer_) ? widthCorrectedDecayer_->spinRatePairs_[spinRatePairs_.size()].rateFunc_ : NULL;
@@ -200,6 +205,7 @@ void Decayer::SetE2SpinRatePairs(){
       gammaEntrance_+= e2Func->GroundStateTransmission();
       gammaTotalWidth_+=e2Func->Integral();
     }
+  }
 }
 
 Decayer::Decayer(int Z, int A, double jInitial, int piInitial, double energy, double totalWidthForCorrection, double uncorrTotalWidthForCorrection, double uncorrTotalWidthSqrdForCorrection,		 Decayer* widthCorrectedDecayer) :
@@ -213,11 +219,14 @@ Decayer::Decayer(int Z, int A, double jInitial, int piInitial, double energy, do
   if(!BoundStateCheck()) {
     //otherwise  consider transition from the continuum
     
+    //qValueAlpha_=0;
     //If Alphadecay is energetically possible
     if(qValueAlpha_+energy_>0) {
       SetAlphaSpinRatePairs();
     }
 
+    //qValueNeutron_=0;
+    //qValueProton_=0;
     //If neutron OR proton decay is energetically possible
     if(qValueNeutron_+energy_>0||qValueProton_+energy>0) {
       SetProtonNeutronSpinRatePairs();    

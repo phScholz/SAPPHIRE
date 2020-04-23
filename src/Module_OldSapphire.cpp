@@ -1017,9 +1017,10 @@ void printHelp() {
 
                 controller->Decay(neutronEntranceWidth,protonEntranceWidth,alphaEntranceWidth,gammaEntranceWidth,neutronTotalWidth,protonTotalWidth,alphaTotalWidth,gammaTotalWidth); 
                 
-                #pragma omp critical
-                chunkResults[j] = std::pair<DecayData,std::vector<DecayProduct>>(DecayData(energy,neutronEntranceWidth,protonEntranceWidth, alphaEntranceWidth,gammaEntranceWidth, neutronTotalWidth,protonTotalWidth, alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
-
+                //#pragma omp critical
+                
+                  chunkResults[j] = std::pair<DecayData,std::vector<DecayProduct>>(DecayData(energy,neutronEntranceWidth,protonEntranceWidth, alphaEntranceWidth,gammaEntranceWidth, neutronTotalWidth,protonTotalWidth, alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
+                
                 if(events==1) controller->PrintDecays();
                 delete controller;
             }

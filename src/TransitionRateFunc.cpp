@@ -63,7 +63,7 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
 
   if(isCrossSection) {
     double highestBoundEnergy=1000.;
-    
+
     if(m1==0&&gammaCutoffEnergy_>0.) highestBoundEnergy = gammaCutoffEnergy_;
     else if(!NuclearMass::HighestBoundEnergy(z2,m2,highestBoundEnergy)) {
       //std::cout << "Could not calculate highest bound energy.  Aborting." << std::endl;
@@ -73,7 +73,7 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
       exclusiveLowEnergy = compoundE+qValue-highestBoundEnergy;
   }
 
-  int numSteps = (highEnergy>lowEnergy) ? 50 : -50;//int((highEnergy-lowEnergy)/dE);
+  int numSteps = (highEnergy>lowEnergy) ? 100 : -100;//int((highEnergy-lowEnergy)/dE);
   if(numSteps>0) {
     if(numSteps%2!=0) {
       numSteps+=1;
@@ -87,20 +87,20 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
   double firstTerm=0.;
   double lastTerm=0.;
 
+//calculate the product of leveldensity*transmissionCoefficient for each energy bin in the continuum
 #pragma omp parallel for if(isCrossSection) reduction(+:sum,exclusiveSum,oddSum,evenSum)
   for(int i=0;i<=numSteps;++i) {
     double ep = lowEnergy+dE*i;
-    double rate = CalcLevelDensity(compoundE+qValue-ep)*
-      CalcTransmissionFunc(ep);
+    double rate = CalcLevelDensity(compoundE+qValue-ep)*CalcTransmissionFunc(ep);
     if(i==0) {
       firstTerm = rate; 
     } else if(i==numSteps) {
       lastTerm = rate;
     } else {
       if(i%2!=0) {
-	oddSum+=rate;
+	      oddSum+=rate;
       } else {
-	evenSum+=rate;
+	      evenSum+=rate;
       }
     }
     if(ep<highEnergy) sum += rate*dE;
@@ -110,11 +110,12 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
       cumulativeSum_.push_back(XYPair(ep+0.5*dE,sum));
     }
   }
+  //This is the composite simpson rule for integration
   double continuousSum = dE/3.*(firstTerm + 2.*evenSum + 4.*oddSum + lastTerm);
   double discreteSum=0.;
   double groundStateTransmission = 0.;
 
-
+//calculate the product of leveldensity*transmissionCoefficient for each level in the known level scheme
 #pragma omp parallel for if(isCrossSection) reduction(+:sum,exclusiveSum,discreteSum)
  for(int i=knownLevels.size()-1;i>=0;--i) {
     if(knownLevels[i].J_==jFinal&&knownLevels[i].Pi_==piFinal) {
