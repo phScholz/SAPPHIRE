@@ -47,7 +47,7 @@ void NuclearLevels::InitializeLevels(std::string levelsDirectory,
     char isotopeFile[256];
     sprintf(isotopeFile,"%sz%03d.dat",levelsDirectory.c_str(),Z);
     std::ifstream in(isotopeFile);
-    if(!in){std::cout << "!!! Cannot read levels file: " << isotopeFile << " !!!" << std::endl; continue;}
+    if(!in){/*std::cout << "!!! Cannot read levels file: " << isotopeFile << " !!!" << std::endl;*/ continue;}
     
     while(!in.eof()) {
       std::string line;
@@ -180,6 +180,6 @@ std::vector<Level> NuclearLevels::FindLevels(int Z, int A) {
   
   LevelsTable::const_iterator it = levelsTable_.find(MassKey(Z,A));
   if(it!=levelsTable_.end()) levelsVector=it->second.levels_;
-    
+  else std::cout << "Couldn't find Levels" << std::endl;
   return levelsVector;
 }

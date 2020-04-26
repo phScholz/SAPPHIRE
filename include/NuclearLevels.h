@@ -1,6 +1,5 @@
 /**
  * @file NuclearLevels.h
- * @author Mary Beard, Philipp Scholz
  * @date 2020-04-21
  * @brief It contains classes and methods, handling the nuclear level scheme
  */

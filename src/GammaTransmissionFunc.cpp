@@ -10,13 +10,12 @@
 #include <stdlib.h>
 #include <gsl/gsl_rng.h>
 #include <gsl/gsl_randist.h>
-#ifndef MPI_BUILD
 #include <omp.h>
-#endif
 
-#ifndef MPI_BUILD
+
+
 extern unsigned int randomSeed[12];
-#endif
+
 
 void GammaTransmissionFunc::SetPorterThomas(bool yn) {
   porterThomas_=yn;
@@ -27,9 +26,7 @@ void GammaTransmissionFunc::SetEGDRType(int type) {
 }
 
 void GammaTransmissionFunc::InitializeGDRParameters(std::string filename) {
-#ifndef MPI_BUILD
   std::cout << "Reading GDR parameters file..." << std::endl;
-#endif
   std::ifstream in(filename.c_str());
   if(!in) {
     std::cout << "Could not read GDR parameters file." << std::endl;
@@ -145,11 +142,8 @@ double GammaTransmissionFunc::operator()(double energy) {
   if(porterThomas_) {
     const gsl_rng_type *Tr = gsl_rng_default;
     gsl_rng *r = gsl_rng_alloc (Tr);
-#ifndef MPI_BUILD
+
     gsl_rng_set (r, rand_r(&randomSeed[omp_get_thread_num()])*time(NULL));
-#else
-    gsl_rng_set (r, rand()*time(NULL));
-#endif
     chirand = gsl_ran_chisq (r, 1.);
     gsl_rng_free (r);
   }

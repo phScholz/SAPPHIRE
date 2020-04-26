@@ -17,8 +17,12 @@
 #include "Module_CrossSection.h"
 #include "Module_OldSapphire.h"
 #include "Module_Decayer.h"
+#include "Module_RandomScheme.h"
 #include "SapphireInput.h"
 
+#include "RandomScheme.h"
+#include "NuclearLevels.h"
+#include <vector>
 //#include "Setup.cpp"
 
 extern void Initialize();
@@ -32,6 +36,7 @@ void PrintHelp(){
 	std::cout << std::endl;
   std::cout << "\treaction      - Calculate reaction cross sections and/or rates." << std::endl;
   std::cout << "\tdecayer       - Calculate Monte-Carlo statistical decay." << std::endl;
+  std::cout << "\trandom        - Create random level schemes" << std::endl;
   std::cout << std::endl;
   std::cout << "\told           - Instruction for the old Sapphire code." << std::endl;
 	std::cout << std::endl;
@@ -47,6 +52,10 @@ void PrintHelp(){
  * @param argv Array of cmd line parameters. 
  */
 int main(int argc, char *argv[]) {
+  
+
+
+
   /**
   * At the beginning of `main()` a header is printed and the cmd line arguments are checked.
   */
@@ -78,6 +87,9 @@ int main(int argc, char *argv[]) {
   }
   else if (mode == "decayer"){
     Module_Decayer::Go(argc,argv);
+  }
+  else if (mode == "random"){
+    Module_RandomScheme::Go(argc,argv);
   }
   else if (mode == "old"){
     Module_OldSapphire::Go(argc, argv);
