@@ -15,7 +15,6 @@ doxygen_config/
 #
 *.root
 *.out
-*.dat
 doc/*
 *.html
 *.js
