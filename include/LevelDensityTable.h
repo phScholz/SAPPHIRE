@@ -8,7 +8,6 @@
 #include "LevelDensity.h"
 #include <string>
 #include <vector>
-#include <tuple>
 
 class LevelDensityTable : public LevelDensity{
     public:
@@ -23,5 +22,6 @@ class LevelDensityTable : public LevelDensity{
     virtual void FillVector(double J, int parity){}; 
 
     protected:
+        std::vector< std::pair<double, double> > DensityVector; /**< Densities will be read to this vector*/
         std::string filename; /**< Filename of the data table*/
 };
