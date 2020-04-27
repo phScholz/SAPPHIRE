@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "LevelDensity.h"
+#include "LevelDensityFormula.h"
 #include "NuclearMass.h"
 #include <iostream>
 #include <stdlib.h>
@@ -15,12 +15,13 @@
 /**
  * @brief Class for the level density model by T. Rauscher. Child of LevelDensity.
  */
-class RauscherLevelDensity : public LevelDensity {
+class RauscherLevelDensity : public LevelDensityFormula{
  public:
-  RauscherLevelDensity(int Z, int A, double J) : LevelDensity(Z,A,J) {
+  RauscherLevelDensity(int Z, int A, double J) : LevelDensityFormula(Z,A,J,1) {
+    SetTables(false);
     aTilda_ = alpha_*A+beta_*pow(A,0.666666667);
     microEnergyCorr_=0.;
-    tables = false;
+    
     if(!NuclearMass::MicroEnergyCorr(Z,A,microEnergyCorr_)){
       //std::cout << "Microscopic energy correction not found.  Aborting." 
       //          << std::endl;
@@ -34,6 +35,7 @@ class RauscherLevelDensity : public LevelDensity {
   void CalcBackShift();
   double CalcDensityParam(double);
   double CalcNuclearTemp(double);
+  
  private:  
   static constexpr double alpha_ = 0.1337;
   static constexpr double beta_ = -0.06571;

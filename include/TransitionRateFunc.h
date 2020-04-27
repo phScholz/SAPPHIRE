@@ -1,7 +1,12 @@
+/**
+ * @file TransitionRateFunc.h
+ * @brief Declaration of the base class for the calculation of transition rates.
+ * @date 2020-04-27
+ */
 #pragma once
 
 #include <vector>
-#include "LevelDensity.h"
+#include "LevelDensityFormula.h"
 #include "TransmissionFunc.h"
 
 /**
@@ -127,7 +132,7 @@ class TransitionRateFunc {
   double groundStateTransmission_;
   std::vector<XYPair> function_;
   std::vector<XYPair> cumulativeSum_;
-  LevelDensity* levelDensity_;          /**< LevelDensity model*/
+  LevelDensityFormula* levelDensity_;          /**< LevelDensity model*/
   TransmissionFunc* transmissionFunc_; /**< Particle or GammaTransmissionFunc*/
 };
 

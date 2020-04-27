@@ -2,40 +2,34 @@
 #include <string>
 class LevelDensity {
  public:
- LevelDensity(int Z, int A, double J) :
-  Z_(Z), A_(A), J_(J) {
-    criticalU_=2.5+150./A;
+ LevelDensity(int Z, int A, double J, int parity) :
+  Z_(Z), A_(A), J_(J), parity_(parity) {
   };
-  virtual ~LevelDensity() {};
-  double operator()(double);
-  double TotalLevelDensity(double);
-  double CalculateDensity(double E);
-  double LookUpDensity(double E);
+  virtual ~LevelDensity(){};
+  double operator()(double E){
+    return CalculateDensity(E);
+  };
+  
   friend class KopeckyUhlGSF;
+  friend class TransitionRateFunc;
 
  protected:
-  virtual void CalcBackShift() = 0;
-  virtual double CalcDensityParam(double) = 0;
-  virtual double CalcNuclearTemp(double) = 0;
-  //virtual void ReadLevelDensityFile(std::string fileName);
-  //virtual double InterpolateDensity(double energy);
+  
+  
   void SetTables(bool x){tables = x;};
-  //virtual std::string GetLevelDensityFile();
-  void CalcConstantTempTerms();
+
+  virtual double TotalLevelDensity(double E){};
+  virtual double CalculateDensity(double E){};
+
+  
 
  protected:
-  static constexpr double zeta_ = 1.0;
-  static constexpr double r0_ = 1.25;
-  int Z_;
-  int A_;
-  double J_;
-  double backshift_;
-  double criticalU_;
-  double constAngTerm_;
-  double nuclearTemp_;
-  double e0_;
+
+  int Z_; /**< Charge number of the nucleus*/
+  int A_; /**< Mass number of the nucleus*/
+  int parity_; /**< Parity of the states*/
+  double J_; /**< Spin of the states*/
   bool tables = false;
-  std::string file;
 };
 
 

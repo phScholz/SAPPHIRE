@@ -1,5 +1,5 @@
 #include "KopeckyUhlGSF.h"
-#include "LevelDensity.h"
+#include "LevelDensityFormula.h"
 #include <iostream>
 
 KopeckyUhlGSF::KopeckyUhlGSF(int z2, int m2, double jInitial, int piInitial,
@@ -8,7 +8,7 @@ KopeckyUhlGSF::KopeckyUhlGSF(int z2, int m2, double jInitial, int piInitial,
 			     double uncorrTotalWidthForCorrection,
 			     double uncorrTotalWidthSqrdForCorrection,
 			     TransmissionFunc* previous,
-			     LevelDensity* levelDensity, double compoundE) :
+			     LevelDensityFormula* levelDensity, double compoundE) :
   GammaTransmissionFunc(z2,m2,jInitial,piInitial,jFinal,piFinal,maxL,
 			totalWidthForCorrection,uncorrTotalWidthForCorrection,
 			uncorrTotalWidthSqrdForCorrection,previous),

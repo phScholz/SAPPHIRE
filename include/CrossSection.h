@@ -38,6 +38,16 @@ class CrossSectionValues {
 
 /**
  * @brief Class to perform the calculations for cross sections and reaction rates
+ * @details
+ * Model
+ * =====
+ * Cross sections are calculated in the scope of the statisitcal model bei W. Hauser and H. Feshbach [(1)].
+ * Simplified, the cross section formula can be expressed as
+ * \f[ \sigma_{(a,b)} = \frac{\pi}{k^2} \sum_{J,\pi} \frac{2J+1}{(2I+1)(2s+1)} \frac{T_a^{J\pi}T_b^{J\pi}}{\sum_c T_c^{J,\pi}}  \f]
+ * where \f$a\f$ and \f$b\f$ are the projectile and ejectile, \f$I\f$ and \f$s\f$ the spin of the target and the projectile, and the sum runs over all possible intermediate states with spin and parity \f$(J,\pi)\f$.
+ * The \f$ T_i \f$ are the transmission coefficients to or from a intermediate state \f$(J,\pi)\f$.
+ * Generally, this model is applicable if the levelspacing of the states with \f$ (J,\pi) \f$ becomes smaller than the average decay width \f$ \Gamma_i^{J,\pi} \f$.
+ * [(1)]: https://doi.org/10.1103/PhysRev.87.366 "W. Hauser and H. Feshbach, Phys. Rev. 87 (1952) 366."
  */
 class CrossSection {
  public:
@@ -193,7 +203,7 @@ class CrossSection {
   static bool residualAlpha_;                 /**< Bool if residualAlpha should be toggled*/
   static bool calculateGammaCutoff_;          
   constexpr static double minEnergy_ = 0.001;
-  constexpr static double maxEnergy_ = 15.0;
+  constexpr static double maxEnergy_ = 10.0;
   constexpr static double dE_ = .1;
   bool gammaCutoffSet_;
   bool isValid_;                              /**< Boolean to control, whether the input is correct or not*/

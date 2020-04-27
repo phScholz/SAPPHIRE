@@ -104,7 +104,7 @@ GammaTransmissionFunc::GammaTransmissionFunc(int z2, int m2, double jInitial, in
 GammaTransmissionFunc*
 GammaTransmissionFunc::CreateGammaTransmissionFunc(int z2, int m2, double jInitial, int piInitial,
 						   double jFinal, int piFinal, double maxL, 
-						   LevelDensity* levelDensity, double totalWidthForCorrection,
+						   LevelDensityFormula* levelDensity, double totalWidthForCorrection,
 						   double uncorrTotalWidthForCorrection,
 						   double uncorrTotalWidthSqrdForCorrection,
 						   TransmissionFunc* previous, double compoundE) {

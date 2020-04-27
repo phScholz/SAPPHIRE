@@ -1,19 +1,14 @@
-#include "LevelDensity.h"
+/**
+ * @file LevelDensity.cpp
+ * @brief Logic of the LevelDensityFormula class
+ * @date 2020-04-27
+ */
+
+#include "LevelDensityFormula.h"
 #include "Constants.h"
 #include <math.h>
 
-double LevelDensity::operator()(double E) {
-  if(!tables){
-    return CalculateDensity(E);
-  }
-  else if (tables){
-    return LookUpDensity(E);
-  }
-  else 
-    return 0;
-}
-
-double LevelDensity::CalculateDensity(double E){
+double LevelDensityFormula::CalculateDensity(double E){
     double density;
     
     if(E-backshift_>criticalU_) {
@@ -37,11 +32,7 @@ double LevelDensity::CalculateDensity(double E){
     return density;
 }
 
-double LevelDensity::LookUpDensity(double E){
-  return 0;
-}
-
-double LevelDensity::TotalLevelDensity(double E) {
+double LevelDensityFormula::TotalLevelDensity(double E) {
   double density;
   if(E-backshift_>criticalU_) {
     double u = E-backshift_;
@@ -56,7 +47,7 @@ double LevelDensity::TotalLevelDensity(double E) {
   return density;
 }
 
-void LevelDensity::CalcConstantTempTerms() {
+void LevelDensityFormula::CalcConstantTempTerms() {
   double a = CalcDensityParam(criticalU_);
   double q = sqrt(2./5.*r0_*r0_*uconv/hbarc/hbarc*zeta_)*
     pow(A_,0.83333333333)*pow(criticalU_/a,0.25);  

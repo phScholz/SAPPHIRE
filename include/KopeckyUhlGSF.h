@@ -1,23 +1,26 @@
-#ifndef KOPECKYUHL_H
-#define KOPECKYUHL_H
+/**
+ * @file KopeckyUhlGSF.h
+ * @brief Declaration for the class of the GLO
+ * @date 2020-04-27
+ */
 #pragma once
 #include "GammaTransmissionFunc.h"
+#include "LevelDensityFormula.h"
 
-class LevelDensity;
 
 class KopeckyUhlGSF : public GammaTransmissionFunc {
  public:
   KopeckyUhlGSF(int,int,double,int,double,int,double, 
 		double,double,double,TransmissionFunc*,
-		LevelDensity*,double);
+		LevelDensityFormula*,double);
   double CalcStrengthFunction(double);
  private:
   double CalcEnergyDependentWidth(double,int);
   double CalcKUTempSqrd(double);
  private:
-  LevelDensity* levelDensity_;
+  LevelDensityFormula* levelDensity_;
   double compoundE_;
   double levelDenParam_;
 };
 
-#endif
+

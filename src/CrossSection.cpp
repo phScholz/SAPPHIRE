@@ -3,6 +3,7 @@
 #include "Decayer.h"
 #include "TransitionRateFunc.h"
 #include "RauscherLevelDensity.h"
+#include "LevelDensityFormula.h"
 #include "Constants.h"
 #include <math.h>
 #include <fstream>

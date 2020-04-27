@@ -1,4 +1,5 @@
 #include "RauscherLevelDensity.h"
+
 #include <math.h>
 
 void RauscherLevelDensity::CalcBackShift() {

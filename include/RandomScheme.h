@@ -8,7 +8,7 @@
 
 #include "GammaTransmissionFunc.h"
 #include "NuclearLevels.h"
-#include "LevelDensity.h"
+#include "LevelDensityFormula.h"
 #include "TransmissionFunc.h"
 #include <vector>
 #include "boost/random.hpp"
@@ -141,7 +141,7 @@ class RandomScheme{
 
         int nldModel_;                   /**< Integer to select the level density model*/
         int gsfModel_;                     /**< Integer to select the gamma strength model*/
-        LevelDensity* levelDensity_;          /**< LevelDensity model*/
+        LevelDensityFormula* levelDensity_;          /**< LevelDensity model*/
         TransmissionFunc* transmissionFunc_; /**< Particle or GammaTransmissionFunc*/
         TransmissionFunc* previous; /**< Particle or previous*/
         std::vector<Level> *randomScheme;

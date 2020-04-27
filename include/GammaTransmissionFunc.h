@@ -1,10 +1,15 @@
-#ifndef GAMMATRANSMISSIONFUNC_H
-#define GAMMATRANSMISSIONFUNC_H
+/**
+ * @file GammaTransmissionFunc.h
+ * @date 2020-04-27
+ * @brief Declaration of the base class for Gamma Strength Functions
+ */
 
 #include "TransmissionFunc.h"
 #include "Constants.h"
 #include "NuclearMass.h"
+#include "LevelDensityFormula.h"
 #include <math.h>
+
 #pragma once
 class GDRParameters {
  public:
@@ -31,8 +36,10 @@ class GDRParameters {
 };
 
 typedef std::tr1::unordered_map<MassKey, GDRParameters > GDRTable;
-class LevelDensity;
 
+/**
+ * @brief Base class for gamma-ray strength functions. Child of TransmissionFunc
+ */
 class GammaTransmissionFunc : public TransmissionFunc {
  public:
   GammaTransmissionFunc(int,int,double,int,double,int,
@@ -41,7 +48,7 @@ class GammaTransmissionFunc : public TransmissionFunc {
   virtual ~GammaTransmissionFunc() {};
   static GammaTransmissionFunc* 
     CreateGammaTransmissionFunc(int,int,double,int,double,int,
-				double,LevelDensity*,double,double,double,
+				double,LevelDensityFormula*,double,double,double,
 				TransmissionFunc*,double); 
   bool IsValid() {
     return true;
@@ -60,5 +67,3 @@ class GammaTransmissionFunc : public TransmissionFunc {
   GDRParameters gdrParameters_;
 };
 
-
-#endif
