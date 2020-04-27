@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 class LevelDensity {
  public:
  LevelDensity(int Z, int A, double J) :
@@ -8,12 +9,18 @@ class LevelDensity {
   virtual ~LevelDensity() {};
   double operator()(double);
   double TotalLevelDensity(double);
+  double CalculateDensity(double E);
+  double LookUpDensity(double E);
   friend class KopeckyUhlGSF;
 
  protected:
   virtual void CalcBackShift() = 0;
   virtual double CalcDensityParam(double) = 0;
   virtual double CalcNuclearTemp(double) = 0;
+  //virtual void ReadLevelDensityFile(std::string fileName);
+  //virtual double InterpolateDensity(double energy);
+  void SetTables(bool x){tables = x;};
+  //virtual std::string GetLevelDensityFile();
   void CalcConstantTempTerms();
 
  protected:
@@ -27,6 +34,8 @@ class LevelDensity {
   double constAngTerm_;
   double nuclearTemp_;
   double e0_;
+  bool tables = false;
+  std::string file;
 };
 
 

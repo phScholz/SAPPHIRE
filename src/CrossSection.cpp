@@ -45,7 +45,7 @@ CrossSection::CrossSection(SapphireInput & input):
 
 bool CrossSection::FindInitialState(){
   /** The groundState is set to -1.*/
-  std::cout << "Find initial state ..." <<std::endl;
+  //std::cout << "Find initial state ..." <<std::endl;
   groundStateJ_ =-1.;
   
   /** The levels of the target nucleus are read via the NuclearLevels::FindLevels() method into a std::vector<Level>*/
@@ -178,7 +178,7 @@ bool CrossSection::PreSetCompound(){
 
 void CrossSection::InitializeSeperationEnergies(){
   if(verbose_) std::cout << "Initialize seperation energies ..." <<std::endl;
-  /** The levels of the target nucleus are read via the NuclearLevels::FindLevels() method into a std::vector<Level>*/
+  /*The levels of the target nucleus are read via the NuclearLevels::FindLevels() method into a std::vector<Level>*/
   std::vector<Level> knownLevels = NuclearLevels::FindLevels(Z_,A_);
   seperationEnergy_ = -qValue_+knownLevels[entranceState_].energy_;
 
@@ -228,8 +228,7 @@ bool CrossSection::FillEnergies(std::string energyFile) {
       std::istringstream stm(line);
       double energy;
       if(stm>>energy) {
-	crossSections_.push_back(std::pair<double,CrossSectionValues>(energy,
-								      CrossSectionValues(0.,0.,0.,0.,0.,0.,0.,0.)));
+	      crossSections_.push_back(std::pair<double,CrossSectionValues>(energy, CrossSectionValues(0.,0.,0.,0.,0.,0.,0.,0.)));
       }
     }
   }
@@ -350,7 +349,7 @@ bool CrossSection::CalcDecayerVector(double E, DecayerVector& decayerVector, boo
   
   //for loop to create a Decayer for every spin-parity pair given in allowedJPi
   for(int i = 0;i<allowedJPi_.size();i++) {
-    Decayer* newDecayer = new Decayer(compoundZ_,compoundA_,allowedJPi_[i].first, allowedJPi_[i].second,E);
+    Decayer* newDecayer = new Decayer(compoundZ_,compoundA_,allowedJPi_[i].first, allowedJPi_[i].second, E);
     newDecayer->CorrectWidthFluctuations();
     std::vector<SpinRatePair*> entrancePairs;
     
@@ -413,11 +412,12 @@ void CrossSection::Calculate() {
 
     skipped_.push_back(false);
 
-    // E = center of mass energy + qvalue (seperationEnergy)
+    // E = center of mass energy - qvalue (seperationEnergy)
     double E = crossSections_[i].first+seperationEnergy_;
     // Here the prefactor is divided by the energy
     double geometricCrossSection = (pType_!=0) ? preFactor_/(E-seperationEnergy_) : preFactor_/E/E;
     
+    //Every SpinRatePair gets its own Decayer
     DecayerVector decayerVector;
     
     if(!CalcDecayerVector(E,decayerVector)) {

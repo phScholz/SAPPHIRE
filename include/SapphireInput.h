@@ -14,6 +14,8 @@
 
 #include <string>
 #include <vector>
+#include "NuclearMass.h"
+#include "NuclearLevels.h"
 
 
 class SapphireInput{
@@ -328,5 +330,9 @@ class SapphireInput{
         std::string levelDir;       /**< String for the path to the levels directory*/
         std::string spinFile;       /**< String for the path tot the spinFile*/
 
+
+    public:
+        //NuclearMass masses;
+        //NuclearLevels levels;
         
 };

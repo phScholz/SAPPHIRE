@@ -1,7 +1,15 @@
+/**
+ * @file Sapphire_config.h.in
+ * @date 2020-04-27
+ * @brief Contains the definition of the sourceDirectory() method
+ */
 #pragma once
 
 #include <string>
 
+/**
+ * @brief Define the sourceDirectory() method from environment variables
+ */
 std::string sourceDirectory() {
   return std::string("@Sapphire_SOURCE_DIR@");
 }

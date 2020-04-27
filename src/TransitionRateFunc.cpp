@@ -74,6 +74,7 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
   }
 
   int numSteps = (highEnergy>lowEnergy) ? 100 : -100;//int((highEnergy-lowEnergy)/dE);
+  //int numSteps = (highEnergy>lowEnergy) ? int((highEnergy-lowEnergy)/dE) : int((lowEnergy-highEnergy)/dE);
   if(numSteps>0) {
     if(numSteps%2!=0) {
       numSteps+=1;

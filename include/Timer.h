@@ -1,3 +1,9 @@
+/**
+ * @file Timer.h
+ * @brief Contains the Timer class which is needed for ProgressBar
+ * @date 2020-04-27
+ */
+
 #pragma once
 #include <iostream>
 #include <chrono>

@@ -23,7 +23,7 @@
 #include "TransitionRateFunc.h"
 #include "ParticleTransmissionFunc.h"
 #include "GammaTransmissionFunc.h"
-
+#include "omp.h"
 
 
 namespace Module_CrossSection{
@@ -185,11 +185,12 @@ namespace Module_CrossSection{
 
         //PrintEntrancePairs(entrancePairs);
 
+        
         for(it = std::begin(entrancePairs); it != std::end(entrancePairs); ++it){
             CrossSection* xs = new CrossSection(it->Z_,it->A_, it->pType_,input.EnergyFile(),input.CalcRates());
             if(xs->IsValid())
             {
-                std::cout << "Calculating for Z: " << it->Z_ << " A: " << it->A_ << " and Particle Type: " << it->pType_ << std::endl;
+                std::cout << std::endl << "Calculating for Z: " << it->Z_ << " A: " << it->A_ << " and Particle Type: " << it->pType_ << std::endl;
                 xs->Calculate();
                 xs->PrintCrossSections();
             }

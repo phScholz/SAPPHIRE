@@ -1,3 +1,8 @@
+/**
+ * @file Progressbar.h
+ * @brief Contains the ProgressBar class
+ * @date 2020-04-27
+ */
 #pragma once
 #include <iostream>
 #include <chrono>
@@ -7,9 +12,13 @@
 #include "Timer.h"
 #include "omp.h"
 
+
+/**
+ * @brief Class which provides a ProgressBar object which can be used in OpenMP loops
+ */
 class ProgressBar{
  private:
-  uint32_t total_work;    ///< Total work to be accomplished
+  uint32_t total_work;    /**< Total work to be accomplished*/
   uint32_t next_update;   ///< Next point to update the visible progress bar
   uint32_t call_diff;     ///< Interval between updates in work units
   uint32_t work_done;

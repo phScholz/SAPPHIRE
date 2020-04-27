@@ -60,6 +60,9 @@ class CrossSection {
   * 4. The validity of the exitStates will be checked via CheckChannels().
   * 5. If the input parameter was set to calculate reaction rates, then the normalized partition function \f$ G_0(T) = \frac{G(T)}{g_0} \f$ will be calculated via CalcPartitionFunc().
   * 6. CalcAllowedJPi() is called to fill the std::vector `allowedJPi_` with all allowed combinations of spin and parity for compoundstates accessible via the selection rules. Additionally, maps for the transmission coefficients are initialized.
+  * 7. If the energyFile string is empty or FillEnergies() returns false, an energygrid will be created automatically.
+  * In case of a gamma as projectile from minEnergy_ to maxEnergy_ in steps of dE_. In the other
+  * cases CalculateEnergyGrid() will be called to create a SMOKER-like grid.
   */
   CrossSection(int Z,int A,int pType,std::string energyFile,bool forRates,int entranceState = 0, std::vector<int> exitStates = std::vector<int>(4,-1));
 
@@ -72,6 +75,11 @@ class CrossSection {
 
   bool IsValid() const {return isValid_;}                                       /**< Getter for isValid_*/
 
+  /**
+   * @brief Function which initiates the calculation of the cross sections.
+   * @details
+   * 
+   */
   void Calculate();
   void PrintCrossSections();
   void PrintTransmissionTerms();
@@ -94,13 +102,14 @@ class CrossSection {
   * @param energyFile std::string containing the path to the energyFile
   * @return true or false depending, if the energies can be read or not
   */
-  bool FillEnergies(std::string energyFile);
+  inline bool FillEnergies(std::string energyFile);
 
   /**
   * @brief Method to fill the `std::vector<std::pair<double,int> > allowedJPi_`.
   * @param calcRates True or false depending, if rates should be calculated or not.
   * @return True if the size of allowedJPi_ is larger than 0; False otherwise.
-  * @details Depending on spin selection rules, the vector `allowedJP_` is filled under consideration of the target nucleus and the projectile. Additionally, the vectors for the maps: 
+  * @details 
+  * Depending on spin selection rules, the vector `allowedJP_` is filled under consideration of the target nucleus and the projectile. Additionally, the vectors for the maps: 
   * - `entranceTrans_`
   * - `gExitTrans_`
   * - `nExitTrans_`
@@ -108,13 +117,22 @@ class CrossSection {
   * - `aExitTrans_`
   * are initialized using the size of `allowedJPi_`
   */
-  bool CalcAllowedJPi(bool calcRates);
+  inline bool CalcAllowedJPi(bool calcRates);
+
+  /**
+   * @brief Every SpinRatePair gets its own decayer
+   * @details
+   * 1. Loop over allowedJPi:
+   *  - A new Decayer is created for a specific the pairs 
+   *  - CorrectWidthFluctuations() is called
+   *  - 
+   */
   bool CalcDecayerVector(double,DecayerVector&,bool forAverageWidth=false);
   
   /**
   * @brief Method to quickly check if the decay into the given exitChannels is energetically allowed.
   */
-  void CheckChannels();
+  inline void CheckChannels();
   
   /**
   * @brief Method to find the attributes of the entrance state and pass them to private member variables by reference.
@@ -126,7 +144,7 @@ class CrossSection {
   * 
   * @return True or false depending on if the initial state is known or not.
   */
-  bool FindInitialState();
+  inline bool FindInitialState();
 
   /**
   * @brief Method to find the compound mass, charge and preFactor and writes it into the member variables.
@@ -136,9 +154,16 @@ class CrossSection {
   * Here is \f$ A \f$ and \f$ J\f$ the mass number and spin of the target nucleus, respectively. The factor 100 is for the conversion of fm² to barn. 
   * @return true or false, depending if the given reaction qvalue is valid.
   */
-  bool PreSetCompound();
+  inline bool PreSetCompound();
 
-  void InitializeSeperationEnergies();
+  /**
+   * @brief SeperationEnergy is calculated from the qValue and the energy of the entranceState
+   * @details
+   * 1. SeperationEnergy is calculated from the qValue and the energy of the entranceState
+   * \f[ E_{sep} = E_i - Q\f]
+   * 2. Vectors for Exit states are generated.
+   */
+  inline void InitializeSeperationEnergies();
 
   void CalculateEnergyGrid();
 
@@ -192,7 +217,7 @@ class CrossSection {
   std::vector<double> specifiedExitJ_;
   std::vector<int> specifiedExitPi_;
   std::vector<bool> skipped_;
-  std::vector<std::pair<double,int> > allowedJPi_;
+  std::vector<std::pair<double,int> > allowedJPi_; /**< Spin Parity Pairs*/
   std::vector<std::pair<double,CrossSectionValues> > crossSections_;
   std::vector<std::pair<double,CrossSectionValues> > reactionRates_;
   std::map<int, std::vector<double> > entranceTrans_;

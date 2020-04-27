@@ -61,9 +61,9 @@
         SapphireInput::Reaction("25Mg+a");        
         SapphireInput::EnergyFile("/examples/energyFile");
         SapphireInput::ReactionFile("/examples/reactionFile");
-        SapphireInput::MassTable(sourceDirectory()+"/tables/masses.dat");
-        SapphireInput::GdrParams(sourceDirectory()+"/tables/ripl3_gdr_parameters.dat");
-        SapphireInput::LevelDir(sourceDirectory()+"/levels/");
+        SapphireInput::MassTable(sourceDirectory()+"/tables/masses/masses.dat");
+        SapphireInput::GdrParams(sourceDirectory()+"/tables/gamma/ripl3_gdr_parameters.dat");
+        SapphireInput::LevelDir(sourceDirectory()+"/tables/levels/");
         SapphireInput::SpinFile(sourceDirectory()+"/tables/spinod.dat");        
         SapphireInput::Isotope("60Ni");
         SapphireInput::PorterThomas_p(false);
@@ -80,6 +80,8 @@
         SapphireInput::ProtonChannel(true);
         SapphireInput::NeutronChannel(true);
         SapphireInput::GammaChannel(true);
+
+
 
     }
 
@@ -221,6 +223,12 @@
         SapphireInput::ChunkSize(pt.get<int>("Decayer.ChunkSize", SapphireInput::ChunkSize()));
         SapphireInput::PreEq(pt.get<bool>("Decayer.Preequillibrium", SapphireInput::PreEq()));
         SapphireInput::PreEqConf(pt.get<std::string>("Decayer.PreEqConfiguration", SapphireInput::PreEqConf()));
+    
+
+        //Initialize Datatables
+        //SapphireInput::masses.InitializeElements();
+        //SapphireInput::masses.InitializeMasses(SapphireInput::MassTable());
+        //SapphireInput::levels.InitializeLevels(SapphireInput::LevelDir(), SapphireInput::SpinFile());
     }
 
     std::string SapphireInput::pTypeStringFromReactionString(std::string reactionString){

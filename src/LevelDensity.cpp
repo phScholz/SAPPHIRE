@@ -3,26 +3,42 @@
 #include <math.h>
 
 double LevelDensity::operator()(double E) {
-  double density;
-  if(E-backshift_>criticalU_) {
-    double u = E-backshift_;
-    double a = CalcDensityParam(u);
-    double q = sqrt(2./5.*r0_*r0_*uconv/hbarc/hbarc*zeta_)*
-      pow(A_,0.83333333333)*pow(u/a,0.25);
+  if(!tables){
+    return CalculateDensity(E);
+  }
+  else if (tables){
+    return LookUpDensity(E);
+  }
+  else 
+    return 0;
+}
 
-    double angTerm = (2.*J_+1.)/4./q/q*exp(-(J_+0.5)*(J_+0.5)/2./q/q);
-    //double angTerm = (2.*J_+1.)/4./q/q*exp(-J_*(J_+1.)/2./q/q);
-    double totalDensity = 1/12./sqrt(2.)/q/pow(a,0.25)*exp(2.*sqrt(a*u))/
-      pow(u,1.25);
+double LevelDensity::CalculateDensity(double E){
+    double density;
+    
+    if(E-backshift_>criticalU_) {
+      double u = E-backshift_;
+      double a = CalcDensityParam(u);
+      double q = sqrt(2./5.*r0_*r0_*uconv/hbarc/hbarc*zeta_)*
+        pow(A_,0.83333333333)*pow(u/a,0.25);
 
-    density = angTerm*totalDensity;
-  } else {
-    double totalDensity = 1./nuclearTemp_*exp((E-e0_)/nuclearTemp_);
+      double angTerm = (2.*J_+1.)/4./q/q*exp(-(J_+0.5)*(J_+0.5)/2./q/q);
+      //double angTerm = (2.*J_+1.)/4./q/q*exp(-J_*(J_+1.)/2./q/q);
+      double totalDensity = 1/12./sqrt(2.)/q/pow(a,0.25)*exp(2.*sqrt(a*u))/
+        pow(u,1.25);
+
+      density = angTerm*totalDensity;
+    } else {
+      double totalDensity = 1./nuclearTemp_*exp((E-e0_)/nuclearTemp_);
 
     density = constAngTerm_*totalDensity;
- }
+    }
 
-  return density;
+    return density;
+}
+
+double LevelDensity::LookUpDensity(double E){
+  return 0;
 }
 
 double LevelDensity::TotalLevelDensity(double E) {
