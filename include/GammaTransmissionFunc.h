@@ -48,7 +48,7 @@ class GammaTransmissionFunc : public TransmissionFunc {
   virtual ~GammaTransmissionFunc() {};
   static GammaTransmissionFunc* 
     CreateGammaTransmissionFunc(int,int,double,int,double,int,
-				double,LevelDensityFormula*,double,double,double,
+				double,double,double,double,
 				TransmissionFunc*,double); 
   bool IsValid() {
     return true;

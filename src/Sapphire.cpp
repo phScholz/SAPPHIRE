@@ -68,6 +68,7 @@ int main(int argc, char *argv[]) {
 	}
 
   /** The Initializer function of Setup.cpp is called, to set some default values. */ 
+  Initialize();
   
   /** The second cmd line parameter defines the module, which should be started, therefore it is stored in the std::string mode.*/
   std::string mode(argv[1]);

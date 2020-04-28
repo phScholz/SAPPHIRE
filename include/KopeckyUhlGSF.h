@@ -5,20 +5,19 @@
  */
 #pragma once
 #include "GammaTransmissionFunc.h"
-#include "LevelDensity/LevelDensityFormula.h"
+#include "LevelDensity/RauscherLevelDensity.h"
 
 
 class KopeckyUhlGSF : public GammaTransmissionFunc {
  public:
   KopeckyUhlGSF(int,int,double,int,double,int,double, 
-		double,double,double,TransmissionFunc*,
-		LevelDensityFormula*,double);
+		double,double,double,TransmissionFunc*, double);
   double CalcStrengthFunction(double);
  private:
   double CalcEnergyDependentWidth(double,int);
   double CalcKUTempSqrd(double);
  private:
-  LevelDensityFormula* levelDensity_;
+  RauscherLevelDensity* levelDensity_;
   double compoundE_;
   double levelDenParam_;
 };

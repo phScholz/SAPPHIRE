@@ -37,7 +37,7 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
     transmissionFunc_ = 
       GammaTransmissionFunc::CreateGammaTransmissionFunc(z2,m2,jInitial,piInitial,
 							 jFinal,piFinal,maxL,
-							 levelDensity_,totalWidthForCorrection,
+							 totalWidthForCorrection,
 							 uncorrTotalWidthForCorrection,
 							 uncorrTotalWidthSqrdForCorrection,
 							 previousTransmissionFunc,compoundE);

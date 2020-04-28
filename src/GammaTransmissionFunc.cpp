@@ -101,10 +101,9 @@ GammaTransmissionFunc::GammaTransmissionFunc(int z2, int m2, double jInitial, in
   } 
 }
 
-GammaTransmissionFunc*
-GammaTransmissionFunc::CreateGammaTransmissionFunc(int z2, int m2, double jInitial, int piInitial,
+GammaTransmissionFunc* GammaTransmissionFunc::CreateGammaTransmissionFunc(int z2, int m2, double jInitial, int piInitial,
 						   double jFinal, int piFinal, double maxL, 
-						   LevelDensityFormula* levelDensity, double totalWidthForCorrection,
+						   double totalWidthForCorrection,
 						   double uncorrTotalWidthForCorrection,
 						   double uncorrTotalWidthSqrdForCorrection,
 						   TransmissionFunc* previous, double compoundE) {
@@ -122,7 +121,7 @@ GammaTransmissionFunc::CreateGammaTransmissionFunc(int z2, int m2, double jIniti
 							      totalWidthForCorrection,
 							      uncorrTotalWidthForCorrection,
 							      uncorrTotalWidthSqrdForCorrection,
-							      previous,levelDensity,compoundE);
+							      previous,compoundE);
   else if((maxL==0.&&egdrType_==2)||
 	  (maxL==1.&&mgdrType_==2)|| 
 	  (maxL==2.&&egqrType_==2)) function = new McCullaghGSF(z2,m2,jInitial,piInitial,jFinal,piFinal,maxL, 

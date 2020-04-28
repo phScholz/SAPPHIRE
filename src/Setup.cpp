@@ -71,7 +71,7 @@ void Initialize() {
   NuclearMass::InitializeElements();
   NuclearMass::InitializeMasses(sourceDirectory()+"/tables/masses/masses.dat");
   GammaTransmissionFunc::InitializeGDRParameters(sourceDirectory()+"/tables/gamma/ripl3_gdr_parameters.dat");
-  NuclearLevels::InitializeLevels(sourceDirectory()+"/tables/levels/",sourceDirectory()+"/tables/spinod.dat");
+  NuclearLevels::InitializeLevels(sourceDirectory()+"/tables/levels/", sourceDirectory()+"/tables/spinod.dat");
   ParticleTransmissionFunc::SetAlphaFormalism(0);
   ParticleTransmissionFunc::SetNeutronFormalism(0);
   ParticleTransmissionFunc::SetProtonFormalism(0);

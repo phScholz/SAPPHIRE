@@ -140,7 +140,7 @@ void RandomScheme<NLD>::CreateGammaTransitions(double eStart){
                 if(abs(rit->J_-it->J_) <= 2 && index > i){
                     transmissionFunc_= GammaTransmissionFunc::CreateGammaTransmissionFunc(Z_, A_, 
                                 rit->J_, rit->Pi_, it->J_, it->Pi_,maxL_,
-		    					 levelDensity_, tWFC_,uTWFC_,uTWSFC_, previous, rit->energy_);
+		    					tWFC_,uTWFC_,uTWSFC_, previous, rit->energy_);
 
                     if(!transmissionFunc_->IsValid()) {
                         throw std::invalid_argument("Input for transmissionfunc is invalid.");

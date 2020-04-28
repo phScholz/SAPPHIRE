@@ -7,17 +7,17 @@ KopeckyUhlGSF::KopeckyUhlGSF(int z2, int m2, double jInitial, int piInitial,
 			     double uncorrTotalWidthForCorrection,
 			     double uncorrTotalWidthSqrdForCorrection,
 			     TransmissionFunc* previous,
-			     LevelDensityFormula* levelDensity, double compoundE) :
+			     double compoundE) :
   GammaTransmissionFunc(z2,m2,jInitial,piInitial,jFinal,piFinal,maxL,
 			totalWidthForCorrection,uncorrTotalWidthForCorrection,
 			uncorrTotalWidthSqrdForCorrection,previous),
-  levelDensity_(levelDensity), compoundE_(compoundE){
+  levelDensity_(new RauscherLevelDensity(z2,m2,jInitial)), compoundE_(compoundE){
   double qValueNeutron;
   if(!NuclearMass::QValue(z2,m2,z2,m2-1,qValueNeutron)) {
     std::cout << "Unknown masses requested.  Aborting." << std::endl;
     exit(1);
   }
-  levelDenParam_ = levelDensity->CalcDensityParam(-1.*qValueNeutron-levelDensity_->backshift_);
+  levelDenParam_ = levelDensity_->CalcDensityParam(-1.*qValueNeutron-levelDensity_->backshift_);
 }
 
 double KopeckyUhlGSF::CalcStrengthFunction(double energy) {
