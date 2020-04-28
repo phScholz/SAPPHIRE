@@ -11,7 +11,7 @@ endif (GSL_PATH)
 
 option (MPI_BUILD "Build Sapphire for MPI simulations. Note: Cross section calculations are disabled with MPI builds." OFF)
 
-#Set the C++ standard to c++11
+#Set the C++ standard to c++17
 set (CMAKE_CXX_STANDARD 11)
 
 #Set optimization to 3

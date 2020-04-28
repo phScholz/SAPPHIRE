@@ -9,6 +9,8 @@
 #include "GammaTransmissionFunc.h"
 #include "NuclearLevels.h"
 #include "LevelDensity/LevelDensityFormula.h"
+#include "LevelDensity/RauscherLevelDensity.h"
+#include "LevelDensity/LevelDensityTable.h"
 #include "TransmissionFunc.h"
 #include <vector>
 #include "boost/random.hpp"
@@ -22,6 +24,7 @@
  * - FillRandomScheme
  * - ExtendRandomScheme
  */
+template<class NLD>
 class RandomScheme{
     public:
         /**
@@ -49,6 +52,7 @@ class RandomScheme{
          * @return A std::vector<Level> containing the randomly built levels
          * @todo Everything
          */
+        
         void CreateRandomScheme(int Z, int A, double eStart, double energy);
 
         /**
@@ -87,6 +91,30 @@ class RandomScheme{
         std::vector<Level> * GetScheme(){
             return randomScheme;
         }
+
+    private:
+        int nldModel_=0;                   /**< Integer to select the level density model*/
+        int gsfModel_=0;                   /**< Integer to select the gamma strength model*/
+        
+        
+        NLD* levelDensity_; /**< LevelDensity model*/
+
+        TransmissionFunc* transmissionFunc_; /**< Particle or GammaTransmissionFunc*/
+        TransmissionFunc* previous; /**< Particle or previous*/
+        std::vector<Level> *randomScheme;
+
+        int Z_;
+        int A_;
+        int maxL_ =2;
+
+        double tWFC_=0;
+        double uTWFC_=0;
+        double uTWSFC_=0;
+        
+        double maxJ_; /**< Double to select the maximum number of spin*/
+        double maxE_; /**< Double for the maximum excitation energy*/
+        double eStep_; /**< Energy binning*/
+        bool verbose_=false;
 
     private:
         /** Getter leveldensity at excitation energy**/
@@ -137,26 +165,4 @@ class RandomScheme{
          * - Porter-Thomas distribution for partial strengths
          */
         void CreateGammaTransitions(double eStart);
-
-
-        int nldModel_=0;                   /**< Integer to select the level density model*/
-        int gsfModel_=0;                     /**< Integer to select the gamma strength model*/
-        LevelDensityFormula* levelDensity_;          /**< LevelDensity model*/
-        TransmissionFunc* transmissionFunc_; /**< Particle or GammaTransmissionFunc*/
-        TransmissionFunc* previous; /**< Particle or previous*/
-        std::vector<Level> *randomScheme;
-
-        int Z_;
-        int A_;
-        int maxL_ =2;
-
-        double tWFC_=0;
-        double uTWFC_=0;
-        double uTWSFC_=0;
-        
-        double maxJ_; /**< Double to select the maximum number of spin*/
-        double maxE_; /**< Double for the maximum excitation energy*/
-        double eStep_; /**< Energy binning*/
-        bool verbose_=false;
-
 };

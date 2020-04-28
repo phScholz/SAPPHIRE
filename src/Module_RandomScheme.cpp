@@ -14,6 +14,8 @@
 #include <vector>
 #include <stdexcept>
 
+#include "LevelDensity/RauscherLevelDensity.h"
+
 namespace Module_RandomScheme{
     void PrintHelp(){
         std::cout  << "\tSyntax:        sapphire random <options>" << std::endl;        
@@ -39,7 +41,7 @@ namespace Module_RandomScheme{
         int A=atoi(argv[4]);
         double E=atof(argv[5]);
 
-        RandomScheme* scheme = new RandomScheme();
+        RandomScheme<RauscherLevelDensity>* scheme = new RandomScheme<RauscherLevelDensity>();
 
         
         std::cout << "Creating Level Scheme for" <<std::endl;
@@ -77,7 +79,7 @@ namespace Module_RandomScheme{
         int A=atoi(argv[4]);
         double E=atof(argv[5]);
 
-        RandomScheme* scheme = new RandomScheme();
+        RandomScheme<RauscherLevelDensity>* scheme = new RandomScheme<RauscherLevelDensity>();
 
         
         std::cout << "Extending Level Scheme for" <<std::endl;

@@ -18,8 +18,6 @@ class TransmissionFunc {
   * @param uncorrTotalWidthForCorrection
   * @param uncorrTotalWidthSqrdForCorrection
   * @param previous
-  * 
-  * 
   */
   TransmissionFunc (int z2, int m2, double jInitial, int piInitial,
 		    double jFinal, int piFinal, double maxL,

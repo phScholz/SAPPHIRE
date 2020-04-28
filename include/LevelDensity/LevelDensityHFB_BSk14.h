@@ -100,6 +100,10 @@ class LevelDensityHFB_BSk14 : public LevelDensityTable {
             if(verbose_) std::cout << "Filling Vector ... " << filename << std::endl;
             FillVector();
         }
+
+        LevelDensityHFB_BSk14(int Z, int A, double J) : LevelDensityTable(Z,A,J,1){
+            
+        }
     
     void PrintRows();
     double CalculateDensity(double E);

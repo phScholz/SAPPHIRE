@@ -26,17 +26,20 @@
 
 extern std::string sourceDirectory();
 
-RandomScheme::RandomScheme():maxJ_(5), maxE_(5.0), eStep_(0.01), previous(NULL){
+template <class NLD>
+RandomScheme<NLD>::RandomScheme():maxJ_(5), maxE_(5.0), eStep_(0.01), previous(NULL){
     randomScheme = new std::vector<Level>();
     nldModel_=0;
     gsfModel_=0;
 }
 
-RandomScheme::RandomScheme(int maxJ, double eStep) : maxJ_(maxJ), maxE_(5.0), eStep_(eStep), previous(NULL){
+template <class NLD>
+RandomScheme<NLD>::RandomScheme(int maxJ, double eStep) : maxJ_(maxJ), maxE_(5.0), eStep_(eStep), previous(NULL){
     randomScheme = new std::vector<Level>();    
 }
 
-RandomScheme::~RandomScheme(){
+template <class NLD>
+RandomScheme<NLD>::~RandomScheme(){
     /*try{
         delete levelDensity_;
     }
@@ -55,7 +58,8 @@ RandomScheme::~RandomScheme(){
     }*/
 }
 
-void RandomScheme::CreateLevels(int Z, int A, double eStart, double eStop){
+template <class NLD>
+void RandomScheme<NLD>::CreateLevels(int Z, int A, double eStart, double eStop){
     if(verbose_) std::cout << "Creating Levels..." << std::endl;
     maxE_=eStop;
 
@@ -80,14 +84,8 @@ void RandomScheme::CreateLevels(int Z, int A, double eStart, double eStop){
             //If even A and the spin float is an integer
             if(A%2==0 && abs(j-floor(j))==0){
                 //Create levelDensity object
-                switch(nldModel_){
-                    case 0:
-                        levelDensity_ = new RauscherLevelDensity(Z,A,j);
-                    case 1:
-                        //levelDensity_= new LevelDensityHFB_BSk14(Z,A,j,1);
-                    default:
-                        levelDensity_ = new RauscherLevelDensity(Z,A,j);
-                }
+                levelDensity_ = new NLD(Z,A,j);
+
                 double levelsPerEnergyStep = CalcLevelDensity(energy)*eStep_;
                 boost::poisson_distribution<> poisson_dist(levelsPerEnergyStep);
                 boost::variate_generator<base_generator_type&, boost::poisson_distribution<>> poisson(generator, poisson_dist);
@@ -106,7 +104,7 @@ void RandomScheme::CreateLevels(int Z, int A, double eStart, double eStop){
             if(verbose_) std::cout << A%2 << " " << abs(j-floor(j)) << std::endl;
             if(A%2!=0 && abs(j-floor(j))!=0){
                 //Create levelDensity object
-                levelDensity_ = new RauscherLevelDensity(Z,A,j);
+                levelDensity_ = new NLD(Z,A,j);
                 double levelsPerEnergyStep = CalcLevelDensity(energy)*eStep_;
                 boost::poisson_distribution<> poisson_dist(levelsPerEnergyStep);
                 boost::variate_generator<base_generator_type&, boost::poisson_distribution<>> poisson(generator, poisson_dist);
@@ -126,7 +124,8 @@ void RandomScheme::CreateLevels(int Z, int A, double eStart, double eStop){
 
 }
 
-void RandomScheme::CreateGammaTransitions(double eStart){
+template <class NLD>
+void RandomScheme<NLD>::CreateGammaTransitions(double eStart){
     if(verbose_) std::cout << "Creating Transitions..." << std::endl;
     size_t index = randomScheme->size() - 1;
     //Loop from highest level to lowest level
@@ -184,13 +183,15 @@ void RandomScheme::CreateGammaTransitions(double eStart){
     }
 }
 
-void RandomScheme::CreateRandomScheme(int Z, int A, double eStart, double eStop){
+template <class NLD>
+void RandomScheme<NLD>::CreateRandomScheme(int Z, int A, double eStart, double eStop){
     
     CreateLevels(Z,A,eStart,eStop);
     CreateGammaTransitions(eStart);
 }
 
-void RandomScheme::PrintRandomScheme(double maxE){
+template <class NLD>
+void RandomScheme<NLD>::PrintRandomScheme(double maxE){
     std::cout.precision(3);
     if(verbose_) std::cout << "Random level scheme generated: " << std::endl;
 
@@ -214,7 +215,8 @@ void RandomScheme::PrintRandomScheme(double maxE){
     std::cout << std::endl;
 }
 
-Level RandomScheme::GetGroundState(int Z_, int A_){
+template <class NLD>
+Level RandomScheme<NLD>::GetGroundState(int Z_, int A_){
     std::string spinFile(sourceDirectory()+"/tables/spinod.dat");
     std::ifstream in(spinFile.c_str());
     int N_=A_-Z_;
@@ -298,7 +300,8 @@ Level RandomScheme::GetGroundState(int Z_, int A_){
 
 }
 
-void RandomScheme::ExtendRandomScheme(int Z, int A, double eMax){
+template <class NLD>
+void RandomScheme<NLD>::ExtendRandomScheme(int Z, int A, double eMax){
     std::vector<Level> knownLevels = NuclearLevels::FindLevels(Z,A);
     //std::cout << knownLevels.size() << std::endl;
     if(knownLevels.size()>0){
@@ -312,3 +315,5 @@ void RandomScheme::ExtendRandomScheme(int Z, int A, double eMax){
     }
 }
 
+template class RandomScheme<RauscherLevelDensity>;
+//template class RandomScheme<LevelDensityHFB_BSk14>;
