@@ -81,7 +81,7 @@ class SapphireInput{
 
         /**
          * @brief Get a projectile integer from a projectile string
-         * @param projectileString The part of the reactionString which defines the projectile.
+         * @param reactionString The part of the reactionString which defines the projectile.
          * @return Integer which represents the pType: 0 = gamma, 1 = neutron, 2 = proton, 3 = alpha.
          */
         int pTypeIntFromReactionString(std::string reactionString);

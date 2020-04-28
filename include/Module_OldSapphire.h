@@ -69,8 +69,6 @@ namespace Module_OldSapphire{
     * @param pType Projectile
     * @param energyFile Reference to the string for the path to the EnergyFile
     * @param asciiIn Boolean which shows if there is a asciiFile or not
-    * @param highEnergy  Reference to a highEnergy double
-    * @param events  Reference to the events int.
     * 
     * @returns True or False
     * 

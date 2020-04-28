@@ -8,18 +8,22 @@
 #include "LevelDensity.h"
 #include <string>
 #include <vector>
+#include <iostream>
 
 class LevelDensityTable : public LevelDensity{
-    public:
-        LevelDensityTable(int Z, int A, double J, int parity): LevelDensity(Z,A,J,parity){
-            SetTables(true);
-            GetFileName(Z_,A_);
-            FillVector(J_,parity_);
-        }
     
     protected:
-    virtual void GetFileName(int Z, int A){};
-    virtual void FillVector(double J, int parity){}; 
+        virtual void GetFileName() = 0;
+        virtual void ReadFile() = 0;
+        virtual void FillVector() = 0;
+        virtual double TotalLevelDensity(double E) = 0;
+        virtual double CalculateDensity(double E) = 0;
+        void SetFilename(std::string x){filename=x;}
+
+    public:
+        LevelDensityTable(int Z, int A, double J, int parity): LevelDensity(Z,A,J,parity){
+
+        }
 
     protected:
         std::vector< std::pair<double, double> > DensityVector; /**< Densities will be read to this vector*/

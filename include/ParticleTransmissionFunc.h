@@ -94,17 +94,17 @@ class ParticleTransmissionFunc : public TransmissionFunc {
 
   /**
    * @brief Create a ParticleTransmissionFunc. Will be called from TransitionRateFunc().
-   * @param z1
-   * @param m1
-   * @param z2
-   * @param m2
-   * @param jInitial
-   * @param piInitial
-   * @param jFinal
-   * @param piFinal
-   * @param spin,
-   * @param parity
-   * @param maxL
+   * @param z1 Charge number of isotope 1
+   * @param m1 Mass number of isotope 1
+   * @param z2 Charge number of isotope 2
+   * @param m2 Mass number of isotope 2
+   * @param jInitial Initial spin
+   * @param piInitial Initial parity
+   * @param jFinal Final spin
+   * @param piFinal Final parity
+   * @param spin,Spin of ejectile
+   * @param parity Parity of ejectile
+   * @param maxL maximum angular momentum
    * @param totalWidthForCorrection
    * @param uncorrTotalWidthForCorrection
    * @param uncorrTotalWidthSqrdForCorrection
@@ -115,8 +115,11 @@ class ParticleTransmissionFunc : public TransmissionFunc {
    * 2. Creates a new TransmissionFunc object based on the input-parameter of the formalism
    * 3. Returns the created TransmissionFunc
    */
-  static ParticleTransmissionFunc* CreateParticleTransmissionFunc(int,int,int,int,double,int, double,int,double,int,double,
-				   double,double,double,TransmissionFunc*);
+  static ParticleTransmissionFunc* CreateParticleTransmissionFunc(int z1,
+  int m1, int z2, int m2, double jInitial, int piInitial, double jFinal, 
+  int piFinal, double spin, int parity, double maxL, double totalWidthForCorrection,
+  double uncorrTotalWidthForCorrection, double uncorrTotalWidthSqrdForCorrection,
+  TransmissionFunc* previous);
   
   static void SetAlphaFormalism(int formalism) {alphaFormalism_ = formalism;};      /**< Setter for AlphaFormalism*/
   static void SetNeutronFormalism(int formalism) {neutronFormalism_ = formalism;};  /**< Setter for NeutronFormalism*/

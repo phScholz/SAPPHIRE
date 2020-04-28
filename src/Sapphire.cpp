@@ -23,7 +23,8 @@
 #include "RandomScheme.h"
 #include "NuclearLevels.h"
 #include <vector>
-//#include "Setup.cpp"
+
+#include "LevelDensityHFB_BSk14.h"
 
 extern void Initialize();
 
@@ -64,6 +65,7 @@ int main(int argc, char *argv[]) {
 	std::cout << "********************************************************" << std::endl;
   std::cout << std::endl;
 
+  
   /** If no argument is given at all, the PrintHelp() method is invoked and the program exits. */
   if (argc <=1 ) {
 	  PrintHelp();
@@ -71,8 +73,7 @@ int main(int argc, char *argv[]) {
 	}
 
   /** The Initializer function of Setup.cpp is called, to set some default values. */ 
-  Initialize();
-
+  
   /** The second cmd line parameter defines the module, which should be started, therefore it is stored in the std::string mode.*/
   std::string mode(argv[1]);
 	

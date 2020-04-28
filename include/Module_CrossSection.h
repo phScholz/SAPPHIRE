@@ -50,7 +50,7 @@ namespace Module_CrossSection{
 
     /**
      * @brief Method to read in the Entrance Pairs given in the reactionFile
-     * @param entrancePair A std::vector object which contains entrancePairs
+     * @param entrancePairs A std::vector object which contains entrancePairs
      * @param reactionFile The file which contains a list of target charge and mass, as well as projectile type.
      */
     void readEntrancePairs(std::vector<EntrancePairs> & entrancePairs, std::string reactionFile);
@@ -90,7 +90,7 @@ namespace Module_CrossSection{
 
     /**
      * @brief Get a projectile integer from a projectile string
-     * @param projectileString The part of the reactionString which defines the projectile.
+     * @param reactionString The part of the reactionString which defines the projectile.
      * @return Integer which represents the pType: 0 = gamma, 1 = neutron, 2 = proton, 3 = alpha.
      */
     int pTypeIntFromString(std::string reactionString);

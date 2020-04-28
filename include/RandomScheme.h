@@ -44,6 +44,7 @@ class RandomScheme{
          * @brief Method to build a random level scheme for one isotope
          * @param Z Charge number
          * @param A Mass number
+         * @param eStart Starting energy from which on the scheme should be built.
          * @param energy Upper energy limit for the level scheme in MeV
          * @return A std::vector<Level> containing the randomly built levels
          * @todo Everything
@@ -65,7 +66,6 @@ class RandomScheme{
          * @brief Method to extend an existing level scheme for one isotope with random levels
          * @param Z Charge number
          * @param A Mass number
-         * @param eMin Lower energy limit for the level scheme in MeV
          * @param eMax Upper energy limit for the level scheme in MeV
          * @return A std::vector<Level> containing the randomly built levels
          * @details
