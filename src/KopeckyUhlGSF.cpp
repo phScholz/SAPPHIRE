@@ -1,5 +1,4 @@
 #include "KopeckyUhlGSF.h"
-#include "LevelDensityFormula.h"
 #include <iostream>
 
 KopeckyUhlGSF::KopeckyUhlGSF(int z2, int m2, double jInitial, int piInitial,

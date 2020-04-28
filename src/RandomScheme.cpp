@@ -7,7 +7,8 @@
  */
 
 #include "RandomScheme.h"
-#include "RauscherLevelDensity.h"
+#include "LevelDensity/LevelDensityHFB_BSk14.h"
+#include "LevelDensity/RauscherLevelDensity.h"
 #include "NuclearLevels.h"
 #include <stdexcept>
 #include "boost/random.hpp"
@@ -26,7 +27,9 @@
 extern std::string sourceDirectory();
 
 RandomScheme::RandomScheme():maxJ_(5), maxE_(5.0), eStep_(0.01), previous(NULL){
-    randomScheme = new std::vector<Level>();    
+    randomScheme = new std::vector<Level>();
+    nldModel_=0;
+    gsfModel_=0;
 }
 
 RandomScheme::RandomScheme(int maxJ, double eStep) : maxJ_(maxJ), maxE_(5.0), eStep_(eStep), previous(NULL){
@@ -77,7 +80,14 @@ void RandomScheme::CreateLevels(int Z, int A, double eStart, double eStop){
             //If even A and the spin float is an integer
             if(A%2==0 && abs(j-floor(j))==0){
                 //Create levelDensity object
-                levelDensity_ = new RauscherLevelDensity(Z,A,j);
+                switch(nldModel_){
+                    case 0:
+                        levelDensity_ = new RauscherLevelDensity(Z,A,j);
+                    case 1:
+                        //levelDensity_= new LevelDensityHFB_BSk14(Z,A,j,1);
+                    default:
+                        levelDensity_ = new RauscherLevelDensity(Z,A,j);
+                }
                 double levelsPerEnergyStep = CalcLevelDensity(energy)*eStep_;
                 boost::poisson_distribution<> poisson_dist(levelsPerEnergyStep);
                 boost::variate_generator<base_generator_type&, boost::poisson_distribution<>> poisson(generator, poisson_dist);

@@ -5,10 +5,10 @@
  * @brief File for the RandomScheme class
  * 
  */
-
+#pragma once
 #include "GammaTransmissionFunc.h"
 #include "NuclearLevels.h"
-#include "LevelDensityFormula.h"
+#include "LevelDensity/LevelDensityFormula.h"
 #include "TransmissionFunc.h"
 #include <vector>
 #include "boost/random.hpp"
@@ -139,8 +139,8 @@ class RandomScheme{
         void CreateGammaTransitions(double eStart);
 
 
-        int nldModel_;                   /**< Integer to select the level density model*/
-        int gsfModel_;                     /**< Integer to select the gamma strength model*/
+        int nldModel_=0;                   /**< Integer to select the level density model*/
+        int gsfModel_=0;                     /**< Integer to select the gamma strength model*/
         LevelDensityFormula* levelDensity_;          /**< LevelDensity model*/
         TransmissionFunc* transmissionFunc_; /**< Particle or GammaTransmissionFunc*/
         TransmissionFunc* previous; /**< Particle or previous*/

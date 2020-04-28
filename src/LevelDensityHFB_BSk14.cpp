@@ -3,7 +3,7 @@
  * @brief Contains the logic for the HFB-BSk14 datatables
  * @date 2020-04-27
  */
-#include "LevelDensityHFB_BSk14.h"
+#include "LevelDensity/LevelDensityHFB_BSk14.h"
 #include "NuclearMass.h"
 #include <string>
 #include <vector>

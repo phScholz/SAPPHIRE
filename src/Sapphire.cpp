@@ -20,11 +20,6 @@
 #include "Module_RandomScheme.h"
 #include "SapphireInput.h"
 
-#include "RandomScheme.h"
-#include "NuclearLevels.h"
-#include <vector>
-
-#include "LevelDensityHFB_BSk14.h"
 
 extern void Initialize();
 

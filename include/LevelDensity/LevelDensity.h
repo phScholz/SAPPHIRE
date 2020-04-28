@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+
 class LevelDensity {
  public:
  LevelDensity(int Z, int A, double J, int parity) :

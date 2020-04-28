@@ -1,7 +1,7 @@
 #include "TransitionRateFunc.h"
 #include "ParticleTransmissionFunc.h"
 #include "GammaTransmissionFunc.h"
-#include "RauscherLevelDensity.h"
+#include "LevelDensity/RauscherLevelDensity.h"
 #include "NuclearLevels.h"
 #include <iostream>
 #include <stdlib.h>

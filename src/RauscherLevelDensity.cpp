@@ -1,4 +1,4 @@
-#include "RauscherLevelDensity.h"
+#include "LevelDensity/RauscherLevelDensity.h"
 
 #include <math.h>
 

@@ -55,6 +55,7 @@
         SapphireInput::p_Formalism(0);
         SapphireInput::n_Formalism(0);
         SapphireInput::g_Formalism(1);
+        SapphireInput::LevelDensity(0);
         SapphireInput::DecayerMaxL(8.);
         SapphireInput::PreEqMaxL(8.);
         SapphireInput::g_CutoffEnergy(10000.);
@@ -80,9 +81,6 @@
         SapphireInput::ProtonChannel(true);
         SapphireInput::NeutronChannel(true);
         SapphireInput::GammaChannel(true);
-
-
-
     }
 
     void SapphireInput::printIntputFile(std::string InputFile){

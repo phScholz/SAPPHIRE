@@ -6,7 +6,7 @@
 #pragma once
 
 #include <vector>
-#include "LevelDensityFormula.h"
+#include "LevelDensity/LevelDensityFormula.h"
 #include "TransmissionFunc.h"
 
 /**

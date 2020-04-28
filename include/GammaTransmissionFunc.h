@@ -7,7 +7,7 @@
 #include "TransmissionFunc.h"
 #include "Constants.h"
 #include "NuclearMass.h"
-#include "LevelDensityFormula.h"
+#include "LevelDensity/LevelDensityFormula.h"
 #include <math.h>
 
 #pragma once

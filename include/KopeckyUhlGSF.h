@@ -5,7 +5,7 @@
  */
 #pragma once
 #include "GammaTransmissionFunc.h"
-#include "LevelDensityFormula.h"
+#include "LevelDensity/LevelDensityFormula.h"
 
 
 class KopeckyUhlGSF : public GammaTransmissionFunc {

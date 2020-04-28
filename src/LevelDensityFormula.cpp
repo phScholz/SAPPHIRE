@@ -4,7 +4,7 @@
  * @date 2020-04-27
  */
 
-#include "LevelDensityFormula.h"
+#include "LevelDensity/LevelDensityFormula.h"
 #include "Constants.h"
 #include <math.h>
 

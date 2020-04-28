@@ -166,6 +166,7 @@ class SapphireInput{
         void n_Formalism(int x){n_formalism=x;}              /**<Setter for n_formalism*/
         void p_Formalism(int x){p_formalism=x;}              /**<Setter for p_formalism*/
         void a_Formalism(int x){a_formalism=x;}              /**<Setter for a_formalism*/
+        void LevelDensity(int x){leveldensity=x;}              /**<Setter for a_formalism*/
         void Events(int x){events=x;}              /**<Setter for events*/
         void ChunkSize(int x){chunkSize=x;}              /**<Setter for chunkSize*/
         void Parity(int x){parity=x;}              /**<Setter for parity*/
@@ -236,6 +237,7 @@ class SapphireInput{
         int n_Formalism() const {return n_formalism;}              /**<Getter for n_formalism*/ 
         int p_Formalism() const {return p_formalism;}              /**<Getter for p_formalism*/ 
         int a_Formalism() const {return a_formalism;}              /**<Getter for a_formalism*/ 
+        int LevelDensity() const {return leveldensity;}              /**<Getter for a_formalism*/ 
         int Events() const {return events;}              /**<Getter for events*/ 
         int ChunkSize() const {return chunkSize;}              /**<Getter for chunkSize*/ 
         int Parity() const {return parity;}                    /**<Getter for parity*/
@@ -297,6 +299,7 @@ class SapphireInput{
         int a_formalism;            /**< Choose alpha OMP*/
         int p_formalism;            /**< Choose proton OMP*/
         int g_formalism;            /**< Choose gamma strength function*/
+        int leveldensity;           /**< Choose a level density model*/
         int events;                 /**< Number of decays*/
         int chunkSize;              /**< Portion of the total numbers of decays which is calculated at once.*/
         int parity;                 /**< Parity of the high energy resonance*/

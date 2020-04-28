@@ -2,8 +2,8 @@
 #include "CrossSection.h"
 #include "Decayer.h"
 #include "TransitionRateFunc.h"
-#include "RauscherLevelDensity.h"
-#include "LevelDensityFormula.h"
+#include "LevelDensity/RauscherLevelDensity.h"
+#include "LevelDensity/LevelDensityFormula.h"
 #include "Constants.h"
 #include <math.h>
 #include <fstream>

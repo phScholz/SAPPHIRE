@@ -2,7 +2,7 @@
  * @file SLPair.h
  * @brief Declaration of the SLPair
  */
-
+#pragma once
 /**
  * @brief Class for a pair of spin and angular momentum
  */
