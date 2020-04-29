@@ -1,5 +1,3 @@
-#pragma once
-
 /**
  * @file SapphireInput.h
  * @brief Option class for Sapphire.
@@ -8,6 +6,7 @@
  * 
  */
 
+#pragma once
 #ifndef MODULE_SAPPHIREINPUT_H
 #define MODULE_SAPPHIREINPUT_H
 #endif
@@ -179,6 +178,8 @@ class SapphireInput{
         void XsA(int x) {xsA=x;}                    /**<Setter for xsA*/
         void DcZ(int x) {dcZ=x;}                    /**<Setter for dcZ*/
         void DcA(int x) {dcA=x;}                    /**<Setter for dcA*/
+        void RdZ(int x) {rdZ=x;}                    /**<Setter for RdZ*/
+        void RdA(int x) {rdA=x;}                    /**<Setter for RdA*/
 
         void DecayerMaxL(double x){decayerMaxL=x;}              /**<Setter for decayerMaxL*/ 
         void PreEqMaxL(double x){preEqMaxL=x;}                  /**<Setter for preEqMaxL*/ 
@@ -188,6 +189,8 @@ class SapphireInput{
         void Spin(double x){spin=x;}                            /**<Setter for spin*/        
         void GroundstateJ(double x){groundstateJ=x;}            /**<Setter for groundstateJ*/        
         void QValue(double x){qValue=x;}                        /**<Setter for qValue*/  
+        void RdEmax(double x){rdEmax=x;}                        /**<Setter for rdEmax*/  
+        void RdEmin(double x){rdEmin=x;}                        /**<Setter for rdEmin*/  
 
 
         void EnergyFile(std::string x){energyFile=x;}                       /**< Setter for string energyFile*/
@@ -209,6 +212,8 @@ class SapphireInput{
         void GdrParams(std::string x){gdrParams=x;}                               /**< Setter for string module*/
         void LevelDir(std::string x){levelDir=x;}                               /**< Setter for string module*/
         void SpinFile(std::string x){spinFile=x;}                               /**< Setter for string module*/
+        void RdMode(std::string x){rdMode=x;}                               /**< Setter for string rdMode*/
+        void RdOutputFile(std::string x){rdOutputFile=x;}               /**< Setter for string rdOutputFile*/
 
         
         //Getter
@@ -250,6 +255,8 @@ class SapphireInput{
         int XsA() const {return xsA;}                    /**<Getter for xsA*/
         int DcZ() const {return dcZ;}                    /**<Getter for dcZ*/
         int DcA() const {return dcA;}                    /**<Getter for dcA*/
+        int RdZ() const {return rdZ;}                    /**<Getter for rdZ*/
+        int RdA() const {return rdA;}                    /**<Getter for rdA*/
 
         double DecayerMaxL() const {return decayerMaxL;}              /**<Getter for decayerMaxL*/
         double PreEqMaxL() const {return preEqMaxL;}              /**<Getter for preEqMaxL*/ 
@@ -259,6 +266,8 @@ class SapphireInput{
         double Spin() const {return spin;}                         /**<Getter for spin*/
         double GroundstateJ() const {return groundstateJ;}              /**<Getter for groundstateJ*/
         double QValue() const {return qValue;}                         /**<Getter for qValue*/
+        double RdEmax() const {return rdEmax;}                         /**<Getter for RdEmax*/
+        double RdEmin() const {return rdEmin;}                         /**<Getter for RdEmin*/
 
         std::string EnergyFile() const {return energyFile;}            /**<Getter for energyFile*/ 
         std::string Energies() const {return energies;}            /**<Getter for energies*/ 
@@ -271,6 +280,8 @@ class SapphireInput{
         std::string GdrParams() const {return gdrParams;}                    /**<Getter for gdrParams*/
         std::string LevelDir() const {return levelDir;}                    /**<Getter for levelDir*/
         std::string SpinFile() const {return spinFile;}                    /**<Getter for spinFile*/
+        std::string RdOutputFile() const {return rdOutputFile;}          /**<Getter for rdOutputFile*/
+        std::string RdMode() const {return rdMode;}                    /**<Getter for rdMode*/
 
         std::vector<int> exitStates;  /**< Vector of integer for the number of exitStates*/
     private:
@@ -312,6 +323,9 @@ class SapphireInput{
         int xsA;                    /** Integer for the mass number of the isotope in reaction module*/
         int dcZ;                    /** Integer for the charge number of the isotope in decayer module*/
         int dcA;                    /** Integer for the mass number of the isotope in decayer module*/
+        int rdZ;                    /** Integer for the charge number of the isotope in random module*/
+        int rdA;                    /** Integer for the mass number of the isotope in random module*/
+        
 
         double decayerMaxL;            /**< Maximum l-value for the decayer*/
         double preEqMaxL;            /**< Maximum l-value for the preEq*/
@@ -321,6 +335,8 @@ class SapphireInput{
         double spin;                /**< Spin of the decaying resonance*/
         double groundstateJ;        /**< Spin of the groundstate*/
         double qValue;              /**< double for the qvalue of the reaction*/
+        double rdEmax;              /**< double for the maximum energy of the randomly created levelscheme*/
+        double rdEmin;              /**< double for the minimum energy of the randomly created levelscheme*/
                 
         std::string energyFile;     /**< String with the path to the energyFile*/
         std::string reactionFile;   /**< String with the path to the reactionFile*/
@@ -332,6 +348,8 @@ class SapphireInput{
         std::string gdrParams;      /**< String for the path to the GDR parameter file*/
         std::string levelDir;       /**< String for the path to the levels directory*/
         std::string spinFile;       /**< String for the path tot the spinFile*/
+        std::string rdOutputFile;   /**< String for the outputFile of the random levelscheme*/
+        std::string rdMode;         /**< String for the mode of the Random module: create, extend, fill*/
 
 
     public:

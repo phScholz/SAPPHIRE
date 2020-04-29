@@ -17,6 +17,7 @@
 #include <vector>
 #include <string>
 #include "omp.h"
+#include "Progressbar.h"
 
 #include <fstream>
 #include <sstream>
@@ -60,7 +61,7 @@ RandomScheme<NLD>::~RandomScheme(){
 
 template <class NLD>
 void RandomScheme<NLD>::CreateLevels(int Z, int A, double eStart, double eStop){
-    if(verbose_) std::cout << "Creating Levels..." << std::endl;
+    std::cout << "Creating Levels..." << std::endl;
     maxE_=eStop;
 
     //Select random number generator
@@ -78,7 +79,15 @@ void RandomScheme<NLD>::CreateLevels(int Z, int A, double eStart, double eStop){
     if(eStart == 0.0 && randomScheme->size() == 0) randomScheme->push_back(GetGroundState(Z,A));
 
     if(verbose_) std::cout << "Begin Loop over energies." << std::endl;
-    for(double energy=eStart+eStep_/2.; energy<=maxE_; energy+=eStep_){
+    
+    int numSteps = (int) (eStop-eStart)/eStep_;
+
+    ProgressBar pg;
+    pg.start(numSteps);
+    //for(double energy=eStart+eStep_/2.; energy<=maxE_; energy+=eStep_){
+    for(int i=0; i<=numSteps; i++){
+        pg.update(i);
+        double energy=eStart+i*eStep_/2.;
         if(verbose_) std::cout << "Begin Loop over spins." << std::endl;
         for(double j=0; j<=maxJ_; j+=0.5){
             //If even A and the spin float is an integer
@@ -86,7 +95,9 @@ void RandomScheme<NLD>::CreateLevels(int Z, int A, double eStart, double eStop){
                 //Create levelDensity object
                 levelDensity_ = new NLD(Z,A,j);
 
-                double levelsPerEnergyStep = CalcLevelDensity(energy)*eStep_;
+                //Mean of poisson distribution isn't allowed to be <=0 ... thats why we are setting the level density in these cases to 1e-10
+                double nld = CalcLevelDensity(energy);
+                double levelsPerEnergyStep = (nld >0) ? nld*eStep_ : 1e-10;
                 boost::poisson_distribution<> poisson_dist(levelsPerEnergyStep);
                 boost::variate_generator<base_generator_type&, boost::poisson_distribution<>> poisson(generator, poisson_dist);
                 double i=0;    
@@ -121,17 +132,23 @@ void RandomScheme<NLD>::CreateLevels(int Z, int A, double eStart, double eStop){
             
         }
     }
+    //sorting level scheme by energy_
+    //std::sort(randomScheme->begin(), randomScheme->end());
 
 }
 
 template <class NLD>
 void RandomScheme<NLD>::CreateGammaTransitions(double eStart){
-    if(verbose_) std::cout << "Creating Transitions..." << std::endl;
+    std::cout << std::endl<< "Creating Transitions..." << std::endl;
     size_t index = randomScheme->size() - 1;
     //Loop from highest level to lowest level
     if(verbose_) std::cout << "Begin Loop for gamma rays" << std::endl;
+    ProgressBar pg;
+    pg.start(randomScheme->size());
+    int j=0;
     for(std::vector<Level>::reverse_iterator rit = randomScheme->rbegin(); rit != randomScheme->rend(); ++rit, --index){
         if (rit->energy_ > eStart){
+            pg.update(j);
             int i = 1;
             double partialStrength = 0;
             double totalStrength = 0;
@@ -179,6 +196,7 @@ void RandomScheme<NLD>::CreateGammaTransitions(double eStart){
                         it->probability_ = it->probability_/totalStrength;
                 }
             }
+            j++;
         }
     }
 }
@@ -315,5 +333,29 @@ void RandomScheme<NLD>::ExtendRandomScheme(int Z, int A, double eMax){
     }
 }
 
+template <class NLD>
+void RandomScheme<NLD>::WriteRandomScheme(std::string file){
+    std::ofstream out(file, std::ios::out);
+    out.precision(3);
+    if(verbose_) std::cout << "Random level scheme generated: " << std::endl;
+    int index = 1;
+    ProgressBar pg;
+    pg.start(randomScheme->size());
+    if(randomScheme->size()>0){
+        for(std::vector<Level>::iterator it = randomScheme->begin(); it != randomScheme->end(); ++it) {
+            out << index << "\t" << std::fixed << it->energy_ << "\t" << std::fixed << it->J_ << "\t" << it->Pi_ << std::endl;
+            if(it->gammas_.size()>0){
+                for(std::vector<GammaTransition>::iterator g = it->gammas_.begin(); g !=it->gammas_.end(); ++g){
+                    if(g->probability_ >= 0.001)
+                    out << "\t" << g->levelIndex_ << "\t" << std::fixed << g->energy_ << "\t" << std::fixed << g->probability_ << std::endl;
+                }
+            }
+        index++;
+        pg.update(index);
+        }
+    }
+    else throw std::out_of_range("RandomScheme is empty.");
+}
+
 template class RandomScheme<RauscherLevelDensity>;
-//template class RandomScheme<LevelDensityHFB_BSk14>;
+template class RandomScheme<LevelDensityHFB_BSk14>;

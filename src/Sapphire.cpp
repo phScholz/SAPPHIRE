@@ -48,9 +48,6 @@ void PrintHelp(){
  * @param argv Array of cmd line parameters. 
  */
 int main(int argc, char *argv[]) {
-  
-
-
 
   /**
   * At the beginning of `main()` a header is printed and the cmd line arguments are checked.

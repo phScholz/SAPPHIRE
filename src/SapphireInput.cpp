@@ -39,8 +39,7 @@
         SapphireInput::g_ExitStates(-1);
         SapphireInput::n_ExitStates(-1);
         SapphireInput::p_ExitStates(-1);
-        SapphireInput::a_ExitStates(-1);           
-        
+        SapphireInput::a_ExitStates(-1);   
         SapphireInput::CalcRates(false);           
         SapphireInput::CalcAverageWidth(false);
         SapphireInput::ResidualGamma(true);               
@@ -81,6 +80,14 @@
         SapphireInput::ProtonChannel(true);
         SapphireInput::NeutronChannel(true);
         SapphireInput::GammaChannel(true);
+        SapphireInput::Suffix(0);
+
+        SapphireInput::RdZ(50);
+        SapphireInput::RdA(120);
+        SapphireInput::RdEmin(0);
+        SapphireInput::RdEmax(0);
+        SapphireInput::RdOutputFile("levelScheme.dat");
+        SapphireInput::RdMode("create");
     }
 
     void SapphireInput::printIntputFile(std::string InputFile){
@@ -132,6 +139,7 @@
         std::cout << "\tNeutronChannel       = "             << SapphireInput::NeutronChannel() << std::endl;
         std::cout << "\tProtonChannel        = "             << SapphireInput::ProtonChannel() << std::endl;
         std::cout << "\tAlphaChannel         = "             << SapphireInput::AlphaChannel() << std::endl;
+        std::cout << "\tLevelDensity         = "             << SapphireInput::LevelDensity() << std::endl;
         
         std::cout << std::endl;
         std::cout << "\t[CrossSection]" << std::endl;
@@ -143,7 +151,7 @@
         std::cout << "\tResidualGamma        = "             << SapphireInput::ResidualGamma() << std::endl;
         std::cout << "\tResidualNeutron      = "             << SapphireInput::ResidualNeutron() << std::endl;
         std::cout << "\tResidualProton       = "             << SapphireInput::ResidualProton() << std::endl;
-        std::cout << "\tResidualAlpha        = "             << SapphireInput::ResidualAlpha() << std::endl;
+        std::cout << "\tResidualAlpha        = "             << SapphireInput::ResidualAlpha() << std::endl; 
         std::cout << "\tCalculateGammaCutoff = "             << SapphireInput::CalculateGammaCutoff() << std::endl;
         std::cout << "\tEntranceState        = "             << SapphireInput::EntranceState() << std::endl;
         std::cout << "\tg_ExitStates         = "             << SapphireInput::g_ExitStates() << std::endl;
@@ -151,7 +159,7 @@
         std::cout << "\tp_ExitStates         = "             << SapphireInput::p_ExitStates() << std::endl;
         std::cout << "\ta_ExitStates         = "             << SapphireInput::a_ExitStates() << std::endl;
         std::cout << std::endl;
-        std::cout << "\t[Decayer]" << std::endl;
+        std::cout << "\t[Decayer]" << std::endl;    
         std::cout << "\tSuffix               = "             << SapphireInput::Suffix() << std::endl;
         std::cout << "\tIsotope              = "             << SapphireInput::Isotope() << std::endl;
         std::cout << "\tSpin                 = "             << SapphireInput::Spin() << std::endl;
@@ -162,6 +170,14 @@
         std::cout << "\tChunkSize            = "             << SapphireInput::ChunkSize() << std::endl;        
         std::cout << "\tPreequillibrium      = "             << SapphireInput::PreEq() << std::endl;
         std::cout << "\tPreEqConfiguration   = "             << SapphireInput::PreEqConf() << std::endl;
+        std::cout << std::endl;
+        std::cout << "\t[Random]" << std::endl;
+        std::cout << "\tZ                    = "             << SapphireInput::RdZ() << std::endl;
+        std::cout << "\tA                    = "             << SapphireInput::RdA() << std::endl;
+        std::cout << "\tMode                 = "             << SapphireInput::RdMode() << std::endl;
+        std::cout << "\tOutputFile           = "             << SapphireInput::RdOutputFile() << std::endl;
+        std::cout << "\tEmin                 = "             << SapphireInput::RdEmin() << std::endl;
+        std::cout << "\tEmax                 = "             << SapphireInput::RdEmax() << std::endl;
         std::cout << std::endl;
     }
 
@@ -190,6 +206,7 @@
         SapphireInput::n_Formalism(pt.get<int>("General.NeutronModel", SapphireInput::n_Formalism()));
         SapphireInput::a_Formalism(pt.get<int>("General.AlphaModel", SapphireInput::a_Formalism()));
         SapphireInput::g_Formalism(pt.get<int>("General.GammaModel", SapphireInput::g_Formalism()));
+        SapphireInput::LevelDensity(pt.get<int>("General.LevelDensity", SapphireInput::LevelDensity()));
         SapphireInput::PorterThomas_p(pt.get<bool>("General.PorterThomasParticle", SapphireInput::PorterThomas_p()));
         SapphireInput::PorterThomas_g(pt.get<bool>("General.PorterThomasGamma", SapphireInput::PorterThomas_g()));
         SapphireInput::GammaChannel(pt.get<bool>("General.GammaChannel", SapphireInput::GammaChannel()));
@@ -221,7 +238,14 @@
         SapphireInput::ChunkSize(pt.get<int>("Decayer.ChunkSize", SapphireInput::ChunkSize()));
         SapphireInput::PreEq(pt.get<bool>("Decayer.Preequillibrium", SapphireInput::PreEq()));
         SapphireInput::PreEqConf(pt.get<std::string>("Decayer.PreEqConfiguration", SapphireInput::PreEqConf()));
-    
+
+        //Reading Random Input
+        SapphireInput::RdZ(pt.get<int>("Random.Z", SapphireInput::RdZ()));
+        SapphireInput::RdA(pt.get<int>("Random.A", SapphireInput::RdA()));
+        SapphireInput::RdMode(pt.get<std::string>("Random.Mode", SapphireInput::RdMode()));
+        SapphireInput::RdOutputFile(pt.get<std::string>("Random.OutputFile", SapphireInput::RdOutputFile()));
+        SapphireInput::RdEmax(pt.get<double>("Random.Emax", SapphireInput::RdEmax()));
+        SapphireInput::RdEmin(pt.get<double>("Random.Emin", SapphireInput::RdEmin()));
 
         //Initialize Datatables
         //SapphireInput::masses.InitializeElements();

@@ -13,6 +13,10 @@
 #include <iostream>
 #include <gsl/gsl_errno.h>
 
+#include "LevelDensity/LevelDensityHFB_BSk14.h"
+
+HFBTable LevelDensityHFB_BSk14::densityTable;
+
 bool CrossSection::residualGamma_;
 bool CrossSection::residualNeutron_;
 bool CrossSection::residualProton_;

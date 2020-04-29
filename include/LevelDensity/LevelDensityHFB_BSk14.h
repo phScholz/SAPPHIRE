@@ -6,6 +6,7 @@
 
 #pragma once
 #include "LevelDensityTable.h"
+#include <tr1/unordered_map>
 
 
 /**
@@ -77,12 +78,16 @@ class HFBTabRow{
         double J49;
 };
 
+typedef std::tr1::unordered_map<ChargeMassParityKey, std::vector<HFBTabRow> > HFBTable; /**< One map object which maps MassKey to LevelsContainer */
+
 /**
  * @brief The HFB level density tables as class in sapphire
  */
 class LevelDensityHFB_BSk14 : public LevelDensityTable {
+    public:
+        static HFBTable densityTable;
     private:
-        HFBTabRow dummyRow;
+        HFBTabRow dummyRow;        
         void GetFileName();
         void ReadFile();
         void FillVector();
@@ -90,22 +95,51 @@ class LevelDensityHFB_BSk14 : public LevelDensityTable {
         bool verbose_=false;    
 
     public:
-        LevelDensityHFB_BSk14(int Z, int A, double J, int parity) : LevelDensityTable(Z,A,J, parity){
+        LevelDensityHFB_BSk14(int Z, int A, double J, int parity) : LevelDensityTable(Z,A,J,parity){
+            
             if(verbose_) std::cout << "LevelDensityHFB Constructor ... " << std::endl;
             SetTables(true);
-            if(verbose_) std::cout << "Getting Filename ... " << std::endl;
-            GetFileName();
-            if(verbose_) std::cout << "Reading File ... " << filename << std::endl;
-            ReadFile();
-            if(verbose_) std::cout << "Filling Vector ... " << filename << std::endl;
-            FillVector();
+            if(!FindDensities(Z_,A_,parity_))
+            {
+                if(verbose_) std::cout << "Getting Filename ... " << std::endl;
+                GetFileName();
+                if(verbose_) std::cout << "Reading File ... " << filename << std::endl;
+                ReadFile();
+            }
+                if(verbose_) std::cout << "Filling Vector ... " << filename << std::endl;
+                FillVector();
         }
 
         LevelDensityHFB_BSk14(int Z, int A, double J) : LevelDensityTable(Z,A,J,1){
-            
+            parity_=1;
+            if(verbose_) std::cout << "LevelDensityHFB Constructor ... " << std::endl;
+            SetTables(true);
+            if(!FindDensities(Z_,A_,parity_))
+            {
+                if(verbose_) std::cout << "Getting Filename ... " << std::endl;
+                GetFileName();
+                if(verbose_) std::cout << "Reading File ... " << filename << std::endl;
+                ReadFile();
+            }
+            if(verbose_) std::cout << "Filling Vector ... " << filename << std::endl;
+            FillVector();
         }
     
     void PrintRows();
+
+    /**
+     * @brief Look if the densities are already stored in the HFBTable or not
+     * @param Z charge number
+     * @param A mass number
+     * @param P parity
+     * @return True or False depending on, if the specific std::vector<HFBTabRow> is already in HFBTable or not
+     * @details
+     * If the densities were found in the DensityTable then the std::vector<HFBTabRow> is copied to the member rows. 
+     * Basically this is a skipping of the reading procedure, if the densities have been previously read.
+     * With that, various calls for different spins should be accelerated.
+     */
+    bool FindDensities(int Z, int A, int P);
+    void PrintDensityTable();
     double CalculateDensity(double E);
     double TotalLevelDensity(double E);
 

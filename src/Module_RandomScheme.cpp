@@ -8,6 +8,7 @@
 #include "RandomScheme.h"
 #include "SapphireInput.h"
 #include "NuclearLevels.h"
+#include "Module_RandomScheme.h"
 
 #include <iostream>
 #include <chrono>
@@ -15,6 +16,7 @@
 #include <stdexcept>
 
 #include "LevelDensity/RauscherLevelDensity.h"
+#include "LevelDensity/LevelDensityHFB_BSk14.h"
 
 namespace Module_RandomScheme{
     void PrintHelp(){
@@ -41,13 +43,13 @@ namespace Module_RandomScheme{
         int A=atoi(argv[4]);
         double E=atof(argv[5]);
 
-        RandomScheme<RauscherLevelDensity>* scheme = new RandomScheme<RauscherLevelDensity>();
-
-        
         std::cout << "Creating Level Scheme for" <<std::endl;
         std::cout << "\tZ = "<< Z << std::endl;
         std::cout << "\tA = "<< A << std::endl;
         std::cout << "\tE = "<< E << std::endl << std::endl;
+
+        //RandomScheme<RauscherLevelDensity>* scheme = new RandomScheme<RauscherLevelDensity>();
+        RandomScheme<LevelDensityHFB_BSk14>* scheme = new RandomScheme<LevelDensityHFB_BSk14>();
         
         try
         {
@@ -109,6 +111,65 @@ namespace Module_RandomScheme{
         delete scheme;       
     }
 
+    void RunCreate(const SapphireInput &input){
+        int Z = input.RdZ();
+        int A = input.RdA();
+        double E = input.RdEmax();
+
+        if(input.LevelDensity() == 1){
+            RandomScheme<LevelDensityHFB_BSk14>* scheme = new RandomScheme<LevelDensityHFB_BSk14>();
+        
+            try
+            {
+                scheme->CreateRandomScheme(Z,A,0.0,E);
+            }
+            catch(const std::exception &e)
+            {
+                std::cerr << e.what() << '\n';
+            }
+            std::cout << std::endl << "Writing Level Scheme to file ..." << input.RdOutputFile() <<std::endl;
+            try
+            {
+                scheme->WriteRandomScheme(input.RdOutputFile());    
+            }
+            catch(const std::exception& e)
+            {
+                std::cerr << e.what() << '\n';
+            }
+            delete scheme; 
+        }
+
+        if(input.LevelDensity() == 0){
+            
+            RandomScheme<RauscherLevelDensity>* scheme = new RandomScheme<RauscherLevelDensity>();
+        
+            try
+            {
+                scheme->CreateRandomScheme(Z,A,0.0,E);
+            }
+            catch(const std::exception &e)
+            {
+                std::cerr << e.what() << '\n';
+            }
+           
+            std::cout << std::endl << "Writing Level Scheme to file ..." << input.RdOutputFile() <<std::endl;
+            try
+            {
+                scheme->WriteRandomScheme(input.RdOutputFile());    
+            }
+            catch(const std::exception& e)
+            {
+                std::cerr << e.what() << '\n';
+            }
+           delete scheme; 
+        }
+    }
+
+    bool fileExists(const char *filename){
+        std::ifstream ifile(filename);
+        return (bool)ifile;
+    };
+
     void Go(int argc,char* argv[]){
         /**
         *   A clock is started at the beginning of Go() 
@@ -120,34 +181,46 @@ namespace Module_RandomScheme{
 
         if(argc < 3){PrintHelp(); exit(0);}
 
-        std::string mode(argv[2]);
+        if(!fileExists(argv[2])){
+            std::string mode(argv[2]);        
 
-        if(mode=="create")
-        {
-            try
+            if(mode=="create")
             {
-                Create(argc,argv);
+                try
+                {
+                    Create(argc,argv);
+                }
+                catch(std::invalid_argument &e)
+                {
+                    PrintHelp();
+                }
             }
-            catch(std::invalid_argument &e)
+            else if (mode=="extend")
             {
-                PrintHelp();
+                try
+                {
+                    Extend(argc,argv);
+                }
+                catch(std::invalid_argument &e)
+                {
+                    PrintHelp();
+                }
             }
-        }
-        else if (mode=="extend")
-        {
-            try
-            {
-                Extend(argc,argv);
-            }
-            catch(std::invalid_argument &e)
+            else
             {
                 PrintHelp();
             }
         }
         else
         {
-            PrintHelp();
+            SapphireInput input;
+            input.ReadInputFile(argv[2]);
+            input.printIntputParameters();
+
+            if(input.RdMode() == "create")
+                RunCreate(input);
         }
+        
         
         auto end = std::chrono::steady_clock::now();
         std::chrono::duration<double> elapsed_seconds = end-start;

@@ -129,8 +129,14 @@ void LevelDensityHFB_BSk14::ReadFile(){
 
         rows.push_back(dummyRow);
     }
+    in.close();
+    densityTable[ChargeMassParityKey(Z_,A_,parity_)]=rows;    
+}
 
-    in.close();    
+void LevelDensityHFB_BSk14::PrintDensityTable(){
+    for(auto it = densityTable.begin(); it!=densityTable.end(); ++it){
+        std::cout << it->first.A_ << " " << it->first.Z_ << " " << it->first.P_ << std::endl;
+    }
 }
 
 void LevelDensityHFB_BSk14::FillVector(){
@@ -288,6 +294,23 @@ double LevelDensityHFB_BSk14::TotalLevelDensity(double E){
         return 0;
     }
 }
+
+bool LevelDensityHFB_BSk14::FindDensities(int Z, int A, int P){    
+  HFBTable::const_iterator it = densityTable.find(ChargeMassParityKey(Z,A,P));
+
+  if(it!=densityTable.end())
+    { 
+        rows=it->second; 
+        //std::cout << "DensityTable Entry found!" << std::endl;
+        return true;
+    }
+  else
+    {
+        //std::cout << "Not found!" << std::endl;
+        return false;
+    }  
+}
+
 
 void HFBTabRow::PrintRow(){
         std::cout.precision(1);

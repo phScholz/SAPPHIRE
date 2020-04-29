@@ -30,6 +30,23 @@ class Level {
  public:
  Level(double J, int Pi, double energy) :
   Pi_(Pi), J_(J), energy_(energy) {};
+  
+  /**
+   * @brief Operator to contruct a less comparison between level energies
+   */
+    bool operator < (const Level& str) const
+    {
+        return (energy_ < str.energy_);
+    }
+  
+  /**
+   * @brief Operator to contruct a greater comparison between level energies
+   */
+    bool operator > (const Level& str) const
+    {
+        return (energy_ > str.energy_);
+    }
+
  int Pi_;
  double J_;
  double energy_;

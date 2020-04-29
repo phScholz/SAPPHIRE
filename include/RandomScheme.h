@@ -87,6 +87,13 @@ class RandomScheme{
          */
         void PrintRandomScheme(double maxE);
 
+        /**
+         * @brief Write the randomly generated level scheme to a file
+         * @param file Path to the output file.
+         * @exception Throws out of range exception if RandomScheme is empty.
+         */
+        void WriteRandomScheme(std::string file);
+
         /** Getter for randomScheme pointer*/
         std::vector<Level> * GetScheme(){
             return randomScheme;
