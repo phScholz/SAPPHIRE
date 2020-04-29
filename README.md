@@ -136,6 +136,9 @@ The file `inputFile.ini` will be parsed by the [Boost.PropertyTree](https://www.
 ### 3.2. decayer
 Not yet fully implemented.
 
+### 3.3 random
+This module is still in an experimental state. It can be used to create or extend level schemes via randomly drawn levels from a Poission distribution. The mean of the Poisson distributin is calculated from a level density model.
+
 ### 3.3. old
 This module provides the same functionallity as the original Sapphire code. Everything stays the same except the keyword ```old```. 
 Thus instead of running ```./sapphire 60Fe+a``` one needs to run ```./sapphire old 60Fe+a```.
