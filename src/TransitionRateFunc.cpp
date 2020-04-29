@@ -2,6 +2,7 @@
 #include "ParticleTransmissionFunc.h"
 #include "GammaTransmissionFunc.h"
 #include "LevelDensity/RauscherLevelDensity.h"
+#include "LevelDensity/LevelDensityHFB_BSk14.h"
 #include "NuclearLevels.h"
 #include <iostream>
 #include <stdlib.h>
@@ -18,8 +19,11 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
 				                              TransitionRateFunc* previous,
 				                              bool isCrossSection) {
 
-  //Choose a level density function                                      
-  levelDensity_ = new RauscherLevelDensity(z2,m2,jFinal);
+  //Choose a level density function                      
+  if(nldmodel_==0)                
+    levelDensity_ = new RauscherLevelDensity(z2,m2,jFinal, piFinal);
+  if(nldmodel_ ==1)
+    levelDensity_ = new LevelDensityHFB_BSk14(z2,m2,jFinal,piFinal);
 
   TransmissionFunc* previousTransmissionFunc = (previous) ? previous->transmissionFunc_ : NULL;
 

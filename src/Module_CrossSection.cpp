@@ -162,20 +162,18 @@ namespace Module_CrossSection{
         CrossSection::SetResidualGamma(input.ResidualGamma());
         CrossSection::SetCalculateGammaCutoff(input.CalculateGammaCutoff());
         TransitionRateFunc::SetGammaCutoffEnergy(input.g_CutoffEnergy());
+        TransitionRateFunc::NLDmodel(input.LevelDensity());
         Decayer::SetCrossSection(true);
-        Decayer::SetMaxL(input.DecayerMaxL());
-        
+        Decayer::SetMaxL(input.DecayerMaxL());        
         std::vector<int> exitStates(4,-1);
         exitStates[0]=input.g_ExitStates();
         exitStates[1]=input.n_ExitStates();
         exitStates[2]=input.p_ExitStates();
-        exitStates[3]=input.a_ExitStates();
-        
+        exitStates[3]=input.a_ExitStates();        
         ParticleTransmissionFunc::SetAlphaFormalism(input.a_Formalism());
         ParticleTransmissionFunc::SetProtonFormalism(input.p_Formalism());
         ParticleTransmissionFunc::SetNeutronFormalism(input.n_Formalism());
         ParticleTransmissionFunc::SetPorterThomas(input.PorterThomas_p());
-
         GammaTransmissionFunc::SetEGDRType(input.g_Formalism());
         GammaTransmissionFunc::SetPorterThomas(input.PorterThomas_g());
 
@@ -205,57 +203,74 @@ namespace Module_CrossSection{
 
     void RunSingleReaction(const SapphireInput & input){
         std::cout<< std::endl << "Starting calculations for reaction ... " << input.Reaction() << std::endl;
-            int A = massNumberIntFromString(input.Reaction());                    
-            int Z = atomicNumberIntFromString(input.Reaction());
+        CrossSection::SetResidualAlpha(input.ResidualAlpha());
+        CrossSection::SetResidualProton(input.ResidualProton());
+        CrossSection::SetResidualNeutron(input.ResidualNeutron());
+        CrossSection::SetResidualGamma(input.ResidualGamma());
+        CrossSection::SetCalculateGammaCutoff(input.CalculateGammaCutoff());
+        TransitionRateFunc::SetGammaCutoffEnergy(input.g_CutoffEnergy());
+        TransitionRateFunc::NLDmodel(input.LevelDensity());
+        Decayer::SetCrossSection(true);
+        Decayer::SetMaxL(input.DecayerMaxL());        
+        std::vector<int> exitStates(4,-1);
+        exitStates[0]=input.g_ExitStates();
+        exitStates[1]=input.n_ExitStates();
+        exitStates[2]=input.p_ExitStates();
+        exitStates[3]=input.a_ExitStates();        
+        ParticleTransmissionFunc::SetAlphaFormalism(input.a_Formalism());
+        ParticleTransmissionFunc::SetProtonFormalism(input.p_Formalism());
+        ParticleTransmissionFunc::SetNeutronFormalism(input.n_Formalism());
+        ParticleTransmissionFunc::SetPorterThomas(input.PorterThomas_p());
+        GammaTransmissionFunc::SetEGDRType(input.g_Formalism());
+        GammaTransmissionFunc::SetPorterThomas(input.PorterThomas_g());
 
-            if(!Z && !A){
-                std::cout<< std::endl << "Could not get a valid target nucleus from reaction ... "  << std::endl;
-                exit(1);
-            }
+        int A = massNumberIntFromString(input.Reaction());                    
+        int Z = atomicNumberIntFromString(input.Reaction());
 
-            int pType = pTypeIntFromString(input.Reaction());
-            std::string energyFile = input.EnergyFile();
-            bool forRates = input.CalcRates();
-            int entranceState = input.EntranceState();
-            std::vector<int> exitStates(4,-1);
-            exitStates[0]=input.g_ExitStates();
-            exitStates[1]=input.n_ExitStates();
-            exitStates[2]=input.p_ExitStates();
-            exitStates[3]=input.a_ExitStates();
+        if(!Z && !A){
+            std::cout<< std::endl << "Could not get a valid target nucleus from reaction ... "  << std::endl;
+            exit(1);
+        }
 
-            std::cout << "Input Values For Cross Section:"   << std::endl
-		            << std::setw(14) << "Z:"               << std::setw(12) 
-		            << Z      << std::setw(0) << std::endl
-		            << std::setw(14) << "A:"               << std::setw(12) 
-		            << A      << std::setw(0) << std::endl;
-                
-                
-            if(pType==0) 
-	            std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "g" << std::setw(0) << std::endl;
-            else if(pType==1) 
-	            std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "n" << std::setw(0) << std::endl;
-            else if(pType==2) 
-	            std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "p" << std::setw(0) << std::endl;
-            else if(pType==3) 
-	            std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "a" << std::setw(0) << std::endl;
-                
-            std::cout << "Starting Cross Section Calculation..." << std::endl;           
+        int pType = pTypeIntFromString(input.Reaction());
+        std::string energyFile = input.EnergyFile();
+        bool forRates = input.CalcRates();
+        int entranceState = input.EntranceState();
 
-            CrossSection* xs = new CrossSection(Z,A,pType,energyFile,forRates,entranceState,exitStates);
-            if(xs->IsValid())
-            {
-                xs->Calculate();
-                xs->PrintCrossSections();
-            }
-            else
-            {
-                std::cout << "Could not calculate cross section." << std::endl;    
-            }            
-            delete xs;
+        std::cout << "Input Values For Cross Section:"   << std::endl
+		        << std::setw(14) << "Z:"               << std::setw(12) 
+		        << Z      << std::setw(0) << std::endl
+		        << std::setw(14) << "A:"               << std::setw(12) 
+		        << A      << std::setw(0) << std::endl;
+            
+            
+        if(pType==0) 
+	        std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "g" << std::setw(0) << std::endl;
+        else if(pType==1) 
+	        std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "n" << std::setw(0) << std::endl;
+        else if(pType==2) 
+	        std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "p" << std::setw(0) << std::endl;
+        else if(pType==3) 
+	        std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "a" << std::setw(0) << std::endl;
+            
+        std::cout << "Starting Cross Section Calculation..." << std::endl;           
+
+        CrossSection* xs = new CrossSection(Z,A,pType,energyFile,forRates,entranceState,exitStates);
+        if(xs->IsValid())
+        {
+            xs->Calculate();
+            xs->PrintCrossSections();
+        }
+        else
+        {
+            std::cout << "Could not calculate cross section." << std::endl;    
+        }            
+        delete xs;
     }
 
     void RunSingleReaction(std::string reactionString){
         /** This method will invoke a cross section calculation for a reaction given as reactionString .*/
+        
         int A = massNumberIntFromString(reactionString);
         int Z = atomicNumberIntFromString(reactionString);
         int pType = pTypeIntFromString(reactionString);

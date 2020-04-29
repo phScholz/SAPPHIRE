@@ -6,7 +6,7 @@
 #pragma once
 
 #include <vector>
-#include "LevelDensity/LevelDensityFormula.h"
+#include "LevelDensity/LevelDensity.h"
 #include "TransmissionFunc.h"
 
 /**
@@ -123,6 +123,16 @@ class TransitionRateFunc {
   static double GetGammaCutoffEnergy() {
     return gammaCutoffEnergy_;
   };
+
+    /**
+     * @brief Getter nldmodel_
+     */
+    static int NLDmodel(){return nldmodel_;};
+
+    /**
+     * @brief Setter nldmodel_
+     */
+    static void NLDmodel(int x){nldmodel_=x;}; 
   
  private:
   static const int numCrossSectionSteps_=20;
@@ -132,7 +142,8 @@ class TransitionRateFunc {
   double groundStateTransmission_;
   std::vector<XYPair> function_;
   std::vector<XYPair> cumulativeSum_;
-  LevelDensityFormula* levelDensity_;          /**< LevelDensity model*/
+  LevelDensity* levelDensity_;          /**< LevelDensity model*/
   TransmissionFunc* transmissionFunc_; /**< Particle or GammaTransmissionFunc*/
+  static int nldmodel_;
 };
 

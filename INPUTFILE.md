@@ -1,8 +1,8 @@
 # Inputfile description and keywords - contents
 
-- [Keywords Table](#keywords-table)
-- [Keywords](#keywords)
-- [Example Inputfile](#example-inputfile)
+1. [Keywords Table](#keywords-table)
+2. [Keywords](#keywords)
+3. [Example Inputfile](#example-inputfile)
 
 ---
 

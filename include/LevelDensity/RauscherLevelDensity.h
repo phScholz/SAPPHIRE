@@ -31,6 +31,21 @@ class RauscherLevelDensity : public LevelDensityFormula{
     CalcConstantTempTerms();
     
   };
+
+  RauscherLevelDensity(int Z, int A, double J, int P) : LevelDensityFormula(Z,A,J,P) {
+    SetTables(false);
+    aTilda_ = alpha_*A+beta_*pow(A,0.666666667);
+    microEnergyCorr_=0.;
+    
+    if(!NuclearMass::MicroEnergyCorr(Z,A,microEnergyCorr_)){
+      //std::cout << "Microscopic energy correction not found.  Aborting." 
+      //          << std::endl;
+      //exit(1);
+    }
+    CalcBackShift();
+    CalcConstantTempTerms();
+  };
+  
   ~RauscherLevelDensity() {};
   void CalcBackShift();
   double CalcDensityParam(double);

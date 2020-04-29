@@ -1,3 +1,13 @@
+/**
+ * @file Setup.cpp
+ * @brief Initialization of static members of the respective classes.
+ * @details
+ * In the original Sapphire code, input parameters were handled via static member
+ * variables of the respective sub classes.
+ * This is an easy way to set global parameters .. but maybe not the nicest.
+ * However, it works like that. So, we continue to use it like that. Maybe once
+ * in future, it would be better to template the respective classes for different models.
+ */
 #include "NuclearMass.h"
 #include "GammaTransmissionFunc.h"
 #include "NuclearLevels.h"
@@ -14,6 +24,8 @@
 #include <gsl/gsl_errno.h>
 
 #include "LevelDensity/LevelDensityHFB_BSk14.h"
+
+//These are all static members of the respective classes
 
 HFBTable LevelDensityHFB_BSk14::densityTable;
 
@@ -35,6 +47,8 @@ bool PreEqDecayer::isCrossSection_;
 double Decayer::maxL_;
 double PreEqDecayer::maxL_;
 double TransitionRateFunc::gammaCutoffEnergy_;
+int TransitionRateFunc::nldmodel_;
+
 ElementTable NuclearMass::elementTable_; 
 MassTable NuclearMass::massTable_;
 GDRTable GammaTransmissionFunc::gdrTable_;
@@ -72,6 +86,7 @@ void Initialize() {
   Decayer::SetMaxL(8.);
   PreEqDecayer::SetMaxL(8.);
   TransitionRateFunc::SetGammaCutoffEnergy(10000.);
+  TransitionRateFunc::NLDmodel(0);
   NuclearMass::InitializeElements();
   NuclearMass::InitializeMasses(sourceDirectory()+"/tables/masses/masses.dat");
   GammaTransmissionFunc::InitializeGDRParameters(sourceDirectory()+"/tables/gamma/ripl3_gdr_parameters.dat");
