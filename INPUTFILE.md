@@ -45,11 +45,22 @@
 | [Suffix](#suffix) | Suffix which can be given to the output files. |
 | PreEqConf         | Sets the initial exciton configuration.        |
 
+## Random
+
+
 # Keywords
 ## General
 ### MassTable
+The default mass tables can be found in `/tables/masses/`. Currently, Sapphire uses the mass excesses from the [Reference Input Parameter Library (RIPL-3)](https://www-nds.iaea.org/RIPL-3/) to calculate atomic masses and Q-Values. The experimental mass excesses were evaluated by [G. Audi and A.H. Wapstra](https://www.sciencedirect.com/science/article/abs/pii/0375947495004459). 
+
+If no experimental mass excesses are available, Sapphire uses the ground state properties of the [Finite Range Droplet Model (FRDM)](https://www.sciencedirect.com/science/article/pii/S0092640X85710029) from RIPL-3.
+
+Users who want to use different ground state properties are free to edit the data tables or exchange them with other ones. However, the file structure needs to stay the same as defined by RIPL-3.
+
 ### GDRParams
+
 ### LevelDir
+The known levels are also derived from RIPL-3 and can be found in `/tables/levels/`. 
 ### SpinFile
 ### Suffix
 
