@@ -133,6 +133,34 @@ void LevelDensityHFB_BSk14::ReadFile(){
     densityTable[ChargeMassParityKey(Z_,A_,parity_)]=rows;    
 }
 
+void LevelDensityHFB_BSk14::ReadCorr(){
+    std::string element = NuclearMass::FindElement(Z_);
+    std::string corrFileName = sourceDirectory() + "/tables/densities/HFB-2008/"+element+".ld";
+    //open file
+    std::ifstream in(corrFileName.c_str());
+    
+    //trying to read file
+    if(!in) {
+        throw std::runtime_error("Cannot read file "+filename);    
+    }
+    
+    int Z,A;
+    double c,d;
+    int dummy;
+    std::string line;
+
+    while(!in.eof()){
+        std::getline(in,line);
+        std::istringstream lineStream(line);
+        HFBLdRow dummyRow;
+        lineStream >> dummyRow.Z >> dummyRow.A >> dummy >> dummy >> dummyRow.c >> dummyRow.d;
+        corrTable[MassKey(Z,A)] = dummyRow;
+        //std::cout << dummyRow.Z << " " << dummyRow.A << " " << dummyRow.c << " " << dummyRow.d << std::endl;
+    }
+
+    in.close();
+}
+
 void LevelDensityHFB_BSk14::PrintDensityTable(){
     for(auto it = densityTable.begin(); it!=densityTable.end(); ++it){
         std::cout << it->first.A_ << " " << it->first.Z_ << " " << it->first.P_ << std::endl;
@@ -227,32 +255,45 @@ void LevelDensityHFB_BSk14::PrintRows(){
     }
 }
 
+
 double LevelDensityHFB_BSk14::CalculateDensity(double E){
+    HFBCorrTable::const_iterator it = corrTable.find(MassKey(Z_,A_));
+    double c = 0;
+    double d = 0;
+    if(it!=corrTable.end()){
+        c=it->second.c;
+        d=it->second.d;
+    }
+
     if(DensityVector.size()>0){
+        double U=E-d;
         //Looking for the energy in the DensityVector
         double lowerx=0;
         double lowery=0;
         double upperx=0;
         double uppery=0;
         for(auto it = DensityVector.begin(); it != DensityVector.end(); ++it){
-            if (it->first == E){
+            if (it->first == U){
                 return it->second;
             }
-            if(it->first > lowerx && it->first < E){
+            if(it->first > lowerx && it->first < U){
                 lowerx = it->first;
                 lowery = it->second;
 
             }
             
-            if(it->first > E && upperx < E){
+            if(it->first > U && upperx < U){
                 upperx = it->first;
                 uppery = it->second;
             }
         }
 
         //If the energy doenst exist in the DensityVector we need to interpolate
+        double density =(U-lowerx)*(uppery-lowery)/(upperx-lowerx)+lowery;
+        density*=exp(c*sqrt(U));
+        density*=exp(c_*sqrt(U));
 
-        return (E-lowerx)*(uppery-lowery)/(upperx-lowerx)+lowery;
+        return density;
     }
     else
     {
@@ -262,31 +303,42 @@ double LevelDensityHFB_BSk14::CalculateDensity(double E){
 }
 
 double LevelDensityHFB_BSk14::TotalLevelDensity(double E){
+    HFBCorrTable::const_iterator it = corrTable.find(MassKey(Z_,A_));
+    if(it!=corrTable.end()){
+        c_=it->second.c;
+        d_=it->second.d;
+    }
+    else{
+        c_=0;
+        d_=0;
+    }
     if(rows.size()>0){
+        double U=E-d_;
         //Looking for the energy in the DensityVector
         double lowerx=0;
         double lowery=0;
         double upperx=0;
         double uppery=0;
         for(auto it = rows.begin(); it != rows.end(); ++it){
-            if (it->U == E){
+            if (it->U == U){
                 return it->RHOTOT;
             }
-            if(it->U > lowerx && it->U < E){
+            if(it->U > lowerx && it->U < U){
                 lowerx = it->U;
                 lowery = it->RHOTOT;
 
             }
             
-            if(it->U > E && upperx < E){
+            if(it->U > U && upperx < U){
                 upperx = it->U;
                 uppery = it->RHOTOT;
             }
         }
 
         //If the energy doenst exist in the DensityVector we need to interpolate
-
-        return (E-lowerx)*(uppery-lowery)/(upperx-lowerx)+lowery;
+        double density =(U-lowerx)*(uppery-lowery)/(upperx-lowerx)+lowery;
+        density*=exp(c_*sqrt(U));
+        return density;
     }
     else
     {
@@ -295,8 +347,8 @@ double LevelDensityHFB_BSk14::TotalLevelDensity(double E){
     }
 }
 
-bool LevelDensityHFB_BSk14::FindDensities(int Z, int A, int P){    
-  HFBTable::const_iterator it = densityTable.find(ChargeMassParityKey(Z,A,P));
+bool LevelDensityHFB_BSk14::FindDensities(){    
+  HFBTable::const_iterator it = densityTable.find(ChargeMassParityKey(Z_,A_,parity_));
 
   if(it!=densityTable.end())
     { 
@@ -310,7 +362,6 @@ bool LevelDensityHFB_BSk14::FindDensities(int Z, int A, int P){
         return false;
     }  
 }
-
 
 void HFBTabRow::PrintRow(){
         std::cout.precision(1);

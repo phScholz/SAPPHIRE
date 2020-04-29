@@ -20,11 +20,14 @@ class LevelDensityTable : public LevelDensity{
         virtual double TotalLevelDensity(double E) = 0;
         virtual double CalculateDensity(double E) = 0;
         void SetFilename(std::string x){filename=x;}
+        static double c_;
+        static double d_;
 
     public:
-        LevelDensityTable(int Z, int A, double J, int parity): LevelDensity(Z,A,J,parity){
+        LevelDensityTable(int Z, int A, double J, int parity): LevelDensity(Z,A,J,parity){};
 
-        }
+        static void SetCtable(double x){c_=x;}; /**< Setter for cTable*/
+        static double GetCtable(){return c_;}; /**< Getter for cTable*/
 
     protected:
         std::vector< std::pair<double, double> > DensityVector; /**< Densities will be read to this vector*/

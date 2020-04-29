@@ -54,7 +54,7 @@
         SapphireInput::p_Formalism(0);
         SapphireInput::n_Formalism(0);
         SapphireInput::g_Formalism(1);
-        SapphireInput::LevelDensity(0);
+        SapphireInput::LevelDensity(1);
         SapphireInput::DecayerMaxL(8.);
         SapphireInput::PreEqMaxL(8.);
         SapphireInput::g_CutoffEnergy(10000.);
@@ -81,7 +81,7 @@
         SapphireInput::NeutronChannel(true);
         SapphireInput::GammaChannel(true);
         SapphireInput::Suffix(0);
-
+        SapphireInput::CTable(0);
         SapphireInput::RdZ(50);
         SapphireInput::RdA(120);
         SapphireInput::RdEmin(0);
@@ -124,7 +124,7 @@
         std::cout << "INPUT PARAMETERS" << std::endl;
         std::cout << std::endl;
 
-        std::cout << "\t[General]" << std::endl;
+        std::cout << "[General]" << std::endl;
         std::cout << "\tMassTable            = "             << SapphireInput::MassTable() << std::endl;
         std::cout << "\tGDRParams            = "             << SapphireInput::GdrParams() << std::endl;
         std::cout << "\tLeveldir             = "             << SapphireInput::LevelDir() << std::endl;
@@ -140,11 +140,12 @@
         std::cout << "\tProtonChannel        = "             << SapphireInput::ProtonChannel() << std::endl;
         std::cout << "\tAlphaChannel         = "             << SapphireInput::AlphaChannel() << std::endl;
         std::cout << "\tLevelDensity         = "             << SapphireInput::LevelDensity() << std::endl;
+        std::cout << "\tcTable               = "             << SapphireInput::CTable() << std::endl;
         std::cout << std::endl;
         
         if(module=="CrossSection" || module=="all"){
             
-            std::cout << "\t[CrossSection]" << std::endl;
+            std::cout << "[CrossSection]" << std::endl;
             std::cout << "\tReaction             = "             << SapphireInput::Reaction() << std::endl;
             std::cout << "\tEnergyFile           = "             << SapphireInput::EnergyFile() << std::endl;
             std::cout << "\tReactionFile         = "             << SapphireInput::ReactionFile() << std::endl;
@@ -163,7 +164,7 @@
             std::cout << std::endl;
         }
         if(module=="Decayer" || module=="all"){
-            std::cout << "\t[Decayer]" << std::endl;    
+            std::cout << "[Decayer]" << std::endl;    
             std::cout << "\tSuffix               = "             << SapphireInput::Suffix() << std::endl;
             std::cout << "\tIsotope              = "             << SapphireInput::Isotope() << std::endl;
             std::cout << "\tSpin                 = "             << SapphireInput::Spin() << std::endl;
@@ -177,7 +178,7 @@
             std::cout << std::endl;
         }
         if(module=="Random" || module=="all"){
-            std::cout << "\t[Random]" << std::endl;
+            std::cout << "[Random]" << std::endl;
             std::cout << "\tZ                    = "             << SapphireInput::RdZ() << std::endl;
             std::cout << "\tA                    = "             << SapphireInput::RdA() << std::endl;
             std::cout << "\tMode                 = "             << SapphireInput::RdMode() << std::endl;
@@ -214,6 +215,7 @@
         SapphireInput::a_Formalism(pt.get<int>("General.AlphaModel", SapphireInput::a_Formalism()));
         SapphireInput::g_Formalism(pt.get<int>("General.GammaModel", SapphireInput::g_Formalism()));
         SapphireInput::LevelDensity(pt.get<int>("General.LevelDensity", SapphireInput::LevelDensity()));
+        SapphireInput::CTable(pt.get<double>("General.cTable", SapphireInput::CTable()));
         SapphireInput::PorterThomas_p(pt.get<bool>("General.PorterThomasParticle", SapphireInput::PorterThomas_p()));
         SapphireInput::PorterThomas_g(pt.get<bool>("General.PorterThomasGamma", SapphireInput::PorterThomas_g()));
         SapphireInput::GammaChannel(pt.get<bool>("General.GammaChannel", SapphireInput::GammaChannel()));

@@ -23,6 +23,7 @@
 #include "TransitionRateFunc.h"
 #include "ParticleTransmissionFunc.h"
 #include "GammaTransmissionFunc.h"
+#include "LevelDensity/LevelDensityTable.h"
 #include "omp.h"
 
 
@@ -176,6 +177,7 @@ namespace Module_CrossSection{
         ParticleTransmissionFunc::SetPorterThomas(input.PorterThomas_p());
         GammaTransmissionFunc::SetEGDRType(input.g_Formalism());
         GammaTransmissionFunc::SetPorterThomas(input.PorterThomas_g());
+        LevelDensityTable::SetCtable(input.CTable());
 
         std::vector<EntrancePairs> entrancePairs;
         readEntrancePairs(&entrancePairs,input.ReactionFile());
@@ -188,7 +190,7 @@ namespace Module_CrossSection{
             CrossSection* xs = new CrossSection(it->Z_,it->A_, it->pType_,input.EnergyFile(),input.CalcRates());
             if(xs->IsValid())
             {
-                std::cout << std::endl << "Calculating for Z: " << it->Z_ << " A: " << it->A_ << " and Particle Type: " << it->pType_ << std::endl;
+                std::cout << std::endl << std::endl << "Calculating for Z: " << it->Z_ << " A: " << it->A_ << " and Particle Type: " << it->pType_ << std::endl;
                 xs->Calculate();
                 xs->PrintCrossSections();
             }
@@ -223,6 +225,7 @@ namespace Module_CrossSection{
         ParticleTransmissionFunc::SetPorterThomas(input.PorterThomas_p());
         GammaTransmissionFunc::SetEGDRType(input.g_Formalism());
         GammaTransmissionFunc::SetPorterThomas(input.PorterThomas_g());
+        LevelDensityTable::SetCtable(input.CTable());
 
         int A = massNumberIntFromString(input.Reaction());                    
         int Z = atomicNumberIntFromString(input.Reaction());

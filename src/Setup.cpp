@@ -23,11 +23,15 @@
 #include <iostream>
 #include <gsl/gsl_errno.h>
 
+#include "LevelDensity/LevelDensityTable.h"
 #include "LevelDensity/LevelDensityHFB_BSk14.h"
 
 //These are all static members of the respective classes
 
 HFBTable LevelDensityHFB_BSk14::densityTable;
+HFBCorrTable LevelDensityHFB_BSk14::corrTable;
+double LevelDensityTable::c_;
+double LevelDensityTable::d_;
 
 bool CrossSection::residualGamma_;
 bool CrossSection::residualNeutron_;

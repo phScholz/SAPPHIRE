@@ -78,6 +78,7 @@
 
 #pragma once
 #include "LevelDensityTable.h"
+#include "NuclearMass.h"
 #include <tr1/unordered_map>
 
 
@@ -157,6 +158,21 @@ class HFBTabRow{
         double J49;
 };
 
+/**
+ * @brief A Class which represents one line in the *.ld files of the HFB density
+ * @details
+ * For odd mass nuclei, the spins begin with 1/2 and end with 99/2.
+ */
+class HFBLdRow{
+    public:
+        int Z;
+        int A;
+        double c;
+        double d;
+
+};
+
+typedef std::tr1::unordered_map<MassKey, HFBLdRow > HFBCorrTable;
 typedef std::tr1::unordered_map<ChargeMassParityKey, std::vector<HFBTabRow> > HFBTable; /**< One map object which maps MassKey to LevelsContainer */
 
 /**
@@ -173,6 +189,15 @@ class LevelDensityHFB_BSk14 : public LevelDensityTable {
          */
         static HFBTable densityTable;
 
+        /**
+         * @brief A static HFBCorrTable map.
+         * @details
+         * This was introduced to reduce the I/O for this NLD model. 
+         * The correction parameters for each nucleus are now read only once and then stored completely 
+         * in this object.
+         */
+        static HFBCorrTable corrTable;
+
     private:
         HFBTabRow dummyRow;    /**< Dummy row object which is used while reading the density files*/    
 
@@ -185,6 +210,11 @@ class LevelDensityHFB_BSk14 : public LevelDensityTable {
          * @brief Logic to read the density files and store it in the std::vector<HFBTabRow> rows.
          */
         void ReadFile();
+
+        /**
+         * @brief Logic to read the correction files.
+         */
+        void ReadCorr();
 
         /**
          * @brief Method to get the density of one spin and parity from std::vector<HFBTabRow> rows into DensityVector.
@@ -212,12 +242,13 @@ class LevelDensityHFB_BSk14 : public LevelDensityTable {
             
             if(verbose_) std::cout << "LevelDensityHFB Constructor ... " << std::endl;
             SetTables(true);
-            if(!FindDensities(Z_,A_,parity_))
+            if(!FindDensities())
             {
                 if(verbose_) std::cout << "Getting Filename ... " << std::endl;
                 GetFileName();
                 if(verbose_) std::cout << "Reading File ... " << filename << std::endl;
                 ReadFile();
+                ReadCorr();
             }
                 if(verbose_) std::cout << "Filling Vector ... " << filename << std::endl;
                 FillVector();
@@ -230,12 +261,13 @@ class LevelDensityHFB_BSk14 : public LevelDensityTable {
             parity_=1;
             if(verbose_) std::cout << "LevelDensityHFB Constructor ... " << std::endl;
             SetTables(true);
-            if(!FindDensities(Z_,A_,parity_))
+            if(!FindDensities())
             {
                 if(verbose_) std::cout << "Getting Filename ... " << std::endl;
                 GetFileName();
                 if(verbose_) std::cout << "Reading File ... " << filename << std::endl;
                 ReadFile();
+                ReadCorr();
             }
             if(verbose_) std::cout << "Filling Vector ... " << filename << std::endl;
             FillVector();
@@ -249,16 +281,13 @@ class LevelDensityHFB_BSk14 : public LevelDensityTable {
 
         /**
          * @brief Look if the densities are already stored in the HFBTable or not
-         * @param Z charge number
-         * @param A mass number
-         * @param P parity
          * @return True or False depending on, if the specific std::vector<HFBTabRow> is already in HFBTable or not
          * @details
          * If the densities were found in the DensityTable then the std::vector<HFBTabRow> is copied to the member rows. 
          * Basically this is a skipping of the reading procedure, if the densities have been previously read.
          * With that, various calls for different spins should be accelerated.
          */
-        bool FindDensities(int Z, int A, int P);
+        bool FindDensities();
 
         /**
          * @brief Print the content of DensityTable to std::out.
@@ -268,10 +297,17 @@ class LevelDensityHFB_BSk14 : public LevelDensityTable {
         /**
          * @brief Main method which will be called by other objects.
          * @param E Energy.
+         * @param c Normalization to level spacing at Sn
+         * @param d energ shift
          * @return The level density at a respective energy in [1/MeV].
          * @details
          * Returns the level density for one spin and parity.
-         * Densities are interpolated by a linear function. 
+         * Densities are interpolated by a linear function.
+         * Adjustment flexibility is included via *c_* and *d_* which are 
+         * by standard the corrections from 
+         * [S. Goriely et al., Phys. Rev. C *78*, 064307 (2008)](https://doi.org/10.1103/PhysRevC.78.064307)
+         * Adjustment via:
+         * \f[\rho(U,J,P)_{adj.} = e^{c\sqrt{U-d}} \rho(U-d,J,P) \f]
          * @todo 
          * - Move from linear interpolation to something like exponential.
          */
@@ -283,10 +319,16 @@ class LevelDensityHFB_BSk14 : public LevelDensityTable {
          * @returns Total level density in [1/MeV]
          * @details
          * Returns the entries of the column RHOTOT. Linear interpolation.
+         * Adjustment flexibility is included via *c_* and *d_* which are 
+         * by standard the corrections from 
+         * [S. Goriely et al., Phys. Rev. C *78*, 064307 (2008)](https://doi.org/10.1103/PhysRevC.78.064307) 
+         * Adjustment via:
+         * \f[\rho(U,J,P)_{adj.} = e^{c\sqrt{U-d}} \rho(U-d,J,P) \f]
          * @todo
          * - Move from linear interpolation to something like exponential.
          */
         double TotalLevelDensity(double E);
+
 
 
 };
