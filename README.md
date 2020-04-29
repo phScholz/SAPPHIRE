@@ -1,28 +1,25 @@
 # Sapphire - A statistical nuclear reaction and decay code
 ## Contents
 
-- [Sapphire - A statistical nuclear reaction and decay code](#sapphire---a-statistical-nuclear-reaction-and-decay-code)
-  - [Contents](#contents)
-  - [1. General Information](#1-general-information)
+  1. [General Information:](#1-general-information)
     - [1.1. Sapphire](#11-sapphire)
-    - [1.2. Former Contributors](#12-former-contributors)
+    - [1.2. Former Contributors:](#12-former-contributors)
     - [1.3. License](#13-license)
-  - [2. Compilation & Execution](#2-compilation--execution)
+  2. [Compilation & Execution:](#2-compilation--execution)
     - [2.1. Requirements](#21-requirements)
     - [2.2. Build](#22-build)
-      - [2.2.1. Automatically](#221-automatically)
-      - [2.2.2. Manually](#222-manually)
     - [2.3. Run](#23-run)
-  - [3. Modules](#3-modules)
+  3. [Modules:](#3-modules)
     - [3.1. reaction](#31-reaction)
     - [3.2. decayer](#32-decayer)
     - [3.3. old](#33-old)
     - [3.4. template](#34-template)
     - [3.5. help](#35-help)
-  - [4. References](#4-references)
+  4. [References:](#4-references)
     - [4.1. Documentation](#41-documentation)
     - [4.2. About Sapphire](#42-about-sapphire)
     - [4.3. Using Sapphire](#43-using-sapphire)
+  5. [Input file description](./INPUTFILE.md)
  
 ## 1. General Information
 
@@ -172,4 +169,3 @@ If you are using *Sapphire* for your research, please send us a reference of you
 * X. Fang, W. P. Tan, M. Beard, R. J. deBoer, G. Gilardy, H. Jung, Q. Liu, S. Lyons, D. Robertson, K. Setoodehnia, C. Seymour, E. Stech, B. Vande Kolk, M. Wiescher, R. T. deSouza, S. Hudan, V. Singh, X. D. Tang, and E. Uberseder, *Experimental measurement of 12C+16O fusion at stellar energies*, Physical Review C **96**, 045804 (2017), DOI: [10.1103/PhysRevC.96.045804](https://dx.doi.org/10.1103/PhysRevC.96.045804)
 * Mary Beard, Ethan Uberseder, and M. Wiescher, *Statistical Model Calculations for (n,g) Reactions*, EPJ Web of Conferences **93**, 04001 (2015), DOI: [10.1103/PhysRevC.90.034619](https://dx.doi.org/10.1103/PhysRevC.90.034619)
 * M. Beard, E. Uberseder, R. Crowter, and M. Wiescher, *Comparison of statistical model calculations for stable isotope neutron capture*, Physical Review C **90**, 034619 (2014), DOI: [10.1103/PhysRevC.90.034619](https://dx.doi.org/10.1103/PhysRevC.90.034619)
-
