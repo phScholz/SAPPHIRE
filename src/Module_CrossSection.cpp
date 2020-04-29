@@ -298,7 +298,7 @@ namespace Module_CrossSection{
             */
             SapphireInput Input;    
             std::string str(argv[2]);
-            Input.printIntputFile(str);
+            Input.PrintIntputFile(str);
             Input.ReadInputFile(str);
             
             /** The next step is to test if a single reaction calculation, or a calculations for reactions given in a
@@ -310,7 +310,7 @@ namespace Module_CrossSection{
             {
                 std::cout << std::endl << "Starting calculations for reactions in file ... " << Input.ReactionFile().c_str() << std::endl;
                 Input.Reaction("");
-                Input.printIntputParameters();
+                Input.PrintIntputParameters("CrossSection");
                 Run(Input);
             }
             else

@@ -215,7 +215,7 @@ namespace Module_RandomScheme{
         {
             SapphireInput input;
             input.ReadInputFile(argv[2]);
-            input.printIntputParameters();
+            input.PrintIntputParameters("Random");
 
             if(input.RdMode() == "create")
                 RunCreate(input);

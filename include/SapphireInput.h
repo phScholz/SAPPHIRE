@@ -50,12 +50,13 @@ class SapphireInput{
          * @brief Print InputFile to std::cout
          * @param filename File name of the ini-File
          */
-        void printIntputFile(std::string filename);
+        void PrintIntputFile(std::string filename);
 
         /**
          * @brief Print Inputparameters to std::cout
+         * @param modul Name of the module
          */
-        void printIntputParameters();
+        void PrintIntputParameters(std::string modul);
 
         /**
          * @brief Get the massNumberString from the reactionString.

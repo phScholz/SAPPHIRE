@@ -91,9 +91,9 @@ namespace Module_Decayer{
             */
             SapphireInput Input;    
             std::string str(argv[2]);
-            Input.printIntputFile(str);
+            Input.PrintIntputFile(str);
             Input.ReadInputFile(str);
-            Input.printIntputParameters();
+            Input.PrintIntputParameters("Decayer");
             Run(Input);
             
         }else{
