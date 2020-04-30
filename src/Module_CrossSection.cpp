@@ -22,7 +22,7 @@
 #include "Decayer.h"
 #include "TransitionRateFunc.h"
 #include "ParticleTransmissionFunc.h"
-#include "GammaTransmissionFunc.h"
+#include "GammaStrength/GammaTransmissionFunc.h"
 #include "LevelDensity/LevelDensityTable.h"
 #include "omp.h"
 

@@ -1,6 +1,6 @@
 #include "TransitionRateFunc.h"
 #include "ParticleTransmissionFunc.h"
-#include "GammaTransmissionFunc.h"
+#include "GammaStrength/GammaTransmissionFunc.h"
 #include "LevelDensity/RauscherLevelDensity.h"
 #include "LevelDensity/LevelDensityHFB_BSk14.h"
 #include "NuclearLevels.h"

@@ -1,9 +1,3 @@
-/**
- * @file LevelDensity.cpp
- * @brief Logic of the LevelDensityFormula class
- * @date 2020-04-27
- */
-
 #include "LevelDensity/LevelDensityFormula.h"
 #include "Constants.h"
 #include <math.h>

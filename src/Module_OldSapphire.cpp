@@ -29,7 +29,7 @@
 
 #include "TransitionRateFunc.h"
 #include "ParticleTransmissionFunc.h"
-#include "GammaTransmissionFunc.h"
+#include "GammaStrength/GammaTransmissionFunc.h"
 /* #include "Setup.cpp"
 
 extern void Initialize(); */

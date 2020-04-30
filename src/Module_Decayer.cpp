@@ -22,7 +22,7 @@
 #include "DecayResults.h"
 #include "Progressbar.h"
 #include "ParticleTransmissionFunc.h"
-#include "GammaTransmissionFunc.h"
+#include "GammaStrength/GammaTransmissionFunc.h"
 
 namespace Module_Decayer{
 

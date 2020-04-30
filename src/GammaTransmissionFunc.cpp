@@ -1,7 +1,7 @@
-#include "GammaTransmissionFunc.h"
-#include "BrinkAxelGSF.h"
-#include "KopeckyUhlGSF.h"
-#include "McCullaghGSF.h"
+#include "GammaStrength/GammaTransmissionFunc.h"
+#include "GammaStrength/BrinkAxelGSF.h"
+#include "GammaStrength/KopeckyUhlGSF.h"
+#include "GammaStrength/McCullaghGSF.h"
 #include "Constants.h"
 #include <iostream>
 #include <iomanip>

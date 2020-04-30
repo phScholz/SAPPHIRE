@@ -27,6 +27,8 @@ class ParticleTransmissionFunc : public TransmissionFunc {
   * @param piInitial Initial parity of the target nucleus
   * @param jFinal Final spin of the nucleus
   * @param piFinal Final parity of the nucleus
+  * @param spin spin of the ejectile
+  * @param parity parity of the ejectile
   * @param maxL Maximum of considered angular momentums
   * @param totalWidthForCorrection
   * @param uncorrTotalWidthForCorrection
@@ -102,7 +104,7 @@ class ParticleTransmissionFunc : public TransmissionFunc {
    * @param piInitial Initial parity
    * @param jFinal Final spin
    * @param piFinal Final parity
-   * @param spin,Spin of ejectile
+   * @param spin Spin of ejectile
    * @param parity Parity of ejectile
    * @param maxL maximum angular momentum
    * @param totalWidthForCorrection

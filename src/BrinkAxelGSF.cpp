@@ -1,8 +1,4 @@
-/**
- * @file BrinkAxelsGSF.cpp
- * @date 2020
- */
-#include "BrinkAxelGSF.h"
+#include "GammaStrength/BrinkAxelGSF.h"
 
 BrinkAxelGSF::BrinkAxelGSF(int z2, int m2, double jInitial, int piInitial,
 			   double jFinal, int piFinal, double maxL, 

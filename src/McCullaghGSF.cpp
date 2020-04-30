@@ -1,4 +1,4 @@
-#include "McCullaghGSF.h"
+#include "GammaStrength/McCullaghGSF.h"
 
 McCullaghGSF::McCullaghGSF(int z2, int m2, double jInitial, int piInitial,
 			   double jFinal, int piFinal, double maxL, 

@@ -9,7 +9,7 @@
  * in future, it would be better to template the respective classes for different models.
  */
 #include "NuclearMass.h"
-#include "GammaTransmissionFunc.h"
+#include "GammaStrength/GammaTransmissionFunc.h"
 #include "NuclearLevels.h"
 #include "Decayer.h"
 #include "Sapphire_config.h"

@@ -4,7 +4,7 @@
  * @brief Declaration of the base class for Gamma Strength Functions
  */
 
-#include "TransmissionFunc.h"
+#include "../TransmissionFunc.h"
 #include "Constants.h"
 #include "NuclearMass.h"
 #include "LevelDensity/LevelDensityFormula.h"

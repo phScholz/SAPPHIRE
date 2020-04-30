@@ -297,8 +297,6 @@ class LevelDensityHFB_BSk14 : public LevelDensityTable {
         /**
          * @brief Main method which will be called by other objects.
          * @param E Energy.
-         * @param c Normalization to level spacing at Sn
-         * @param d energ shift
          * @return The level density at a respective energy in [1/MeV].
          * @details
          * Returns the level density for one spin and parity.
