@@ -12,7 +12,6 @@
 #include <sstream>
 #include <stdexcept>
 #include <cmath>
-#include <boost/math/interpolators/barycentric_rational.hpp>
 
 extern std::string sourceDirectory();
 
@@ -64,8 +63,7 @@ void LevelDensityHFB_BSk14::ReadFile(){
     
     //skip the first four lines
     for(int i = 0;i<4;++i) std::getline(in,line);    
-    //create a dummy row which will then pushed back to the rows vector
-    
+        
     for(int i=0; i<56; ++i){
         std::getline(in,line);
         std::istringstream lineStream(line);

@@ -10,6 +10,7 @@
  */
 #include "NuclearMass.h"
 #include "GammaStrength/GammaTransmissionFunc.h"
+#include "GammaStrength/D1MQRPA.h"
 #include "NuclearLevels.h"
 #include "Decayer.h"
 #include "Sapphire_config.h"
@@ -32,6 +33,9 @@ HFBTable LevelDensityHFB_BSk14::densityTable;
 HFBCorrTable LevelDensityHFB_BSk14::corrTable;
 double LevelDensityTable::c_;
 double LevelDensityTable::d_;
+
+QRPA_E1_Table D1MQRPA::e1Table;
+QRPA_M1_Table D1MQRPA::m1Table;
 
 bool CrossSection::residualGamma_;
 bool CrossSection::residualNeutron_;

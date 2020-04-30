@@ -12,8 +12,6 @@
 #include <gsl/gsl_randist.h>
 #include <omp.h>
 
-
-
 extern unsigned int randomSeed[12];
 
 
@@ -53,9 +51,10 @@ GammaTransmissionFunc::GammaTransmissionFunc(int z2, int m2, double jInitial, in
 					     double uncorrTotalWidthForCorrection,
 					     double uncorrTotalWidthSqrdForCorrection,
 					     TransmissionFunc* previous) : 
-  TransmissionFunc(z2,m2,jInitial,piInitial,jFinal,piFinal,maxL,
-		   totalWidthForCorrection,uncorrTotalWidthForCorrection,
-		   uncorrTotalWidthSqrdForCorrection,previous) {
+TransmissionFunc(z2,m2,jInitial,piInitial,jFinal,piFinal,maxL,
+totalWidthForCorrection,uncorrTotalWidthForCorrection,
+uncorrTotalWidthSqrdForCorrection,previous) 
+{
   double k =1./pi/pi/hbarc/hbarc/10.;
   if(maxL==0.) {
     k/=3.;
@@ -107,6 +106,7 @@ GammaTransmissionFunc* GammaTransmissionFunc::CreateGammaTransmissionFunc(int z2
 						   double uncorrTotalWidthForCorrection,
 						   double uncorrTotalWidthSqrdForCorrection,
 						   TransmissionFunc* previous, double compoundE) {
+                 
   //Variable maxL determines multipolarity (E1 = 0., M1= 1., E2 = 2.).
 
   GammaTransmissionFunc* function;
@@ -138,25 +138,26 @@ GammaTransmissionFunc* GammaTransmissionFunc::CreateGammaTransmissionFunc(int z2
  
 double GammaTransmissionFunc::operator()(double energy) {
   double chirand = 1.;
+
   if(porterThomas_) {
     const gsl_rng_type *Tr = gsl_rng_default;
     gsl_rng *r = gsl_rng_alloc (Tr);
-
     gsl_rng_set (r, rand_r(&randomSeed[omp_get_thread_num()])*time(NULL));
     chirand = gsl_ran_chisq (r, 1.);
     gsl_rng_free (r);
   }
-  double T = (maxL_==0.||maxL_==1.) ? 2.*pi*CalcStrengthFunction(energy)*pow(energy,3.) : 
-    2.*pi*CalcStrengthFunction(energy)*pow(energy,5.);
+
+  double T = (maxL_==0.||maxL_==1.) ? 2.*pi*CalcStrengthFunction(energy)*pow(energy,3.) : 2.*pi*CalcStrengthFunction(energy)*pow(energy,5.);
+  
   if(totalWidthForCorrection_!=0.) {
     double previousT = (previous_) ? previous_->operator()(energy) : T;
     double tBar = uncorrTotalWidthSqrdForCorrection_/uncorrTotalWidthForCorrection_;
-    double exponent = 4.*tBar/uncorrTotalWidthForCorrection_
-      *(1.+T/uncorrTotalWidthForCorrection_)/(1.+3*tBar/uncorrTotalWidthForCorrection_);
-    double WCF = 1.+2./(1.+pow(T,exponent))+87.*pow((T-tBar)/uncorrTotalWidthForCorrection_,2.)*
-      pow(T/uncorrTotalWidthForCorrection_,5.);
+    
+    double exponent = 4.*tBar/uncorrTotalWidthForCorrection_*(1.+T/uncorrTotalWidthForCorrection_)/(1.+3*tBar/uncorrTotalWidthForCorrection_);
+    double WCF = 1.+2./(1.+pow(T,exponent))+87.*pow((T-tBar)/uncorrTotalWidthForCorrection_,2.)*pow(T/uncorrTotalWidthForCorrection_,5.);
     return T/(1.+(WCF-1.)*previousT/totalWidthForCorrection_);
-  } else return T*chirand;
+  } 
+  else return T*chirand;
 }
 
 

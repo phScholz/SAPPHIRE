@@ -5,8 +5,6 @@
 * 
 */
 #pragma once
-#ifndef BRINKAXELGSF_H
-#define BRINKAXELGSF_H
 
 #include "GammaTransmissionFunc.h"
 
@@ -35,7 +33,11 @@ class BrinkAxelGSF : public GammaTransmissionFunc {
 			   double totalWidthForCorrection,
 			   double uncorrTotalWidthForCorrection,
 			   double uncorrTotalWidthSqrdForCorrection,
-			   TransmissionFunc* previous);
+			   TransmissionFunc* previous):
+        GammaTransmissionFunc(z2,m2,jInitial,piInitial,jFinal,piFinal,maxL,
+			totalWidthForCorrection,uncorrTotalWidthForCorrection,
+			uncorrTotalWidthSqrdForCorrection,previous) {
+};
 
   /**
    * @brief Calculate the strength for a specific energy
@@ -48,4 +50,4 @@ class BrinkAxelGSF : public GammaTransmissionFunc {
   double CalcEnergyDependentWidth(double,int);
 };
 
-#endif
+

@@ -20,6 +20,7 @@
 #include "Module_RandomScheme.h"
 #include "SapphireInput.h"
 
+//#include "D1MQRPA.h"
 
 extern void Initialize();
 
@@ -48,6 +49,10 @@ void PrintHelp(){
  * @param argv Array of cmd line parameters. 
  */
 int main(int argc, char *argv[]) {
+  //Only for testing
+  //Initialize();
+  //D1MQRPA * func =new  D1MQRPA(20,40, 0, 1, 1, -1, 2, 0,0,0, nullptr);
+
 
   /**
   * At the beginning of `main()` a header is printed and the cmd line arguments are checked.

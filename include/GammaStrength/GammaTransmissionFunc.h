@@ -42,22 +42,41 @@ typedef std::tr1::unordered_map<MassKey, GDRParameters > GDRTable;
  */
 class GammaTransmissionFunc : public TransmissionFunc {
  public:
-  GammaTransmissionFunc(int,int,double,int,double,int,
-			double,double,double,double,
-			TransmissionFunc*); 
-  virtual ~GammaTransmissionFunc() {};
-  static GammaTransmissionFunc* 
-    CreateGammaTransmissionFunc(int,int,double,int,double,int,
-				double,double,double,double,
-				TransmissionFunc*,double); 
-  bool IsValid() {
-    return true;
-  };
+    /**
+     * @brief constructor of GammaTransmissionFunc
+     * @param z2
+     * @param m2
+     * @param jInitial
+     * @param piInitial
+     * @param jFinal
+     * @param piFInal
+     * @param maxL
+     * @param TWFC
+     * @param uTWFC
+     * @param uTWSFC
+     * @param previous
+     */
+    GammaTransmissionFunc(int z2,int m2, double jInitial, int piInitial, double jFinal,
+    int piFinal, double maxL, double TWFC, double uTWFC, double uTWSFC, TransmissionFunc* previous); 
+    
+    virtual ~GammaTransmissionFunc(){};
+    
+    static GammaTransmissionFunc* CreateGammaTransmissionFunc(int,int,double,int,double,int, double,double,double,double,	TransmissionFunc*,double); 
+    
+    bool IsValid() {
+      return true;
+    };
+
   double operator()(double);
+
   virtual double CalcStrengthFunction(double) = 0;
+
   static void InitializeGDRParameters(std::string);
+
   static void SetEGDRType(int);
+
   static void SetPorterThomas(bool);
+
  protected:
   static GDRTable gdrTable_;
   static int egdrType_;
