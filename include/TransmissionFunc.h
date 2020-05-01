@@ -14,22 +14,22 @@ class TransmissionFunc {
   * @param jFinal
   * @param piFinal
   * @param maxL
-  * @param totalWidthForCorrection
-  * @param uncorrTotalWidthForCorrection
-  * @param uncorrTotalWidthSqrdForCorrection
+  * @param TWFC
+  * @param uTWFC
+  * @param uTWSFC
   * @param previous
   */
   TransmissionFunc (int z2, int m2, double jInitial, int piInitial,
 		    double jFinal, int piFinal, double maxL,
-		    double totalWidthForCorrection,
-		    double uncorrTotalWidthForCorrection,
-		    double uncorrTotalWidthSqrdForCorrection,
+		    double TWFC,
+		    double uTWFC,
+		    double uTWSFC,
 		    TransmissionFunc* previous) :
   z2_(z2),m2_(m2),piInitial_(piInitial),piFinal_(piFinal),
     jInitial_(jInitial),jFinal_(jFinal), maxL_(maxL),
-    totalWidthForCorrection_(totalWidthForCorrection),
-    uncorrTotalWidthForCorrection_(uncorrTotalWidthForCorrection),
-    uncorrTotalWidthSqrdForCorrection_(uncorrTotalWidthSqrdForCorrection),
+    TWFC_(TWFC),
+    uTWFC_(uTWFC),
+    uTWSFC_(uTWSFC),
     previous_(previous) {};  
 
   /**
@@ -52,10 +52,10 @@ class TransmissionFunc {
   double jInitial_;
   double jFinal_;
   double maxL_;   /**< maximum angular momentum*/
-  double totalWidthForCorrection_;
-  double uncorrTotalWidthForCorrection_;
-  double uncorrTotalWidthSqrdForCorrection_;
-  TransmissionFunc* previous_;
+  double TWFC_; /**< Total width for correction*/
+  double uTWFC_; /**< uncorrected total width for correction*/
+  double uTWSFC_; /**< uncorrected total width squared for correction*/
+  TransmissionFunc* previous_;  /**< previous transmission func; needed for width fluctuation correction*/
 };
 
 

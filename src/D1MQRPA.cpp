@@ -181,7 +181,7 @@ double D1MQRPA::CalcStrengthFunction(double energy){
     }
 
     // same parities && dL <=1 && (one of the two spins need to be not zero)
-    if(piFinal_==piInitial_ && abs(jFinal_-jInitial_) <= 1 && (jFinal_!=0 || jInitial_!=0) )){
+    if((piFinal_==piInitial_) && (abs(jFinal_-jInitial_) <= 1) && (jFinal_!=0 || jInitial_!=0) ){
         return CalcM1Strength(energy);
     }
 }

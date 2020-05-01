@@ -31,6 +31,7 @@
 
 HFBTable LevelDensityHFB_BSk14::densityTable;
 HFBCorrTable LevelDensityHFB_BSk14::corrTable;
+
 double LevelDensityTable::c_;
 double LevelDensityTable::d_;
 
@@ -49,24 +50,31 @@ bool Decayer::alphaDecay_;
 bool Decayer::protonDecay_;
 bool Decayer::neutronDecay_;
 bool Decayer::gammaDecay_;
-
 bool Decayer::isCrossSection_;
-bool PreEqDecayer::isCrossSection_;
 double Decayer::maxL_;
+
+bool PreEqDecayer::isCrossSection_;
 double PreEqDecayer::maxL_;
+
 double TransitionRateFunc::gammaCutoffEnergy_;
 int TransitionRateFunc::nldmodel_;
 
 ElementTable NuclearMass::elementTable_; 
 MassTable NuclearMass::massTable_;
-GDRTable GammaTransmissionFunc::gdrTable_;
+
 LevelsTable NuclearLevels::levelsTable_;
+
 int ParticleTransmissionFunc::alphaFormalism_;
 int ParticleTransmissionFunc::neutronFormalism_;
 int ParticleTransmissionFunc::protonFormalism_;
-int GammaTransmissionFunc::egdrType_;
-bool GammaTransmissionFunc::porterThomas_;
 bool ParticleTransmissionFunc::porterThomas_;
+
+int GammaTransmissionFunc::egdrType_;
+int GammaTransmissionFunc::mgdrType_;
+int GammaTransmissionFunc::egqrType_;
+bool GammaTransmissionFunc::porterThomas_;
+GDRTable GammaTransmissionFunc::gdrTable_;
+
 
 /** 
  * @brief First Function which is called in the Sapphire main() in Sapphire.cpp. Setting default parameters
@@ -87,23 +95,30 @@ void Initialize() {
   Decayer::SetProtonDecay(true);
   Decayer::SetNeutronDecay(true);
   Decayer::SetGammaDecay(true);
-
-  Decayer::SetCrossSection(false);
-  PreEqDecayer::SetCrossSection(false);
-  
   Decayer::SetMaxL(8.);
+  Decayer::SetCrossSection(false);
+
+  PreEqDecayer::SetCrossSection(false);
   PreEqDecayer::SetMaxL(8.);
+
   TransitionRateFunc::SetGammaCutoffEnergy(10000.);
   TransitionRateFunc::NLDmodel(0);
+
   NuclearMass::InitializeElements();
   NuclearMass::InitializeMasses(sourceDirectory()+"/tables/masses/masses.dat");
-  GammaTransmissionFunc::InitializeGDRParameters(sourceDirectory()+"/tables/gamma/ripl3_gdr_parameters.dat");
+
   NuclearLevels::InitializeLevels(sourceDirectory()+"/tables/levels/", sourceDirectory()+"/tables/spinod.dat");
+
+  GammaTransmissionFunc::InitializeGDRParameters(sourceDirectory()+"/tables/gamma/ripl3_gdr_parameters.dat");
+  GammaTransmissionFunc::SetEGDRType(3);
+  GammaTransmissionFunc::SetMGDRType(3);
+  GammaTransmissionFunc::SetEGQRType(0);
+  GammaTransmissionFunc::SetPorterThomas(true);
+
   ParticleTransmissionFunc::SetAlphaFormalism(0);
   ParticleTransmissionFunc::SetNeutronFormalism(0);
-  ParticleTransmissionFunc::SetProtonFormalism(0);
-  GammaTransmissionFunc::SetEGDRType(1);
-  GammaTransmissionFunc::SetPorterThomas(false);
-  ParticleTransmissionFunc::SetPorterThomas(false);
+  ParticleTransmissionFunc::SetProtonFormalism(0);  
+  ParticleTransmissionFunc::SetPorterThomas(true);
+
   gsl_set_error_handler (&CoulFunc::GSLErrorHandler);
 }

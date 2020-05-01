@@ -33,7 +33,7 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
       ParticleTransmissionFunc::CreateParticleTransmissionFunc(z1,m1,z2,m2,
 							       jInitial,piInitial,
 							       jFinal,piFinal,
-							       spin,parity,maxL,totalWidthForCorrection,
+							       dSpin,dParity,maxL,totalWidthForCorrection,
 							       uncorrTotalWidthForCorrection,
 							       uncorrTotalWidthSqrdForCorrection,
 							       previousTransmissionFunc);

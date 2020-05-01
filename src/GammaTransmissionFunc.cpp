@@ -1,3 +1,4 @@
+
 #include "GammaStrength/GammaTransmissionFunc.h"
 #include "GammaStrength/BrinkAxelGSF.h"
 #include "GammaStrength/KopeckyUhlGSF.h"
@@ -14,15 +15,6 @@
 #include <omp.h>
 
 extern unsigned int randomSeed[12];
-
-
-void GammaTransmissionFunc::SetPorterThomas(bool yn) {
-  porterThomas_=yn;
-}
-
-void GammaTransmissionFunc::SetEGDRType(int type) {
-  egdrType_=type;
-}
 
 void GammaTransmissionFunc::InitializeGDRParameters(std::string filename) {
   std::cout << "Reading GDR parameters file..." << std::endl;
@@ -48,13 +40,13 @@ void GammaTransmissionFunc::InitializeGDRParameters(std::string filename) {
 
 GammaTransmissionFunc::GammaTransmissionFunc(int z2, int m2, double jInitial, int piInitial,
 					     double jFinal, int piFinal, double maxL, 
-					     double totalWidthForCorrection,
-					     double uncorrTotalWidthForCorrection,
-					     double uncorrTotalWidthSqrdForCorrection,
+					     double TWFC,
+					     double uTWFC,
+					     double uTWSFC,
 					     TransmissionFunc* previous) : 
 TransmissionFunc(z2,m2,jInitial,piInitial,jFinal,piFinal,maxL,
-totalWidthForCorrection,uncorrTotalWidthForCorrection,
-uncorrTotalWidthSqrdForCorrection,previous) 
+TWFC,uTWFC,
+uTWSFC,previous) 
 {
   double k =1./pi/pi/hbarc/hbarc/10.;
   if(maxL==0.) {
@@ -101,12 +93,13 @@ uncorrTotalWidthSqrdForCorrection,previous)
   } 
 }
 
-GammaTransmissionFunc* GammaTransmissionFunc::CreateGammaTransmissionFunc(int z2, int m2, double jInitial, int piInitial,
-						   double jFinal, int piFinal, double maxL, 
-						   double totalWidthForCorrection,
-						   double uncorrTotalWidthForCorrection,
-						   double uncorrTotalWidthSqrdForCorrection,
-						   TransmissionFunc* previous, double compoundE) {
+GammaTransmissionFunc* GammaTransmissionFunc::CreateGammaTransmissionFunc(int z2, 
+                  int m2, double jInitial, int piInitial,
+						      double jFinal, int piFinal, 
+                  double maxL, double TWFC,
+						      double uTWFC, double uTWSFC,
+						      TransmissionFunc* previous, 
+                  double compoundE){
                  
   //Variable maxL determines multipolarity (E1 = 0., M1= 1., E2 = 2.).
 
@@ -115,27 +108,27 @@ GammaTransmissionFunc* GammaTransmissionFunc::CreateGammaTransmissionFunc(int z2
   if((maxL==0.&&egdrType_==0)||
      (maxL==1.&&mgdrType_==0)|| 
      (maxL==2.&&egqrType_==0)) function = new BrinkAxelGSF(z2,m2,jInitial,piInitial,jFinal,piFinal,maxL, 
-							  totalWidthForCorrection,
-							  uncorrTotalWidthForCorrection,
-							  uncorrTotalWidthSqrdForCorrection,
+							  TWFC,
+							  uTWFC,
+							  uTWSFC,
 							  previous);
   else if(maxL==0.&&egdrType_==1) function = new KopeckyUhlGSF(z2,m2,jInitial,piInitial,jFinal,piFinal,maxL, 
-							      totalWidthForCorrection,
-							      uncorrTotalWidthForCorrection,
-							      uncorrTotalWidthSqrdForCorrection,
+							      TWFC,
+							      uTWFC,
+							      uTWSFC,
 							      previous,compoundE);
   else if((maxL==0.&&egdrType_==2)||
 	        (maxL==1.&&mgdrType_==2)|| 
 	        (maxL==2.&&egqrType_==2)) function = new McCullaghGSF(z2,m2,jInitial,piInitial,jFinal,piFinal,maxL, 
-							       totalWidthForCorrection,
-							       uncorrTotalWidthForCorrection,
-							       uncorrTotalWidthSqrdForCorrection,
+							       TWFC,
+							       uTWFC,
+							       uTWSFC,
 							       previous);
   else if((maxL==0. && egdrType_==3)||
           (maxL==1. && mgdrType_==3)) function = new D1MQRPA(z2,m2,jInitial,piInitial,jFinal,piFinal,maxL, 
-							      totalWidthForCorrection,
-							      uncorrTotalWidthForCorrection,
-							      uncorrTotalWidthSqrdForCorrection,
+							      TWFC,
+							      uTWFC,
+							      uTWSFC,
 							      previous);
   else {
     std::cout << "Giant resonance shape / multipolarity combination not known.  Aborting." << std::endl;
@@ -157,13 +150,13 @@ double GammaTransmissionFunc::operator()(double energy) {
 
   double T = (maxL_==0.||maxL_==1.) ? 2.*pi*CalcStrengthFunction(energy)*pow(energy,3.) : 2.*pi*CalcStrengthFunction(energy)*pow(energy,5.);
   
-  if(totalWidthForCorrection_!=0.) {
+  if(TWFC_!=0.) {
     double previousT = (previous_) ? previous_->operator()(energy) : T;
-    double tBar = uncorrTotalWidthSqrdForCorrection_/uncorrTotalWidthForCorrection_;
+    double tBar = uTWSFC_/uTWFC_;
     
-    double exponent = 4.*tBar/uncorrTotalWidthForCorrection_*(1.+T/uncorrTotalWidthForCorrection_)/(1.+3*tBar/uncorrTotalWidthForCorrection_);
-    double WCF = 1.+2./(1.+pow(T,exponent))+87.*pow((T-tBar)/uncorrTotalWidthForCorrection_,2.)*pow(T/uncorrTotalWidthForCorrection_,5.);
-    return T/(1.+(WCF-1.)*previousT/totalWidthForCorrection_);
+    double exponent = 4.*tBar/uTWFC_*(1.+T/uTWFC_)/(1.+3*tBar/uTWFC_);
+    double WCF = 1.+2./(1.+pow(T,exponent))+87.*pow((T-tBar)/uTWFC_,2.)*pow(T/uTWFC_,5.);
+    return T/(1.+(WCF-1.)*previousT/TWFC_);
   } 
   else return T*chirand;
 }

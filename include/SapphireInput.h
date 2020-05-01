@@ -128,6 +128,41 @@ class SapphireInput{
          */
         int massNumberIntFromIsotopeString(std::string isotopeString);
 
+        /**
+         * @brief Setting input paramters to the static members of Decayer class
+         */
+        void SetInputDecayer();
+
+        /**
+         * @brief Setting input paramters to the static members of CrossSection class
+         */
+        void SetInputCrossSection();
+
+        /**
+         * @brief Setting input paramters to the static members of RandomScheme class
+         */
+        void SetInputRandom();
+
+        /**
+         * @brief Setting input paramters to the static members of GammaTransmissionFunc class
+         */
+        void SetInputGammaTransmission();
+
+        /**
+        * @brief Setting input paramters to the static members of ParticleTansmission class
+        */
+        void SetInputParticleTransmission();
+
+        /**
+        * @brief Setting input paramters to the static members of TransitionRateFunc class
+        */
+        void SetInputTransitionRate();
+
+        /**
+        * @brief Setting input paramters to the static members of LevelDensity class
+        */
+        void SetInputLevelDensity();
+
         //Setter
         void CalcRates(bool x){calcRates=x;}                         /**< Setter for bool calcRates*/
         void CalcAverageWidth(bool x){calcAverageWidth=x;}           /**< Setter for bool calcAverageWidth*/
@@ -162,7 +197,9 @@ class SapphireInput{
             a_exitStates=x;
             exitStates[3]=x;
         }
-        void g_Formalism(int x){g_formalism=x;}              /**<Setter for g_formalism*/
+        void e1_Formalism(int x){e1_formalism=x;}              /**<Setter for e1_formalism*/
+        void m1_Formalism(int x){m1_formalism=x;}              /**<Setter for m1_formalism*/
+        void e2_Formalism(int x){e2_formalism=x;}              /**<Setter for e2_formalism*/
         void n_Formalism(int x){n_formalism=x;}              /**<Setter for n_formalism*/
         void p_Formalism(int x){p_formalism=x;}              /**<Setter for p_formalism*/
         void a_Formalism(int x){a_formalism=x;}              /**<Setter for a_formalism*/
@@ -240,7 +277,9 @@ class SapphireInput{
         int n_ExitStates() const {return n_exitStates;}              /**<Getter for n_exitStates*/ 
         int p_ExitStates() const {return p_exitStates;}              /**<Getter for p_exitStates*/ 
         int a_ExitStates() const {return a_exitStates;}              /**<Getter for a_exitStates*/ 
-        int g_Formalism() const {return g_formalism;}              /**<Getter for g_formalism*/ 
+        int E1_Formalism() const {return e1_formalism;}              /**<Getter for e1_formalism*/ 
+        int M1_Formalism() const {return m1_formalism;}              /**<Getter for m1_formalism*/ 
+        int E2_Formalism() const {return e2_formalism;}              /**<Getter for e2_formalism*/ 
         int n_Formalism() const {return n_formalism;}              /**<Getter for n_formalism*/ 
         int p_Formalism() const {return p_formalism;}              /**<Getter for p_formalism*/ 
         int a_Formalism() const {return a_formalism;}              /**<Getter for a_formalism*/ 
@@ -312,7 +351,9 @@ class SapphireInput{
         int n_formalism;            /**< Choose neutron OMP*/
         int a_formalism;            /**< Choose alpha OMP*/
         int p_formalism;            /**< Choose proton OMP*/
-        int g_formalism;            /**< Choose gamma strength function*/
+        int e1_formalism;            /**< Choose E1 gamma strength function*/
+        int m1_formalism;            /**< Choose M1 gamma strength function*/
+        int e2_formalism;            /**< Choose E2 gamma strength function*/
         int leveldensity;           /**< Choose a level density model*/
         int events;                 /**< Number of decays*/
         int chunkSize;              /**< Portion of the total numbers of decays which is calculated at once.*/

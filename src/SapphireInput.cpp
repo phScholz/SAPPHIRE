@@ -8,6 +8,13 @@
 
 #include "SapphireInput.h"
 #include "NuclearMass.h"
+#include "Decayer.h"
+#include "RandomScheme.h"
+#include "CrossSection.h"
+#include "GammaTransmissionFunc.h"
+#include "ParticleTransmissionFunc.h"
+#include "TransitionRateFunc.h"
+#include "LevelDensityTable.h"
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
@@ -53,7 +60,9 @@
         SapphireInput::a_Formalism(0);
         SapphireInput::p_Formalism(0);
         SapphireInput::n_Formalism(0);
-        SapphireInput::g_Formalism(1);
+        SapphireInput::e1_Formalism(3);
+        SapphireInput::m1_Formalism(3);
+        SapphireInput::e2_Formalism(0);
         SapphireInput::LevelDensity(1);
         SapphireInput::DecayerMaxL(8.);
         SapphireInput::PreEqMaxL(8.);
@@ -132,7 +141,9 @@
         std::cout << "\tProtonModel          = "             << SapphireInput::p_Formalism() << std::endl;
         std::cout << "\tNeutronModel         = "             << SapphireInput::n_Formalism() << std::endl;
         std::cout << "\tAlphaModel           = "             << SapphireInput::a_Formalism() << std::endl;
-        std::cout << "\tGammaModel           = "             << SapphireInput::g_Formalism() << std::endl;
+        std::cout << "\tE1Model              = "             << SapphireInput::e1_Formalism() << std::endl;
+        std::cout << "\tM1Model              = "             << SapphireInput::m1_Formalism() << std::endl;
+        std::cout << "\tE2Model              = "             << SapphireInput::e2_Formalism() << std::endl;
         std::cout << "\tPorterThomasParticle = "             << SapphireInput::PorterThomas_p() << std::endl;
         std::cout << "\tPorterThomasGamma    = "             << SapphireInput::PorterThomas_g() << std::endl;
         std::cout << "\tGammaChannel         = "             << SapphireInput::GammaChannel() << std::endl;
@@ -192,7 +203,7 @@
     void SapphireInput::ReadInputFile(std::string InputFile){
         /**
         */
-        std::cout << "Reading input file ..." << InputFile << std::endl;
+        std::cout << std::endl << "Reading input file ..." << InputFile << std::endl;
         boost::property_tree::ptree pt;
 
         try{
@@ -213,7 +224,9 @@
         SapphireInput::p_Formalism(pt.get<int>("General.ProtonModel", SapphireInput::p_Formalism()));
         SapphireInput::n_Formalism(pt.get<int>("General.NeutronModel", SapphireInput::n_Formalism()));
         SapphireInput::a_Formalism(pt.get<int>("General.AlphaModel", SapphireInput::a_Formalism()));
-        SapphireInput::g_Formalism(pt.get<int>("General.GammaModel", SapphireInput::g_Formalism()));
+        SapphireInput::e1_Formalism(pt.get<int>("General.E1Model", SapphireInput::e1_Formalism()));
+        SapphireInput::m1_Formalism(pt.get<int>("General.M1Model", SapphireInput::m1_Formalism()));
+        SapphireInput::e2_Formalism(pt.get<int>("General.E2Model", SapphireInput::e2_Formalism()));
         SapphireInput::LevelDensity(pt.get<int>("General.LevelDensity", SapphireInput::LevelDensity()));
         SapphireInput::CTable(pt.get<double>("General.cTable", SapphireInput::CTable()));
         SapphireInput::PorterThomas_p(pt.get<bool>("General.PorterThomasParticle", SapphireInput::PorterThomas_p()));
@@ -367,4 +380,44 @@
         std::string atomicNumberString = SapphireInput::atomicNumberStringFromIsotopeString(isotopeString);
         int Z = NuclearMass::FindZ(atomicNumberString);
         return Z;
+    }
+
+    void SapphireInput::SetInputDecayer(){
+        Decayer::SetAlphaDecay(AlphaChannel());
+        Decayer::SetProtonDecay(ProtonChannel());
+        Decayer::SetNeutronDecay(NeutronChannel());
+        Decayer::SetGammaDecay(GammaChannel());
+        Decayer::SetMaxL(8.);
+    }
+
+    void SapphireInput::SetInputCrossSection(){
+        CrossSection::SetResidualGamma(ResidualGamma());
+        CrossSection::SetResidualNeutron(ResidualNeutron());
+        CrossSection::SetResidualProton(ResidualProton());
+        CrossSection::SetResidualAlpha(residualAlpha());
+        CrossSection::SetCalculateGammaCutoff(CalculateGammaCutoff());
+    }
+
+    void SapphireInput::SetInputRandom(){}
+
+    void SapphireInput::SetInputGammaTransmission(){
+        GammaTransmissionFunc::SetEGDRType(e1_Formalism());
+        GammaTransmissionFunc::SetMGDRType(m1_Formalism());
+        GammaTransmissionFunc::SetEGQRType(e2_Formalism());
+        GammaTransmissionFunc::SetPorterThomas(PorterThomas_g());
+    }
+
+    void SapphireInput::SetInputParticleTransmission(){
+        ParticleTransmissionFunc::SetAlphaFormalism(a_Formalism());
+        ParticleTransmissionFunc::SetNeutronFormalism(n_Formalism());
+        ParticleTransmissionFunc::SetProtonFormalism(p_Formalism());  
+        ParticleTransmissionFunc::SetPorterThomas(PorterThomas_p());
+    }
+
+    void SapphireInput::SetInputTransitionRate(){
+        TransitionRateFunc::NLDmodel(LevelDensity());        
+    }
+
+    void SapphireInput::SetInputLevelDensity(){
+        LevelDensityTable::SetCtable(CTable());
     }

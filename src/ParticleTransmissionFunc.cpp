@@ -15,9 +15,9 @@ ParticleTransmissionFunc* ParticleTransmissionFunc::CreateParticleTransmissionFu
 							 double jInitial, int piInitial,
 							 double jFinal, int piFinal,
 							 double spin, int parity, double maxL,
-							 double totalWidthForCorrection,
-							 double uncorrTotalWidthForCorrection,
-							 double uncorrTotalWidthSqrdForCorrection,
+							 double TWFC,
+							 double uTWFC,
+							 double uTWSFC,
 							 TransmissionFunc* previous) {
   ParticleTransmissionFunc* transmissionFunc;
 
@@ -27,17 +27,17 @@ ParticleTransmissionFunc* ParticleTransmissionFunc::CreateParticleTransmissionFu
       transmissionFunc = new EquivSquareWell(z1,m1,z2,m2, 
 					                                  jInitial, piInitial,jFinal,piFinal,
 					                                  spin,parity,maxL,
-					                                  totalWidthForCorrection,
-					                                  uncorrTotalWidthForCorrection,
-					                                  uncorrTotalWidthSqrdForCorrection,
+					                                  TWFC,
+					                                  uTWFC,
+					                                  uTWSFC,
 					                                  previous);
     } else if(alphaFormalism_==1) {
       transmissionFunc = new McFaddenSatchlerPotential(z1,m1,z2,m2, 
 						                                          jInitial, piInitial,jFinal,piFinal,
 						                                          spin,parity,maxL,
-						                                          totalWidthForCorrection,
-						                                          uncorrTotalWidthForCorrection,
-						                                          uncorrTotalWidthSqrdForCorrection,
+						                                          TWFC,
+						                                          uTWFC,
+						                                          uTWSFC,
 						                                          previous);
     } else {
       std::cout << "Specified alpha transmission formalism doesn't exist.  Exiting." << std::endl;
@@ -47,17 +47,17 @@ ParticleTransmissionFunc* ParticleTransmissionFunc::CreateParticleTransmissionFu
       transmissionFunc = new JLMPotential(z1,m1,z2,m2, 
 					                                jInitial, piInitial,jFinal,piFinal,
 					                                spin,parity,maxL,
-					                                totalWidthForCorrection,
-					                                uncorrTotalWidthForCorrection,
-					                                uncorrTotalWidthSqrdForCorrection,
+					                                TWFC,
+					                                uTWFC,
+					                                uTWSFC,
 					                                previous);
   } else if ((z1==1&&m1==1&&protonFormalism_==0) || (z1==0&&m1==1&&neutronFormalism_==0)) {
       transmissionFunc = new EquivSquareWell(z1,m1,z2,m2, 
 					                                jInitial, piInitial,jFinal,piFinal,
 					                                spin,parity,maxL,
-					                                totalWidthForCorrection,
-					                                uncorrTotalWidthForCorrection,
-					                                uncorrTotalWidthSqrdForCorrection,
+					                                TWFC,
+					                                uTWFC,
+					                                uTWSFC,
 					                                previous);
   } else {
       std::cout << "Specified proton/neutron transmission formalism doesn't exist.  Exiting." << std::endl;
@@ -84,13 +84,13 @@ double ParticleTransmissionFunc::operator()(double energy){
   for(std::map<SLPair,double>::const_iterator it = functions.begin(); it!=functions.end();it++) {
       double chirand = (porterThomas_) ? gsl_ran_chisq (r, 1.) : 1.;
       
-      if(totalWidthForCorrection_!=0.) {
+      if(TWFC_!=0.) {
         double previousT = (previous_) ? ((ParticleTransmissionFunc*)previous_)->operator()(energy,i) : it->second;
-        double tBar = uncorrTotalWidthSqrdForCorrection_/uncorrTotalWidthForCorrection_;
-        double exponent = 4.*tBar/uncorrTotalWidthForCorrection_*(1.+it->second/uncorrTotalWidthForCorrection_)/(1.+3*tBar/uncorrTotalWidthForCorrection_);
-        double WCF = 1.+2./(1.+pow(it->second,exponent))+87.*pow((it->second-tBar)/uncorrTotalWidthForCorrection_,2.)*pow(it->second/uncorrTotalWidthForCorrection_,5.);
+        double tBar = uTWSFC_/uTWFC_;
+        double exponent = 4.*tBar/uTWFC_*(1.+it->second/uTWFC_)/(1.+3*tBar/uTWFC_);
+        double WCF = 1.+2./(1.+pow(it->second,exponent))+87.*pow((it->second-tBar)/uTWFC_,2.)*pow(it->second/uTWFC_,5.);
         
-        sum+=it->second/(1.+(WCF-1.)*previousT/totalWidthForCorrection_);
+        sum+=it->second/(1.+(WCF-1.)*previousT/TWFC_);
     
     } else sum+=it->second*chirand;
       i++;
@@ -107,14 +107,14 @@ double ParticleTransmissionFunc::operator()(double energy, int which) {
   for(std::map<SLPair,double>::const_iterator it = functions.begin();
       it!=functions.end();it++) {
     if(i==which) {
-      if(totalWidthForCorrection_!=0.) {
+      if(TWFC_!=0.) {
 	double previousT = (previous_) ? previous_->operator()(energy) : it->second;
-	double tBar = uncorrTotalWidthSqrdForCorrection_/uncorrTotalWidthForCorrection_;
-	double exponent = 4.*tBar/uncorrTotalWidthForCorrection_
-	  *(1.+it->second/uncorrTotalWidthForCorrection_)/(1.+3*tBar/uncorrTotalWidthForCorrection_);
-	double WCF = 1.+2./(1.+pow(it->second,exponent))+87.*pow((it->second-tBar)/uncorrTotalWidthForCorrection_,2.)*
-	  pow(it->second/uncorrTotalWidthForCorrection_,5.);
-	sum=it->second/(1.+(WCF-1.)*previousT/totalWidthForCorrection_);
+	double tBar = uTWSFC_/uTWFC_;
+	double exponent = 4.*tBar/uTWFC_
+	  *(1.+it->second/uTWFC_)/(1.+3*tBar/uTWFC_);
+	double WCF = 1.+2./(1.+pow(it->second,exponent))+87.*pow((it->second-tBar)/uTWFC_,2.)*
+	  pow(it->second/uTWFC_,5.);
+	sum=it->second/(1.+(WCF-1.)*previousT/TWFC_);
       } else sum=it->second;
       break;
     }

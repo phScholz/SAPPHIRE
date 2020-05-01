@@ -1,5 +1,9 @@
-#ifndef EQUIVSQUAREWELL_H
-#define EQUIVSQUAREWELL_H
+/**
+ * @file EquivSquareWell.h
+ * @brief Woods-Saxon equivalent square well (ESqW)
+ * @details
+ */
+
 #pragma once
 #include "CoulFunc.h"
 #include "ParticleTransmissionFunc.h"
@@ -38,4 +42,3 @@ class EquivSquareWell : public ParticleTransmissionFunc {
   CoulFunc* coulFunc_;
 };
 
-#endif
