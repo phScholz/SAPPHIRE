@@ -197,9 +197,9 @@ class SapphireInput{
             a_exitStates=x;
             exitStates[3]=x;
         }
-        void e1_Formalism(int x){e1_formalism=x;}              /**<Setter for e1_formalism*/
-        void m1_Formalism(int x){m1_formalism=x;}              /**<Setter for m1_formalism*/
-        void e2_Formalism(int x){e2_formalism=x;}              /**<Setter for e2_formalism*/
+        void E1_Formalism(int x){e1_formalism=x;}              /**<Setter for e1_formalism*/
+        void M1_Formalism(int x){m1_formalism=x;}              /**<Setter for m1_formalism*/
+        void E2_Formalism(int x){e2_formalism=x;}              /**<Setter for e2_formalism*/
         void n_Formalism(int x){n_formalism=x;}              /**<Setter for n_formalism*/
         void p_Formalism(int x){p_formalism=x;}              /**<Setter for p_formalism*/
         void a_Formalism(int x){a_formalism=x;}              /**<Setter for a_formalism*/

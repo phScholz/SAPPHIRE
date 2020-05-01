@@ -175,7 +175,9 @@ namespace Module_CrossSection{
         ParticleTransmissionFunc::SetProtonFormalism(input.p_Formalism());
         ParticleTransmissionFunc::SetNeutronFormalism(input.n_Formalism());
         ParticleTransmissionFunc::SetPorterThomas(input.PorterThomas_p());
-        GammaTransmissionFunc::SetEGDRType(input.g_Formalism());
+        GammaTransmissionFunc::SetEGDRType(input.E1_Formalism());
+        GammaTransmissionFunc::SetMGDRType(input.M1_Formalism());
+        GammaTransmissionFunc::SetEGQRType(input.E2_Formalism());
         GammaTransmissionFunc::SetPorterThomas(input.PorterThomas_g());
         LevelDensityTable::SetCtable(input.CTable());
 
@@ -223,7 +225,9 @@ namespace Module_CrossSection{
         ParticleTransmissionFunc::SetProtonFormalism(input.p_Formalism());
         ParticleTransmissionFunc::SetNeutronFormalism(input.n_Formalism());
         ParticleTransmissionFunc::SetPorterThomas(input.PorterThomas_p());
-        GammaTransmissionFunc::SetEGDRType(input.g_Formalism());
+        GammaTransmissionFunc::SetEGDRType(input.E1_Formalism());
+        GammaTransmissionFunc::SetMGDRType(input.M1_Formalism());
+        GammaTransmissionFunc::SetEGQRType(input.E2_Formalism());
         GammaTransmissionFunc::SetPorterThomas(input.PorterThomas_g());
         LevelDensityTable::SetCtable(input.CTable());
 

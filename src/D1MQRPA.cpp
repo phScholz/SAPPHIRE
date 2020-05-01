@@ -220,7 +220,7 @@ double D1MQRPA::CalcE1Strength(double energy){
         //If the energy doenst exist in e1Rows we need to interpolate
         strength =(energy-lowerx)*(uppery-lowery)/(upperx-lowerx)+lowery;
         
-        return strength;
+        return strength+f0_*exEnergy_/(1+exp(energy-e0_));
     }
 }
 
@@ -258,6 +258,20 @@ double D1MQRPA::CalcM1Strength(double energy){
         //If the energy doenst exist in e1Rows we need to interpolate
         strength =(energy-lowerx)*(uppery-lowery)/(upperx-lowerx)+lowery;
         
-        return strength;
+        return strength+C_*exp(-1.0*eta_*energy);
     }
+}
+
+void D1MQRPA::SetUpperLimit(){
+    f0_ = 5.0e-10;
+    e0_ = 5.0;
+    eta_ = 0.8;
+    C_ = 3.0e-8;
+}
+
+void D1MQRPA::SetLowerLimit(){
+    f0_ = 1.0e-10;
+    e0_ = 3.0;
+    eta_ = 0.8;
+    C_ = 1.0e-8;
 }

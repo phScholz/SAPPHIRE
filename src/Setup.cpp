@@ -74,6 +74,7 @@ int GammaTransmissionFunc::mgdrType_;
 int GammaTransmissionFunc::egqrType_;
 bool GammaTransmissionFunc::porterThomas_;
 GDRTable GammaTransmissionFunc::gdrTable_;
+double GammaTransmissionFunc::gnorm_;
 
 
 /** 

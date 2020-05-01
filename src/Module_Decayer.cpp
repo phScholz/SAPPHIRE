@@ -126,7 +126,9 @@ namespace Module_Decayer{
         ParticleTransmissionFunc::SetAlphaFormalism(input.a_Formalism());
         ParticleTransmissionFunc::SetNeutronFormalism(input.n_Formalism());
         ParticleTransmissionFunc::SetProtonFormalism(input.p_Formalism());
-        GammaTransmissionFunc::SetEGDRType(input.g_Formalism());
+        GammaTransmissionFunc::SetEGDRType(input.E1_Formalism());
+        GammaTransmissionFunc::SetMGDRType(input.M1_Formalism());
+        GammaTransmissionFunc::SetEGQRType(input.E2_Formalism());
         int chunkSize = input.ChunkSize();
         int A = massNumberIntFromString(input.Isotope());
         int Z = atomicNumberIntFromString(input.Isotope());

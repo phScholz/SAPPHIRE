@@ -129,7 +129,7 @@ GammaTransmissionFunc* GammaTransmissionFunc::CreateGammaTransmissionFunc(int z2
 							      TWFC,
 							      uTWFC,
 							      uTWSFC,
-							      previous);
+							      previous, compoundE);
   else {
     std::cout << "Giant resonance shape / multipolarity combination not known.  Aborting." << std::endl;
     std::exit(1);

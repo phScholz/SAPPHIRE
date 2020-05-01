@@ -11,10 +11,10 @@
 #include "Decayer.h"
 #include "RandomScheme.h"
 #include "CrossSection.h"
-#include "GammaTransmissionFunc.h"
+#include "GammaStrength/GammaTransmissionFunc.h"
 #include "ParticleTransmissionFunc.h"
 #include "TransitionRateFunc.h"
-#include "LevelDensityTable.h"
+#include "LevelDensity/LevelDensityTable.h"
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
@@ -60,9 +60,9 @@
         SapphireInput::a_Formalism(0);
         SapphireInput::p_Formalism(0);
         SapphireInput::n_Formalism(0);
-        SapphireInput::e1_Formalism(3);
-        SapphireInput::m1_Formalism(3);
-        SapphireInput::e2_Formalism(0);
+        SapphireInput::E1_Formalism(3);
+        SapphireInput::M1_Formalism(3);
+        SapphireInput::E2_Formalism(0);
         SapphireInput::LevelDensity(1);
         SapphireInput::DecayerMaxL(8.);
         SapphireInput::PreEqMaxL(8.);
@@ -142,9 +142,9 @@
         std::cout << "\tProtonModel          = "             << SapphireInput::p_Formalism() << std::endl;
         std::cout << "\tNeutronModel         = "             << SapphireInput::n_Formalism() << std::endl;
         std::cout << "\tAlphaModel           = "             << SapphireInput::a_Formalism() << std::endl;
-        std::cout << "\tE1Model              = "             << SapphireInput::e1_Formalism() << std::endl;
-        std::cout << "\tM1Model              = "             << SapphireInput::m1_Formalism() << std::endl;
-        std::cout << "\tE2Model              = "             << SapphireInput::e2_Formalism() << std::endl;
+        std::cout << "\tE1Model              = "             << SapphireInput::E1_Formalism() << std::endl;
+        std::cout << "\tM1Model              = "             << SapphireInput::M1_Formalism() << std::endl;
+        std::cout << "\tE2Model              = "             << SapphireInput::E2_Formalism() << std::endl;
         std::cout << "\tgNorm                = "             << SapphireInput::Gnorm() << std::endl;
         std::cout << "\tPorterThomasParticle = "             << SapphireInput::PorterThomas_p() << std::endl;
         std::cout << "\tPorterThomasGamma    = "             << SapphireInput::PorterThomas_g() << std::endl;
@@ -226,9 +226,9 @@
         SapphireInput::p_Formalism(pt.get<int>("General.ProtonModel", SapphireInput::p_Formalism()));
         SapphireInput::n_Formalism(pt.get<int>("General.NeutronModel", SapphireInput::n_Formalism()));
         SapphireInput::a_Formalism(pt.get<int>("General.AlphaModel", SapphireInput::a_Formalism()));
-        SapphireInput::e1_Formalism(pt.get<int>("General.E1Model", SapphireInput::e1_Formalism()));
-        SapphireInput::m1_Formalism(pt.get<int>("General.M1Model", SapphireInput::m1_Formalism()));
-        SapphireInput::e2_Formalism(pt.get<int>("General.E2Model", SapphireInput::e2_Formalism()));
+        SapphireInput::E1_Formalism(pt.get<int>("General.E1Model", SapphireInput::E1_Formalism()));
+        SapphireInput::M1_Formalism(pt.get<int>("General.M1Model", SapphireInput::M1_Formalism()));
+        SapphireInput::E2_Formalism(pt.get<int>("General.E2Model", SapphireInput::E2_Formalism()));
         SapphireInput::Gnorm(pt.get<double>("General.E2Model", SapphireInput::Gnorm()));
         SapphireInput::LevelDensity(pt.get<int>("General.LevelDensity", SapphireInput::LevelDensity()));
         SapphireInput::CTable(pt.get<double>("General.cTable", SapphireInput::CTable()));
@@ -397,16 +397,16 @@
         CrossSection::SetResidualGamma(ResidualGamma());
         CrossSection::SetResidualNeutron(ResidualNeutron());
         CrossSection::SetResidualProton(ResidualProton());
-        CrossSection::SetResidualAlpha(residualAlpha());
+        CrossSection::SetResidualAlpha(ResidualAlpha());
         CrossSection::SetCalculateGammaCutoff(CalculateGammaCutoff());
     }
 
     void SapphireInput::SetInputRandom(){}
 
     void SapphireInput::SetInputGammaTransmission(){
-        GammaTransmissionFunc::SetEGDRType(e1_Formalism());
-        GammaTransmissionFunc::SetMGDRType(m1_Formalism());
-        GammaTransmissionFunc::SetEGQRType(e2_Formalism());
+        GammaTransmissionFunc::SetEGDRType(E1_Formalism());
+        GammaTransmissionFunc::SetMGDRType(M1_Formalism());
+        GammaTransmissionFunc::SetEGQRType(E2_Formalism());
         GammaTransmissionFunc::SetPorterThomas(PorterThomas_g());
         GammaTransmissionFunc::SetGnorm(Gnorm());
 

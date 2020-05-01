@@ -164,6 +164,6 @@ class GammaTransmissionFunc : public TransmissionFunc {
   static int egqrType_; /**< Type of E2 strength*/
   static bool porterThomas_; /**< Toggle Porter Thomas fluctuations.*/
   GDRParameters gdrParameters_; /**< Current GDR parameters for the nucleus*/
-  static int gnorm_; /**< total normalization of transmission coefficient for gammas*/
+  static double gnorm_; /**< total normalization of transmission coefficient for gammas*/
 };
 

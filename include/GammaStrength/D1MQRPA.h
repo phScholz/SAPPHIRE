@@ -36,9 +36,11 @@ class D1MQRPA : public GammaTransmissionFunc {
 			   double totalWidthForCorrection,
 			   double uncorrTotalWidthForCorrection,
 			   double uncorrTotalWidthSqrdForCorrection,
-			   TransmissionFunc* previous):  GammaTransmissionFunc(z2,m2,jInitial,piInitial,jFinal,piFinal,maxL,
+			   TransmissionFunc* previous, double exEnergy):
+               GammaTransmissionFunc(z2,m2,jInitial,piInitial,jFinal,piFinal,maxL,
 			totalWidthForCorrection,uncorrTotalWidthForCorrection,
-			uncorrTotalWidthSqrdForCorrection,previous) {
+			uncorrTotalWidthSqrdForCorrection,previous), exEnergy_(exEnergy) {
+                SetUpperLimit();
                 ReadFile();
         };
 
@@ -57,6 +59,19 @@ class D1MQRPA : public GammaTransmissionFunc {
     bool FindM1();
     void PrintE1();
     void PrintM1();
+    /**
+     * @brief Set the parameters of the lower limit correction
+     * @details
+     * See [S. Goriely et al., Phys. Rev. C 98 014327 (2018)](https://journals.aps.org/prc/abstract/10.1103/PhysRevC.98.014327) for details.
+     */
+    void SetLowerLimit();
+    
+    /**
+     * @brief Set the parameters of the upper limit correction
+     * @details
+     * See [S. Goriely et al., Phys. Rev. C 98 014327 (2018)](https://journals.aps.org/prc/abstract/10.1103/PhysRevC.98.014327) for details.
+     */
+    void SetUpperLimit();
     double CalcE1Strength(double energy);
     double CalcM1Strength(double energy);
 
@@ -69,6 +84,14 @@ class D1MQRPA : public GammaTransmissionFunc {
     bool verbose_ =false;
     bool e1_;
     bool m1_;
+    
+    double exEnergy_; /**< Excitation energy.*/
+
+    /* Parameters for the analytical correction*/
+    double f0_;
+    double e0_;
+    double eta_;
+    double C_;
 };
 
 
