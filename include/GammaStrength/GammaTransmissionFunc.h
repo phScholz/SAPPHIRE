@@ -79,9 +79,9 @@ class GammaTransmissionFunc : public TransmissionFunc {
 
  protected:
   static GDRTable gdrTable_;
-  static int egdrType_;
-  static const int mgdrType_=0;
-  static const int egqrType_=0;
+  static int egdrType_; //electric giant dipol resonance?
+  static const int mgdrType_=0; //magnetic giant dipole resonance?
+  static const int egqrType_=0; //electric giant quadrupole resonance? E2?
   static bool porterThomas_;
   GDRParameters gdrParameters_;
 };

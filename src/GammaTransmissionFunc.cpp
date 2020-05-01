@@ -2,6 +2,7 @@
 #include "GammaStrength/BrinkAxelGSF.h"
 #include "GammaStrength/KopeckyUhlGSF.h"
 #include "GammaStrength/McCullaghGSF.h"
+#include "GammaStrength/D1MQRPA.h"
 #include "Constants.h"
 #include <iostream>
 #include <iomanip>
@@ -110,6 +111,7 @@ GammaTransmissionFunc* GammaTransmissionFunc::CreateGammaTransmissionFunc(int z2
   //Variable maxL determines multipolarity (E1 = 0., M1= 1., E2 = 2.).
 
   GammaTransmissionFunc* function;
+
   if((maxL==0.&&egdrType_==0)||
      (maxL==1.&&mgdrType_==0)|| 
      (maxL==2.&&egqrType_==0)) function = new BrinkAxelGSF(z2,m2,jInitial,piInitial,jFinal,piFinal,maxL, 
@@ -123,12 +125,18 @@ GammaTransmissionFunc* GammaTransmissionFunc::CreateGammaTransmissionFunc(int z2
 							      uncorrTotalWidthSqrdForCorrection,
 							      previous,compoundE);
   else if((maxL==0.&&egdrType_==2)||
-	  (maxL==1.&&mgdrType_==2)|| 
-	  (maxL==2.&&egqrType_==2)) function = new McCullaghGSF(z2,m2,jInitial,piInitial,jFinal,piFinal,maxL, 
+	        (maxL==1.&&mgdrType_==2)|| 
+	        (maxL==2.&&egqrType_==2)) function = new McCullaghGSF(z2,m2,jInitial,piInitial,jFinal,piFinal,maxL, 
 							       totalWidthForCorrection,
 							       uncorrTotalWidthForCorrection,
 							       uncorrTotalWidthSqrdForCorrection,
 							       previous);
+  else if((maxL==0. && egdrType_==3)||
+          (maxL==1. && mgdrType_==3)) function = new D1MQRPA(z2,m2,jInitial,piInitial,jFinal,piFinal,maxL, 
+							      totalWidthForCorrection,
+							      uncorrTotalWidthForCorrection,
+							      uncorrTotalWidthSqrdForCorrection,
+							      previous);
   else {
     std::cout << "Giant resonance shape / multipolarity combination not known.  Aborting." << std::endl;
     std::exit(1);

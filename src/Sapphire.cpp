@@ -20,7 +20,8 @@
 #include "Module_RandomScheme.h"
 #include "SapphireInput.h"
 
-//#include "D1MQRPA.h"
+#include "GammaStrength/D1MQRPA.h"
+#include <iostream>
 
 extern void Initialize();
 
@@ -50,8 +51,9 @@ void PrintHelp(){
  */
 int main(int argc, char *argv[]) {
   //Only for testing
-  //Initialize();
-  //D1MQRPA * func =new  D1MQRPA(20,40, 0, 1, 1, -1, 2, 0,0,0, nullptr);
+  Initialize();
+  D1MQRPA * func =new  D1MQRPA(20,40, 0, 1, 1, 1, 2, 0,0,0, nullptr);
+  std::cout << std::endl << func->CalcStrengthFunction(6.0) << std::endl;
 
 
   /**

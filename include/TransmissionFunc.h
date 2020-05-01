@@ -43,14 +43,15 @@ class TransmissionFunc {
   virtual double operator()(double) = 0;
 
   virtual bool IsValid() = 0;
+
  protected:
-  int z2_;
-  int m2_;
+  int z2_;  /**< charge numbere*/
+  int m2_; /**< mass number */
   int piInitial_;
   int piFinal_;
   double jInitial_;
   double jFinal_;
-  double maxL_;
+  double maxL_;   /**< maximum angular momentum*/
   double totalWidthForCorrection_;
   double uncorrTotalWidthForCorrection_;
   double uncorrTotalWidthSqrdForCorrection_;

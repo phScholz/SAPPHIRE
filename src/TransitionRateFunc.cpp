@@ -11,7 +11,7 @@
 TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
 				                              double jInitial, int piInitial, 
 				                              double jFinal, int piFinal,
-				                              double spin, int parity, double maxL,
+				                              double dSpin, int dParity, double maxL,
 				                              double compoundE, double qValue,
 				                              double totalWidthForCorrection, 
 				                              double uncorrTotalWidthForCorrection, 

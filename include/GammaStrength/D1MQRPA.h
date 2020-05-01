@@ -57,13 +57,16 @@ class D1MQRPA : public GammaTransmissionFunc {
     bool FindM1();
     void PrintE1();
     void PrintM1();
+    double CalcE1Strength(double energy);
+    double CalcM1Strength(double energy);
+
     QRPAE1row dummyRowE1;
     QRPAM1row dummyRowM1;
     std::vector<QRPAE1row> e1Rows;
     std::vector<QRPAM1row> m1Rows;
     static QRPA_E1_Table e1Table;
     static QRPA_M1_Table m1Table;
-    bool verbose_ =true;
+    bool verbose_ =false;
     bool e1_;
     bool m1_;
 };

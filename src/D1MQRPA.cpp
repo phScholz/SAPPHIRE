@@ -16,11 +16,11 @@ void D1MQRPA::ReadFile(){
         m1_=ReadM1();
 
     if(e1_){
-        PrintE1();
+        if(verbose_)PrintE1();
     }
 
     if(m1_){
-        PrintM1();
+        if(verbose_) PrintM1();
     }
 }
 
@@ -174,5 +174,90 @@ void D1MQRPA::PrintM1(){
 }
 
 double D1MQRPA::CalcStrengthFunction(double energy){
-    ReadFile();
+
+    //opposite parities && dL = 1
+    if(piFinal_==-1*piInitial_ && abs(jFinal_-jInitial_) == 1){
+        return CalcE1Strength(energy);
+    }
+
+    // same parities && dL <=1 && (one of the two spins need to be not zero)
+    if(piFinal_==piInitial_ && abs(jFinal_-jInitial_) <= 1 && (jFinal_!=0 || jInitial_!=0) )){
+        return CalcM1Strength(energy);
+    }
+}
+
+double D1MQRPA::CalcE1Strength(double energy){
+
+    if(e1Rows.size()>0){
+        //Looking for the energy in the e1Rows
+        double lowerx=0;
+        double lowery=0;
+        double upperx=0;
+        double uppery=0;
+
+        double strength=0;
+    
+
+        for(auto it = e1Rows.begin(); it != e1Rows.end(); ++it){
+            if (it->energy == energy){
+                strength = it->strength.at(0);
+                return strength;
+            }
+
+            //Linear Interpolation
+            if(it->energy > lowerx && it->energy < energy){
+                lowerx = it->energy;
+                lowery = it->strength.at(0);
+
+            }
+            
+            if(it->energy > energy && upperx < energy){
+                upperx = it->energy;
+                uppery = it->strength.at(0);
+            }
+        }
+
+        //If the energy doenst exist in e1Rows we need to interpolate
+        strength =(energy-lowerx)*(uppery-lowery)/(upperx-lowerx)+lowery;
+        
+        return strength;
+    }
+}
+
+double D1MQRPA::CalcM1Strength(double energy){
+
+    if(m1Rows.size()>0){
+        //Looking for the energy in the e1Rows
+        double lowerx=0;
+        double lowery=0;
+        double upperx=0;
+        double uppery=0;
+
+        double strength=0;
+    
+
+        for(auto it = m1Rows.begin(); it != m1Rows.end(); ++it){
+            if (it->energy == energy){
+                strength = it->strength.at(0);
+                return strength;
+            }
+
+            //Linear Interpolation
+            if(it->energy > lowerx && it->energy < energy){
+                lowerx = it->energy;
+                lowery = it->strength.at(0);
+
+            }
+            
+            if(it->energy > energy && upperx < energy){
+                upperx = it->energy;
+                uppery = it->strength.at(0);
+            }
+        }
+
+        //If the energy doenst exist in e1Rows we need to interpolate
+        strength =(energy-lowerx)*(uppery-lowery)/(upperx-lowerx)+lowery;
+        
+        return strength;
+    }
 }
