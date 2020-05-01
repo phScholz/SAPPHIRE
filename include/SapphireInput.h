@@ -230,6 +230,7 @@ class SapphireInput{
         void RdEmax(double x){rdEmax=x;}                        /**<Setter for rdEmax*/  
         void RdEmin(double x){rdEmin=x;}                        /**<Setter for rdEmin*/  
         void CTable(double x){cTable=x;}                        /**<Setter for cTable*/  
+        void Gnorm(double x){gNorm=x;}                        /**<Setter for gNorm*/  
 
 
         void EnergyFile(std::string x){energyFile=x;}                       /**< Setter for string energyFile*/
@@ -310,6 +311,7 @@ class SapphireInput{
         double RdEmax() const {return rdEmax;}                         /**<Getter for RdEmax*/
         double RdEmin() const {return rdEmin;}                         /**<Getter for RdEmin*/
         double CTable() const {return cTable;}                         /**<Getter for cTable*/
+        double Gnorm() const {return gNorm;}                         /**<Getter for gNorm*/
 
         std::string EnergyFile() const {return energyFile;}            /**<Getter for energyFile*/ 
         std::string Energies() const {return energies;}            /**<Getter for energies*/ 
@@ -382,6 +384,7 @@ class SapphireInput{
         double rdEmax;              /**< double for the maximum energy of the randomly created levelscheme*/
         double rdEmin;              /**< double for the minimum energy of the randomly created levelscheme*/
         double cTable;              /**< double for the normalization of the ctable parameter.*/
+        double gNorm;              /**< double for the normalization of the gamma transmission coefficent.*/
                 
         std::string energyFile;     /**< String with the path to the energyFile*/
         std::string reactionFile;   /**< String with the path to the reactionFile*/

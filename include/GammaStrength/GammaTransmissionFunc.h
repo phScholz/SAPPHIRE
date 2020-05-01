@@ -152,6 +152,11 @@ class GammaTransmissionFunc : public TransmissionFunc {
    */
   static void SetPorterThomas(bool toggle){porterThomas_=toggle;};
 
+  /**
+   * @brief Set the gnorm parameter
+   * @param x The value the transmission coefficient for gammas should be multiplied with*/
+  static void SetGnorm(double x){gnorm_=x;}
+
  protected:
   static GDRTable gdrTable_; /**< Map to store GDR parameters*/
   static int egdrType_; /**< Type of E1 strength*/
@@ -159,5 +164,6 @@ class GammaTransmissionFunc : public TransmissionFunc {
   static int egqrType_; /**< Type of E2 strength*/
   static bool porterThomas_; /**< Toggle Porter Thomas fluctuations.*/
   GDRParameters gdrParameters_; /**< Current GDR parameters for the nucleus*/
+  static int gnorm_; /**< total normalization of transmission coefficient for gammas*/
 };
 

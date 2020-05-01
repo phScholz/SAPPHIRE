@@ -97,6 +97,7 @@
         SapphireInput::RdEmax(0);
         SapphireInput::RdOutputFile("levelScheme.dat");
         SapphireInput::RdMode("create");
+        SapphireInput::Gnorm(1.0);
     }
 
     void SapphireInput::PrintIntputFile(std::string InputFile){
@@ -144,6 +145,7 @@
         std::cout << "\tE1Model              = "             << SapphireInput::e1_Formalism() << std::endl;
         std::cout << "\tM1Model              = "             << SapphireInput::m1_Formalism() << std::endl;
         std::cout << "\tE2Model              = "             << SapphireInput::e2_Formalism() << std::endl;
+        std::cout << "\tgNorm                = "             << SapphireInput::Gnorm() << std::endl;
         std::cout << "\tPorterThomasParticle = "             << SapphireInput::PorterThomas_p() << std::endl;
         std::cout << "\tPorterThomasGamma    = "             << SapphireInput::PorterThomas_g() << std::endl;
         std::cout << "\tGammaChannel         = "             << SapphireInput::GammaChannel() << std::endl;
@@ -227,6 +229,7 @@
         SapphireInput::e1_Formalism(pt.get<int>("General.E1Model", SapphireInput::e1_Formalism()));
         SapphireInput::m1_Formalism(pt.get<int>("General.M1Model", SapphireInput::m1_Formalism()));
         SapphireInput::e2_Formalism(pt.get<int>("General.E2Model", SapphireInput::e2_Formalism()));
+        SapphireInput::Gnorm(pt.get<double>("General.E2Model", SapphireInput::Gnorm()));
         SapphireInput::LevelDensity(pt.get<int>("General.LevelDensity", SapphireInput::LevelDensity()));
         SapphireInput::CTable(pt.get<double>("General.cTable", SapphireInput::CTable()));
         SapphireInput::PorterThomas_p(pt.get<bool>("General.PorterThomasParticle", SapphireInput::PorterThomas_p()));
@@ -405,6 +408,8 @@
         GammaTransmissionFunc::SetMGDRType(m1_Formalism());
         GammaTransmissionFunc::SetEGQRType(e2_Formalism());
         GammaTransmissionFunc::SetPorterThomas(PorterThomas_g());
+        GammaTransmissionFunc::SetGnorm(Gnorm());
+
     }
 
     void SapphireInput::SetInputParticleTransmission(){

@@ -156,9 +156,9 @@ double GammaTransmissionFunc::operator()(double energy) {
     
     double exponent = 4.*tBar/uTWFC_*(1.+T/uTWFC_)/(1.+3*tBar/uTWFC_);
     double WCF = 1.+2./(1.+pow(T,exponent))+87.*pow((T-tBar)/uTWFC_,2.)*pow(T/uTWFC_,5.);
-    return T/(1.+(WCF-1.)*previousT/TWFC_);
+    return gnorm_*T/(1.+(WCF-1.)*previousT/TWFC_);
   } 
-  else return T*chirand;
+  else return gnorm_*T*chirand;
 }
 
 

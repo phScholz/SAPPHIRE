@@ -114,6 +114,7 @@ void Initialize() {
   GammaTransmissionFunc::SetMGDRType(3);
   GammaTransmissionFunc::SetEGQRType(0);
   GammaTransmissionFunc::SetPorterThomas(true);
+  GammaTransmissionFunc::SetGnorm(1.0);
 
   ParticleTransmissionFunc::SetAlphaFormalism(0);
   ParticleTransmissionFunc::SetNeutronFormalism(0);
