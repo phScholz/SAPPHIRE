@@ -17,7 +17,9 @@
 | [SpinFile](#spinfile)         | Path to the file which contains the spin information                   |
 | [ProtonModel](#threads)       | Sets the model for proton transmission function.                       |
 | [NeutronModel](#threads)      | Sets the model for neutron transmission function.                      |
-| [GammaModel](#threads)        | Sets the model for gamma transmission function.                        |
+| [E1Model](#E1Model)           | Sets the model for E1 gamma transmission function.                     |
+| [M1Model](#M1Model)           | Sets the model for M1 gamma transmission function.                     |
+| [E2Model](#E2Model)           | Sets the model for E2 gamma transmission function.                     |
 | [AlphaModel](#threads)        | Sets the model for alpha transmission function.                        |
 | [LevelDensity](#LevelDensity) | Sets the model for the Nuclear Level Density.                          |
 | [cTable](#cTable)             | Value to normalize the level spacing at the neutron separation energy. |
@@ -61,6 +63,17 @@ Users who want to use different ground state properties are free to edit the dat
 
 ### GDRParams
 
+### E1Model
+Currently available models are:
+
+1. **Brink-Axel Lorentzian**
+2. **Generalized Lorentzian by Kopecky-Uhl**
+3. **Microscopical E1 strength based on QRPA calculations using the D1M Gogny Force** (default)
+
+### M1Model
+
+### E2Model
+
 ### LevelDensity
 Currently available models:
 
@@ -85,8 +98,8 @@ With this parameter the level density can be fitted to level spacing at the neut
 
 ### LevelDir
 The known levels are also derived from RIPL-3 and can be found in `/tables/levels/`. 
+
 ### SpinFile
-### Suffix
 
 ## CrossSection
 

@@ -48,6 +48,7 @@ TransmissionFunc(z2,m2,jInitial,piInitial,jFinal,piFinal,maxL,
 TWFC,uTWFC,
 uTWSFC,previous) 
 {
+  //Debugging: std::cout << gnorm_ << std::endl;
   double k =1./pi/pi/hbarc/hbarc/10.;
   if(maxL==0.) {
     k/=3.;
@@ -139,6 +140,7 @@ GammaTransmissionFunc* GammaTransmissionFunc::CreateGammaTransmissionFunc(int z2
  
 double GammaTransmissionFunc::operator()(double energy) {
   double chirand = 1.;
+  double returnvalue=0;
 
   if(porterThomas_) {
     const gsl_rng_type *Tr = gsl_rng_default;
@@ -156,9 +158,16 @@ double GammaTransmissionFunc::operator()(double energy) {
     
     double exponent = 4.*tBar/uTWFC_*(1.+T/uTWFC_)/(1.+3*tBar/uTWFC_);
     double WCF = 1.+2./(1.+pow(T,exponent))+87.*pow((T-tBar)/uTWFC_,2.)*pow(T/uTWFC_,5.);
-    return gnorm_*T/(1.+(WCF-1.)*previousT/TWFC_);
+
+    returnvalue=gnorm_*T/(1.+(WCF-1.)*previousT/TWFC_);
+    //Debugging: std::cout << returnvalue << gnorm_<< std::endl;
+    return returnvalue;
   } 
-  else return gnorm_*T*chirand;
+  else{
+    returnvalue= gnorm_*T*chirand;
+    //Debugging: std::cout << returnvalue << gnorm_<< std::endl;
+    return returnvalue;
+  } 
 }
 
 

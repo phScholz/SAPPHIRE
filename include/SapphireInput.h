@@ -131,37 +131,37 @@ class SapphireInput{
         /**
          * @brief Setting input paramters to the static members of Decayer class
          */
-        void SetInputDecayer();
+        void SetInputDecayer() const;
 
         /**
          * @brief Setting input paramters to the static members of CrossSection class
          */
-        void SetInputCrossSection();
+        void SetInputCrossSection() const;
 
         /**
          * @brief Setting input paramters to the static members of RandomScheme class
          */
-        void SetInputRandom();
+        void SetInputRandom() const;
 
         /**
          * @brief Setting input paramters to the static members of GammaTransmissionFunc class
          */
-        void SetInputGammaTransmission();
+        void SetInputGammaTransmission() const; 
 
         /**
         * @brief Setting input paramters to the static members of ParticleTansmission class
         */
-        void SetInputParticleTransmission();
+        void SetInputParticleTransmission() const;
 
         /**
         * @brief Setting input paramters to the static members of TransitionRateFunc class
         */
-        void SetInputTransitionRate();
+        void SetInputTransitionRate() const;
 
         /**
         * @brief Setting input paramters to the static members of LevelDensity class
         */
-        void SetInputLevelDensity();
+        void SetInputLevelDensity() const;
 
         //Setter
         void CalcRates(bool x){calcRates=x;}                         /**< Setter for bool calcRates*/

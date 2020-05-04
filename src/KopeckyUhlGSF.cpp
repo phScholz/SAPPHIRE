@@ -30,6 +30,7 @@ double KopeckyUhlGSF::CalcStrengthFunction(double energy) {
        0.7*gdrParameters_.W_[i]*4.*pow(pi,2.)*CalcKUTempSqrd(energy)/
        pow(gdrParameters_.E_[i],5.));
   }
+  //Debugging: if(true) std::cout << "strength " << strength << " energy " << energy << std::endl;
   return strength;
 }
 

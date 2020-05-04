@@ -229,7 +229,7 @@
         SapphireInput::E1_Formalism(pt.get<int>("General.E1Model", SapphireInput::E1_Formalism()));
         SapphireInput::M1_Formalism(pt.get<int>("General.M1Model", SapphireInput::M1_Formalism()));
         SapphireInput::E2_Formalism(pt.get<int>("General.E2Model", SapphireInput::E2_Formalism()));
-        SapphireInput::Gnorm(pt.get<double>("General.E2Model", SapphireInput::Gnorm()));
+        SapphireInput::Gnorm(pt.get<double>("General.gNorm", SapphireInput::Gnorm()));
         SapphireInput::LevelDensity(pt.get<int>("General.LevelDensity", SapphireInput::LevelDensity()));
         SapphireInput::CTable(pt.get<double>("General.cTable", SapphireInput::CTable()));
         SapphireInput::PorterThomas_p(pt.get<bool>("General.PorterThomasParticle", SapphireInput::PorterThomas_p()));
@@ -385,25 +385,26 @@
         return Z;
     }
 
-    void SapphireInput::SetInputDecayer(){
+    void SapphireInput::SetInputDecayer() const{
         Decayer::SetAlphaDecay(AlphaChannel());
         Decayer::SetProtonDecay(ProtonChannel());
         Decayer::SetNeutronDecay(NeutronChannel());
         Decayer::SetGammaDecay(GammaChannel());
-        Decayer::SetMaxL(8.);
+        Decayer::SetMaxL(DecayerMaxL());
     }
 
-    void SapphireInput::SetInputCrossSection(){
+    void SapphireInput::SetInputCrossSection() const{
         CrossSection::SetResidualGamma(ResidualGamma());
         CrossSection::SetResidualNeutron(ResidualNeutron());
         CrossSection::SetResidualProton(ResidualProton());
         CrossSection::SetResidualAlpha(ResidualAlpha());
         CrossSection::SetCalculateGammaCutoff(CalculateGammaCutoff());
+        Decayer::SetCrossSection(true);
     }
 
-    void SapphireInput::SetInputRandom(){}
+    void SapphireInput::SetInputRandom() const{}
 
-    void SapphireInput::SetInputGammaTransmission(){
+    void SapphireInput::SetInputGammaTransmission() const{
         GammaTransmissionFunc::SetEGDRType(E1_Formalism());
         GammaTransmissionFunc::SetMGDRType(M1_Formalism());
         GammaTransmissionFunc::SetEGQRType(E2_Formalism());
@@ -412,17 +413,18 @@
 
     }
 
-    void SapphireInput::SetInputParticleTransmission(){
+    void SapphireInput::SetInputParticleTransmission() const{
         ParticleTransmissionFunc::SetAlphaFormalism(a_Formalism());
         ParticleTransmissionFunc::SetNeutronFormalism(n_Formalism());
         ParticleTransmissionFunc::SetProtonFormalism(p_Formalism());  
         ParticleTransmissionFunc::SetPorterThomas(PorterThomas_p());
     }
 
-    void SapphireInput::SetInputTransitionRate(){
-        TransitionRateFunc::NLDmodel(LevelDensity());        
+    void SapphireInput::SetInputTransitionRate() const {
+        TransitionRateFunc::NLDmodel(LevelDensity());    
+        TransitionRateFunc::SetGammaCutoffEnergy(g_CutoffEnergy());    
     }
 
-    void SapphireInput::SetInputLevelDensity(){
+    void SapphireInput::SetInputLevelDensity() const{
         LevelDensityTable::SetCtable(CTable());
     }

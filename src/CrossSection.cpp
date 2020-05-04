@@ -86,7 +86,7 @@ void CrossSection::CheckChannels(){
       } else if(i==1) {
 	      levels = NuclearLevels::FindLevels(compoundZ_,compoundA_-1);
 	      if(!NuclearMass::QValue(compoundZ_,compoundA_,compoundZ_,compoundA_-1,qVal)) {
-	        exitStates_[i]=-1;
+          exitStates_[i]=-1;
 	        continue;
 	      }
       } else if(i==2) {
@@ -455,101 +455,110 @@ void CrossSection::Calculate() {
 	        decayer->spinRatePairs_[k].Z_==compoundZ_) {
 	  
           if(exitStates_[0]<0) {
-	          double branching = 
-	            (residualGamma_) ? decayer->spinRatePairs_[k].rateFunc_->ExclusiveBranching() : 1.;
-	    gammaExitTransmission+=decayer->spinRatePairs_[k].integral_*branching;
-	  } else {
-	    if(decayer->spinRatePairs_[k].spin_==specifiedExitJ_[0]&&
-	       decayer->spinRatePairs_[k].parity_==specifiedExitPi_[0])
-	      if(E-specifiedExitSepE_[0]>0.)
-		gammaExitTransmission+=decayer->spinRatePairs_[k].rateFunc_->CalcTransmissionFunc(E-specifiedExitSepE_[0]);
-	  }
-	} else if(decayer->spinRatePairs_[k].A_==compoundA_-1&&
-		  decayer->spinRatePairs_[k].Z_==compoundZ_) {
-	  if(exitStates_[1]<0) {
-	    double branching = 
-	      (residualNeutron_) ? decayer->spinRatePairs_[k].rateFunc_->ExclusiveBranching() : 1.;
-	    neutronExitTransmission+=decayer->spinRatePairs_[k].integral_*branching;
-	  } else {
-	    if(decayer->spinRatePairs_[k].spin_==specifiedExitJ_[1]&&
-	       decayer->spinRatePairs_[k].parity_==specifiedExitPi_[1])
-	      if(E-specifiedExitSepE_[1]>0.)
-		neutronExitTransmission+=decayer->spinRatePairs_[k].rateFunc_->CalcTransmissionFunc(E-specifiedExitSepE_[1]);
-	  }
-	} else if(decayer->spinRatePairs_[k].A_==compoundA_-1&&
-		  decayer->spinRatePairs_[k].Z_==compoundZ_-1) {
-	  if(exitStates_[2]<0) {
-	    double branching = 
-	      (residualProton_) ? decayer->spinRatePairs_[k].rateFunc_->ExclusiveBranching() : 1.;
-	    protonExitTransmission+=decayer->spinRatePairs_[k].integral_*branching;	
-	  } else {
-	    if(decayer->spinRatePairs_[k].spin_==specifiedExitJ_[2]&&
-	       decayer->spinRatePairs_[k].parity_==specifiedExitPi_[2])
-	      if(E-specifiedExitSepE_[2]>0.)
-		protonExitTransmission+=decayer->spinRatePairs_[k].rateFunc_->CalcTransmissionFunc(E-specifiedExitSepE_[2]);
-	  }
-	} else if(decayer->spinRatePairs_[k].A_==compoundA_-4&&
-		  decayer->spinRatePairs_[k].Z_==compoundZ_-2) {
-	  if(exitStates_[3]<0) {
-	    double branching = 
-	      (residualAlpha_) ? decayer->spinRatePairs_[k].rateFunc_->ExclusiveBranching() : 1.;
-	    alphaExitTransmission+=decayer->spinRatePairs_[k].integral_*branching;
-	  } else {
-	    if(decayer->spinRatePairs_[k].spin_==specifiedExitJ_[3]&&
-	       decayer->spinRatePairs_[k].parity_==specifiedExitPi_[3])
-	      if(E-specifiedExitSepE_[3]>0.)
-		alphaExitTransmission+=decayer->spinRatePairs_[k].rateFunc_->CalcTransmissionFunc(E-specifiedExitSepE_[3]);
-	  }	
-	}
+	          double branching = (residualGamma_) ? decayer->spinRatePairs_[k].rateFunc_->ExclusiveBranching() : 1.;
+	          gammaExitTransmission+=decayer->spinRatePairs_[k].integral_*branching;
+	        } else {
+	          if(decayer->spinRatePairs_[k].spin_==specifiedExitJ_[0] && decayer->spinRatePairs_[k].parity_==specifiedExitPi_[0]){	      
+              if(E-specifiedExitSepE_[0]>0.){
+		            gammaExitTransmission+=decayer->spinRatePairs_[k].rateFunc_->CalcTransmissionFunc(E-specifiedExitSepE_[0]);
+              }
+            }
+	        }
+	      } else if(decayer->spinRatePairs_[k].A_==compoundA_-1 && decayer->spinRatePairs_[k].Z_==compoundZ_) {
+	        if(exitStates_[1]<0) {
+	          double branching = (residualNeutron_) ? decayer->spinRatePairs_[k].rateFunc_->ExclusiveBranching() : 1.;
+	          neutronExitTransmission+=decayer->spinRatePairs_[k].integral_*branching;
+	        } else {
+	          if(decayer->spinRatePairs_[k].spin_==specifiedExitJ_[1] && decayer->spinRatePairs_[k].parity_==specifiedExitPi_[1]){
+	            if(E-specifiedExitSepE_[1]>0.){
+		            neutronExitTransmission+=decayer->spinRatePairs_[k].rateFunc_->CalcTransmissionFunc(E-specifiedExitSepE_[1]);
+              }
+            }
+	        }
+	      } else if(decayer->spinRatePairs_[k].A_==compoundA_-1 && decayer->spinRatePairs_[k].Z_==compoundZ_-1) {
+	        if(exitStates_[2]<0) {
+	          double branching = (residualProton_) ? decayer->spinRatePairs_[k].rateFunc_->ExclusiveBranching() : 1.;
+	            protonExitTransmission+=decayer->spinRatePairs_[k].integral_*branching;	
+	        } else {
+	          if(decayer->spinRatePairs_[k].spin_==specifiedExitJ_[2]&& decayer->spinRatePairs_[k].parity_==specifiedExitPi_[2]){
+	            if(E-specifiedExitSepE_[2]>0.){
+		            protonExitTransmission+=decayer->spinRatePairs_[k].rateFunc_->CalcTransmissionFunc(E-specifiedExitSepE_[2]);
+              }
+            }
+	        }
+	      } else if(decayer->spinRatePairs_[k].A_==compoundA_-4 && decayer->spinRatePairs_[k].Z_==compoundZ_-2) {
+	        if(exitStates_[3]<0) {
+	          double branching = (residualAlpha_) ? decayer->spinRatePairs_[k].rateFunc_->ExclusiveBranching() : 1.;
+	          alphaExitTransmission+=decayer->spinRatePairs_[k].integral_*branching;
+	        } else {
+	          if(decayer->spinRatePairs_[k].spin_==specifiedExitJ_[3] && decayer->spinRatePairs_[k].parity_==specifiedExitPi_[3]){
+	            if(E-specifiedExitSepE_[3]>0.){
+		            alphaExitTransmission+=decayer->spinRatePairs_[k].rateFunc_->CalcTransmissionFunc(E-specifiedExitSepE_[3]);
+              }
+            }
+          }	
+	      }
       }
+
+
       double compoundTransmission;
       if(pType_==0) {
-	compoundTransmission=gammaExitTransmission;
-	if(exitStates_[0]<0||entranceState_==exitStates_[0]) 
-	  gammaExitTransmission-=entranceTransmission;
+	      compoundTransmission=gammaExitTransmission;
+	      
+        if(exitStates_[0]<0||entranceState_==exitStates_[0]){
+	        gammaExitTransmission-=entranceTransmission;
+        }
+      
       } else if(pType_==1) {
-	compoundTransmission=neutronExitTransmission;
-	if(exitStates_[1]<0||entranceState_==exitStates_[1]) 
-	  neutronExitTransmission-=entranceTransmission;
+	      compoundTransmission=neutronExitTransmission;
+	
+        if(exitStates_[1]<0||entranceState_==exitStates_[1]) {
+	        neutronExitTransmission-=entranceTransmission;
+        }
+
       } else if(pType_==2) {
-	compoundTransmission=protonExitTransmission;
-	if(exitStates_[2]<0||entranceState_==exitStates_[2]) 
-	  protonExitTransmission-=entranceTransmission;
+	      compoundTransmission=protonExitTransmission;
+	
+        if(exitStates_[2]<0||entranceState_==exitStates_[2]){
+	        protonExitTransmission-=entranceTransmission;
+        }
+      
       } else if(pType_==3) {
-	compoundTransmission=alphaExitTransmission;
-	if(exitStates_[3]<0||entranceState_==exitStates_[3]) 
-	  alphaExitTransmission-=entranceTransmission;
+	      compoundTransmission=alphaExitTransmission;
+	
+        if(exitStates_[3]<0||entranceState_==exitStates_[3]) {
+	        alphaExitTransmission-=entranceTransmission;
+        }
       }
+      
       entranceTrans_[j].push_back(entranceTransmission);
       nExitTrans_[j].push_back(neutronExitTransmission);
       gExitTrans_[j].push_back(gammaExitTransmission);
       pExitTrans_[j].push_back(protonExitTransmission);
       aExitTrans_[j].push_back(alphaExitTransmission);
+
       if(decayer->totalIntegral_>0.) {
-	gammaSum+=(2.*decayer->jInitial_+1.)*entranceTransmission*gammaExitTransmission/
-	  decayer->totalIntegral_;
-	neutronSum+=(2.*decayer->jInitial_+1.)*entranceTransmission*neutronExitTransmission/
-	  decayer->totalIntegral_;
-	protonSum+=(2.*decayer->jInitial_+1.)*entranceTransmission*protonExitTransmission/
-	  decayer->totalIntegral_;
-	alphaSum+=(2.*decayer->jInitial_+1.)*entranceTransmission*alphaExitTransmission/
-	  decayer->totalIntegral_;
-	gammaStellarSum+=(2.*decayer->jInitial_+1.)*compoundTransmission*gammaExitTransmission/
-	  decayer->totalIntegral_;
-	neutronStellarSum+=(2.*decayer->jInitial_+1.)*compoundTransmission*neutronExitTransmission/
-	  decayer->totalIntegral_;
-	protonStellarSum+=(2.*decayer->jInitial_+1.)*compoundTransmission*protonExitTransmission/
-	  decayer->totalIntegral_;
-	alphaStellarSum+=(2.*decayer->jInitial_+1.)*compoundTransmission*alphaExitTransmission/
-	  decayer->totalIntegral_;
+	      gammaSum+=(2.*decayer->jInitial_+1.)*entranceTransmission*gammaExitTransmission/decayer->totalIntegral_;
+	      neutronSum+=(2.*decayer->jInitial_+1.)*entranceTransmission*neutronExitTransmission/decayer->totalIntegral_;
+	      protonSum+=(2.*decayer->jInitial_+1.)*entranceTransmission*protonExitTransmission/decayer->totalIntegral_;
+	      alphaSum+=(2.*decayer->jInitial_+1.)*entranceTransmission*alphaExitTransmission/decayer->totalIntegral_;
+	      gammaStellarSum+=(2.*decayer->jInitial_+1.)*compoundTransmission*gammaExitTransmission/decayer->totalIntegral_;
+	      neutronStellarSum+=(2.*decayer->jInitial_+1.)*compoundTransmission*neutronExitTransmission/decayer->totalIntegral_;
+	      protonStellarSum+=(2.*decayer->jInitial_+1.)*compoundTransmission*protonExitTransmission/decayer->totalIntegral_;
+	      alphaStellarSum+=(2.*decayer->jInitial_+1.)*compoundTransmission*alphaExitTransmission/decayer->totalIntegral_;
       }
       delete decayerVector[j].first;
     }
+
     double totalSum = gammaSum + neutronSum + protonSum + alphaSum;
+    
     if(totalSum>=2.*gammaSum&&!gammaCutoffSet_&&i>0) {
       TransitionRateFunc::SetGammaCutoffEnergy(crossSections_[i-1].first+seperationEnergy_);
       gammaCutoffSet_=true;
     }
+    
+    //if(true) std::cout << "gamma sum " << gammaSum;
+
     crossSections_[i].second.gamma_=gammaSum*geometricCrossSection;
     crossSections_[i].second.proton_=protonSum*geometricCrossSection;
     crossSections_[i].second.neutron_=neutronSum*geometricCrossSection;
