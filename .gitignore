@@ -16,6 +16,7 @@ doxygen_config/
 *.root
 *.out
 doc/*
+output/*
 *.html
 *.js
 .vscode/

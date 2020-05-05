@@ -1,3 +1,7 @@
+/**
+ * @file CrossSection.h
+ * @brief Contains CrossSection and CrossSectionValues classes.
+ */
 #pragma once
 #include <vector>
 #include <map>
@@ -22,18 +26,30 @@ struct int_double_pair_compare {
  */
 class CrossSectionValues {
  public:
- CrossSectionValues(double gamma, double neutron, double proton, double alpha,
+  /**
+   * @brief Constructor. Initializes by passing function parameters.
+   * @param gamma (x,g) cross section
+   * @param neutron (x,n) cross section
+   * @param proton (x,p) cross section
+   * @param alpha (x,a) cross section
+   * @param gammaStellar stellar (x,g) cross section
+   * @param neutronStellar stellar (x,n) cross section
+   * @param protonStellar stellar (x,p) cross section
+   * @param alphaStellar stellar (x,a) cross section
+   */
+  CrossSectionValues(double gamma, double neutron, double proton, double alpha,
 		    double gammaStellar, double neutronStellar, double protonStellar, double alphaStellar) :
   gamma_(gamma),neutron_(neutron),proton_(proton),alpha_(alpha),
   gammaStellar_(gammaStellar),neutronStellar_(neutronStellar),protonStellar_(protonStellar),alphaStellar_(alphaStellar) {};
-  double gamma_;
-  double neutron_;
-  double proton_;
-  double alpha_;
-  double gammaStellar_;
-  double neutronStellar_;
-  double protonStellar_;
-  double alphaStellar_;
+  
+  double gamma_; /**<(x,g) cross section**/
+  double neutron_; /**<(x,n) cross section**/
+  double proton_; /**<(x,p) cross section**/
+  double alpha_; /**<(x,a) cross section**/
+  double gammaStellar_; /**< stellar (x,g) cross section**/
+  double neutronStellar_; /**< stellar (x,n) cross section**/
+  double protonStellar_; /**< stellar (x,p) cross section**/
+  double alphaStellar_; /**< stellar (x,a) cross section**/
 };
 
 /**
@@ -91,8 +107,18 @@ class CrossSection {
    * 
    */
   void Calculate();
+
+  /**
+   * @brief Method which prints the cross section to a file.
+   */
   void PrintCrossSections();
+
+  /**
+   * @brief Method to print the transmission terms to file
+   */
   void PrintTransmissionTerms();
+  
+  
   std::pair<double,double> CalcAverageSWaveResWidth();
   std::pair<double,double> CalcAveragePWaveResWidth();
   std::pair<double,double> CalcAverageDWaveResWidth();

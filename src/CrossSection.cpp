@@ -572,31 +572,36 @@ void CrossSection::Calculate() {
 }
 
 void CrossSection::PrintCrossSections() {
+  /** 1. Construct file names*/
   char filename[256];
   if(pType_==0) {
-    sprintf(filename,"Sapphire_%d%s+g.dat",
+    sprintf(filename,"output/Sapphire_%d%s+g.dat",
     	A_,
     	NuclearMass::FindElement(Z_).c_str());  
   } else if(pType_==1) {
-    sprintf(filename,"Sapphire_%d%s+n.dat",
+    sprintf(filename,"output/Sapphire_%d%s+n.dat",
     	A_,
     	NuclearMass::FindElement(Z_).c_str());  
   } else if(pType_==2) {
-    sprintf(filename,"Sapphire_%d%s+p.dat",
+    sprintf(filename,"output/Sapphire_%d%s+p.dat",
     	A_,
     	NuclearMass::FindElement(Z_).c_str());  
   } else {
-    sprintf(filename,"Sapphire_%d%s+a.dat",
+    sprintf(filename,"output/Sapphire_%d%s+a.dat",
       	    A_,
     	    NuclearMass::FindElement(Z_).c_str());  
   }
+  
+  /** 2. Write header*/
   std::ofstream out(filename);
   out << "#" << std::setw(14) << "Energy [MeV]"
       << std::setw(15) << "gamma [b]"
       << std::setw(15) << "neutron [b]"
       << std::setw(15) << "proton [b]"
       << std::setw(15) << "alpha [b]"
-      << std::setw(0)  << std::endl; 
+      << std::setw(0)  << std::endl;
+
+  /** 3. In a foor loop, write the content of crossSections_*/ 
   for(int i = 0;i<crossSections_.size();i++) {
     if(skipped_[i]) continue;
     out << std::scientific
@@ -612,18 +617,25 @@ void CrossSection::PrintCrossSections() {
 }
 
 void CrossSection::PrintTransmissionTerms() {
+  /** Foor-loop over all \f$(J,\Pi) \f$ :*/
   for(int j = 0;j<allowedJPi_.size();j++) {
     char filename[256];
-    if(allowedJPi_[j].second>0)
-      sprintf(filename,"Transmission_%d%s_J=%.1f+.dat",
+
+    /**   1. Construct file names*/
+    if(allowedJPi_[j].second>0){
+      sprintf(filename,"output/Transmission_%d%s_J=%.1f+.dat",
 	      compoundA_,
 	      NuclearMass::FindElement(compoundZ_).c_str(),
 	      allowedJPi_[j].first);  
-    else
-      sprintf(filename,"Transmission_%d%s_J=%.1f-.dat",
+    }
+    else{
+      sprintf(filename,"output/Transmission_%d%s_J=%.1f-.dat",
 	      compoundA_,
 	      NuclearMass::FindElement(compoundZ_).c_str(),
 	      allowedJPi_[j].first);  
+    }
+    
+    /**   2. Write header*/
     std::ofstream out(filename);
     out << "#" << std::setw(14) << "Energy [MeV]"
 	<< std::setw(15) << "entrance"
@@ -633,6 +645,8 @@ void CrossSection::PrintTransmissionTerms() {
 	<< std::setw(15) << "alpha"
 	<< std::setw(0)  << std::endl; 
     int k = 0;
+
+    /**   3. Writing all transmission coefficients*/
     for(int i = 0;i<crossSections_.size();i++) {
       if(skipped_[i]) continue;
       out << std::scientific

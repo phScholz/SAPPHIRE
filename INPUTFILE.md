@@ -62,17 +62,45 @@ If no experimental mass excesses are available, Sapphire uses the ground state p
 Users who want to use different ground state properties are free to edit the data tables or exchange them with other ones. However, the file structure needs to stay the same as defined by RIPL-3.
 
 ### GDRParams
+This keywords sets the path to the file containing the GDR parameters. Currently the parameters from [RIPL-3](https://www-nds.iaea.org/RIPL-3/) are used and stored in `/tables/gamma/ripl3_gdr_parameters.dat`. If changed by the user, the new file has to be in the same format as the current file. For more information, see the official [RIPL-3 README-file](https://www-nds.iaea.org/RIPL-3/gamma/gdr-parameters&errors-exp.readme).
 
 ### E1Model
 Currently available models are:
 
-1. **Brink-Axel Lorentzian**
-2. **Generalized Lorentzian by Kopecky-Uhl**
-3. **Microscopical E1 strength based on QRPA calculations using the D1M Gogny Force** (default)
+[0] **Brink-Axel Lorentzian**
+
+Simple Standard Lorentzian (SLO) with GDR parameters from [RIPL-3]. See [GDRParams](#gdrparams) for details.
+      
+
+[1] **Generalized Lorentzian by Kopecky-Uhl**
+
+[2] **McCullaghGSF**
+
+[3] **Microscopical E1 strength based on QRPA calculations using the D1M Gogny Force** (default)
+
+This model is based on the published tables of the [PSF Database](https://www-nds.iaea.org/PSFdatabase/). The tables can be found in `tables/gamma/D1M/`. The tables are modified by the analytical corrections for the up-bend and nuclear temperature. For details see references:
+- S. Goriely et al., The European Physical Journal A 55, 172 (2019)
+- S. Goriely, S. Hilaire, S. Péru, K. Sieja, Phys. Rev. C 98, 014327 (2018) 
 
 ### M1Model
+[0] **Brink-Axel Lorentzian**
+
+Simple Standard Lorentzian (SLO) with GDR parameters from [RIPL-3]. See [GDRParams](#gdrparams) for details.
+
+[2] **McCullaghGSF**
+   
+[3] **Microscopical M1 strength based on QRPA calculations using the D1M Gogny Force**   (default)
+
+This model is based on the published tables of the [PSF Database](https://www-nds.iaea.org/PSFdatabase/). The tables can be found in `tables/gamma/D1M/`. The tables are modified by the analytical corrections for the up-bend and nuclear temperature. For details see references:
+- S. Goriely et al., The European Physical Journal A 55, 172 (2019)
+- S. Goriely, S. Hilaire, S. Péru, K. Sieja, Phys. Rev. C 98, 014327 (2018) 
 
 ### E2Model
+[0] **Brink-Axel Lorentzian**
+Simple Standard Lorentzian (SLO) with GDR parameters from [RIPL-3]. See [GDRParams](#gdrparams) for details.
+
+[2] **McCullaghGSF**
+
 
 ### LevelDensity
 Currently available models:

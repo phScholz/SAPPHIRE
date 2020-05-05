@@ -1,6 +1,9 @@
-#ifndef DECAYPRODUCT_H
-#define DECAYPRODUCT_H
+/**
+ * @file DecayProduct.h
+ */
 #pragma once
+
+
 class DecayData {
   double energy_;
   double neutronEntranceWidth_;
@@ -11,16 +14,40 @@ class DecayData {
   double protonTotalWidth_;
   double alphaTotalWidth_;
   double gammaTotalWidth_;
+
  public:
- DecayData() : energy_(0.), neutronEntranceWidth_(0.), protonEntranceWidth_(0.),alphaEntranceWidth_(0.),
-   gammaEntranceWidth_(0.), neutronTotalWidth_(0.), protonTotalWidth_(0.), alphaTotalWidth_(0.),gammaTotalWidth_(0.) {};
- DecayData(double energy, double neutronEntranceWidth,double protonEntranceWidth,
+  /**
+   * @brief Simple DecayData class constructor. Initializes members with 0.
+   */
+  DecayData() : energy_(0.), neutronEntranceWidth_(0.), protonEntranceWidth_(0.),alphaEntranceWidth_(0.), gammaEntranceWidth_(0.), neutronTotalWidth_(0.), protonTotalWidth_(0.), alphaTotalWidth_(0.),gammaTotalWidth_(0.) {};
+  
+  /**
+   * @brief DecayData class constructor. Initializes members with function parameters.
+   * @param energy
+   * @param neutronEntranceWidth
+   * @param protonEntranceWidth
+   * @param alphaEntranceWidth
+   * @param gammaEntranceWidth
+   * @param neutronTotalWidth
+   * @param protonTotalWidth
+   * @param alphaTotalWidth
+   * @param gammaTotalWidth
+   */
+  DecayData(double energy, double neutronEntranceWidth,double protonEntranceWidth,
 	   double alphaEntranceWidth, double gammaEntranceWidth,double neutronTotalWidth,
 	   double protonTotalWidth, double alphaTotalWidth, double gammaTotalWidth) : energy_(energy), neutronEntranceWidth_(neutronEntranceWidth),
     protonEntranceWidth_(protonEntranceWidth), alphaEntranceWidth_(alphaEntranceWidth),
     gammaEntranceWidth_(gammaEntranceWidth), neutronTotalWidth_(neutronTotalWidth), protonTotalWidth_(protonTotalWidth),
     alphaTotalWidth_(alphaTotalWidth),gammaTotalWidth_(gammaTotalWidth) {};
+  
+  /**
+   * @brief Setter energy.
+   */
   double energy() const {return energy_;};
+  
+  /**
+   * @brief Setter neutronEntranceWidth
+   */
   double neutronEntranceWidth() const {return neutronEntranceWidth_;};
   double protonEntranceWidth() const {return protonEntranceWidth_;};
   double alphaEntranceWidth() const {return alphaEntranceWidth_;};
@@ -31,8 +58,15 @@ class DecayData {
   double gammaTotalWidth() const {return gammaTotalWidth_;};
 };
 
+/**
+ * @brief Class for Decay Products
+ */
 class DecayProduct {
+ 
  public:
+  /**
+   * @brief Simple Constructor for DecayProduct class object.
+   */
   DecayProduct() :
    Z_(0), A_(0), J_(0.), Pi_(0), excitationEnergy_(0.),
    fragmentEnergyCM_(0.), fragmentEnergy_(0.),
@@ -42,6 +76,10 @@ class DecayProduct {
    particleEnergyCM_(0.), particleEnergy_(0.), 
    particleMomentumX_(0.), particleMomentumY_(0.),
    particleMomentumZ_(0.) {};
+  
+  /**
+   * @brief DecayProduct constructor 
+   */
   DecayProduct(int Z, int A, double J, int Pi, 
 	       double excitationEnergy, double fragmentEnergyCM,
 	       double fragmentEnergy, double fragmentMomentumX,
@@ -77,5 +115,3 @@ class DecayProduct {
   double particleMomentumY_;
   double particleMomentumZ_;
 };
-
-#endif

@@ -174,6 +174,8 @@ class SapphireInput{
         void PorterThomas_g(bool x){porterThomas_g=x;}                  /**<Setter for bool porterThomas_g*/
         void PorterThomas_p(bool x){porterThomas_p=x;}                  /**<Setter for bool porterThomas_p*/
         void PrintTrans(bool x){printTrans=x;}                      /**<Setter for bool printTrans*/
+        void PrintXs(bool x){printTrans=x;}                      /**<Setter for bool printXs*/
+        void PrintRate(bool x){printTrans=x;}                      /**<Setter for bool printRate*/
         void PreEq(bool x){preEq=x;}                                    /**<Setter for bool preEq*/
         void AlphaChannel(bool x){alphaChannel=x;}                /**<Setter for bool alphaChannel*/
         void ProtonChannel(bool x){protonChannel=x;}                /**<Setter for bool protonChannel*/
@@ -267,6 +269,8 @@ class SapphireInput{
         bool PorterThomas_g() const {return porterThomas_g;}             /**<Getter for bool porterThomas_g*/
         bool PorterThomas_p() const {return porterThomas_p;}             /**<Getter for bool porterThomas_p*/
         bool PrintTrans() const {return printTrans;}                       /**Getter for bool printTrans*/
+        bool PrintXs() const {return printXs;}                       /**Getter for bool printXs*/
+        bool PrintRate() const {return printRate;}                       /**Getter for bool printRate*/
         bool PreEq() const {return preEq;}                                /**<Getter for bool preEq*/
         bool AlphaChannel() const {return alphaChannel;}              /**<Getter for bool alphaChannel*/
         bool ProtonChannel() const {return protonChannel;}              /**<Getter for bool protonChannel*/
@@ -339,11 +343,14 @@ class SapphireInput{
         bool porterThomas_g;       /**< Bool for PorterThomas usage gamma*/  
         bool porterThomas_p;       /**< Bool for PorterThomas usage particle*/
         bool printTrans;            /**< Bool if transmission should be printed*/
+        bool printXs;               /**< Bool if crossSection should be printed*/
+        bool printRate;             /**< Bool if reactionRate should be printed*/
         bool preEq;                 /**< Bool for preEq.*/
         bool alphaChannel;          /**< Toggle alpha channel*/
         bool protonChannel;          /**< Toggle proton channel*/
         bool neutronChannel;          /**< Toggle neutron channel*/
         bool gammaChannel;          /**< Toggle gamma channel*/
+
 
         int entranceState;          /**< Int for the number of level, which should be the entrance State*/
         int g_exitStates;           /**< Int for the number of exitStates for gamma residual**/

@@ -187,7 +187,9 @@ namespace Module_CrossSection{
             {
                 std::cout << std::endl << std::endl << "Calculating for Z: " << it->Z_ << " A: " << it->A_ << " and Particle Type: " << it->pType_ << std::endl;
                 xs->Calculate();
-                xs->PrintCrossSections();
+                if(input.PrintXs()) xs->PrintCrossSections();
+                if(input.PrintTrans()) xs->PrintTransmissionTerms();
+                //if(input.PrintRate()) xs->PrintReactionRates();
             }
             else
             {
@@ -250,7 +252,8 @@ namespace Module_CrossSection{
         if(xs->IsValid())
         {
             xs->Calculate();
-            xs->PrintCrossSections();
+            if(input.PrintXs()) xs->PrintCrossSections();
+            if(input.PrintTrans()) xs->PrintTransmissionTerms();
         }
         else
         {

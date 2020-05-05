@@ -47,6 +47,9 @@
         SapphireInput::n_ExitStates(-1);
         SapphireInput::p_ExitStates(-1);
         SapphireInput::a_ExitStates(-1);   
+        SapphireInput::PrintTrans(false);
+        SapphireInput::PrintXs(true);
+        SapphireInput::PrintRate(false);
         SapphireInput::CalcRates(false);           
         SapphireInput::CalcAverageWidth(false);
         SapphireInput::ResidualGamma(true);               
@@ -174,6 +177,9 @@
             std::cout << "\tn_ExitStates         = "             << SapphireInput::n_ExitStates() << std::endl;
             std::cout << "\tp_ExitStates         = "             << SapphireInput::p_ExitStates() << std::endl;
             std::cout << "\ta_ExitStates         = "             << SapphireInput::a_ExitStates() << std::endl;
+            std::cout << "\tPrintXS              = "             << SapphireInput::PrintXs() << std::endl;
+            std::cout << "\tPrintTRANS           = "             << SapphireInput::PrintTrans() << std::endl;
+            std::cout << "\tPrintRATE            = "             << SapphireInput::PrintRate() << std::endl;
             std::cout << std::endl;
         }
         if(module=="Decayer" || module=="all"){
@@ -251,6 +257,9 @@
         SapphireInput::ResidualProton(pt.get<bool>("CrossSection.ResidualProton", SapphireInput::ResidualProton()));
         SapphireInput::ResidualAlpha(pt.get<bool>("CrossSection.ResidualAlpha", SapphireInput::ResidualAlpha()));
         SapphireInput::CalculateGammaCutoff(pt.get<bool>("CrossSection.CalculateGammaCutoff", SapphireInput::CalculateGammaCutoff()));
+        SapphireInput::PrintXs(pt.get<bool>("CrossSection.PrintXS", SapphireInput::PrintXs()));
+        SapphireInput::PrintTrans(pt.get<bool>("CrossSection.PrintTRANS", SapphireInput::PrintTrans()));
+        SapphireInput::PrintRate(pt.get<bool>("CrossSection.PrintRATE", SapphireInput::PrintRate()));
 
         //Reading Decayer Input
         SapphireInput::Suffix(pt.get<int>("Decayer.Suffix", SapphireInput::Suffix()));
