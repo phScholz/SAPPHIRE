@@ -1,5 +1,7 @@
-#ifndef CONSTANTS_H
-#define CONSTANTS_H
+/**
+ * @file Constants.h
+ * @brief Definition of some physical constants
+ */
 
 #pragma once
 #include <complex>
@@ -22,5 +24,3 @@ typedef std::vector<std::vector<double> > matrix_r;
 typedef std::vector<std::vector<std::complex<double> > > matrix_c;
 typedef std::vector<std::vector<std::vector<double> > > vector_matrix_r;
 typedef std::vector<std::vector<std::vector<std::complex<double> > > > vector_matrix_c;
-
-#endif

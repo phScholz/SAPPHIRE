@@ -1,6 +1,10 @@
-#ifndef COULFUNC_H
-#define COULFUNC_H
+/**
+ * @file CoulFunc.h
+ * @brief Declaration of CoulWaves and CoulFunc
+ */
+
 #pragma once
+
 struct CoulWaves {
   double F; 
   double dF;
@@ -41,5 +45,3 @@ class CoulFunc {
   double energyLast_;
   struct CoulWaves coulLast_;
 };
-
-#endif

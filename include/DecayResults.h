@@ -1,18 +1,20 @@
-#ifndef DECAYRESULTS_H
-#define DECAYRESULTS_H
+/**
+ * @file DecayResults.h
+ * @brief Declaration of DecayResults and DecayEvent
+ */
 #pragma once
 #include <TTree.h>
 #include <TFile.h>
+#include <TObject.h>
 #include <vector>
-
-class DecayProduct;
-class DecayData;
+#include "DecayProduct.h"
 
 class DecayResults {
  public:
   DecayResults(int, int, double, int, double, double, int);
   ~DecayResults();
   void AddResults(std::vector<std::pair<DecayData, std::vector<DecayProduct> > >&);
+
  private:
   int initialZ_;
   int initialA_;
@@ -51,7 +53,7 @@ class DecayResults {
   Double_t protonMomentumX_[100];
   Double_t protonMomentumY_[100];
   Double_t protonMomentumZ_[100];
-  Double_t gammaEnergy_[16000];
+  Double_t gammaEnergy_[100];
   Double_t gammaMomentumX_[100];
   Double_t gammaMomentumY_[100];
   Double_t gammaMomentumZ_[100];
@@ -65,4 +67,7 @@ class DecayResults {
   Double_t alphaMomentumZ_[100];
 };
 
-#endif
+
+class DecayEvent : public TObject{
+
+};

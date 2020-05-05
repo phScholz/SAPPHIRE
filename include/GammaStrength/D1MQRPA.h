@@ -12,13 +12,18 @@
 #include "NuclearMass.h"
 #include <vector>
 
-
+/**
+ * @brief Class for one row in the QRPA E1 data files
+ */
 class QRPAE1row{
     public:
         double energy;
         std::vector<double> strength;
 };
 
+/**
+ * @brief Class for one row in the QRPA M1 data files
+ */
 class QRPAM1row{
     public:
         double energy;

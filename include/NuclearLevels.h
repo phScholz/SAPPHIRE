@@ -1,7 +1,7 @@
 /**
  * @file NuclearLevels.h
  * @date 2020-04-21
- * @brief It contains classes and methods, handling the nuclear level scheme
+ * @brief It contains classes and methods, handling the nuclear level scheme: GammaTransition, Level, LevelsContainer and NuclearLevels
  */
 
 #pragma once

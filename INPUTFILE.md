@@ -1,4 +1,4 @@
-# Inputfile description and keywords - contents
+# Inputfile description and keywords
 
 1. [Keywords Table](#keywords-table)
 2. [Keywords](#keywords)

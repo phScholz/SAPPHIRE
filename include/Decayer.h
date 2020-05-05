@@ -1,3 +1,7 @@
+/**
+ * @file Decayer.h
+ * @brief Declaration of the Decayer class.
+ */
 #pragma once
 #include <vector>
 #include <cstdlib>
@@ -38,11 +42,7 @@ class Decayer{
      * 4. If the state is not bound or no gamma-ray transitions are known from this state, proceed to use transitions from the continuum.
      * 5. The vec 
      */
-    Decayer(int Z, int A, double jInitial, 
-  	  int piInitial, double energy, double totalWidthForCorrection = 0.,
-  	  double uncorrTotalWidthForCorrection = 0.,
-  	  double uncorrTotalWidthSqrdForCorrection = 0.,
-  	  Decayer* widthCorrectedDecayer=NULL);
+    Decayer(int Z, int A, double jInitial, int piInitial, double energy, double totalWidthForCorrection = 0., double uncorrTotalWidthForCorrection = 0., double uncorrTotalWidthSqrdForCorrection = 0., Decayer* widthCorrectedDecayer=NULL);
     
     /**
      * @brief Constructor of Decayer on the basis of a SapphireInput onject
@@ -83,38 +83,30 @@ class Decayer{
     void PrintCDF();
 
     void CorrectWidthFluctuations();
+
+    /**
+     * @brief Setter for the isCorssSection boolean
+     */
     static void SetCrossSection(bool isCrossSection) {isCrossSection_=isCrossSection;};
-    static void SetMaxL(double maxL) {maxL_=maxL;};
+    
+    static void SetMaxL(double maxL) {maxL_=maxL;};       /**< Setter for maxL_*/
     static void SetAlphaDecay(bool x){alphaDecay_=x;}     /**<Setter for alphaDecay_*/
     static void SetProtonDecay(bool x){protonDecay_=x;}   /**<Setter for protonDecay_*/
     static void SetNeutronDecay(bool x){neutronDecay_=x;} /**<Setter for neutronDecay_*/
     static void SetGammaDecay(bool x){gammaDecay_=x;}     /**<Setter for gammaDecay_*/
-    static double GetMaxL() {return maxL_;};
+    
+    static double GetMaxL() {return maxL_;};            /**< Getter for maxL_*/
+    
     friend class CrossSection;
-    double NeutronEntranceWidth() const {
-      return neutronEntrance_;
-    }
-    double ProtonEntranceWidth() const {
-      return protonEntrance_;
-    }
-    double AlphaEntranceWidth() const {
-      return alphaEntrance_;
-    }
-    double GammaEntranceWidth() const {
-      return gammaEntrance_;
-    }
-    double GammaTotalWidth() const {
-      return gammaTotalWidth_;
-    }
-    double NeutronTotalWidth() const {
-      return neutronTotalWidth_;
-    }
-    double AlphaTotalWidth() const {
-      return alphaTotalWidth_;
-    }
-    double ProtonTotalWidth() const {
-      return protonTotalWidth_;
-    }
+    
+    double NeutronEntranceWidth() const { return neutronEntrance_; } /**< Getter for neutronEntrance_*/
+    double ProtonEntranceWidth() const { return protonEntrance_; }  /**< Getter for protonEntrance_*/
+    double AlphaEntranceWidth() const { return alphaEntrance_; }    /**< Getter for alphaEntrance_*/
+    double GammaEntranceWidth() const { return gammaEntrance_; }    /**< Getter for gammaEntrance_*/
+    double GammaTotalWidth() const { return gammaTotalWidth_; }     /**< Getter for gammaTotalWidth_*/
+    double NeutronTotalWidth() const { return neutronTotalWidth_; } /**< Getter for neutronTotalWidth_*/
+    double AlphaTotalWidth() const { return alphaTotalWidth_; }     /**< Getter for alphaTotalWidth_*/
+    double ProtonTotalWidth() const { return protonTotalWidth_; }   /**< Getter for protonTotalWidth_*/
 
   private:
     /**
@@ -188,19 +180,19 @@ class Decayer{
     double totalWidthForCorrection_;
     double uncorrTotalWidthForCorrection_;
     double uncorrTotalWidthSqrdForCorrection_;
-    double neutronEntrance_;
-    double protonEntrance_;
-    double gammaEntrance_;
-    double alphaEntrance_;
-    double neutronTotalWidth_;
-    double alphaTotalWidth_;
-    double protonTotalWidth_;
-    double gammaTotalWidth_;
-    double qValueProton_;
-    double qValueNeutron_;
-    double qValueAlpha_;
+    double neutronEntrance_; /**< neutron entrance width*/
+    double protonEntrance_; /**< proton entrance width*/
+    double gammaEntrance_;  /**< gamma entrance width*/
+    double alphaEntrance_;  /**< alpha entrance width*/
+    double neutronTotalWidth_;  /**< neutron total width*/
+    double alphaTotalWidth_;  /**< alpha total width*/
+    double protonTotalWidth_; /**< proton total width*/
+    double gammaTotalWidth_;  /**< gamma total width*/
+    double qValueProton_; /**< Qvalue for proton*/
+    double qValueNeutron_;  /**< Qvalue for neutron*/
+    double qValueAlpha_;  /**< Qvalue for alpha*/
 
-    std::vector<SpinRatePair> spinRatePairs_; 
+    std::vector<SpinRatePair> spinRatePairs_; /**< Vector of Spin-Rate pairs*/
     std::vector<CDFEntry> cdf_; /**< Vector of CDFEntries from CDFEntry.h*/
-    Decayer* widthCorrectedDecayer_;
+    Decayer* widthCorrectedDecayer_; /**< Pointer to another Decayer for WFC*/
 };
