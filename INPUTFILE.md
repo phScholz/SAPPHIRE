@@ -16,8 +16,11 @@
 | [LevelDir](#leveldir)                  | Path to the directory which contains the level files                   |
 | [SpinFile](#spinfile)                  | Path to the file which contains the spin information                   |
 | [ProtonModel](#protonmodel)            | Sets the model for proton transmission function.                       |
+| [pNorm](#gNorm)                        | Multiplication factor for the proton transmission coefficient          |
 | [NeutronModel](#neutronmodel)          | Sets the model for neutron transmission function.                      |
+| [nNorm](#gNorm)                        | Multiplication factor for the neutron transmission coefficient         |
 | [AlphaModel](#alphamodel)              | Sets the model for neutron transmission function.                      |
+| [aNorm](#gNorm)                        | Multiplication factor for the alpha transmission coefficient           |
 | [E1Model](#E1Model)                    | Sets the model for E1 gamma transmission function.                     |
 | [M1Model](#M1Model)                    | Sets the model for M1 gamma transmission function.                     |
 | [E2Model](#E2Model)                    | Sets the model for E2 gamma transmission function.                     |

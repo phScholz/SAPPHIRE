@@ -101,6 +101,9 @@
         SapphireInput::RdOutputFile("levelScheme.dat");
         SapphireInput::RdMode("create");
         SapphireInput::Gnorm(1.0);
+        SapphireInput::Pnorm(1.0);
+        SapphireInput::Nnorm(1.0);
+        SapphireInput::Anorm(1.0);
     }
 
     void SapphireInput::PrintIntputFile(std::string InputFile){
@@ -143,8 +146,11 @@
         std::cout << "\tLeveldir             = "             << SapphireInput::LevelDir() << std::endl;
         std::cout << "\tSpinFile             = "             << SapphireInput::SpinFile() << std::endl;
         std::cout << "\tProtonModel          = "             << SapphireInput::p_Formalism() << std::endl;
+        std::cout << "\tpNorm                = "             << SapphireInput::Pnorm() << std::endl;
         std::cout << "\tNeutronModel         = "             << SapphireInput::n_Formalism() << std::endl;
+        std::cout << "\tnNorm                = "             << SapphireInput::Nnorm() << std::endl;
         std::cout << "\tAlphaModel           = "             << SapphireInput::a_Formalism() << std::endl;
+        std::cout << "\taNorm                = "             << SapphireInput::Anorm() << std::endl;
         std::cout << "\tE1Model              = "             << SapphireInput::E1_Formalism() << std::endl;
         std::cout << "\tM1Model              = "             << SapphireInput::M1_Formalism() << std::endl;
         std::cout << "\tE2Model              = "             << SapphireInput::E2_Formalism() << std::endl;
@@ -230,8 +236,11 @@
         SapphireInput::LevelDir(pt.get<std::string>("General.LevelDir", SapphireInput::LevelDir()));
         SapphireInput::SpinFile(pt.get<std::string>("General.SpinFile", SapphireInput::SpinFile()));
         SapphireInput::p_Formalism(pt.get<int>("General.ProtonModel", SapphireInput::p_Formalism()));
+        SapphireInput::Pnorm(pt.get<double>("General.pNorm", SapphireInput::Pnorm()));
         SapphireInput::n_Formalism(pt.get<int>("General.NeutronModel", SapphireInput::n_Formalism()));
+        SapphireInput::Nnorm(pt.get<double>("General.nNorm", SapphireInput::Nnorm()));
         SapphireInput::a_Formalism(pt.get<int>("General.AlphaModel", SapphireInput::a_Formalism()));
+        SapphireInput::Anorm(pt.get<double>("General.aNorm", SapphireInput::Anorm()));
         SapphireInput::E1_Formalism(pt.get<int>("General.E1Model", SapphireInput::E1_Formalism()));
         SapphireInput::M1_Formalism(pt.get<int>("General.M1Model", SapphireInput::M1_Formalism()));
         SapphireInput::E2_Formalism(pt.get<int>("General.E2Model", SapphireInput::E2_Formalism()));
@@ -427,6 +436,9 @@
         ParticleTransmissionFunc::SetNeutronFormalism(n_Formalism());
         ParticleTransmissionFunc::SetProtonFormalism(p_Formalism());  
         ParticleTransmissionFunc::SetPorterThomas(PorterThomas_p());
+        ParticleTransmissionFunc::SetPnorm(Pnorm());
+        ParticleTransmissionFunc::SetNnorm(Nnorm());
+        ParticleTransmissionFunc::SetAnorm(Anorm());
     }
 
     void SapphireInput::SetInputTransitionRate() const {

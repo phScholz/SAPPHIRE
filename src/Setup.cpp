@@ -68,6 +68,9 @@ int ParticleTransmissionFunc::alphaFormalism_;
 int ParticleTransmissionFunc::neutronFormalism_;
 int ParticleTransmissionFunc::protonFormalism_;
 bool ParticleTransmissionFunc::porterThomas_;
+double ParticleTransmissionFunc::aNorm_;
+double ParticleTransmissionFunc::pNorm_;
+double ParticleTransmissionFunc::nNorm_;
 
 int GammaTransmissionFunc::egdrType_;
 int GammaTransmissionFunc::mgdrType_;
@@ -121,6 +124,9 @@ void Initialize() {
   ParticleTransmissionFunc::SetNeutronFormalism(0);
   ParticleTransmissionFunc::SetProtonFormalism(0);  
   ParticleTransmissionFunc::SetPorterThomas(true);
+  ParticleTransmissionFunc::SetAnorm(1.0);
+  ParticleTransmissionFunc::SetPnorm(1.0);
+  ParticleTransmissionFunc::SetNnorm(1.0);
 
   gsl_set_error_handler (&CoulFunc::GSLErrorHandler);
 }

@@ -3,7 +3,10 @@
 double EquivSquareWell::CalcTransmission(double s, int l, double energy) {
   double rho = sqrt(2.*uconv)/hbarc*GetR1()*sqrt(redmass_*energy);
   double pene = coulFunc_->Penetrability(l,GetR1(),energy);
-  return 1-exp(-4.*pi*pene*GetF()/pi/rho/sqrt(1+GetV1()/energy));
+  double transmission = 1-exp(-4.*pi*pene*GetF()/pi/rho/sqrt(1+GetV1()/energy));
+  if(m1_==1 && z1_==1) return pNorm_*transmission;
+  if(m1_==1 && z1_==0) return nNorm_*transmission;
+  if(m1_==4 && z1_==2) return aNorm_*transmission;
 }
 
 double EquivSquareWell::GetF() {

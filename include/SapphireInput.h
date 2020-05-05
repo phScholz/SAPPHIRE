@@ -233,6 +233,9 @@ class SapphireInput{
         void RdEmin(double x){rdEmin=x;}                        /**<Setter for rdEmin*/  
         void CTable(double x){cTable=x;}                        /**<Setter for cTable*/  
         void Gnorm(double x){gNorm=x;}                        /**<Setter for gNorm*/  
+        void Pnorm(double x){pNorm=x;}                        /**<Setter for pNorm*/  
+        void Nnorm(double x){nNorm=x;}                        /**<Setter for nNorm*/  
+        void Anorm(double x){aNorm=x;}                        /**<Setter for aNorm*/  
 
 
         void EnergyFile(std::string x){energyFile=x;}                       /**< Setter for string energyFile*/
@@ -316,6 +319,9 @@ class SapphireInput{
         double RdEmin() const {return rdEmin;}                         /**<Getter for RdEmin*/
         double CTable() const {return cTable;}                         /**<Getter for cTable*/
         double Gnorm() const {return gNorm;}                         /**<Getter for gNorm*/
+        double Pnorm() const {return pNorm;}                         /**<Getter for pNorm*/
+        double Nnorm() const {return nNorm;}                         /**<Getter for nNorm*/
+        double Anorm() const {return aNorm;}                         /**<Getter for aNorm*/
 
         std::string EnergyFile() const {return energyFile;}            /**<Getter for energyFile*/ 
         std::string Energies() const {return energies;}            /**<Getter for energies*/ 
@@ -392,6 +398,9 @@ class SapphireInput{
         double rdEmin;              /**< double for the minimum energy of the randomly created levelscheme*/
         double cTable;              /**< double for the normalization of the ctable parameter.*/
         double gNorm;              /**< double for the normalization of the gamma transmission coefficent.*/
+        double pNorm;              /**< double for the normalization of the proton transmission coefficent.*/
+        double nNorm;              /**< double for the normalization of the neutron transmission coefficent.*/
+        double aNorm;              /**< double for the normalization of the alpha transmission coefficent.*/
                 
         std::string energyFile;     /**< String with the path to the energyFile*/
         std::string reactionFile;   /**< String with the path to the reactionFile*/

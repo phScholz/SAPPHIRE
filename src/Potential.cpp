@@ -105,5 +105,7 @@ double Potential::CalcTransmission(double s, int l, double energy)  {
 
   double pene = rho/(coulWaves.F*coulWaves.F+coulWaves.G*coulWaves.G);
   double transmission = (pene>0.) ? -1.*real(4.*pene*imag(beta)/(lFunction-beta)/conj(lFunction-beta)) : 0.;
-  return transmission;
+  if(m1_==1 && z1_==1) return pNorm_*transmission;
+  if(m1_==1 && z1_==0) return nNorm_*transmission;
+  if(m1_==4 && z1_==2) return aNorm_*transmission;
 }

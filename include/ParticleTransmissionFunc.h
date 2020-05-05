@@ -127,6 +127,9 @@ class ParticleTransmissionFunc : public TransmissionFunc {
   static void SetNeutronFormalism(int formalism) {neutronFormalism_ = formalism;};  /**< Setter for NeutronFormalism*/
   static void SetProtonFormalism(int formalism) {protonFormalism_ = formalism;};    /**< Setter for ProtonFormalism*/
   static void SetPorterThomas(bool yn){ porterThomas_=yn;} /**< Setter for porterThomas_*/
+  static void SetAnorm(double x){aNorm_=x;} /**< Setter aNorm_*/
+  static void SetPnorm(double x){pNorm_=x;} /**< Setter pNorm_*/
+  static void SetNnorm(double x){nNorm_=x;} /**< Setter nNorm_*/
  
  protected:
   virtual double CalcTransmission(double,int,double) = 0;
@@ -138,11 +141,16 @@ class ParticleTransmissionFunc : public TransmissionFunc {
   int parity_;
   double redmass_;
   double spin_;
+  static double pNorm_;
+  static double nNorm_;
+  static double aNorm_;
+ 
  private:
   static bool porterThomas_;
   static int alphaFormalism_;
   static int protonFormalism_;
   static int neutronFormalism_;
+
 };
 
 
