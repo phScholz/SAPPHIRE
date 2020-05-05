@@ -7,57 +7,74 @@
 #include <thread>
 #include "omp.h"
 
-DecayResults::DecayResults(int Z, int A, double J, int Pi,
-                           double initialEnergyLow, double initialEnergyHigh,
-			   int suffixNo) :
- initialZ_(Z),initialA_(A),initialPi_(Pi),initialJ_(J),
- initialEnergyLow_(initialEnergyLow), initialEnergyHigh_(initialEnergyHigh) {
+DecayResults::DecayResults(int Z, int A, double J, int Pi, double initialEnergyLow, double initialEnergyHigh, int suffixNo) :
+                          initialZ_(Z),initialA_(A),initialPi_(Pi),initialJ_(J), initialEnergyLow_(initialEnergyLow), initialEnergyHigh_(initialEnergyHigh) {
+  
+  /** 1. Construct file name either with SuffixNumber or not*/
   char spin[10];
   if(initialPi_==1) sprintf(spin,"%.1f+",initialJ_);
   else sprintf(spin,"%.1f-",initialJ_);
 
   char filename[256];
   if(suffixNo!=0) {
-    if(initialEnergyLow_==initialEnergyHigh_) 
-      sprintf(filename,"Sapphire_%d%s_J=%s_E=%.3f_%d.root",
-	      initialA_,NuclearMass::FindElement(initialZ_).c_str(),
-	      spin,initialEnergyLow_,suffixNo);
-    else sprintf(filename,"Sapphire_%d%s_J=%s_E=%.3f-%.3f_%d.root",
-		 initialA_,NuclearMass::FindElement(initialZ_).c_str(),
-		 spin,initialEnergyLow_,initialEnergyHigh_,suffixNo);
-  } else {
+    if(initialEnergyLow_==initialEnergyHigh_){
+      sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,suffixNo);
+    }
+    else{
+      sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f-%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,initialEnergyHigh_,suffixNo);
+    }
+  } 
+  else
+  {
     bool validFileName=false;
     int i  = 0;
+    
     while(!validFileName) {
-      if(i==0) {
-	if(initialEnergyLow_==initialEnergyHigh_) 
-	  sprintf(filename,"Sapphire_%d%s_J=%s_E=%.3f.root",
-		  initialA_,NuclearMass::FindElement(initialZ_).c_str(),
-		  spin,initialEnergyLow_);
-	else sprintf(filename,"Sapphire_%d%s_J=%s_E=%.3f-%.3f.root",
-		     initialA_,NuclearMass::FindElement(initialZ_).c_str(),
-		     spin,initialEnergyLow_,initialEnergyHigh_);
-      } else {
-	if(initialEnergyLow_==initialEnergyHigh_) 
-	  sprintf(filename,"Sapphire_%d%s_J=%s_E=%.3f_%d.root",
-		  initialA_,NuclearMass::FindElement(initialZ_).c_str(),
-		  spin,initialEnergyLow_,i+1);
-	else sprintf(filename,"Sapphire_%d%s_J=%s_E=%.3f-%.3f_%d.root",
-		     initialA_,NuclearMass::FindElement(initialZ_).c_str(),
-		     spin,initialEnergyLow_,initialEnergyHigh_,i+1);
+      if(i==0) 
+      {
+	      if(initialEnergyLow_==initialEnergyHigh_)
+        {
+	        sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_);
+        }
+	      else
+        {
+          sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f-%.3f.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,initialEnergyHigh_);
+        }
+      } 
+      else
+      {
+	      if(initialEnergyLow_==initialEnergyHigh_)
+        {
+          sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,i+1);
+        }	
+        else
+        {
+          sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f-%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(),spin,initialEnergyLow_,initialEnergyHigh_,i+1);
+        }
       }
+
       std::ifstream inTest(filename);
-      if(!inTest) {
-	validFileName=true;
-      } else inTest.close();
+      if(!inTest)
+      {
+	        validFileName=true;
+      } 
+      else
+      {
+        inTest.close();
+      }
       i++;
     }
   }
+
   std::cout << "Output filename is " << filename << std::endl;
 
+  /** 2. Open outFile as TFILE*/
   outputFile_ = new TFile(filename,"recreate");
+
+  /** 3. Create a new TTree "statDecay"*/
   outputTree_ = new TTree("statDecay","Sapphire Results");
-    
+
+  /** 4. Creating branches for all decay results*/    
   outputTree_->Branch("initialEnergy",&initialEnergy_,"initialEnergy/D");
   outputTree_->Branch("neutronTotalWidth",&neutronTotalWidth_,"neutronTotalWidth/D");
   outputTree_->Branch("protonTotalWidth",&protonTotalWidth_,"protonTotalWidth/D");
@@ -102,19 +119,28 @@ DecayResults::DecayResults(int Z, int A, double J, int Pi,
 }
 
 DecayResults::~DecayResults() {
+  /** 1. Wait until the number of OpenMP threads is equal to 1. */
   std::cout << "Waiting on threads to be finished..." << std::endl;
   while(omp_get_num_threads()!=1){
     std::this_thread::sleep_for(std::chrono::seconds(1));
     std::cout << "Waiting ..." << std::endl;
   }  
+
+  /** 2. Write the output file*/
   outputFile_->Write();
+
+  /** 3. Close the output file*/
   outputFile_->Close();
+
+  /** 4. Delete the outputFile_ object*/
   delete outputFile_;
 }
 
 void DecayResults::AddResults(std::vector<std::pair<DecayData, std::vector<DecayProduct> > >& results) {
+
   for(int i = 0;i<results.size();i++) {
     if(results[i].second.size()==0) continue;
+
     initialEnergy_ = results[i].first.energy();
     neutronTotalWidth_ = results[i].first.neutronTotalWidth();
     gammaTotalWidth_ = results[i].first.gammaTotalWidth();
@@ -126,6 +152,7 @@ void DecayResults::AddResults(std::vector<std::pair<DecayData, std::vector<Decay
     alphaEntranceWidth_ = results[i].first.alphaEntranceWidth();
 
     numSteps_=numNeutrons_=numGammas_=numProtons_=numAlphas_=0;
+    
     for(std::vector<DecayProduct>::const_iterator it = results[i].second.begin();
 	    it<results[i].second.end();++it) {
       Z_[numSteps_] = it->Z_;

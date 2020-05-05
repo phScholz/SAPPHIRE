@@ -1,11 +1,14 @@
 /**
  * @file DecayProduct.h
+ * @brief Declaration of DecayData and DecayProduct
  */
 #pragma once
 
-
+/**
+ * @brief Class for the decay data
+ */
 class DecayData {
-  double energy_;
+  double energy_;  
   double neutronEntranceWidth_;
   double protonEntranceWidth_;
   double alphaEntranceWidth_;
@@ -96,6 +99,7 @@ class DecayProduct {
     particleEnergyCM_(particleEnergyCM), particleEnergy_(particleEnergy),
     particleMomentumX_(particleMomentumX),particleMomentumY_(particleMomentumY),
     particleMomentumZ_(particleMomentumZ) {};
+    
   int Z_;
   int A_;
   int Pi_;
