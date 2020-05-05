@@ -9,47 +9,73 @@
 # Keywords Table
 ## General
 
-| Keyword                       | Short explanation                                                      |
-| :---------------------------- | :--------------------------------------------------------------------- |
-| [MassTable](#masstable)       | Path to the mass tables                                                |
-| [GDRParams](#gdrparams)       | Path to the file with gdr parameters                                   |
-| [LevelDir](#leveldir)         | Path to the directory which contains the level files                   |
-| [SpinFile](#spinfile)         | Path to the file which contains the spin information                   |
-| [ProtonModel](#threads)       | Sets the model for proton transmission function.                       |
-| [NeutronModel](#threads)      | Sets the model for neutron transmission function.                      |
-| [E1Model](#E1Model)           | Sets the model for E1 gamma transmission function.                     |
-| [M1Model](#M1Model)           | Sets the model for M1 gamma transmission function.                     |
-| [E2Model](#E2Model)           | Sets the model for E2 gamma transmission function.                     |
-| [AlphaModel](#threads)        | Sets the model for alpha transmission function.                        |
-| [LevelDensity](#LevelDensity) | Sets the model for the Nuclear Level Density.                          |
-| [cTable](#cTable)             | Value to normalize the level spacing at the neutron separation energy. |
+| Keyword                                | Short explanation                                                      |
+| :------------------------------------- | :--------------------------------------------------------------------- |
+| [MassTable](#masstable)                | Path to the mass tables                                                |
+| [GDRParams](#gdrparams)                | Path to the file with gdr parameters                                   |
+| [LevelDir](#leveldir)                  | Path to the directory which contains the level files                   |
+| [SpinFile](#spinfile)                  | Path to the file which contains the spin information                   |
+| [ProtonModel](#protonmodel)            | Sets the model for proton transmission function.                       |
+| [NeutronModel](#neutronmodel)          | Sets the model for neutron transmission function.                      |
+| [AlphaModel](#alphamodel)              | Sets the model for neutron transmission function.                      |
+| [E1Model](#E1Model)                    | Sets the model for E1 gamma transmission function.                     |
+| [M1Model](#M1Model)                    | Sets the model for M1 gamma transmission function.                     |
+| [E2Model](#E2Model)                    | Sets the model for E2 gamma transmission function.                     |
+| [gNorm](#gNorm)                        | Multiplication factor for the gamma transmission coefficient           |
+| [PorterThomasParticle](#porter-thomas) | Toggle the Porter-Thomas Fluctuations for particle transmission        |
+| [PorterThomasGamma](#porter-thomas)    | Toggle the Porter-Thomas Fluctuations for gamma transmission           |
+| [GammaChannel](#channels)              | Toggle the gamma channel                                               |
+| [NeutronChannel](#channels)            | Toggle the neutron channel                                             |
+| [ProtonChannel](#channels)             | Toggle the proton channel                                              |
+| [AlphaChannel](#channels)              | Toggle the alpha channel                                               |
+| [LevelDensity](#LevelDensity)          | Sets the model for the Nuclear Level Density.                          |
+| [cTable](#cTable)                      | Value to normalize the level spacing at the neutron separation energy. |
 
 ## CrossSection
-| Keyword              | Short explanation                                                         |
-| :------------------- | :------------------------------------------------------------------------ |
-| Reaction             | Reaction string,e.g., 25Mg+a                                              |
-| EnergyFile           | Path to the file containing a list of energies                            |
-| ReactionFile         | Path to the file containing a list of reactions                           |
-| CalcRates            | Turn calculation of rates on or off (if neutron)                          |
-| CalcAverageWidth     | Calculates the average s-wave radiative width at threshold and exits.     |
-| ResidualGamma        | Toggles if residual or total capture cross section is calculated.         |
-| ResidualNeutron      | Toggles if neutron residual or total capture cross section is calculated. |
-| ResidualProton       | Toggles if proton residual or total capture cross section is calculated.  |
-| ResidualAlpha        | Toggles if alpha residual or total capture cross section is calculated.   |
-| CalculateGammaCutoff | Toggles if Gamma-Cutoff energy should be calculated or not.               |
-| EntranceState        | Give the number of the initial state, e.g. 0 for groundstate              |
-| g_ExitStates         | Define how many partial cross section should be calculated.               |
-| n_ExitStates         | Define how many partial cross section should be calculated.               |
-| p_ExitStates         | Define how many partial cross section should be calculated.               |
-| a_ExitStates         | Define how many partial cross section should be calculated.               |
+| Keyword              | Short explanation                                                          |
+| :------------------- | :------------------------------------------------------------------------- |
+| Reaction             | Reaction string,e.g., 25Mg+a                                               |
+| EnergyFile           | Path to the file containing a list of energies                             |
+| ReactionFile         | Path to the file containing a list of reactions                            |
+| CalcRates            | Turn calculation of rates on or off (if neutron)                           |
+| CalcAverageWidth     | Calculates the average s-wave radiative width at threshold and exits.      |
+| ResidualGamma        | Toggles if residual or total capture cross section is calculated.          |
+| ResidualNeutron      | Toggles if neutron residual or total capture cross section is calculated.  |
+| ResidualProton       | Toggles if proton residual or total capture cross section is calculated.   |
+| ResidualAlpha        | Toggles if alpha residual or total capture cross section is calculated.    |
+| CalculateGammaCutoff | Toggles if Gamma-Cutoff energy should be calculated or not.                |
+| EntranceState        | Give the number of the initial state, e.g. 0 for groundstate               |
+| g_ExitStates         | Define how many partial cross section should be calculated.                |
+| n_ExitStates         | Define how many partial cross section should be calculated.                |
+| p_ExitStates         | Define how many partial cross section should be calculated.                |
+| a_ExitStates         | Define how many partial cross section should be calculated.                |
+| PrintXS              | Toggle if calculated cross sections should be written to a file            |
+| PrintTRANS           | Toggle if calculated transmission coefficients should be written to a file |
+| PrintRATE            | Toggle if calculated reaction rates should be written to a file            |
 
 ## Decay
-| Keyword           | Short explanation                              |
-| :---------------- | :--------------------------------------------- |
-| [Suffix](#suffix) | Suffix which can be given to the output files. |
-| PreEqConf         | Sets the initial exciton configuration.        |
+| Keyword           | Short explanation                                        |
+| :---------------- | :------------------------------------------------------- |
+| [Suffix](#suffix) | Suffix which can be given to the output files.           |
+| Isotope           | Isotope of interest. Format example: 94Mo                |
+| Spin              | Spin of the initial state as a double.                   |
+| Parity            | Parity of the initial state: 1 = + , -1 = -              |
+| EnergyLow         | Lower limit of the excitation energy window  in MeV      |
+| EnergyHigh        | Upper limit of the excitation energy window in MeV       |
+| Events            | Number of simulated decays                               |
+| ChunkSize         | Size of the chunks which are calculated at the same time |
+| Preequillibrium   | Toggle if the prequillibrium decayer should be used      |
+| PreEqConf         | Sets the initial exciton configuration.                  |
 
 ## Random
+| Keyword    | Short explanation                                    |
+| :--------- | :--------------------------------------------------- |
+| Z          | Charge of the isotope                                |
+| A          | Mass of the isotope                                  |
+| Mode       | create or extend                                     |
+| OutputFile | OutputFile of the level scheme                       |
+| Emin       | Starting energy for the creation of the level scheme |
+| Emax       | Energy limit for the creation of the level scheme    |
 
 
 # Keywords
@@ -101,6 +127,11 @@ Simple Standard Lorentzian (SLO) with GDR parameters from [RIPL-3]. See [GDRPara
 
 [2] **McCullaghGSF**
 
+### gNorm
+For a simple normalization of the gamma-decay width, the parameter `gNorm` can be used. All gamma-ray transmission coefficients are multiplied with this factor. It's default value is `1.0`.
+
+### Porter-Thomas
+
 
 ### LevelDensity
 Currently available models:
@@ -128,6 +159,9 @@ With this parameter the level density can be fitted to level spacing at the neut
 The known levels are also derived from RIPL-3 and can be found in `/tables/levels/`. 
 
 ### SpinFile
+
+### Channels
+In some situations the user might want to exclude specific channels in the calculations, for instance, if the user is only interested in the gamma-ray decay behaviour while neutron decay is also open but much more likely. In these cases the keywords `AlphaChannel`, `ProtonChannel`, `NeutronChannel`, or `GammaChannel` can be set to `0`.
 
 ## CrossSection
 

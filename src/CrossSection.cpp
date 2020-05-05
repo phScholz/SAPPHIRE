@@ -690,6 +690,7 @@ std::pair<double,double> CrossSection::CalcAverageSWaveResWidth() {
     delete decayerVector[j].first;
   }
 
+  
   LevelDensity* levelDensityUp = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_+0.5);
   LevelDensity* levelDensityDown = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_-0.5);
   
