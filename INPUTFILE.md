@@ -178,16 +178,33 @@ The paths to the input files for masses, levels, etc. are created automatically 
 
 ```
 [General]
-MassTable            = ./SAPPHIRE/tables/masses.dat
-GDRParams            = ./SAPPHIRE/tables/ripl3_gdr_parameters.dat
-Leveldir             = ./SAPPHIRE/levels/
-SpinFile             = ./SAPPHIRE/tables/spinod.dat
-Suffix               = 
+MassTable            = /SAPPHIRE/tables/masses/masses.dat
+GDRParams            = /SAPPHIRE/tables/gamma/ripl3_gdr_parameters.dat
+Leveldir             = /SAPPHIRE/tables/levels/
+SpinFile             = /SAPPHIRE/tables/spinod.dat
+ProtonModel          = 0
+pNorm                = 1
+NeutronModel         = 0
+nNorm                = 1
+AlphaModel           = 0
+aNorm                = 1
+E1Model              = 3
+M1Model              = 3
+E2Model              = 0
+gNorm                = 1
+PorterThomasParticle = 0
+PorterThomasGamma    = 0
+GammaChannel         = 1
+NeutronChannel       = 1
+ProtonChannel        = 1
+AlphaChannel         = 1
+LevelDensity         = 1
+cTable               = 0
 
 [CrossSection]
 Reaction             = 25Mg+a
-EnergyFile           = 
-ReactionFile         = ./SAPPHIRE/examples/reactionFile
+EnergyFile           = /examples/energyFile
+ReactionFile         = /examples/reactionFile
 CalcRates            = 0
 CalcAverageWidth     = 0
 ResidualGamma        = 1
@@ -200,4 +217,27 @@ g_ExitStates         = -1
 n_ExitStates         = -1
 p_ExitStates         = -1
 a_ExitStates         = -1
+PrintXS              = 1
+PrintTRANS           = 0
+PrintRATE            = 0
+
+[Decayer]
+Suffix               = 0
+Isotope              = 60Ni
+Spin                 = 1
+Parity               = -1
+EnergyLow            = 6
+EnergyHigh           = 6
+Events               = 100000
+ChunkSize            = 10000
+Preequillibrium      = 0
+PreEqConfiguration   =
+
+[Random]
+Z                    = 50
+A                    = 120
+Mode                 = create
+OutputFile           = levelScheme.dat
+Emin                 = 0
+Emax                 = 0
 ```

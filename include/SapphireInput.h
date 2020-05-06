@@ -174,8 +174,8 @@ class SapphireInput{
         void PorterThomas_g(bool x){porterThomas_g=x;}                  /**<Setter for bool porterThomas_g*/
         void PorterThomas_p(bool x){porterThomas_p=x;}                  /**<Setter for bool porterThomas_p*/
         void PrintTrans(bool x){printTrans=x;}                      /**<Setter for bool printTrans*/
-        void PrintXs(bool x){printTrans=x;}                      /**<Setter for bool printXs*/
-        void PrintRate(bool x){printTrans=x;}                      /**<Setter for bool printRate*/
+        void PrintXs(bool x){printXs=x;}                      /**<Setter for bool printXs*/
+        void PrintRate(bool x){printRate=x;}                      /**<Setter for bool printRate*/
         void PreEq(bool x){preEq=x;}                                    /**<Setter for bool preEq*/
         void AlphaChannel(bool x){alphaChannel=x;}                /**<Setter for bool alphaChannel*/
         void ProtonChannel(bool x){protonChannel=x;}                /**<Setter for bool protonChannel*/

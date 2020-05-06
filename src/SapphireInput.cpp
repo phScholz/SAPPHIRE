@@ -48,9 +48,9 @@
         SapphireInput::p_ExitStates(-1);
         SapphireInput::a_ExitStates(-1);   
         SapphireInput::PrintTrans(false);
-        SapphireInput::PrintXs(true);
-        SapphireInput::PrintRate(false);
-        SapphireInput::CalcRates(false);           
+        SapphireInput::PrintXs(1);
+        SapphireInput::PrintRate(0);
+        SapphireInput::CalcRates(0);           
         SapphireInput::CalcAverageWidth(false);
         SapphireInput::ResidualGamma(true);               
         SapphireInput::ResidualNeutron(false);           
@@ -104,6 +104,7 @@
         SapphireInput::Pnorm(1.0);
         SapphireInput::Nnorm(1.0);
         SapphireInput::Anorm(1.0);
+        
     }
 
     void SapphireInput::PrintIntputFile(std::string InputFile){

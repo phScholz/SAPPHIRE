@@ -1,9 +1,6 @@
 /**
  * @file Sapphire.cpp
- * @brief Entry point for the decayer module.
- * 
- * 
- * 
+ * @brief Entry point for the decayer module. * 
  */
 
 
@@ -112,23 +109,15 @@ namespace Module_Decayer{
     
     void Run(const SapphireInput &input){
         /**
-        * At first the parameters needed to be initialized for the old Sapphire code
+        * 1. At first the parameters needed to be initialized for the old Sapphire code
         * are obtained from the SapphireInput object passed by reference to the Module_Decayer::Run()
         * method.
         */
         Decayer::SetCrossSection(false);
+        input.SetInputDecayer();
+        input.SetInputParticleTransmission();
+        input.SetInputGammaTransmission();
 
-        Decayer::SetAlphaDecay(input.AlphaChannel());
-        Decayer::SetProtonDecay(input.ProtonChannel());
-        Decayer::SetNeutronDecay(input.NeutronChannel());
-        Decayer::SetGammaDecay(input.GammaChannel());
-
-        ParticleTransmissionFunc::SetAlphaFormalism(input.a_Formalism());
-        ParticleTransmissionFunc::SetNeutronFormalism(input.n_Formalism());
-        ParticleTransmissionFunc::SetProtonFormalism(input.p_Formalism());
-        GammaTransmissionFunc::SetEGDRType(input.E1_Formalism());
-        GammaTransmissionFunc::SetMGDRType(input.M1_Formalism());
-        GammaTransmissionFunc::SetEGQRType(input.E2_Formalism());
         int chunkSize = input.ChunkSize();
         int A = massNumberIntFromString(input.Isotope());
         int Z = atomicNumberIntFromString(input.Isotope());
@@ -145,7 +134,7 @@ namespace Module_Decayer{
         int numNuParticles =0;
 
         /**
-        *   Because of the "segmentation fault on more than 10 threads" bug,
+        *   2. Because of the "segmentation fault on more than 10 threads" bug,
         *   the system is asked via omp_get_max_threads() what the maximum numbers of threads are.
         *   If this value is larger than 10, then the maximum number of threads used for the calculation
         *   is fixed at 10 to prevent the "segmentation fault" bug. 
@@ -154,7 +143,7 @@ namespace Module_Decayer{
         if(omp_get_max_threads() > 10) omp_set_num_threads(10);
 
         /**
-        *   In a next step, the input parameters for the Decayer are printed to std::ccout.
+        *   3. In a next step, the input parameters for the Decayer are printed to std::ccout.
         */
 
         std::cout << "Input Values For Parent Nucleus:" << std::endl
@@ -176,7 +165,7 @@ namespace Module_Decayer{
   	    << std::setw(0) << std::endl << std::endl;
 
         /**
-        * If the number of events is not a multiple of the chunkSize,
+        * 4. If the number of events is not a multiple of the chunkSize,
         * then the number of remainder is calculated from the modulo.
         * The number of maximum chunks is then derived from the ratio (events-remainder)/chunkSize.
         */
@@ -184,7 +173,7 @@ namespace Module_Decayer{
         int chunks = (events-remainder)/chunkSize;
 
         /**
-        * For the Monte-Carlo decay, a unsigned int randomSeed[12] array is initialized.
+        * 5. For the Monte-Carlo decay, an unsigned int randomSeed[12] array is initialized.
         */
         unsigned int randomSeed[12];
 
@@ -252,8 +241,7 @@ namespace Module_Decayer{
             
             omp_set_lock(&writelock);            
             if(events>1){
-                std::cout << std::endl << "Writing ROOT Tree..." << std::endl;
-                
+                std::cout << std::endl << "Writing ROOT Tree..." << std::endl;                
                 results->AddResults(chunkResults);
             }
             omp_unset_lock(&writelock);
@@ -262,11 +250,6 @@ namespace Module_Decayer{
         
 
         if(results) delete results;
-                
-        while(omp_get_num_threads()>1){
-          std::this_thread::sleep_for(std::chrono::seconds(1));
-          std::cout << "Waiting ..." << std::endl;
-        }
 
     }
 

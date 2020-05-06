@@ -74,7 +74,22 @@ DecayResults::DecayResults(int Z, int A, double J, int Pi, double initialEnergyL
   /** 3. Create a new TTree "statDecay"*/
   outputTree_ = new TTree("statDecay","Sapphire Results");
 
-  /** 4. Creating branches for all decay results*/    
+  /** 4. Creating histograms*/
+  ggMatrix_ = new TH2F("ggMatrix", "2D Histo; ggMatrix", 
+                        4000, 0, 16.0,
+                        4000, 0, 16.0);
+  
+  TSCMatrix_ = new TH2F("TSCMatrix", "2D Histo; TSCMatrix", 
+                        4000, 0, 16.0,
+                        4000, 0, 16.0);
+  
+  gammaEnergyHist_ = new TH1F("Gamma Energy Hist", "1D Gamma Energy Hist", 4000, 0, 16.0);
+  protonEnergyHist_ = new TH1F("Proton Energy Hist", "1D Proton Energy Hist", 4000, 0, 16.0);
+  neutronEnergyHist_ = new TH1F("Neutron Energy Hist", "1D Neutron Energy Hist", 4000, 0, 16.0);
+  alphaEnergyHist_ = new TH1F("Alpha Energy Hist", "1D Alpha Energy Hist", 4000, 0, 16.0);
+
+  /** 5. Creating branches for all decay results*/   
+  //outputTree_->Branch("ggMatrix","TH2F", &ggMatrix_, 32000,0);
   outputTree_->Branch("initialEnergy",&initialEnergy_,"initialEnergy/D");
   outputTree_->Branch("neutronTotalWidth",&neutronTotalWidth_,"neutronTotalWidth/D");
   outputTree_->Branch("protonTotalWidth",&protonTotalWidth_,"protonTotalWidth/D");
@@ -125,7 +140,7 @@ DecayResults::~DecayResults() {
     std::this_thread::sleep_for(std::chrono::seconds(1));
     std::cout << "Waiting ..." << std::endl;
   }  
-
+  //outputTree_->Print();
   /** 2. Write the output file*/
   outputFile_->Write();
 
@@ -133,11 +148,18 @@ DecayResults::~DecayResults() {
   outputFile_->Close();
 
   /** 4. Delete the outputFile_ object*/
+  delete gammaEnergyHist_;
+  delete protonEnergyHist_;
+  delete alphaEnergyHist_;
+  delete neutronEnergyHist_;
+  delete TSCMatrix_;
+  delete ggMatrix_;
+  delete outputTree_;
   delete outputFile_;
 }
 
 void DecayResults::AddResults(std::vector<std::pair<DecayData, std::vector<DecayProduct> > >& results) {
-
+  
   for(int i = 0;i<results.size();i++) {
     if(results[i].second.size()==0) continue;
 
@@ -152,6 +174,7 @@ void DecayResults::AddResults(std::vector<std::pair<DecayData, std::vector<Decay
     alphaEntranceWidth_ = results[i].first.alphaEntranceWidth();
 
     numSteps_=numNeutrons_=numGammas_=numProtons_=numAlphas_=0;
+    double previousGammaEnergy=0;
     
     for(std::vector<DecayProduct>::const_iterator it = results[i].second.begin();
 	    it<results[i].second.end();++it) {
@@ -169,6 +192,7 @@ void DecayResults::AddResults(std::vector<std::pair<DecayData, std::vector<Decay
 	      gammaMomentumX_[numGammas_]=it->particleMomentumX_;
 	      gammaMomentumY_[numGammas_]=it->particleMomentumY_;
 	      gammaMomentumZ_[numGammas_]=it->particleMomentumZ_;
+        gammaEnergyHist_->Fill(it->particleEnergy_);
 	      ++numGammas_;
       } else if(it->particleType_==1) {
 	      neutronStepIndex_[numNeutrons_] = numSteps_;
@@ -176,6 +200,7 @@ void DecayResults::AddResults(std::vector<std::pair<DecayData, std::vector<Decay
 	      neutronMomentumX_[numNeutrons_]=it->particleMomentumX_;
 	      neutronMomentumY_[numNeutrons_]=it->particleMomentumY_;
 	      neutronMomentumZ_[numNeutrons_]=it->particleMomentumZ_;
+        neutronEnergyHist_->Fill(it->particleEnergy_);
 	      ++numNeutrons_;
       } else if(it->particleType_==2) {
 	      protonStepIndex_[numProtons_] = numSteps_;
@@ -183,6 +208,7 @@ void DecayResults::AddResults(std::vector<std::pair<DecayData, std::vector<Decay
 	      protonMomentumX_[numProtons_]=it->particleMomentumX_;
 	      protonMomentumY_[numProtons_]=it->particleMomentumY_;
 	      protonMomentumZ_[numProtons_]=it->particleMomentumZ_;
+        protonEnergyHist_->Fill(it->particleEnergy_);
 	      ++numProtons_;
       } else if(it->particleType_==3) {
 	      alphaStepIndex_[numAlphas_] = numSteps_;
@@ -190,10 +216,20 @@ void DecayResults::AddResults(std::vector<std::pair<DecayData, std::vector<Decay
 	      alphaMomentumX_[numAlphas_]=it->particleMomentumX_;
 	      alphaMomentumY_[numAlphas_]=it->particleMomentumY_;
 	      alphaMomentumZ_[numAlphas_]=it->particleMomentumZ_;
+        alphaEnergyHist_->Fill(it->particleEnergy_);
 	      ++numAlphas_;
       }
       ++numSteps_;
     }
+    
+    for(int i =0; i < numGammas_; i++){
+      for(int j=i+1; j <numGammas_; j++){
+        ggMatrix_->Fill(gammaEnergy_[i], gammaEnergy_[j], 1.);
+        TSCMatrix_->Fill(gammaEnergy_[i], gammaEnergy_[i]+gammaEnergy_[j], 1.);
+        TSCMatrix_->Fill(gammaEnergy_[j], gammaEnergy_[i]+gammaEnergy_[j], 1.);
+      }     
+    }
+
     outputTree_->Fill();
   }
 }

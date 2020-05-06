@@ -5,6 +5,8 @@
 #pragma once
 #include <TTree.h>
 #include <TFile.h>
+#include <TH2F.h>
+#include <TH1F.h>
 #include <TObject.h>
 #include <vector>
 #include "DecayProduct.h"
@@ -16,12 +18,22 @@ class DecayResults {
   void AddResults(std::vector<std::pair<DecayData, std::vector<DecayProduct> > >&);
 
  private:
+  
   int initialZ_;
   int initialA_;
   int initialPi_;
   double initialJ_;
   double initialEnergyLow_;
   double initialEnergyHigh_;
+  TH2F* ngMatrix_;
+  TH2F* pgMatrix_;
+  TH2F* agMatrix_;
+  TH2F* ggMatrix_;
+  TH2F* TSCMatrix_;
+  TH1F* gammaEnergyHist_;
+  TH1F* neutronEnergyHist_;
+  TH1F* protonEnergyHist_;
+  TH1F* alphaEnergyHist_;
   TFile* outputFile_;
   TTree* outputTree_;
   Int_t Z_[100];
