@@ -182,12 +182,7 @@ namespace Module_Decayer{
         DecayResults* results = NULL;
         if(events>1) results = new DecayResults(Z,A,J,Pi,lowEnergy,highEnergy,suffixNo);
         
-        
-        omp_lock_t writelock;
-        omp_init_lock(&writelock);
-  
-
-        for(int i = 0;i<=chunks;i++) {
+    for(int i = 0;i<=chunks;i++) {
 
           
             int numInChunk = (i==chunks) ? remainder : chunkSize;
@@ -238,14 +233,14 @@ namespace Module_Decayer{
                 delete controller;
             }
             
-            omp_set_lock(&writelock);            
+                        
             if(events>1){
                 std::cout << std::endl << "Writing ROOT Tree..." << std::endl;                
                 results->AddResults(chunkResults);
             }
-            omp_unset_lock(&writelock);
+            
         }   
-        omp_destroy_lock(&writelock);
+        
         
 
         if(results) delete results;
