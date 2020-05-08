@@ -22,3 +22,6 @@ install:
   - source root/bin/thisroot.sh
   - cd ${TRAVIS_BUILD_DIR}
   - bash build.sh
+
+script:
+ - build/sapphire reaction 25Mg+p
