@@ -29,28 +29,28 @@ namespace Module_Decayer{
      * @param isotopeString A string from the cmd line which represents the reaction, e.g., 60Fe+p
      * @returns The atomic number part of the isotopeString, e.g. Fe
      */
-    std::string atomicNumberStringFromString(std::string isotopeString);
+    std::string atomicNumberStringFromString(std::string &isotopeString);
 
     /**
      * @brief Get the atomic number as int from isotopeString.
      * @param isotopeString A string from the cmd line which represents the reaction, e.g., 60Fe+p
      * @returns The atomic number part of the isotopeString, e.g. 28 other wise returns 0.
      */
-    int atomicNumberIntFromString(std::string isotopeString);
+    int atomicNumberIntFromString(std::string &isotopeString);
 
     /**
      * @brief Get the massNumberString from the isotopeString.
      * @param isotopeString A string from the cmd line which represents the reaction, e.g., 60Fe+p
      * @returns The mass number part of the isotopeString, e.g. "60"
      */
-    std::string massNumberStringFromString(std::string isotopeString);
+    std::string massNumberStringFromString(std::string &isotopeString);
 
     /**
      * @brief Get the massNumberInt from the isotopeString.
      * @param isotopeString A string from the cmd line which represents the reaction, e.g., 60Fe+p
      * @returns The mass number part of the isotopeString, e.g. 60, if successful. Otherwise returns 0.
      */
-    int massNumberIntFromString(std::string isotopeString);
+    int massNumberIntFromString(std::string &isotopeString);
 
     //void masterProcess(boost::mpi::communicator& world,InitialNucleusData initalNucleus, int suffixNo,int events);
     //void slaveProcess(boost::mpi::communicator& world,InitialNucleusData initialNucleus);

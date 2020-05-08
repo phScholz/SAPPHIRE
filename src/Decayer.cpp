@@ -253,7 +253,7 @@ Decayer::~Decayer(){
 }
 
 void Decayer::PrintFunctions() {
-  for(std::vector<SpinRatePair>::const_iterator spinRatePair = spinRatePairs_.begin(); spinRatePair<spinRatePairs_.end();spinRatePair++) {
+  for(std::vector<SpinRatePair>::const_iterator spinRatePair = spinRatePairs_.begin(); spinRatePair<spinRatePairs_.end(); ++spinRatePair) {
     if(spinRatePair->rateFunc_==NULL) continue;
     char filename[256];
     char filename2[256];
@@ -272,7 +272,7 @@ void Decayer::PrintFunctions() {
     std::ofstream totalLevelOut(filename4);
     std::vector<XYPair> function = spinRatePair->rateFunc_->Function();
     
-    for(std::vector<XYPair>::const_iterator it = function.begin(); it<function.end();it++) {
+    for(std::vector<XYPair>::const_iterator it = function.begin(); it<function.end(); ++it) {
       levelOut << std::scientific << energy_+spinRatePair->qValue_-it->X_ << ' ' << spinRatePair->rateFunc_->CalcLevelDensity(energy_+spinRatePair->qValue_-it->X_)  << std::endl;
       totalLevelOut << std::scientific << energy_+spinRatePair->qValue_-it->X_ << ' '  << spinRatePair->rateFunc_->CalcTotalLevelDensity(energy_+spinRatePair->qValue_-it->X_) << std::endl;
       transOut << std::scientific << it->X_ << ' ' << spinRatePair->rateFunc_->CalcTransmissionFunc(it->X_) << std::endl;
@@ -321,7 +321,7 @@ bool Decayer::BuildKnownCDF(int levelIndex, std::vector<Level>& knownLevels) {
   //The cdfValue is calculated as the ratio of the partial decay probability and the total widht
   //A CDFEnty is generated for the last spinRatePair using the number of the last entry of SpinRatePairs, the energy difference and the cdfValue
   //Since its a cummulative distribution function the probability of the previous entry is the offset of the next
-  for(std::vector<GammaTransition>::const_iterator it = gammas.begin(); it<gammas.end();it++) {
+  for(std::vector<GammaTransition>::const_iterator it = gammas.begin(); it<gammas.end(); ++it) {
     spinRatePairs_.push_back(SpinRatePair(Z_,A_,knownLevels[it->levelIndex_-1].J_, knownLevels[it->levelIndex_-1].Pi_,0., NULL, it->probability_));
     double cdfValue = (it->probability_+offSet)/totalIntegral_;
     cdf_.push_back(CDFEntry(spinRatePairs_.size()-1, energy_-knownLevels[it->levelIndex_-1].energy_, cdfValue));
@@ -348,7 +348,7 @@ bool Decayer::Decay(int& Z, int& A, double& jFinal, int& piFinal,
 
   bool found = false;
   double previousValue = 0.;
-  for(std::vector<CDFEntry>::const_iterator it = cdf_.begin(); it<cdf_.end();it++) {
+  for(std::vector<CDFEntry>::const_iterator it = cdf_.begin(); it<cdf_.end(); ++it) {
     if(previousValue<randomNumber && randomNumber<=it->value_) {
       Z = spinRatePairs_[it->pairIndex_].Z_;
       A = spinRatePairs_[it->pairIndex_].A_;

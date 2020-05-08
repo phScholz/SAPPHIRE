@@ -77,8 +77,7 @@ int NuclearMass::FindZ(std::string element) {
 
 std::string NuclearMass::FindElement(int Z) {
   std::string returnString("?");
-  for(ElementTable::const_iterator it = elementTable_.begin();
-      it!=elementTable_.end();it++) {
+  for(ElementTable::const_iterator it = elementTable_.begin(); it!=elementTable_.end(); ++it) {
   	if(it->second==Z) {
   	  returnString = it->first;
   	  break;

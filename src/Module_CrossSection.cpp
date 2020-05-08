@@ -35,7 +35,7 @@ namespace Module_CrossSection{
     return (bool)ifile;
     }
 
-    std::string pTypeStringFromString(std::string reactionString){
+    std::string pTypeStringFromString(std::string &reactionString){
         std::string massNumberString=massNumberStringFromString(reactionString);
         std::string atomicNumberString=atomicNumberStringFromString(reactionString);
 
@@ -52,7 +52,7 @@ namespace Module_CrossSection{
         return projectileString;
     }
 
-    int pTypeIntFromString(std::string reactionString){
+    int pTypeIntFromString(std::string &reactionString){
         std::string projectileString = pTypeStringFromString(reactionString);
 
         if(projectileString=="g")
@@ -68,7 +68,7 @@ namespace Module_CrossSection{
         return 1;
     }
 
-    std::string massNumberStringFromString(std::string reactionString){
+    std::string massNumberStringFromString(std::string &reactionString){
         std::string massNumberS;
         for(unsigned int i = 0; i<reactionString.length(); i++) {
             std::string nextChar(reactionString,i,1);
@@ -81,7 +81,7 @@ namespace Module_CrossSection{
         return massNumberS;
     }
 
-    int massNumberIntFromString(std::string reactionString){
+    int massNumberIntFromString(std::string &reactionString){
         std::string massNumberS = massNumberStringFromString(reactionString);
         if(massNumberS.length()>0)
             return atoi(massNumberS.c_str());
@@ -89,7 +89,7 @@ namespace Module_CrossSection{
             return 0;
     }
 
-    std::string atomicNumberStringFromString(std::string reactionString){
+    std::string atomicNumberStringFromString(std::string &reactionString){
         std::string massNumberS = massNumberStringFromString(reactionString);
         reactionString.erase(0,massNumberS.length());
         std::string atomicNumberString;
@@ -101,7 +101,7 @@ namespace Module_CrossSection{
         return atomicNumberString;
     }
 
-    int atomicNumberIntFromString(std::string reactionString){
+    int atomicNumberIntFromString(std::string &reactionString){
         std::string atomicNumberString = atomicNumberStringFromString(reactionString);
         if(NuclearMass::FindZ(atomicNumberString) != -1) 
             return NuclearMass::FindZ(atomicNumberString);
@@ -216,16 +216,16 @@ namespace Module_CrossSection{
         exitStates[2]=input.p_ExitStates();
         exitStates[3]=input.a_ExitStates();        
 
-
-        int A = massNumberIntFromString(input.Reaction());                    
-        int Z = atomicNumberIntFromString(input.Reaction());
+        std::string reactionString(input.Reaction());
+        int A = massNumberIntFromString(reactionString);                    
+        int Z = atomicNumberIntFromString(reactionString);
 
         if(!Z && !A){
             std::cout<< std::endl << "Could not get a valid target nucleus from reaction ... "  << std::endl;
             exit(1);
         }
 
-        int pType = pTypeIntFromString(input.Reaction());
+        int pType = pTypeIntFromString(reactionString);
         std::string energyFile = input.EnergyFile();
         bool forRates = input.CalcRates();
         int entranceState = input.EntranceState();
@@ -262,7 +262,7 @@ namespace Module_CrossSection{
         delete xs;
     }
 
-    void RunSingleReaction(std::string reactionString){
+    void RunSingleReaction(std::string &reactionString){
         /** This method will invoke a cross section calculation for a reaction given as reactionString .*/
         
         int A = massNumberIntFromString(reactionString);
@@ -333,7 +333,8 @@ namespace Module_CrossSection{
         else{
             /** If no regular inputFile is given in the first place, the code assumes that the cmd line parameter is a
             * reactionString. In this case RunSingleReaction will be called by passing the cmd line parameter.*/
-            RunSingleReaction(argv[2]);
+            std::string reactionString(argv[2]);
+            RunSingleReaction(reactionString);
         }
 
         /** At the end of the Go() method, the clock is stopped and the total calculation time is printed to std::cout.

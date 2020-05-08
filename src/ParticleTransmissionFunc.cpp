@@ -81,7 +81,7 @@ double ParticleTransmissionFunc::operator()(double energy){
   double sum=0.;
   int i=0;
 
-  for(std::map<SLPair,double>::const_iterator it = functions.begin(); it!=functions.end();it++) {
+  for(std::map<SLPair,double>::const_iterator it = functions.begin(); it!=functions.end();++it) {
       double chirand = (porterThomas_) ? gsl_ran_chisq (r, 1.) : 1.;
       
       if(TWFC_!=0.) {
@@ -104,8 +104,7 @@ double ParticleTransmissionFunc::operator()(double energy, int which) {
   CalcSLDependentFunctions(energy,functions);
   double sum=0.;
   int i=0;
-  for(std::map<SLPair,double>::const_iterator it = functions.begin();
-      it!=functions.end();it++) {
+  for(std::map<SLPair,double>::const_iterator it = functions.begin(); it!=functions.end(); ++it) {
     if(i==which) {
       if(TWFC_!=0.) {
 	double previousT = (previous_) ? previous_->operator()(energy) : it->second;

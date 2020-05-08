@@ -23,7 +23,7 @@
 
 namespace Module_Decayer{
 
-    std::string massNumberStringFromString(std::string isotopeString){
+    std::string massNumberStringFromString(std::string &isotopeString){
         std::string massNumberString;
 
         for(unsigned int i = 0; i<isotopeString.length(); i++) {
@@ -36,7 +36,7 @@ namespace Module_Decayer{
       return massNumberString;
     }
 
-    int massNumberIntFromString(std::string isotopeString){
+    int massNumberIntFromString(std::string &isotopeString){
         std::string massNumberString = massNumberStringFromString(isotopeString);
         if(massNumberString.length()>0)
             return atoi(massNumberString.c_str());
@@ -44,13 +44,13 @@ namespace Module_Decayer{
             return 0;
     }
 
-    std::string atomicNumberStringFromString(std::string isotopeString){
+    std::string atomicNumberStringFromString(std::string &isotopeString){
         std::string massNumberString = massNumberStringFromString(isotopeString);
         std::string atomicNumberString = isotopeString.substr(massNumberString.length());
         return atomicNumberString;
     }
 
-    int atomicNumberIntFromString(std::string isotopeString){
+    int atomicNumberIntFromString(std::string &isotopeString){
         std::string atomicNumberString = atomicNumberStringFromString(isotopeString);
         int Z = NuclearMass::FindZ(atomicNumberString);
         return Z;
@@ -117,12 +117,15 @@ namespace Module_Decayer{
         input.SetInputDecayer();
         input.SetInputParticleTransmission();
         input.SetInputGammaTransmission();
-
+        
         int chunkSize = input.ChunkSize();
-        int A = massNumberIntFromString(input.Isotope());
-        int Z = atomicNumberIntFromString(input.Isotope());
-        int Pi = input.Parity();
         int events = input.Events();
+        
+        std::string isotopeString(input.Isotope());
+        int A = massNumberIntFromString(isotopeString);
+        int Z = atomicNumberIntFromString(isotopeString);
+        int Pi = input.Parity();
+        
         double J = input.Spin();
         double lowEnergy = input.LowEnergy();
         double highEnergy = input.HighEnergy();
