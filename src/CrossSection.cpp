@@ -1040,7 +1040,7 @@ void CrossSection::CalculateEnergyGrid() {
   maxEnergies.push_back(int_double_pair(3,maxAlphaEnergy));
   sort(maxEnergies.begin(),maxEnergies.end(),int_double_pair_compare());
   reverse(maxEnergies.begin(),maxEnergies.end());
-  int entrancePosition;
+  int entrancePosition=0;
   for(int i = 0; i< minEnergies.size();++i) {
     if(minEnergies[i].first==pType_) {
       entrancePosition=i;
@@ -1078,7 +1078,8 @@ void CrossSection::CalculateEnergyGrid() {
   //Determine energy points for each window
   std::vector<double> energyGrid;
   for(int i = 0; i< minEnergies.size();++i) {
-    double sepE,redMass,z1z2;
+    double redMass,z1z2;
+    double sepE=0.0;
     if(minEnergies[minEnergies.size()-i-1].first==1) {
       sepE=neutronSepE;
       redMass=(compoundA_-1.)/compoundA_;
