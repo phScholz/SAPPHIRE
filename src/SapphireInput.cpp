@@ -417,6 +417,7 @@
         CrossSection::SetResidualNeutron(ResidualNeutron());
         CrossSection::SetResidualProton(ResidualProton());
         CrossSection::SetResidualAlpha(ResidualAlpha());
+        TransitionRateFunc::NLDmodel(LevelDensity());
         CrossSection::SetCalculateGammaCutoff(CalculateGammaCutoff());
         Decayer::SetCrossSection(true);
     }

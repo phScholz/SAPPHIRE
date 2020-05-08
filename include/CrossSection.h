@@ -131,6 +131,7 @@ class CrossSection {
   static void SetCalculateGammaCutoff(bool calc) {calculateGammaCutoff_=calc;};   /**< Setter for calculateGammaCutoff_*/
   static void CreateTempVector();
   static void CreateMACSEnergiesVector();
+  static void NLDmodel(int x){nldmodel_=x;} /**< Setter for nldmodel_*/
 
  private:
   /**
@@ -222,12 +223,15 @@ class CrossSection {
   */
   void CalcPartitionFunc();
 
+  
+
  private:
   static bool residualGamma_;                 /**< Bool if residualGamma should be toggled*/
   static bool residualNeutron_;               /**< Bool if residualNeutron should be toggled*/
   static bool residualProton_;                /**< Bool if residualProton should be toggled*/
   static bool residualAlpha_;                 /**< Bool if residualAlpha should be toggled*/
-  static bool calculateGammaCutoff_;          
+  static bool calculateGammaCutoff_;          /**< */
+  static int nldmodel_;                       /**< integer for level density model*/
   constexpr static double minEnergy_ = 0.001;
   constexpr static double maxEnergy_ = 10.0;
   constexpr static double dE_ = .1;

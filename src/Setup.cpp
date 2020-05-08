@@ -43,6 +43,7 @@ bool CrossSection::residualNeutron_;
 bool CrossSection::residualProton_;
 bool CrossSection::residualAlpha_;
 bool CrossSection::calculateGammaCutoff_;
+int CrossSection::nldmodel_;
 std::vector<double> CrossSection::rateTemps_;
 std::vector<double> CrossSection::macsEnergies_;
 
@@ -93,6 +94,7 @@ void Initialize() {
   CrossSection::SetCalculateGammaCutoff(true);
   CrossSection::CreateTempVector();
   CrossSection::CreateMACSEnergiesVector();
+  CrossSection::NLDmodel(1);
   
   //By default all decay channels are allowed if energetically possible
   Decayer::SetAlphaDecay(true);
@@ -106,7 +108,7 @@ void Initialize() {
   PreEqDecayer::SetMaxL(8.);
 
   TransitionRateFunc::SetGammaCutoffEnergy(10000.);
-  TransitionRateFunc::NLDmodel(0);
+  TransitionRateFunc::NLDmodel(1);
 
   NuclearMass::InitializeElements();
   NuclearMass::InitializeMasses(sourceDirectory()+"/tables/masses/masses.dat");

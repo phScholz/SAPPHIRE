@@ -4,6 +4,7 @@
 #include "TransitionRateFunc.h"
 #include "LevelDensity/RauscherLevelDensity.h"
 #include "LevelDensity/LevelDensityFormula.h"
+#include "LevelDensity/LevelDensityHFB_BSk14.h"
 #include "Constants.h"
 #include <math.h>
 #include <fstream>
@@ -667,35 +668,52 @@ void CrossSection::PrintTransmissionTerms() {
 std::pair<double,double> CrossSection::CalcAverageSWaveResWidth() {
   double energy = seperationEnergy_;
   DecayerVector decayerVector;
+
   if(!CalcDecayerVector(energy,decayerVector,true)) {
     for(int j = 0;j<decayerVector.size();j++) 
       delete decayerVector[j].first;
     return std::pair<double,double>(0.,0.);
   }
+
   double upSum=0.;
   double downSum=0.;
+  
   for(int j = 0;j<decayerVector.size();j++) {
     Decayer* decayer = decayerVector[j].first->widthCorrectedDecayer_;
-    if(decayer->jInitial_!=groundStateJ_+0.5&&
-       decayer->jInitial_!=groundStateJ_-0.5) continue;
+    
+    if(decayer->jInitial_!=groundStateJ_+0.5 && decayer->jInitial_!=groundStateJ_-0.5) continue;
+    
     if(decayer->piInitial_!=groundStatePi_) continue;
+    
     for(int k=0;k<decayer->spinRatePairs_.size();k++) {
-      if(decayer->spinRatePairs_[k].A_!=compoundA_||
-	 decayer->spinRatePairs_[k].Z_!=compoundZ_) continue;
-      if(decayer->jInitial_==groundStateJ_+0.5)
-	upSum+=decayer->spinRatePairs_[k].integral_;
-      else if(decayer->jInitial_==groundStateJ_-0.5)
-	downSum+=decayer->spinRatePairs_[k].integral_;
+      if(decayer->spinRatePairs_[k].A_!=compoundA_|| decayer->spinRatePairs_[k].Z_!=compoundZ_) continue;
+      
+      if(decayer->jInitial_==groundStateJ_+0.5)	upSum+=decayer->spinRatePairs_[k].integral_;
+      
+      else if(decayer->jInitial_==groundStateJ_-0.5) downSum+=decayer->spinRatePairs_[k].integral_;
     }
+
     delete decayerVector[j].first;
   }
 
-  
-  LevelDensity* levelDensityUp = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_+0.5);
-  LevelDensity* levelDensityDown = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_-0.5);
+  LevelDensity* levelDensityUp;
+  LevelDensity* levelDensityDown;
+
+  if(nldmodel_==0)
+  {
+   levelDensityUp = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_+0.5);
+   levelDensityDown = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_-0.5);
+  }
+
+  if(nldmodel_==1)
+  {
+   levelDensityUp = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_+0.5);
+   levelDensityDown = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_-0.5);
+  }
   
   double ldValueUp=0.;
   double ldValueDown=0.;  
+
   if(levelDensityUp->operator()(energy)>0.) {
     ldValueUp=levelDensityUp->operator()(energy);
     upSum/=2.*pi*ldValueUp;
@@ -704,16 +722,19 @@ std::pair<double,double> CrossSection::CalcAverageSWaveResWidth() {
     ldValueDown=levelDensityDown->operator()(energy);
     downSum/=2.*pi*ldValueDown;
   }
+
   delete levelDensityUp;
   delete levelDensityDown;
+
   double sum = upSum*(2.*groundStateJ_+2.);
   double totalWeight = (2.*groundStateJ_+2.);
+  
   if(groundStateJ_>=0.5) {
     totalWeight+=2.*groundStateJ_;
     sum+=downSum*2.*groundStateJ_;
   }
-  return std::pair<double,double>(sum/totalWeight,
-				  1./(ldValueUp+ldValueDown));
+
+  return std::pair<double,double>(sum/totalWeight, 1./(ldValueUp+ldValueDown));
 }
 
 std::pair<double,double> CrossSection::CalcAveragePWaveResWidth() {
@@ -749,10 +770,28 @@ std::pair<double,double> CrossSection::CalcAveragePWaveResWidth() {
     }
     delete decayerVector[j].first;
   }
-  LevelDensity* levelDensityUp15 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_+1.5);
-  LevelDensity* levelDensityUp05 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_+0.5);
-  LevelDensity* levelDensityDown05 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_-0.5);
-  LevelDensity* levelDensityDown15 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_-1.5);
+
+  LevelDensity* levelDensityUp15;
+  LevelDensity* levelDensityUp05;
+  LevelDensity* levelDensityDown05;
+  LevelDensity* levelDensityDown15;
+
+  if(nldmodel_==0)
+  {
+    levelDensityUp15 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_+1.5);
+    levelDensityUp05 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_+0.5);
+    levelDensityDown05 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_-0.5);
+    levelDensityDown15 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_-1.5);
+  }
+
+  if(nldmodel_==1)
+  {
+    levelDensityUp15 = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_+1.5);
+    levelDensityUp05 = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_+0.5);
+    levelDensityDown05 = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_-0.5);
+    levelDensityDown15 = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_-1.5);
+  }
+
   double ldValueUp15 = 0.;
   double ldValueUp05 = 0.;
   double ldValueDown05 = 0.;
@@ -773,12 +812,15 @@ std::pair<double,double> CrossSection::CalcAveragePWaveResWidth() {
     ldValueDown15=levelDensityDown15->operator()(energy);
     downSum15/=2.*pi*ldValueDown15;
   }
+
   delete levelDensityUp15;
   delete levelDensityUp05;
   delete levelDensityDown05;
   delete levelDensityDown15;
+
   double sum = upSum15*(2.*groundStateJ_+4.)+upSum05*(2.*groundStateJ_+2.);
   double totalWeight = 4.*groundStateJ_+6.;
+
   if(groundStateJ_>=0.5) {
     totalWeight+= 2.*groundStateJ_;
     sum+=downSum05*(2.*groundStateJ_);
@@ -833,18 +875,39 @@ std::pair<double,double> CrossSection::CalcAverageDWaveResWidth() {
     }
     delete decayerVector[j].first;
   }
-  LevelDensity* levelDensityUp25 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_+2.5);
-  LevelDensity* levelDensityUp15 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_+1.5);
-  LevelDensity* levelDensityUp05 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_+0.5);
-  LevelDensity* levelDensityDown05 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_-0.5);
-  LevelDensity* levelDensityDown15 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_-1.5);
-  LevelDensity* levelDensityDown25 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_-2.5);
+
+  LevelDensity* levelDensityUp25;
+  LevelDensity* levelDensityUp15;
+  LevelDensity* levelDensityUp05;
+  LevelDensity* levelDensityDown05;
+  LevelDensity* levelDensityDown15;
+  LevelDensity* levelDensityDown25;
+
+  if(nldmodel_==0){
+    levelDensityUp25 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_+2.5);
+    levelDensityUp15 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_+1.5);
+    levelDensityUp05 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_+0.5);
+    levelDensityDown05 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_-0.5);
+    levelDensityDown15 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_-1.5);
+    levelDensityDown25 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_-2.5);
+  }
+
+  if(nldmodel_==1){
+    levelDensityUp25 = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_+2.5);
+    levelDensityUp15 = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_+1.5);
+    levelDensityUp05 = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_+0.5);
+    levelDensityDown05 = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_-0.5);
+    levelDensityDown15 = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_-1.5);
+    levelDensityDown25 = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_-2.5);
+  }
+
   double ldValueUp25 = 0.;
   double ldValueUp15 = 0.;
   double ldValueUp05 = 0.;
   double ldValueDown05 = 0.;
   double ldValueDown15 = 0.;
   double ldValueDown25 = 0.;
+  
   if(levelDensityUp25->operator()(energy)>0.) {
     ldValueUp25=levelDensityUp25->operator()(energy);
     upSum25/=2.*pi*ldValueUp25;
