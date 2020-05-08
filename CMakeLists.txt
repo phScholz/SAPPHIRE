@@ -17,6 +17,9 @@ set (CMAKE_CXX_STANDARD 11)
 #Set optimization to 3
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 
+#Explicitly setting link to math
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lm")
+
 #Set compilation warnings
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall ")
 
