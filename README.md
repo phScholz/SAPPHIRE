@@ -1,6 +1,7 @@
 # Sapphire - A statistical nuclear reaction and decay code
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Build Status](https://travis-ci.org/phScholz/SAPPHIRE.svg?branch=master)](https://travis-ci.org/phScholz/SAPPHIRE)
+
 ## Contents
 
   1. [General Information:](#1-general-information)

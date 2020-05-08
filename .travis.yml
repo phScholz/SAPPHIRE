@@ -18,11 +18,8 @@ addons:
 
 install:
   - cd ${TRAVIS_BUILD_DIR}/..
-  - git clone https://github.com/root-project/root.git root
-  - mkdir build
-  - cd build
-  - cmake ../root
-  - make -j8
-  - source bin/thisroot.sh
+  - wget https://root.cern/download/root_v6.20.04.Linux-ubuntu19-x86_64-gcc9.2.tar.gz
+  - tar -xzvf root_v6.20.04.Linux-ubuntu19-x86_64-gcc9.2.tar.gz
+  - source root/bin/thisroot.sh
   - cd ${TRAVIS_BUILD_DIR}
   - bash build.sh
