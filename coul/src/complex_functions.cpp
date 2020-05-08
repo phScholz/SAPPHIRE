@@ -11,7 +11,7 @@ std::complex<double> expm1 (const std::complex<double> &z)
 {
   const double x = real (z),y = imag (z);
 
-  if ((std::abs (x) >= 1.0) || (std::abs (y) >= 1.0)) return (exp (z) - 1.0);
+  if ((std::abs (x) >= 1.0) || (std::abs (y) >= 1.0)) return expm1(z);
 
   const double expm1_x = expm1 (x),exp_x = 1.0 + expm1_x,sin_y_over_two = sin (0.5*y),sin_y = sin (y);
 
@@ -34,7 +34,7 @@ std::complex<double> log1p (const std::complex<double> &z)
 
   const double xp1 = 1.0 + x,abs_x = std::abs (x), abs_y = std::abs (y);
 
-  if ((abs_x >= 1.0) || (abs_y >= 1.0)) return log (1.0 + z);
+  if ((abs_x >= 1.0) || (abs_y >= 1.0)) return log1p(z);
  
   const double y_over_xp1 = y/xp1;
 

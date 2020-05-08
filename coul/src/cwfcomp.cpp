@@ -1,49 +1,51 @@
 #include "cwfcomp.H"
 
-// Calculation of h(omega) = H(omega)'/H(omega) with a continued fraction.
-// -----------------------------------------------------------------------
-// One calculates the ratio h = H'/H with the continued fraction of the associated hypergeometric confluent function.
-// One uses Lentz's method.
-// One has : h = [b[0] + a[1]/b[1]+ a[2]/b[2]+ ... a[n]/b[n]+ ...].i.omega/z with :
-// b[0] = z - eta, a[n] = (1 + l + i.omega + n-1).(i.omega.eta - l + n-1), b[n] = 2[z - eta] + i.omega.n .
-//
-// If the number of iterations reaches 100000 and |z| > 0.5, the convergence is too slow. One is probably very close to the imaginary axis.
-// If l=0 and |z| <= 0.5, the direct integration is still done as it is stable.
-// If 1+l+/-i.eta is negative integer, it has to be done otherwise it is too long even if |z| is not exceedingly small.
-// One first considers Re[z] >= 0.
-// One takes the starting point z0 = 2 + i.(Im[z] + 2.sign[Im[z]]) (0.6 + i.sign[Re[z]].0.6.sign[Im[z]] if |z| <= 0.5).
-// Then, one calculates H[omega],H[omega]' at the starting point, and one integrates numerically H[omega] until z.
-// h(omega)(z) is then H[omega](z)'/H[omega](z).
-// If Re[z] < 0, one calculates H[-omega],H[-omega]' with l, eta -> -eta, and z -> -z.
-// One uses the Coulomb wave functions class cwf_minus_eta_ptr defined with l and -eta. 
-// The ratio h(omega,l,eta,z) is then equal to -h(-omega,l,-eta,-z).
-// To avoid infinite loops, continued_fraction_h must not be used in this integration. So, the starting point is chosen so |H[+/-]| is very likely
-// to increase in modulus. Then, one always integrates forward. Forward integration is enforced putting
-// is_H_dir_int_naive to true. It is put to false again at the end of the calculation.
-//
-// Variables:
-// ----------
-// z : variable of the Coulomb wave function.
-// omega : 1 for the outgoing wave function ratio H+'/H+, -1 for the incoming wave function ratio H-'/H-.
-// large,small : 1E50,1E-50. They are used in the case of vanishing denominators or numerators.
-// I_omega,I_omega_eta,two_I_omega,z_minus_eta,two_z_minus_eta : i.omega,i.omega.eta, 2.i.omega, z-eta, 2(z-eta).
-// a,c : 1 + l + i.omega.eta, i.omega.eta - l.
-// b0,Cn,Dn,an,bn,Delta_n : variables used in the Lentz method.
-// n,nm1 : index of a[n] and b[n], n-1 
-// bn_plus_an_Dn : bn + an.Dn. Dn = 1/[bn + an.Dn] or 1E50 if bn + an.Dn is zero.
-// bn_plus_an_over_Cn : bn + an/Cn. Cn = bn + an/Dn or 1E-50 if bn + an/Dn is zero.
-// hn : value of the continuous fraction during the iteration process.
-// test : test of convergence of hn.
-// cwf : reference to *this if Re[z] >= 0, reference to cwf_minus_eta_ptr if Re[z] < 0
-//       cwf_minus_eta_ptr is allocated first if it is zero, in the case of Re[z] < 0 .
-//       It is used to integrate the Coulomb wave functions with l,eta for Re[z] >= 0 or l,-eta for Re[z] < 0. 
-// z00 : 2 + i.sign[Re[z]].(Im[z] + 2.sign[Im[z]]).
-// z01 : 0.6 + i.0.6.sign[Re[z]].sign[Im[z]].
-// abs_z : |z|
-// z_start,F_start,dF_start : starting point of the direct integration, F(l,+/-eta,z_start),F'(l,+/-eta,z_start) 
-// H,dH : Coulomb wave function and derivative in l,eta,omega,z if Re[z] > 0, in l,-eta,-omega,-z if Re[z] < 0.
-// h : value of H(omega)'/H(omega).
-// debut_cwf,F_debut_cwf,dF_debut_cwf : values stored in cwf put back in cwf at the end of direct integration as they change values.
+/**
+ * Calculation of h(omega) = H(omega)'/H(omega) with a continued fraction.
+ * -----------------------------------------------------------------------
+ * One calculates the ratio h = H'/H with the continued fraction of the associated hypergeometric confluent function.
+ * One uses Lentz's method.
+ * One has : h = [b[0] + a[1]/b[1]+ a[2]/b[2]+ ... a[n]/b[n]+ ...].i.omega/z with :
+ * b[0] = z - eta, a[n] = (1 + l + i.omega + n-1).(i.omega.eta - l + n-1), b[n] = 2[z - eta] + i.omega.n .
+ *
+ * If the number of iterations reaches 100000 and |z| > 0.5, the convergence is too slow. One is probably very close to the imaginary axis.
+ * If l=0 and |z| <= 0.5, the direct integration is still done as it is stable.
+ * If 1+l+/-i.eta is negative integer, it has to be done otherwise it is too long even if |z| is not exceedingly small.
+ * One first considers Re[z] >= 0.
+ * One takes the starting point z0 = 2 + i.(Im[z] + 2.sign[Im[z]]) (0.6 + i.sign[Re[z]].0.6.sign[Im[z]] if |z| <= 0.5).
+ * Then, one calculates H[omega],H[omega]' at the starting point, and one integrates numerically H[omega] until z.
+ * h(omega)(z) is then H[omega](z)'/H[omega](z).
+ * If Re[z] < 0, one calculates H[-omega],H[-omega]' with l, eta -> -eta, and z -> -z.
+ * One uses the Coulomb wave functions class cwf_minus_eta_ptr defined with l and -eta. 
+ * The ratio h(omega,l,eta,z) is then equal to -h(-omega,l,-eta,-z).
+ * To avoid infinite loops, continued_fraction_h must not be used in this integration. So, the starting point is chosen so |H[+/-]| is very likely
+ * to increase in modulus. Then, one always integrates forward. Forward integration is enforced putting
+ * is_H_dir_int_naive to true. It is put to false again at the end of the calculation.
+ *
+ * Variables:
+ * ----------
+ * z : variable of the Coulomb wave function.
+ * omega : 1 for the outgoing wave function ratio H+'/H+, -1 for the incoming wave function ratio H-'/H-.
+ * large,small : 1E50,1E-50. They are used in the case of vanishing denominators or numerators.
+ * I_omega,I_omega_eta,two_I_omega,z_minus_eta,two_z_minus_eta : i.omega,i.omega.eta, 2.i.omega, z-eta, 2(z-eta).
+ * a,c : 1 + l + i.omega.eta, i.omega.eta - l.
+ * b0,Cn,Dn,an,bn,Delta_n : variables used in the Lentz method.
+ * n,nm1 : index of a[n] and b[n], n-1 
+ * bn_plus_an_Dn : bn + an.Dn. Dn = 1/[bn + an.Dn] or 1E50 if bn + an.Dn is zero.
+ * bn_plus_an_over_Cn : bn + an/Cn. Cn = bn + an/Dn or 1E-50 if bn + an/Dn is zero.
+ * hn : value of the continuous fraction during the iteration process.
+ * test : test of convergence of hn.
+ * cwf : reference to *this if Re[z] >= 0, reference to cwf_minus_eta_ptr if Re[z] < 0
+ *       cwf_minus_eta_ptr is allocated first if it is zero, in the case of Re[z] < 0 .
+ *       It is used to integrate the Coulomb wave functions with l,eta for Re[z] >= 0 or l,-eta for Re[z] < 0. 
+ * z00 : 2 + i.sign[Re[z]].(Im[z] + 2.sign[Im[z]]).
+ * z01 : 0.6 + i.0.6.sign[Re[z]].sign[Im[z]].
+ * abs_z : |z|
+ * z_start,F_start,dF_start : starting point of the direct integration, F(l,+/-eta,z_start),F'(l,+/-eta,z_start) 
+ * H,dH : Coulomb wave function and derivative in l,eta,omega,z if Re[z] > 0, in l,-eta,-omega,-z if Re[z] < 0.
+ * h : value of H(omega)'/H(omega).
+ * debut_cwf,F_debut_cwf,dF_debut_cwf : values stored in cwf put back in cwf at the end of direct integration as they change values.
+ */
 
 std::complex<double> Coulomb_wave_functions::continued_fraction_h (const std::complex<double> &z,const int omega)
 { 
