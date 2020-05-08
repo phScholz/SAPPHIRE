@@ -3,6 +3,17 @@ os: linux
 dist: bionic
 compiler: gcc
 
+addons:
+  apt:
+    sources:
+      - sourceline: "ppa:ubuntu-toolchain-r/test"
+    update: true
+    packages:
+      - doxygen
+      - libgsl-dev
+      - libboost-all-dev
+
+
 install:
   - cd ${TRAVIS_BUILD_DIR}
   - bash build.sh
