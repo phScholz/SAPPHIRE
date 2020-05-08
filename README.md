@@ -1,4 +1,5 @@
 # Sapphire - A statistical nuclear reaction and decay code
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/eacc9fdbb3944304815068d49f83be7f)](https://app.codacy.com/manual/phScholz/SAPPHIRE?utm_source=github.com&utm_medium=referral&utm_content=phScholz/SAPPHIRE&utm_campaign=Badge_Grade_Settings)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Build Status](https://travis-ci.org/phScholz/SAPPHIRE.svg?branch=master)](https://travis-ci.org/phScholz/SAPPHIRE)
 
