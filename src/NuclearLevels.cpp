@@ -160,13 +160,13 @@ void NuclearLevels::PrintLevels(int Z, int A) {
   LevelsTable::const_iterator it = levelsTable_.find(MassKey(Z,A));
   if(it!=levelsTable_.end()) {
     for(std::vector<Level>::const_iterator level = it->second.levels_.begin();
-	level<it->second.levels_.end();level++) {
+	level<it->second.levels_.end();++level) {
       std::cout << std::setw(12) << level->energy_ 
 		<< std::setw(5)  << level->J_  
 		<< std::setw(5)  << level->Pi_
 		<< std::setw(0)  << std::endl;
       for(std::vector<GammaTransition>::const_iterator gamma = level->gammas_.begin();
-	  gamma<level->gammas_.end();gamma++)
+	  gamma<level->gammas_.end();++gamma)
 	std::cout << '\t' << std::setw(5) << gamma->levelIndex_
 		  << std::setw(12) << gamma->energy_
 		  << std::setw(12) << gamma->probability_

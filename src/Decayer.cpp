@@ -306,7 +306,7 @@ bool Decayer::BuildKnownCDF(int levelIndex, std::vector<Level>& knownLevels) {
   std::vector<GammaTransition> gammas = knownLevels[levelIndex].gammas_;
 
   //For loop to calculate the totaldecay width and its squared for all the known gamma transitions of the level
-  for(std::vector<GammaTransition>::const_iterator it = gammas.begin(); it<gammas.end(); it++) {
+  for(std::vector<GammaTransition>::const_iterator it = gammas.begin(); it<gammas.end(); ++it) {
     totalIntegral_+=it->probability_;
     totalIntegralSqrd_+=it->probability_*it->probability_;
   }

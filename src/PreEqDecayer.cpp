@@ -241,7 +241,7 @@ bool PreEqDecayer::Decay(int& Z, int& A, double& jFinal, int& piFinal,
 #endif
   bool found = false;
   double previousValue = 0.;
-  for(std::vector<PreEqCDFEntry>::const_iterator it = cdf_.begin();it<cdf_.end();it++) {
+  for(std::vector<PreEqCDFEntry>::const_iterator it = cdf_.begin();it<cdf_.end();++it) {
     if(previousValue<randomNumber&&randomNumber<=it->value_) {
       Z = spinRatePairs_[it->pairIndex_].Z_;
       A = spinRatePairs_[it->pairIndex_].A_;
