@@ -12,11 +12,13 @@ addons:
       - doxygen
       - libgsl-dev
       - libboost-all-dev
+      - libomp-dev
+      - libxpm-dev
 
 
 install:
   - cd ${TRAVIS_BUILD_DIR}/..
-  - git clone https://github.com/root-project/root.git
+  - git clone https://github.com/root-project/root.git root
   - mkdir build
   - cd build
   - cmake ../root
