@@ -15,5 +15,12 @@ addons:
 
 
 install:
+  - cd ${TRAVIS_BUILD_DIR}/..
+  - git clone https://github.com/root-project/root.git
+  - mkdir build
+  - cd build
+  - cmake ../root
+  - make -j8
+  - source bin/thisroot.sh
   - cd ${TRAVIS_BUILD_DIR}
   - bash build.sh
