@@ -15,7 +15,6 @@ addons:
       - libomp-dev
       - libxpm-dev
 
-
 install:
   - cd ${TRAVIS_BUILD_DIR}/..
   - wget https://root.cern/download/root_v6.20.04.Linux-ubuntu19-x86_64-gcc9.2.tar.gz
