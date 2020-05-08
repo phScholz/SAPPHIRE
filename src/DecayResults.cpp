@@ -6,6 +6,8 @@
 #include <chrono>
 #include <thread>
 #include "omp.h"
+#include <boost/random.hpp>
+#include <boost/random/normal_distribution.hpp>
 
 DecayResults::DecayResults(int Z, int A, double J, int Pi, double initialEnergyLow, double initialEnergyHigh, int suffixNo) :
                           initialZ_(Z),initialA_(A),initialPi_(Pi),initialJ_(J), initialEnergyLow_(initialEnergyLow), initialEnergyHigh_(initialEnergyHigh) {
@@ -83,10 +85,10 @@ DecayResults::DecayResults(int Z, int A, double J, int Pi, double initialEnergyL
                         4000, 0, 16.0,
                         4000, 0, 16.0);
   
-  gammaEnergyHist_ = new TH1F("Gamma Energy Hist", "1D Gamma Energy Hist", 4000, 0, 16.0);
-  protonEnergyHist_ = new TH1F("Proton Energy Hist", "1D Proton Energy Hist", 4000, 0, 16.0);
-  neutronEnergyHist_ = new TH1F("Neutron Energy Hist", "1D Neutron Energy Hist", 4000, 0, 16.0);
-  alphaEnergyHist_ = new TH1F("Alpha Energy Hist", "1D Alpha Energy Hist", 4000, 0, 16.0);
+  gammaEnergyHist_ = new TH1F("GammaEnergyHist", "1D Gamma Energy Hist", 4000, 0, 16.0);
+  protonEnergyHist_ = new TH1F("ProtonEnergyHist", "1D Proton Energy Hist", 4000, 0, 16.0);
+  neutronEnergyHist_ = new TH1F("NeutronEnergyHist", "1D Neutron Energy Hist", 4000, 0, 16.0);
+  alphaEnergyHist_ = new TH1F("AlphaEnergyHist", "1D Alpha Energy Hist", 4000, 0, 16.0);
 
   /** 5. Creating branches for all decay results*/   
   //outputTree_->Branch("ggMatrix","TH2F", &ggMatrix_, 32000,0);
@@ -131,6 +133,12 @@ DecayResults::DecayResults(int Z, int A, double J, int Pi, double initialEnergyL
   outputTree_->Branch("alphaMomentumX",alphaMomentumX_,"alphaMomentumX[numAlphas]/D");
   outputTree_->Branch("alphaMomentumY",alphaMomentumY_,"alphaMomentumY[numAlphas]/D");
   outputTree_->Branch("alphaMomentumZ",alphaMomentumZ_,"alphaMomentumZ[numAlphas]/D");
+
+  /** 6. Initialize energy resolution*/
+  SetaResol(0.0);
+  SetpResol(0.0);
+  SetnResol(0.0);
+  SetgResol(0.00);
 }
 
 DecayResults::~DecayResults() {
@@ -192,7 +200,11 @@ void DecayResults::AddResults(std::vector<std::pair<DecayData, std::vector<Decay
 	      gammaMomentumX_[numGammas_]=it->particleMomentumX_;
 	      gammaMomentumY_[numGammas_]=it->particleMomentumY_;
 	      gammaMomentumZ_[numGammas_]=it->particleMomentumZ_;
-        gammaEnergyHist_->Fill(it->particleEnergy_);
+        if(GetgResol()==0.0){
+          gammaEnergyHist_->Fill(it->particleEnergy_);
+        }
+        else{
+        }
 	      ++numGammas_;
       } else if(it->particleType_==1) {
 	      neutronStepIndex_[numNeutrons_] = numSteps_;

@@ -239,9 +239,7 @@ namespace Module_Decayer{
                 results->AddResults(chunkResults);
             }
             
-        }   
-        
-        
+        }       
 
         if(results) delete results;
 
