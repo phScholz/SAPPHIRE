@@ -14,16 +14,10 @@ addons:
       - libboost-all-dev
       - libomp-dev
       - libxpm-dev
-      - gcc-9
-      - g++-9
-
-before_install:
-  - CC=gcc-9 && CXX=g++-9
-
 
 install:
   - cd ${TRAVIS_BUILD_DIR}/..
-  - wget https://root.cern/download/root_v6.20.04.Linux-ubuntu19-x86_64-gcc9.2.tar.gz
+  - wget https://root.cern/download/root_v6.20.04.Linux-ubuntu18-x86_64-gcc7.5.tar.gz
   - tar -xzvf root_v6.20.04.Linux-ubuntu19-x86_64-gcc9.2.tar.gz
   - source root/bin/thisroot.sh
   - cd ${TRAVIS_BUILD_DIR}
