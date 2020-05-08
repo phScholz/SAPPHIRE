@@ -3,3 +3,5 @@ os: linux
 dist: bionic
 compiler: gcc
 
+install:
+  - bash build.sh
