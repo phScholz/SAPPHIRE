@@ -147,8 +147,8 @@ void DecayResults::WriteNCloseFile(){
 }
 
 DecayResults::~DecayResults() {
-  delete outputTree_;
-  delete outputFile_;
+  //delete outputTree_;
+  //delete outputFile_;
 }
 
 void DecayResults::AddResults(std::vector<std::pair<DecayData, std::vector<DecayProduct> > >& results) {
