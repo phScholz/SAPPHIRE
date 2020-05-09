@@ -30,7 +30,7 @@ install:
 
 script:
  # run the project
- - build/sapphire reaction 25Mg+p
+ - build/sapphire reaction examples/test_89Y+p.ini
  # cpp check src
  - cppcheck --xml src/
  # cpp check include
