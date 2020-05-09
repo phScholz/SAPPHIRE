@@ -4,14 +4,18 @@ cmake_minimum_required (VERSION 3.1)
 project (Sapphire)
 message("Using CMAKE version ${CMAKE_VERSION}")
 
+option(CODE_COVERAGE "Enable coverage reporting" ON)
+option(MPI_BUILD "Build Sapphire for MPI simulations. Note: Cross section calculations are disabled with MPI builds." OFF)
+option(USE_GCOV "Create a GCov-enabled build." ON)
+option(BUILD_DOC "Build documentation" ON)
+
+
 if (GSL_PATH)
 set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${GSL_PATH})
 set(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${GSL_PATH})
 endif (GSL_PATH) 
 
-option (MPI_BUILD "Build Sapphire for MPI simulations. Note: Cross section calculations are disabled with MPI builds." OFF)
-
-#Set the C++ standard to c++17
+#Set the C++ standard to c++11
 set (CMAKE_CXX_STANDARD 11)
 
 #Set optimization to 3
@@ -23,6 +27,29 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lm")
 #Set compilation warnings
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall ")
 
+# Code Coverage Configuration
+add_library(coverage_config INTERFACE)
+
+if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+  # Add required flags (GCC & LLVM/Clang)
+  target_compile_options(coverage_config INTERFACE
+    -O0        # no optimization
+    -g         # generate debug info
+    --coverage # sets all required flags
+  )
+  if(CMAKE_VERSION VERSION_GREATER_EQUAL 3.13)
+    target_link_options(coverage_config INTERFACE --coverage)
+  else()
+    target_link_libraries(coverage_config INTERFACE --coverage)
+  endif()
+endif(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+
+if (USE_GCOV)
+  set(GCC_COVERAGE_COMPILE_FLAGS "-fprofile-arcs -ftest-coverage")
+  set(GCC_COVERAGE_LINK_FLAGS    "-lgcov")
+endif()
+set( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )
+set( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}" )
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
@@ -41,16 +68,6 @@ message("Checking if Boost can be found ...")
 FIND_PACKAGE(Boost REQUIRED)
 INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
 
-##ifdef MPI_BUILD
-#message("Checking for MPI can be found ...")
-#find_package(MPI REQUIRED)
-#if (MPI_FOUND)
-#    include_directories(SYSTEM ${MPI_INCLUDE_PATH})
-#else (MPI_FOUND)
-#    message(SEND_ERROR "This application cannot compile without MPI")
-#endif (MPI_FOUND)
-##endif
-
 message("Checking if OpenMP can be found ...")
 find_package (OpenMP REQUIRED)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
@@ -63,9 +80,6 @@ configure_file( include/Sapphire_config.h.in ${CMAKE_BINARY_DIR}/generated/Sapph
 include_directories( ${CMAKE_BINARY_DIR}/generated/ )
 
 add_subdirectory (src)
-
-## first we can indicate the documentation build as an option and set it to ON by default
-option(BUILD_DOC "Build documentation" ON)
 
 # check if Doxygen is installed
 message("Checking if Doxygen can be found ...")

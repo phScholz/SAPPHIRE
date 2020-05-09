@@ -33,6 +33,7 @@ install:
 script:
   # run the project
   - build/sapphire reaction examples/test_89Y+p.ini
+  - build/sapphire decayer examples/test_decayer.ini
 
 after_success:
   - codecov
