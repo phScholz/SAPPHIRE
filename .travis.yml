@@ -15,6 +15,7 @@ addons:
       - libboost-all-dev
       - libomp-dev
       - libxpm-dev
+      - lcov
 
 before_install:
   # Getting root binaries
@@ -29,9 +30,14 @@ install:
   - bash build.sh
 
 script:
- # run the project
- - build/sapphire reaction examples/test_89Y+p.ini
- # cpp check src
- - cppcheck --xml src/ > report_src.xml
- # code covarage
- - bash <(curl -s https://codecov.io/bash)
+  # run the project
+  - build/sapphire reaction examples/test_89Y+p.ini
+
+ after_success:
+  # lcov
+  - lcov --directory . --capture --output-file coverage.info
+  - bash <(curl -s https://codecov.io/bash) - f coverage.info || echo "No lcov report"
+  # cpp check src
+  - cppcheck --xml src/ > report_src.xml
+  # code covarage
+  - bash <(curl -s https://codecov.io/bash) -f report_src.xml || echo "No cppcheck report"
