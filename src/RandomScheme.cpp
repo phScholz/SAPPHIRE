@@ -160,8 +160,9 @@ void RandomScheme<NLD>::CreateGammaTransitions(double eStart){
 		    					tWFC_,uTWFC_,uTWSFC_, previous, rit->energy_);
 
                     if(!transmissionFunc_->IsValid()) {
-                        throw std::invalid_argument("Input for transmissionfunc is invalid.");
                         delete transmissionFunc_;
+                        throw std::invalid_argument("Input for transmissionfunc is invalid.");
+                        
                     }
 
                     if(abs(rit->energy_-it->energy_)!=0){
@@ -337,11 +338,13 @@ template <class NLD>
 void RandomScheme<NLD>::WriteRandomScheme(std::string file){
     std::ofstream out(file, std::ios::out);
     out.precision(3);
+
     if(verbose_) std::cout << "Random level scheme generated: " << std::endl;
-    int index = 1;
+    
     ProgressBar pg;
     pg.start(randomScheme->size());
     if(randomScheme->size()>0){
+        int index = 1;
         for(std::vector<Level>::iterator it = randomScheme->begin(); it != randomScheme->end(); ++it) {
             out << index << "\t" << std::fixed << it->energy_ << "\t" << std::fixed << it->J_ << "\t" << it->Pi_ << std::endl;
             if(it->gammas_.size()>0){

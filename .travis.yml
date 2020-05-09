@@ -25,3 +25,4 @@ install:
 
 script:
  - build/sapphire reaction 25Mg+p
+ - bash <(curl -s https://codecov.io/bash)

@@ -120,15 +120,15 @@ namespace Module_CrossSection{
 
     void readEntrancePairs(std::vector<EntrancePairs> * entrancePairs, std::string reactionFile){
         std::ifstream in(reactionFile.c_str());
-        int Z,A,pType =0;
+        
         if(!in) {
 	        std::cout << "Could not open " << reactionFile << " for reading." << std::endl;
 	        exit(1);
         } else {
 	        std::cout << "Reading nuclei from " << reactionFile << "." << std::endl;
 
-
 	    while(!in.eof()) {
+            int Z,A,pType =0;
 	        std::string line;
 	        std::getline(in,line);
 	            
