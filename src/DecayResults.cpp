@@ -147,12 +147,6 @@ void DecayResults::WriteNCloseFile(){
 }
 
 DecayResults::~DecayResults() {
-  delete gammaEnergyHist_;
-  delete protonEnergyHist_;
-  delete alphaEnergyHist_;
-  delete neutronEnergyHist_;
-  delete TSCMatrix_;
-  delete ggMatrix_;
   delete outputTree_;
   delete outputFile_;
 }
