@@ -206,7 +206,7 @@ namespace Module_Decayer{
 
             
             #pragma omp parallel for
-            for(int j = 0;j<numInChunk;j++) {
+            for(int j = 0;j<numInChunk;j++){
                 
                 pg.update(j);
                 double energy = (lowEnergy==highEnergy) ? lowEnergy :
@@ -240,12 +240,14 @@ namespace Module_Decayer{
             if(events>1){
                 std::cout << std::endl << "Writing ROOT Tree..." << std::endl;                
                 results->AddResults(chunkResults);
-            }
-            
-        }       
+            }            
+        }
 
-        if(results) delete results;
-
+        if(events>1)
+        {
+            results->WriteNCloseFile();
+            delete results;
+        }
     }
 
     bool fexists(const char *filename) {

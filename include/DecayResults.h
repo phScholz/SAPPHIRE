@@ -18,6 +18,7 @@ class DecayResults {
   DecayResults(int, int, double, int, double, double, int);
   ~DecayResults();
   void AddResults(std::vector<std::pair<DecayData, std::vector<DecayProduct> > >&);
+  void WriteNCloseFile();
 
   
   void SetgResol(double x){gResol_=x;} /**< Setter gResol_*/

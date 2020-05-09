@@ -141,21 +141,12 @@ DecayResults::DecayResults(int Z, int A, double J, int Pi, double initialEnergyL
   SetgResol(0.00);
 }
 
-DecayResults::~DecayResults() {
-  /** 1. Wait until the number of OpenMP threads is equal to 1. */
-  std::cout << "Waiting on threads to be finished..." << std::endl;
-  while(omp_get_num_threads()!=1){
-    std::this_thread::sleep_for(std::chrono::seconds(1));
-    std::cout << "Waiting ..." << std::endl;
-  }  
-  //outputTree_->Print();
-  /** 2. Write the output file*/
+void DecayResults::WriteNCloseFile(){
   outputFile_->Write();
-
-  /** 3. Close the output file*/
   outputFile_->Close();
+}
 
-  /** 4. Delete the outputFile_ object*/
+DecayResults::~DecayResults() {
   delete gammaEnergyHist_;
   delete protonEnergyHist_;
   delete alphaEnergyHist_;
