@@ -32,8 +32,6 @@ script:
  # run the project
  - build/sapphire reaction examples/test_89Y+p.ini
  # cpp check src
- - cppcheck --xml src/
- # cpp check include
- - cppcheck --xml include/
+ - cppcheck --xml src/ > report_src.xml
  # code covarage
  - bash <(curl -s https://codecov.io/bash)
