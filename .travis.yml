@@ -32,8 +32,8 @@ script:
  # run the project
  - build/sapphire reaction 25Mg+p
  # cpp check src
- - cppcheck src/
+ - cppcheck --xml src/
  # cpp check include
- - cppcheck include/
+ - cppcheck --xml include/
  # code covarage
  - bash <(curl -s https://codecov.io/bash)
