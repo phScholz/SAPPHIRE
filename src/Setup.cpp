@@ -90,7 +90,7 @@ void Initialize() {
   CrossSection::SetResidualGamma(true);
   CrossSection::SetResidualNeutron(true);
   CrossSection::SetResidualProton(true);
-  CrossSection::SetResidualAlpha(trues);
+  CrossSection::SetResidualAlpha(true);
   CrossSection::SetCalculateGammaCutoff(true);
   CrossSection::CreateTempVector();
   CrossSection::CreateMACSEnergiesVector();
