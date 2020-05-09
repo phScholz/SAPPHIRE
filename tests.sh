@@ -18,3 +18,4 @@ build/sapphire reaction examples/test_reaction2.ini || echo "Sapphire reaction e
 build/sapphire reaction examples/test_reaction3.ini || echo "Sapphire reaction examples/test_reaction3.ini failed!"
 build/sapphire decayer examples/test_decayer.ini || echo "Sapphire decayer examples/test_decayer.ini failed!"
 build/sapphire random examples/test_random.ini || echo "Sapphire random examples/test_random.ini failed!"
+build/sapphire old 25Mg+p --average-rad-width || echo "Sapphire old 25Mg+p --average-rad-width failed!"
