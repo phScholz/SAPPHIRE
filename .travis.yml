@@ -33,7 +33,7 @@ script:
   # run the project
   - build/sapphire reaction examples/test_89Y+p.ini
 
- after_success:
+after_success:
   # lcov
   - lcov --directory . --capture --output-file coverage.info
   - bash <(curl -s https://codecov.io/bash) - f coverage.info || echo "No lcov report"
