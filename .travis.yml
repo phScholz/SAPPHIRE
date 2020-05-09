@@ -35,5 +35,5 @@ script:
   - bash tests.sh
 
 after_success:
-  - lgov -d . -c -o coverage.info
+  - lcov -d . -c -o coverage.info
   - codecov
