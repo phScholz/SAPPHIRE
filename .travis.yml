@@ -16,11 +16,11 @@ addons:
       - libomp-dev
       - libxpm-dev
 
-before install:
+before_install:
   # Getting root binaries
   - cd ${TRAVIS_BUILD_DIR}/..
   - wget https://root.cern/download/root_v6.20.04.Linux-ubuntu18-x86_64-gcc7.5.tar.gz
-  - tar -xzvf root_v6.20.04.Linux-ubuntu18-x86_64-gcc7.5.tar.gz
+  - tar -xzf root_v6.20.04.Linux-ubuntu18-x86_64-gcc7.5.tar.gz
   - source root/bin/thisroot.sh
   
 install:  
