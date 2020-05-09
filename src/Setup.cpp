@@ -88,9 +88,9 @@ double GammaTransmissionFunc::gnorm_;
 void Initialize() {
 
   CrossSection::SetResidualGamma(true);
-  CrossSection::SetResidualNeutron(false);
-  CrossSection::SetResidualProton(false);
-  CrossSection::SetResidualAlpha(false);
+  CrossSection::SetResidualNeutron(true);
+  CrossSection::SetResidualProton(true);
+  CrossSection::SetResidualAlpha(trues);
   CrossSection::SetCalculateGammaCutoff(true);
   CrossSection::CreateTempVector();
   CrossSection::CreateMACSEnergiesVector();

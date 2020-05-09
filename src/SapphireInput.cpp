@@ -52,7 +52,7 @@
         SapphireInput::PrintRate(0);
         SapphireInput::CalcRates(0);           
         SapphireInput::CalcAverageWidth(false);
-        SapphireInput::ResidualGamma(true);               
+        SapphireInput::ResidualGamma(false);               
         SapphireInput::ResidualNeutron(false);           
         SapphireInput::ResidualProton(false);
         SapphireInput::ResidualAlpha(false);
