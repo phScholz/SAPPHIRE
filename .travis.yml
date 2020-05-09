@@ -10,19 +10,30 @@ addons:
     update: true
     packages:
       - doxygen
+      - cppcheck
       - libgsl-dev
       - libboost-all-dev
       - libomp-dev
       - libxpm-dev
 
-install:
+before install:
+  # Getting root binaries
   - cd ${TRAVIS_BUILD_DIR}/..
   - wget https://root.cern/download/root_v6.20.04.Linux-ubuntu18-x86_64-gcc7.5.tar.gz
   - tar -xzvf root_v6.20.04.Linux-ubuntu18-x86_64-gcc7.5.tar.gz
   - source root/bin/thisroot.sh
+  
+install:  
+  # build the project
   - cd ${TRAVIS_BUILD_DIR}
   - bash build.sh
 
 script:
+ # run the project
  - build/sapphire reaction 25Mg+p
+ # cpp check src
+ - cppcheck src/
+ # cpp check include
+ - cppcheck include/
+ # code covarage
  - bash <(curl -s https://codecov.io/bash)
