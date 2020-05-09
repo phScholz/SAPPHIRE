@@ -19,7 +19,7 @@ addons:
 before_install:
   # Getting root binaries
   - cd ${TRAVIS_BUILD_DIR}/..
-  - wget -quiet https://root.cern/download/root_v6.20.04.Linux-ubuntu18-x86_64-gcc7.5.tar.gz
+  - wget --quiet https://root.cern/download/root_v6.20.04.Linux-ubuntu18-x86_64-gcc7.5.tar.gz
   - tar -xzf root_v6.20.04.Linux-ubuntu18-x86_64-gcc7.5.tar.gz
   - source root/bin/thisroot.sh
   
