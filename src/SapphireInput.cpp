@@ -71,8 +71,8 @@
         SapphireInput::PreEqMaxL(8.);
         SapphireInput::g_CutoffEnergy(10000.);
         SapphireInput::Reaction("25Mg+a");        
-        SapphireInput::EnergyFile("/examples/energyFile");
-        SapphireInput::ReactionFile("/examples/reactionFile");
+        SapphireInput::EnergyFile("");
+        SapphireInput::ReactionFile("");
         SapphireInput::MassTable(sourceDirectory()+"/tables/masses/masses.dat");
         SapphireInput::GdrParams(sourceDirectory()+"/tables/gamma/ripl3_gdr_parameters.dat");
         SapphireInput::LevelDir(sourceDirectory()+"/tables/levels/");
