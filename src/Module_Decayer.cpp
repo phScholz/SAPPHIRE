@@ -222,7 +222,7 @@ namespace Module_Decayer{
                 
                 pg.update(j);
 
-                DecayController* controller = controllerVector.at(j);
+                //DecayController* controller = controllerVector.at(j);
 
                 double neutronEntranceWidth = 0.;
                 double protonEntranceWidth = 0.;
@@ -233,12 +233,12 @@ namespace Module_Decayer{
                 double gammaTotalWidth = 0.;
                 double alphaTotalWidth = 0.;
 
-                controller->Decay(neutronEntranceWidth,protonEntranceWidth,alphaEntranceWidth,gammaEntranceWidth,neutronTotalWidth,protonTotalWidth,alphaTotalWidth,gammaTotalWidth); 
+                controllerVector.at(j)->Decay(neutronEntranceWidth,protonEntranceWidth,alphaEntranceWidth,gammaEntranceWidth,neutronTotalWidth,protonTotalWidth,alphaTotalWidth,gammaTotalWidth); 
                 
-                chunkResults[j] = std::pair<DecayData,std::vector<DecayProduct>>(DecayData(energy,neutronEntranceWidth,protonEntranceWidth, alphaEntranceWidth,gammaEntranceWidth, neutronTotalWidth,protonTotalWidth, alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
+                chunkResults[j] = std::pair<DecayData,std::vector<DecayProduct>>(DecayData(energy,neutronEntranceWidth,protonEntranceWidth, alphaEntranceWidth,gammaEntranceWidth, neutronTotalWidth,protonTotalWidth, alphaTotalWidth,gammaTotalWidth),controllerVector.at(j)->DecayProducts());
 
-                if(events==1) controller->PrintDecays();
-                delete controller;
+                if(events==1) controllerVector.at(j)->PrintDecays();
+                //delete controller;
             }          
                         
             if(events>1){
