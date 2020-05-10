@@ -203,21 +203,26 @@ namespace Module_Decayer{
             */
             ProgressBar pg;
             pg.start(numInChunk); 
-
             
+            double energy=0;
+
+            std::vector<DecayController *> controllerVector(numInChunk);
+
+            for(int k = 0; k<numInChunk; k++){
+                energy = (lowEnergy==highEnergy) ? lowEnergy :
+                    lowEnergy+(highEnergy-lowEnergy)*double(rand_r(&randomSeed[omp_get_thread_num()]))/double(RAND_MAX);
+
+                if(preEq) {
+	               controllerVector.at(k)= new DecayController(Z,A,J,Pi,energy,numNuParticles,numNuHoles,numPiParticles,numPiHoles);
+                } else controllerVector.at(k) = new DecayController(Z,A,J,Pi,energy);
+            }
+
             #pragma omp parallel for
             for(int j = 0;j<numInChunk;j++){
                 
                 pg.update(j);
-                double energy = (lowEnergy==highEnergy) ? lowEnergy :
-    
-                lowEnergy+(highEnergy-lowEnergy)*double(rand_r(&randomSeed[omp_get_thread_num()]))/double(RAND_MAX);
 
-                DecayController* controller;
-
-                if(preEq) {
-	               controller= new DecayController(Z,A,J,Pi,energy,numNuParticles,numNuHoles,numPiParticles,numPiHoles);
-                } else controller = new DecayController(Z,A,J,Pi,energy);
+                DecayController* controller = controllerVector.at(j);
 
                 double neutronEntranceWidth = 0.;
                 double protonEntranceWidth = 0.;
@@ -234,8 +239,7 @@ namespace Module_Decayer{
 
                 if(events==1) controller->PrintDecays();
                 delete controller;
-            }
-            
+            }          
                         
             if(events>1){
                 std::cout << std::endl << "Writing ROOT Tree..." << std::endl;                
