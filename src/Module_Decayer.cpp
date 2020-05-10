@@ -239,7 +239,9 @@ namespace Module_Decayer{
 
                 if(events==1) controllerVector.at(j)->PrintDecays();
                 //delete controller;
-            }          
+            }
+
+            while(!controllerVector.empty()) delete controllerVector.back(), controllerVector.pop_back();
                         
             if(events>1){
                 std::cout << std::endl << "Writing ROOT Tree..." << std::endl;                
