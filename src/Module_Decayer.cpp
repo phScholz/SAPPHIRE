@@ -202,8 +202,6 @@ namespace Module_Decayer{
             *   number of decays in the current chunk.
             */
             ProgressBar pg;
-            pg.start(numInChunk); 
-            
             double energy=0;
 
             std::vector<DecayController *> controllerVector(numInChunk, nullptr);
@@ -216,6 +214,8 @@ namespace Module_Decayer{
 	               controllerVector.at(k)= new DecayController(Z,A,J,Pi,energy,numNuParticles,numNuHoles,numPiParticles,numPiHoles);
                 } else controllerVector.at(k) = new DecayController(Z,A,J,Pi,energy);
             }
+
+            pg.start(numInChunk); 
 
             #pragma omp parallel for
             for(int j = 0;j<numInChunk;j++){
@@ -236,7 +236,7 @@ namespace Module_Decayer{
                 controller->Decay(neutronEntranceWidth,protonEntranceWidth,alphaEntranceWidth,gammaEntranceWidth,neutronTotalWidth,protonTotalWidth,alphaTotalWidth,gammaTotalWidth); 
                 
                 #pragma omp critical
-                chunkResults[j] = std::pair<DecayData,std::vector<DecayProduct>>(DecayData(energy,neutronEntranceWidth,protonEntranceWidth, alphaEntranceWidth,gammaEntranceWidth, neutronTotalWidth,protonTotalWidth, alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
+                    chunkResults[j] = std::pair<DecayData,std::vector<DecayProduct>>(DecayData(energy,neutronEntranceWidth,protonEntranceWidth, alphaEntranceWidth,gammaEntranceWidth, neutronTotalWidth,protonTotalWidth, alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
 
                 if(events==1) controller->PrintDecays();
                 //delete controller;
