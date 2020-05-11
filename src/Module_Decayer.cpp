@@ -206,7 +206,7 @@ namespace Module_Decayer{
             
             double energy=0;
 
-            std::vector<DecayController *> controllerVector(numInChunk);
+            std::vector<DecayController *> controllerVector(numInChunk, nullptr);
 
             for(int k = 0; k<numInChunk; k++){
                 energy = (lowEnergy==highEnergy) ? lowEnergy :
@@ -222,7 +222,7 @@ namespace Module_Decayer{
                 
                 pg.update(j);
 
-                //DecayController* controller = controllerVector.at(j);
+                DecayController* controller = controllerVector.at(j);
 
                 double neutronEntranceWidth = 0.;
                 double protonEntranceWidth = 0.;
@@ -233,11 +233,12 @@ namespace Module_Decayer{
                 double gammaTotalWidth = 0.;
                 double alphaTotalWidth = 0.;
 
-                controllerVector.at(j)->Decay(neutronEntranceWidth,protonEntranceWidth,alphaEntranceWidth,gammaEntranceWidth,neutronTotalWidth,protonTotalWidth,alphaTotalWidth,gammaTotalWidth); 
+                controller->Decay(neutronEntranceWidth,protonEntranceWidth,alphaEntranceWidth,gammaEntranceWidth,neutronTotalWidth,protonTotalWidth,alphaTotalWidth,gammaTotalWidth); 
                 
-                chunkResults[j] = std::pair<DecayData,std::vector<DecayProduct>>(DecayData(energy,neutronEntranceWidth,protonEntranceWidth, alphaEntranceWidth,gammaEntranceWidth, neutronTotalWidth,protonTotalWidth, alphaTotalWidth,gammaTotalWidth),controllerVector.at(j)->DecayProducts());
+                #pragma omp critical
+                chunkResults[j] = std::pair<DecayData,std::vector<DecayProduct>>(DecayData(energy,neutronEntranceWidth,protonEntranceWidth, alphaEntranceWidth,gammaEntranceWidth, neutronTotalWidth,protonTotalWidth, alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
 
-                if(events==1) controllerVector.at(j)->PrintDecays();
+                if(events==1) controller->PrintDecays();
                 //delete controller;
             }
 
