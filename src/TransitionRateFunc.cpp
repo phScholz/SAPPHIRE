@@ -77,7 +77,7 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
       exclusiveLowEnergy = compoundE+qValue-highestBoundEnergy;
   }
 
-  int numSteps = (highEnergy>lowEnergy) ? 100 : -100;//int((highEnergy-lowEnergy)/dE);
+  int numSteps = (highEnergy>lowEnergy) ? 50 : -50;//int((highEnergy-lowEnergy)/dE);
   //int numSteps = (highEnergy>lowEnergy) ? int((highEnergy-lowEnergy)/dE) : int((lowEnergy-highEnergy)/dE);
   if(numSteps>0) {
     if(numSteps%2!=0) {
@@ -93,7 +93,7 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
   double lastTerm=0.;
 
 //calculate the product of leveldensity*transmissionCoefficient for each energy bin in the continuum
-#pragma omp parallel for if(isCrossSection) reduction(+:sum,exclusiveSum,oddSum,evenSum)
+//#pragma omp parallel for if(isCrossSection) reduction(+:sum,exclusiveSum,oddSum,evenSum)
   for(int i=0;i<=numSteps;++i) {
     double ep = lowEnergy+dE*i;
     double rate = CalcLevelDensity(compoundE+qValue-ep)*CalcTransmissionFunc(ep);
@@ -121,8 +121,9 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
   double groundStateTransmission = 0.;
 
 //calculate the product of leveldensity*transmissionCoefficient for each level in the known level scheme
-#pragma omp parallel for if(isCrossSection) reduction(+:sum,exclusiveSum,discreteSum)
+//#pragma omp parallel for if(isCrossSection) reduction(+:sum,exclusiveSum,discreteSum)
  for(int i=knownLevels.size()-1;i>=0;--i) {
+
     if(knownLevels[i].J_==jFinal&&knownLevels[i].Pi_==piFinal) {
       double ep = compoundE+qValue-knownLevels[i].energy_;
       if(ep<1e-10) continue;
@@ -130,10 +131,12 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
       discreteSum+=rate;
       sum+=rate;
       exclusiveSum+=rate;
+
       if(!isCrossSection){
 	      function_.push_back(XYPair(ep,rate));
 	      cumulativeSum_.push_back(XYPair(ep,sum));     
       }
+
       if(knownLevels[i].energy_==0.) groundStateTransmission = rate;
    }
   }
@@ -142,5 +145,5 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
   if(!isCrossSection)
     for(int i = 0; i< cumulativeSum_.size(); i++) 
       if(integral_>0.) cumulativeSum_[i].Y_*=sum/integral_;
-  exclusiveBranching_ = (sum>0.) ? exclusiveSum/sum : 0.;
+      exclusiveBranching_ = (sum>0.) ? exclusiveSum/sum : 0.;
 }

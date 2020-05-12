@@ -343,7 +343,6 @@ void Decayer::PrintCDF() {
 bool Decayer::Decay(int& Z, int& A, double& jFinal, int& piFinal, 
 		    double& excitationEnergy, double& decayEnergy) {
   double randomNumber=0.;
-
   while(randomNumber==0.) randomNumber = double(rand_r(&randomSeed[omp_get_thread_num()]))/double(RAND_MAX);
 
   bool found = false;

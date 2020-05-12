@@ -2,7 +2,7 @@
 
 1. [Keywords Table](#keywords-table)
 2. [Keywords](#keywords)
-3. [Example Inputfile](#example-inputfile)
+3. [Example Inputfiles](#example-inputfiles)
 
 ---
 

@@ -20,6 +20,9 @@
 #include "Progressbar.h"
 #include "ParticleTransmissionFunc.h"
 #include "GammaStrength/GammaTransmissionFunc.h"
+#include "boost/random.hpp"
+#include "boost/generator_iterator.hpp"
+#include <ctime>
 
 namespace Module_Decayer{
 
@@ -91,7 +94,7 @@ namespace Module_Decayer{
             Input.PrintIntputFile(str);
             Input.ReadInputFile(str);
             Input.PrintIntputParameters("Decayer");
-            Run(Input);
+            RunSingle(Input);
             
         }else{
             std::cout << "No valid input file was given." << std::endl;
@@ -107,7 +110,7 @@ namespace Module_Decayer{
         std::cout << std::endl << "Total calculation time: " << elapsed_seconds.count() << "s\n";
     }
     
-    void Run(const SapphireInput &input){
+    void RunSingle(const SapphireInput &input){
         /**
         * 1. At first the parameters needed to be initialized for the old Sapphire code
         * are obtained from the SapphireInput object passed by reference to the Module_Decayer::Run()
@@ -186,7 +189,6 @@ namespace Module_Decayer{
         if(events>1) results = new DecayResults(Z,A,J,Pi,lowEnergy,highEnergy,suffixNo);
         
     for(int i = 0;i<=chunks;i++) {
-
           
             int numInChunk = (i==chunks) ? remainder : chunkSize;
             if(numInChunk==0) continue;
@@ -206,13 +208,29 @@ namespace Module_Decayer{
 
             std::vector<DecayController *> controllerVector(numInChunk, nullptr);
 
-            for(int k = 0; k<numInChunk; k++){
-                energy = (lowEnergy==highEnergy) ? lowEnergy :
-                    lowEnergy+(highEnergy-lowEnergy)*double(rand_r(&randomSeed[omp_get_thread_num()]))/double(RAND_MAX);
+            //Select random number generator
+            typedef boost::mt19937 base_generator_type;
 
-                if(preEq) {
+            //Use the system time as seed
+            base_generator_type generator(time(0));
+
+            // Define a uniform random number distribution which produces "double"
+            // values between 0 and 1 (0 inclusive, 1 exclusive).
+            boost::uniform_real<> uni_dist(0,1);
+
+            boost::variate_generator<base_generator_type&, boost::uniform_real<> > uni(generator, uni_dist);
+
+            for(int k = 0; k<numInChunk; k++){
+                energy = (lowEnergy==highEnergy) ? lowEnergy : lowEnergy+(highEnergy-lowEnergy)*uni();
+
+                if(preEq)
+                {
 	               controllerVector.at(k)= new DecayController(Z,A,J,Pi,energy,numNuParticles,numNuHoles,numPiParticles,numPiHoles);
-                } else controllerVector.at(k) = new DecayController(Z,A,J,Pi,energy);
+                } 
+                else
+                {
+                    controllerVector.at(k) = new DecayController(Z,A,J,Pi,energy);
+                }
             }
 
             pg.start(numInChunk); 
@@ -236,18 +254,21 @@ namespace Module_Decayer{
                 controller->Decay(neutronEntranceWidth,protonEntranceWidth,alphaEntranceWidth,gammaEntranceWidth,neutronTotalWidth,protonTotalWidth,alphaTotalWidth,gammaTotalWidth); 
                 
                 #pragma omp critical
-                    chunkResults[j] = std::pair<DecayData,std::vector<DecayProduct>>(DecayData(energy,neutronEntranceWidth,protonEntranceWidth, alphaEntranceWidth,gammaEntranceWidth, neutronTotalWidth,protonTotalWidth, alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
-
-                if(events==1) controller->PrintDecays();
+                    chunkResults[j] = std::pair<DecayData,std::vector<DecayProduct>>(DecayData(controller->Energy(),neutronEntranceWidth,protonEntranceWidth, alphaEntranceWidth,gammaEntranceWidth, neutronTotalWidth,protonTotalWidth, alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
+                
+                #pragma omp critical
+                    if(events<=10) controller->PrintDecays();
                 //delete controller;
             }
 
-            while(!controllerVector.empty()) delete controllerVector.back(), controllerVector.pop_back();
-                        
+            pg.update(numInChunk);
+
             if(events>1){
                 std::cout << std::endl << "Writing ROOT Tree..." << std::endl;                
                 results->AddResults(chunkResults);
-            }            
+            }
+
+            while(!controllerVector.empty()) delete controllerVector.back(), controllerVector.pop_back();            
         }
 
         if(events>1)

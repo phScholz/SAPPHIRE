@@ -125,7 +125,7 @@ namespace Module_CrossSection{
 	        std::cout << "Could not open " << reactionFile << " for reading." << std::endl;
 	        exit(1);
         } else {
-	        std::cout << "Reading nuclei from " << reactionFile << "." << std::endl;
+	        std::cout << "Reading nuclei from " << reactionFile << ".::" << std::endl << std::endl;
 
 	    while(!in.eof()) {
             int Z,A,pType =0;
@@ -185,11 +185,38 @@ namespace Module_CrossSection{
             CrossSection* xs = new CrossSection(it->Z_,it->A_, it->pType_,input.EnergyFile(),input.CalcRates());
             if(xs->IsValid())
             {
-                std::cout << std::endl << std::endl << "Calculating for Z: " << it->Z_ << " A: " << it->A_ << " and Particle Type: " << it->pType_ << std::endl;
+                if(input.CalcAverageWidth()) {
+	                    std::pair<double,double> sWave = xs->CalcAverageSWaveResWidth();
+	                    std::pair<double,double> pWave = xs->CalcAveragePWaveResWidth();
+	                    std::pair<double,double> dWave = xs->CalcAverageDWaveResWidth();
+	                    std::cout << std::endl << std::endl << "  Average S-Wave Radiative Width [meV]: " 
+	                    	    << 1.e9*sWave.first
+	                    	    << std::endl;
+	                    std::cout << "Average S-Wave Resonance Spacing [keV]: " 
+	                    	    << 1.e3*sWave.second
+	                    	    << std::endl;	
+	                    std::cout << "  Average P-Wave Radiative Width [meV]: " 
+	                    	    << 1.e9*pWave.first 
+	                    	    << std::endl;
+	                    std::cout << "Average P-Wave Resonance Spacing [keV]: " 
+	                    	    << 1.e3*pWave.second
+	                    	    << std::endl;	
+	                    std::cout << "  Average D-Wave Radiative Width [meV]: " 
+	                    	    << 1.e9*dWave.first 
+	                    	    << std::endl;
+	                    std::cout << "Average D-Wave Resonance Spacing [keV]: " 
+		                << 1.e3*dWave.second
+		                << std::endl;
+                }
+
+                std::cout << std::endl << "Calculating for Z: " << it->Z_ << " A: " << it->A_ << " and Particle Type: " << it->pType_ << std::endl << std::endl;
                 xs->Calculate();
                 if(input.PrintXs()) xs->PrintCrossSections();
                 if(input.PrintTrans()) xs->PrintTransmissionTerms();
-                //if(input.PrintRate()) xs->PrintReactionRates();
+                if(input.CalcRates()) xs->CalculateReactionRates(false);
+                if(input.PrintRate() && input.CalcRates()) xs->PrintReactionRates(false);
+                if(input.CalcMACS()) xs->CalculateReactionRates(true);
+                if(input.PrintMACS() && input.CalcMACS()) xs->PrintReactionRates(true);           
             }
             else
             {
@@ -246,14 +273,43 @@ namespace Module_CrossSection{
         else if(pType==3) 
 	        std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "a" << std::setw(0) << std::endl;
             
-        std::cout << "Starting Cross Section Calculation..." << std::endl;           
+        std::cout << std::endl << "Starting Cross Section Calculation..." << std::endl;           
 
         CrossSection* xs = new CrossSection(Z,A,pType,energyFile,forRates,entranceState,exitStates);
         if(xs->IsValid())
         {
+            if(input.CalcAverageWidth()) 
+            {
+	                    std::pair<double,double> sWave = xs->CalcAverageSWaveResWidth();
+	                    std::pair<double,double> pWave = xs->CalcAveragePWaveResWidth();
+	                    std::pair<double,double> dWave = xs->CalcAverageDWaveResWidth();
+	                    std::cout << std::endl << std::endl << "  Average S-Wave Radiative Width [meV]: " 
+	                    	    << 1.e9*sWave.first
+	                    	    << std::endl;
+	                    std::cout << "Average S-Wave Resonance Spacing [keV]: " 
+	                    	    << 1.e3*sWave.second
+	                    	    << std::endl;	
+	                    std::cout << "  Average P-Wave Radiative Width [meV]: " 
+	                    	    << 1.e9*pWave.first 
+	                    	    << std::endl;
+	                    std::cout << "Average P-Wave Resonance Spacing [keV]: " 
+	                    	    << 1.e3*pWave.second
+	                    	    << std::endl;	
+	                    std::cout << "  Average D-Wave Radiative Width [meV]: " 
+	                    	    << 1.e9*dWave.first 
+	                    	    << std::endl;
+	                    std::cout << "Average D-Wave Resonance Spacing [keV]: " 
+		                << 1.e3*dWave.second
+		                << std::endl;
+            }
+
             xs->Calculate();
             if(input.PrintXs()) xs->PrintCrossSections();
             if(input.PrintTrans()) xs->PrintTransmissionTerms();
+            if(input.CalcRates()) xs->CalculateReactionRates(false);
+            if(input.PrintRate() && input.CalcRates()) xs->PrintReactionRates(false);
+            if(input.CalcMACS()) xs->CalculateReactionRates(true);
+            if(input.PrintMACS() && input.CalcMACS()) xs->PrintReactionRates(true);  
         }
         else
         {

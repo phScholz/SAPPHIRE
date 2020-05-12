@@ -220,7 +220,7 @@ CrossSection::CrossSection(int Z, int A, int pType, std::string energyFile, bool
 }
 
 bool CrossSection::FillEnergies(std::string energyFile) {
-  if(verbose_) std::cout << "Trying to read energyFile ..." <<std::endl;
+  //std::cout << std::endl << "Trying to read energyFile ..." <<std::endl;
   std::ifstream in(energyFile.c_str());
   if(!in) return false;
   while(!in.eof()) {
@@ -240,7 +240,7 @@ bool CrossSection::FillEnergies(std::string energyFile) {
 }
 
 bool CrossSection::CalcAllowedJPi(bool forRates) {
-  if(verbose_) std::cout << "Calculate allowed spin and parity ..." <<std::endl;
+  //std::cout << std::endl << "Calculate allowed spin and parity ..." <<std::endl;
   //For rates calculations, transitions to all J-Pi combinations must be calculated since everything is possible, because of reactions on excited states.
   if(forRates) {
     if((pType_==1 || pType_==2)&&A_%2==0) { //even-even nuclei with proton and neutron
@@ -376,7 +376,7 @@ bool CrossSection::CalcDecayerVector(double E, DecayerVector& decayerVector, boo
 }
 
 void CrossSection::Calculate() {
-  if(verbose_) std::cout << "Calculate ..." << std::endl;
+  std::cout << std::endl << "Calculating cross section..." << std::endl;
   
   if(calculateGammaCutoff_) {
     TransitionRateFunc::SetGammaCutoffEnergy(10000.);
@@ -390,12 +390,12 @@ void CrossSection::Calculate() {
     
   int pointIndex=0;
   int numPoints=crossSections_.size();
-  std::cout<<std::endl;
-  pg.start(numPoints);
-  
+
+  pg.start(numPoints);  
   int skipCounter = 0;
 
   //For loop over all energies
+  #pragma omp parallel for
   for(unsigned int i=0; i < crossSections_.size(); i++){
     //update progressbar
     pg.update(i);
@@ -411,6 +411,7 @@ void CrossSection::Calculate() {
         continue;
       }
     }
+    
 
     skipped_.push_back(false);
 
@@ -569,6 +570,7 @@ void CrossSection::Calculate() {
     crossSections_[i].second.neutronStellar_=neutronStellarSum*geometricCrossSection;
     crossSections_[i].second.alphaStellar_=alphaStellarSum*geometricCrossSection;
   }
+  pg.update(numPoints);
  
 }
 
@@ -666,6 +668,7 @@ void CrossSection::PrintTransmissionTerms() {
 }
 
 std::pair<double,double> CrossSection::CalcAverageSWaveResWidth() {
+  std::cout << std::endl << "Calculating Average s-wave resonance width ..." << std::endl;
   double energy = seperationEnergy_;
   DecayerVector decayerVector;
 
@@ -678,7 +681,11 @@ std::pair<double,double> CrossSection::CalcAverageSWaveResWidth() {
   double upSum=0.;
   double downSum=0.;
   
-  for(int j = 0;j<decayerVector.size();j++) {
+  ProgressBar pg;
+  int size=decayerVector.size();
+  pg.start(size);
+  for(int j = 0;j<size;j++) {
+    pg.update(j);
     Decayer* decayer = decayerVector[j].first->widthCorrectedDecayer_;
     
     if(decayer->jInitial_!=groundStateJ_+0.5 && decayer->jInitial_!=groundStateJ_-0.5) continue;
@@ -695,6 +702,7 @@ std::pair<double,double> CrossSection::CalcAverageSWaveResWidth() {
 
     delete decayerVector[j].first;
   }
+  pg.update(size);
 
   LevelDensity* levelDensityUp;
   LevelDensity* levelDensityDown;
@@ -707,8 +715,8 @@ std::pair<double,double> CrossSection::CalcAverageSWaveResWidth() {
 
   if(nldmodel_==1)
   {
-   levelDensityUp = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_+0.5);
-   levelDensityDown = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_-0.5);
+    levelDensityUp = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_+0.5);
+    levelDensityDown = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_-0.5);
   }
   
   double ldValueUp=0.;
@@ -718,6 +726,7 @@ std::pair<double,double> CrossSection::CalcAverageSWaveResWidth() {
     ldValueUp=levelDensityUp->operator()(energy);
     upSum/=2.*pi*ldValueUp;
   }
+
   if(levelDensityDown->operator()(energy)>0.) {
     ldValueDown=levelDensityDown->operator()(energy);
     downSum/=2.*pi*ldValueDown;
@@ -738,6 +747,7 @@ std::pair<double,double> CrossSection::CalcAverageSWaveResWidth() {
 }
 
 std::pair<double,double> CrossSection::CalcAveragePWaveResWidth() {
+  std::cout << std::endl << "Calculating Average p-wave resonance width ..." << std::endl;
   double energy = seperationEnergy_;
   DecayerVector decayerVector;
   if(!CalcDecayerVector(energy,decayerVector,true)) {
@@ -749,7 +759,12 @@ std::pair<double,double> CrossSection::CalcAveragePWaveResWidth() {
   double upSum05=0.;
   double downSum05=0.;
   double downSum15=0.;
-  for(int j = 0;j<decayerVector.size();j++) {
+
+  ProgressBar pg;
+  int size=decayerVector.size();
+  pg.start(size);
+  for(int j = 0;j<size;j++) {
+    pg.update(j);
     Decayer* decayer = decayerVector[j].first->widthCorrectedDecayer_;
     if(decayer->jInitial_!=groundStateJ_+1.5&&
        decayer->jInitial_!=groundStateJ_+0.5&&
@@ -770,6 +785,7 @@ std::pair<double,double> CrossSection::CalcAveragePWaveResWidth() {
     }
     delete decayerVector[j].first;
   }
+  pg.update(size);
 
   LevelDensity* levelDensityUp15;
   LevelDensity* levelDensityUp05;
@@ -835,6 +851,7 @@ std::pair<double,double> CrossSection::CalcAveragePWaveResWidth() {
 }
 
 std::pair<double,double> CrossSection::CalcAverageDWaveResWidth() {
+  std::cout << std::endl << "Calculating Average d-wave resonance width ..." << std::endl;
   double energy = seperationEnergy_;
   DecayerVector decayerVector;
   if(!CalcDecayerVector(energy,decayerVector,true)) {
@@ -848,7 +865,12 @@ std::pair<double,double> CrossSection::CalcAverageDWaveResWidth() {
   double downSum05=0.;
   double downSum15=0.;
   double downSum25=0.;
-  for(int j = 0;j<decayerVector.size();j++) {
+
+  ProgressBar pg;
+  int size = decayerVector.size();
+  pg.start(size);
+  for(int j = 0;j<size;j++) {
+    pg.update(j);
     Decayer* decayer = decayerVector[j].first->widthCorrectedDecayer_;
     if(decayer->jInitial_!=groundStateJ_+2.5&&
        decayer->jInitial_!=groundStateJ_+1.5&&
@@ -875,6 +897,7 @@ std::pair<double,double> CrossSection::CalcAverageDWaveResWidth() {
     }
     delete decayerVector[j].first;
   }
+  pg.update(size);
 
   LevelDensity* levelDensityUp25;
   LevelDensity* levelDensityUp15;
@@ -957,7 +980,7 @@ std::pair<double,double> CrossSection::CalcAverageDWaveResWidth() {
  * Creates SMOKER-like energy grid. A bit crazy.
  */
 void CrossSection::CalculateEnergyGrid() {
-  if(verbose_) std::cout << "Calculate energy grid ..." <<std::endl;
+  std::cout << std::endl << "Calculate energy grid ..." <<std::endl;
   double neutronSepE;
   double protonSepE;
   double alphaSepE;
@@ -1313,8 +1336,8 @@ double gsl_reactionrate_integrand(double x, void * p) {
 
 
 void CrossSection::CalculateReactionRates(bool macs) {
-  if(macs) std::cout << "Calculating MACS..." << std::endl;
-  else std::cout << "Calculating Reaction Rates..." << std::endl;
+  if(macs) std::cout << std::endl << "Calculating MACS..." << std::endl;
+  else std::cout << std::endl << "Calculating Reaction Rates..." << std::endl;
   double energies[crossSections_.size()];
   double gamma[crossSections_.size()];
   double neutron[crossSections_.size()];
@@ -1463,22 +1486,22 @@ void CrossSection::CalculateReactionRates(bool macs) {
 void CrossSection::PrintReactionRates(bool macs) {
   char filename[256];
   if(pType_==0) {
-    sprintf(filename,"Sapphire_%d%s+g_rates.dat",
+    sprintf(filename,"output/Sapphire_%d%s+g_rates.dat",
 	    A_,
 	    NuclearMass::FindElement(Z_).c_str());  
   } else if(pType_==1) {
-    if(macs) sprintf(filename,"Sapphire_%d%s+n_macs.dat",
+    if(macs) sprintf(filename,"output/Sapphire_%d%s+n_macs.dat",
 		     A_,
 		     NuclearMass::FindElement(Z_).c_str());  
-    else sprintf(filename,"Sapphire_%d%s+n_rates.dat",
+    else sprintf(filename,"output/Sapphire_%d%s+n_rates.dat",
 		 A_,
 		 NuclearMass::FindElement(Z_).c_str());  
   } else if(pType_==2) {
-    sprintf(filename,"Sapphire_%d%s+p_rates.dat",
+    sprintf(filename,"output/Sapphire_%d%s+p_rates.dat",
 	    A_,
 	    NuclearMass::FindElement(Z_).c_str());  
   } else {
-    sprintf(filename,"Sapphire_%d%s+a_rates.dat",
+    sprintf(filename,"output/Sapphire_%d%s+a_rates.dat",
 	    A_,
 	    NuclearMass::FindElement(Z_).c_str());  
   }
@@ -1544,7 +1567,7 @@ double gsl_partfunc_integrand(double x, void * p) {
 }
 
 void CrossSection::CalcPartitionFunc() {
-  std::cout << "Calculating Partition Function..." << std::endl;
+  std::cout << std::endl << "Calculating Partition Function..." << std::endl;
   std::vector<Level> knownLevels = NuclearLevels::FindLevels(Z_,A_);
   double highestLevel = (knownLevels.size()) ? knownLevels[knownLevels.size()-1].energy_ : 0.;
   double spinOffset = (A_%2==0) ? 0. : 0.5;
@@ -1553,7 +1576,12 @@ void CrossSection::CalcPartitionFunc() {
   for(int i=0;i<2;++i) {
     std::vector<double>::const_iterator end = (i==0) ? rateTemps_.end() : macsEnergies_.end();
     
+    ProgressBar pg;
+    int size = (i==0) ? rateTemps_.size() : macsEnergies_.size();
+    int num = 0;
+    pg.start(size);
     for(std::vector<double>::const_iterator it = (i==0) ? rateTemps_.begin() : macsEnergies_.begin();it<end;++it) {
+      pg.update(num);
       double sum = 0.;
       double temperature = (i==0) ? (*it) : (*it)/boltzConst;
       
@@ -1564,7 +1592,10 @@ void CrossSection::CalcPartitionFunc() {
 
       for(double j=0.;j<10.0;j+=1.) {	
 	      double jValue = spinOffset+j;
-	      LevelDensity* den = new RauscherLevelDensity(Z_,A_,jValue);
+        LevelDensity * den;
+        if(nldmodel_==0) den = new RauscherLevelDensity(Z_,A_,jValue);
+        if(nldmodel_==1) den = new LevelDensityHFB_BSk14(Z_,A_,jValue);
+
 	      gsl_integration_workspace * w 
 	      = gsl_integration_workspace_alloc (1000);
 	      gsl_function F;
@@ -1580,7 +1611,9 @@ void CrossSection::CalcPartitionFunc() {
       
       if(i==0) partFunc_.push_back(std::pair<double,double>(temperature,sum/(2.*groundStateJ_+1.)));
       else partFuncMACS_.push_back(std::pair<double,double>(temperature,sum/(2.*groundStateJ_+1.)));
+      num++;
     }
+    pg.update(size);
   }
 }
 

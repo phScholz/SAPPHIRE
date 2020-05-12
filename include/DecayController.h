@@ -39,6 +39,8 @@ class DecayController {
   bool Decay(double&,double&,double&,double&,double&,double&,double&,double&);
 
   std::vector<DecayProduct> DecayProducts() const { return decayProducts_; };
+
+  double Energy(){return energy_;}  /**< Getter for energy_*/
  
   /**
    * @brief Print decay informations to std::cout

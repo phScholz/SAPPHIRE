@@ -78,17 +78,29 @@ DecayResults::DecayResults(int Z, int A, double J, int Pi, double initialEnergyL
 
   /** 4. Creating histograms*/
   ggMatrix_ = new TH2F("ggMatrix", "2D Histo; ggMatrix", 
+                        16000, 0, 16.0,
+                        16000, 0, 16.0);
+                        
+  ngMatrix_ = new TH2F("ngMatrix", "2D Histo; ngMatrix", 
+                        4000, 0, 16.0,
+                        4000, 0, 16.0);
+
+  pgMatrix_ = new TH2F("pgMatrix", "2D Histo; pgMatrix", 
+                        4000, 0, 16.0,
+                        4000, 0, 16.0);
+
+  agMatrix_ = new TH2F("agMatrix", "2D Histo; agMatrix", 
                         4000, 0, 16.0,
                         4000, 0, 16.0);
   
   TSCMatrix_ = new TH2F("TSCMatrix", "2D Histo; TSCMatrix", 
-                        4000, 0, 16.0,
-                        4000, 0, 16.0);
+                        16000, 0, 16.0,
+                        16000, 0, 16.0);
   
-  gammaEnergyHist_ = new TH1F("GammaEnergyHist", "1D Gamma Energy Hist", 4000, 0, 16.0);
-  protonEnergyHist_ = new TH1F("ProtonEnergyHist", "1D Proton Energy Hist", 4000, 0, 16.0);
-  neutronEnergyHist_ = new TH1F("NeutronEnergyHist", "1D Neutron Energy Hist", 4000, 0, 16.0);
-  alphaEnergyHist_ = new TH1F("AlphaEnergyHist", "1D Alpha Energy Hist", 4000, 0, 16.0);
+  gammaEnergyHist_ = new TH1F("GammaEnergyHist", "1D Gamma Energy Hist", 16000, 0, 16.0);
+  protonEnergyHist_ = new TH1F("ProtonEnergyHist", "1D Proton Energy Hist", 16000, 0, 16.0);
+  neutronEnergyHist_ = new TH1F("NeutronEnergyHist", "1D Neutron Energy Hist", 16000, 0, 16.0);
+  alphaEnergyHist_ = new TH1F("AlphaEnergyHist", "1D Alpha Energy Hist", 16000, 0, 16.0);
 
   /** 5. Creating branches for all decay results*/   
   //outputTree_->Branch("ggMatrix","TH2F", &ggMatrix_, 32000,0);
@@ -138,7 +150,7 @@ DecayResults::DecayResults(int Z, int A, double J, int Pi, double initialEnergyL
   SetaResol(0.0);
   SetpResol(0.0);
   SetnResol(0.0);
-  SetgResol(0.00);
+  SetgResol(0.0);
 }
 
 void DecayResults::WriteNCloseFile(){
@@ -167,7 +179,6 @@ void DecayResults::AddResults(std::vector<std::pair<DecayData, std::vector<Decay
     alphaEntranceWidth_ = results[i].first.alphaEntranceWidth();
 
     numSteps_=numNeutrons_=numGammas_=numProtons_=numAlphas_=0;
-    double previousGammaEnergy=0;
     
     for(std::vector<DecayProduct>::const_iterator it = results[i].second.begin();
 	    it<results[i].second.end();++it) {
@@ -185,12 +196,8 @@ void DecayResults::AddResults(std::vector<std::pair<DecayData, std::vector<Decay
 	      gammaMomentumX_[numGammas_]=it->particleMomentumX_;
 	      gammaMomentumY_[numGammas_]=it->particleMomentumY_;
 	      gammaMomentumZ_[numGammas_]=it->particleMomentumZ_;
-        if(GetgResol()==0.0){
-          gammaEnergyHist_->Fill(it->particleEnergy_);
-        }
-        else{
-        }
-	      ++numGammas_;
+        gammaEnergyHist_->Fill(it->particleEnergy_);
+        ++numGammas_;
       } else if(it->particleType_==1) {
 	      neutronStepIndex_[numNeutrons_] = numSteps_;
 	      neutronEnergy_[numNeutrons_]=it->particleEnergy_;
@@ -224,7 +231,19 @@ void DecayResults::AddResults(std::vector<std::pair<DecayData, std::vector<Decay
         ggMatrix_->Fill(gammaEnergy_[i], gammaEnergy_[j], 1.);
         TSCMatrix_->Fill(gammaEnergy_[i], gammaEnergy_[i]+gammaEnergy_[j], 1.);
         TSCMatrix_->Fill(gammaEnergy_[j], gammaEnergy_[i]+gammaEnergy_[j], 1.);
-      }     
+      }
+      
+      for(int j=0; j < numNeutrons_; j++){
+        ngMatrix_->Fill(gammaEnergy_[i], neutronEnergy_[j], 1.);
+      }
+
+      for(int j=0; j < numProtons_; j++){
+        pgMatrix_->Fill(gammaEnergy_[i], protonEnergy_[j], 1.);
+      }
+
+      for(int j=0; j < numAlphas_; j++){
+        agMatrix_->Fill(gammaEnergy_[i], alphaEnergy_[j], 1.);
+      }
     }
 
     outputTree_->Fill();

@@ -220,7 +220,7 @@ void LevelDensityHFB_BSk14::FillVector(){
             case 49:DensityVector.push_back(std::pair<double,double>(it->U, it->J49)); break;
 
             default:
-                throw std::runtime_error("Spin is to large for NLD tables "+ std::to_string(J_)+ "!!!");
+                throw std::runtime_error("Spin is not in NLD tables "+ std::to_string(J_)+ "!!!");
         }
     }
 
@@ -255,6 +255,8 @@ void LevelDensityHFB_BSk14::PrintRows(){
 
 
 double LevelDensityHFB_BSk14::CalculateDensity(double E){
+    if(J_<0) return 0;
+    
     HFBCorrTable::const_iterator it = corrTable.find(MassKey(Z_,A_));
     double c = 0;
     double d = 0;

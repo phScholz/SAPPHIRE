@@ -15,7 +15,8 @@
 
 namespace Module_Decayer{
     void Go(int argc,char *argv[]); /**< Top level function to call from main*/
-    void Run(const SapphireInput & input); /**< Declaration of the main function of the Decayer Module*/
+    void RunSingle(const SapphireInput & input); /**< Declaration of the main function of the Decayer Module*/
+    void RunDist(const SapphireInput & input); /**< Declaration of the main function with spin distribution of the Decayer Module*/
 
     /**
      * @brief Check wheter a string represents an actual file.

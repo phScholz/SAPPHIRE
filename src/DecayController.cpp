@@ -38,7 +38,7 @@ bool DecayController::Decay(double& neutronEntrance,
     int parentProtonHoleNumber = initialProtonHoleNumber_;
     
     Decayer *initialEqDecayer = new Decayer(parentZ,parentA,parentJ,parentPi,parentEnergy);
-
+    //initialEqDecayer -> PrintCDF();
     neutronEntrance=initialEqDecayer->NeutronEntranceWidth();
     protonEntrance=initialEqDecayer->ProtonEntranceWidth();
     alphaEntrance=initialEqDecayer->AlphaEntranceWidth();
@@ -72,8 +72,8 @@ bool DecayController::Decay(double& neutronEntrance,
 	        int daughterTotalExcitonNumber = daughterNeutronNumber+daughterNeutronHoleNumber+daughterProtonNumber+daughterProtonHoleNumber;
           int parentTotalExcitonNumber = parentNeutronNumber+parentNeutronHoleNumber+parentProtonNumber+parentProtonHoleNumber;
 
-	        /*decayer->PrintCDF();
-	        preEq = false;
+          //decayer->PrintCDF();
+	        /*preEq = false;
 	        decay = false;
 	        continue;*/
 
@@ -122,13 +122,12 @@ bool DecayController::Decay(double& neutronEntrance,
     
       if(decayer->Decay(daughterZ,daughterA,daughterJ,daughterPi,daughterEnergy,decayEnergy))
       {
-        /*
-        decayer->PrintFunctions();
-        decayer->PrintCDF();
-        decay = false;
-        continue;
-        */
         
+/*      decayer->PrintFunctions();*/
+        //decayer->PrintCDF();
+        /*decay = false;
+        continue; */
+                
 
         if(daughterEnergy<=thresholdEnergy_){
 	        daughterEnergy = 0.;

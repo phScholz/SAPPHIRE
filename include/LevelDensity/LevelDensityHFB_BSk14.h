@@ -242,16 +242,18 @@ class LevelDensityHFB_BSk14 : public LevelDensityTable {
             
             if(verbose_) std::cout << "LevelDensityHFB Constructor ... " << std::endl;
             SetTables(true);
-            if(!FindDensities())
-            {
-                if(verbose_) std::cout << "Getting Filename ... " << std::endl;
-                GetFileName();
-                if(verbose_) std::cout << "Reading File ... " << filename << std::endl;
-                ReadFile();
-                ReadCorr();
+            if(J_>=0){
+                if(!FindDensities())
+                {
+                    if(verbose_) std::cout << "Getting Filename ... " << std::endl;
+                    GetFileName();
+                    if(verbose_) std::cout << "Reading File ... " << filename << std::endl;
+                    ReadFile();
+                    ReadCorr();
+                }
+                    if(verbose_) std::cout << "Filling Vector ... " << filename << std::endl;
+                    FillVector();
             }
-                if(verbose_) std::cout << "Filling Vector ... " << filename << std::endl;
-                FillVector();
         }
 
         /**
@@ -259,18 +261,18 @@ class LevelDensityHFB_BSk14 : public LevelDensityTable {
          */
         LevelDensityHFB_BSk14(int Z, int A, double J) : LevelDensityTable(Z,A,J,1){
             parity_=1;
-            if(verbose_) std::cout << "LevelDensityHFB Constructor ... " << std::endl;
-            SetTables(true);
-            if(!FindDensities())
-            {
-                if(verbose_) std::cout << "Getting Filename ... " << std::endl;
-                GetFileName();
-                if(verbose_) std::cout << "Reading File ... " << filename << std::endl;
-                ReadFile();
-                ReadCorr();
+            if(J_>=0){
+                if(!FindDensities())
+                {
+                    if(verbose_) std::cout << "Getting Filename ... " << std::endl;
+                    GetFileName();
+                    if(verbose_) std::cout << "Reading File ... " << filename << std::endl;
+                    ReadFile();
+                    ReadCorr();
+                }
+                    if(verbose_) std::cout << "Filling Vector ... " << filename << std::endl;
+                    FillVector();
             }
-            if(verbose_) std::cout << "Filling Vector ... " << filename << std::endl;
-            FillVector();
         }
 
 

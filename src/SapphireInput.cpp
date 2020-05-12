@@ -50,7 +50,9 @@
         SapphireInput::PrintTrans(false);
         SapphireInput::PrintXs(1);
         SapphireInput::PrintRate(0);
+        SapphireInput::PrintMACS(0);
         SapphireInput::CalcRates(0);           
+        SapphireInput::CalcMACS(0);           
         SapphireInput::CalcAverageWidth(false);
         SapphireInput::ResidualGamma(false);               
         SapphireInput::ResidualNeutron(false);           
@@ -78,8 +80,8 @@
         SapphireInput::LevelDir(sourceDirectory()+"/tables/levels/");
         SapphireInput::SpinFile(sourceDirectory()+"/tables/spinod.dat");        
         SapphireInput::Isotope("60Ni");
-        SapphireInput::PorterThomas_p(false);
-        SapphireInput::PorterThomas_g(false);        
+        SapphireInput::PorterThomas_p(true);
+        SapphireInput::PorterThomas_g(true);        
         SapphireInput::PreEq(false);
         SapphireInput::PreEqConf("");
         SapphireInput::Spin(1.0);
@@ -173,6 +175,7 @@
             std::cout << "\tEnergyFile           = "             << SapphireInput::EnergyFile() << std::endl;
             std::cout << "\tReactionFile         = "             << SapphireInput::ReactionFile() << std::endl;
             std::cout << "\tCalcRates            = "             << SapphireInput::CalcRates() << std::endl;
+            std::cout << "\tCalcMACS             = "             << SapphireInput::CalcMACS() << std::endl;
             std::cout << "\tCalcAverageWidth     = "             << SapphireInput::CalcAverageWidth() << std::endl;
             std::cout << "\tResidualGamma        = "             << SapphireInput::ResidualGamma() << std::endl;
             std::cout << "\tResidualNeutron      = "             << SapphireInput::ResidualNeutron() << std::endl;
@@ -187,6 +190,7 @@
             std::cout << "\tPrintXS              = "             << SapphireInput::PrintXs() << std::endl;
             std::cout << "\tPrintTRANS           = "             << SapphireInput::PrintTrans() << std::endl;
             std::cout << "\tPrintRATE            = "             << SapphireInput::PrintRate() << std::endl;
+            std::cout << "\tPrintMACS            = "             << SapphireInput::PrintMACS() << std::endl;
             std::cout << std::endl;
         }
         if(module=="Decayer" || module=="all"){
@@ -261,6 +265,7 @@
         SapphireInput::EnergyFile(pt.get<std::string>("CrossSection.EnergyFile", SapphireInput::EnergyFile()));
         SapphireInput::ReactionFile(pt.get<std::string>("CrossSection.ReactionFile", SapphireInput::ReactionFile()));
         SapphireInput::CalcRates(pt.get<bool>("CrossSection.CalcRates", SapphireInput::CalcRates()));
+        SapphireInput::CalcMACS(pt.get<bool>("CrossSection.CalcRates", SapphireInput::CalcMACS()));
         SapphireInput::CalcAverageWidth(pt.get<bool>("CrossSection.CalcAverageWidth", SapphireInput::CalcAverageWidth()));
         SapphireInput::ResidualGamma(pt.get<bool>("CrossSection.ResidualGamma", SapphireInput::ResidualGamma()));               
         SapphireInput::ResidualNeutron(pt.get<bool>("CrossSection.ResidualNeutron", SapphireInput::ResidualNeutron()));           
@@ -269,7 +274,8 @@
         SapphireInput::CalculateGammaCutoff(pt.get<bool>("CrossSection.CalculateGammaCutoff", SapphireInput::CalculateGammaCutoff()));
         SapphireInput::PrintXs(pt.get<bool>("CrossSection.PrintXS", SapphireInput::PrintXs()));
         SapphireInput::PrintTrans(pt.get<bool>("CrossSection.PrintTRANS", SapphireInput::PrintTrans()));
-        SapphireInput::PrintRate(pt.get<bool>("CrossSection.PrintRATE", SapphireInput::PrintRate()));
+        SapphireInput::PrintRate(pt.get<bool>("CrossSection.PrintRATES", SapphireInput::PrintRate()));
+        SapphireInput::PrintMACS(pt.get<bool>("CrossSection.PrintMACS", SapphireInput::PrintMACS()));
 
         //Reading Decayer Input
         SapphireInput::Suffix(pt.get<int>("Decayer.Suffix", SapphireInput::Suffix()));
@@ -417,7 +423,7 @@
         CrossSection::SetResidualNeutron(ResidualNeutron());
         CrossSection::SetResidualProton(ResidualProton());
         CrossSection::SetResidualAlpha(ResidualAlpha());
-        TransitionRateFunc::NLDmodel(LevelDensity());
+        CrossSection::NLDmodel(LevelDensity());
         CrossSection::SetCalculateGammaCutoff(CalculateGammaCutoff());
         Decayer::SetCrossSection(true);
     }

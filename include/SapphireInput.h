@@ -165,6 +165,7 @@ class SapphireInput{
 
         //Setter
         void CalcRates(bool x){calcRates=x;}                         /**< Setter for bool calcRates*/
+        void CalcMACS(bool x){calcMacs=x;}                         /**< Setter for bool calcMacs*/
         void CalcAverageWidth(bool x){calcAverageWidth=x;}           /**< Setter for bool calcAverageWidth*/
         void ResidualGamma(bool x){residualGamma=x;}                 /**< Setter for bool residualGamma*/
         void ResidualNeutron(bool x){residualNeutron=x;}             /**< Setter for bool residualNeutron*/
@@ -176,6 +177,7 @@ class SapphireInput{
         void PrintTrans(bool x){printTrans=x;}                      /**<Setter for bool printTrans*/
         void PrintXs(bool x){printXs=x;}                      /**<Setter for bool printXs*/
         void PrintRate(bool x){printRate=x;}                      /**<Setter for bool printRate*/
+        void PrintMACS(bool x){printMACS=x;}                      /**<Setter for bool printMACS*/
         void PreEq(bool x){preEq=x;}                                    /**<Setter for bool preEq*/
         void AlphaChannel(bool x){alphaChannel=x;}                /**<Setter for bool alphaChannel*/
         void ProtonChannel(bool x){protonChannel=x;}                /**<Setter for bool protonChannel*/
@@ -263,6 +265,7 @@ class SapphireInput{
         
         //Getter
         bool CalcRates() const {return calcRates;}                     /**<Getter for calcrates*/    
+        bool CalcMACS() const {return calcMacs;}                     /**<Getter for calcMacs*/    
         bool CalcAverageWidth() const {return calcAverageWidth;}       /**<Getter for calcAverageWidth*/    
         bool ResidualGamma() const {return residualGamma;}             /**<Getter for residualGamma*/    
         bool ResidualNeutron() const {return residualNeutron;}         /**<Getter for residualNeutron*/    
@@ -274,6 +277,7 @@ class SapphireInput{
         bool PrintTrans() const {return printTrans;}                       /**Getter for bool printTrans*/
         bool PrintXs() const {return printXs;}                       /**Getter for bool printXs*/
         bool PrintRate() const {return printRate;}                       /**Getter for bool printRate*/
+        bool PrintMACS() const {return printMACS;}                       /**Getter for bool printMacs*/
         bool PreEq() const {return preEq;}                                /**<Getter for bool preEq*/
         bool AlphaChannel() const {return alphaChannel;}              /**<Getter for bool alphaChannel*/
         bool ProtonChannel() const {return protonChannel;}              /**<Getter for bool protonChannel*/
@@ -341,6 +345,7 @@ class SapphireInput{
     private:
         bool calcRates;             /**< Bool if rates should be calculated*/
         bool calcAverageWidth;      /**< Bool if average widths should be calculated*/
+        bool calcMacs;             /**< Bool if macs should be calculated*/
         bool residualGamma;        /**< Bool if residual cross section for gamma should be calculated*/
         bool residualNeutron;      /**< Bool if residual cross section for neutron should be calculated*/
         bool residualProton;       /**< Bool if residual cross section for proton should be calculated*/
@@ -351,6 +356,7 @@ class SapphireInput{
         bool printTrans;            /**< Bool if transmission should be printed*/
         bool printXs;               /**< Bool if crossSection should be printed*/
         bool printRate;             /**< Bool if reactionRate should be printed*/
+        bool printMACS;             /**< Bool if MACS should be printed*/
         bool preEq;                 /**< Bool for preEq.*/
         bool alphaChannel;          /**< Toggle alpha channel*/
         bool protonChannel;          /**< Toggle proton channel*/
