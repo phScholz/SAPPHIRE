@@ -1378,8 +1378,9 @@ void CrossSection::CalculateReactionRates(bool macs) {
   double protonStellar[crossSections_.size()];
   double alphaStellar[crossSections_.size()];
   int j = 0;
+
   for(int i = 0;i<crossSections_.size();i++) {
-    if(skipped_[i]) continue;
+    //if(skipped_[i]) continue;
     energies[j]=crossSections_[i].first;
     gamma[j]=crossSections_[i].second.gamma_;
     neutron[j]=crossSections_[i].second.neutron_;
@@ -1391,6 +1392,7 @@ void CrossSection::CalculateReactionRates(bool macs) {
     alphaStellar[j]=crossSections_[i].second.alphaStellar_;
     j++;
   }
+
   TGraph* g_gamma = new TGraph(j,energies,gamma);
   TGraph* g_neutron = new TGraph(j,energies,neutron);
   TGraph* g_proton = new TGraph(j,energies,proton);
@@ -1400,14 +1402,17 @@ void CrossSection::CalculateReactionRates(bool macs) {
   TGraph* g_protonStellar = new TGraph(j,energies,protonStellar);
   TGraph* g_alphaStellar = new TGraph(j,energies,alphaStellar);
   reactionRates_.clear();
-  if(macs) 
-    for(std::vector<double>::const_iterator it = macsEnergies_.begin();
-	it<macsEnergies_.end();++it) {
+
+  if(macs){
+    ProgressBar pg;
+    pg.start(rateTemps_.size());
+    int index=0;
+    for(std::vector<double>::const_iterator it = macsEnergies_.begin(); it<macsEnergies_.end();++it) {
+      pg.update(index);
       struct gsl_reactionrate_params paramsGamma = {(*it)/boltzConst,g_gamma,true};
       struct gsl_reactionrate_params paramsGammaStellar = {(*it)/boltzConst,g_gammaStellar,true};
 
-       gsl_integration_workspace * w 
-	= gsl_integration_workspace_alloc (1000);
+       gsl_integration_workspace * w = gsl_integration_workspace_alloc (1000);
       
       gsl_function F;
       F.function = &gsl_reactionrate_integrand;
@@ -1434,9 +1439,15 @@ void CrossSection::CalculateReactionRates(bool macs) {
 										       0.,
 										       0.)));
     }
+    pg.update(index);
+  }
   else
-    for(std::vector<double>::const_iterator it = rateTemps_.begin();
-	it<rateTemps_.end();++it) {
+  {
+    ProgressBar pg;
+    pg.start(rateTemps_.size());
+    int index=0;
+    for(std::vector<double>::const_iterator it = rateTemps_.begin(); it<rateTemps_.end();++it) {
+      pg.update(index);
       struct gsl_reactionrate_params paramsGamma = {(*it),g_gamma,true};
       struct gsl_reactionrate_params paramsNeutron = {(*it),g_neutron,false};
       struct gsl_reactionrate_params paramsProton = {(*it),g_proton,false};
@@ -1446,14 +1457,12 @@ void CrossSection::CalculateReactionRates(bool macs) {
       struct gsl_reactionrate_params paramsProtonStellar = {(*it),g_protonStellar,false};
       struct gsl_reactionrate_params paramsAlphaStellar = {(*it),g_alphaStellar,false};
       
-      gsl_integration_workspace * w 
-	= gsl_integration_workspace_alloc (1000);
+      gsl_integration_workspace * w = gsl_integration_workspace_alloc (1000);
       
       gsl_function F;
       F.function = &gsl_reactionrate_integrand;
       
-      double error,gammaRate=0.,neutronRate=0.,protonRate=0.,alphaRate=0.,gammaStellarRate=0.,
-	neutronStellarRate=0.,protonStellarRate=0.,alphaStellarRate=0.;
+      double error,gammaRate=0.,neutronRate=0.,protonRate=0.,alphaRate=0.,gammaStellarRate=0., neutronStellarRate=0.,protonStellarRate=0.,alphaStellarRate=0.;
       
       F.params=&paramsGamma;
       gsl_integration_qag(&F,energies[0],energies[j-1],0.0,1e-3,1000,3,w,&gammaRate,&error);
@@ -1474,24 +1483,15 @@ void CrossSection::CalculateReactionRates(bool macs) {
       
       gsl_integration_workspace_free (w);
       
-      double redMass = (pType_==1||pType_==2) ? double(compoundA_-1.)/double(compoundA_) :
-	4.*double(compoundA_-4.)/double(compoundA_);
-      gammaRate*=1e-24*avagadroNum*lightSpeedInCmPerS*sqrt(8.0/pi/redMass/uconv)/
-	pow(boltzConst*(*it),1.5);
-      neutronRate*=1e-24*avagadroNum*lightSpeedInCmPerS*sqrt(8.0/pi/redMass/uconv)/
-	pow(boltzConst*(*it),1.5);
-      protonRate*=1e-24*avagadroNum*lightSpeedInCmPerS*sqrt(8.0/pi/redMass/uconv)/
-	pow(boltzConst*(*it),1.5);
-      alphaRate*=1e-24*avagadroNum*lightSpeedInCmPerS*sqrt(8.0/pi/redMass/uconv)/
-	pow(boltzConst*(*it),1.5);
-      gammaStellarRate*=1e-24*avagadroNum*lightSpeedInCmPerS*sqrt(8.0/pi/redMass/uconv)/
-	pow(boltzConst*(*it),1.5);
-      neutronStellarRate*=1e-24*avagadroNum*lightSpeedInCmPerS*sqrt(8.0/pi/redMass/uconv)/
-	pow(boltzConst*(*it),1.5);
-      protonStellarRate*=1e-24*avagadroNum*lightSpeedInCmPerS*sqrt(8.0/pi/redMass/uconv)/
-	pow(boltzConst*(*it),1.5);
-      alphaStellarRate*=1e-24*avagadroNum*lightSpeedInCmPerS*sqrt(8.0/pi/redMass/uconv)/
-	pow(boltzConst*(*it),1.5);
+      double redMass = (pType_==1||pType_==2) ? double(compoundA_-1.)/double(compoundA_) : 4.*double(compoundA_-4.)/double(compoundA_);
+      gammaRate*=1e-24*avagadroNum*lightSpeedInCmPerS*sqrt(8.0/pi/redMass/uconv) / pow(boltzConst*(*it),1.5);
+      neutronRate*=1e-24*avagadroNum*lightSpeedInCmPerS*sqrt(8.0/pi/redMass/uconv) / pow(boltzConst*(*it),1.5);
+      protonRate*=1e-24*avagadroNum*lightSpeedInCmPerS*sqrt(8.0/pi/redMass/uconv) /	pow(boltzConst*(*it),1.5);
+      alphaRate*=1e-24*avagadroNum*lightSpeedInCmPerS*sqrt(8.0/pi/redMass/uconv) / pow(boltzConst*(*it),1.5);
+      gammaStellarRate*=1e-24*avagadroNum*lightSpeedInCmPerS*sqrt(8.0/pi/redMass/uconv) / pow(boltzConst*(*it),1.5);
+      neutronStellarRate*=1e-24*avagadroNum*lightSpeedInCmPerS*sqrt(8.0/pi/redMass/uconv) /	pow(boltzConst*(*it),1.5);
+      protonStellarRate*=1e-24*avagadroNum*lightSpeedInCmPerS*sqrt(8.0/pi/redMass/uconv) / pow(boltzConst*(*it),1.5);
+      alphaStellarRate*=1e-24*avagadroNum*lightSpeedInCmPerS*sqrt(8.0/pi/redMass/uconv) /	pow(boltzConst*(*it),1.5);
       
       reactionRates_.push_back(std::pair<double,CrossSectionValues>((*it),
 								    CrossSectionValues(gammaRate,
@@ -1503,6 +1503,8 @@ void CrossSection::CalculateReactionRates(bool macs) {
 										       protonStellarRate,
 										       alphaStellarRate)));
     }
+    pg.update(index);
+  }
   delete g_gamma;
   delete g_neutron;
   delete g_proton;
@@ -1512,6 +1514,7 @@ void CrossSection::CalculateReactionRates(bool macs) {
   delete g_protonStellar;
   delete g_alphaStellar;
 }
+
 
 void CrossSection::PrintReactionRates(bool macs) {
   char filename[256];
