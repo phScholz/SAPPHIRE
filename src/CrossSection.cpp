@@ -394,26 +394,27 @@ void CrossSection::Calculate() {
   pg.start(numPoints);  
   int skipCounter = 0;
 
-  //For loop over all energies
-  #pragma omp parallel for
+  //I dont understand this yet ... Its something about counting, which energies were skipped in the calculations ...
   for(unsigned int i=0; i < crossSections_.size(); i++){
-    //update progressbar
-    pg.update(i);
-
-    //I dont understand this yet ... Its something about counting, which energies were skipped in the calculations ...
     if(i>0&&!energiesGiven_) {
       skipCounter++;
       
       if((crossSections_[i-1].second.neutron_==0.|| crossSections_[i-1].second.alpha_==0.|| crossSections_[i-1].second.proton_==0.)&& !skipped_[i-1]) skipCounter=0;
       
-      if(( crossSections_[i].first>skipEnergy_ ) && (i!=crossSections_.size()-1) && ( (i+1)%3!=0 ) && ( skipCounter>8 ) ) {
+      if((crossSections_[i].first>skipEnergy_ ) && (i!=crossSections_.size()-1) && ( (i+1)%3!=0 ) && ( skipCounter>8 ) ) {
         skipped_.push_back(true);
         continue;
       }
+      
+      skipped_.push_back(false);
     }
-    
+  }
 
-    skipped_.push_back(false);
+  //For loop over all energies
+  #pragma omp parallel for
+  for(unsigned int i=0; i < crossSections_.size(); i++){
+    //update progressbar
+    pg.update(i);
 
     // E = center of mass energy - qvalue (seperationEnergy)
     double E = crossSections_[i].first+seperationEnergy_;
