@@ -321,6 +321,7 @@ namespace Module_CrossSection{
     void RunSingleReaction(std::string &reactionString){
         /** This method will invoke a cross section calculation for a reaction given as reactionString .*/
         
+        std::string reaction=reactionString;
         int A = massNumberIntFromString(reactionString);
         int Z = atomicNumberIntFromString(reactionString);
         int pType = pTypeIntFromString(reactionString);
@@ -333,7 +334,7 @@ namespace Module_CrossSection{
 
         if(xs->IsValid())
         {   
-            std::cout << "Calculate cross section for reaction: " << reactionString << std::endl;
+            std::cout << "Calculate cross section for reaction: " << reaction << std::endl;
             xs->Calculate();
             xs->PrintCrossSections();
         }

@@ -376,7 +376,7 @@ bool CrossSection::CalcDecayerVector(double E, DecayerVector& decayerVector, boo
 }
 
 void CrossSection::Calculate() {
-  std::cout << std::endl << "Calculating cross section..." << std::endl;
+  //std::cout << std::endl << "Calculating cross section..." << std::endl;
   
   if(calculateGammaCutoff_) {
     TransitionRateFunc::SetGammaCutoffEnergy(10000.);
@@ -387,34 +387,47 @@ void CrossSection::Calculate() {
 
   //Creating ProgressBar object
   ProgressBar pg;
-    
-  int pointIndex=0;
+  
   int numPoints=crossSections_.size();
 
-  pg.start(numPoints);  
+  pg.start(numPoints);
+  std::cout << std::endl << "Number of energies: " << numPoints << std::endl;  
   int skipCounter = 0;
 
   //I dont understand this yet ... Its something about counting, which energies were skipped in the calculations ...
   for(unsigned int i=0; i < crossSections_.size(); i++){
-    if(i>0&&!energiesGiven_) {
-      skipCounter++;
-      
-      if((crossSections_[i-1].second.neutron_==0.|| crossSections_[i-1].second.alpha_==0.|| crossSections_[i-1].second.proton_==0.)&& !skipped_[i-1]) skipCounter=0;
-      
-      if((crossSections_[i].first>skipEnergy_ ) && (i!=crossSections_.size()-1) && ( (i+1)%3!=0 ) && ( skipCounter>8 ) ) {
-        skipped_.push_back(true);
-        continue;
-      }
-      
-      skipped_.push_back(false);
-    }
+    //if(i>0&&!energiesGiven_) {
+    //  skipCounter++;
+    //  std::cout << "Hier funktionierts noch ..." << std::endl;
+    //  try{
+    //    if((crossSections_[i-1].second.neutron_==0.|| crossSections_[i-1].second.alpha_==0.|| crossSections_[i-1].second.proton_==0.) && !skipped_[i-1]) skipCounter=0;
+    //  }
+    //  catch (std::exception& e)
+    //  {
+    //    std::cout << e.what() << '\n';
+    //  }
+    //  std::cout << "Hier funktionierts auch noch ..." << std::endl;
+    //  try{
+    //    if((crossSections_[i].first>skipEnergy_ ) && (i!=crossSections_.size()-1) && ( (i+1)%3!=0 ) && ( skipCounter>8 ) ) {
+    //      skipped_.push_back(true);
+    //      continue;
+    //    }
+    //  }
+    //  catch (std::exception& e)
+    //  {
+    //    std::cout << e.what() << '\n';
+    //  }
+    //  skipped_.push_back(false);
+    //}
   }
 
+  //std::cout << std::endl << "Starting" << std::endl;
   //For loop over all energies
+  pg.update(0);
   #pragma omp parallel for
   for(unsigned int i=0; i < crossSections_.size(); i++){
-    //update progressbar
-    pg.update(i);
+    
+    //std::cout << std::endl << "Thread: " << omp_get_thread_num() <<  " Energy: " << crossSections_[i].first << std::endl;
 
     // E = center of mass energy - qvalue (seperationEnergy)
     double E = crossSections_[i].first+seperationEnergy_;
@@ -555,10 +568,11 @@ void CrossSection::Calculate() {
 
     double totalSum = gammaSum + neutronSum + protonSum + alphaSum;
     
-    if(totalSum>=2.*gammaSum&&!gammaCutoffSet_&&i>0) {
-      TransitionRateFunc::SetGammaCutoffEnergy(crossSections_[i-1].first+seperationEnergy_);
-      gammaCutoffSet_=true;
-    }
+    // Don't know yet what the following is for
+    //if(totalSum>=2.*gammaSum && !gammaCutoffSet_&& i>0) {
+    //  TransitionRateFunc::SetGammaCutoffEnergy(crossSections_[i-1].first+seperationEnergy_);
+    //  gammaCutoffSet_=true;
+    //}
     
     //if(true) std::cout << "gamma sum " << gammaSum;
 
@@ -570,12 +584,18 @@ void CrossSection::Calculate() {
     crossSections_[i].second.protonStellar_=protonStellarSum*geometricCrossSection;
     crossSections_[i].second.neutronStellar_=neutronStellarSum*geometricCrossSection;
     crossSections_[i].second.alphaStellar_=alphaStellarSum*geometricCrossSection;
+
+    //update progressbar
+    pg.update(i);
   }
+
   pg.update(numPoints);
+  //std::cout << "Calculation done ..." << std::endl;
  
 }
 
 void CrossSection::PrintCrossSections() {
+  std::cout << std::endl << "Printing Cross Sections ..." << std::endl;
   /** 1. Construct file names*/
   char filename[256];
   if(pType_==0) {
@@ -605,17 +625,26 @@ void CrossSection::PrintCrossSections() {
       << std::setw(15) << "alpha [b]"
       << std::setw(0)  << std::endl;
 
-  /** 3. In a foor loop, write the content of crossSections_*/ 
+  /** 3. In a foor loop, write the content of crossSections_*/
+  ProgressBar pg;
+  pg.start(crossSections_.size());
   for(int i = 0;i<crossSections_.size();i++) {
-    if(skipped_[i]) continue;
+    
+    //if(skipped_[i])
+    //{
+    //  continue;
+    //}
+    
     out << std::scientific
-	<< std::setw(15) << crossSections_[i].first
-	<< std::setw(15) << crossSections_[i].second.gamma_
-	<< std::setw(15) << crossSections_[i].second.neutron_
+	      << std::setw(15) << crossSections_[i].first
+	      << std::setw(15) << crossSections_[i].second.gamma_
+	      << std::setw(15) << crossSections_[i].second.neutron_
         << std::setw(15) << crossSections_[i].second.proton_ 
         << std::setw(15) << crossSections_[i].second.alpha_ 
         << std::setw(0)  << std::endl; 
+    pg.update(i);
   }
+  pg.update(crossSections_.size());
   out.flush();
   out.close();
 }
@@ -1218,34 +1247,34 @@ void CrossSection::CalculateEnergyGrid() {
   std::vector<Level> neutronLevels = NuclearLevels::FindLevels(compoundZ_,compoundA_-1);
   std::vector<Level> protonLevels = NuclearLevels::FindLevels(compoundZ_-1,compoundA_-1);
   std::vector<Level> alphaLevels = NuclearLevels::FindLevels(compoundZ_-2,compoundA_-4);
-  double highestCompoundLevel = 
-    (compoundLevels.size()) ? compoundLevels[compoundLevels.size()-1].energy_ : 0.;
-  double neutronHighestLevel = 
-    (neutronLevels.size()) ? neutronLevels[neutronLevels.size()-1].energy_ : 0.;
-  double protonHighestLevel = 
-    (protonLevels.size()) ? protonLevels[protonLevels.size()-1].energy_ : 0.;
-  double alphaHighestLevel = 
-    (alphaLevels.size()) ? alphaLevels[alphaLevels.size()-1].energy_ : 0.;
+
+  double highestCompoundLevel = (compoundLevels.size()) ? compoundLevels[compoundLevels.size()-1].energy_ : 0.;
+  double neutronHighestLevel =  (neutronLevels.size()) ? neutronLevels[neutronLevels.size()-1].energy_ : 0.;
+  double protonHighestLevel =  (protonLevels.size()) ? protonLevels[protonLevels.size()-1].energy_ : 0.;
+  double alphaHighestLevel =  (alphaLevels.size()) ? alphaLevels[alphaLevels.size()-1].energy_ : 0.;
+  
   std::vector<double> highestLevels;
+  
   highestLevels.push_back(highestCompoundLevel);
   highestLevels.push_back(neutronHighestLevel+neutronSepE);
   highestLevels.push_back(protonHighestLevel+protonSepE);
   highestLevels.push_back(alphaHighestLevel+alphaSepE);
   sort(highestLevels.begin(),highestLevels.end());
+  
   double lowestCompoundLevel = (compoundLevels.size()) ? compoundLevels[0].energy_ : 0.;
   double neutronLowestLevel = (neutronLevels.size()) ? neutronLevels[0].energy_ : 0.;
   double protonLowestLevel = (protonLevels.size()) ? protonLevels[0].energy_ : 0.;
   double alphaLowestLevel = (alphaLevels.size()) ? alphaLevels[0].energy_ : 0.;
+
   std::vector<double> lowestLevels;
   lowestLevels.push_back(lowestCompoundLevel);
   lowestLevels.push_back(neutronLowestLevel+neutronSepE);
   lowestLevels.push_back(protonLowestLevel+protonSepE);
   lowestLevels.push_back(alphaLowestLevel+alphaSepE);
   sort(lowestLevels.begin(),lowestLevels.end());
-  skipEnergy_ = 
-    (lowestLevels[lowestLevels.size()-1]==highestLevels[highestLevels.size()-1]) ?
-    lowestLevels[lowestLevels.size()-1]+1. : 
-    std::max(lowestLevels[lowestLevels.size()-1],highestLevels[highestLevels.size()-1]);
+  
+  skipEnergy_ = (lowestLevels[lowestLevels.size()-1]==highestLevels[highestLevels.size()-1]) ? lowestLevels[lowestLevels.size()-1]+1. :  std::max(lowestLevels[lowestLevels.size()-1],highestLevels[highestLevels.size()-1]);
+  
   skipEnergy_-=seperationEnergy_;
 
   //Fill cross section vector
