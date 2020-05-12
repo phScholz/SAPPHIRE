@@ -78,8 +78,8 @@ DecayResults::DecayResults(int Z, int A, double J, int Pi, double initialEnergyL
 
   /** 4. Creating histograms*/
   ggMatrix_ = new TH2F("ggMatrix", "2D Histo; ggMatrix", 
-                        16000, 0, 16.0,
-                        16000, 0, 16.0);
+                        4000, 0, 16.0,
+                        4000, 0, 16.0);
                         
   ngMatrix_ = new TH2F("ngMatrix", "2D Histo; ngMatrix", 
                         4000, 0, 16.0,
@@ -94,8 +94,8 @@ DecayResults::DecayResults(int Z, int A, double J, int Pi, double initialEnergyL
                         4000, 0, 16.0);
   
   TSCMatrix_ = new TH2F("TSCMatrix", "2D Histo; TSCMatrix", 
-                        16000, 0, 16.0,
-                        16000, 0, 16.0);
+                        4000, 0, 16.0,
+                        4000, 0, 16.0);
   
   gammaEnergyHist_ = new TH1F("GammaEnergyHist", "1D Gamma Energy Hist", 16000, 0, 16.0);
   protonEnergyHist_ = new TH1F("ProtonEnergyHist", "1D Proton Energy Hist", 16000, 0, 16.0);
