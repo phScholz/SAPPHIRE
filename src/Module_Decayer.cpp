@@ -146,7 +146,7 @@ namespace Module_Decayer{
         *   is fixed at 10 to prevent the "segmentation fault" bug. 
         *   Once this issue is fixed, this can be removed.
         */
-        if(omp_get_max_threads() > 10) omp_set_num_threads(20);
+        if(omp_get_max_threads() > 10) omp_set_num_threads(10);
 
         /**
         *   3. In a next step, the input parameters for the Decayer are printed to std::ccout.

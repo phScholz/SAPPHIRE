@@ -178,72 +178,28 @@ In some situations the user might want to exclude specific channels in the calcu
 
 
 # Example Inputfile
-Below an example of an input file for the reaction module is shown.
-The paths to the input files for masses, levels, etc. are created automatically from the source directory during the building process of the code. These only have to been edited, if the source directory has been moved since the last compilation.
 
+## Decay of 92Mo
+In this example the statistical decay of 2- states in 92Mo at excitation energies between 8.0 MeV and 8.5 MeV will be simulated.
+The input file looks like the code below.
 
 ```
 [General]
-MassTable            = /SAPPHIRE/tables/masses/masses.dat
-GDRParams            = /SAPPHIRE/tables/gamma/ripl3_gdr_parameters.dat
-Leveldir             = /SAPPHIRE/tables/levels/
-SpinFile             = /SAPPHIRE/tables/spinod.dat
-ProtonModel          = 0
-pNorm                = 1
-NeutronModel         = 0
-nNorm                = 1
-AlphaModel           = 0
-aNorm                = 1
-E1Model              = 3
-M1Model              = 3
-E2Model              = 0
-gNorm                = 1
-PorterThomasParticle = 0
-PorterThomasGamma    = 0
-GammaChannel         = 1
-NeutronChannel       = 1
-ProtonChannel        = 1
-AlphaChannel         = 1
-LevelDensity         = 1
-cTable               = 0
-
-[CrossSection]
-Reaction             = 25Mg+a
-EnergyFile           = /examples/energyFile
-ReactionFile         = /examples/reactionFile
-CalcRates            = 0
-CalcAverageWidth     = 0
-ResidualGamma        = 1
-ResidualNeutron      = 0
-ResidualProton       = 0
-ResidualAlpha        = 0
-CalculateGammaCutoff = 0
-EntranceState        = 0
-g_ExitStates         = -1
-n_ExitStates         = -1
-p_ExitStates         = -1
-a_ExitStates         = -1
-PrintXS              = 1
-PrintTRANS           = 0
-PrintRATE            = 0
+LevelDensity    = 0
+E1Model         = 0
+M1Model         = 0
 
 [Decayer]
-Suffix               = 0
-Isotope              = 60Ni
-Spin                 = 1
-Parity               = -1
-EnergyLow            = 6
-EnergyHigh           = 6
-Events               = 100000
-ChunkSize            = 10000
-Preequillibrium      = 0
-PreEqConfiguration   =
-
-[Random]
-Z                    = 50
-A                    = 120
-Mode                 = create
-OutputFile           = levelScheme.dat
-Emin                 = 0
-Emax                 = 0
+Isotope = 92Mo 
+Events = 10000
+ChunkSize= 10000
+Spin = 2.0
+Parity = -1
+EnergyLow =  8.0
+EnergyHigh = 8.5
 ```
+
+This will generate the following gamma-ray spectrum and TSC matrix:
+
+<center><img src="examples/Decay_92Mo/92Mo_spectrum.png"></center>
+<center><img src="examples/Decay_92Mo/92Mo_TSC.png"></center>
