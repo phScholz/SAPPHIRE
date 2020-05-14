@@ -645,8 +645,10 @@ void CrossSection::PrintCrossSections() {
     pg.update(i);
   }
   pg.update(crossSections_.size());
+
   out.flush();
   out.close();
+
 }
 
 void CrossSection::PrintTransmissionTerms() {
@@ -681,7 +683,7 @@ void CrossSection::PrintTransmissionTerms() {
 
     /**   3. Writing all transmission coefficients*/
     for(int i = 0;i<crossSections_.size();i++) {
-      if(skipped_[i]) continue;
+      //if(skipped_[i]) continue;
       out << std::scientific
 	  << std::setw(15) << crossSections_[i].first
 	  << std::setw(15) << entranceTrans_[j][k]
