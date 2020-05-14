@@ -104,6 +104,7 @@ DecayResults::DecayResults(int Z, int A, double J, int Pi, double initialEnergyL
 
   /** 5. Creating branches for all decay results*/   
   //outputTree_->Branch("ggMatrix","TH2F", &ggMatrix_, 32000,0);
+  outputTree_->Branch("Events",&event,"Events");
   outputTree_->Branch("initialEnergy",&initialEnergy_,"initialEnergy/D");
   outputTree_->Branch("neutronTotalWidth",&neutronTotalWidth_,"neutronTotalWidth/D");
   outputTree_->Branch("protonTotalWidth",&protonTotalWidth_,"protonTotalWidth/D");
@@ -167,7 +168,9 @@ void DecayResults::AddResults(std::vector<std::pair<DecayData, std::vector<Decay
   
   for(int i = 0;i<results.size();i++) {
     if(results[i].second.size()==0) continue;
-
+    event.Data = results[i].first;
+    event.Products = results[i].second;
+    
     initialEnergy_ = results[i].first.energy();
     neutronTotalWidth_ = results[i].first.neutronTotalWidth();
     gammaTotalWidth_ = results[i].first.gammaTotalWidth();

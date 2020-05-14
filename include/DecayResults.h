@@ -50,6 +50,7 @@ class DecayResults {
   double initialJ_;
   double initialEnergyLow_;
   double initialEnergyHigh_;
+  DecayEvent event;
   TH2F* ngMatrix_;
   TH2F* pgMatrix_;
   TH2F* agMatrix_;

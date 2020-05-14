@@ -119,3 +119,9 @@ class DecayProduct {
   double particleMomentumY_;
   double particleMomentumZ_;
 };
+
+class DecayEvent{
+  public:
+    DecayData  Data;
+    std::vector<DecayProduct> Products;
+};
