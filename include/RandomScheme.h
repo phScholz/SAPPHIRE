@@ -87,6 +87,8 @@ class RandomScheme{
          */
         void PrintRandomScheme(double maxE);
 
+        void AverageGroundStateBranching();
+
         /**
          * @brief Write the randomly generated level scheme to a file
          * @param file Path to the output file.

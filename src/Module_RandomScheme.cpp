@@ -70,6 +70,8 @@ namespace Module_RandomScheme{
             std::cerr << e.what() << '\n';
         }
 
+        scheme->AverageGroundStateBranching();
+
         delete scheme;       
     }
 
@@ -130,7 +132,7 @@ namespace Module_RandomScheme{
             std::cout << std::endl << "Writing Level Scheme to file ..." << input.RdOutputFile() <<std::endl;
             try
             {
-                scheme->WriteRandomScheme(input.RdOutputFile());    
+                scheme->WriteRandomScheme("output/"+input.RdOutputFile());    
             }
             catch(const std::exception& e)
             {

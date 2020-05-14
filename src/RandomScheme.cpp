@@ -116,7 +116,8 @@ void RandomScheme<NLD>::CreateLevels(int Z, int A, double eStart, double eStop){
             if(A%2!=0 && abs(j-floor(j))!=0){
                 //Create levelDensity object
                 levelDensity_ = new NLD(Z,A,j);
-                double levelsPerEnergyStep = CalcLevelDensity(energy)*eStep_;
+                double nld = CalcLevelDensity(energy);
+                double levelsPerEnergyStep = (nld >0) ? nld*eStep_ : 1e-10;
                 boost::poisson_distribution<> poisson_dist(levelsPerEnergyStep);
                 boost::variate_generator<base_generator_type&, boost::poisson_distribution<>> poisson(generator, poisson_dist);
                 double i=0;    
@@ -135,6 +136,26 @@ void RandomScheme<NLD>::CreateLevels(int Z, int A, double eStart, double eStop){
     //sorting level scheme by energy_
     //std::sort(randomScheme->begin(), randomScheme->end());
 
+}
+
+template <class NLD>
+void RandomScheme<NLD>::AverageGroundStateBranching(){
+    std::cout << std::endl << "\t" << "Energy" << "\t" << "spin" << "\t" << "groundstate/total" << std::endl;
+    for(std::vector<Level>::iterator it=randomScheme->begin(); it != randomScheme->end(); ++it){
+        double total = 0;
+        double groundstate=0;
+        for(std::vector<GammaTransition>::iterator git = it->gammas_.begin(); git !=it->gammas_.end(); ++git){
+            total += git->probability_;
+            
+            if(git->levelIndex_==1){
+                groundstate=git->probability_;
+            }
+        }
+
+        if(abs(it->J_-randomScheme->at(0).J_) == 1){
+                std::cout << "\t" << it->energy_ << "\t" << it->J_ << "\t" << groundstate/total << std::endl;
+        }
+    }
 }
 
 template <class NLD>
