@@ -106,6 +106,7 @@
         SapphireInput::Pnorm(1.0);
         SapphireInput::Nnorm(1.0);
         SapphireInput::Anorm(1.0);
+        SapphireInput::DisFile("");
         
     }
 
@@ -199,6 +200,7 @@
             std::cout << "\tIsotope              = "             << SapphireInput::Isotope() << std::endl;
             std::cout << "\tSpin                 = "             << SapphireInput::Spin() << std::endl;
             std::cout << "\tParity               = "             << SapphireInput::Parity() << std::endl;
+            std::cout << "\tDistribution         = "             << SapphireInput::DisFile() << std::endl;
             std::cout << "\tEnergyLow            = "             << SapphireInput::LowEnergy() << std::endl;
             std::cout << "\tEnergyHigh           = "             << SapphireInput::HighEnergy() << std::endl;
             std::cout << "\tEvents               = "             << SapphireInput::Events() << std::endl;
@@ -280,6 +282,7 @@
         //Reading Decayer Input
         SapphireInput::Suffix(pt.get<int>("Decayer.Suffix", SapphireInput::Suffix()));
         SapphireInput::Isotope(pt.get<std::string>("Decayer.Isotope", SapphireInput::Isotope()));
+        SapphireInput::DisFile(pt.get<std::string>("Decayer.Distribution", SapphireInput::DisFile()));
         SapphireInput::Spin(pt.get<double>("Decayer.Spin", SapphireInput::Spin()));
         SapphireInput::Parity(pt.get<double>("Decayer.Parity", SapphireInput::Parity()));
         SapphireInput::LowEnergy(pt.get<double>("Decayer.EnergyLow", SapphireInput::LowEnergy()));

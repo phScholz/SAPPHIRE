@@ -261,6 +261,7 @@ class SapphireInput{
         void SpinFile(std::string x){spinFile=x;}                               /**< Setter for string module*/
         void RdMode(std::string x){rdMode=x;}                               /**< Setter for string rdMode*/
         void RdOutputFile(std::string x){rdOutputFile=x;}               /**< Setter for string rdOutputFile*/
+        void DisFile(std::string x){disFile=x;}               /**< Setter for string disFile*/
 
         
         //Getter
@@ -330,6 +331,7 @@ class SapphireInput{
         std::string EnergyFile() const {return energyFile;}            /**<Getter for energyFile*/ 
         std::string Energies() const {return energies;}            /**<Getter for energies*/ 
         std::string ReactionFile() const {return reactionFile;}        /**<Getter for reactionFile*/
+        std::string DisFile() const {return disFile;}        /**<Getter for disFile*/
         
         std::string Reaction() const {return reaction;}                    /**<Getter for reaction*/
         std::string Isotope() const {return isotope;}                    /**<Getter for isotope*/
@@ -420,6 +422,7 @@ class SapphireInput{
         std::string spinFile;       /**< String for the path tot the spinFile*/
         std::string rdOutputFile;   /**< String for the outputFile of the random levelscheme*/
         std::string rdMode;         /**< String for the mode of the Random module: create, extend, fill*/
+        std::string disFile; /**< String for the path to the distribution file*/
 
 
     public:
