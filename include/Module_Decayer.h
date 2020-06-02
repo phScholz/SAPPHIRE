@@ -12,11 +12,20 @@
 #include <string>
 #include "SapphireMPITypes.h"
 #include "SapphireInput.h"
+#include "SPDistribution.h"
 
 namespace Module_Decayer{
     void Go(int argc,char *argv[]); /**< Top level function to call from main*/
     void RunSingle(const SapphireInput & input); /**< Declaration of the main function of the Decayer Module*/
     void RunDist(const SapphireInput & input); /**< Declaration of the main function with spin distribution of the Decayer Module*/
+
+    /**
+     * @brief Reading Spin-Parity Distribution from a File
+     * @param file Path to the spin-parity distribution file
+     * @param dist SPDistribution paramter by reference.
+     * @return True by success; False by failor.
+     */
+    bool ReadDist(std::string file, SPDistribution &dist);
 
     /**
      * @brief Check wheter a string represents an actual file.
