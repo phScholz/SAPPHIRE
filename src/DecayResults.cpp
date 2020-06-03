@@ -218,11 +218,11 @@ std::string DecayResults::CreateFileName(int suffixNo){
         {
 	        if(initialEnergyLow_==initialEnergyHigh_)
           {
-            sprintf(filename,"output/Sapphire_%d%s_J=E=%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,i+1);
+            sprintf(filename,"output/Sapphire_%d%s_E=%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,i+1);
           }	
           else
           {
-            sprintf(filename,"output/Sapphire_%d%s_J=E=%.3f-%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,initialEnergyHigh_,i+1);
+            sprintf(filename,"output/Sapphire_%d%s_E=%.3f-%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,initialEnergyHigh_,i+1);
           }
         }
 
