@@ -267,10 +267,7 @@ namespace Module_Decayer{
             double energy=0;
 
             std::vector<DecayController *> controllerVector(numInChunk, nullptr);
-           
-
-            std::cout << std::endl << "Randomly drawn spin and parity for chunk: " << std::endl;
-
+                      
             for(int k = 0; k<numInChunk; k++){
                 /**
                 *   We randomly draw the initial energy.
@@ -294,7 +291,7 @@ namespace Module_Decayer{
                 }
                 
                 
-                std::cout << "\t" << J << "\t" << Pi << std::endl;
+                //std::cout << "\t" << J << "\t" << Pi << std::endl;
 
                 if(preEq)
                 {

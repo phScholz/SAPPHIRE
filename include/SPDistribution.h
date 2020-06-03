@@ -17,7 +17,7 @@ class SPDistribution{
         /**
          * @brief Simple Constructor
          */
-        SPDistribution(): total(0.0){};
+        SPDistribution(): total(0.0), distribution(nullptr){};
 
         std::vector<SPPopulation> *distribution; /**< Vector which stores the population data*/
         double Total() const {return total;}; /**<Getter for total*/

@@ -40,9 +40,9 @@ class DecayController {
 
   std::vector<DecayProduct> DecayProducts() const { return decayProducts_; };
 
-  double Energy(){return energy_;}  /**< Getter for energy_*/
-  double Spin(){return jInitial_;} /**< Getter for jInitial_*/
-  double Parity(){return piInitial_;} /**< Getter for piInitial_*/
+  double Energy() const {return energy_;}  /**< Getter for energy_*/
+  double Spin() const {return jInitial_;} /**< Getter for jInitial_*/
+  int Parity() const {return piInitial_;} /**< Getter for piInitial_*/
  
   /**
    * @brief Print decay informations to std::cout
