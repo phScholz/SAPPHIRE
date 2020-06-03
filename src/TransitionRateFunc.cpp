@@ -61,8 +61,8 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
 
   double highestKnownLevel = (knownLevels.size()) ? knownLevels[knownLevels.size()-1].energy_ : 0.;
   double lowEnergy=0.001; 
-  double highEnergy = compoundE+qValue-highestKnownLevel;
-  //double dE  = (!isCrossSection) ? 0.01 : 0.05;
+  double highEnergy = compoundE+qValue-highestKnownLevel;  
+  double dE;
   double exclusiveLowEnergy = lowEnergy;
 
   if(isCrossSection) {
@@ -77,7 +77,7 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
       exclusiveLowEnergy = compoundE+qValue-highestBoundEnergy;
   }
 
-  int numSteps = (highEnergy>lowEnergy) ? 100 : -100;
+  int numSteps = (highEnergy>lowEnergy) ? binning_ : -1*binning_;
   if(numSteps>0) {
     if(numSteps%2!=0) {
       numSteps+=1;

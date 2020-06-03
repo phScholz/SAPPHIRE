@@ -59,6 +59,7 @@ double PreEqDecayer::maxL_;
 
 double TransitionRateFunc::gammaCutoffEnergy_;
 int TransitionRateFunc::nldmodel_;
+int TransitionRateFunc::binning_;
 
 ElementTable NuclearMass::elementTable_; 
 MassTable NuclearMass::massTable_;
@@ -109,6 +110,7 @@ void Initialize() {
 
   TransitionRateFunc::SetGammaCutoffEnergy(10000.);
   TransitionRateFunc::NLDmodel(1);
+  TransitionRateFunc::Binning(100);
 
   NuclearMass::InitializeElements();
   NuclearMass::InitializeMasses(sourceDirectory()+"/tables/masses/masses.dat");

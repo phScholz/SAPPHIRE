@@ -107,6 +107,7 @@
         SapphireInput::Nnorm(1.0);
         SapphireInput::Anorm(1.0);
         SapphireInput::DisFile("");
+        SapphireInput::EBinning(100);
         
     }
 
@@ -167,6 +168,7 @@
         std::cout << "\tAlphaChannel         = "             << SapphireInput::AlphaChannel() << std::endl;
         std::cout << "\tLevelDensity         = "             << SapphireInput::LevelDensity() << std::endl;
         std::cout << "\tcTable               = "             << SapphireInput::CTable() << std::endl;
+        std::cout << "\teBinning             = "             << SapphireInput::EBinning() << std::endl;
         std::cout << std::endl;
         
         if(module=="CrossSection" || module=="all"){
@@ -260,6 +262,7 @@
         SapphireInput::AlphaChannel(pt.get<bool>("General.AlphaChannel", SapphireInput::AlphaChannel()));
         SapphireInput::ProtonChannel(pt.get<bool>("General.ProtonChannel", SapphireInput::ProtonChannel()));
         SapphireInput::NeutronChannel(pt.get<bool>("General.NeutronChannel", SapphireInput::NeutronChannel()));
+        SapphireInput::EBinning(pt.get<int>("General.eBinning", SapphireInput::EBinning()));
 
         //Reading CrossSection Input
         SapphireInput::Reaction(pt.get<std::string>("CrossSection.Reaction", SapphireInput::Reaction()));
@@ -453,7 +456,8 @@
     }
 
     void SapphireInput::SetInputTransitionRate() const {
-        TransitionRateFunc::NLDmodel(LevelDensity());    
+        TransitionRateFunc::NLDmodel(LevelDensity());
+        TransitionRateFunc::Binning(EBinning());
         TransitionRateFunc::SetGammaCutoffEnergy(g_CutoffEnergy());    
     }
 

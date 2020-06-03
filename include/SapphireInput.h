@@ -222,6 +222,7 @@ class SapphireInput{
         void DcA(int x) {dcA=x;}                    /**<Setter for dcA*/
         void RdZ(int x) {rdZ=x;}                    /**<Setter for RdZ*/
         void RdA(int x) {rdA=x;}                    /**<Setter for RdA*/
+        void EBinning(int x) {eBinning=x;}                    /**<Setter for eBinning*/
 
         void DecayerMaxL(double x){decayerMaxL=x;}              /**<Setter for decayerMaxL*/ 
         void PreEqMaxL(double x){preEqMaxL=x;}                  /**<Setter for preEqMaxL*/ 
@@ -311,6 +312,7 @@ class SapphireInput{
         int DcA() const {return dcA;}                    /**<Getter for dcA*/
         int RdZ() const {return rdZ;}                    /**<Getter for rdZ*/
         int RdA() const {return rdA;}                    /**<Getter for rdA*/
+        int EBinning() const {return eBinning;}          /**< Getter for eBinning*/
 
         double DecayerMaxL() const {return decayerMaxL;}              /**<Getter for decayerMaxL*/
         double PreEqMaxL() const {return preEqMaxL;}              /**<Getter for preEqMaxL*/ 
@@ -392,6 +394,7 @@ class SapphireInput{
         int dcA;                    /** Integer for the mass number of the isotope in decayer module*/
         int rdZ;                    /** Integer for the charge number of the isotope in random module*/
         int rdA;                    /** Integer for the mass number of the isotope in random module*/
+        int eBinning;               /** Number of energy bins for TransitionRateFunc calculation*/
         
 
         double decayerMaxL;            /**< Maximum l-value for the decayer*/

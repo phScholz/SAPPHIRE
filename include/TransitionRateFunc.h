@@ -133,6 +133,11 @@ class TransitionRateFunc {
      * @brief Setter nldmodel_
      */
     static void NLDmodel(int x){nldmodel_=x;}; 
+
+    /**
+     * @brief Setter for binning_
+     */
+    static void Binning(int x){binning_=x;};
   
  private:
   static const int numCrossSectionSteps_=20;

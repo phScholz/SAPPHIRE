@@ -33,6 +33,7 @@
 | [AlphaChannel](#channels)              | Toggle the alpha channel                                               |
 | [LevelDensity](#LevelDensity)          | Sets the model for the Nuclear Level Density.                          |
 | [cTable](#cTable)                      | Value to normalize the level spacing at the neutron separation energy. |
+| eBinning                               | Number of continuum bins during the continuum calculations.            |
 
 ## CrossSection
 
