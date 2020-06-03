@@ -60,16 +60,17 @@ namespace Module_RandomScheme{
             std::cerr << e.what() << '\n';
         }
         
-        std::cout << "Printing Level Scheme ..." <<std::endl;
+        std::cout << std::endl << "Printing Level Scheme ..." <<std::endl;
         try
         {
-            scheme->PrintRandomScheme(E);    
+            //scheme->PrintRandomScheme(E);    
         }
         catch(const std::exception& e)
         {
             std::cerr << e.what() << '\n';
         }
 
+        std::cout << std::endl << "Groundstate Branching" << std::endl;
         scheme->AverageGroundStateBranching();
 
         delete scheme;       

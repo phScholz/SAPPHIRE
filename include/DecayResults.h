@@ -13,13 +13,42 @@
 #include <boost/random.hpp>
 #include <boost/random/normal_distribution.hpp>
 
+/**
+ * @brief Class to handle the results of the decayer module
+ */
 class DecayResults {
  public:
-  DecayResults(int, int, double, int, double, double, int);
-  ~DecayResults();
-  void AddResults(std::vector<std::pair<DecayData, std::vector<DecayProduct> > >&);
-  void WriteNCloseFile();
+ /**
+  * @brief Constructor for DecayResults for a single resonance
+  * @param Z  charge number
+  * @param A  mass number
+  * @param J  initial spin
+  * @param Pi initial parity
+  * @param energyLow lower limit of initial energy
+  * @param energyHigh upper limit of initial energy
+  * @param suffixNo Suffix Number for outputfile
+  */
+  DecayResults(int Z, int A, double J, int Pi, double energyLow, double energyHigh, int suffixNo);
 
+  /**
+  * @brief Constructor for DecayResults for the decay of a distribution
+  * @param Z  charge number
+  * @param A  mass number
+  * @param energyLow lower limit of initial energy
+  * @param energyHigh upper limit of initial energy
+  * @param suffixNo Suffix Number for outputfile
+  */
+  DecayResults(int Z, int A, double energyLow, double energyHigh, int suffixNo);
+
+  /**
+   * @brief Destructor for DecayResults
+   */
+  ~DecayResults();
+
+
+  void AddResults(std::vector<std::pair<DecayData, std::vector<DecayProduct> > >&);
+  
+  void WriteNCloseFile();
   
   void SetgResol(double x){gResol_=x;} /**< Setter gResol_*/
   
@@ -64,6 +93,7 @@ class DecayResults {
   TTree* outputTree_;
   Int_t Z_[100];
   Int_t A_[100];
+  Int_t initialParity_;
   Int_t numNeutrons_;
   Int_t numGammas_;
   Int_t numProtons_;
@@ -74,6 +104,7 @@ class DecayResults {
   Int_t neutronStepIndex_[100];
   Int_t alphaStepIndex_[100];
   Double_t initialEnergy_;
+  Double_t initialSpin_;
   Double_t fragmentEnergy_[100];
   Double_t fragmentExcitation_[100];
   Double_t fragmentMomentumX_[100];

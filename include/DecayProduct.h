@@ -8,7 +8,9 @@
  * @brief Class for the decay data
  */
 class DecayData {
-  double energy_;  
+  double energy_;
+  double spin_;
+  int parity_;
   double neutronEntranceWidth_;
   double protonEntranceWidth_;
   double alphaEntranceWidth_;
@@ -22,11 +24,13 @@ class DecayData {
   /**
    * @brief Simple DecayData class constructor. Initializes members with 0.
    */
-  DecayData() : energy_(0.), neutronEntranceWidth_(0.), protonEntranceWidth_(0.),alphaEntranceWidth_(0.), gammaEntranceWidth_(0.), neutronTotalWidth_(0.), protonTotalWidth_(0.), alphaTotalWidth_(0.),gammaTotalWidth_(0.) {};
+  DecayData() : energy_(0.), spin_(0), parity_(0), neutronEntranceWidth_(0.), protonEntranceWidth_(0.),alphaEntranceWidth_(0.), gammaEntranceWidth_(0.), neutronTotalWidth_(0.), protonTotalWidth_(0.), alphaTotalWidth_(0.),gammaTotalWidth_(0.) {};
   
   /**
    * @brief DecayData class constructor. Initializes members with function parameters.
    * @param energy
+   * @param spin
+   * @param parity
    * @param neutronEntranceWidth
    * @param protonEntranceWidth
    * @param alphaEntranceWidth
@@ -36,29 +40,25 @@ class DecayData {
    * @param alphaTotalWidth
    * @param gammaTotalWidth
    */
-  DecayData(double energy, double neutronEntranceWidth,double protonEntranceWidth,
+  DecayData(double energy, double spin, int parity, double neutronEntranceWidth,double protonEntranceWidth,
 	   double alphaEntranceWidth, double gammaEntranceWidth,double neutronTotalWidth,
-	   double protonTotalWidth, double alphaTotalWidth, double gammaTotalWidth) : energy_(energy), neutronEntranceWidth_(neutronEntranceWidth),
+	   double protonTotalWidth, double alphaTotalWidth, double gammaTotalWidth) : energy_(energy), spin_(spin), parity_(parity), neutronEntranceWidth_(neutronEntranceWidth),
     protonEntranceWidth_(protonEntranceWidth), alphaEntranceWidth_(alphaEntranceWidth),
     gammaEntranceWidth_(gammaEntranceWidth), neutronTotalWidth_(neutronTotalWidth), protonTotalWidth_(protonTotalWidth),
-    alphaTotalWidth_(alphaTotalWidth),gammaTotalWidth_(gammaTotalWidth) {};
+    alphaTotalWidth_(alphaTotalWidth),gammaTotalWidth_(gammaTotalWidth) {};  
+
+  double energy() const {return energy_;}; /**< Getter energy_*/
+  double spin() const {return spin_;}; /**< Getter spin_*/
+  int parity() const {return parity_;}; /**< Getter parity_*/
   
-  /**
-   * @brief Setter energy.
-   */
-  double energy() const {return energy_;};
-  
-  /**
-   * @brief Setter neutronEntranceWidth
-   */
-  double neutronEntranceWidth() const {return neutronEntranceWidth_;};
-  double protonEntranceWidth() const {return protonEntranceWidth_;};
-  double alphaEntranceWidth() const {return alphaEntranceWidth_;};
-  double gammaEntranceWidth() const {return gammaEntranceWidth_;};
-  double neutronTotalWidth() const {return neutronTotalWidth_;};
-  double protonTotalWidth() const {return protonTotalWidth_;};
-  double alphaTotalWidth() const {return alphaTotalWidth_;};
-  double gammaTotalWidth() const {return gammaTotalWidth_;};
+  double neutronEntranceWidth() const {return neutronEntranceWidth_;};/**< Getter neutronEntranceWidth_ */
+  double protonEntranceWidth() const {return protonEntranceWidth_;};/**< Getter protonEntranceWidth_ */
+  double alphaEntranceWidth() const {return alphaEntranceWidth_;};/**< Getter  alphaEntranceWidth_*/
+  double gammaEntranceWidth() const {return gammaEntranceWidth_;};/**< Getter gammaEntranceWidth_*/
+  double neutronTotalWidth() const {return neutronTotalWidth_;};/**< Getter neutronTotalWidth_ */
+  double protonTotalWidth() const {return protonTotalWidth_;};/**< Getter protonTotalWidth_*/
+  double alphaTotalWidth() const {return alphaTotalWidth_;};/**< Getter alphaTotalWidth_*/
+  double gammaTotalWidth() const {return gammaTotalWidth_;};/**< Getter gammaTotalWidth_*/
 };
 
 /**

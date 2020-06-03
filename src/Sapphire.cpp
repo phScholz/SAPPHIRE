@@ -106,5 +106,6 @@ int main(int argc, char *argv[]) {
   else
     PrintHelp();
   
+  std::cout << std::endl;
   return 0;
 }

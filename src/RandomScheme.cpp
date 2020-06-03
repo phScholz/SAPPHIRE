@@ -28,7 +28,7 @@
 extern std::string sourceDirectory();
 
 template <class NLD>
-RandomScheme<NLD>::RandomScheme():maxJ_(5), maxE_(5.0), eStep_(0.01), previous(NULL){
+RandomScheme<NLD>::RandomScheme():maxJ_(4), maxE_(5.0), eStep_(0.01), previous(NULL){
     randomScheme = new std::vector<Level>();
     nldModel_=0;
     gsfModel_=0;
@@ -63,6 +63,9 @@ template <class NLD>
 void RandomScheme<NLD>::CreateLevels(int Z, int A, double eStart, double eStop){
     std::cout << "Creating Levels..." << std::endl;
     maxE_=eStop;
+    Z_=Z;
+    A_=A;
+
 
     //Select random number generator
     typedef boost::mt19937 base_generator_type;
@@ -84,12 +87,11 @@ void RandomScheme<NLD>::CreateLevels(int Z, int A, double eStart, double eStop){
 
     ProgressBar pg;
     pg.start(numSteps);
-    //for(double energy=eStart+eStep_/2.; energy<=maxE_; energy+=eStep_){
     for(int i=0; i<=numSteps; i++){
         pg.update(i);
-        double energy=eStart+i*eStep_/2.;
+        double energy=eStart+eStep_/2.0+i*eStep_;
         if(verbose_) std::cout << "Begin Loop over spins." << std::endl;
-        for(double j=0; j<=maxJ_; j+=0.5){
+        for(double j=randomScheme->at(0).J_-1; j<=randomScheme->at(0).J_+1; j+=0.5){
             //If even A and the spin float is an integer
             if(A%2==0 && abs(j-floor(j))==0){
                 //Create levelDensity object
@@ -152,74 +154,94 @@ void RandomScheme<NLD>::AverageGroundStateBranching(){
             }
         }
 
+        std::cout.precision(3);
         if(abs(it->J_-randomScheme->at(0).J_) == 1){
-                std::cout << "\t" << it->energy_ << "\t" << it->J_ << "\t" << groundstate/total << std::endl;
+                std::cout << std::fixed << "\t" << it->energy_ << "\t" << it->J_ << "\t" << groundstate/total << std::endl;
         }
     }
 }
 
 template <class NLD>
 void RandomScheme<NLD>::CreateGammaTransitions(double eStart){
+    //Select random number generator
+    typedef boost::mt19937 base_generator_type;
+    
+    //Use the system time as seed
+    base_generator_type generator(time(0));
+    
+    //Define a normal random number distribution which produces "double" for Porter-Thomas
+    boost::normal_distribution<> normal_dist(0.0,1.0);
+    
+    boost::variate_generator<base_generator_type&, boost::normal_distribution<> > gauss(generator, normal_dist);
+
     std::cout << std::endl<< "Creating Transitions..." << std::endl;
     size_t index = randomScheme->size() - 1;
     //Loop from highest level to lowest level
     if(verbose_) std::cout << "Begin Loop for gamma rays" << std::endl;
     ProgressBar pg;
-    pg.start(randomScheme->size());
+    int size=randomScheme->size();
+    pg.start(size-1);
     int j=0;
-    for(std::vector<Level>::reverse_iterator rit = randomScheme->rbegin(); rit != randomScheme->rend(); ++rit, --index){
-        if (rit->energy_ > eStart){
+    if(size>1){
+        for(unsigned int k = size-1; k>=0; k--){
+        //for(std::vector<Level>::reverse_iterator rit = randomScheme->rbegin(); rit != randomScheme->rend(); ++rit, --index){
             pg.update(j);
-            int i = 1;
-            double partialStrength = 0;
-            double totalStrength = 0;
-            //loop from lowest level to highes level
-            for(std::vector<Level>::iterator it = randomScheme->begin(); it != randomScheme->end(); ++it) {
-                if(abs(rit->J_-it->J_) <= 2 && index > i){
-                    transmissionFunc_= GammaTransmissionFunc::CreateGammaTransmissionFunc(Z_, A_, 
-                                rit->J_, rit->Pi_, it->J_, it->Pi_,maxL_,
-		    					tWFC_,uTWFC_,uTWSFC_, previous, rit->energy_);
+            if (randomScheme->at(k).energy_ > eStart){
+                double partialStrength = 0;
+                double totalStrength = 0;
 
-                    if(!transmissionFunc_->IsValid()) {
-                        delete transmissionFunc_;
-                        throw std::invalid_argument("Input for transmissionfunc is invalid.");
-                        
+                //loop from lowest level to highes level
+                //for(std::vector<Level>::iterator it = randomScheme->begin(); it != randomScheme->end(); ++it) {
+                for(unsigned int l=0; l<k; l++){
+                    if(abs(randomScheme->at(k).J_-randomScheme->at(l).J_) <= 1 && k > l){
+                        transmissionFunc_= GammaTransmissionFunc::CreateGammaTransmissionFunc(Z_, A_, 
+                                    randomScheme->at(k).J_, randomScheme->at(k).Pi_, randomScheme->at(l).J_, randomScheme->at(l).Pi_,maxL_,
+	    	    					tWFC_,uTWFC_,uTWSFC_, previous, randomScheme->at(k).energy_);
+
+                        if(!transmissionFunc_->IsValid()) {
+                            delete transmissionFunc_;
+                            throw std::invalid_argument("Input for transmissionfunc is invalid.");
+
+                        }
+
+                        if(abs(randomScheme->at(k).energy_-randomScheme->at(l).energy_)>=0.4){
+                            levelDensity_ = new NLD(Z_,A_,randomScheme->at(k).J_);
+                            double nld = CalcLevelDensity(randomScheme->at(k).energy_);
+                            double transmission=CalcTransmissionFunc(abs(randomScheme->at(k).energy_-randomScheme->at(l).energy_));
+                            partialStrength=pow(gauss(),2)*transmission/nld;                    
+                            totalStrength+=partialStrength;
+                            randomScheme->at(k).gammas_.push_back(GammaTransition(l+1,abs(randomScheme->at(k).energy_-randomScheme->at(l).energy_), partialStrength));
+                        }
+
+                        if(transmissionFunc_->IsValid()) delete transmissionFunc_;
                     }
 
-                    if(abs(rit->energy_-it->energy_)!=0){
-                        partialStrength=CalcTransmissionFunc(abs(rit->energy_-it->energy_));                    
-                        totalStrength+=partialStrength;
-                        rit->gammas_.push_back(GammaTransition(i,abs(rit->energy_-it->energy_), partialStrength));
+                    if(k==1 && randomScheme->at(k).gammas_.size()==0){
+                        randomScheme->at(k).gammas_.push_back(GammaTransition(1,abs(randomScheme->at(k).energy_-randomScheme->at(l).energy_),1.0));
+                        totalStrength=1;
+                    }
+                }
+
+                if(verbose_) PrintRandomScheme(maxE_);
+
+                if(verbose_) std::cout << "Renormalization" << std::endl;
+                if(randomScheme->at(k).gammas_.size()>0 && randomScheme->at(k).energy_>eStart){
+                    totalStrength=0;
+                    //calculate total strength
+                    for(std::vector<GammaTransition>::iterator it = randomScheme->at(k).gammas_.begin(); it !=randomScheme->at(k).gammas_.end(); ++it){
+
+                        totalStrength += it->probability_;
                     }
 
-                    if(transmissionFunc_->IsValid()) delete transmissionFunc_;
-                }
-
-                if(index==1 && abs(rit->J_-it->J_)>2 && rit->gammas_.size()==0){
-                    rit->gammas_.push_back(GammaTransition(0,abs(rit->energy_-it->energy_),1.0));
-                    totalStrength=1;
-                }
-
-                i++;
-            }
-
-            if(verbose_) PrintRandomScheme(maxE_);
-
-            if(verbose_) std::cout << "Renormalization" << std::endl;
-            if(rit->gammas_.size()>0 && rit->energy_>eStart){
-                totalStrength=0;
-                //calculate total strength
-                for(std::vector<GammaTransition>::iterator it = rit->gammas_.begin(); it !=rit->gammas_.end(); ++it){
-
-                    totalStrength += it->probability_;
-                }
-                //normalize
-                for(std::vector<GammaTransition>::iterator it = rit->gammas_.begin(); it !=rit->gammas_.end(); ++it){
-                        it->probability_ = it->probability_/totalStrength;
+                    //normalize
+                    for(std::vector<GammaTransition>::iterator it = randomScheme->at(k).gammas_.begin(); it !=randomScheme->at(k).gammas_.end(); ++it){
+                            it->probability_ = it->probability_/totalStrength;
+                    }
                 }
             }
             j++;
         }
+        pg.update(size-1);
     }
 }
 

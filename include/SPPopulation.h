@@ -14,7 +14,7 @@ class SPPopulation{
         /**
          * @brief Simple Constructor
          */
-        SPPopulation():spin(0.0), parity(1), pop(0.0){
+        SPPopulation():spin(0.0), parity(1), pop(0.0), cdf(0.0){
         };
 
         /**
@@ -22,9 +22,23 @@ class SPPopulation{
          * @param spin Double value for the spin
          * @param parity integer value for parity, 1 == +; -1 == -
          */
-        SPPopulation(double spin, int parity, double pop):spin(spin),parity(parity), pop(pop){};
+        SPPopulation(double spin, int parity, double pop):spin(spin),parity(parity), pop(pop), cdf(0.0){};
         
+        double Spin() const {return spin;};        /**< Getter for spin*/
+        double Spin(double x){spin = x;};   /**< Setter for spin*/
+
+        int Parity() const{return parity;};        /**< Getter for parity*/
+        int Parity(int x){parity = x;};   /**< Setter for parity*/
+
+        double Pop() const {return pop;};        /**< Getter for pop*/
+        double Pop(double x){pop = x;};   /**< Setter for pop*/
+
+        double Cdf() const {return cdf;};        /**< Getter for cdf*/
+        double Cdf(double x){cdf = x;};   /**< Setter for cdf*/
+
+    private:
         double spin; /**< Spin*/
         int parity; /**< parity*/
         double pop; /**< population*/
+        double cdf; /**< cdf*/
 };

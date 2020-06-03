@@ -5,14 +5,11 @@
 
 
 #include "Module_Decayer.h"
-#include <iostream>
-#include <fstream>
 #include "SapphireMPITypes.h"
 #include "SapphireInput.h"
 #include <string>
 #include "NuclearMass.h"
 #include <chrono>
-#include <sstream>
 #include "Decayer.h"
 #include "omp.h"
 #include "DecayController.h"
@@ -23,8 +20,53 @@
 #include "boost/random.hpp"
 #include "boost/generator_iterator.hpp"
 #include <ctime>
+#include "SPDistribution.h"
+#include <iostream>
+#include <sstream>
+#include <fstream>
 
 namespace Module_Decayer{
+
+    bool ReadDist(std::string file, SPDistribution &dist){
+        /**
+         * 1. Check whether the SPDistribution object is empty. If not, return false.
+         */
+        if (dist.distribution.size() == 0){
+
+            /**
+             * 2. Attempting to read distribution file. If not possible, return false.
+             */
+            std::ifstream in(file.c_str());
+            if(!in){
+                std::cout << std::endl << "Cannot read distribution file ... " << file << std::endl;
+                return false;
+            }
+
+            /**
+             * 3. Read content of distribution file line-by-line and store it into the SPDistribution object.
+             */
+            std::string line;
+            SPPopulation dummy;
+            while(!in.eof()){
+                std::getline(in,line);
+                std::istringstream lineStream(line);
+                double spin;
+                double pop;
+                int parity;
+                lineStream >> spin >> parity >> pop;
+                dummy.Spin(spin);
+                dummy.Parity(parity);
+                dummy.Pop(pop);
+                dist.distribution.push_back(dummy);
+            }
+            dist.Normalize();
+            in.close();
+        }
+        else{
+            std::cout << std::endl << "Distribution object was not initialized!!" << std::endl;
+            return false;
+        }
+    }
 
     std::string massNumberStringFromString(std::string &isotopeString){
         std::string massNumberString;
@@ -94,7 +136,14 @@ namespace Module_Decayer{
             Input.PrintIntputFile(str);
             Input.ReadInputFile(str);
             Input.PrintIntputParameters("Decayer");
-            RunSingle(Input);
+            if (Input.DisFile().length()>0){
+                std::cout << std::endl << "Running Decayer for distribution in ... " << Input.DisFile() << std::endl;
+                RunDist(Input);
+            }
+            else{
+                std::cout << std::endl << "Running Decayer for resonances with J = " << Input.Spin() << " and Pi = " << Input.Parity() << std::endl;
+                RunSingle(Input);
+            }
             
         }else{
             std::cout << "No valid input file was given." << std::endl;
@@ -108,6 +157,161 @@ namespace Module_Decayer{
         auto end = std::chrono::steady_clock::now();
         std::chrono::duration<double> elapsed_seconds = end-start;
         std::cout << std::endl << "Total calculation time: " << elapsed_seconds.count() << "s\n";
+    }
+
+    void RunDist(const SapphireInput &input){
+        /**
+         * 1. Attempting to read the spin-parity distribution from file. If this fails, the code exits.
+         */
+        SPDistribution spinDist = new SPDistribution();
+        if(!ReadDist(input.DisFile(), spinDist)){
+            std::cout << std::endl << "Cannot load spin-parity distribution!!!" << std::endl;
+            exit(1);
+        }
+
+        /**
+        * 2. The parameters needed to be initialized for the old Sapphire code
+        * are obtained from the SapphireInput object passed by reference to the Module_Decayer::Run()
+        * method.
+        */
+        Decayer::SetCrossSection(false);
+        input.SetInputDecayer();
+        input.SetInputParticleTransmission();
+        input.SetInputGammaTransmission();
+
+        int chunkSize = input.ChunkSize();
+        int events = input.Events();
+        
+        std::string isotopeString(input.Isotope());
+        int A = massNumberIntFromString(isotopeString);
+        int Z = atomicNumberIntFromString(isotopeString);
+        int Pi = input.Parity();
+        
+        double J = input.Spin();
+        double lowEnergy = input.LowEnergy();
+        double highEnergy = input.HighEnergy();
+        int suffixNo = input.Suffix();
+        bool preEq = input.PreEq();
+        int numPiHoles = 0;
+        int numPiParticles =0;
+        int numNuHoles =0;
+        int numNuParticles =0;
+
+        /**
+        *   3. Because of the "segmentation fault on more than 10 threads" bug,
+        *   the system is asked via omp_get_max_threads() what the maximum numbers of threads are.
+        *   If this value is larger than 10, then the maximum number of threads used for the calculation
+        *   is fixed at 10 to prevent the "segmentation fault" bug. 
+        *   Once this issue is fixed, this can be removed.
+        */
+        if(omp_get_max_threads() > 10) omp_set_num_threads(10);
+
+        /**
+        * 4. If the number of events is not a multiple of the chunkSize,
+        * then the number of remainder is calculated from the modulo.
+        * The number of maximum chunks is then derived from the ratio (events-remainder)/chunkSize.
+        */
+        int remainder = events%chunkSize;
+        int chunks = (events-remainder)/chunkSize;
+
+        /**
+        * 5. For the Monte-Carlo decay, an unsigned int randomSeed[12] array is initialized.
+        */
+        unsigned int randomSeed[12];
+
+        std::cout << "Starting Decay Simulation..." << std::endl;
+
+        DecayResults* results = NULL;
+        if(events>1) results = new DecayResults(Z,A,lowEnergy,highEnergy,suffixNo);
+
+        for(int i = 0;i<=chunks;i++) {
+          
+            int numInChunk = (i==chunks) ? remainder : chunkSize;
+            if(numInChunk==0) continue;
+            if(events>=chunkSize)
+              std::cout << "Decay chunk " << i+1 << " of " << chunks << " started ..." << std::endl;
+            else
+              std::cout << "Decay of " << numInChunk << " nuclei started ..." << std::endl;
+            std::vector<std::pair<DecayData,std::vector<DecayProduct> > > chunkResults;
+            chunkResults.resize(numInChunk);
+            
+            /**
+            *   Now a ProgressBar object is generated from Progressbar.h, initialized with numInChunk, which ist the 
+            *   number of decays in the current chunk.
+            */
+            ProgressBar pg;
+            double energy=0;
+
+            std::vector<DecayController *> controllerVector(numInChunk, nullptr);
+
+            //Select random number generator
+            typedef boost::mt19937 base_generator_type;
+
+            //Use the system time as seed
+            base_generator_type generator(time(0));
+
+            // Define a uniform random number distribution which produces "double"
+            // values between 0 and 1 (0 inclusive, 1 exclusive).
+            boost::uniform_real<> uni_dist(0,1);
+
+            boost::variate_generator<base_generator_type&, boost::uniform_real<> > uni(generator, uni_dist);
+
+            for(int k = 0; k<numInChunk; k++){
+                energy = (lowEnergy==highEnergy) ? lowEnergy : lowEnergy+(highEnergy-lowEnergy)*uni();
+
+                if(preEq)
+                {
+	               controllerVector.at(k)= new DecayController(Z,A,J,Pi,energy,numNuParticles,numNuHoles,numPiParticles,numPiHoles);
+                } 
+                else
+                {
+                    controllerVector.at(k) = new DecayController(Z,A,J,Pi,energy);
+                }
+            }
+
+            pg.start(numInChunk); 
+
+            #pragma omp parallel for
+            for(int j = 0;j<numInChunk;j++){
+                
+                pg.update(j);
+
+                DecayController* controller = controllerVector.at(j);
+
+                double neutronEntranceWidth = 0.;
+                double protonEntranceWidth = 0.;
+                double gammaEntranceWidth = 0.;
+                double alphaEntranceWidth = 0.;
+                double neutronTotalWidth = 0.;
+                double protonTotalWidth = 0.;
+                double gammaTotalWidth = 0.;
+                double alphaTotalWidth = 0.;
+
+                controller->Decay(neutronEntranceWidth,protonEntranceWidth,alphaEntranceWidth,gammaEntranceWidth,neutronTotalWidth,protonTotalWidth,alphaTotalWidth,gammaTotalWidth); 
+                
+                #pragma omp critical
+                    chunkResults[j] = std::pair<DecayData,std::vector<DecayProduct>>(DecayData(controller->Energy(), J, Pi, neutronEntranceWidth,protonEntranceWidth, alphaEntranceWidth,gammaEntranceWidth, neutronTotalWidth,protonTotalWidth, alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
+                
+                #pragma omp critical
+                    if(events<=10) controller->PrintDecays();
+                //delete controller;
+            }
+
+            pg.update(numInChunk);
+
+            if(events>1){
+                std::cout << std::endl << "Writing ROOT Tree..." << std::endl;                
+                results->AddResults(chunkResults);
+            }
+
+            while(!controllerVector.empty()) delete controllerVector.back(), controllerVector.pop_back();            
+        }
+
+        if(events>1)
+        {
+            results->WriteNCloseFile();
+            delete results;
+        }
     }
     
     void RunSingle(const SapphireInput &input){
@@ -254,7 +458,7 @@ namespace Module_Decayer{
                 controller->Decay(neutronEntranceWidth,protonEntranceWidth,alphaEntranceWidth,gammaEntranceWidth,neutronTotalWidth,protonTotalWidth,alphaTotalWidth,gammaTotalWidth); 
                 
                 #pragma omp critical
-                    chunkResults[j] = std::pair<DecayData,std::vector<DecayProduct>>(DecayData(controller->Energy(),neutronEntranceWidth,protonEntranceWidth, alphaEntranceWidth,gammaEntranceWidth, neutronTotalWidth,protonTotalWidth, alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
+                    chunkResults[j] = std::pair<DecayData,std::vector<DecayProduct>>(DecayData(controller->Energy(), J, Pi, neutronEntranceWidth,protonEntranceWidth, alphaEntranceWidth,gammaEntranceWidth, neutronTotalWidth,protonTotalWidth, alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
                 
                 #pragma omp critical
                     if(events<=10) controller->PrintDecays();
