@@ -128,13 +128,15 @@ void DecayResults::CreateBranches(){
 }
 
 std::string DecayResults::CreateFileName(int suffixNo){ 
+
+  char filename[256];
+
   if(initialJ_>=0){
     /** Construct file name either with SuffixNumber or not*/
     char spin[10];
     if(initialPi_==1) sprintf(spin,"%.1f+",initialJ_);
     else sprintf(spin,"%.1f-",initialJ_);
-
-    char filename[256];
+    
     if(suffixNo!=0) {
       if(initialEnergyLow_==initialEnergyHigh_){
         sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,suffixNo);
@@ -185,8 +187,7 @@ std::string DecayResults::CreateFileName(int suffixNo){
       }
     }
   }
-  else{
-    char filename[256];
+  else{    
     
     if(suffixNo!=0) {
       if(initialEnergyLow_==initialEnergyHigh_){
@@ -238,6 +239,10 @@ std::string DecayResults::CreateFileName(int suffixNo){
       }
     }
   }
+
+  std::string fileN(filename);
+  return fileN;
+  
 }
 
 void DecayResults::WriteNCloseFile(){
