@@ -339,7 +339,6 @@ void DecayResults::AddResults(std::vector<std::pair<DecayData, std::vector<Decay
       }
     }
 
-    outputTree_->Fill();
-    outputTree_->Write();
+    outputTree_->Fill();    
   }
 }

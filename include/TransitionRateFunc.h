@@ -145,5 +145,6 @@ class TransitionRateFunc {
   LevelDensity* levelDensity_;          /**< LevelDensity model*/
   TransmissionFunc* transmissionFunc_; /**< Particle or GammaTransmissionFunc*/
   static int nldmodel_;
+  static int binning_;
 };
 
