@@ -17,6 +17,8 @@ class SPPopulation{
         SPPopulation():spin(0.0), parity(1), pop(0.0), cdf(0.0){
         };
 
+        ~SPPopulation(){};
+
         /**
          * @brief Constructor which initializes the member variables
          * @param spin Double value for the spin

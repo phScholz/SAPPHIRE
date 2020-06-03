@@ -27,7 +27,9 @@ class SPDistribution{
          * @brief Normalize the distribution.
          */
         void Normalize(){
-            if(this->distribution.size()>0){
+            if(verbose_) std::cout << std::endl << "Normalizing spin distribution ... " << std::endl;
+
+            if(this->distribution->size()>0){
                 /**
                  * 1. Initialize total
                  */
@@ -36,7 +38,7 @@ class SPDistribution{
                 /**
                  * 2. Calculate the total probability
                  */
-                for(std::vector<SPPopulation>::const_iterator it = distribution.begin(); it !=distribution.end(); ++it){
+                for(std::vector<SPPopulation>::iterator it = distribution->begin(); it !=distribution->end(); ++it){
                     double pop = it->Pop();
                     this->Total(this->Total()+pop);
                 }
@@ -44,7 +46,7 @@ class SPDistribution{
                 /**
                  * 3. Normalize the single probabilities on the total probability
                  */
-                for(std::vector<SPPopulation>::const_iterator it = distribution.begin(); it !=distribution.end(); ++it){
+                for(std::vector<SPPopulation>::iterator it = distribution->begin(); it !=distribution->end(); ++it){
                     double pop = it->Pop();
                     double total = this->Total();
                     it->Pop(pop/total);
@@ -55,7 +57,7 @@ class SPDistribution{
                  */
 
                 double offset = 0;
-                for(std::vector<SPPopulation>::const_iterator it = distribution.begin(); it !=distribution.end(); ++it){
+                for(std::vector<SPPopulation>::iterator it = distribution->begin(); it !=distribution->end(); ++it){
                     it->Cdf(offset+it->Pop());
                     offset = it->Cdf();
                 }
@@ -64,8 +66,16 @@ class SPDistribution{
                 std::cout << std::endl << "Cannot normalize empty object!" << std::endl;
             }
         };
+
+        void PrintPopulation(){
+            for(std::vector<SPPopulation>::iterator it = distribution->begin(); it !=distribution->end(); ++it){
+                std::cout << "\t" << it->Spin() << "\t" << it->Parity() << "\t" << it->Pop() << std::endl;
+            }
+        }
+
     private:    
         double total;
+        bool verbose_ = true;
 
 };
 

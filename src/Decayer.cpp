@@ -346,9 +346,9 @@ bool Decayer::Decay(int& Z, int& A, double& jFinal, int& piFinal,
   while(randomNumber==0.) randomNumber = double(rand_r(&randomSeed[omp_get_thread_num()]))/double(RAND_MAX);
 
   bool found = false;
-  double previousValue = 0.;
+  
   for(std::vector<CDFEntry>::const_iterator it = cdf_.begin(); it<cdf_.end(); ++it) {
-    if(previousValue<randomNumber && randomNumber<=it->value_) {
+    if(randomNumber<=it->value_) {
       Z = spinRatePairs_[it->pairIndex_].Z_;
       A = spinRatePairs_[it->pairIndex_].A_;
       jFinal = spinRatePairs_[it->pairIndex_].spin_;

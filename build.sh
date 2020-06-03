@@ -6,12 +6,14 @@
 ## @brief Script to build Sapphire
 ######################################################
 #
-#check if the build directory exists or not
+#check if the build and output directory exists or not
 #if not, then create the build directory
 [ ! -d /build ] && mkdir -p ./build
+[ ! -d /output ] && mkdir -p ./output
 
 #go into the build directory
 cd ./build
 
 #run cmake and if sucessfull run make install 
 cmake .. && make install
+

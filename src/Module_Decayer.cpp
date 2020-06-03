@@ -24,14 +24,17 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include "boost/random.hpp"
+#include "boost/generator_iterator.hpp"
 
 namespace Module_Decayer{
 
     bool ReadDist(std::string file, SPDistribution &dist){
+        std::cout << std::endl << "Reading Spin-Parity Distribution ..." << std::endl;
         /**
          * 1. Check whether the SPDistribution object is empty. If not, return false.
          */
-        if (dist.distribution.size() == 0){
+        if (dist.distribution == nullptr){
 
             /**
              * 2. Attempting to read distribution file. If not possible, return false.
@@ -47,20 +50,28 @@ namespace Module_Decayer{
              */
             std::string line;
             SPPopulation dummy;
+            std::vector<SPPopulation> *dummyVector = new std::vector<SPPopulation>;
+
+            double spin;
+            double pop;
+            int parity;
+
             while(!in.eof()){
                 std::getline(in,line);
                 std::istringstream lineStream(line);
-                double spin;
-                double pop;
-                int parity;
                 lineStream >> spin >> parity >> pop;
+                std::cout << "\t" << spin << "\t" << parity << "\t" << pop << std::endl;
                 dummy.Spin(spin);
                 dummy.Parity(parity);
-                dummy.Pop(pop);
-                dist.distribution.push_back(dummy);
+                dummy.Pop(pop);                
+                dummyVector->push_back(dummy);                
             }
-            dist.Normalize();
+
             in.close();
+            dist.distribution = dummyVector;
+            dist.Normalize();
+            dist.PrintPopulation();
+            
         }
         else{
             std::cout << std::endl << "Distribution object was not initialized!!" << std::endl;
@@ -163,7 +174,7 @@ namespace Module_Decayer{
         /**
          * 1. Attempting to read the spin-parity distribution from file. If this fails, the code exits.
          */
-        SPDistribution spinDist = new SPDistribution();
+        SPDistribution spinDist;
         if(!ReadDist(input.DisFile(), spinDist)){
             std::cout << std::endl << "Cannot load spin-parity distribution!!!" << std::endl;
             exit(1);
@@ -215,15 +226,28 @@ namespace Module_Decayer{
         int chunks = (events-remainder)/chunkSize;
 
         /**
-        * 5. For the Monte-Carlo decay, an unsigned int randomSeed[12] array is initialized.
+        * 5. For the Monte-Carlo decay, we need to initialize a random generator.
+        *    We are using here the boost::random library and initialize it with the current time.
         */
-        unsigned int randomSeed[12];
 
-        std::cout << "Starting Decay Simulation..." << std::endl;
+        std::cout << std::endl << "Starting Decay Simulation..." << std::endl;
 
+        //Select random number generator
+        typedef boost::mt19937 base_generator_type;
+    
+        //Use the system time as seed
+        base_generator_type generator(time(0));
+    
+        // Define a uniform random number distribution which produces "double"
+        // values between 0 and 1 (0 inclusive, 1 exclusive).
+        boost::uniform_real<> uni_dist(0,1);
+        boost::variate_generator<base_generator_type&, boost::uniform_real<> > uni(generator, uni_dist);
+
+        // Initialize the Decay results object
         DecayResults* results = NULL;
         if(events>1) results = new DecayResults(Z,A,lowEnergy,highEnergy,suffixNo);
-
+        
+        
         for(int i = 0;i<=chunks;i++) {
           
             int numInChunk = (i==chunks) ? remainder : chunkSize;
@@ -243,21 +267,34 @@ namespace Module_Decayer{
             double energy=0;
 
             std::vector<DecayController *> controllerVector(numInChunk, nullptr);
+           
 
-            //Select random number generator
-            typedef boost::mt19937 base_generator_type;
-
-            //Use the system time as seed
-            base_generator_type generator(time(0));
-
-            // Define a uniform random number distribution which produces "double"
-            // values between 0 and 1 (0 inclusive, 1 exclusive).
-            boost::uniform_real<> uni_dist(0,1);
-
-            boost::variate_generator<base_generator_type&, boost::uniform_real<> > uni(generator, uni_dist);
+            std::cout << std::endl << "Randomly drawn spin and parity for chunk: " << std::endl;
 
             for(int k = 0; k<numInChunk; k++){
+                /**
+                *   We randomly draw the initial energy.
+                */
                 energy = (lowEnergy==highEnergy) ? lowEnergy : lowEnergy+(highEnergy-lowEnergy)*uni();
+
+                /**
+                *   We randomly draw the initial spin and parity
+                */
+
+                double J;
+                int Pi;
+                double rdmCDF = uni();
+
+                for(std::vector<SPPopulation>::const_iterator it = spinDist.distribution->begin(); it!= spinDist.distribution->end(); ++it){
+                    if(it->Cdf() >= rdmCDF){
+                        J = it->Spin();
+                        Pi = it->Parity();
+                        break;
+                    }
+                }
+                
+                
+                std::cout << "\t" << J << "\t" << Pi << std::endl;
 
                 if(preEq)
                 {
@@ -290,7 +327,7 @@ namespace Module_Decayer{
                 controller->Decay(neutronEntranceWidth,protonEntranceWidth,alphaEntranceWidth,gammaEntranceWidth,neutronTotalWidth,protonTotalWidth,alphaTotalWidth,gammaTotalWidth); 
                 
                 #pragma omp critical
-                    chunkResults[j] = std::pair<DecayData,std::vector<DecayProduct>>(DecayData(controller->Energy(), J, Pi, neutronEntranceWidth,protonEntranceWidth, alphaEntranceWidth,gammaEntranceWidth, neutronTotalWidth,protonTotalWidth, alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
+                    chunkResults[j] = std::pair<DecayData,std::vector<DecayProduct>>(DecayData(controller->Energy(), controller->Spin(), controller->Parity(), neutronEntranceWidth,protonEntranceWidth, alphaEntranceWidth,gammaEntranceWidth, neutronTotalWidth,protonTotalWidth, alphaTotalWidth,gammaTotalWidth),controller->DecayProducts());
                 
                 #pragma omp critical
                     if(events<=10) controller->PrintDecays();
