@@ -74,10 +74,10 @@ void DecayResults::CreateHists(){
                         4000, 0, 16.0,
                         4000, 0, 16.0);
   
-  gammaEnergyHist_ = new TH1F("GammaEnergyHist", "1D Gamma Energy Hist", 16000, 0, 16.0);
-  protonEnergyHist_ = new TH1F("ProtonEnergyHist", "1D Proton Energy Hist", 16000, 0, 16.0);
-  neutronEnergyHist_ = new TH1F("NeutronEnergyHist", "1D Neutron Energy Hist", 16000, 0, 16.0);
-  alphaEnergyHist_ = new TH1F("AlphaEnergyHist", "1D Alpha Energy Hist", 16000, 0, 16.0);
+  gammaEnergyHist_ = new TH1F("GammaEnergyHist", "1D Gamma Energy Hist", 8000, 0, 16.0);
+  protonEnergyHist_ = new TH1F("ProtonEnergyHist", "1D Proton Energy Hist", 8000, 0, 16.0);
+  neutronEnergyHist_ = new TH1F("NeutronEnergyHist", "1D Neutron Energy Hist", 8000, 0, 16.0);
+  alphaEnergyHist_ = new TH1F("AlphaEnergyHist", "1D Alpha Energy Hist", 8000, 0, 16.0);
 }
 
 void DecayResults::CreateBranches(){
