@@ -40,6 +40,8 @@ class DecayResults {
   */
   DecayResults(int Z, int A, double energyLow, double energyHigh, int suffixNo);
 
+
+
   /**
    * @brief Destructor for DecayResults
    */
@@ -49,30 +51,28 @@ class DecayResults {
   void AddResults(std::vector<std::pair<DecayData, std::vector<DecayProduct> > >&);
   
   void WriteNCloseFile();
-  
-  void SetgResol(double x){gResol_=x;} /**< Setter gResol_*/
-  
-  void SetaResol(double x){aResol_=x;} /**< Setter aResol_*/
-  
-  void SetnResol(double x){nResol_=x;} /**< Setter nResol_*/
-  
-  void SetpResol(double x){pResol_=x;} /**< Setter pResol_*/
-  
-  double GetgResol(){return gResol_;} /**< Getter gResol_*/
-  
-  double GetaResol(){return aResol_;} /**< Getter aResol_*/
-  
-  double GetnResol(){return nResol_;} /**< Getter nResol_*/
-  
-  double GetpResol(){return pResol_;} /**< Getter pResol_*/
 
+
+private:
+  /**
+  * @brief Function to create the output file name.
+  * @return A std::string of the file name
+  */
+  std::string CreateFileName(int suffixNo);
+
+  /**
+   * @brief Create branches in outputTree_
+   * 
+   */
+  void CreateBranches();
+
+  /**
+   * @brief Create histograms in outputTree_
+   * 
+   */
+  void CreateHists();
 
  private:
-  
-  double gResol_; /**< Resolution of energy in percent*/ 
-  double aResol_; /**< Resolution of energy in percent*/
-  double nResol_; /**< Resolution of energy in percent*/
-  double pResol_; /**< Resolution of energy in percent*/
   int initialZ_;
   int initialA_;
   int initialPi_;

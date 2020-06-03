@@ -9,217 +9,51 @@
 #include <boost/random.hpp>
 #include <boost/random/normal_distribution.hpp>
 
+
+
 DecayResults::DecayResults(int Z, int A, double initialEnergyLow, double initialEnergyHigh, int suffixNo) :
-                          initialZ_(Z),initialA_(A), initialEnergyLow_(initialEnergyLow), initialEnergyHigh_(initialEnergyHigh) {
+                          initialZ_(Z),initialA_(A), initialJ_(-1.0), initialPi_(0),initialEnergyLow_(initialEnergyLow), initialEnergyHigh_(initialEnergyHigh) {
   
-  /** 1. Construct file name either with SuffixNumber or not*/
-
-  char filename[256];
-  if(suffixNo!=0) {
-    if(initialEnergyLow_==initialEnergyHigh_){
-      sprintf(filename,"output/Sapphire_%d%s_E=%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,suffixNo);
-    }
-    else{
-      sprintf(filename,"output/Sapphire_%d%s_E=%.3f-%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,initialEnergyHigh_,suffixNo);
-    }
-  } 
-  else
-  {
-    bool validFileName=false;
-    int i  = 0;
-    
-    while(!validFileName) {
-      if(i==0) 
-      {
-	      if(initialEnergyLow_==initialEnergyHigh_)
-        {
-	        sprintf(filename,"output/Sapphire_%d%s_E=%.3f.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_);
-        }
-	      else
-        {
-          sprintf(filename,"output/Sapphire_%d%s_E=%.3f-%.3f.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,initialEnergyHigh_);
-        }
-      } 
-      else
-      {
-	      if(initialEnergyLow_==initialEnergyHigh_)
-        {
-          sprintf(filename,"output/Sapphire_%d%s_J=E=%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,i+1);
-        }	
-        else
-        {
-          sprintf(filename,"output/Sapphire_%d%s_J=E=%.3f-%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,initialEnergyHigh_,i+1);
-        }
-      }
-
-      std::ifstream inTest(filename);
-      if(!inTest)
-      {
-	        validFileName=true;
-      } 
-      else
-      {
-        inTest.close();
-      }
-      i++;
-    }
-  }
-
+  /**
+   * 1. Create File Name
+   */
+  std::string filename = CreateFileName(suffixNo);
   std::cout << "Output filename is " << filename << std::endl;
 
   /** 2. Open outFile as TFILE*/
-  outputFile_ = new TFile(filename,"recreate");
+  outputFile_ = new TFile(filename.c_str(),"recreate");
 
   /** 3. Create a new TTree "statDecay"*/
   outputTree_ = new TTree("statDecay","Sapphire Results");
 
   /** 4. Creating histograms*/
-  ggMatrix_ = new TH2F("ggMatrix", "2D Histo; ggMatrix", 
-                        4000, 0, 16.0,
-                        4000, 0, 16.0);
-                        
-  ngMatrix_ = new TH2F("ngMatrix", "2D Histo; ngMatrix", 
-                        4000, 0, 16.0,
-                        4000, 0, 16.0);
-
-  pgMatrix_ = new TH2F("pgMatrix", "2D Histo; pgMatrix", 
-                        4000, 0, 16.0,
-                        4000, 0, 16.0);
-
-  agMatrix_ = new TH2F("agMatrix", "2D Histo; agMatrix", 
-                        4000, 0, 16.0,
-                        4000, 0, 16.0);
-  
-  TSCMatrix_ = new TH2F("TSCMatrix", "2D Histo; TSCMatrix", 
-                        4000, 0, 16.0,
-                        4000, 0, 16.0);
-  
-  gammaEnergyHist_ = new TH1F("GammaEnergyHist", "1D Gamma Energy Hist", 16000, 0, 16.0);
-  protonEnergyHist_ = new TH1F("ProtonEnergyHist", "1D Proton Energy Hist", 16000, 0, 16.0);
-  neutronEnergyHist_ = new TH1F("NeutronEnergyHist", "1D Neutron Energy Hist", 16000, 0, 16.0);
-  alphaEnergyHist_ = new TH1F("AlphaEnergyHist", "1D Alpha Energy Hist", 16000, 0, 16.0);
+  CreateHists();
 
   /** 5. Creating branches for all decay results*/   
-  outputTree_->Branch("Events",&event,"Events");
-  outputTree_->Branch("initialEnergy",&initialEnergy_,"initialEnergy/D");
-  outputTree_->Branch("initialSpin",&initialSpin_,"initialSpin/D");
-  outputTree_->Branch("initialParity",&initialParity_,"initialParity/D");
-  outputTree_->Branch("neutronTotalWidth",&neutronTotalWidth_,"neutronTotalWidth/D");
-  outputTree_->Branch("protonTotalWidth",&protonTotalWidth_,"protonTotalWidth/D");
-  outputTree_->Branch("gammaTotalWidth",&gammaTotalWidth_,"gammaTotalWidth/D");
-  outputTree_->Branch("alphaTotalWidth",&alphaTotalWidth_,"alphaTotalWidth/D");
-  outputTree_->Branch("neutronEntranceWidth",&neutronEntranceWidth_,"neutronEntranceWidth/D");
-  outputTree_->Branch("protonEntranceWidth",&protonEntranceWidth_,"protonEntranceWidth/D");
-  outputTree_->Branch("gammaEntranceWidth",&gammaEntranceWidth_,"gammaEntranceWidth/D");
-  outputTree_->Branch("alphaEntranceWidth",&alphaEntranceWidth_,"alphaEntranceWidth/D");
-  outputTree_->Branch("numSteps",&numSteps_,"numSteps/I");
-  outputTree_->Branch("fragmentEnergy",fragmentEnergy_,"fragmentEnergy[numSteps]/D");
-  outputTree_->Branch("fragmentExcitation",fragmentExcitation_,"fragmentExcitation[numSteps]/D");
-  outputTree_->Branch("fragmentMomentumX",fragmentMomentumX_,"fragmentMomentumX[numSteps]/D");
-  outputTree_->Branch("fragmentMomentumY",fragmentMomentumY_,"fragmentMomentumY[numSteps]/D");
-  outputTree_->Branch("fragmentMomentumZ",fragmentMomentumZ_,"fragmentMomentumZ[numSteps]/D");
-  outputTree_->Branch("Z",Z_,"Z[numSteps]/I");
-  outputTree_->Branch("A",A_,"A[numSteps]/I");
-  outputTree_->Branch("numGammas",&numGammas_,"numGammas/I");
-  outputTree_->Branch("gammaStepIndex",gammaStepIndex_,"gammaStepIndex[numGammas]/D");
-  outputTree_->Branch("gammaEnergy",gammaEnergy_,"gammaEnergy[numGammas]/D");
-  outputTree_->Branch("gammaMomentumX",gammaMomentumX_,"gammaMomentumX[numGammas]/D");
-  outputTree_->Branch("gammaMomentumY",gammaMomentumY_,"gammaMomentumY[numGammas]/D");
-  outputTree_->Branch("gammaMomentumZ",gammaMomentumZ_,"gammaMomentumZ[numGammas]/D");
-  outputTree_->Branch("numNeutrons",&numNeutrons_,"numNeutrons/I");
-  outputTree_->Branch("neutronStepIndex",neutronStepIndex_,"neutronStepIndex[numNeutrons]/D");
-  outputTree_->Branch("neutronEnergy",neutronEnergy_,"neutronEnergy[numNeutrons]/D");
-  outputTree_->Branch("neutronMomentumX",neutronMomentumX_,"neutronMomentumX[numNeutrons]/D");
-  outputTree_->Branch("neutronMomentumY",neutronMomentumY_,"neutronMomentumY[numNeutrons]/D");
-  outputTree_->Branch("neutronMomentumZ",neutronMomentumZ_,"neutronMomentumZ[numNeutrons]/D");
-  outputTree_->Branch("numProtons",&numProtons_,"numProtons/I");
-  outputTree_->Branch("protonStepIndex",protonStepIndex_,"protonStepIndex[numProtons]/D");
-  outputTree_->Branch("protonEnergy",protonEnergy_,"protonEnergy[numProtons]/D");
-  outputTree_->Branch("protonMomentumX",protonMomentumX_,"protonMomentumX[numProtons]/D");
-  outputTree_->Branch("protonMomentumY",protonMomentumY_,"protonMomentumY[numProtons]/D");
-  outputTree_->Branch("protonMomentumZ",protonMomentumZ_,"protonMomentumZ[numProtons]/D");
-  outputTree_->Branch("numAlphas",&numAlphas_,"numAlphas/I");
-  outputTree_->Branch("alphaStepIndex",alphaStepIndex_,"alphaStepIndex[numAlphas]/D");
-  outputTree_->Branch("alphaEnergy",alphaEnergy_,"alphaEnergy[numAlphas]/D");
-  outputTree_->Branch("alphaMomentumX",alphaMomentumX_,"alphaMomentumX[numAlphas]/D");
-  outputTree_->Branch("alphaMomentumY",alphaMomentumY_,"alphaMomentumY[numAlphas]/D");
-  outputTree_->Branch("alphaMomentumZ",alphaMomentumZ_,"alphaMomentumZ[numAlphas]/D");
-
-  /** 6. Initialize energy resolution*/
-  SetaResol(0.0);
-  SetpResol(0.0);
-  SetnResol(0.0);
-  SetgResol(0.0);
+  CreateBranches();
 }
 
 DecayResults::DecayResults(int Z, int A, double J, int Pi, double initialEnergyLow, double initialEnergyHigh, int suffixNo) :
                           initialZ_(Z),initialA_(A),initialPi_(Pi),initialJ_(J), initialEnergyLow_(initialEnergyLow), initialEnergyHigh_(initialEnergyHigh) {
   
-  /** 1. Construct file name either with SuffixNumber or not*/
-  char spin[10];
-  if(initialPi_==1) sprintf(spin,"%.1f+",initialJ_);
-  else sprintf(spin,"%.1f-",initialJ_);
-
-  char filename[256];
-  if(suffixNo!=0) {
-    if(initialEnergyLow_==initialEnergyHigh_){
-      sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,suffixNo);
-    }
-    else{
-      sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f-%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,initialEnergyHigh_,suffixNo);
-    }
-  } 
-  else
-  {
-    bool validFileName=false;
-    int i  = 0;
-    
-    while(!validFileName) {
-      if(i==0) 
-      {
-	      if(initialEnergyLow_==initialEnergyHigh_)
-        {
-	        sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_);
-        }
-	      else
-        {
-          sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f-%.3f.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,initialEnergyHigh_);
-        }
-      } 
-      else
-      {
-	      if(initialEnergyLow_==initialEnergyHigh_)
-        {
-          sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,i+1);
-        }	
-        else
-        {
-          sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f-%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(),spin,initialEnergyLow_,initialEnergyHigh_,i+1);
-        }
-      }
-
-      std::ifstream inTest(filename);
-      if(!inTest)
-      {
-	        validFileName=true;
-      } 
-      else
-      {
-        inTest.close();
-      }
-      i++;
-    }
-  }
+  std::string filename = CreateFileName(suffixNo);
 
   std::cout << "Output filename is " << filename << std::endl;
 
   /** 2. Open outFile as TFILE*/
-  outputFile_ = new TFile(filename,"recreate");
+  outputFile_ = new TFile(filename.c_str(),"recreate");
 
   /** 3. Create a new TTree "statDecay"*/
   outputTree_ = new TTree("statDecay","Sapphire Results");
 
   /** 4. Creating histograms*/
+  CreateHists();
+
+  /** 5. Creating branches for all decay results*/   
+  CreateBranches();
+}
+
+void DecayResults::CreateHists(){
   ggMatrix_ = new TH2F("ggMatrix", "2D Histo; ggMatrix", 
                         4000, 0, 16.0,
                         4000, 0, 16.0);
@@ -244,9 +78,9 @@ DecayResults::DecayResults(int Z, int A, double J, int Pi, double initialEnergyL
   protonEnergyHist_ = new TH1F("ProtonEnergyHist", "1D Proton Energy Hist", 16000, 0, 16.0);
   neutronEnergyHist_ = new TH1F("NeutronEnergyHist", "1D Neutron Energy Hist", 16000, 0, 16.0);
   alphaEnergyHist_ = new TH1F("AlphaEnergyHist", "1D Alpha Energy Hist", 16000, 0, 16.0);
+}
 
-  /** 5. Creating branches for all decay results*/   
-  //outputTree_->Branch("ggMatrix","TH2F", &ggMatrix_, 32000,0);
+void DecayResults::CreateBranches(){
   outputTree_->Branch("Events",&event,"Events");
   outputTree_->Branch("initialEnergy",&initialEnergy_,"initialEnergy/D");
   outputTree_->Branch("initialSpin",&initialSpin_,"initialSpin/D");
@@ -291,12 +125,119 @@ DecayResults::DecayResults(int Z, int A, double J, int Pi, double initialEnergyL
   outputTree_->Branch("alphaMomentumX",alphaMomentumX_,"alphaMomentumX[numAlphas]/D");
   outputTree_->Branch("alphaMomentumY",alphaMomentumY_,"alphaMomentumY[numAlphas]/D");
   outputTree_->Branch("alphaMomentumZ",alphaMomentumZ_,"alphaMomentumZ[numAlphas]/D");
+}
 
-  /** 6. Initialize energy resolution*/
-  SetaResol(0.0);
-  SetpResol(0.0);
-  SetnResol(0.0);
-  SetgResol(0.0);
+std::string DecayResults::CreateFileName(int suffixNo){ 
+  if(initialJ_>=0){
+    /** Construct file name either with SuffixNumber or not*/
+    char spin[10];
+    if(initialPi_==1) sprintf(spin,"%.1f+",initialJ_);
+    else sprintf(spin,"%.1f-",initialJ_);
+
+    char filename[256];
+    if(suffixNo!=0) {
+      if(initialEnergyLow_==initialEnergyHigh_){
+        sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,suffixNo);
+      }
+      else{
+        sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f-%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,initialEnergyHigh_,suffixNo);
+      }
+    } 
+    else
+    {
+      bool validFileName=false;
+      int i  = 0;
+
+      while(!validFileName) {
+        if(i==0) 
+        {
+	        if(initialEnergyLow_==initialEnergyHigh_)
+          {
+	          sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_);
+          }
+	        else
+          {
+            sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f-%.3f.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,initialEnergyHigh_);
+          }
+        } 
+        else
+        {
+	        if(initialEnergyLow_==initialEnergyHigh_)
+          {
+            sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,i+1);
+          }	
+          else
+          {
+            sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f-%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(),spin,initialEnergyLow_,initialEnergyHigh_,i+1);
+          }
+        }
+
+        std::ifstream inTest(filename);
+        if(!inTest)
+        {
+	          validFileName=true;
+        } 
+        else
+        {
+          inTest.close();
+        }
+        i++;
+      }
+    }
+  }
+  else{
+    char filename[256];
+    
+    if(suffixNo!=0) {
+      if(initialEnergyLow_==initialEnergyHigh_){
+        sprintf(filename,"output/Sapphire_%d%s_E=%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,suffixNo);
+      }
+      else{
+        sprintf(filename,"output/Sapphire_%d%s_E=%.3f-%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,initialEnergyHigh_,suffixNo);
+      }
+    } 
+    else
+    {
+      bool validFileName=false;
+      int i  = 0;
+    
+      while(!validFileName) {
+        if(i==0) 
+        {
+	        if(initialEnergyLow_==initialEnergyHigh_)
+          {
+	          sprintf(filename,"output/Sapphire_%d%s_E=%.3f.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_);
+          }
+	        else
+          {
+            sprintf(filename,"output/Sapphire_%d%s_E=%.3f-%.3f.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,initialEnergyHigh_);
+          }
+        } 
+        else
+        {
+	        if(initialEnergyLow_==initialEnergyHigh_)
+          {
+            sprintf(filename,"output/Sapphire_%d%s_J=E=%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,i+1);
+          }	
+          else
+          {
+            sprintf(filename,"output/Sapphire_%d%s_J=E=%.3f-%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,initialEnergyHigh_,i+1);
+          }
+        }
+
+        std::ifstream inTest(filename);
+        if(!inTest)
+        {
+	          validFileName=true;
+        } 
+        else
+        {
+          inTest.close();
+        }
+        i++;
+      }
+    }
+  }
 }
 
 void DecayResults::WriteNCloseFile(){
@@ -304,10 +245,7 @@ void DecayResults::WriteNCloseFile(){
   outputFile_->Close();
 }
 
-DecayResults::~DecayResults() {
-  //delete outputTree_;
-  //delete outputFile_;
-}
+DecayResults::~DecayResults() {}
 
 void DecayResults::AddResults(std::vector<std::pair<DecayData, std::vector<DecayProduct> > >& results) {
   
@@ -397,5 +335,6 @@ void DecayResults::AddResults(std::vector<std::pair<DecayData, std::vector<Decay
     }
 
     outputTree_->Fill();
+    outputTree_->Write();
   }
 }
