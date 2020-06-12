@@ -426,7 +426,7 @@ void CrossSection::Calculate() {
   //std::cout << std::endl << "Starting" << std::endl;
   //For loop over all energies
   pg.update(0);
-  #pragma omp parallel for
+  //#pragma omp parallel for
   for(unsigned int i=0; i < crossSections_.size(); i++){
     
     //std::cout << std::endl << "Thread: " << omp_get_thread_num() <<  " Energy: " << crossSections_[i].first << std::endl;
