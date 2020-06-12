@@ -231,6 +231,8 @@ bool CrossSection::FillEnergies(std::string energyFile) {
       double energy;
       if(stm>>energy) {
 	      crossSections_.push_back(std::pair<double,CrossSectionValues>(energy, CrossSectionValues(0.,0.,0.,0.,0.,0.,0.,0.)));
+        beamEnergies_.push_back(energy);
+        excitationEnergies_.push_back(energy+seperationEnergy_);
       }
     }
   }
@@ -713,11 +715,94 @@ std::pair<double,double> CrossSection::CalcAverageSWaveResWidth() {
   double upSum=0.;
   double downSum=0.;
   
-  ProgressBar pg;
+  
+
   int size=decayerVector.size();
+
+  ProgressBar pg;
   pg.start(size);
+
   for(int j = 0;j<size;j++) {
+
     pg.update(j);
+    Decayer* decayer = decayerVector[j].first->widthCorrectedDecayer_;
+    
+    if(decayer->jInitial_!=groundStateJ_+0.5 && decayer->jInitial_!=groundStateJ_-0.5) continue;
+    
+    if(decayer->piInitial_!=groundStatePi_) continue;
+    
+    for(int k=0;k<decayer->spinRatePairs_.size();k++) {
+
+      if(decayer->spinRatePairs_[k].A_!=compoundA_ || decayer->spinRatePairs_[k].Z_!=compoundZ_) continue;
+      
+      if(decayer->jInitial_==groundStateJ_+0.5)	upSum+=decayer->spinRatePairs_[k].integral_;
+      
+      else if(decayer->jInitial_==groundStateJ_-0.5) downSum+=decayer->spinRatePairs_[k].integral_;
+    }
+
+    delete decayerVector[j].first;
+  }
+
+  pg.update(size);
+
+  LevelDensity* levelDensityUp;
+  LevelDensity* levelDensityDown;
+
+  if(nldmodel_==0)
+  {
+   levelDensityUp = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_+0.5);
+   levelDensityDown = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_-0.5);
+  }
+
+  if(nldmodel_==1)
+  {
+    levelDensityUp = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_+0.5);
+    levelDensityDown = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_-0.5);
+  }
+  
+  double ldValueUp=0.;
+  double ldValueDown=0.;  
+
+  if(levelDensityUp->operator()(energy)>0.) {
+    ldValueUp=levelDensityUp->operator()(energy);
+    upSum/=2.*pi*ldValueUp;
+  }
+
+  if(levelDensityDown->operator()(energy)>0.) {
+    ldValueDown=levelDensityDown->operator()(energy);
+    downSum/=2.*pi*ldValueDown;
+  }
+
+  delete levelDensityUp;
+  delete levelDensityDown;
+
+  double sum = upSum*(2.*groundStateJ_+2.);
+  double totalWeight = (2.*groundStateJ_+2.);
+  
+  if(groundStateJ_>=0.5) {
+    totalWeight+=2.*groundStateJ_;
+    sum+=downSum*2.*groundStateJ_;
+  }
+
+  return std::pair<double,double>(sum/totalWeight, 1./(ldValueUp+ldValueDown));
+}
+
+std::pair<double,double> CrossSection::CalcAverageSWaveResWidth(double energy) {
+  //double energy = seperationEnergy_;
+  DecayerVector decayerVector;
+
+  if(!CalcDecayerVector(energy,decayerVector,true)) {
+    for(int j = 0;j<decayerVector.size();j++) 
+      delete decayerVector[j].first;
+    return std::pair<double,double>(0.,0.);
+  }
+
+  double upSum=0.;
+  double downSum=0.;
+  
+  int size=decayerVector.size();
+  for(int j = 0;j<size;j++) {
+    
     Decayer* decayer = decayerVector[j].first->widthCorrectedDecayer_;
     
     if(decayer->jInitial_!=groundStateJ_+0.5 && decayer->jInitial_!=groundStateJ_-0.5) continue;
@@ -734,7 +819,6 @@ std::pair<double,double> CrossSection::CalcAverageSWaveResWidth() {
 
     delete decayerVector[j].first;
   }
-  pg.update(size);
 
   LevelDensity* levelDensityUp;
   LevelDensity* levelDensityDown;
@@ -882,6 +966,109 @@ std::pair<double,double> CrossSection::CalcAveragePWaveResWidth() {
 				  1./(ldValueUp15+ldValueUp05+ldValueDown05+ldValueDown15));
 }
 
+std::pair<double,double> CrossSection::CalcAveragePWaveResWidth(double energy) {
+  
+  DecayerVector decayerVector;
+  if(!CalcDecayerVector(energy,decayerVector,true)) {
+    for(int j = 0;j<decayerVector.size();j++) 
+      delete decayerVector[j].first;
+    return std::pair<double,double>(0.,0.);
+  }
+  double upSum15=0.;
+  double upSum05=0.;
+  double downSum05=0.;
+  double downSum15=0.;
+
+  int size=decayerVector.size();
+
+  for(int j = 0;j<size;j++) {
+    
+    Decayer* decayer = decayerVector[j].first->widthCorrectedDecayer_;
+    if(decayer->jInitial_!=groundStateJ_+1.5&&
+       decayer->jInitial_!=groundStateJ_+0.5&&
+       decayer->jInitial_!=groundStateJ_-0.5&&
+       decayer->jInitial_!=groundStateJ_-1.5) continue;
+    if(decayer->piInitial_==groundStatePi_) continue;
+    for(int k=0;k<decayer->spinRatePairs_.size();k++) {
+      if(decayer->spinRatePairs_[k].A_!=compoundA_||
+	 decayer->spinRatePairs_[k].Z_!=compoundZ_) continue;
+      if(decayer->jInitial_==groundStateJ_+1.5)
+	upSum15+=decayer->spinRatePairs_[k].integral_;
+      else if(decayer->jInitial_==groundStateJ_+0.5)
+	upSum05+=decayer->spinRatePairs_[k].integral_;
+      else if(decayer->jInitial_==groundStateJ_-0.5)
+	downSum05+=decayer->spinRatePairs_[k].integral_;
+      else if(decayer->jInitial_==groundStateJ_-1.5)
+	downSum15+=decayer->spinRatePairs_[k].integral_;
+    }
+    delete decayerVector[j].first;
+  }
+  
+
+  LevelDensity* levelDensityUp15;
+  LevelDensity* levelDensityUp05;
+  LevelDensity* levelDensityDown05;
+  LevelDensity* levelDensityDown15;
+
+  if(nldmodel_==0)
+  {
+    levelDensityUp15 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_+1.5);
+    levelDensityUp05 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_+0.5);
+    levelDensityDown05 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_-0.5);
+    levelDensityDown15 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_-1.5);
+  }
+
+  if(nldmodel_==1)
+  {
+    levelDensityUp15 = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_+1.5);
+    levelDensityUp05 = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_+0.5);
+    levelDensityDown05 = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_-0.5);
+    levelDensityDown15 = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_-1.5);
+  }
+
+  double ldValueUp15 = 0.;
+  double ldValueUp05 = 0.;
+  double ldValueDown05 = 0.;
+  double ldValueDown15 = 0.;
+
+  if(levelDensityUp15->operator()(energy)>0.) {
+    ldValueUp15=levelDensityUp15->operator()(energy);
+    upSum15/=2.*pi*ldValueUp15;
+  }
+  if(levelDensityUp05->operator()(energy)>0.) {
+    ldValueUp05=levelDensityUp05->operator()(energy);
+    upSum05/=2.*pi*ldValueUp05;
+  }
+  if(levelDensityDown05->operator()(energy)>0.) {
+    ldValueDown05=levelDensityDown05->operator()(energy);
+    downSum05/=2.*pi*ldValueDown05;
+  }
+  if(levelDensityDown15->operator()(energy)>0.) {
+    ldValueDown15=levelDensityDown15->operator()(energy);
+    downSum15/=2.*pi*ldValueDown15;
+  }
+
+  delete levelDensityUp15;
+  delete levelDensityUp05;
+  delete levelDensityDown05;
+  delete levelDensityDown15;
+
+  double sum = upSum15*(2.*groundStateJ_+4.)+upSum05*(2.*groundStateJ_+2.);
+  double totalWeight = 4.*groundStateJ_+6.;
+
+  if(groundStateJ_>=0.5) {
+    totalWeight+= 2.*groundStateJ_;
+    sum+=downSum05*(2.*groundStateJ_);
+  }
+  if(groundStateJ_>=1.5) {
+    totalWeight+= 2.*groundStateJ_-2.;
+     sum+=downSum15*(2.*groundStateJ_-2.);
+  }
+  
+  return std::pair<double,double>(sum/totalWeight,
+				  1./(ldValueUp15+ldValueUp05+ldValueDown05+ldValueDown15));
+}
+
 std::pair<double,double> CrossSection::CalcAverageDWaveResWidth() {
   std::cout << std::endl << "Calculating Average d-wave resonance width ..." << std::endl;
   double energy = seperationEnergy_;
@@ -930,6 +1117,130 @@ std::pair<double,double> CrossSection::CalcAverageDWaveResWidth() {
     delete decayerVector[j].first;
   }
   pg.update(size);
+
+  LevelDensity* levelDensityUp25;
+  LevelDensity* levelDensityUp15;
+  LevelDensity* levelDensityUp05;
+  LevelDensity* levelDensityDown05;
+  LevelDensity* levelDensityDown15;
+  LevelDensity* levelDensityDown25;
+
+  if(nldmodel_==0){
+    levelDensityUp25 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_+2.5);
+    levelDensityUp15 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_+1.5);
+    levelDensityUp05 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_+0.5);
+    levelDensityDown05 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_-0.5);
+    levelDensityDown15 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_-1.5);
+    levelDensityDown25 = new RauscherLevelDensity(compoundZ_,compoundA_,groundStateJ_-2.5);
+  }
+
+  if(nldmodel_==1){
+    levelDensityUp25 = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_+2.5);
+    levelDensityUp15 = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_+1.5);
+    levelDensityUp05 = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_+0.5);
+    levelDensityDown05 = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_-0.5);
+    levelDensityDown15 = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_-1.5);
+    levelDensityDown25 = new LevelDensityHFB_BSk14(compoundZ_,compoundA_,groundStateJ_-2.5);
+  }
+
+  double ldValueUp25 = 0.;
+  double ldValueUp15 = 0.;
+  double ldValueUp05 = 0.;
+  double ldValueDown05 = 0.;
+  double ldValueDown15 = 0.;
+  double ldValueDown25 = 0.;
+  
+  if(levelDensityUp25->operator()(energy)>0.) {
+    ldValueUp25=levelDensityUp25->operator()(energy);
+    upSum25/=2.*pi*ldValueUp25;
+  }
+  if(levelDensityUp15->operator()(energy)>0.) {
+    ldValueUp15=levelDensityUp15->operator()(energy);
+    upSum15/=2.*pi*ldValueUp15;
+  }
+  if(levelDensityUp05->operator()(energy)>0.) {
+    ldValueUp05=levelDensityUp05->operator()(energy);
+    upSum05/=2.*pi*ldValueUp05;
+  }
+  if(levelDensityDown05->operator()(energy)>0.) {
+    ldValueDown05=levelDensityDown05->operator()(energy);
+    downSum05/=2.*pi*ldValueDown05;
+  }
+  if(levelDensityDown15->operator()(energy)>0.) {
+    ldValueDown15=levelDensityDown15->operator()(energy);
+    downSum15/=2.*pi*ldValueDown15;
+  }
+  if(levelDensityDown25->operator()(energy)>0.) {
+    ldValueDown25=levelDensityDown25->operator()(energy);
+    downSum25/=2.*pi*ldValueDown25;
+  }
+  delete levelDensityUp25;
+  delete levelDensityUp15;
+  delete levelDensityUp05;
+  delete levelDensityDown05;
+  delete levelDensityDown15;
+  delete levelDensityDown25;
+  double totalWeight = 4.*groundStateJ_+10.;
+  double sum = upSum25*(2.*groundStateJ_+6.)+upSum15*(2.*groundStateJ_+4.);//+upSum05*(2.*groundStateJ_+2.);
+  
+  if(groundStateJ_>=1.5) {
+    totalWeight+= 2.*groundStateJ_-2.;
+     sum+=downSum15*(2.*groundStateJ_-2.);
+  }
+  if(groundStateJ_>=2.5) {
+    totalWeight+= 2.*groundStateJ_-4.;
+     sum+=downSum25*(2.*groundStateJ_-4.);
+  }
+  return std::pair<double,double>(sum/totalWeight,
+				  1./(ldValueUp25+ldValueUp15+downSum15+downSum25));
+}
+
+std::pair<double,double> CrossSection::CalcAverageDWaveResWidth(double energy) {
+  
+  DecayerVector decayerVector;
+  if(!CalcDecayerVector(energy,decayerVector,true)) {
+    for(int j = 0;j<decayerVector.size();j++) 
+      delete decayerVector[j].first;
+    return std::pair<double,double>(0.,0.);
+  }
+  double upSum25=0.;
+  double upSum15=0.;
+  double upSum05=0.;
+  double downSum05=0.;
+  double downSum15=0.;
+  double downSum25=0.;
+
+  int size = decayerVector.size();
+  
+  for(int j = 0;j<size;j++) {
+    
+    Decayer* decayer = decayerVector[j].first->widthCorrectedDecayer_;
+    if(decayer->jInitial_!=groundStateJ_+2.5&&
+       decayer->jInitial_!=groundStateJ_+1.5&&
+       decayer->jInitial_!=groundStateJ_+0.5&&
+       decayer->jInitial_!=groundStateJ_-0.5&&
+       decayer->jInitial_!=groundStateJ_-1.5&&
+       decayer->jInitial_!=groundStateJ_-2.5) continue;
+    if(decayer->piInitial_!=groundStatePi_) continue;
+    for(int k=0;k<decayer->spinRatePairs_.size();k++) {
+      if(decayer->spinRatePairs_[k].A_!=compoundA_||
+	 decayer->spinRatePairs_[k].Z_!=compoundZ_) continue;
+      if(decayer->jInitial_==groundStateJ_+2.5)
+	upSum25+=decayer->spinRatePairs_[k].integral_;
+      else if(decayer->jInitial_==groundStateJ_+1.5)
+	upSum15+=decayer->spinRatePairs_[k].integral_;
+      else if(decayer->jInitial_==groundStateJ_+0.5)
+	upSum05+=decayer->spinRatePairs_[k].integral_;
+      else if(decayer->jInitial_==groundStateJ_-0.5)
+	downSum05+=decayer->spinRatePairs_[k].integral_;
+      else if(decayer->jInitial_==groundStateJ_-1.5)
+	downSum15+=decayer->spinRatePairs_[k].integral_;
+      else if(decayer->jInitial_==groundStateJ_-2.5)
+	downSum25+=decayer->spinRatePairs_[k].integral_;
+    }
+    delete decayerVector[j].first;
+  }
+  
 
   LevelDensity* levelDensityUp25;
   LevelDensity* levelDensityUp15;
