@@ -14,10 +14,10 @@
 /**
  * Now there are new includes which differ from the original version
  */
-#include "Module_CrossSection.h"
-#include "Module_OldSapphire.h"
-#include "Module_Decayer.h"
-#include "Module_RandomScheme.h"
+#include "Modules/Module_CrossSection.h"
+#include "Modules/Module_OldSapphire.h"
+#include "Modules/Module_Decayer.h"
+#include "Modules/Module_RandomScheme.h"
 #include "SapphireInput.h"
 
 #include "GammaStrength/D1MQRPA.h"
@@ -34,9 +34,13 @@ void PrintHelp(){
 	std::cout << std::endl;
   std::cout << "\treaction      - Calculate reaction cross sections and/or rates." << std::endl;
   std::cout << "\tdecayer       - Calculate Monte-Carlo statistical decay." << std::endl;
-  std::cout << "\trandom        - Create random level schemes" << std::endl;
   std::cout << std::endl;
-  std::cout << "\told           - Instruction for the old Sapphire code." << std::endl;
+  std::cout << "\trandom        - Create random level schemes (experimental)" << std::endl;
+  std::cout << "\tbetaneutron   - Calculate HF and BW cross sections from "   << std::endl;
+  std::cout << "\t                given neutron widths and level energies. "   << std::endl;
+  std::cout << "\t                (experimental) "   << std::endl;
+  std::cout << std::endl;
+  std::cout << "\told           - Instruction for the old Sapphire code. (not supported anymore)" << std::endl;
 	std::cout << std::endl;
   std::cout << "\thelp          - Show this help message." << std::endl;
   std::cout << "\ttemplate      - Print template input file." << std::endl;

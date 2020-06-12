@@ -4,7 +4,7 @@
  */
 
 
-#include "Module_Decayer.h"
+#include "Modules/Module_Decayer.h"
 #include "SapphireMPITypes.h"
 #include "SapphireInput.h"
 #include <string>
@@ -426,7 +426,7 @@ namespace Module_Decayer{
         DecayResults* results = NULL;
         if(events>1) results = new DecayResults(Z,A,J,Pi,lowEnergy,highEnergy,suffixNo);
         
-    for(int i = 0;i<=chunks;i++) {
+        for(int i = 0;i<=chunks;i++) {
           
             int numInChunk = (i==chunks) ? remainder : chunkSize;
             if(numInChunk==0) continue;
@@ -460,6 +460,7 @@ namespace Module_Decayer{
 
             for(int k = 0; k<numInChunk; k++){
                 energy = (lowEnergy==highEnergy) ? lowEnergy : lowEnergy+(highEnergy-lowEnergy)*uni();
+                std::cout << std::endl << energy << std::endl;
 
                 if(preEq)
                 {
