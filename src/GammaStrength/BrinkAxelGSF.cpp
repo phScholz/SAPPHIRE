@@ -7,8 +7,13 @@ double BrinkAxelGSF::CalcStrengthFunction(double energy) {
       (pow(pow(energy,2.)-pow(gdrParameters_.E_[i],2.),2.)+
        pow(CalcEnergyDependentWidth(energy,i)*energy,2.));
   }
-  if(maxL_==0.||maxL_==1.) strength*=energy;
-  else strength/=energy;
+
+  if(maxL_==0.||maxL_==1.){
+     strength*=energy;
+  }
+  else{
+    strength/=energy;
+  } 
   return strength;
 }
 

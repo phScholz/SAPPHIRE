@@ -18,6 +18,7 @@
 #include "Modules/Module_OldSapphire.h"
 #include "Modules/Module_Decayer.h"
 #include "Modules/Module_RandomScheme.h"
+#include "Modules/Module_GSF.h"
 #include "SapphireInput.h"
 
 #include "GammaStrength/D1MQRPA.h"
@@ -39,6 +40,7 @@ void PrintHelp(){
   std::cout << "\tbetaneutron   - Calculate HF and BW cross sections from "   << std::endl;
   std::cout << "\t                given neutron widths and level energies. "   << std::endl;
   std::cout << "\t                (experimental) "   << std::endl;
+  std::cout << "\tgsf           - Printing gamma-strength function (experimental)" << std::endl;
   std::cout << std::endl;
   std::cout << "\told           - Instruction for the old Sapphire code. (not supported anymore)" << std::endl;
 	std::cout << std::endl;
@@ -98,6 +100,9 @@ int main(int argc, char *argv[]) {
   }
   else if (mode == "old"){
     Module_OldSapphire::Go(argc, argv);
+  }
+  else if (mode == "gsf"){
+    Module_GSF::Go(argc, argv);
   }
   else if (mode == "template"){
     SapphireInput *input = new SapphireInput();

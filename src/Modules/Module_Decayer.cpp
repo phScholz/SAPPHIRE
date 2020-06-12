@@ -147,6 +147,7 @@ namespace Module_Decayer{
             Input.PrintIntputFile(str);
             Input.ReadInputFile(str);
             Input.PrintIntputParameters("Decayer");
+            
             if (Input.DisFile().length()>0){
                 std::cout << std::endl << "Running Decayer for distribution in ... " << Input.DisFile() << std::endl;
                 RunDist(Input);

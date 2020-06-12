@@ -80,6 +80,9 @@ configure_file( include/Sapphire_config.h.in ${CMAKE_BINARY_DIR}/generated/Sapph
 include_directories( ${CMAKE_BINARY_DIR}/generated/ )
 
 add_subdirectory(src)
+#add_subdirectory(src/GammaStrength)
+#add_subdirectory(src/Modules)
+#add_subdirectory(src/LevelDensity)
 
 # check if Doxygen is installed
 message("Checking if Doxygen can be found ...")

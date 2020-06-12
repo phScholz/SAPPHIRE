@@ -56,25 +56,6 @@ namespace Module_OldSapphire{
         oldSapphire(argc, argv);
     }
     
-    
-
-    
-    /**
-     * @brief CMD line parameters are parsed for the Decay module
-     * @param args cmd line string
-     * @param Z nuclear charge number
-     * @param A nuclear mass number
-     * @param J Reference to a spin double
-     * @param Pi Reference to a parity int
-     * @param lowEnergy Reference to a lowEnergy double
-     * @param highEnergy  Reference to a highEnergy double
-     * @param events  Reference to the events int.
-     * 
-     * @returns True or False
-     * 
-     * @note This has to move to another class in future. This does not belong in a main file but in the class file of the respective module.
-     * 
-     */
     bool parseCommandLineForDecay(std::vector<std::string>& args, 
     			      int& Z, int& A, double& J, int& Pi, 
     			      double& lowEnergy, double& highEnergy,
@@ -172,22 +153,6 @@ namespace Module_OldSapphire{
     }
 
     
-    /**
-    * @brief CMD line parameters are parsed for the Cross section module
-    * @param args cmd line string
-    * @param Z nuclear charge number
-    * @param A nuclear mass number
-    * @param pType Projectile
-    * @param energyFile Reference to the string for the path to the EnergyFile
-    * @param asciiIn Boolean which shows if there is a asciiFile or not
-    * @param highEnergy  Reference to a highEnergy double
-    * @param events  Reference to the events int.
-    * 
-    * @returns True or False
-    * 
-    * @note This has to move to another class in future. This does not belong in a main file but in the class file of the respective module.
-    * 
-    */
     bool parseCommandLineForXS(std::vector<std::string>& args,int& Z, int&A, 
     			   int& pType, std::string& energyFile, bool asciiIn) {
 
