@@ -18,6 +18,8 @@ namespace Module_GSF{
         }
 
         std::string isotope(argv[2]);
+        
+        std::cout << std::endl << "Gamma-Strength Functions for " << isotope << std::endl;
 
         GetGSF(isotope, atoi(argv[3]), atoi(argv[4]), atoi(argv[5]));
 
@@ -37,6 +39,78 @@ namespace Module_GSF{
         GammaTransmissionFunc::SetMGDRType(m1);
         GammaTransmissionFunc::SetEGQRType(e2);
 
+        switch (e1)
+        {
+        case 0:
+            std::cout << "E1 Strength Function:\t" << "Brink-AxelGSF" << std::endl;
+            break;
+
+        case 1:
+            std::cout << "E1 Strength Function:\t" << "KopeckyUhlGSF" << std::endl;
+            break;
+        
+        case 2:
+            std::cout << "E1 Strength Function:\t" << "McCullaghGSF" << std::endl;
+            break;
+        
+        case 3:
+            std::cout << "E1 Strength Function:\t" << "D!MQRPA" << std::endl;
+            break;
+        
+        default:
+            std::cout << "!!!Wrong Input for E1 Strength Function!!!" << std::endl;
+            exit(1);
+            break;
+        }
+
+        switch (m1)
+        {
+        case 0:
+            std::cout << "M1 Strength Function:\t" << "Brink-AxelGSF" << std::endl;
+            break;
+
+        //case 1:
+        //    std::cout << "E1 Strength Function:" << "KopeckyUhlGSF" << std::endl;
+        //    break;
+        
+        case 2:
+            std::cout << "M1 Strength Function:\t" << "McCullaghGSF" << std::endl;
+            break;
+        
+        case 3:
+            std::cout << "M1 Strength Function:\t" << "D!MQRPA" << std::endl;
+            break;
+        
+        default:
+            std::cout << "!!!Wrong Input for M1 Strength Function!!!" << std::endl;
+            exit(1);
+            break;
+        }
+
+        switch (e2)
+        {
+        case 0:
+            std::cout << "E2 Strength Function:\t" << "Brink-AxelGSF" << std::endl;
+            break;
+
+        //case 1:
+        //    std::cout << "E1 Strength Function:" << "KopeckyUhlGSF" << std::endl;
+        //    break;
+        
+        case 2:
+            std::cout << "E2 Strength Function:\t" << "McCullaghGSF" << std::endl;
+            break;
+        
+        //case 3:
+        //    std::cout << "E1 Strength Function:" << "D!MQRPA" << std::endl;
+        //    break;
+        
+        default:
+            std::cout << "!!!Wrong Input for E2 Strength Function!!!" << std::endl;
+            exit(1);
+            break;
+        }
+
         GammaTransmissionFunc* e1p;
         GammaTransmissionFunc* m1p;
         GammaTransmissionFunc* e2p;
@@ -48,7 +122,7 @@ namespace Module_GSF{
         std::cout.precision(2);
         std::cout << std::endl  << "Energy\t\t" << "f(E1)\t\t" << "f(M1)\t\t" << "f(E2)\t\t" << "T(E1)\t\t" << "T(M1)\t\t" << "T(E2)\t\t" << std::endl;
 
-        for(double energy =0.5; energy <= 20.0; energy+=0.5){
+        for(double energy =0.0001; energy <= 25.0; energy+=0.5){
             
             std::cout << std::scientific << energy << "\t"
                                     << e1s->CalcStrengthFunction(energy) << "\t"

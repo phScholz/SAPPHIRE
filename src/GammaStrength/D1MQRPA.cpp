@@ -175,6 +175,10 @@ void D1MQRPA::PrintM1(){
 
 double D1MQRPA::CalcStrengthFunction(double energy){
 
+    if(energy == 0){
+        return 0;
+    }
+
     //opposite parities && dL = 1
     if(piFinal_==-1*piInitial_ && abs(jFinal_-jInitial_) == 1){
         return CalcE1Strength(energy);

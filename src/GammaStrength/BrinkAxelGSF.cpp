@@ -2,19 +2,27 @@
 
 double BrinkAxelGSF::CalcStrengthFunction(double energy) {
   double strength = 0.;
-  for(int i = 0;i<2;i++) {
-    strength+=gdrParameters_.kSigmaGamma_[i]*CalcEnergyDependentWidth(energy,i)/
-      (pow(pow(energy,2.)-pow(gdrParameters_.E_[i],2.),2.)+
-       pow(CalcEnergyDependentWidth(energy,i)*energy,2.));
-  }
-
-  if(maxL_==0.||maxL_==1.){
-     strength*=energy;
+  
+  if(energy == 0){
+    return 0;
   }
   else{
-    strength/=energy;
-  } 
-  return strength;
+
+    for(int i = 0;i<2;i++) {
+      strength+=gdrParameters_.kSigmaGamma_[i]*CalcEnergyDependentWidth(energy,i)/
+        (pow(pow(energy,2.)-pow(gdrParameters_.E_[i],2.),2.)+
+         pow(CalcEnergyDependentWidth(energy,i)*energy,2.));
+    }
+
+    if(maxL_==0.|| maxL_==1.){
+       strength*=energy;
+    }
+    else{
+      strength/=energy;
+    }
+
+    return strength;
+  }
 }
 
 double BrinkAxelGSF::CalcEnergyDependentWidth(double energy, int which) {
