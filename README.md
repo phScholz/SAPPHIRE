@@ -7,23 +7,26 @@
 ## Contents
 
   1. [General Information:](#1-general-information)
-    - [1.1. Sapphire](#11-sapphire)
-    - [1.2. Former Contributors:](#12-former-contributors)
-    - [1.3. License](#13-license)
+     1. [Sapphire](#11-sapphire)
+     2. [Former Contributors:](#12-former-contributors)
+     3. [License](#13-license)
   2. [Compilation & Execution:](#2-compilation--execution)
-    - [2.1. Requirements](#21-requirements)
-    - [2.2. Build](#22-build)
-    - [2.3. Run](#23-run)
+     1. [Requirements](#21-requirements)
+     2. [Build](#22-build)
+     3. [Run](#23-run)
   3. [Modules:](#3-modules)
-    - [3.1. reaction](#31-reaction)
-    - [3.2. decayer](#32-decayer)
-    - [3.3. old](#33-old)
-    - [3.4. template](#34-template)
-    - [3.5. help](#35-help)
+     1. [reaction](#31-reaction)
+     2. [decayer](#32-decayer)
+     3. [random](#33-random)
+     4. [gsf](#34-gsf)
+     5. [nld](#35-nld)
+     6. [old](#36-old)
+     7. [template](#37-template)
+     8. [help](#38-help)
   4. [References:](#4-references)
-    - [4.1. Documentation](#41-documentation)
-    - [4.2. About Sapphire](#42-about-sapphire)
-    - [4.3. Using Sapphire](#43-using-sapphire)
+     1. [Documentation](#41-documentation)
+     2. [About Sapphire](#42-about-sapphire)
+     3. [Using Sapphire](#43-using-sapphire)
   5. [Input file description](./INPUTFILE.md)
  
 ## 1. General Information
@@ -141,18 +144,33 @@ Not yet fully implemented.
 ### 3.3 random
 This module is still in an experimental state. It can be used to create or extend level schemes via randomly drawn levels from a Poission distribution. The mean of the Poisson distributin is calculated from a level density model.
 
-### 3.3. old
+### 3.4 gsf
+This is a small module to print values for the gamma-strength function as they are used in Sapphire. 
+The usage is pretty simple. The user simply has to add an isotope of interest followed by the number of the e1/m1/e2 model.
+
+```
+./sapphire gsf 64Cu 0 0 0
+```
+
+### 3.5 nld
+Similar to the `gsf` module, the `nld` module is for testing the input of the nuclear level density quickly. The user simply has to give an isotope of interest and the number of the nldmodel.
+
+```
+./sapphire nld 64Cu 0
+```
+
+### 3.6. old
 This module provides the same functionallity as the original Sapphire code. Everything stays the same except the keyword ```old```. 
 Thus instead of running ```./sapphire 60Fe+a``` one needs to run ```./sapphire old 60Fe+a```.
 
 In future more and more of the features of the original Sapphire code will be reimplemented as modules. This part of the code can still be used but won't be maintained in future.
 
-### 3.4. template
+### 3.7. template
 This simple module can be used to automatically generate a template for an input file. Simply type 
 ```sapphire template```
 and the output can be easily converted into an ini-File.
 
-### 3.5. help
+### 3.8. help
 Print the help text for the different modules.
 
 ---
