@@ -1,5 +1,5 @@
 #include "Modules/Module_NLD.h"
-#include "NuclearMass.h"
+#include "Databases/NuclearMass.h"
 #include "LevelDensity/LevelDensity.h"
 #include "LevelDensity/RauscherLevelDensity.h"
 #include "LevelDensity/LevelDensityHFB_BSk14.h"
@@ -61,7 +61,7 @@ namespace Module_NLD{
             LevelDensity * p3 = new T(charge, mass, 3, 1 );
             LevelDensity * n3 = new T(charge, mass, 3, -1 );
 
-            std::cout << "Energy\t "<< "p(0+) \t"
+            std::cout << std::endl  << "Energy\t "<< "p(0+) \t"
                                     << "p(0-) \t"
                                     << "p(1+) \t"
                                     << "p(1-) \t"
@@ -93,7 +93,7 @@ namespace Module_NLD{
             LevelDensity * p3 = new T(charge, mass, 3.5, 1 );
             LevelDensity * n3 = new T(charge, mass, 3.5, -1 );
 
-            std::cout << "Energy\t "<< "p(1/2+)\t"
+            std::cout << std::endl  << "Energy\t "<< "p(1/2+)\t"
                                     << "p(1/2-)\t"
                                     << "p(3/2+)\t"
                                     << "p(3/2-)\t"

@@ -1,13 +1,13 @@
 /**
- * @file DecayController.h
+ * @file Decayer/DecayController.h
  * @brief Declaration of class DecayController
  */
 
 #pragma once
 
 #include <vector>
-#include "Decayer.h"
-#include "DecayProduct.h"
+#include "Decayer/Decayer.h"
+#include "Decayer/DecayProduct.h"
 
 class TVector3;
 

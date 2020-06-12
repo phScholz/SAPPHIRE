@@ -4,7 +4,7 @@
  * @date 2020-04-27
  */
 #include "LevelDensity/LevelDensityHFB_BSk14.h"
-#include "NuclearMass.h"
+#include "Databases/NuclearMass.h"
 #include <string>
 #include <vector>
 #include <iostream>

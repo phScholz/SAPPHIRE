@@ -1,5 +1,5 @@
 /**
- * @file Module_Decayer.h
+ * @file Module_Decayer/Decayer.h
  * @brief Reimplementation of the decay routine of Sapphire as a module.
  * @date 2020
  * @author Philipp Scholz, <pscholz@outlook.de>

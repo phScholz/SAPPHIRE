@@ -16,10 +16,10 @@
 #include <chrono>
 //#include <ctime>
 
-#include "NuclearMass.h"
+#include "Databases/NuclearMass.h"
 #include "CrossSection.h"
 #include "SapphireInput.h"
-#include "Decayer.h"
+#include "Decayer/Decayer.h"
 #include "TransitionRateFunc.h"
 #include "ParticleTransmissionFunc.h"
 #include "GammaStrength/GammaTransmissionFunc.h"

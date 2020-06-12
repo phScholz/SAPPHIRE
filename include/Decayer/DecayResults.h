@@ -1,5 +1,5 @@
 /**
- * @file DecayResults.h
+ * @file Decayer/DecayResults.h
  * @brief Declaration of DecayResults and DecayEvent
  */
 #pragma once
@@ -9,7 +9,7 @@
 #include <TH1F.h>
 #include <TObject.h>
 #include <vector>
-#include "DecayProduct.h"
+#include "Decayer/DecayProduct.h"
 #include <boost/random.hpp>
 #include <boost/random/normal_distribution.hpp>
 

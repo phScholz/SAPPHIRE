@@ -6,7 +6,7 @@
 #pragma once
 #include "../TransmissionFunc.h"
 #include "Constants.h"
-#include "NuclearMass.h"
+#include "Databases/NuclearMass.h"
 #include "LevelDensity/LevelDensityFormula.h"
 #include <math.h>
 

@@ -8,7 +8,7 @@
 #include <string>
 #include "SapphireInput.h"
 #include "SpinRatePair.h"
-#include "Decayer.h"
+#include "Decayer/Decayer.h"
 
 typedef std::vector<std::pair<Decayer*,std::vector<SpinRatePair*> > > DecayerVector;
 

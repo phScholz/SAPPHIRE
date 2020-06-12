@@ -13,8 +13,8 @@
 
 #include <string>
 #include <vector>
-#include "NuclearMass.h"
-#include "NuclearLevels.h"
+#include "Databases/NuclearMass.h"
+#include "Databases/NuclearLevels.h"
 
 
 class SapphireInput{

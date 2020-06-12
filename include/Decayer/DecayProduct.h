@@ -1,5 +1,5 @@
 /**
- * @file DecayProduct.h
+ * @file Decayer/DecayProduct.h
  * @brief Declaration of DecayData and DecayProduct
  */
 #pragma once

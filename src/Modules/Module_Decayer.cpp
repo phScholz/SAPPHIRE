@@ -8,12 +8,12 @@
 #include "SapphireMPITypes.h"
 #include "SapphireInput.h"
 #include <string>
-#include "NuclearMass.h"
+#include "Databases/NuclearMass.h"
 #include <chrono>
-#include "Decayer.h"
+#include "Decayer/Decayer.h"
 #include "omp.h"
-#include "DecayController.h"
-#include "DecayResults.h"
+#include "Decayer/DecayController.h"
+#include "Decayer/DecayResults.h"
 #include "Progressbar.h"
 #include "ParticleTransmissionFunc.h"
 #include "GammaStrength/GammaTransmissionFunc.h"

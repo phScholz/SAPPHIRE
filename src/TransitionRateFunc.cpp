@@ -3,7 +3,7 @@
 #include "GammaStrength/GammaTransmissionFunc.h"
 #include "LevelDensity/RauscherLevelDensity.h"
 #include "LevelDensity/LevelDensityHFB_BSk14.h"
-#include "NuclearLevels.h"
+#include "Databases/NuclearLevels.h"
 #include <iostream>
 #include <stdlib.h>
 #include <omp.h>

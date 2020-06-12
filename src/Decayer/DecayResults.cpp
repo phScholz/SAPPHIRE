@@ -1,6 +1,6 @@
-#include "DecayResults.h"
-#include "DecayProduct.h"
-#include "NuclearMass.h"
+#include "Decayer/DecayResults.h"
+#include "Decayer/DecayProduct.h"
+#include "Databases/NuclearMass.h"
 #include <fstream>
 #include <iostream>
 #include <chrono>

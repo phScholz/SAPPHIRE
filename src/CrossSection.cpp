@@ -1,6 +1,6 @@
-#include "NuclearLevels.h"
+#include "Databases/NuclearLevels.h"
 #include "CrossSection.h"
-#include "Decayer.h"
+#include "Decayer/Decayer.h"
 #include "TransitionRateFunc.h"
 #include "LevelDensity/RauscherLevelDensity.h"
 #include "LevelDensity/LevelDensityFormula.h"

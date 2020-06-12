@@ -78,7 +78,7 @@
 
 #pragma once
 #include "LevelDensityTable.h"
-#include "NuclearMass.h"
+#include "Databases/NuclearMass.h"
 #include <tr1/unordered_map>
 
 

@@ -1,5 +1,5 @@
 #include "Modules/Module_GSF.h"
-#include "NuclearMass.h"
+#include "Databases/NuclearMass.h"
 #include "GammaStrength/GammaTransmissionFunc.h"
 
 #include <iostream>

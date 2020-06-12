@@ -7,8 +7,8 @@
  */
 
 #include "SapphireInput.h"
-#include "NuclearMass.h"
-#include "Decayer.h"
+#include "Databases/NuclearMass.h"
+#include "Decayer/Decayer.h"
 #include "RandomScheme.h"
 #include "CrossSection.h"
 #include "GammaStrength/GammaTransmissionFunc.h"

@@ -19,9 +19,9 @@
 #include <string.h>
 #include <math.h>
 #include <algorithm>
-#include "DecayController.h"
-#include "NuclearMass.h"
-#include "DecayResults.h"
+#include "Decayer/DecayController.h"
+#include "Databases/NuclearMass.h"
+#include "Decayer/DecayResults.h"
 #include "CrossSection.h"
 #include "omp.h" /** Currently only used for the Decayer*/
 #include "SapphireMPITypes.h"

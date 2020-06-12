@@ -8,17 +8,17 @@
  * However, it works like that. So, we continue to use it like that. Maybe once
  * in future, it would be better to template the respective classes for different models.
  */
-#include "NuclearMass.h"
+#include "Databases/NuclearMass.h"
 #include "GammaStrength/GammaTransmissionFunc.h"
 #include "GammaStrength/D1MQRPA.h"
-#include "NuclearLevels.h"
-#include "Decayer.h"
+#include "Databases/NuclearLevels.h"
+#include "Decayer/Decayer.h"
 #include "Sapphire_config.h"
 #include "TransitionRateFunc.h"
 
 #include "CrossSection.h"
 
-#include "PreEqDecayer.h"
+#include "Decayer/PreEqDecayer.h"
 #include "ParticleTransmissionFunc.h"
 #include "CoulFunc.h"
 #include <iostream>

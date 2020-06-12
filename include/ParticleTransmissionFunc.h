@@ -5,7 +5,7 @@
 #pragma once
 
 #include "TransmissionFunc.h"
-#include "NuclearMass.h"
+#include "Databases/NuclearMass.h"
 #include "Constants.h"
 #include "SLPair.h"
 #include <map>

@@ -9,7 +9,7 @@
 #include "RandomScheme.h"
 #include "LevelDensity/LevelDensityHFB_BSk14.h"
 #include "LevelDensity/RauscherLevelDensity.h"
-#include "NuclearLevels.h"
+#include "Databases/NuclearLevels.h"
 #include <stdexcept>
 #include "boost/random.hpp"
 #include "boost/generator_iterator.hpp"
