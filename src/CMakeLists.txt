@@ -10,10 +10,6 @@ include_directories(${Sapphire_SOURCE_DIR}/include)
 
 add_executable (sapphire ${Sapphire_SOURCES})
 
-#if (MPI_BUILD) 
 target_link_libraries (sapphire ${GSL_LIBRARIES} ${ROOT_LIBRARIES} ${Boost_LIBRARIES} ${EXTRA_LIBS})
-#else (MPI_BUILD)
-#target_link_libraries (sapphire ${GSL_LIBRARIES} ${ROOT_LIBRARIES} ${EXTRA_LIBS})
-#endif (MPI_BUILD)
 
 install(TARGETS sapphire DESTINATION ${Sapphire_BINARY_DIR})

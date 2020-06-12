@@ -198,7 +198,6 @@ namespace Module_CrossSection{
                     ProgressBar pg;
                     pg.start(xs->excitationEnergies_.size());
                     
-                    #pragma omp parallel for
                     for(unsigned int i = 0; i < xs->excitationEnergies_.size(); i++){
                         pg.update(i);
                         std::cout.precision(3);
@@ -210,14 +209,15 @@ namespace Module_CrossSection{
                     pg.update(xs->excitationEnergies_.size());
                     
                     std::cout << std::endl;
+                    std::cout << std::endl;
                     std::cout << "Energy\t" << "s width\t" << "s spacing\t" << "p width\t" << "p spacing\t" << "d width\t" << "d spacing\t" << std::endl;
                     std::cout << " [MeV]\t" << "  [meV]\t" << "    [keV]\t" << "  [meV]\t" << "    [keV]\t" << "  [meV]\t" << "    [keV]\t" << std::endl;
     
                     for(unsigned int i = 0; i < xs->excitationEnergies_.size(); i++){
                     
-                                std::cout.precision(3);
+                                std::cout.precision(2);
     
-                                std::cout << std::fixed << xs->excitationEnergies_.at(i)
+                                std::cout << std::scientific << xs->excitationEnergies_.at(i)
                                                         << "\t" << sWave.at(i).first << "\t" << sWave.at(i).second 
                                                         << "\t" << pWave.at(i).first << "\t" << pWave.at(i).second 
                                                         << "\t" << dWave.at(i).first << "\t" << dWave.at(i).second 
@@ -242,11 +242,12 @@ namespace Module_CrossSection{
             }            
             delete xs;
         }
+        std::cout << std::fixed;
     }
     
 
     void RunSingleReaction(const SapphireInput & input){
-        std::cout<< std::endl << "Starting calculations for reaction ... " << input.Reaction() << std::endl;
+        std::cout<< std::endl << "Starting calculations for reaction ... " << input.Reaction() << std::endl << std::endl;
         input.SetInputCrossSection();
         input.SetInputDecayer();
         input.SetInputTransitionRate();
@@ -274,22 +275,6 @@ namespace Module_CrossSection{
         std::string energyFile = input.EnergyFile();
         bool forRates = input.CalcRates();
         int entranceState = input.EntranceState();
-
-        std::cout << "Input Values For Cross Section:"   << std::endl
-		        << std::setw(14) << "Z:"               << std::setw(12) 
-		        << Z      << std::setw(0) << std::endl
-		        << std::setw(14) << "A:"               << std::setw(12) 
-		        << A      << std::setw(0) << std::endl;
-            
-            
-        if(pType==0) 
-	        std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "g" << std::setw(0) << std::endl;
-        else if(pType==1) 
-	        std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "n" << std::setw(0) << std::endl;
-        else if(pType==2) 
-	        std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "p" << std::setw(0) << std::endl;
-        else if(pType==3) 
-	        std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "a" << std::setw(0) << std::endl;
                   
 
         CrossSection* xs = new CrossSection(Z,A,pType,energyFile,forRates,entranceState,exitStates);
@@ -307,7 +292,6 @@ namespace Module_CrossSection{
                 ProgressBar pg;
                 pg.start(xs->excitationEnergies_.size());
                 
-                #pragma omp parallel for
                 for(unsigned int i = 0; i < xs->excitationEnergies_.size(); i++){
                     pg.update(i);
                     std::cout.precision(3);
@@ -319,20 +303,23 @@ namespace Module_CrossSection{
                 pg.update(xs->excitationEnergies_.size());
                 
                 std::cout << std::endl;
+                std::cout << std::endl;
                 std::cout << "Energy\t" << "s width\t" << "s spacing\t" << "p width\t" << "p spacing\t" << "d width\t" << "d spacing\t" << std::endl;
                 std::cout << " [MeV]\t" << "  [meV]\t" << "    [keV]\t" << "  [meV]\t" << "    [keV]\t" << "  [meV]\t" << "    [keV]\t" << std::endl;
 
                 for(unsigned int i = 0; i < xs->excitationEnergies_.size(); i++){
 
-                            std::cout.precision(3);
+                            std::cout.precision(2);
 
-                            std::cout << std::fixed << xs->excitationEnergies_.at(i)
+                            std::cout << std::scientific << xs->excitationEnergies_.at(i)
                                                     << "\t" << sWave.at(i).first << "\t" << sWave.at(i).second 
                                                     << "\t" << pWave.at(i).first << "\t" << pWave.at(i).second 
                                                     << "\t" << dWave.at(i).first << "\t" << dWave.at(i).second 
                                                     <<  std::endl;
                         
                 }
+
+                std::cout << std::fixed;
             }
 
             if(input.CalcXS()) xs->Calculate();
@@ -346,7 +333,8 @@ namespace Module_CrossSection{
         else
         {
             std::cout << "Could not calculate cross section." << std::endl;    
-        }            
+        }
+
         delete xs;
     }
 
@@ -406,7 +394,7 @@ namespace Module_CrossSection{
 
             if(fexists(Input.ReactionFile().c_str()))
             {
-                std::cout << std::endl << "Starting calculations for reactions in file ... " << Input.ReactionFile().c_str() << std::endl;
+                std::cout << std::endl << "Starting calculations for reactions in file ... " << Input.ReactionFile().c_str() << std::endl<<std::endl;
                 Input.Reaction("");
                 Input.PrintIntputParameters("CrossSection");
                 Run(Input);
