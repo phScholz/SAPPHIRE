@@ -69,7 +69,7 @@ FIND_PACKAGE(Boost REQUIRED)
 INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
 
 message("Checking if OpenMP can be found ...")
-find_package (OpenMP REQUIRED)
+find_package(OpenMP REQUIRED)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 
 include_directories(${Sapphire_SOURCE_DIR}/coul/include)
@@ -79,7 +79,7 @@ set (EXTRA_LIBS coul)
 configure_file( include/Sapphire_config.h.in ${CMAKE_BINARY_DIR}/generated/Sapphire_config.h )
 include_directories( ${CMAKE_BINARY_DIR}/generated/ )
 
-add_subdirectory (src)
+add_subdirectory(src)
 
 # check if Doxygen is installed
 message("Checking if Doxygen can be found ...")
