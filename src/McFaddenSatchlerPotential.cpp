@@ -31,15 +31,19 @@ McFaddenSatchlerPotential::McFaddenSatchlerPotential(int z1, int m1, int z2, int
 
 std::complex<double> 
 McFaddenSatchlerPotential::Calculate(double r, int l, double s, double j, double energy) const {
-  std::complex<double> nuclearPotential=
-    std::complex<double>(-V_/(1.+exp((r-rR_)/aR_)),-W_/(1.+exp((r-rI_)/aI_)));
+  std::complex<double> nuclearPotential= std::complex<double>(-V_/(1.+exp((r-rR_)/aR_)),-W_/(1.+exp((r-rI_)/aI_)));
+  
   double coulombPotential=0.0;
-  if(r<=coulombRadius_) {
-    coulombPotential=hbarc*fstruc*GetZ1Z2()/coulombRadius_*
-      (1.0+0.5*(1-pow(r/coulombRadius_,2.0)));
-  } else {
+
+  if(r<=coulombRadius_)
+  {
+      coulombPotential=hbarc*fstruc*GetZ1Z2()/coulombRadius_*(1.0+0.5*(1-pow(r/coulombRadius_,2.0)));
+  } 
+  else
+  {
     coulombPotential=hbarc*fstruc*GetZ1Z2()/r;
   }
+
   return nuclearPotential+coulombPotential;
 }
  
