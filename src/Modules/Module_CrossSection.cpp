@@ -226,7 +226,7 @@ namespace Module_CrossSection{
                     }
                 }
 
-                std::cout << std::endl << "Calculating for Z: " << it->Z_ << " A: " << it->A_ << " and Particle Type: " << it->pType_ << std::endl << std::endl;
+                std::cout << std::endl << std::endl << "Calculating for Z: " << it->Z_ << " A: " << it->A_ << " and Particle Type: " << it->pType_ << std::endl;
                 
                 if(input.CalcXS()) xs->Calculate();
                 if(input.CalcXS() && input.PrintXs()) xs->PrintCrossSections();
