@@ -5,7 +5,7 @@
  * 
  * 
  */
-#include "Module_CrossSection.h"
+#include "Modules/Module_CrossSection.h"
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -25,6 +25,7 @@
 #include "GammaStrength/GammaTransmissionFunc.h"
 #include "LevelDensity/LevelDensityTable.h"
 #include "omp.h"
+#include "Progressbar.h"
 
 
 namespace Module_CrossSection{
@@ -185,33 +186,50 @@ namespace Module_CrossSection{
             CrossSection* xs = new CrossSection(it->Z_,it->A_, it->pType_,input.EnergyFile(),input.CalcRates());
             if(xs->IsValid())
             {
-                if(input.CalcAverageWidth()) {
-	                    std::pair<double,double> sWave = xs->CalcAverageSWaveResWidth();
-	                    std::pair<double,double> pWave = xs->CalcAveragePWaveResWidth();
-	                    std::pair<double,double> dWave = xs->CalcAverageDWaveResWidth();
-	                    std::cout << std::endl << std::endl << "  Average S-Wave Radiative Width [meV]: " 
-	                    	    << 1.e9*sWave.first
-	                    	    << std::endl;
-	                    std::cout << "Average S-Wave Resonance Spacing [keV]: " 
-	                    	    << 1.e3*sWave.second
-	                    	    << std::endl;	
-	                    std::cout << "  Average P-Wave Radiative Width [meV]: " 
-	                    	    << 1.e9*pWave.first 
-	                    	    << std::endl;
-	                    std::cout << "Average P-Wave Resonance Spacing [keV]: " 
-	                    	    << 1.e3*pWave.second
-	                    	    << std::endl;	
-	                    std::cout << "  Average D-Wave Radiative Width [meV]: " 
-	                    	    << 1.e9*dWave.first 
-	                    	    << std::endl;
-	                    std::cout << "Average D-Wave Resonance Spacing [keV]: " 
-		                << 1.e3*dWave.second
-		                << std::endl;
+                if(input.CalcAverageWidth()){
+                
+                    std::cout << std::endl << "Calculating average resonance widths ... " << std::endl;
+    
+                    std::vector<std::pair<double,double>> sWave(xs->excitationEnergies_.size()); 
+                    std::vector<std::pair<double,double>> pWave(xs->excitationEnergies_.size());
+                    std::vector<std::pair<double,double>> dWave(xs->excitationEnergies_.size());
+    
+                    
+                    ProgressBar pg;
+                    pg.start(xs->excitationEnergies_.size());
+                    
+                    #pragma omp parallel for
+                    for(unsigned int i = 0; i < xs->excitationEnergies_.size(); i++){
+                        pg.update(i);
+                        std::cout.precision(3);
+                        sWave.at(i) = xs->CalcAverageSWaveResWidth(xs->excitationEnergies_.at(i));
+                        pWave.at(i) = xs->CalcAveragePWaveResWidth(xs->excitationEnergies_.at(i));
+	                    dWave.at(i) = xs->CalcAverageDWaveResWidth(xs->excitationEnergies_.at(i));
+                    }
+    
+                    pg.update(xs->excitationEnergies_.size());
+                    
+                    std::cout << std::endl;
+                    std::cout << "Energy\t" << "s width\t" << "s spacing\t" << "p width\t" << "p spacing\t" << "d width\t" << "d spacing\t" << std::endl;
+                    std::cout << " [MeV]\t" << "  [meV]\t" << "    [keV]\t" << "  [meV]\t" << "    [keV]\t" << "  [meV]\t" << "    [keV]\t" << std::endl;
+    
+                    for(unsigned int i = 0; i < xs->excitationEnergies_.size(); i++){
+                    
+                                std::cout.precision(3);
+    
+                                std::cout << std::fixed << xs->excitationEnergies_.at(i)
+                                                        << "\t" << sWave.at(i).first << "\t" << sWave.at(i).second 
+                                                        << "\t" << pWave.at(i).first << "\t" << pWave.at(i).second 
+                                                        << "\t" << dWave.at(i).first << "\t" << dWave.at(i).second 
+                                                        <<  std::endl;
+                            
+                    }
                 }
 
                 std::cout << std::endl << "Calculating for Z: " << it->Z_ << " A: " << it->A_ << " and Particle Type: " << it->pType_ << std::endl << std::endl;
-                xs->Calculate();
-                if(input.PrintXs()) xs->PrintCrossSections();
+                
+                if(input.CalcXS()) xs->Calculate();
+                if(input.CalcXS() && input.PrintXs()) xs->PrintCrossSections();
                 if(input.PrintTrans()) xs->PrintTransmissionTerms();
                 if(input.CalcRates()) xs->CalculateReactionRates(false);
                 if(input.PrintRate() && input.CalcRates()) xs->PrintReactionRates(false);
@@ -272,39 +290,53 @@ namespace Module_CrossSection{
 	        std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "p" << std::setw(0) << std::endl;
         else if(pType==3) 
 	        std::cout << std::setw(14) << "projectile:"  << std::setw(12) << "a" << std::setw(0) << std::endl;
-            
-        std::cout << std::endl << "Starting Cross Section Calculation..." << std::endl;           
+                  
 
         CrossSection* xs = new CrossSection(Z,A,pType,energyFile,forRates,entranceState,exitStates);
         if(xs->IsValid())
         {
-            if(input.CalcAverageWidth()) 
-            {
-	                    std::pair<double,double> sWave = xs->CalcAverageSWaveResWidth();
-	                    std::pair<double,double> pWave = xs->CalcAveragePWaveResWidth();
-	                    std::pair<double,double> dWave = xs->CalcAverageDWaveResWidth();
-	                    std::cout << std::endl << std::endl << "  Average S-Wave Radiative Width [meV]: " 
-	                    	    << 1.e9*sWave.first
-	                    	    << std::endl;
-	                    std::cout << "Average S-Wave Resonance Spacing [keV]: " 
-	                    	    << 1.e3*sWave.second
-	                    	    << std::endl;	
-	                    std::cout << "  Average P-Wave Radiative Width [meV]: " 
-	                    	    << 1.e9*pWave.first 
-	                    	    << std::endl;
-	                    std::cout << "Average P-Wave Resonance Spacing [keV]: " 
-	                    	    << 1.e3*pWave.second
-	                    	    << std::endl;	
-	                    std::cout << "  Average D-Wave Radiative Width [meV]: " 
-	                    	    << 1.e9*dWave.first 
-	                    	    << std::endl;
-	                    std::cout << "Average D-Wave Resonance Spacing [keV]: " 
-		                << 1.e3*dWave.second
-		                << std::endl;
+            if(input.CalcAverageWidth()){
+                
+                std::cout << std::endl << "Calculating average resonance widths ... " << std::endl;
+
+                std::vector<std::pair<double,double>> sWave(xs->excitationEnergies_.size()); 
+                std::vector<std::pair<double,double>> pWave(xs->excitationEnergies_.size());
+                std::vector<std::pair<double,double>> dWave(xs->excitationEnergies_.size());
+
+                
+                ProgressBar pg;
+                pg.start(xs->excitationEnergies_.size());
+                
+                #pragma omp parallel for
+                for(unsigned int i = 0; i < xs->excitationEnergies_.size(); i++){
+                    pg.update(i);
+                    std::cout.precision(3);
+                    sWave.at(i) = xs->CalcAverageSWaveResWidth(xs->excitationEnergies_.at(i));
+                    pWave.at(i) = xs->CalcAveragePWaveResWidth(xs->excitationEnergies_.at(i));
+	                dWave.at(i) = xs->CalcAverageDWaveResWidth(xs->excitationEnergies_.at(i));
+                }
+
+                pg.update(xs->excitationEnergies_.size());
+                
+                std::cout << std::endl;
+                std::cout << "Energy\t" << "s width\t" << "s spacing\t" << "p width\t" << "p spacing\t" << "d width\t" << "d spacing\t" << std::endl;
+                std::cout << " [MeV]\t" << "  [meV]\t" << "    [keV]\t" << "  [meV]\t" << "    [keV]\t" << "  [meV]\t" << "    [keV]\t" << std::endl;
+
+                for(unsigned int i = 0; i < xs->excitationEnergies_.size(); i++){
+
+                            std::cout.precision(3);
+
+                            std::cout << std::fixed << xs->excitationEnergies_.at(i)
+                                                    << "\t" << sWave.at(i).first << "\t" << sWave.at(i).second 
+                                                    << "\t" << pWave.at(i).first << "\t" << pWave.at(i).second 
+                                                    << "\t" << dWave.at(i).first << "\t" << dWave.at(i).second 
+                                                    <<  std::endl;
+                        
+                }
             }
 
-            xs->Calculate();
-            if(input.PrintXs()) xs->PrintCrossSections();
+            if(input.CalcXS()) xs->Calculate();
+            if(input.CalcXS() && input.PrintXs()) xs->PrintCrossSections();
             if(input.PrintTrans()) xs->PrintTransmissionTerms();
             if(input.CalcRates()) xs->CalculateReactionRates(false);
             if(input.PrintRate() && input.CalcRates()) xs->PrintReactionRates(false);
