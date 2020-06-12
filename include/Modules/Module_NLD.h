@@ -1,12 +1,13 @@
 /**
- * @file Module_GSF.h
- * @brief Contains the declarations for the GSF module
+ * @file Module_NLD.h
+ * @brief Contains the declarations for the NLD module
  */
 
 #pragma once
 #include <string>
+#include "LevelDensity/LevelDensity.h"
 
-namespace Module_GSF{
+namespace Module_NLD{
     /** 
     *   @brief Top level function to call from main for the reaction Module.
     *   @param argc Number of cmd line parameters of Sapphire.
@@ -15,9 +16,15 @@ namespace Module_GSF{
     void Go(int argc,char *argv[]); 
 
     /**
-     * @brief Function to get GSF
+     * @brief Function to get NLD
      */
-    void GetGSF(std::string isotope, int e1, int m1, int e2);
+    void GetNLD(std::string isotope, int nldmodel);
+
+    /**
+     * @brief Print NLD for model 0
+     */
+    template<class T>
+    void Print(std::string isotope);
 
     /**
      * @brief Printing help information to std::cout

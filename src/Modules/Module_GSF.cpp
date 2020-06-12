@@ -170,7 +170,7 @@ namespace Module_GSF{
 
     void PrintHelp(){
         std::cout << std::endl << "Module: gsf" << std::endl; 
-        std::cout << std::endl << "\tSyntax:        sapphire gsf E1Model M1Model E2Model" << std::endl;        
+        std::cout << std::endl << "\tSyntax:        sapphire gsf Isotope E1Model M1Model E2Model" << std::endl;        
 	    std::cout << std::endl;        
     }
 }
