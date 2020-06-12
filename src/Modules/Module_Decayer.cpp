@@ -461,7 +461,7 @@ namespace Module_Decayer{
 
             for(int k = 0; k<numInChunk; k++){
                 energy = (lowEnergy==highEnergy) ? lowEnergy : lowEnergy+(highEnergy-lowEnergy)*uni();
-                std::cout << std::endl << energy << std::endl;
+                //std::cout << std::endl << energy << std::endl;
 
                 if(preEq)
                 {

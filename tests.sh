@@ -35,3 +35,4 @@ build/sapphire decayer examples/Decay_70Ge/decayer.ini || echo "Sapphire decayer
 
 #Reaction Module Test
 build/sapphire reaction examples/Reaction_N50/reaction.ini || echo "Sapphire reaction_test_0 failed!"
+build/sapphire reaction examples/Reaction_N50/avgWidth.ini || echo "Sapphire reaction_test_1 failed!"
