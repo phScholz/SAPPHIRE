@@ -1,5 +1,5 @@
 /**
- * @file Decayer.h
+ * @file Decayer/Decayer.h
  * @brief Declaration of the Decayer class.
  */
 #pragma once
@@ -9,7 +9,7 @@
 #include "TransitionRateFunc.h"
 #include "SapphireInput.h"
 #include "CDFEntry.h"
-#include "NuclearLevels.h"
+#include "Databases/NuclearLevels.h"
 
 class Decayer{
 

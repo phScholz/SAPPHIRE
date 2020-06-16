@@ -8,7 +8,7 @@
 #include <string>
 #include "SapphireInput.h"
 #include "SpinRatePair.h"
-#include "Decayer.h"
+#include "Decayer/Decayer.h"
 
 typedef std::vector<std::pair<Decayer*,std::vector<SpinRatePair*> > > DecayerVector;
 
@@ -120,8 +120,12 @@ class CrossSection {
   
   
   std::pair<double,double> CalcAverageSWaveResWidth();
+  std::pair<double,double> CalcAverageSWaveResWidth(double energy);
   std::pair<double,double> CalcAveragePWaveResWidth();
+  std::pair<double,double> CalcAveragePWaveResWidth(double energy);
   std::pair<double,double> CalcAverageDWaveResWidth();
+  std::pair<double,double> CalcAverageDWaveResWidth(double enrergy);
+  
   void CalculateReactionRates(bool);
   void PrintReactionRates(bool);
   static void SetResidualGamma(bool residual) {residualGamma_=residual;};         /**< Setter for residualGamma_*/
@@ -223,6 +227,9 @@ class CrossSection {
   */
   void CalcPartitionFunc();
 
+public:
+  std::vector<double> excitationEnergies_;
+  std::vector<double> beamEnergies_;
   
 
  private:

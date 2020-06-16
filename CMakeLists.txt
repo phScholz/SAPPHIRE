@@ -69,7 +69,7 @@ FIND_PACKAGE(Boost REQUIRED)
 INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
 
 message("Checking if OpenMP can be found ...")
-find_package (OpenMP REQUIRED)
+find_package(OpenMP REQUIRED)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 
 include_directories(${Sapphire_SOURCE_DIR}/coul/include)
@@ -79,28 +79,31 @@ set (EXTRA_LIBS coul)
 configure_file( include/Sapphire_config.h.in ${CMAKE_BINARY_DIR}/generated/Sapphire_config.h )
 include_directories( ${CMAKE_BINARY_DIR}/generated/ )
 
-add_subdirectory (src)
+add_subdirectory(src)
+#add_subdirectory(src/GammaStrength)
+#add_subdirectory(src/Modules)
+#add_subdirectory(src/LevelDensity)
 
-# check if Doxygen is installed
-message("Checking if Doxygen can be found ...")
-find_package(Doxygen)
-if (DOXYGEN_FOUND)
-    # set input and output files
-    set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/doxygen_config/sapphire.doxy)
-    set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/sapphire.doxy)
-
-    # request to configure the file
-   configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
-   message("Doxygen build started")
-
-    # note the option ALL which allows to build the docs together with the application
-  add_custom_target( doc_doxygen ALL
-      COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
-     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    COMMENT "Generating API documentation with Doxygen"
-   VERBATIM )
-else (DOXYGEN_FOUND)
-  message("Doxygen need to be installed to generate the doxygen documentation")
-endif (DOXYGEN_FOUND)
+#       # check if Doxygen is installed
+#       message("Checking if Doxygen can be found ...")
+#       find_package(Doxygen)
+#       if (DOXYGEN_FOUND)
+#           # set input and output files
+#           set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/doxygen_config/sapphire.doxy)
+#           set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/sapphire.doxy)
+#       
+#           # request to configure the file
+#          configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
+#          message("Doxygen build started")
+#       
+#           # note the option ALL which allows to build the docs together with the application
+#         add_custom_target(doc_doxygen ALL
+#             COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
+#            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+#           COMMENT "Generating API documentation with Doxygen"
+#          VERBATIM )
+#       else (DOXYGEN_FOUND)
+#         message("Doxygen need to be installed to generate the doxygen documentation")
+#       endif (DOXYGEN_FOUND)
 
 message("Done")

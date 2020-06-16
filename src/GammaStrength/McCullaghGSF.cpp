@@ -13,6 +13,11 @@ McCullaghGSF::McCullaghGSF(int z2, int m2, double jInitial, int piInitial,
 
 double McCullaghGSF::CalcStrengthFunction(double energy) {
   double strength = 0.;
+
+  if(energy == 0){
+    return 0;
+  }
+
   for(int i = 0;i<2;i++) {
     strength+=gdrParameters_.kSigmaGamma_[i]*CalcEnergyDependentWidth(energy,i)/
       (pow(pow(energy,2.)-pow(gdrParameters_.E_[i],2.),2.)+

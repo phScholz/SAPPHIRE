@@ -7,8 +7,8 @@
 
 #include "RandomScheme.h"
 #include "SapphireInput.h"
-#include "NuclearLevels.h"
-#include "Module_RandomScheme.h"
+#include "Databases/NuclearLevels.h"
+#include "Modules/Module_RandomScheme.h"
 
 #include <iostream>
 #include <chrono>

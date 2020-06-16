@@ -3,7 +3,7 @@
 #include "GammaStrength/GammaTransmissionFunc.h"
 #include "LevelDensity/RauscherLevelDensity.h"
 #include "LevelDensity/LevelDensityHFB_BSk14.h"
-#include "NuclearLevels.h"
+#include "Databases/NuclearLevels.h"
 #include <iostream>
 #include <stdlib.h>
 #include <omp.h>
@@ -92,7 +92,7 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
   double lastTerm=0.;
 
 //calculate the product of leveldensity*transmissionCoefficient for each energy bin in the continuum
-//#pragma omp parallel for if(isCrossSection) reduction(+:sum,exclusiveSum,oddSum,evenSum)
+#pragma omp parallel for if(isCrossSection) reduction(+:sum,exclusiveSum,oddSum,evenSum)
   for(int i=0;i<=numSteps;++i) {
     double ep = lowEnergy+dE*i;
     double rate = CalcLevelDensity(compoundE+qValue-ep)*CalcTransmissionFunc(ep);

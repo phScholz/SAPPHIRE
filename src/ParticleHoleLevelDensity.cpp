@@ -3,7 +3,7 @@
 #include "math.h"
 #include <algorithm>
 #include <iostream>
-#include "NuclearMass.h"
+#include "Databases/NuclearMass.h"
 
 ParticleHoleLevelDensity::ParticleHoleLevelDensity(int Z, int A, double J,
 						   int neutronNumber,

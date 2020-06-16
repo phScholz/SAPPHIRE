@@ -4,16 +4,16 @@
  */
 
 
-#include "Module_Decayer.h"
+#include "Modules/Module_Decayer.h"
 #include "SapphireMPITypes.h"
 #include "SapphireInput.h"
 #include <string>
-#include "NuclearMass.h"
+#include "Databases/NuclearMass.h"
 #include <chrono>
-#include "Decayer.h"
+#include "Decayer/Decayer.h"
 #include "omp.h"
-#include "DecayController.h"
-#include "DecayResults.h"
+#include "Decayer/DecayController.h"
+#include "Decayer/DecayResults.h"
 #include "Progressbar.h"
 #include "ParticleTransmissionFunc.h"
 #include "GammaStrength/GammaTransmissionFunc.h"
@@ -147,6 +147,7 @@ namespace Module_Decayer{
             Input.PrintIntputFile(str);
             Input.ReadInputFile(str);
             Input.PrintIntputParameters("Decayer");
+            
             if (Input.DisFile().length()>0){
                 std::cout << std::endl << "Running Decayer for distribution in ... " << Input.DisFile() << std::endl;
                 RunDist(Input);
@@ -426,7 +427,7 @@ namespace Module_Decayer{
         DecayResults* results = NULL;
         if(events>1) results = new DecayResults(Z,A,J,Pi,lowEnergy,highEnergy,suffixNo);
         
-    for(int i = 0;i<=chunks;i++) {
+        for(int i = 0;i<=chunks;i++) {
           
             int numInChunk = (i==chunks) ? remainder : chunkSize;
             if(numInChunk==0) continue;
@@ -460,6 +461,7 @@ namespace Module_Decayer{
 
             for(int k = 0; k<numInChunk; k++){
                 energy = (lowEnergy==highEnergy) ? lowEnergy : lowEnergy+(highEnergy-lowEnergy)*uni();
+                //std::cout << std::endl << energy << std::endl;
 
                 if(preEq)
                 {

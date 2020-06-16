@@ -1,5 +1,5 @@
 /**
- * @file NuclearMass.h
+ * @file Databases/Databases/NuclearMass.h
  * @author Mary Beard, Philipp Scholz
  * @date 2020
  * @brief It contains classes and methods for handling the nuclear masses: MassKey, MassEntry, MassTable, ElementTable, and NuclearMass

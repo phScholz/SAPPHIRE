@@ -1,13 +1,13 @@
 /**
- * @file DecayController.h
+ * @file Decayer/DecayController.h
  * @brief Declaration of class DecayController
  */
 
 #pragma once
 
 #include <vector>
-#include "Decayer.h"
-#include "DecayProduct.h"
+#include "Decayer/Decayer.h"
+#include "Decayer/DecayProduct.h"
 
 class TVector3;
 
@@ -29,20 +29,16 @@ class DecayController {
    * @param initialProtonNumber Preequillibrium config. Default set to -1
    * @param initialProtonHoleNumber Preequillibrium config. Default set to -1
    */
-  DecayController(int Z, int A, double jInitial, int piInitial, double energy,
-		 int initialNeutronNumber = -1, int initialNeutronHoleNumber = -1,
-		 int initialProtonNumber = -1, int initialProtonHoleNumber = -1) :
-    Z_(Z), A_(A), piInitial_(piInitial), initialNeutronNumber_(initialNeutronNumber), initialNeutronHoleNumber_(initialNeutronHoleNumber),
-    initialProtonNumber_(initialProtonNumber), initialProtonHoleNumber_(initialProtonHoleNumber),
-    jInitial_(jInitial), energy_(energy) {};
+  DecayController(int Z, int A, double jInitial, int piInitial, double energy, int initialNeutronNumber = -1, int initialNeutronHoleNumber = -1, int initialProtonNumber = -1, int initialProtonHoleNumber = -1) :
+    Z_(Z), A_(A), piInitial_(piInitial), initialNeutronNumber_(initialNeutronNumber), initialNeutronHoleNumber_(initialNeutronHoleNumber), initialProtonNumber_(initialProtonNumber), initialProtonHoleNumber_(initialProtonHoleNumber), jInitial_(jInitial), energy_(energy) {};
 
   bool Decay(double&,double&,double&,double&,double&,double&,double&,double&);
 
   std::vector<DecayProduct> DecayProducts() const { return decayProducts_; };
 
   double Energy() const {return energy_;}  /**< Getter for energy_*/
-  double Spin() const {return jInitial_;} /**< Getter for jInitial_*/
-  int Parity() const {return piInitial_;} /**< Getter for piInitial_*/
+  double Spin() const {return jInitial_;}  /**< Getter for jInitial_*/
+  int Parity() const {return piInitial_;}  /**< Getter for piInitial_*/
  
   /**
    * @brief Print decay informations to std::cout

@@ -23,6 +23,7 @@ class SPPopulation{
          * @brief Constructor which initializes the member variables
          * @param spin Double value for the spin
          * @param parity integer value for parity, 1 == +; -1 == -
+         * @param pop population 
          */
         SPPopulation(double spin, int parity, double pop):spin(spin),parity(parity), pop(pop), cdf(0.0){};
         

@@ -9,7 +9,7 @@
  */
 
 #include "GammaTransmissionFunc.h"
-#include "NuclearMass.h"
+#include "Databases/NuclearMass.h"
 #include <vector>
 
 /**

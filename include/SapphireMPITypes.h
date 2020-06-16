@@ -6,7 +6,7 @@
 #include <boost/serialization/utility.hpp>
 #include <boost/mpi/datatype.hpp>
 #include <vector>
-#include "DecayProduct.h"
+#include "Decayer/DecayProduct.h"
 
 enum SapphireTags_t {SapphireTagProcess,SapphireTagDone,SapphireTagResults};
 

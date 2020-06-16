@@ -7,7 +7,7 @@
 #pragma once
 
 #include "LevelDensityFormula.h"
-#include "NuclearMass.h"
+#include "Databases/NuclearMass.h"
 #include <iostream>
 #include <stdlib.h>
 #include <math.h>

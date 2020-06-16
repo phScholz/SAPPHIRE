@@ -4,7 +4,7 @@
  * @date 2020-04-27
  */
 #include "LevelDensity/LevelDensityHFB_BSk14.h"
-#include "NuclearMass.h"
+#include "Databases/NuclearMass.h"
 #include <string>
 #include <vector>
 #include <iostream>
@@ -256,6 +256,7 @@ void LevelDensityHFB_BSk14::PrintRows(){
 
 double LevelDensityHFB_BSk14::CalculateDensity(double E){
     if(J_<0) return 0;
+    if(E==0) return 0;
     
     HFBCorrTable::const_iterator it = corrTable.find(MassKey(Z_,A_));
     double c = 0;

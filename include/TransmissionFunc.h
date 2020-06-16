@@ -25,11 +25,9 @@ class TransmissionFunc {
 		    double uTWFC,
 		    double uTWSFC,
 		    TransmissionFunc* previous) :
-  z2_(z2),m2_(m2),piInitial_(piInitial),piFinal_(piFinal),
+    z2_(z2),m2_(m2),piInitial_(piInitial),piFinal_(piFinal),
     jInitial_(jInitial),jFinal_(jFinal), maxL_(maxL),
-    TWFC_(TWFC),
-    uTWFC_(uTWFC),
-    uTWSFC_(uTWSFC),
+    TWFC_(TWFC),uTWFC_(uTWFC), uTWSFC_(uTWSFC),
     previous_(previous) {};  
 
   /**

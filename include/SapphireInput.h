@@ -13,8 +13,8 @@
 
 #include <string>
 #include <vector>
-#include "NuclearMass.h"
-#include "NuclearLevels.h"
+#include "Databases/NuclearMass.h"
+#include "Databases/NuclearLevels.h"
 
 
 class SapphireInput{
@@ -166,6 +166,7 @@ class SapphireInput{
         //Setter
         void CalcRates(bool x){calcRates=x;}                         /**< Setter for bool calcRates*/
         void CalcMACS(bool x){calcMacs=x;}                         /**< Setter for bool calcMacs*/
+        void CalcXS(bool x){calcXS=x;}                         /**< Setter for bool calcXS*/
         void CalcAverageWidth(bool x){calcAverageWidth=x;}           /**< Setter for bool calcAverageWidth*/
         void ResidualGamma(bool x){residualGamma=x;}                 /**< Setter for bool residualGamma*/
         void ResidualNeutron(bool x){residualNeutron=x;}             /**< Setter for bool residualNeutron*/
@@ -268,6 +269,7 @@ class SapphireInput{
         //Getter
         bool CalcRates() const {return calcRates;}                     /**<Getter for calcrates*/    
         bool CalcMACS() const {return calcMacs;}                     /**<Getter for calcMacs*/    
+        bool CalcXS() const {return calcXS;}                     /**<Getter for calcXS*/    
         bool CalcAverageWidth() const {return calcAverageWidth;}       /**<Getter for calcAverageWidth*/    
         bool ResidualGamma() const {return residualGamma;}             /**<Getter for residualGamma*/    
         bool ResidualNeutron() const {return residualNeutron;}         /**<Getter for residualNeutron*/    
@@ -350,6 +352,7 @@ class SapphireInput{
         bool calcRates;             /**< Bool if rates should be calculated*/
         bool calcAverageWidth;      /**< Bool if average widths should be calculated*/
         bool calcMacs;             /**< Bool if macs should be calculated*/
+        bool calcXS;                /**< Bool if xs should be calculated or not*/
         bool residualGamma;        /**< Bool if residual cross section for gamma should be calculated*/
         bool residualNeutron;      /**< Bool if residual cross section for neutron should be calculated*/
         bool residualProton;       /**< Bool if residual cross section for proton should be calculated*/

@@ -1,4 +1,4 @@
-#include "NuclearMass.h"
+#include "Databases/NuclearMass.h"
 #include "Constants.h"
 #include <sstream>
 #include <fstream>

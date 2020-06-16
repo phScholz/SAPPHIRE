@@ -1,7 +1,7 @@
-#include "Decayer.h"
+#include "Decayer/Decayer.h"
 #include "TransitionRateFunc.h"
-#include "NuclearMass.h"
-#include "NuclearLevels.h"
+#include "Databases/NuclearMass.h"
+#include "Databases/NuclearLevels.h"
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>

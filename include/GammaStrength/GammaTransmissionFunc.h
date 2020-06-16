@@ -6,7 +6,7 @@
 #pragma once
 #include "../TransmissionFunc.h"
 #include "Constants.h"
-#include "NuclearMass.h"
+#include "Databases/NuclearMass.h"
 #include "LevelDensity/LevelDensityFormula.h"
 #include <math.h>
 
@@ -89,18 +89,6 @@ class GammaTransmissionFunc : public TransmissionFunc {
     
     /**
      * @brief Chooses the Gammastrength model depending on input parameters and maximum angular momentum difference.
-     * @param z2 Charge number of compound nucleus
-     * @param m2 Mass number of compound nucleus
-     * @param jInitial Initial spin \f$ J_i \f$
-     * @param piInitial Initial parity \f$ \pi_i \f$
-     * @param jFinal Final spin \f$ J_f \f$
-     * @param piFInal Final parity \f$ \pi_f \f$
-     * @param maxL Maximum difference in angular momentum \f$ dL_{max} \$f
-     * @param TWFC 
-     * @param uTWFC
-     * @param uTWSFC
-     * @param previous
-     * @param compoundE Excitation energy of the compound nucleus.
      */
     static GammaTransmissionFunc* CreateGammaTransmissionFunc(int z2,int m2, double jInitial, int piInitial, double jFinal,
     int piFinal, double maxL, double TWFC, double uTWFC, double uTWSFC, TransmissionFunc* previous, double compoundE);

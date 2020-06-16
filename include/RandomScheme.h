@@ -7,7 +7,7 @@
  */
 #pragma once
 #include "GammaStrength/GammaTransmissionFunc.h"
-#include "NuclearLevels.h"
+#include "Databases/NuclearLevels.h"
 #include "LevelDensity/LevelDensityFormula.h"
 #include "LevelDensity/RauscherLevelDensity.h"
 #include "LevelDensity/LevelDensityTable.h"

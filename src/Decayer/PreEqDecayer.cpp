@@ -1,5 +1,5 @@
-#include "PreEqDecayer.h"
-#include "NuclearMass.h"
+#include "Decayer/PreEqDecayer.h"
+#include "Databases/NuclearMass.h"
 #include "PreEqTransitionRateFunc.h"
 #include <iostream>
 #include <math.h>

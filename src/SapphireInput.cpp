@@ -7,8 +7,8 @@
  */
 
 #include "SapphireInput.h"
-#include "NuclearMass.h"
-#include "Decayer.h"
+#include "Databases/NuclearMass.h"
+#include "Decayer/Decayer.h"
 #include "RandomScheme.h"
 #include "CrossSection.h"
 #include "GammaStrength/GammaTransmissionFunc.h"
@@ -51,8 +51,9 @@
         SapphireInput::PrintXs(1);
         SapphireInput::PrintRate(0);
         SapphireInput::PrintMACS(0);
-        SapphireInput::CalcRates(0);           
-        SapphireInput::CalcMACS(0);           
+        SapphireInput::CalcRates(false);           
+        SapphireInput::CalcMACS(false);           
+        SapphireInput::CalcXS(true);           
         SapphireInput::CalcAverageWidth(false);
         SapphireInput::ResidualGamma(false);               
         SapphireInput::ResidualNeutron(false);           
@@ -179,6 +180,7 @@
             std::cout << "\tReactionFile         = "             << SapphireInput::ReactionFile() << std::endl;
             std::cout << "\tCalcRates            = "             << SapphireInput::CalcRates() << std::endl;
             std::cout << "\tCalcMACS             = "             << SapphireInput::CalcMACS() << std::endl;
+            std::cout << "\tCalcXS               = "             << SapphireInput::CalcXS() << std::endl;
             std::cout << "\tCalcAverageWidth     = "             << SapphireInput::CalcAverageWidth() << std::endl;
             std::cout << "\tResidualGamma        = "             << SapphireInput::ResidualGamma() << std::endl;
             std::cout << "\tResidualNeutron      = "             << SapphireInput::ResidualNeutron() << std::endl;
@@ -271,6 +273,7 @@
         SapphireInput::ReactionFile(pt.get<std::string>("CrossSection.ReactionFile", SapphireInput::ReactionFile()));
         SapphireInput::CalcRates(pt.get<bool>("CrossSection.CalcRates", SapphireInput::CalcRates()));
         SapphireInput::CalcMACS(pt.get<bool>("CrossSection.CalcRates", SapphireInput::CalcMACS()));
+        SapphireInput::CalcXS(pt.get<bool>("CrossSection.CalcRates", SapphireInput::CalcXS()));
         SapphireInput::CalcAverageWidth(pt.get<bool>("CrossSection.CalcAverageWidth", SapphireInput::CalcAverageWidth()));
         SapphireInput::ResidualGamma(pt.get<bool>("CrossSection.ResidualGamma", SapphireInput::ResidualGamma()));               
         SapphireInput::ResidualNeutron(pt.get<bool>("CrossSection.ResidualNeutron", SapphireInput::ResidualNeutron()));           

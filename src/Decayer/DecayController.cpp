@@ -3,10 +3,10 @@
  * @brief Logic of the DecayController class
  */
 
-#include "DecayController.h"
+#include "Decayer/DecayController.h"
 #include "Constants.h"
-#include "NuclearMass.h"
-#include "PreEqDecayer.h"
+#include "Databases/NuclearMass.h"
+#include "Decayer/PreEqDecayer.h"
 #include <iostream>
 #include <iomanip>
 #include <TVector3.h>
