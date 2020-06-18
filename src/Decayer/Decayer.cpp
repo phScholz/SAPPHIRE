@@ -68,7 +68,7 @@ void Decayer::InitializeWidths(){
 
 void Decayer::SetAlphaSpinRatePairs(){
   if(alphaDecay_){
-    for(double l=0;l<=maxL_;l+=1.) {
+    for(double l=0; l<=maxL_; l+=1.) {
         int piFinal = (int(l)%2==0) ? piInitial_ : -1*piInitial_;
 
 	      for(double jFinal = fabs(l-jInitial_); jFinal<=l+jInitial_;jFinal+=1.) {
