@@ -117,14 +117,16 @@ class CrossSection {
    * @brief Method to print the transmission terms to file
    */
   void PrintTransmissionTerms();
+
+  bool CalcEntranceWidth();
   
   
   std::pair<double,double> CalcAverageSWaveResWidth();
-  std::pair<double,double> CalcAverageSWaveResWidth(double energy);
+  std::pair<double,double> CalcAverageSWaveResWidth(double energy, int type);
   std::pair<double,double> CalcAveragePWaveResWidth();
-  std::pair<double,double> CalcAveragePWaveResWidth(double energy);
+  std::pair<double,double> CalcAveragePWaveResWidth(double energy, int type);
   std::pair<double,double> CalcAverageDWaveResWidth();
-  std::pair<double,double> CalcAverageDWaveResWidth(double enrergy);
+  std::pair<double,double> CalcAverageDWaveResWidth(double enrergy, int type);
   
   void CalculateReactionRates(bool);
   void PrintReactionRates(bool);
@@ -146,7 +148,7 @@ class CrossSection {
   inline bool FillEnergies(std::string energyFile);
 
   /**
-  * @brief Method to fill the `std::vector<std::pair<double,int> > allowedJPi_`.
+  * @brief Method to fill the `std::vector<std::pair<double,int> > allowedJPi_` for the formation of the compound.
   * @param calcRates True or false depending, if rates should be calculated or not.
   * @return True if the size of allowedJPi_ is larger than 0; False otherwise.
   * @details 
@@ -162,11 +164,6 @@ class CrossSection {
 
   /**
    * @brief Every SpinRatePair gets its own decayer
-   * @details
-   * 1. Loop over allowedJPi:
-   *  - A new Decayer is created for a specific the pairs 
-   *  - CorrectWidthFluctuations() is called
-   *  - 
    */
   bool CalcDecayerVector(double,DecayerVector&,bool forAverageWidth=false);
   

@@ -351,18 +351,27 @@ bool CrossSection::CalcAllowedJPi(bool forRates) {
 bool CrossSection::CalcDecayerVector(double E, DecayerVector& decayerVector, bool forAverageWidth) {
   if(verbose_) std::cout << "\tCalcDecayerVector() for energy: " << E<<std::endl;
   
-  //for loop to create a Decayer for every spin-parity pair given in allowedJPi
+  /**
+   * 1. We start with a loop over all allowed states in the compound nucleus and create a decayer for this state.
+   */
   for(int i = 0;i<allowedJPi_.size();i++) {
     Decayer* newDecayer = new Decayer(compoundZ_,compoundA_,allowedJPi_[i].first, allowedJPi_[i].second, E);
+    /**
+     * 2. CorrectWidthFluctuations() will be called for all of these decayers.
+     */
     newDecayer->CorrectWidthFluctuations();
     std::vector<SpinRatePair*> entrancePairs;
     
+    /**
+     * 3. Only the spinRatePairs for the target nucleus and the ground state spin and parity 
+     * are stored in entrancePairs vector.
+     */
     for(int i = 0;i<newDecayer->widthCorrectedDecayer_->spinRatePairs_.size(); i++) {
       if( newDecayer->widthCorrectedDecayer_->spinRatePairs_[i].Z_==Z_&&
 	        newDecayer->widthCorrectedDecayer_->spinRatePairs_[i].A_==A_&&
 	        newDecayer->widthCorrectedDecayer_->spinRatePairs_[i].spin_==groundStateJ_&&
 	        newDecayer->widthCorrectedDecayer_->spinRatePairs_[i].parity_==groundStatePi_){
-	    
+            
         entrancePairs.push_back(&newDecayer->widthCorrectedDecayer_->spinRatePairs_[i]);
       }
     }
@@ -372,12 +381,109 @@ bool CrossSection::CalcDecayerVector(double E, DecayerVector& decayerVector, boo
       return false;
     }
     */
+    /**
+     * 4. The decayer and the entrancePairs are pushed back to the decayerVector.
+     */
     decayerVector.push_back(std::pair<Decayer*,std::vector<SpinRatePair*> >(newDecayer,entrancePairs));
   }
   return true;
 }
 
-void CrossSection::Calculate() {
+bool CrossSection::CalcEntranceWidth(){
+  //For every input energy
+  for(unsigned int i=0; i < crossSections_.size(); i++){
+    // compoundE = center of mass energy - qvalue (seperationEnergy)
+    double compoundE = crossSections_[i].first+seperationEnergy_;
+    // Initialize decayerVector
+    DecayerVector decayerVector;
+
+    if(!CalcDecayerVector(compoundE,decayerVector)) {
+      for(int j = 0;j<decayerVector.size();j++) 
+	      delete decayerVector[j].first;
+      continue;
+    }
+
+    std::cout << "A\t" 
+              << "Z\t"
+              << "I_1\t"
+              << "Pi_1\t"
+              << "I_2\t"
+              << "Pi_2\t"
+              << "Transmission\t"
+              << "LevelDensity\t"
+              << "nDecay Width \t"
+              << "pDecay Width \t"
+              << "gDecay Width \t"
+              << "aDecay Width \t"
+              << "nTotal Width \t"
+              << "pTotal Width \t"
+              << "gTotal Width \t"
+              << "aTotal Width \t"
+              << std::endl;
+
+    std::cout << " \t" 
+              << " \t"
+              << "   \t"
+              << "    \t"
+              << "   \t"
+              << "    \t"
+              << "            \t"
+              << "  [1/MeV]\t"
+              << "  [MeV]\t\t"
+              << "  [MeV]\t\t"
+              << "  [MeV]\t\t"
+              << "  [MeV]\t\t"
+              << "  [MeV]\t\t"
+              << "  [MeV]\t\t"
+              << "  [MeV]\t\t"
+              << "  [MeV]\t\t"
+              << std::endl;
+
+    std::cout.precision(3);
+
+    for(int j = 0;j<decayerVector.size();j++) {
+      std::vector<SpinRatePair*> entrancePairs = decayerVector[j].second;
+      Decayer* decayer = decayerVector[j].first->widthCorrectedDecayer_;
+      double entranceTransmission=0.;
+      double trans=0.;
+      
+      for(int k = 0;k<entrancePairs.size();k++) {
+	      trans = entrancePairs[k]->rateFunc_->CalcTransmissionFunc(compoundE-seperationEnergy_);
+        LevelDensity * nld = nullptr;
+        
+        if(nldmodel_ == 0)
+        nld = new RauscherLevelDensity(decayer->Z_, decayer->A_, decayer->jInitial_, decayer->piInitial_);
+
+        if(nldmodel_ == 1)
+        nld = new LevelDensityHFB_BSk14(decayer->Z_, decayer->A_, decayer->jInitial_, decayer->piInitial_);
+
+        entranceTransmission += trans;
+        double levels = nld->operator()(compoundE);
+        std::cout << std::fixed << entrancePairs[k]->A_ << "\t"
+                  << std::fixed << entrancePairs[k]->Z_ << "\t"
+                  << std::fixed << entrancePairs[k]->spin_ << "\t"
+                  << std::fixed << entrancePairs[k]->parity_ << "\t"
+                  << std::fixed << decayer->jInitial_ << "\t"
+                  << std::fixed << decayer->piInitial_ << "\t"
+                  << std::scientific << trans << "\t"
+                  << std::scientific << levels << "\t"
+                  << std::scientific << decayer->widthCorrectedDecayer_->neutronEntrance_ << "\t"
+                  << std::scientific << decayer->widthCorrectedDecayer_->protonEntrance_ << "\t"
+                  << std::scientific << decayer->widthCorrectedDecayer_->gammaEntrance_ << "\t"
+                  << std::scientific << decayer->widthCorrectedDecayer_->alphaEntrance_ << "\t"
+                  << std::scientific << decayer->widthCorrectedDecayer_->neutronTotalWidth_ << "\t"
+                  << std::scientific << decayer->widthCorrectedDecayer_->protonTotalWidth_ << "\t"
+                  << std::scientific << decayer->widthCorrectedDecayer_->gammaTotalWidth_ << "\t"
+                  << std::scientific << decayer->widthCorrectedDecayer_->alphaTotalWidth_ << "\t"
+                  << std::fixed << std::endl;
+      }   
+    }
+    std::cout << std::endl; 
+  }
+  return true;
+}
+
+void CrossSection::Calculate(){
   //std::cout << std::endl << "Calculating cross section..." << std::endl;
   
   if(calculateGammaCutoff_) {
@@ -387,46 +493,45 @@ void CrossSection::Calculate() {
     gammaCutoffSet_ = true;
   }
 
-  //Creating ProgressBar object
-  ProgressBar pg;
-  
-  int numPoints=crossSections_.size();
 
-  pg.start(numPoints);
-  std::cout << std::endl << "Number of energies: " << numPoints << std::endl;  
-  int skipCounter = 0;
 
   //I dont understand this yet ... Its something about counting, which energies were skipped in the calculations ...
-  for(unsigned int i=0; i < crossSections_.size(); i++){
-    //if(i>0&&!energiesGiven_) {
-    //  skipCounter++;
-    //  std::cout << "Hier funktionierts noch ..." << std::endl;
-    //  try{
-    //    if((crossSections_[i-1].second.neutron_==0.|| crossSections_[i-1].second.alpha_==0.|| crossSections_[i-1].second.proton_==0.) && !skipped_[i-1]) skipCounter=0;
-    //  }
-    //  catch (std::exception& e)
-    //  {
-    //    std::cout << e.what() << '\n';
-    //  }
-    //  std::cout << "Hier funktionierts auch noch ..." << std::endl;
-    //  try{
-    //    if((crossSections_[i].first>skipEnergy_ ) && (i!=crossSections_.size()-1) && ( (i+1)%3!=0 ) && ( skipCounter>8 ) ) {
-    //      skipped_.push_back(true);
-    //      continue;
-    //    }
-    //  }
-    //  catch (std::exception& e)
-    //  {
-    //    std::cout << e.what() << '\n';
-    //  }
-    //  skipped_.push_back(false);
-    //}
-  }
+  //for(unsigned int i=0; i < crossSections_.size(); i++){
+  //  //if(i>0&&!energiesGiven_) {
+  //  //  skipCounter++;
+  //  //  std::cout << "Hier funktionierts noch ..." << std::endl;
+  //  //  try{
+  //  //    if((crossSections_[i-1].second.neutron_==0.|| crossSections_[i-1].second.alpha_==0.|| crossSections_[i-1].second.proton_==0.) && !skipped_[i-1]) skipCounter=0;
+  //  //  }
+  //  //  catch (std::exception& e)
+  //  //  {
+  //  //    std::cout << e.what() << '\n';
+  //  //  }
+  //  //  std::cout << "Hier funktionierts auch noch ..." << std::endl;
+  //  //  try{
+  //  //    if((crossSections_[i].first>skipEnergy_ ) && (i!=crossSections_.size()-1) && ( (i+1)%3!=0 ) && ( skipCounter>8 ) ) {
+  //  //      skipped_.push_back(true);
+  //  //      continue;
+  //  //    }
+  //  //  }
+  //  //  catch (std::exception& e)
+  //  //  {
+  //  //    std::cout << e.what() << '\n';
+  //  //  }
+  //  //  skipped_.push_back(false);
+  //  //}
+  //}
 
   //std::cout << std::endl << "Starting" << std::endl;
   //For loop over all energies
+
+  //Creating ProgressBar object
+  ProgressBar pg;  
+  int numPoints=crossSections_.size();
+  pg.start(numPoints);
+  std::cout << std::endl << "Number of energies: " << numPoints << std::endl;  
   pg.update(0);
-  //#pragma omp parallel for
+
   for(unsigned int i=0; i < crossSections_.size(); i++){
     
     //std::cout << std::endl << "Thread: " << omp_get_thread_num() <<  " Energy: " << crossSections_[i].first << std::endl;
@@ -555,7 +660,7 @@ void CrossSection::Calculate() {
       pExitTrans_[j].push_back(protonExitTransmission);
       aExitTrans_[j].push_back(alphaExitTransmission);
 
-      if(decayer->totalIntegral_>0.) {
+      if(decayer->totalIntegral_ > 0.) {
 	      gammaSum+=(2.*decayer->jInitial_+1.)*entranceTransmission*gammaExitTransmission/decayer->totalIntegral_;
 	      neutronSum+=(2.*decayer->jInitial_+1.)*entranceTransmission*neutronExitTransmission/decayer->totalIntegral_;
 	      protonSum+=(2.*decayer->jInitial_+1.)*entranceTransmission*protonExitTransmission/decayer->totalIntegral_;
@@ -596,7 +701,7 @@ void CrossSection::Calculate() {
  
 }
 
-void CrossSection::PrintCrossSections() {
+void CrossSection::PrintCrossSections(){
   std::cout << std::endl << "Printing Cross Sections ..." << std::endl;
   /** 1. Construct file names*/
   char filename[256];
@@ -713,9 +818,7 @@ std::pair<double,double> CrossSection::CalcAverageSWaveResWidth() {
   }
 
   double upSum=0.;
-  double downSum=0.;
-  
-  
+  double downSum=0.;  
 
   int size=decayerVector.size();
 
@@ -787,7 +890,7 @@ std::pair<double,double> CrossSection::CalcAverageSWaveResWidth() {
   return std::pair<double,double>(sum/totalWeight, 1./(ldValueUp+ldValueDown));
 }
 
-std::pair<double,double> CrossSection::CalcAverageSWaveResWidth(double energy) {
+std::pair<double,double> CrossSection::CalcAverageSWaveResWidth(double energy, int type=0) {
   //double energy = seperationEnergy_;
   DecayerVector decayerVector;
 
@@ -966,7 +1069,7 @@ std::pair<double,double> CrossSection::CalcAveragePWaveResWidth() {
 				  1./(ldValueUp15+ldValueUp05+ldValueDown05+ldValueDown15));
 }
 
-std::pair<double,double> CrossSection::CalcAveragePWaveResWidth(double energy) {
+std::pair<double,double> CrossSection::CalcAveragePWaveResWidth(double energy, int type=0) {
   
   DecayerVector decayerVector;
   if(!CalcDecayerVector(energy,decayerVector,true)) {
@@ -1195,7 +1298,7 @@ std::pair<double,double> CrossSection::CalcAverageDWaveResWidth() {
 				  1./(ldValueUp25+ldValueUp15+downSum15+downSum25));
 }
 
-std::pair<double,double> CrossSection::CalcAverageDWaveResWidth(double energy) {
+std::pair<double,double> CrossSection::CalcAverageDWaveResWidth(double energy, int type = 0) {
   
   DecayerVector decayerVector;
   if(!CalcDecayerVector(energy,decayerVector,true)) {
