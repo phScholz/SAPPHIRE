@@ -95,7 +95,9 @@ double ParticleTransmissionFunc::operator()(double energy){
     } else sum+=it->second*chirand;
       i++;
   }
+
   if(porterThomas_) gsl_rng_free (r);
+  
   return sum;
 }
 
@@ -107,14 +109,14 @@ double ParticleTransmissionFunc::operator()(double energy, int which) {
   for(std::map<SLPair,double>::const_iterator it = functions.begin(); it!=functions.end(); ++it) {
     if(i==which) {
       if(TWFC_!=0.) {
-	double previousT = (previous_) ? previous_->operator()(energy) : it->second;
-	double tBar = uTWSFC_/uTWFC_;
-	double exponent = 4.*tBar/uTWFC_
-	  *(1.+it->second/uTWFC_)/(1.+3*tBar/uTWFC_);
-	double WCF = 1.+2./(1.+pow(it->second,exponent))+87.*pow((it->second-tBar)/uTWFC_,2.)*
-	  pow(it->second/uTWFC_,5.);
-	sum=it->second/(1.+(WCF-1.)*previousT/TWFC_);
-      } else sum=it->second;
+	      double previousT = (previous_) ? previous_->operator()(energy) : it->second;
+	      double tBar = uTWSFC_/uTWFC_;
+	      double exponent = 4.*tBar/uTWFC_
+	        *(1.+it->second/uTWFC_)/(1.+3*tBar/uTWFC_);
+	      double WCF = 1.+2./(1.+pow(it->second,exponent))+87.*pow((it->second-tBar)/uTWFC_,2.)*pow(it->second/uTWFC_,5.);
+        sum=it->second/(1.+(WCF-1.)*previousT/TWFC_);
+      } 
+      else sum=it->second;
       break;
     }
     i++;
@@ -122,14 +124,13 @@ double ParticleTransmissionFunc::operator()(double energy, int which) {
   return sum;
 }
 
-void ParticleTransmissionFunc::CalcSLDependentFunctions(double energy,
-							std::map<SLPair,double>& functions) {
+void ParticleTransmissionFunc::CalcSLDependentFunctions(double energy, std::map<SLPair,double>& functions) {
   for(double s=fabs(jFinal_-spin_);s<=jFinal_+spin_;s+=1.0) {
     for(double l=fabs(jInitial_-s);l<=jInitial_+s;l+=1.0) {
       double intPart;
       if(modf(l,&intPart)!=0.) {
-	std::cout << "WARNING: Calculated L not an integer." << std::endl;
-	continue;
+	      std::cout << "WARNING: Calculated L not an integer." << std::endl;
+	      continue;
       }
       if(int(intPart)>maxL_) break;
       int parity = (int(intPart)%2==0) ? parity_*piFinal_ : -1*parity_*piFinal_;
