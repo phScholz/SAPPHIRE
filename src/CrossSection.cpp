@@ -411,6 +411,7 @@ bool CrossSection::CalcCompoundWidth(){
               << "Pi_2\t"
               << "Transmission\t"
               << "LevelDensity\t"
+              << "Trans/NLD\t"
               << "nDecay Width \t"
               << "pDecay Width \t"
               << "gDecay Width \t"
@@ -437,6 +438,7 @@ bool CrossSection::CalcCompoundWidth(){
               << "  [MeV]\t\t"
               << "  [MeV]\t\t"
               << "  [MeV]\t\t"
+              << "  [MeV]\t\t"
               << std::endl;
 
     std::cout.precision(3);
@@ -444,6 +446,7 @@ bool CrossSection::CalcCompoundWidth(){
     for(int j = 0;j<decayerVector.size();j++) {
       std::vector<SpinRatePair*> entrancePairs = decayerVector[j].second;
       Decayer* decayer = decayerVector[j].first->widthCorrectedDecayer_;
+      
       double entranceTransmission=0.;
       double trans=0.;
       
@@ -459,23 +462,29 @@ bool CrossSection::CalcCompoundWidth(){
 
         entranceTransmission += trans;
         double levels = nld->operator()(compoundE);
-        std::cout << std::fixed << entrancePairs[k]->A_ << "\t"
-                  << std::fixed << entrancePairs[k]->Z_ << "\t"
-                  << std::fixed << entrancePairs[k]->spin_ << "\t"
-                  << std::fixed << entrancePairs[k]->parity_ << "\t"
-                  << std::fixed << decayer->jInitial_ << "\t"
-                  << std::fixed << decayer->piInitial_ << "\t"
-                  << std::scientific << trans << "\t"
-                  << std::scientific << levels << "\t"
-                  << std::scientific << decayer->widthCorrectedDecayer_->neutronEntrance_ << "\t"
-                  << std::scientific << decayer->widthCorrectedDecayer_->protonEntrance_ << "\t"
-                  << std::scientific << decayer->widthCorrectedDecayer_->gammaEntrance_ << "\t"
-                  << std::scientific << decayer->widthCorrectedDecayer_->alphaEntrance_ << "\t"
-                  << std::scientific << decayer->widthCorrectedDecayer_->neutronTotalWidth_ << "\t"
-                  << std::scientific << decayer->widthCorrectedDecayer_->protonTotalWidth_ << "\t"
-                  << std::scientific << decayer->widthCorrectedDecayer_->gammaTotalWidth_ << "\t"
-                  << std::scientific << decayer->widthCorrectedDecayer_->alphaTotalWidth_ << "\t"
-                  << std::fixed << std::endl;
+        std::string p1 = (entrancePairs[k]->parity_ > 0)? "+" : "-";
+        std::string p2 = (decayer->piInitial_ > 0)? "+" : "-";
+
+        if(trans > 0){
+          std::cout << std::fixed << entrancePairs[k]->A_ << "\t"
+                    << std::fixed << entrancePairs[k]->Z_ << "\t"
+                    << std::fixed << entrancePairs[k]->spin_ << "\t"
+                    << std::fixed << p1 << "\t"
+                    << std::fixed << decayer->jInitial_ << "\t"
+                    << std::fixed << p2 << "\t"
+                    << std::scientific << trans << "\t"
+                    << std::scientific << levels << "\t"
+                    << std::scientific << trans/levels << "\t"
+                    << std::scientific << decayer->neutronEntrance_ << "\t"
+                    << std::scientific << decayer->protonEntrance_ << "\t"
+                    << std::scientific << decayer->gammaEntrance_ << "\t"
+                    << std::scientific << decayer->alphaEntrance_ << "\t"
+                    << std::scientific << decayer->neutronTotalWidth_ << "\t"
+                    << std::scientific << decayer->protonTotalWidth_ << "\t"
+                    << std::scientific << decayer->gammaTotalWidth_ << "\t"
+                    << std::scientific << decayer->alphaTotalWidth_ << "\t"
+                    << std::fixed << std::endl;
+        }
       }   
     }
     std::cout << std::endl; 
@@ -492,38 +501,6 @@ void CrossSection::Calculate(){
   } else {
     gammaCutoffSet_ = true;
   }
-
-
-
-  //I dont understand this yet ... Its something about counting, which energies were skipped in the calculations ...
-  //for(unsigned int i=0; i < crossSections_.size(); i++){
-  //  //if(i>0&&!energiesGiven_) {
-  //  //  skipCounter++;
-  //  //  std::cout << "Hier funktionierts noch ..." << std::endl;
-  //  //  try{
-  //  //    if((crossSections_[i-1].second.neutron_==0.|| crossSections_[i-1].second.alpha_==0.|| crossSections_[i-1].second.proton_==0.) && !skipped_[i-1]) skipCounter=0;
-  //  //  }
-  //  //  catch (std::exception& e)
-  //  //  {
-  //  //    std::cout << e.what() << '\n';
-  //  //  }
-  //  //  std::cout << "Hier funktionierts auch noch ..." << std::endl;
-  //  //  try{
-  //  //    if((crossSections_[i].first>skipEnergy_ ) && (i!=crossSections_.size()-1) && ( (i+1)%3!=0 ) && ( skipCounter>8 ) ) {
-  //  //      skipped_.push_back(true);
-  //  //      continue;
-  //  //    }
-  //  //  }
-  //  //  catch (std::exception& e)
-  //  //  {
-  //  //    std::cout << e.what() << '\n';
-  //  //  }
-  //  //  skipped_.push_back(false);
-  //  //}
-  //}
-
-  //std::cout << std::endl << "Starting" << std::endl;
-  //For loop over all energies
 
   //Creating ProgressBar object
   ProgressBar pg;  
