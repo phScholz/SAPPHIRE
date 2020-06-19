@@ -33,7 +33,7 @@ namespace Module_CrossSection{
 
     bool fexists(const char *filename) {
         std::ifstream ifile(filename);
-    return (bool)ifile;
+        return (bool)ifile;
     }
 
     std::string pTypeStringFromString(std::string &reactionString){

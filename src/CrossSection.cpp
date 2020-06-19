@@ -389,7 +389,7 @@ bool CrossSection::CalcDecayerVector(double E, DecayerVector& decayerVector, boo
   return true;
 }
 
-bool CrossSection::CalcEntranceWidth(){
+bool CrossSection::CalcCompoundWidth(){
   //For every input energy
   for(unsigned int i=0; i < crossSections_.size(); i++){
     // compoundE = center of mass energy - qvalue (seperationEnergy)

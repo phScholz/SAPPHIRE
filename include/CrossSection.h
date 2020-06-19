@@ -118,7 +118,7 @@ class CrossSection {
    */
   void PrintTransmissionTerms();
 
-  bool CalcEntranceWidth();
+  bool CalcCompoundWidth();
   
   
   std::pair<double,double> CalcAverageSWaveResWidth();

@@ -20,6 +20,7 @@
 #include "Modules/Module_RandomScheme.h"
 #include "Modules/Module_GSF.h"
 #include "Modules/Module_NLD.h"
+#include "Modules/Module_Compound.h"
 #include "SapphireInput.h"
 
 #include "GammaStrength/D1MQRPA.h"
@@ -38,11 +39,12 @@ void PrintHelp(){
   std::cout << "\tdecayer       - Calculate Monte-Carlo statistical decay." << std::endl;
   std::cout << std::endl;
   std::cout << "\trandom        - Create random level schemes (experimental)" << std::endl;
-  std::cout << "\tbetaneutron   - Calculate HF and BW cross sections from "   << std::endl;
-  std::cout << "\t                given neutron widths and level energies. "   << std::endl;
-  std::cout << "\t                (experimental) "   << std::endl;
+  //std::cout << "\tbetaneutron   - Calculate HF and BW cross sections from "   << std::endl;
+  //std::cout << "\t                given neutron widths and level energies. "   << std::endl;
+  //std::cout << "\t                (experimental) "   << std::endl;
   std::cout << "\tgsf           - Printing gamma-strength function" << std::endl;
   std::cout << "\tnld           - Printing nuclear level density" << std::endl;
+  std::cout << "\tcompound      - Calculating decay widths of compound states" << std::endl;
   std::cout << std::endl;
   std::cout << "\told           - Instruction for the old Sapphire code. (not supported anymore)" << std::endl;
 	std::cout << std::endl;
@@ -99,6 +101,9 @@ int main(int argc, char *argv[]) {
   }
   else if (mode == "random"){
     Module_RandomScheme::Go(argc,argv);
+  }
+  else if (mode == "compound"){
+    Module_Compound::Go(argc,argv);
   }
   else if (mode == "old"){
     Module_OldSapphire::Go(argc, argv);
