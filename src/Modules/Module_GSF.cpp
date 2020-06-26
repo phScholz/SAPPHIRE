@@ -11,6 +11,7 @@
 namespace Module_GSF{
 
     void Go(int argc, char *argv[]){
+        std::cout << std::endl << "Module: gsf" << std::endl; 
         if(argc < 6){
             std::cout << std::endl << "Not enough input parameters ..." << std::endl;
             PrintHelp();
@@ -168,9 +169,8 @@ namespace Module_GSF{
         return Z;
     }
 
-    void PrintHelp(){
-        std::cout << std::endl << "Module: gsf" << std::endl; 
-        std::cout << std::endl << "\tSyntax:        sapphire gsf Isotope E1Model M1Model E2Model" << std::endl;        
+    void PrintHelp(){        
+        std::cout << std::endl << "\tSyntax:        sapphire gsf <Isotope> <E1Model> <M1Model> <E2Model>" << std::endl;        
 	    std::cout << std::endl;        
     }
 }

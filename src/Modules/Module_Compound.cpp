@@ -230,7 +230,6 @@ namespace Module_Compound{
     }
 
     void PrintHelp(){
-        std::cout << std::endl << "Module: compound" << std::endl; 
         std::cout << std::endl << "\tSyntax:        sapphire compound <xxY+z> <energyFile>" << std::endl;        
         std::cout << std::endl << "\t               sapphire compound <xxY+z> <energyFile> <spinParity>" << std::endl;
 	    std::cout << std::endl;        

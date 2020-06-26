@@ -13,6 +13,8 @@
 namespace Module_NLD{
 
     void Go(int argc, char *argv[]){
+        std::cout << std::endl << "Module: nld" << std::endl; 
+
         if(argc < 4){
             std::cout << std::endl << "Not enough input parameters ..." << std::endl;
             PrintHelp();
@@ -151,9 +153,8 @@ namespace Module_NLD{
         return Z;
     }
 
-    void PrintHelp(){
-        std::cout << std::endl << "Module: nld" << std::endl; 
-        std::cout << std::endl << "\tSyntax:        sapphire nld NLDModel" << std::endl;        
+    void PrintHelp(){        
+        std::cout << std::endl << "\tSyntax:        sapphire nld <isotope> <NLDModel>" << std::endl;        
 	    std::cout << std::endl;        
     }
 }
