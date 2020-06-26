@@ -9,6 +9,7 @@
 #include "SapphireInput.h"
 #include "SpinRatePair.h"
 #include "Decayer/Decayer.h"
+#include "CompoundStates.h"
 
 typedef std::vector<std::pair<Decayer*,std::vector<SpinRatePair*> > > DecayerVector;
 
@@ -118,8 +119,21 @@ class CrossSection {
    */
   void PrintTransmissionTerms();
 
-  bool CalcCompoundWidth();
+  /**
+   * @brief For given energies the groundstate and total widths of the different compoundstates are calculated and returned
+   * 
+   * @return CompoundStates Container of CompoundState onjects.
+   */
+  CompoundStates CalcCompoundWidth();
   
+  /**
+   * @brief For given energies the groundstate and total widths of the different compoundstates are calculated and returned
+   * @param spin The spin of the compound state of interest.
+   * @param parity The parity of the compound state of interest.
+   * @return CompoundStates Container of CompoundState onjects.
+   */
+  CompoundStates CalcCompoundWidth(double spin, int parity);
+
   
   std::pair<double,double> CalcAverageSWaveResWidth();
   std::pair<double,double> CalcAverageSWaveResWidth(double energy, int type);

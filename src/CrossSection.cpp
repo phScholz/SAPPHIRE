@@ -18,6 +18,7 @@
 #include "SapphireInput.h"
 #include "Progressbar.h"
 #include "omp.h"
+#include "CompoundStates.h"
 
 CrossSection::CrossSection(SapphireInput & input):
   Z_(input.XsZ()), A_(input.XsA()), calcRates_(input.CalcRates()), pType_(input.PType()), skipEnergy_(1000.), entranceState_(input.EntranceState()), exitStates_(input.exitStates) {
@@ -389,11 +390,14 @@ bool CrossSection::CalcDecayerVector(double E, DecayerVector& decayerVector, boo
   return true;
 }
 
-bool CrossSection::CalcCompoundWidth(){
+CompoundStates CrossSection::CalcCompoundWidth(double spin, int parity){
+  CompoundStates compound;
+
   //For every input energy
   for(unsigned int i=0; i < crossSections_.size(); i++){
     // compoundE = center of mass energy - qvalue (seperationEnergy)
     double compoundE = crossSections_[i].first+seperationEnergy_;
+    
     // Initialize decayerVector
     DecayerVector decayerVector;
 
@@ -402,45 +406,71 @@ bool CrossSection::CalcCompoundWidth(){
 	      delete decayerVector[j].first;
       continue;
     }
+    std::cout.precision(3);
 
-    std::cout << "A\t" 
-              << "Z\t"
-              << "I_1\t"
-              << "Pi_1\t"
-              << "I_2\t"
-              << "Pi_2\t"
-              << "Transmission\t"
-              << "LevelDensity\t"
-              << "Trans/NLD\t"
-              << "nDecay Width \t"
-              << "pDecay Width \t"
-              << "gDecay Width \t"
-              << "aDecay Width \t"
-              << "nTotal Width \t"
-              << "pTotal Width \t"
-              << "gTotal Width \t"
-              << "aTotal Width \t"
-              << std::endl;
+    for(int j = 0;j<decayerVector.size();j++) {
+      std::vector<SpinRatePair*> entrancePairs = decayerVector[j].second;
+      Decayer* decayer = decayerVector[j].first->widthCorrectedDecayer_;
+      
 
-    std::cout << " \t" 
-              << " \t"
-              << "   \t"
-              << "    \t"
-              << "   \t"
-              << "    \t"
-              << "            \t"
-              << "  [1/MeV]\t"
-              << "  [MeV]\t\t"
-              << "  [MeV]\t\t"
-              << "  [MeV]\t\t"
-              << "  [MeV]\t\t"
-              << "  [MeV]\t\t"
-              << "  [MeV]\t\t"
-              << "  [MeV]\t\t"
-              << "  [MeV]\t\t"
-              << "  [MeV]\t\t"
-              << std::endl;
+        double entranceTransmission=0.;
+        double trans=0.;
 
+        for(int k = 0;k<entrancePairs.size();k++) {
+          if(decayer->jInitial_ == spin && decayer->piInitial_ == parity){
+          CompoundState dummy(decayer->A_, decayer->Z_, decayer->jInitial_, decayer->piInitial_, decayer->energy_);
+	        trans = entrancePairs[k]->rateFunc_->CalcTransmissionFunc(compoundE-seperationEnergy_);
+          LevelDensity * nld = nullptr;
+          if(nldmodel_ == 0)
+          nld = new RauscherLevelDensity(decayer->Z_, decayer->A_, decayer->jInitial_, decayer->piInitial_);
+          if(nldmodel_ == 1)
+          nld = new LevelDensityHFB_BSk14(decayer->Z_, decayer->A_, decayer->jInitial_, decayer->piInitial_);
+          entranceTransmission += trans;
+          double levels = nld->operator()(compoundE);
+          std::string p1 = (entrancePairs[k]->parity_ > 0)? "+" : "-";
+          std::string p2 = (decayer->piInitial_ > 0)? "+" : "-";
+
+          //if the transmission coefficient is not NAN (Not A Number)
+          if(!isnan(trans)){        
+            dummy.GroundStateWidth("gamma", decayer->gammaEntrance_ );
+            dummy.GroundStateWidth("neutron", decayer->neutronEntrance_ );
+            dummy.GroundStateWidth("proton", decayer->protonEntrance_ );
+            dummy.GroundStateWidth("alpha", decayer->alphaEntrance_ );
+            dummy.TotalWidth("gamma",   decayer->gammaTotalWidth_ );
+            dummy.TotalWidth("neutron", decayer->neutronTotalWidth_ );
+            dummy.TotalWidth("proton",  decayer->protonTotalWidth_ );
+            dummy.TotalWidth("alpha",   decayer->alphaTotalWidth_ );
+            dummy.Density(levels);
+          }
+
+          compound.states.push_back(dummy);
+          }
+
+        }
+      
+    }    
+    std::cout << std::endl; 
+  }
+  return compound;
+
+}
+
+CompoundStates CrossSection::CalcCompoundWidth(){
+  CompoundStates compound;
+
+  //For every input energy
+  for(unsigned int i=0; i < crossSections_.size(); i++){
+    // compoundE = center of mass energy - qvalue (seperationEnergy)
+    double compoundE = crossSections_[i].first+seperationEnergy_;
+    
+    // Initialize decayerVector
+    DecayerVector decayerVector;
+
+    if(!CalcDecayerVector(compoundE,decayerVector)) {
+      for(int j = 0;j<decayerVector.size();j++) 
+	      delete decayerVector[j].first;
+      continue;
+    }
     std::cout.precision(3);
 
     for(int j = 0;j<decayerVector.size();j++) {
@@ -451,6 +481,7 @@ bool CrossSection::CalcCompoundWidth(){
       double trans=0.;
       
       for(int k = 0;k<entrancePairs.size();k++) {
+        CompoundState dummy(decayer->A_, decayer->Z_, decayer->jInitial_, decayer->piInitial_, decayer->energy_);
 	      trans = entrancePairs[k]->rateFunc_->CalcTransmissionFunc(compoundE-seperationEnergy_);
         LevelDensity * nld = nullptr;
         
@@ -465,31 +496,23 @@ bool CrossSection::CalcCompoundWidth(){
         std::string p1 = (entrancePairs[k]->parity_ > 0)? "+" : "-";
         std::string p2 = (decayer->piInitial_ > 0)? "+" : "-";
 
-        if(trans > 0){
-          std::cout << std::fixed << entrancePairs[k]->A_ << "\t"
-                    << std::fixed << entrancePairs[k]->Z_ << "\t"
-                    << std::fixed << entrancePairs[k]->spin_ << "\t"
-                    << std::fixed << p1 << "\t"
-                    << std::fixed << decayer->jInitial_ << "\t"
-                    << std::fixed << p2 << "\t"
-                    << std::scientific << trans << "\t"
-                    << std::scientific << levels << "\t"
-                    << std::scientific << trans/levels << "\t"
-                    << std::scientific << decayer->neutronEntrance_ << "\t"
-                    << std::scientific << decayer->protonEntrance_ << "\t"
-                    << std::scientific << decayer->gammaEntrance_ << "\t"
-                    << std::scientific << decayer->alphaEntrance_ << "\t"
-                    << std::scientific << decayer->neutronTotalWidth_ << "\t"
-                    << std::scientific << decayer->protonTotalWidth_ << "\t"
-                    << std::scientific << decayer->gammaTotalWidth_ << "\t"
-                    << std::scientific << decayer->alphaTotalWidth_ << "\t"
-                    << std::fixed << std::endl;
+        if(!isnan(trans)){        
+          dummy.GroundStateWidth("gamma", decayer->gammaEntrance_ );
+          dummy.GroundStateWidth("neutron", decayer->neutronEntrance_ );
+          dummy.GroundStateWidth("proton", decayer->protonEntrance_ );
+          dummy.GroundStateWidth("alpha", decayer->alphaEntrance_ );
+
+          dummy.TotalWidth("gamma",   decayer->gammaTotalWidth_ );
+          dummy.TotalWidth("neutron", decayer->neutronTotalWidth_ );
+          dummy.TotalWidth("proton",  decayer->protonTotalWidth_ );
+          dummy.TotalWidth("alpha",   decayer->alphaTotalWidth_ );
         }
-      }   
-    }
+        compound.states.push_back(dummy);
+      }
+    }    
     std::cout << std::endl; 
   }
-  return true;
+  return compound;
 }
 
 void CrossSection::Calculate(){

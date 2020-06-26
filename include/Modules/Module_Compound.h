@@ -6,6 +6,7 @@
 #pragma once
 #include <string>
 #include "LevelDensity/LevelDensity.h"
+#include "CompoundStates.h"
 
 namespace Module_Compound{
     /** 
@@ -14,6 +15,21 @@ namespace Module_Compound{
     *   @param argv The array which contains the cmd line parameters of Sapphire.
     */
     void Go(int argc,char *argv[]); 
+
+    /**
+     * @brief Print the information of Compound States to std::cout.
+     * 
+     * @param compound A CompoundStates object.
+     */
+    void PrintCompoundStates(std::vector<CompoundState> states);
+
+    /**
+     * @brief Write the information of Compound States to a file.
+     * 
+     * @param compound A CompoundStates object.
+     * @param file The path to the output file
+     */
+    void WriteCompoundStates(CompoundStates * compound, std::string file);
 
     /**
     * @brief Check wheter a string represents an actual file.
@@ -31,8 +47,17 @@ namespace Module_Compound{
      * @brief Function to calculate the compound decay widths
      * 
      */
-
     void CalcWidths(std::string reaction, double energy);
+
+
+    /**
+     * @brief Same as CalcWidths() but for only one compound state
+     * 
+     * @param reactionString Capture reaction
+     * @param energy energy file or single energy
+     * @param state spin and parity e.g. "1/2+"
+     */
+    void CalcWidths(std::string reactionString, double energy, std::string state);
 
     /**
      * @brief Get a projectile integer from a projectile string
@@ -75,4 +100,10 @@ namespace Module_Compound{
      * @returns The mass number part of the isotopeString, e.g. 60, if successful. Otherwise returns 0.
      */
     int massNumberIntFromString(std::string &isotopeString);
+
+    double spinDoubleFromString(std::string &jpi);
+
+    int parityIntFromString(std::string &jpi);
+
+    void parseJPiString(double & spin, int & parity, std::string & jPiString);
 }

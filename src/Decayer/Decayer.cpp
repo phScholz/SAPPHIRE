@@ -71,7 +71,7 @@ void Decayer::SetAlphaSpinRatePairs(){
     for(double l=0; l<=maxL_; l+=1.) {
         int piFinal = (int(l)%2==0) ? piInitial_ : -1*piInitial_;
 
-	      for(double jFinal = fabs(l-jInitial_); jFinal<=l+jInitial_;jFinal+=1.) {
+	      for(double jFinal = fabs(l-jInitial_); jFinal<=l+jInitial_; jFinal+=1.) {
           bool exists = false;
           
           //Check if this spin rate pair already exists or not
