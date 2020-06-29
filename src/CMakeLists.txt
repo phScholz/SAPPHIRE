@@ -2,7 +2,7 @@ set(Sapphire_SOURCES ${Sapphire_SOURCES} LevelDensity/LevelDensityFormula.cpp Le
 set(Sapphire_SOURCES ${Sapphire_SOURCES} Databases/NuclearLevels.cpp Databases/NuclearMass.cpp)
 set(Sapphire_SOURCES ${Sapphire_SOURCES} Potentials/ParticleTransmissionFunc.cpp Potentials/JLMPotential.cpp Potentials/EquivSquareWell.cpp Potentials/McFaddenSatchlerPotential.cpp Potentials/Potential.cpp)
 set(Sapphire_SOURCES ${Sapphire_SOURCES} GammaStrength/GammaTransmissionFunc.cpp GammaStrength/BrinkAxelGSF.cpp GammaStrength/D1MQRPA.cpp GammaStrength/McCullaghGSF.cpp GammaStrength/KopeckyUhlGSF.cpp)
-set(Sapphire_SOURCES ${Sapphire_SOURCES} Modules/Module_Compound.cpp Modules/Module_NLD.cpp Modules/Module_GSF.cpp Modules/Module_RandomScheme.cpp Modules/Module_OldSapphire.cpp Modules/Module_Decayer.cpp Modules/Module_CrossSection.cpp)
+set(Sapphire_SOURCES ${Sapphire_SOURCES} Modules/Module_BreitWigner.cpp Modules/Module_Compound.cpp Modules/Module_NLD.cpp Modules/Module_GSF.cpp Modules/Module_RandomScheme.cpp Modules/Module_OldSapphire.cpp Modules/Module_Decayer.cpp Modules/Module_CrossSection.cpp)
 set(Sapphire_SOURCES ${Sapphire_SOURCES} Decayer/Decayer.cpp Decayer/DecayResults.cpp Decayer/DecayController.cpp Decayer/PreEqDecayer.cpp)
 set(Sapphire_SOURCES ${Sapphire_SOURCES} CrossSection.cpp SapphireInput.cpp CoulFunc.cpp TransitionRateFunc.cpp Sapphire.cpp Setup.cpp ParticleHoleLevelDensity.cpp PreEqTransitionRateFunc.cpp SapphireMPITypes.cpp RandomScheme.cpp)
 

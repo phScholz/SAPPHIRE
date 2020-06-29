@@ -21,6 +21,7 @@
 #include "Modules/Module_GSF.h"
 #include "Modules/Module_NLD.h"
 #include "Modules/Module_Compound.h"
+#include "Modules/Module_BreitWigner.h"
 #include "SapphireInput.h"
 
 #include "GammaStrength/D1MQRPA.h"
@@ -45,6 +46,7 @@ void PrintHelp(){
   std::cout << "\tgsf           - Printing gamma-strength function" << std::endl;
   std::cout << "\tnld           - Printing nuclear level density" << std::endl;
   std::cout << "\tcompound      - Calculating decay widths of compound states" << std::endl;
+  std::cout << "\tbreitWigner   - Calculate BreitWigner Cross Sections from partial Widths" << std::endl;
   std::cout << std::endl;
   std::cout << "\told           - Instruction for the old Sapphire code. (not supported anymore)" << std::endl;
 	std::cout << std::endl;
@@ -104,6 +106,9 @@ int main(int argc, char *argv[]) {
   }
   else if (mode == "compound"){
     Module_Compound::Go(argc,argv);
+  }
+  else if (mode == "breitWigner"){
+    Module_BreitWigner::Go(argc,argv);
   }
   else if (mode == "old"){
     Module_OldSapphire::Go(argc, argv);
