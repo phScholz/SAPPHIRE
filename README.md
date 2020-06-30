@@ -20,9 +20,10 @@
      3. [random](#33-random)
      4. [gsf](#34-gsf)
      5. [nld](#35-nld)
-     6. [old](#36-old)
-     7. [template](#37-template)
-     8. [help](#38-help)
+     6. [compound](#36-compound)
+     7. [old](#37-old)
+     8. [template](#38-template)
+     9. [help](#39-help)
   4. [References:](#4-references)
      1. [Documentation](#41-documentation)
      2. [About Sapphire](#42-about-sapphire)
@@ -159,18 +160,25 @@ Similar to the `gsf` module, the `nld` module is for testing the input of the nu
 ./sapphire nld 64Cu 0
 ```
 
-### 3.6. old
+### 3.6 compound
+This submodule is to quickly calculate the transmission coefficients and decay widths for compound states. Example usage:
+
+```
+./sapphire compound 49Ca+n 0.001
+```
+
+### 3.7. old
 This module provides the same functionallity as the original Sapphire code. Everything stays the same except the keyword ```old```. 
 Thus instead of running ```./sapphire 60Fe+a``` one needs to run ```./sapphire old 60Fe+a```.
 
 In future more and more of the features of the original Sapphire code will be reimplemented as modules. This part of the code can still be used but won't be maintained in future.
 
-### 3.7. template
+### 3.8. template
 This simple module can be used to automatically generate a template for an input file. Simply type 
 ```sapphire template```
 and the output can be easily converted into an ini-File.
 
-### 3.8. help
+### 3.9. help
 Print the help text for the different modules.
 
 ---

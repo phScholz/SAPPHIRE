@@ -9,6 +9,7 @@
 #include "SapphireInput.h"
 #include "SpinRatePair.h"
 #include "Decayer/Decayer.h"
+#include "CompoundStates.h"
 
 typedef std::vector<std::pair<Decayer*,std::vector<SpinRatePair*> > > DecayerVector;
 
@@ -117,14 +118,29 @@ class CrossSection {
    * @brief Method to print the transmission terms to file
    */
   void PrintTransmissionTerms();
+
+  /**
+   * @brief For given energies the groundstate and total widths of the different compoundstates are calculated and returned
+   * 
+   * @return CompoundStates Container of CompoundState onjects.
+   */
+  CompoundStates CalcCompoundWidth();
   
+  /**
+   * @brief For given energies the groundstate and total widths of the different compoundstates are calculated and returned
+   * @param spin The spin of the compound state of interest.
+   * @param parity The parity of the compound state of interest.
+   * @return CompoundStates Container of CompoundState onjects.
+   */
+  CompoundStates CalcCompoundWidth(double spin, int parity);
+
   
   std::pair<double,double> CalcAverageSWaveResWidth();
-  std::pair<double,double> CalcAverageSWaveResWidth(double energy);
+  std::pair<double,double> CalcAverageSWaveResWidth(double energy, int type);
   std::pair<double,double> CalcAveragePWaveResWidth();
-  std::pair<double,double> CalcAveragePWaveResWidth(double energy);
+  std::pair<double,double> CalcAveragePWaveResWidth(double energy, int type);
   std::pair<double,double> CalcAverageDWaveResWidth();
-  std::pair<double,double> CalcAverageDWaveResWidth(double enrergy);
+  std::pair<double,double> CalcAverageDWaveResWidth(double enrergy, int type);
   
   void CalculateReactionRates(bool);
   void PrintReactionRates(bool);
@@ -146,7 +162,7 @@ class CrossSection {
   inline bool FillEnergies(std::string energyFile);
 
   /**
-  * @brief Method to fill the `std::vector<std::pair<double,int> > allowedJPi_`.
+  * @brief Method to fill the `std::vector<std::pair<double,int> > allowedJPi_` for the formation of the compound.
   * @param calcRates True or false depending, if rates should be calculated or not.
   * @return True if the size of allowedJPi_ is larger than 0; False otherwise.
   * @details 
@@ -162,11 +178,6 @@ class CrossSection {
 
   /**
    * @brief Every SpinRatePair gets its own decayer
-   * @details
-   * 1. Loop over allowedJPi:
-   *  - A new Decayer is created for a specific the pairs 
-   *  - CorrectWidthFluctuations() is called
-   *  - 
    */
   bool CalcDecayerVector(double,DecayerVector&,bool forAverageWidth=false);
   
@@ -230,6 +241,8 @@ class CrossSection {
 public:
   std::vector<double> excitationEnergies_;
   std::vector<double> beamEnergies_;
+
+  double PreFactor() const {return preFactor_;} /**< Getter for preFactor*/
   
 
  private:

@@ -107,11 +107,13 @@ namespace Module_OldSapphire{
           else secondString+=nextChar;
         }
       }
+      
       if(parityString.length()>0) {
         if(parityString=="-") Pi=-1;
         else if(parityString=="+") Pi=1;
         goodPi=true;
       }
+
       if(firstString.length()>0) {
       	if(foundDelimiter&&delimiterString=="/") {
       	  if(secondString.length()>0) J = atof(firstString.c_str())/atof(secondString.c_str());

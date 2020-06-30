@@ -93,23 +93,31 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
 
 //calculate the product of leveldensity*transmissionCoefficient for each energy bin in the continuum
 #pragma omp parallel for if(isCrossSection) reduction(+:sum,exclusiveSum,oddSum,evenSum)
-  for(int i=0;i<=numSteps;++i) {
+  for(int i=0;i<=numSteps;++i)
+  {
     double ep = lowEnergy+dE*i;
     double rate = CalcLevelDensity(compoundE+qValue-ep)*CalcTransmissionFunc(ep);
+  
     if(i==0) {
       firstTerm = rate; 
-    } else if(i==numSteps) {
+    } 
+    else if(i==numSteps) {
       lastTerm = rate;
     } else {
+      
       if(i%2!=0) {
 	      oddSum+=rate;
       } else {
 	      evenSum+=rate;
       }
+
     }
+
     if(ep<highEnergy) sum += rate*dE;
     if(ep>=exclusiveLowEnergy) exclusiveSum+=rate*dE;
-    if(!isCrossSection&&ep<highEnergy){
+
+    if(!isCrossSection&&ep<highEnergy)
+    {
       function_.push_back(XYPair(ep,rate*dE));
       cumulativeSum_.push_back(XYPair(ep+0.5*dE,sum));
     }
@@ -120,18 +128,25 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
   double groundStateTransmission = 0.;
 
 //calculate the product of leveldensity*transmissionCoefficient for each level in the known level scheme
-//#pragma omp parallel for if(isCrossSection) reduction(+:sum,exclusiveSum,discreteSum)
+#pragma omp parallel for if(isCrossSection) reduction(+:sum,exclusiveSum,discreteSum)
  for(int i=knownLevels.size()-1;i>=0;--i) {
 
-    if(knownLevels[i].J_==jFinal&&knownLevels[i].Pi_==piFinal) {
+    if(knownLevels[i].J_==jFinal&&knownLevels[i].Pi_==piFinal)
+    {
       double ep = compoundE+qValue-knownLevels[i].energy_;
+      
       if(ep<1e-10) continue;
+      
       double rate = CalcTransmissionFunc(ep);
+      
       discreteSum+=rate;
+      
       sum+=rate;
+      
       exclusiveSum+=rate;
 
-      if(!isCrossSection){
+      if(!isCrossSection)
+      {
 	      function_.push_back(XYPair(ep,rate));
 	      cumulativeSum_.push_back(XYPair(ep,sum));     
       }
@@ -139,10 +154,20 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
       if(knownLevels[i].energy_==0.) groundStateTransmission = rate;
    }
   }
+
   integral_=continuousSum+discreteSum;
+  
   groundStateTransmission_ = groundStateTransmission;
-  if(!isCrossSection)
-    for(int i = 0; i< cumulativeSum_.size(); i++) 
-      if(integral_>0.) cumulativeSum_[i].Y_*=sum/integral_;
-      exclusiveBranching_ = (sum>0.) ? exclusiveSum/sum : 0.;
+  
+  if(!isCrossSection){
+    for(int i = 0; i< cumulativeSum_.size(); i++)
+    {
+      if(integral_>0.)
+      { 
+        cumulativeSum_[i].Y_*=sum/integral_;
+      }
+    }
+  }
+
+  exclusiveBranching_ = (sum>0.) ? exclusiveSum/sum : 0.;
 }

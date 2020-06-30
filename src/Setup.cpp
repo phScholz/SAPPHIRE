@@ -121,13 +121,13 @@ void Initialize() {
   GammaTransmissionFunc::SetEGDRType(3);
   GammaTransmissionFunc::SetMGDRType(3);
   GammaTransmissionFunc::SetEGQRType(0);
-  GammaTransmissionFunc::SetPorterThomas(true);
+  GammaTransmissionFunc::SetPorterThomas(false);
   GammaTransmissionFunc::SetGnorm(1.0);
 
   ParticleTransmissionFunc::SetAlphaFormalism(0);
   ParticleTransmissionFunc::SetNeutronFormalism(0);
   ParticleTransmissionFunc::SetProtonFormalism(0);  
-  ParticleTransmissionFunc::SetPorterThomas(true);
+  ParticleTransmissionFunc::SetPorterThomas(false);
   ParticleTransmissionFunc::SetAnorm(1.0);
   ParticleTransmissionFunc::SetPnorm(1.0);
   ParticleTransmissionFunc::SetNnorm(1.0);

@@ -33,7 +33,7 @@ namespace Module_CrossSection{
 
     bool fexists(const char *filename) {
         std::ifstream ifile(filename);
-    return (bool)ifile;
+        return (bool)ifile;
     }
 
     std::string pTypeStringFromString(std::string &reactionString){
@@ -201,9 +201,9 @@ namespace Module_CrossSection{
                     for(unsigned int i = 0; i < xs->excitationEnergies_.size(); i++){
                         pg.update(i);
                         std::cout.precision(3);
-                        sWave.at(i) = xs->CalcAverageSWaveResWidth(xs->excitationEnergies_.at(i));
-                        pWave.at(i) = xs->CalcAveragePWaveResWidth(xs->excitationEnergies_.at(i));
-	                    dWave.at(i) = xs->CalcAverageDWaveResWidth(xs->excitationEnergies_.at(i));
+                        sWave.at(i) = xs->CalcAverageSWaveResWidth(xs->excitationEnergies_.at(i), 0);
+                        pWave.at(i) = xs->CalcAveragePWaveResWidth(xs->excitationEnergies_.at(i), 0);
+	                    dWave.at(i) = xs->CalcAverageDWaveResWidth(xs->excitationEnergies_.at(i), 0);
                     }
     
                     pg.update(xs->excitationEnergies_.size());
@@ -280,6 +280,8 @@ namespace Module_CrossSection{
         CrossSection* xs = new CrossSection(Z,A,pType,energyFile,forRates,entranceState,exitStates);
         if(xs->IsValid())
         {
+            //xs->CalcEntranceWidth();
+
             if(input.CalcAverageWidth()){
                 
                 std::cout << std::endl << "Calculating average resonance widths ... " << std::endl;
@@ -295,9 +297,9 @@ namespace Module_CrossSection{
                 for(unsigned int i = 0; i < xs->excitationEnergies_.size(); i++){
                     pg.update(i);
                     std::cout.precision(3);
-                    sWave.at(i) = xs->CalcAverageSWaveResWidth(xs->excitationEnergies_.at(i));
-                    pWave.at(i) = xs->CalcAveragePWaveResWidth(xs->excitationEnergies_.at(i));
-	                dWave.at(i) = xs->CalcAverageDWaveResWidth(xs->excitationEnergies_.at(i));
+                    sWave.at(i) = xs->CalcAverageSWaveResWidth(xs->excitationEnergies_.at(i), 0);
+                    pWave.at(i) = xs->CalcAveragePWaveResWidth(xs->excitationEnergies_.at(i), 0);
+	                dWave.at(i) = xs->CalcAverageDWaveResWidth(xs->excitationEnergies_.at(i), 0);
                 }
 
                 pg.update(xs->excitationEnergies_.size());
