@@ -432,14 +432,14 @@ CompoundStates CrossSection::CalcCompoundWidth(double spin, int parity){
 
           //if the transmission coefficient is not NAN (Not A Number)
           if(!isnan(trans)){        
-            dummy.GroundStateWidth("gamma", decayer->gammaEntrance_ );
-            dummy.GroundStateWidth("neutron", decayer->neutronEntrance_ );
-            dummy.GroundStateWidth("proton", decayer->protonEntrance_ );
-            dummy.GroundStateWidth("alpha", decayer->alphaEntrance_ );
-            dummy.TotalWidth("gamma",   decayer->gammaTotalWidth_ );
-            dummy.TotalWidth("neutron", decayer->neutronTotalWidth_ );
-            dummy.TotalWidth("proton",  decayer->protonTotalWidth_ );
-            dummy.TotalWidth("alpha",   decayer->alphaTotalWidth_ );
+            dummy.GroundStateWidth("gamma", decayer->gammaEntrance_/levels );
+            dummy.GroundStateWidth("neutron", decayer->neutronEntrance_/levels );
+            dummy.GroundStateWidth("proton", decayer->protonEntrance_/levels );
+            dummy.GroundStateWidth("alpha", decayer->alphaEntrance_/levels );
+            dummy.TotalWidth("gamma",   decayer->gammaTotalWidth_/levels );
+            dummy.TotalWidth("neutron", decayer->neutronTotalWidth_/levels );
+            dummy.TotalWidth("proton",  decayer->protonTotalWidth_/levels );
+            dummy.TotalWidth("alpha",   decayer->alphaTotalWidth_/levels );
             dummy.Density(levels);
           }
 
@@ -635,7 +635,7 @@ void CrossSection::Calculate(){
       } else if(pType_==1) {
 	      compoundTransmission=neutronExitTransmission;
 	
-        if(exitStates_[1]<0||entranceState_==exitStates_[1]) {
+        if(exitStates_[1]<0 || entranceState_==exitStates_[1]) {
 	        neutronExitTransmission-=entranceTransmission;
         }
 

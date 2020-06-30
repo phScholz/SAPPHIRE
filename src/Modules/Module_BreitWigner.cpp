@@ -79,6 +79,12 @@ namespace Module_BreitWigner{
             if(xs->IsValid())
             {
                 compound = xs->CalcCompoundWidth(it->spin_, it->parity_);
+                //Setting the neutron groundstate width to the experimental value.
+                double oldGSWidth = compound.states.at(0).GroundStateWidth("neutron");
+                double oldTotalWidth = compound.states.at(0).TotalWidth("neutron");
+                compound.states.at(0).GroundStateWidth("neutron",it->width_);
+                compound.states.at(0).TotalWidth("neutron",oldTotalWidth - oldGSWidth + it->width_);
+
                 PrintCompoundStates(compound.states);
                 
                 std::cout << std::endl;
@@ -86,6 +92,8 @@ namespace Module_BreitWigner{
                           << std::setw(6) << "Energy [MeV]" << "\t"
                           << std::setw(6) << "Crosssection [b]" << "\t"
                           <<std::endl;
+
+                
 
                 for(auto erg = energies.begin(); erg != energies.end(); ++erg){
                     double bw = BW(it->width_, compound.states.at(0).TotalWidth("gamma"), compound.states.at(0).TotalWidth("all"), compound.states.at(0).Density(), it->energy_, *erg);
@@ -165,6 +173,23 @@ namespace Module_BreitWigner{
                       << std::setw(6) <<  std::scientific << "p TotalWidth" << "\t"
                       << std::setw(6) <<  std::scientific << "a TotalWidth" << "\t"                                            
                       << std::setw(6) <<  std::scientific << "TotalWidth" << "\t"
+                      << std::fixed << std::endl;
+        
+        std::cout     << std::setw(6) <<  std::fixed << "" << "\t"
+                      << std::setw(6) <<  std::fixed << "" << "\t"
+                      << std::setw(6) <<  std::fixed << "" << "\t"
+                      << std::setw(6) <<  std::fixed << "" << "\t"
+                      << std::setw(6) <<  std::fixed << "[MeV]" << "\t"
+                      << std::setw(9) <<  std::scientific << "[1/MeV]" << "\t"
+                      << std::setw(6) <<  std::scientific << "[MeV]" << "\t\t"
+                      << std::setw(6) <<  std::scientific << "[MeV]" << "\t\t"
+                      << std::setw(6) <<  std::scientific << "[MeV]" << "\t\t"
+                      << std::setw(6) <<  std::scientific << "[MeV]" << "\t\t"
+                      << std::setw(6) <<  std::scientific << "[MeV]" << "\t\t"
+                      << std::setw(6) <<  std::scientific << "[MeV]" << "\t\t"
+                      << std::setw(6) <<  std::scientific << "[MeV]" << "\t\t"
+                      << std::setw(6) <<  std::scientific << "[MeV]" << "\t\t"                                            
+                      << std::setw(6) <<  std::scientific << "[MeV]" << "\t\t"
                       << std::fixed << std::endl;
 
         for(auto it = states.begin(); it != states.end(); ++it){
