@@ -25,6 +25,22 @@ namespace Module_BreitWigner{
      */
     void CalcWidths(std::string reaction, std::string file);
 
+    /**
+     * @brief Calculate BW cross section if energyFile is given
+     * 
+     * @param reaction 
+     * @param widths 
+     * @param energies 
+     * 
+     * @todo 
+     * - Separate this method from printing to std::out
+     * - Create a write method for storing results in a file
+     * - formatting of output
+     * - create a class as container for the results
+     * - simultanously calculate HF cross section
+     * - adjusting level density
+     * - using input partial width in total width
+     */
     void CalcBreitWigner(std::string reaction, std::string widths, std::string energies);
 
     double BW(double G1, double G2, double Gtot, double density, double E1, double E);
