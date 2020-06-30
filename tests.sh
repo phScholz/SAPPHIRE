@@ -11,6 +11,8 @@ build/sapphire || echo "Sapphire test failed!"
 build/sapphire reaction || echo "Sapphire reaction test failed!"
 build/sapphire decayer || echo "Sapphire decayer test failed!"
 build/sapphire random || echo "Sapphire random test failed!"
+build/sapphire compound || echo "Sapphire compound test failed!"
+build/sapphire breitWigner || echo "Sapphire compound test failed!"
 build/sapphire gsf || echo "Sapphire gsf test failed!"
 build/sapphire nld || echo "Sapphire nld test failed!"
 build/sapphire old || echo "Sapphire old test failed!"
@@ -36,3 +38,10 @@ build/sapphire decayer examples/Decay_70Ge/decayer.ini || echo "Sapphire decayer
 #Reaction Module Test
 build/sapphire reaction examples/Reaction_N50/reaction.ini || echo "Sapphire reaction_test_0 failed!"
 build/sapphire reaction examples/Reaction_N50/avgWidth.ini || echo "Sapphire reaction_test_1 failed!"
+
+#Compound Module Test
+build/sapphire compound 94Sr+n || echo "Sapphire compound_test_0 failed!"
+build/sapphire compound 94Sr+n 3/2- || echo "Sapphire compound_test_1 failed!"
+
+#BreitWigner Module Test
+build/sapphire breitWigner 94Sr+n examples/BetaNeutron/95Sr_partialWidths.dat examples/BetaNeutron/energyFile.dat  || echo "Sapphire breitWigner_test_0 failed!"
