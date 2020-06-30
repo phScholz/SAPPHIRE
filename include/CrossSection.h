@@ -241,6 +241,8 @@ class CrossSection {
 public:
   std::vector<double> excitationEnergies_;
   std::vector<double> beamEnergies_;
+
+  double PreFactor() const {return preFactor_;} /**< Getter for preFactor*/
   
 
  private:

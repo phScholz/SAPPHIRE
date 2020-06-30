@@ -101,9 +101,28 @@ namespace Module_Compound{
      */
     int massNumberIntFromString(std::string &isotopeString);
 
+    /**
+     * @brief Get the spin as double from a jPiString
+     * 
+     * @param jpi A string of a state, e.g. 3/2+
+     * @return the spin as a double
+     */
     double spinDoubleFromString(std::string &jpi);
 
+    /**
+     * @brief Get the parity as integer from a jPiString
+     * 
+     * @param jpi A string of a state, e.g. 3/2+
+     * @return the parity as a integer
+     */
     int parityIntFromString(std::string &jpi);
 
+    /**
+     * @brief Parse a jPiString for spin and parity.
+     * 
+     * @param spin 
+     * @param parity 
+     * @param jPiString 
+     */
     void parseJPiString(double & spin, int & parity, std::string & jPiString);
 }
