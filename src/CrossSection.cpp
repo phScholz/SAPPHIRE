@@ -119,13 +119,13 @@ void CrossSection::CheckChannels(){
 	      std::string parity = (levels[exitStates_[i]].Pi_<0) ? "-" : "+";
 	      
         if(i==0) std::cout      << "  Gamma residual state:  E = " << levels[exitStates_[i]].energy_ 
-			                          << " MeV J=" << levels[exitStates_[i]].J_ << parity << std::endl;
+			                          << " MeV | J = " << levels[exitStates_[i]].J_ << parity << std::endl;
 	      else if(i==1) std::cout << "Neutron residual state:  E = " << levels[exitStates_[i]].energy_ 
-			                          << " MeV J=" << levels[exitStates_[i]].J_ << parity << std::endl;
+			                          << " MeV | J = " << levels[exitStates_[i]].J_ << parity << std::endl;
 	      else if(i==2) std::cout << " Proton residual state:  E = " << levels[exitStates_[i]].energy_ 
-			                          << " MeV J=" << levels[exitStates_[i]].J_ << parity << std::endl;
+			                          << " MeV | J = " << levels[exitStates_[i]].J_ << parity << std::endl;
 	      else if(i==3) std::cout << "  Alpha residual state:  E = " << levels[exitStates_[i]].energy_ 
-			                          << " MeV J = " << levels[exitStates_[i]].J_ << parity << std::endl << std::endl;
+			                          << " MeV | J = " << levels[exitStates_[i]].J_ << parity << std::endl << std::endl;
       }
     }
   }
