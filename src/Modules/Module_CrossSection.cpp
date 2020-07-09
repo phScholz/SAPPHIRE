@@ -180,7 +180,7 @@ namespace Module_CrossSection{
 
         
         for(it = std::begin(entrancePairs); it != std::end(entrancePairs); ++it){
-            CrossSection* xs = new CrossSection(it->Z_,it->A_, it->pType_,input.EnergyFile(),input.CalcRates());
+            CrossSection* xs = new CrossSection(it->Z_,it->A_, it->pType_,input.EnergyFile(),input.CalcRates(), input.EntranceState(), exitStates);
             if(xs->IsValid())
             {
                 if(input.CalcAverageWidth()){
