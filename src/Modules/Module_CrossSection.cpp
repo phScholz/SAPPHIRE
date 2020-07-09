@@ -126,7 +126,7 @@ namespace Module_CrossSection{
 	        std::cout << "Could not open " << reactionFile << " for reading." << std::endl;
 	        exit(1);
         } else {
-	        std::cout << "Reading nuclei from " << reactionFile << ".::" << std::endl << std::endl;
+	        std::cout << "Reading nuclei from " << reactionFile << " " << std::endl << std::endl;
 
 	    while(!in.eof()) {
             int Z,A,pType =0;
@@ -170,10 +170,7 @@ namespace Module_CrossSection{
         exitStates[0]=input.g_ExitStates();
         exitStates[1]=input.n_ExitStates();
         exitStates[2]=input.p_ExitStates();
-        exitStates[3]=input.a_ExitStates();        
-
-        
-
+        exitStates[3]=input.a_ExitStates();      
         
         std::vector<EntrancePairs> entrancePairs;
         readEntrancePairs(&entrancePairs,input.ReactionFile());
@@ -226,7 +223,7 @@ namespace Module_CrossSection{
                     }
                 }
 
-                std::cout << std::endl << std::endl << "Calculating for Z: " << it->Z_ << " A: " << it->A_ << " and Particle Type: " << it->pType_ << std::endl;
+                std::cout << "Calculating for Z: " << it->Z_ << " A: " << it->A_ << " and Particle Type: " << it->pType_ << std::endl;
                 
                 if(input.CalcXS()) xs->Calculate();
                 if(input.CalcXS() && input.PrintXs()) xs->PrintCrossSections();
