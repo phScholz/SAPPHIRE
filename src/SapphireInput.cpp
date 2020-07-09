@@ -280,6 +280,11 @@
         SapphireInput::ResidualProton(pt.get<bool>("CrossSection.ResidualProton", SapphireInput::ResidualProton()));
         SapphireInput::ResidualAlpha(pt.get<bool>("CrossSection.ResidualAlpha", SapphireInput::ResidualAlpha()));
         SapphireInput::CalculateGammaCutoff(pt.get<bool>("CrossSection.CalculateGammaCutoff", SapphireInput::CalculateGammaCutoff()));
+        SapphireInput::EntranceState(pt.get<int>("CrossSection.EntranceState", SapphireInput::EntranceState()));
+        SapphireInput::g_ExitStates(pt.get<int>("CrossSection.g_ExitStates", SapphireInput::g_ExitStates()));
+        SapphireInput::n_ExitStates(pt.get<int>("CrossSection.n_ExitStates", SapphireInput::n_ExitStates()));
+        SapphireInput::p_ExitStates(pt.get<int>("CrossSection.p_ExitStates", SapphireInput::p_ExitStates()));
+        SapphireInput::a_ExitStates(pt.get<int>("CrossSection.a_ExitStates", SapphireInput::a_ExitStates()));
         SapphireInput::PrintXs(pt.get<bool>("CrossSection.PrintXS", SapphireInput::PrintXs()));
         SapphireInput::PrintTrans(pt.get<bool>("CrossSection.PrintTRANS", SapphireInput::PrintTrans()));
         SapphireInput::PrintRate(pt.get<bool>("CrossSection.PrintRATES", SapphireInput::PrintRate()));
