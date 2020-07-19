@@ -9,6 +9,7 @@ option(MPI_BUILD "Build Sapphire for MPI simulations. Note: Cross section calcul
 option(USE_GCOV "Create a GCov-enabled build." ON)
 option(BUILD_DOC "Build documentation" ON)
 
+set(CMAKE_CXX_COMPILER g++)
 
 if (GSL_PATH)
 set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${GSL_PATH})
