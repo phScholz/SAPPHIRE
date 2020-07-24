@@ -30,3 +30,11 @@ generated/
 src/Makefile
 src/cmake_install.cmake
 
+#testing
+googletest-prefix
+generated/
+unit_test/
+external/
+
+tst/cmake_install.cmake
+cmake_install.cmake
