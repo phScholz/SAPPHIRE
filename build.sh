@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 ######################################################
 ## @file build.sh
 ## @author Philipp Scholz <pscholz@outlook.de>
@@ -15,5 +15,5 @@
 cd ./build
 
 #run cmake and if sucessfull run make install 
-cmake .. && make install
+cmake .. && make -j8 && make install
 
