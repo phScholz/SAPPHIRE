@@ -7,7 +7,7 @@ set(Sapphire_SOURCES ${Sapphire_SOURCES} Decayer/Decayer.cpp Decayer/DecayResult
 set(Sapphire_SOURCES ${Sapphire_SOURCES} CrossSection.cpp SapphireInput.cpp CoulFunc.cpp TransitionRateFunc.cpp Sapphire.cpp Setup.cpp ParticleHoleLevelDensity.cpp PreEqTransitionRateFunc.cpp SapphireMPITypes.cpp RandomScheme.cpp)
 
 include_directories(${Sapphire_SOURCE_DIR}/include)
-
+message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 add_executable (sapphire ${Sapphire_SOURCES})
 
 target_link_libraries (sapphire ${GSL_LIBRARIES} ${ROOT_LIBRARIES} ${Boost_LIBRARIES} ${EXTRA_LIBS})

@@ -10,16 +10,17 @@ option(USE_GCOV "Create a GCov-enabled build." ON)
 option(BUILD_DOC "Build documentation" ON)
 
 set(CMAKE_CXX_COMPILER g++)
-
-set(CMAKE_CXX_COMPILER_VERSION "8.3.0")
+#set(CMAKE_CXX_COMPILER_VERSION "8.3.0")
 
 message("CMAKE_CXX_COMPILER_ID     : ${CMAKE_CXX_COMPILER_ID}")
 message("CMAKE_CXX_COMPILER_VERSION: ${CMAKE_CXX_COMPILER_VERSION}")
+message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 
 if (GSL_PATH)
 set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${GSL_PATH})
 set(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${GSL_PATH})
 endif (GSL_PATH) 
+message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 
 #Set the C++ standard to c++11
 set (CMAKE_CXX_STANDARD 11)
@@ -32,6 +33,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lm")
 
 #Set compilation warnings
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall ")
+
+message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 
 # Code Coverage Configuration
 add_library(coverage_config INTERFACE)
@@ -68,15 +71,18 @@ find_package (ROOT REQUIRED)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ROOT_CXX_FLAGS}")
 include_directories(${ROOT_INCLUDE_DIR})
 link_directories(${ROOT_LIBRARY_DIR})
+message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 
 add_definitions(-DMPI_BUILD)
 message("Checking if Boost can be found ...")
 FIND_PACKAGE(Boost REQUIRED)
 INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
+message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 
 message("Checking if OpenMP can be found ...")
 find_package(OpenMP REQUIRED)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 
 include_directories(${Sapphire_SOURCE_DIR}/coul/include)
 add_subdirectory (coul)
@@ -103,7 +109,7 @@ add_subdirectory(src)
     message("Doxygen build started")
  
      # note the option ALL which allows to build the docs together with the application
-   add_custom_target(doc_doxygen ALL
+      add_custom_target(doc_doxygen ALL
        COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
      COMMENT "Generating API documentation with Doxygen"
@@ -111,5 +117,7 @@ add_subdirectory(src)
  else (DOXYGEN_FOUND)
    message("Doxygen need to be installed to generate the doxygen documentation")
  endif (DOXYGEN_FOUND)
+
+ message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 
 message("Done")
