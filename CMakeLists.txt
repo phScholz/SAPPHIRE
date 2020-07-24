@@ -1,6 +1,6 @@
 #CMakeLists.txt
 
-cmake_minimum_required (VERSION 3.1)
+cmake_minimum_required(VERSION 3.1)
 project (Sapphire)
 message("Using CMAKE version ${CMAKE_VERSION}")
 
@@ -10,7 +10,7 @@ option(USE_GCOV "Create a GCov-enabled build." ON)
 option(BUILD_DOC "Build documentation" ON)
 
 set(CMAKE_CXX_COMPILER g++)
-set(CMAKE_CXX_COMPILER_VERSION "8.3.0")
+#set(CMAKE_CXX_COMPILER_VERSION "8.3.0")
 
 message("CMAKE_CXX_COMPILER_ID     : ${CMAKE_CXX_COMPILER_ID}")
 message("CMAKE_CXX_COMPILER_VERSION: ${CMAKE_CXX_COMPILER_VERSION}")
