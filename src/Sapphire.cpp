@@ -26,7 +26,7 @@
 
 #include "GammaStrength/D1MQRPA.h"
 #include <iostream>
-
+#include <omp.h>
 extern void Initialize();
 
 /**
@@ -62,6 +62,8 @@ void PrintHelp(){
  * @param argv Array of cmd line parameters. 
  */
 int main(int argc, char *argv[]) {
+  omp_set_num_threads(10);
+  
   //Only for testing
   //Initialize();
   //D1MQRPA * func =new  D1MQRPA(20,40, 0, 1, 1, 1, 2, 0,0,0, nullptr);
