@@ -15,7 +15,7 @@
  * Now there are new includes which differ from the original version
  */
 #include "Modules/Module_CrossSection.h"
-#include "Modules/Module_OldSapphire.h"
+//#include "Modules/Module_OldSapphire.h"
 #include "Modules/Module_Decayer.h"
 #include "Modules/Module_RandomScheme.h"
 #include "Modules/Module_GSF.h"
@@ -48,8 +48,8 @@ void PrintHelp(){
   std::cout << "\tcompound      - Calculating decay widths of compound states" << std::endl;
   std::cout << "\tbreitWigner   - Calculate BreitWigner Cross Sections from partial Widths" << std::endl;
   std::cout << std::endl;
-  std::cout << "\told           - Instruction for the old Sapphire code. (not supported anymore)" << std::endl;
-	std::cout << std::endl;
+  //std::cout << "\told           - Instruction for the old Sapphire code. (not supported anymore)" << std::endl;
+	//std::cout << std::endl;
   std::cout << "\thelp          - Show this help message." << std::endl;
   std::cout << "\ttemplate      - Print template input file." << std::endl;
 	std::cout << std::endl;
@@ -110,9 +110,9 @@ int main(int argc, char *argv[]) {
   else if (mode == "breitWigner"){
     Module_BreitWigner::Go(argc,argv);
   }
-  else if (mode == "old"){
-    Module_OldSapphire::Go(argc, argv);
-  }
+  //else if (mode == "old"){
+  //  Module_OldSapphire::Go(argc, argv);
+  //}
   else if (mode == "gsf"){
     Module_GSF::Go(argc, argv);
   }
