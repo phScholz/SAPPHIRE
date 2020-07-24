@@ -23,13 +23,13 @@ endif (GSL_PATH)
 message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 
 #Set the C++ standard to c++17
-set (CMAKE_CXX_STANDARD 17)
+#set (CMAKE_CXX_STANDARD 17)
 
 #Set optimization to 3
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 
 #Set c++standard explicitly
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
 #Explicitly setting link to math
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lm")
