@@ -30,6 +30,7 @@
 
 namespace Module_CrossSection{
  
+    bool verbose = false;
 
     bool fexists(const char *filename) {
         std::ifstream ifile(filename);
@@ -244,6 +245,11 @@ namespace Module_CrossSection{
     
 
     void RunSingleReaction(const SapphireInput & input){
+        if(verbose)
+        {
+            std::cout << std::endl << "[DEBUG] !!! Running a Single Reaction with Sapphire Input !!!" << std::endl;
+        } 
+
         std::cout<< std::endl << "Starting calculations for reaction ... " << input.Reaction() << std::endl << std::endl;
         input.SetInputCrossSection();
         input.SetInputDecayer();
@@ -338,8 +344,16 @@ namespace Module_CrossSection{
     }
 
     void RunSingleReaction(std::string &reactionString){
+        if(verbose){
+            std::cout << std::endl << "[DEBUG] !!! Using " << reactionString << " as input for reaction and starting single reaction calculation !!!" << std::endl;
+        }
+
         /** This method will invoke a cross section calculation for a reaction given as reactionString .*/
         
+        if(verbose){
+            std::cout << std::endl << "[DEBUG] !!! Initializing: reactionString, A, Z, pType, energyFile, forRates, entranceState, exitStates !!!" << std::endl;
+        }
+
         std::string reaction=reactionString;
         int A = massNumberIntFromString(reactionString);
         int Z = atomicNumberIntFromString(reactionString);
@@ -349,16 +363,31 @@ namespace Module_CrossSection{
         int entranceState = 0;
         std::vector<int> exitStates(4,-1);
 
+        if(verbose){
+            std::cout << std::endl << "[DEBUG] !!! Initializing: CrossSection object !!!" << std::endl;
+        }
+
         CrossSection* xs = new CrossSection(Z,A,pType,energyFile,forRates,entranceState,exitStates);
+       
+        if(verbose){
+            std::cout << std::endl << "[DEBUG] !!! Checking whether the CrossSection object is valid or not !!!" << std::endl;
+        }
 
         if(xs->IsValid())
         {   
+            if(verbose){
+                std::cout << std::endl << "[DEBUG] !!! It's valid !!!" << std::endl;
+            }
+
             std::cout << "Calculate cross section for reaction: " << reaction << std::endl;
             xs->Calculate();
             xs->PrintCrossSections();
         }
         else
         {
+            if(verbose){
+                std::cout << std::endl << "[DEBUG] !!! It's not valid !!!" << std::endl;
+            }
             std::cout << "Could not calculate cross section." << std::endl;    
         }            
         delete xs;
@@ -373,14 +402,30 @@ namespace Module_CrossSection{
         /** It'll be checked, whether enough cmd line parameters are given, otherwise the printHelp() method is called. */
         if(argc < 3){
             printHelp();
-            exit(0);
+            exit(1);
         }
+        
+        if(verbose)
+        {
+            std::cout << std::endl << "[DEBUG] !!! Check whether a file exists for the second argument !!!" << std::endl;
+        }
+
         /** If enough cmd line parameters are given, then it'll be checked if the inputFile given is an actual file.*/
-        if(fexists(argv[2])){              
+        if(fexists(argv[2])){   
+            if(verbose)
+            {
+                std::cout << std::endl << "[DEBUG] !!! It seems like its a file !!!" << std::endl;
+            }           
             /** If the inputFile can be found, a SapphireInput object is created, the inputFile will be printed out
             * via SapphireInput::printInputFile() and the content will be read into the SapphireInput object via
             * SapphireInput::ReadInputFile().
             */
+
+            if(verbose)
+            {
+                std::cout << std::endl << "[DEBUG] !!! Trying to read input file !!!" << std::endl;
+            }
+
             SapphireInput Input;    
             std::string str(argv[2]);
             Input.PrintIntputFile(str);
@@ -407,6 +452,10 @@ namespace Module_CrossSection{
                      
         }
         else{
+            if(verbose)
+            {
+                std::cout << std::endl << "[DEBUG] !!! It seems like its not a file !!!" << std::endl;
+            } 
             /** If no regular inputFile is given in the first place, the code assumes that the cmd line parameter is a
             * reactionString. In this case RunSingleReaction will be called by passing the cmd line parameter.*/
             std::string reactionString(argv[2]);

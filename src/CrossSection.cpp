@@ -48,7 +48,6 @@ CrossSection::CrossSection(SapphireInput & input):
 
 bool CrossSection::FindInitialState(){
   /** The groundState is set to -1.*/
-  //std::cout << "Find initial state ..." <<std::endl;
   groundStateJ_ =-1.;
   
   /** The levels of the target nucleus are read via the NuclearLevels::FindLevels() method into a std::vector<Level>*/
@@ -76,7 +75,7 @@ bool CrossSection::FindInitialState(){
 }
 
 void CrossSection::CheckChannels(){
-  if (verbose_) std::cout << "Checking channels ..." <<std::endl;
+  
   for(int i =0;i<exitStates_.size();i++) {
     if(exitStates_[i]>=0) {
       std::vector<Level> levels;  
@@ -132,19 +131,24 @@ void CrossSection::CheckChannels(){
 }
 
 bool CrossSection::PreSetCompound(){
-  if(verbose_) std::cout << "Pre set compound ..." <<std::endl;
+  
   if(pType_ == 0) {
+    if(verbose_) std::cout << std::endl << "pType_ == 0 ..." <<std::endl;
     qValue_=0.;
     compoundZ_ = Z_;
     compoundA_ = A_;
     double spinNorm=2.*(2.*groundStateJ_+1.); 
     preFactor_=hbarc*hbarc/100.*pi/spinNorm;
-  } else if(pType_ == 1) {
-    
+  } 
+
+  else if(pType_ == 1) {
+    if(verbose_) std::cout << std::endl << "pType_ == 1 ..." <<std::endl;
     if(!NuclearMass::QValue(Z_,A_+1,Z_,A_,qValue_)) {
+      if(verbose_) std::cout << std::endl << "!!! Looking up QValue failed !!!" << std::endl;
       isValid_=false;
       return false;
     }
+    if(verbose_) std::cout << std::endl << "!!! Looking up QValue succeeded !!!" << std::endl;
     compoundZ_ = Z_;
     compoundA_ = A_+1;
     double reducedMass =double(A_)/double(A_+1);
@@ -152,11 +156,13 @@ bool CrossSection::PreSetCompound(){
     preFactor_ = hbarc*hbarc/200.*pi/uconv/reducedMass/spinNorm;
   
   } else if(pType_ == 2) {
-    
+    if(verbose_) std::cout << std::endl << "pType_ == 2 ..." <<std::endl;
     if(!NuclearMass::QValue(Z_+1,A_+1,Z_,A_,qValue_)) {
+      if(verbose_) std::cout << std::endl << "!!! Looking up QValue failed !!!" << std::endl;
       isValid_=false;
       return false;
     }
+    if(verbose_) std::cout << std::endl << "!!! Looking up QValue succeeded !!!" << std::endl;
     compoundZ_ = Z_+1;
     compoundA_ = A_+1;
     double reducedMass=double(A_)/double(A_+1);
@@ -164,23 +170,25 @@ bool CrossSection::PreSetCompound(){
     preFactor_ = hbarc*hbarc/200.*pi/uconv/reducedMass/spinNorm;
   
   } else if(pType_ ==3) {
-    
+    if(verbose_) std::cout << std::endl << "pType_ == 3 ..." <<std::endl;
     if(!NuclearMass::QValue(Z_+2,A_+4,Z_,A_,qValue_)) {
+      if(verbose_) std::cout << std::endl << "!!!Looking up QValue failed!!!" << std::endl;
       isValid_=false;
       return false;
     }
-  
+    if(verbose_) std::cout << std::endl << "!!! Looking up QValue succeeded !!!" << std::endl;
     compoundZ_ = Z_+2;
     compoundA_ = A_+4;
     double reducedMass=double(A_)*4./double(A_+4);
     double spinNorm=(2.*groundStateJ_+1.);
     preFactor_ = hbarc*hbarc/200.*pi/uconv/reducedMass/spinNorm;
   }
-  
+
+  if(verbose_) std::cout << std::endl << "!!! Done with setting up compound !!!" << std::endl;
+  return true;  
 }
 
 void CrossSection::InitializeSeperationEnergies(){
-  if(verbose_) std::cout << "Initialize seperation energies ..." <<std::endl;
   /*The levels of the target nucleus are read via the NuclearLevels::FindLevels() method into a std::vector<Level>*/
   std::vector<Level> knownLevels = NuclearLevels::FindLevels(Z_,A_);
   seperationEnergy_ = -qValue_+knownLevels[entranceState_].energy_;
@@ -194,13 +202,17 @@ CrossSection::CrossSection(int Z, int A, int pType, std::string energyFile, bool
   Z_(Z), A_(A), pType_(pType), skipEnergy_(1000.), entranceState_(entranceState), exitStates_(exitStates) {
 
   isValid_=true;
-  
+
+  if(verbose_) std::cout << std::endl << "[CrossSection] Find Initial State ..." <<std::endl;
   if(!FindInitialState()) return;
   
+  if(verbose_) std::cout << std::endl << "[CrossSection] Pre set compound ..." <<std::endl;
   PreSetCompound();
 
+  if(verbose_) std::cout << "[CrossSection] Initialize seperation energies ..." <<std::endl;
   InitializeSeperationEnergies();
 
+  if (verbose_) std::cout << "[CrossSection] Checking channels ..." <<std::endl;
   CheckChannels();  
 
   if(forRates) CalcPartitionFunc();

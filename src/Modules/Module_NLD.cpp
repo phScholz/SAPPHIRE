@@ -18,7 +18,7 @@ namespace Module_NLD{
         if(argc < 4){
             std::cout << std::endl << "Not enough input parameters ..." << std::endl;
             PrintHelp();
-            exit(1);
+            exit(0);
         }
 
         std::string isotope(argv[2]);

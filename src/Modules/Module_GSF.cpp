@@ -15,7 +15,7 @@ namespace Module_GSF{
         if(argc < 6){
             std::cout << std::endl << "Not enough input parameters ..." << std::endl;
             PrintHelp();
-            exit(1);
+            exit(0);
         }
 
         std::string isotope(argv[2]);

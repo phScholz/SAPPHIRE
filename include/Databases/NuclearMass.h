@@ -200,6 +200,7 @@ class NuclearMass {
   static double CalculateLDMMass(int Z,int A);
 
  private:
+  static const bool verbose_ = false;
   static MassTable massTable_; /**< Map of MassKey and MassEntry*/
   static ElementTable elementTable_; /**< Map of atomic number and element symbol*/
 };

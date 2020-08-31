@@ -23,7 +23,7 @@ namespace Module_Compound{
         if(argc < 4){
             std::cout << std::endl << "Not enough input parameters ..." << std::endl;
             PrintHelp();
-            exit(1);
+            exit(0);
         }
 
         std::string reaction(argv[2]);

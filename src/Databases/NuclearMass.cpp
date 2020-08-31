@@ -87,6 +87,7 @@ std::string NuclearMass::FindElement(int Z) {
 }
 
 bool NuclearMass::FindMass(int Z, int A, double& M) {
+  if(verbose_) std::cout << std::endl << "FindMass started .. " << std::endl;
   M = 0.;
   MassTable::const_iterator it = massTable_.find(MassKey(Z,A));
   if(it!=massTable_.end()) {
@@ -112,17 +113,20 @@ bool NuclearMass::MassDifference(int Z1, int A1,
 double NuclearMass::MassDifference(int Z1, int A1, 
 				 int Z2, int A2) {
   double M1,M2;
+  if(verbose_) std::cout << std::endl << "MassDifference calculation started .. " << std::endl;
   if(!FindMass(Z1,A1,M1)) throw std::invalid_argument( "Cannot find M1");
   if(!FindMass(Z2,A2,M2)) throw std::invalid_argument( "Cannot find M1");
     return M1-M2;
 }
 
 bool NuclearMass::QValue(int Z1, int A1, int Z2, int A2, double &qValue) {
+  if(verbose_) std::cout << std::endl << "QValue calculation started .. " << std::endl;
   double massDifference;
   double decayMass;
   if(!MassDifference(Z1,A1,Z2,A2,massDifference)) return false;
   if(!FindMass(Z1-Z2,A1-A2,decayMass)) return false;
   qValue = massDifference-decayMass;
+  if(verbose_) std::cout << std::endl << "QValue is "<< qValue << "" << std::endl;
   return true;
 }
 

@@ -23,7 +23,7 @@ namespace Module_BreitWigner{
         if(argc < 3){
             std::cout << std::endl << "Not enough input parameters ..." << std::endl;
             PrintHelp();
-            exit(1);
+            exit(0);
         }
 
         if(argc == 4){
