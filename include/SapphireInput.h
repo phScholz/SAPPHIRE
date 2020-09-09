@@ -242,6 +242,7 @@ class SapphireInput{
         void Anorm(double x){aNorm=x;}                        /**<Setter for aNorm*/  
 
 
+        void OutputDir(std::string x){outputDir=x;}           /**< Setter for outputDir*/
         void EnergyFile(std::string x){energyFile=x;}                       /**< Setter for string energyFile*/
         void Energies(std::string x){energies=x;}                       /**< Setter for string energies*/
         void ReactionFile(std::string x){reactionFile=x;}                   /**< Setter for string reactionFile*/
@@ -332,6 +333,7 @@ class SapphireInput{
         double Nnorm() const {return nNorm;}                         /**<Getter for nNorm*/
         double Anorm() const {return aNorm;}                         /**<Getter for aNorm*/
 
+        std::string OutputDir() const { return outputDir;}              /**<Getter for outputDir*/
         std::string EnergyFile() const {return energyFile;}            /**<Getter for energyFile*/ 
         std::string Energies() const {return energies;}            /**<Getter for energies*/ 
         std::string ReactionFile() const {return reactionFile;}        /**<Getter for reactionFile*/
@@ -416,6 +418,7 @@ class SapphireInput{
         double nNorm;              /**< double for the normalization of the neutron transmission coefficent.*/
         double aNorm;              /**< double for the normalization of the alpha transmission coefficent.*/
                 
+        std::string outputDir;      /**< String with the path to the output directory*/
         std::string energyFile;     /**< String with the path to the energyFile*/
         std::string reactionFile;   /**< String with the path to the reactionFile*/
         std::string reaction;         /**< String for reaction*/

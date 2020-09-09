@@ -27,8 +27,9 @@
 #include <sstream>
 #include <stdexcept>
 #include <vector>
+#include <boost/filesystem.hpp>
 
-
+    namespace fs = boost::filesystem;
     extern std::string sourceDirectory();
    
     SapphireInput::SapphireInput(){
@@ -42,6 +43,8 @@
     void SapphireInput::Initialize(){
         /** Setting default configurations for the SapphireInput class. */
         std::cout << "Setting default values..." << std::endl;
+        std::string path(fs::current_path().string());
+        SapphireInput::OutputDir(path +"/output/");
         SapphireInput::exitStates = std::vector<int>(4,-1);
         SapphireInput::g_ExitStates(-1);
         SapphireInput::n_ExitStates(-1);
@@ -147,6 +150,7 @@
         std::cout << std::endl;
 
         std::cout << "[General]" << std::endl;
+        std::cout << "\tOutputDir            = "             << SapphireInput::OutputDir() << std::endl;
         std::cout << "\tMassTable            = "             << SapphireInput::MassTable() << std::endl;
         std::cout << "\tGDRParams            = "             << SapphireInput::GdrParams() << std::endl;
         std::cout << "\tLeveldir             = "             << SapphireInput::LevelDir() << std::endl;
@@ -242,6 +246,7 @@
         }
 
         //Reading General Input
+        SapphireInput::OutputDir(pt.get<std::string>("General.OutputDir", SapphireInput::OutputDir()));
         SapphireInput::MassTable(pt.get<std::string>("General.MassTable", SapphireInput::MassTable()));
         SapphireInput::GdrParams(pt.get<std::string>("General.GDRParams", SapphireInput::GdrParams()));
         SapphireInput::LevelDir(pt.get<std::string>("General.LevelDir", SapphireInput::LevelDir()));
@@ -439,6 +444,7 @@
         CrossSection::SetResidualAlpha(ResidualAlpha());
         CrossSection::NLDmodel(LevelDensity());
         CrossSection::SetCalculateGammaCutoff(CalculateGammaCutoff());
+        CrossSection::OutputDir(OutputDir());
         Decayer::SetCrossSection(true);
     }
 
