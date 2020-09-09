@@ -78,7 +78,7 @@ message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 
 add_definitions(-DMPI_BUILD)
 message("Checking if Boost can be found ...")
-FIND_PACKAGE(Boost 1.72 COMPONENTS filesystem random REQUIRED)
+FIND_PACKAGE(Boost 1.65 COMPONENTS filesystem random REQUIRED)
 INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
 message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 
