@@ -921,7 +921,7 @@ void printHelp() {
 
         int numDecayed = 0; /** Initialize the counting of decays.*/
         DecayResults* results = NULL;
-        if(events>1) results = new DecayResults(Z,A,J,Pi,lowEnergy,highEnergy,suffixNo);
+        if(events>1) results = new DecayResults(Z,A,J,Pi,lowEnergy,highEnergy,suffixNo, "./output/");
         
         
         omp_lock_t writelock;

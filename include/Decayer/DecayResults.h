@@ -28,7 +28,7 @@ class DecayResults {
   * @param energyHigh upper limit of initial energy
   * @param suffixNo Suffix Number for outputfile
   */
-  DecayResults(int Z, int A, double J, int Pi, double energyLow, double energyHigh, int suffixNo);
+  DecayResults(int Z, int A, double J, int Pi, double energyLow, double energyHigh, int suffixNo, std::string outputDir);
 
   /**
   * @brief Constructor for DecayResults for the decay of a distribution
@@ -73,6 +73,7 @@ private:
   void CreateHists();
 
  private:
+  std::string outputDir_;
   int initialZ_;
   int initialA_;
   int initialPi_;

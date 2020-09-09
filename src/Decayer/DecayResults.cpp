@@ -33,8 +33,8 @@ DecayResults::DecayResults(int Z, int A, double initialEnergyLow, double initial
   CreateBranches();
 }
 
-DecayResults::DecayResults(int Z, int A, double J, int Pi, double initialEnergyLow, double initialEnergyHigh, int suffixNo) :
-                          initialZ_(Z),initialA_(A),initialPi_(Pi),initialJ_(J), initialEnergyLow_(initialEnergyLow), initialEnergyHigh_(initialEnergyHigh) {
+DecayResults::DecayResults(int Z, int A, double J, int Pi, double initialEnergyLow, double initialEnergyHigh, int suffixNo, std::string outputDir) :
+                          initialZ_(Z),initialA_(A),initialPi_(Pi),initialJ_(J), initialEnergyLow_(initialEnergyLow), initialEnergyHigh_(initialEnergyHigh), outputDir_(outputDir) {
   
   std::string filename = CreateFileName(suffixNo);
 
@@ -139,10 +139,12 @@ std::string DecayResults::CreateFileName(int suffixNo){
     
     if(suffixNo!=0) {
       if(initialEnergyLow_==initialEnergyHigh_){
-        sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,suffixNo);
+        std::string outputString(outputDir_+"Sapphire_%d%s_J=%s_E=%.3f_%d.root");
+        sprintf(filename,outputString.c_str(), initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,suffixNo);
       }
       else{
-        sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f-%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,initialEnergyHigh_,suffixNo);
+        std::string outputString(outputDir_+"Sapphire_%d%s_J=%s_E=%.3f-%.3f_%d.root");
+        sprintf(filename,outputString.c_str(), initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,initialEnergyHigh_,suffixNo);
       }
     } 
     else
@@ -155,22 +157,26 @@ std::string DecayResults::CreateFileName(int suffixNo){
         {
 	        if(initialEnergyLow_==initialEnergyHigh_)
           {
-	          sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_);
+            std::string outputString(outputDir_+"Sapphire_%d%s_J=%s_E=%.3f.root");
+	          sprintf(filename,outputString.c_str(), initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_);
           }
 	        else
           {
-            sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f-%.3f.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,initialEnergyHigh_);
+            std::string outputString(outputDir_+"Sapphire_%d%s_J=%s_E=%.3f-%.3f.root");
+            sprintf(filename,outputString.c_str(), initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,initialEnergyHigh_);
           }
         } 
         else
         {
 	        if(initialEnergyLow_==initialEnergyHigh_)
           {
-            sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,i+1);
+            std::string outputString(outputDir_+"Sapphire_%d%s_J=%s_E=%.3f_%d.root");
+            sprintf(filename,outputString.c_str(), initialA_,NuclearMass::FindElement(initialZ_).c_str(), spin,initialEnergyLow_,i+1);
           }	
           else
           {
-            sprintf(filename,"output/Sapphire_%d%s_J=%s_E=%.3f-%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(),spin,initialEnergyLow_,initialEnergyHigh_,i+1);
+            std::string outputString(outputDir_+"Sapphire_%d%s_J=%s_E=%.3f-%.3f_%d.root");
+            sprintf(filename,outputString.c_str(), initialA_,NuclearMass::FindElement(initialZ_).c_str(),spin,initialEnergyLow_,initialEnergyHigh_,i+1);
           }
         }
 
@@ -191,10 +197,12 @@ std::string DecayResults::CreateFileName(int suffixNo){
     
     if(suffixNo!=0) {
       if(initialEnergyLow_==initialEnergyHigh_){
-        sprintf(filename,"output/Sapphire_%d%s_E=%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,suffixNo);
+        std::string outputString(outputDir_+"Sapphire_%d%s_E=%.3f_%d.root");
+        sprintf(filename,outputString.c_str(), initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,suffixNo);
       }
       else{
-        sprintf(filename,"output/Sapphire_%d%s_E=%.3f-%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,initialEnergyHigh_,suffixNo);
+        std::string outputString(outputDir_+"Sapphire_%d%s_E=%.3f-%.3f_%d.root");
+        sprintf(filename,outputString.c_str(), initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,initialEnergyHigh_,suffixNo);
       }
     } 
     else
@@ -207,22 +215,26 @@ std::string DecayResults::CreateFileName(int suffixNo){
         {
 	        if(initialEnergyLow_==initialEnergyHigh_)
           {
-	          sprintf(filename,"output/Sapphire_%d%s_E=%.3f.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_);
+            std::string outputString(outputDir_+"Sapphire_%d%s_E=%.3f.root");
+	          sprintf(filename,outputString.c_str(), initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_);
           }
 	        else
           {
-            sprintf(filename,"output/Sapphire_%d%s_E=%.3f-%.3f.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,initialEnergyHigh_);
+            std::string outputString(outputDir_+"Sapphire_%d%s_E=%.3f-%.3f.root");
+            sprintf(filename,outputString.c_str(), initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,initialEnergyHigh_);
           }
         } 
         else
         {
 	        if(initialEnergyLow_==initialEnergyHigh_)
           {
-            sprintf(filename,"output/Sapphire_%d%s_E=%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,i+1);
+            std::string outputString(outputDir_+"Sapphire_%d%s_E=%.3f_%d.root");
+            sprintf(filename,outputString.c_str(), initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,i+1);
           }	
           else
           {
-            sprintf(filename,"output/Sapphire_%d%s_E=%.3f-%.3f_%d.root", initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,initialEnergyHigh_,i+1);
+            std::string outputString(outputDir_+"Sapphire_%d%s_E=%.3f-%.3f_%d.root");
+            sprintf(filename,outputString.c_str(), initialA_,NuclearMass::FindElement(initialZ_).c_str(), initialEnergyLow_,initialEnergyHigh_,i+1);
           }
         }
 

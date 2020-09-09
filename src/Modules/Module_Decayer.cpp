@@ -425,7 +425,7 @@ namespace Module_Decayer{
         std::cout << "Starting Decay Simulation..." << std::endl;
 
         DecayResults* results = NULL;
-        if(events>1) results = new DecayResults(Z,A,J,Pi,lowEnergy,highEnergy,suffixNo);
+        if(events>1) results = new DecayResults(Z,A,J,Pi,lowEnergy,highEnergy,suffixNo, input.OutputDir());
         
         for(int i = 0;i<=chunks;i++) {
           
