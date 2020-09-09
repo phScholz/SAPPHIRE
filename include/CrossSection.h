@@ -152,6 +152,8 @@ class CrossSection {
   static void CreateTempVector();
   static void CreateMACSEnergiesVector();
   static void NLDmodel(int x){nldmodel_=x;} /**< Setter for nldmodel_*/
+  static void OutputDir(std::string x){outputDir_=x;} /**< Setter for outputDir_*/
+
 
  private:
   /**
@@ -241,6 +243,7 @@ class CrossSection {
 public:
   std::vector<double> excitationEnergies_;
   std::vector<double> beamEnergies_;
+  
 
   double PreFactor() const {return preFactor_;} /**< Getter for preFactor*/
   
@@ -289,5 +292,7 @@ public:
   std::vector<std::pair<double,double> > partFuncMACS_;
   static std::vector<double> rateTemps_;
   static std::vector<double> macsEnergies_;
+  static std::string outputDir_; /**< path to the output dir*/
+  
 };
 

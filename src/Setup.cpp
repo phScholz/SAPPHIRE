@@ -23,9 +23,12 @@
 #include "CoulFunc.h"
 #include <iostream>
 #include <gsl/gsl_errno.h>
+#include <boost/filesystem.hpp>
 
 #include "LevelDensity/LevelDensityTable.h"
 #include "LevelDensity/LevelDensityHFB_BSk14.h"
+
+namespace fs = boost::filesystem;
 
 //These are all static members of the respective classes
 
@@ -44,6 +47,7 @@ bool CrossSection::residualProton_;
 bool CrossSection::residualAlpha_;
 bool CrossSection::calculateGammaCutoff_;
 int CrossSection::nldmodel_;
+std::string CrossSection::outputDir_;
 std::vector<double> CrossSection::rateTemps_;
 std::vector<double> CrossSection::macsEnergies_;
 
@@ -96,8 +100,11 @@ void Initialize() {
   CrossSection::CreateTempVector();
   CrossSection::CreateMACSEnergiesVector();
   CrossSection::NLDmodel(1);
+  std::string path(fs::current_path().string());
+  CrossSection::OutputDir(path +"/output/");
   
   //By default all decay channels are allowed if energetically possible
+  
   Decayer::SetAlphaDecay(true);
   Decayer::SetProtonDecay(true);
   Decayer::SetNeutronDecay(true);
@@ -133,4 +140,9 @@ void Initialize() {
   ParticleTransmissionFunc::SetNnorm(1.0);
 
   gsl_set_error_handler (&CoulFunc::GSLErrorHandler);
+
+  if(!(fs::exists("output"))){
+    fs::create_directory("output");
+    std::cout << std::endl << "Output directory has been created ..." << std::endl << std::endl;
+  }
 }
