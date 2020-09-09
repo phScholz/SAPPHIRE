@@ -9,7 +9,7 @@ option(MPI_BUILD "Build Sapphire for MPI simulations. Note: Cross section calcul
 option(USE_GCOV "Create a GCov-enabled build." OFF)
 option(BUILD_DOC "Build documentation" OFF)
 
-set(CMAKE_CXX_COMPILER g++)
+set(CMAKE_CXX_COMPILER c++)
 #set(CMAKE_CXX_COMPILER_VERSION "8.3.0")
 
 message("CMAKE_CXX_COMPILER_ID     : ${CMAKE_CXX_COMPILER_ID}")
@@ -29,7 +29,7 @@ message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 
 #Set c++standard explicitly
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
 #Explicitly setting link to math
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lm")
@@ -70,7 +70,7 @@ find_package (gsl REQUIRED)
 include_directories(${GSL_INCLUDE_DIR})
 
 message("Checking if ROOT can be found ...")
-find_package (ROOT REQUIRED)
+find_package (ROOT 6.0 REQUIRED)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ROOT_CXX_FLAGS}")
 include_directories(${ROOT_INCLUDE_DIR})
 link_directories(${ROOT_LIBRARY_DIR})
@@ -78,7 +78,7 @@ message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 
 add_definitions(-DMPI_BUILD)
 message("Checking if Boost can be found ...")
-FIND_PACKAGE(Boost REQUIRED)
+FIND_PACKAGE(Boost 1.72 COMPONENTS filesystem random REQUIRED)
 INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
 message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 

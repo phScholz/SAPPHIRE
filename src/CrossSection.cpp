@@ -718,19 +718,23 @@ void CrossSection::PrintCrossSections(){
   /** 1. Construct file names*/
   char filename[256];
   if(pType_==0) {
-    sprintf(filename,"output/Sapphire_%d%s+g.dat",
+    std::string outputString(outputDir_+"Sapphire_%d%s+g.dat");
+    sprintf(filename,outputString.c_str(),
     	A_,
     	NuclearMass::FindElement(Z_).c_str());  
   } else if(pType_==1) {
-    sprintf(filename,"output/Sapphire_%d%s+n.dat",
+    std::string outputString(outputDir_+"Sapphire_%d%s+n.dat");
+    sprintf(filename,outputString.c_str(),
     	A_,
     	NuclearMass::FindElement(Z_).c_str());  
   } else if(pType_==2) {
-    sprintf(filename,"output/Sapphire_%d%s+p.dat",
+    std::string outputString(outputDir_+"Sapphire_%d%s+p.dat");
+    sprintf(filename,outputString.c_str(),
     	A_,
     	NuclearMass::FindElement(Z_).c_str());  
   } else {
-    sprintf(filename,"output/Sapphire_%d%s+a.dat",
+    std::string outputString(outputDir_+"Sapphire_%d%s+a.dat");
+    sprintf(filename,outputString.c_str(),
       	    A_,
     	    NuclearMass::FindElement(Z_).c_str());  
   }
@@ -777,13 +781,15 @@ void CrossSection::PrintTransmissionTerms() {
 
     /**   1. Construct file names*/
     if(allowedJPi_[j].second>0){
-      sprintf(filename,"output/Transmission_%d%s_J=%.1f+.dat",
+      std::string outputString(outputDir_+"Transmission_%d%s_J=%.1f+.dat");
+      sprintf(filename,outputString.c_str(),
 	      compoundA_,
 	      NuclearMass::FindElement(compoundZ_).c_str(),
 	      allowedJPi_[j].first);  
     }
     else{
-      sprintf(filename,"output/Transmission_%d%s_J=%.1f-.dat",
+      std::string outputString(outputDir_+"Transmission_%d%s_J=%.1f-.dat");
+      sprintf(filename,outputString.c_str(),
 	      compoundA_,
 	      NuclearMass::FindElement(compoundZ_).c_str(),
 	      allowedJPi_[j].first);  
@@ -1669,6 +1675,7 @@ void CrossSection::CalculateEnergyGrid() {
     }
   }
   sort(energyGrid.begin(),energyGrid.end());
+  reverse(energyGrid.begin(),energyGrid.end());
 
   //Calculate skipping energy
   std::vector<Level> compoundLevels = NuclearLevels::FindLevels(compoundZ_,compoundA_);
@@ -1947,22 +1954,28 @@ void CrossSection::CalculateReactionRates(bool macs) {
 void CrossSection::PrintReactionRates(bool macs) {
   char filename[256];
   if(pType_==0) {
-    sprintf(filename,"output/Sapphire_%d%s+g_rates.dat",
+    std::string outputString(outputDir_+"Sapphire_%d%s+g_rates.dat");
+    sprintf(filename,outputString.c_str(),
 	    A_,
 	    NuclearMass::FindElement(Z_).c_str());  
   } else if(pType_==1) {
-    if(macs) sprintf(filename,"output/Sapphire_%d%s+n_macs.dat",
+    if(macs){
+       std::string outputString(outputDir_+"Sapphire_%d%s+n_macs.dat");
+       sprintf(filename,outputString.c_str(),
 		     A_,
 		     NuclearMass::FindElement(Z_).c_str());  
-    else sprintf(filename,"output/Sapphire_%d%s+n_rates.dat",
-		 A_,
-		 NuclearMass::FindElement(Z_).c_str());  
+    }
+    else
+    { 
+      std::string outputString(outputDir_+"Sapphire_%d%s+n_rates.dat");
+      sprintf(filename,outputString.c_str(), A_, NuclearMass::FindElement(Z_).c_str());  
+    }
   } else if(pType_==2) {
-    sprintf(filename,"output/Sapphire_%d%s+p_rates.dat",
-	    A_,
-	    NuclearMass::FindElement(Z_).c_str());  
+    std::string outputString(outputDir_+"Sapphire_%d%s+p_rates.dat");
+    sprintf(filename,outputString.c_str(), A_, NuclearMass::FindElement(Z_).c_str());  
   } else {
-    sprintf(filename,"output/Sapphire_%d%s+a_rates.dat",
+    std::string outputString(outputDir_+"Sapphire_%d%s+a_rates.dat");
+    sprintf(filename,outputString.c_str(),
 	    A_,
 	    NuclearMass::FindElement(Z_).c_str());  
   }
