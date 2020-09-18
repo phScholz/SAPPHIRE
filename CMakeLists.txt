@@ -2,13 +2,21 @@
 message("\nStart building SAPPHIRE\n")
 
 cmake_minimum_required(VERSION 3.1)
-project (Sapphire)
+project(Sapphire C CXX)
+
+set(CMAKE_CXX_STANDARD 11)
+
+#Set optimization to 3
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
+
+enable_testing()
+
 message("Using CMAKE version ${CMAKE_VERSION}")
 
 set(build_types None Debug Release Travis MinSizeRel)
 
 if(${CMAKE_BUILD_TYPE} MATCHES "Debug")
-  message("Build type is set to ${CMAKE_BUILD_TYPE}")
+  message("\nBuild type is set to ${CMAKE_BUILD_TYPE}")
 
   option(CODE_COVERAGE "Enable coverage reporting" OFF)
   message("OPTION CODE_COVERAGE IS OFF")
@@ -17,37 +25,28 @@ if(${CMAKE_BUILD_TYPE} MATCHES "Debug")
   message("OPTION USE_GCOV IS OFF")
 
   option(BUILD_DOC "Build documentation" OFF)
-  message("OPTION BUILD_DOC IS OFF")
+  message("OPTION BUILD_DOC IS OFF\n")
 
 endif(${CMAKE_BUILD_TYPE} MATCHES "Debug")
 
 if(${CMAKE_BUILD_TYPE} MATCHES "Travis")
   option(CODE_COVERAGE "Enable coverage reporting" ON)
-  message("OPTION CODE_COVERAGE IS ON")
+  message("\nOPTION CODE_COVERAGE IS ON")
   option(USE_GCOV "Create a GCov-enabled build." ON)
   message("OPTION USE_GCOV IS ON")
   option(BUILD_DOC "Build documentation" ON)
-  message("OPTION BUILD_DOC IS ON")
+  message("OPTION BUILD_DOC IS ON\n")
 endif(${CMAKE_BUILD_TYPE} MATCHES "Travis")
-
-set(CMAKE_CXX_COMPILER c++)
-#set(CMAKE_CXX_COMPILER_VERSION "8.3.0")
 
 message("CMAKE_CXX_COMPILER_ID     : ${CMAKE_CXX_COMPILER_ID}")
 message("CMAKE_CXX_COMPILER_VERSION: ${CMAKE_CXX_COMPILER_VERSION}")
-message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
+
 
 if (GSL_PATH)
 set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${GSL_PATH})
 set(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${GSL_PATH})
 endif (GSL_PATH) 
-message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 
-#Set the C++ standard to c++17
-#set (CMAKE_CXX_STANDARD 17)
-
-#Set optimization to 3
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 
 #Set c++standard explicitly
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
@@ -57,8 +56,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lm")
 
 #Disable compilation warnings
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w ")
-
-message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 
 # Code Coverage Configuration
 add_library(coverage_config INTERFACE)
@@ -86,11 +83,11 @@ set( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAG
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
-message("Checking if GNU SCIENTIFIC LIBRARY (GSL) can be found ...")
+message("\nChecking if GNU SCIENTIFIC LIBRARY (GSL) can be found ...")
 find_package (gsl REQUIRED)
 include_directories(${GSL_INCLUDE_DIR})
 
-message("Checking if ROOT can be found ...")
+message("\nChecking if ROOT can be found ...")
 find_package (ROOT 6.0 REQUIRED)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ROOT_CXX_FLAGS}")
 include_directories(${ROOT_INCLUDE_DIR})
@@ -98,30 +95,25 @@ link_directories(${ROOT_LIBRARY_DIR})
 message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 
 add_definitions(-DMPI_BUILD)
-message("Checking if Boost can be found ...")
+message("\nChecking if Boost can be found ...")
 FIND_PACKAGE(Boost 1.65 COMPONENTS filesystem random REQUIRED)
 INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
-message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 
-message("Checking if OpenMP can be found ...")
+message("\nChecking if OpenMP can be found ...")
 find_package(OpenMP REQUIRED)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 
 include_directories(${Sapphire_SOURCE_DIR}/coul/include)
-add_subdirectory (coul)
-set (EXTRA_LIBS coul)
-
-configure_file( include/Sapphire_config.h.in ${CMAKE_BINARY_DIR}/generated/Sapphire_config.h )
+add_subdirectory(coul)
+set(EXTRA_LIBS coul)
+configure_file(include/Sapphire_config.h.in ${CMAKE_BINARY_DIR}/generated/Sapphire_config.h )
 include_directories( ${CMAKE_BINARY_DIR}/generated/ )
 
 add_subdirectory(src)
-#add_subdirectory(src/GammaStrength)
-#add_subdirectory(src/Modules)
-#add_subdirectory(src/LevelDensity)
 
+if(BUILD_DOC MATCHES ON)
  # check if Doxygen is installed
- message("Checking if Doxygen can be found ...")
+ message("\nChecking if Doxygen can be found ...")
  find_package(Doxygen)
  if (DOXYGEN_FOUND)
      # set input and output files
@@ -141,8 +133,8 @@ add_subdirectory(src)
  else (DOXYGEN_FOUND)
    message("Doxygen need to be installed to generate the doxygen documentation")
  endif (DOXYGEN_FOUND)
-
- message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
+ endif(BUILD_DOC MATCHES ON)
 
 message("Building Done\n")
 
+add_subdirectory(tst)

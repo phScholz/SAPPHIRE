@@ -42,26 +42,31 @@
 
     void SapphireInput::Initialize(){
         /** Setting default configurations for the SapphireInput class. */
-        std::cout << "Setting default values..." << std::endl;
+        //std::cout << "Setting default values..." << std::endl;
         std::string path(fs::current_path().string());
         SapphireInput::OutputDir(path +"/output/");
         SapphireInput::exitStates = std::vector<int>(4,-1);
+
         SapphireInput::g_ExitStates(-1);
         SapphireInput::n_ExitStates(-1);
         SapphireInput::p_ExitStates(-1);
-        SapphireInput::a_ExitStates(-1);   
+        SapphireInput::a_ExitStates(-1);
+
         SapphireInput::PrintTrans(false);
         SapphireInput::PrintXs(1);
         SapphireInput::PrintRate(0);
         SapphireInput::PrintMACS(0);
+
         SapphireInput::CalcRates(false);           
         SapphireInput::CalcMACS(false);           
         SapphireInput::CalcXS(true);           
         SapphireInput::CalcAverageWidth(false);
+
         SapphireInput::ResidualGamma(false);               
         SapphireInput::ResidualNeutron(false);           
         SapphireInput::ResidualProton(false);
         SapphireInput::ResidualAlpha(false);
+        
         SapphireInput::CalculateGammaCutoff(false);   
         SapphireInput::PorterThomas_g(false);
         SapphireInput::PorterThomas_p(false);
