@@ -1,6 +1,8 @@
 #ignore CMakeFiles
 CMakeFiles
 CMakeFiles/*
+googletest
+googletest/*
 
 #ignore CMakeCache.txt
 CMakeCache.txt
