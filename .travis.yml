@@ -16,6 +16,7 @@ addons:
       - libomp-dev
       - libxpm-dev
       - lcov
+      - libgtest-dev
 
 before_install:
   # Getting root binaries
@@ -28,7 +29,7 @@ before_install:
 install:  
   # build the project
   - cd ${TRAVIS_BUILD_DIR}
-  - bash build.sh
+  - bash build.sh Travis
 
 script:
   # run the project
