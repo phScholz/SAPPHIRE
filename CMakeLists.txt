@@ -1,13 +1,34 @@
 #CMakeLists.txt
+message("\nStart building SAPPHIRE\n")
 
 cmake_minimum_required(VERSION 3.1)
 project (Sapphire)
 message("Using CMAKE version ${CMAKE_VERSION}")
 
-option(CODE_COVERAGE "Enable coverage reporting" OFF)
-option(MPI_BUILD "Build Sapphire for MPI simulations. Note: Cross section calculations are disabled with MPI builds." OFF)
-option(USE_GCOV "Create a GCov-enabled build." OFF)
-option(BUILD_DOC "Build documentation" OFF)
+set(build_types None Debug Release Travis MinSizeRel)
+
+if(${CMAKE_BUILD_TYPE} MATCHES "Debug")
+  message("Build type is set to ${CMAKE_BUILD_TYPE}")
+
+  option(CODE_COVERAGE "Enable coverage reporting" OFF)
+  message("OPTION CODE_COVERAGE IS OFF")
+
+  option(USE_GCOV "Create a GCov-enabled build." OFF)
+  message("OPTION USE_GCOV IS OFF")
+
+  option(BUILD_DOC "Build documentation" OFF)
+  message("OPTION BUILD_DOC IS OFF")
+
+endif(${CMAKE_BUILD_TYPE} MATCHES "Debug")
+
+if(${CMAKE_BUILD_TYPE} MATCHES "Travis")
+  option(CODE_COVERAGE "Enable coverage reporting" ON)
+  message("OPTION CODE_COVERAGE IS ON")
+  option(USE_GCOV "Create a GCov-enabled build." ON)
+  message("OPTION USE_GCOV IS ON")
+  option(BUILD_DOC "Build documentation" ON)
+  message("OPTION BUILD_DOC IS ON")
+endif(${CMAKE_BUILD_TYPE} MATCHES "Travis")
 
 set(CMAKE_CXX_COMPILER c++)
 #set(CMAKE_CXX_COMPILER_VERSION "8.3.0")
@@ -123,4 +144,5 @@ add_subdirectory(src)
 
  message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 
-message("Done")
+message("Building Done\n")
+
