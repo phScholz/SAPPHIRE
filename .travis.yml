@@ -25,6 +25,10 @@ before_install:
   - tar -xzf root_v6.20.04.Linux-ubuntu18-x86_64-gcc7.5.tar.gz
   - source root/bin/thisroot.sh
   - sudo pip install codecov
+  - cd /usr/src/gtest
+  - sudo cmake CMakeLists.txt
+  - sudo make
+  - sudo cp *.a /usr/lib
   
 install:  
   # build the project
