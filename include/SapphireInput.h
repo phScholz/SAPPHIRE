@@ -236,6 +236,7 @@ class SapphireInput{
         void RdEmax(double x){rdEmax=x;}                        /**<Setter for rdEmax*/  
         void RdEmin(double x){rdEmin=x;}                        /**<Setter for rdEmin*/  
         void CTable(double x){cTable=x;}                        /**<Setter for cTable*/  
+        void DTable(double x){cTable=x;}                        /**<Setter for dTable*/  
         void Gnorm(double x){gNorm=x;}                        /**<Setter for gNorm*/  
         void Pnorm(double x){pNorm=x;}                        /**<Setter for pNorm*/  
         void Nnorm(double x){nNorm=x;}                        /**<Setter for nNorm*/  
@@ -328,6 +329,7 @@ class SapphireInput{
         double RdEmax() const {return rdEmax;}                         /**<Getter for RdEmax*/
         double RdEmin() const {return rdEmin;}                         /**<Getter for RdEmin*/
         double CTable() const {return cTable;}                         /**<Getter for cTable*/
+        double DTable() const {return cTable;}                         /**<Getter for dTable*/
         double Gnorm() const {return gNorm;}                         /**<Getter for gNorm*/
         double Pnorm() const {return pNorm;}                         /**<Getter for pNorm*/
         double Nnorm() const {return nNorm;}                         /**<Getter for nNorm*/
@@ -413,6 +415,7 @@ class SapphireInput{
         double rdEmax;              /**< double for the maximum energy of the randomly created levelscheme*/
         double rdEmin;              /**< double for the minimum energy of the randomly created levelscheme*/
         double cTable;              /**< double for the normalization of the ctable parameter.*/
+        double dTable;              /**< double for the normalization of the dtable parameter.*/
         double gNorm;              /**< double for the normalization of the gamma transmission coefficent.*/
         double pNorm;              /**< double for the normalization of the proton transmission coefficent.*/
         double nNorm;              /**< double for the normalization of the neutron transmission coefficent.*/
