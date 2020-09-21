@@ -5,7 +5,10 @@
  */
 class TransmissionFunc {
  public:
- /**
+  
+  
+
+  /**
   * @brief Constructor of a TransmissionFunc.
   * @param z2
   * @param m2

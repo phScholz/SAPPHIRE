@@ -24,10 +24,14 @@ class LevelDensityTable : public LevelDensity{
         static double d_;
 
     public:
+        LevelDensityTable(): LevelDensity(50,120,1,1){};
         LevelDensityTable(int Z, int A, double J, int parity): LevelDensity(Z,A,J,parity){};
 
         static void SetCtable(double x){c_=x;}; /**< Setter for cTable*/
         static double GetCtable(){return c_;}; /**< Getter for cTable*/
+
+        static void SetDtable(double x){d_=x;}; /**< Setter for cTable*/
+        static double GetDtable(){return d_;}; /**< Getter for cTable*/
 
     protected:
         std::vector< std::pair<double, double> > DensityVector; /**< Densities will be read to this vector*/

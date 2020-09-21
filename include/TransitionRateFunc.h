@@ -24,6 +24,9 @@ class XYPair {
  */
 class TransitionRateFunc {
  public:
+
+  TransitionRateFunc(){};
+
  /**
   * @brief Constructor of a TransitionRateFunc
   * @param z1 charge of ejectile
@@ -138,6 +141,12 @@ class TransitionRateFunc {
      * @brief Setter for binning_
      */
     static void Binning(int x){binning_=x;};
+
+    /**
+     * @brief Getter for binning_
+     */
+
+    static int Binning(){return binning_;};
   
  private:
   static const int numCrossSectionSteps_=20;

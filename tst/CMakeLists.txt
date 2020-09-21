@@ -4,6 +4,7 @@ set(BINARY test_sapphire)
 set(TEST_SOURCE ${TEST_SOURCE} ./main.cpp)
 set(TEST_SOURCE ${TEST_SOURCE} ./test_NuclearMass.cpp)
 set(TEST_SOURCE ${TEST_SOURCE} ./test_SapphireInput.cpp)
+set(TEST_SOURCE ${TEST_SOURCE} ./test_LevelDensity.cpp)
 
 set(TEST_SOURCE ${TEST_SOURCE} ../src/LevelDensity/LevelDensityFormula.cpp ../src/LevelDensity/LevelDensityTable.cpp ../src/LevelDensity/RauscherLevelDensity.cpp ../src/LevelDensity/LevelDensityHFB_BSk14.cpp)
 set(TEST_SOURCE ${TEST_SOURCE} ../src/Databases/NuclearLevels.cpp ../src/Databases/NuclearMass.cpp)

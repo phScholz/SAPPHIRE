@@ -130,6 +130,14 @@ class ParticleTransmissionFunc : public TransmissionFunc {
   static void SetAnorm(double x){aNorm_=x;} /**< Setter aNorm_*/
   static void SetPnorm(double x){pNorm_=x;} /**< Setter pNorm_*/
   static void SetNnorm(double x){nNorm_=x;} /**< Setter nNorm_*/
+
+  static int GetAlphaFormalism()  {return alphaFormalism_;};      /**< Getter for AlphaFormalism*/
+  static int GetNeutronFormalism(){return neutronFormalism_;};  /**< Getter for NeutronFormalism*/
+  static int GetProtonFormalism() {return protonFormalism_ ;};    /**< Getter for ProtonFormalism*/
+  static bool GetPorterThomas(){return porterThomas_;}; /**< Getter for porterThomas_*/
+  static double GetAnorm(){return aNorm_;} /**< Getter aNorm_*/
+  static double GetPnorm(){return pNorm_;} /**< Getter pNorm_*/
+  static double GetNnorm(){return nNorm_;} /**< Getter nNorm_*/
  
  protected:
   virtual double CalcTransmission(double,int,double) = 0;
