@@ -53,24 +53,24 @@
         SapphireInput::a_ExitStates(-1);
 
         SapphireInput::PrintTrans(false);
-        SapphireInput::PrintXs(1);
-        SapphireInput::PrintRate(0);
-        SapphireInput::PrintMACS(0);
+        SapphireInput::PrintXs(true);
+        SapphireInput::PrintRate(false);
+        SapphireInput::PrintMACS(false);
 
         SapphireInput::CalcRates(false);           
         SapphireInput::CalcMACS(false);           
         SapphireInput::CalcXS(true);           
         SapphireInput::CalcAverageWidth(false);
+        SapphireInput::CalculateGammaCutoff(false);
 
         SapphireInput::ResidualGamma(false);               
         SapphireInput::ResidualNeutron(false);           
         SapphireInput::ResidualProton(false);
         SapphireInput::ResidualAlpha(false);
-        
-        SapphireInput::CalculateGammaCutoff(false);   
+                  
         SapphireInput::PorterThomas_g(false);
         SapphireInput::PorterThomas_p(false);
-        SapphireInput::EntranceState(0);
+
         SapphireInput::a_Formalism(0);
         SapphireInput::p_Formalism(0);
         SapphireInput::n_Formalism(0);
@@ -78,19 +78,22 @@
         SapphireInput::M1_Formalism(3);
         SapphireInput::E2_Formalism(0);
         SapphireInput::LevelDensity(1);
+
+        SapphireInput::EntranceState(0);
         SapphireInput::DecayerMaxL(8.);
         SapphireInput::PreEqMaxL(8.);
         SapphireInput::g_CutoffEnergy(10000.);
+
         SapphireInput::Reaction("25Mg+a");        
         SapphireInput::EnergyFile("");
         SapphireInput::ReactionFile("");
+
         SapphireInput::MassTable(sourceDirectory()+"/tables/masses/masses.dat");
         SapphireInput::GdrParams(sourceDirectory()+"/tables/gamma/ripl3_gdr_parameters.dat");
         SapphireInput::LevelDir(sourceDirectory()+"/tables/levels/");
         SapphireInput::SpinFile(sourceDirectory()+"/tables/spinod.dat");        
         SapphireInput::Isotope("60Ni");
-        SapphireInput::PorterThomas_p(true);
-        SapphireInput::PorterThomas_g(true);        
+
         SapphireInput::PreEq(false);
         SapphireInput::PreEqConf("");
         SapphireInput::Spin(1.0);
@@ -105,6 +108,7 @@
         SapphireInput::GammaChannel(true);
         SapphireInput::Suffix(0);
         SapphireInput::CTable(0);
+        SapphireInput::DTable(0);
         SapphireInput::RdZ(50);
         SapphireInput::RdA(120);
         SapphireInput::RdEmin(0);
@@ -178,6 +182,7 @@
         std::cout << "\tAlphaChannel         = "             << SapphireInput::AlphaChannel() << std::endl;
         std::cout << "\tLevelDensity         = "             << SapphireInput::LevelDensity() << std::endl;
         std::cout << "\tcTable               = "             << SapphireInput::CTable() << std::endl;
+        std::cout << "\tdTable               = "             << SapphireInput::DTable() << std::endl;
         std::cout << "\teBinning             = "             << SapphireInput::EBinning() << std::endl;
         std::cout << std::endl;
         
@@ -268,6 +273,7 @@
         SapphireInput::Gnorm(pt.get<double>("General.gNorm", SapphireInput::Gnorm()));
         SapphireInput::LevelDensity(pt.get<int>("General.LevelDensity", SapphireInput::LevelDensity()));
         SapphireInput::CTable(pt.get<double>("General.cTable", SapphireInput::CTable()));
+        SapphireInput::DTable(pt.get<double>("General.dTable", SapphireInput::DTable()));
         SapphireInput::PorterThomas_p(pt.get<bool>("General.PorterThomasParticle", SapphireInput::PorterThomas_p()));
         SapphireInput::PorterThomas_g(pt.get<bool>("General.PorterThomasGamma", SapphireInput::PorterThomas_g()));
         SapphireInput::GammaChannel(pt.get<bool>("General.GammaChannel", SapphireInput::GammaChannel()));
@@ -482,4 +488,5 @@
 
     void SapphireInput::SetInputLevelDensity() const{
         LevelDensityTable::SetCtable(CTable());
+        LevelDensityTable::SetDtable(DTable());
     }
