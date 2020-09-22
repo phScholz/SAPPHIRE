@@ -187,6 +187,8 @@ TEST(SapphireInput, Initialize){
     EXPECT_EQ(input->M1_Formalism(), 3);
     EXPECT_EQ(input->E2_Formalism(), 0);
     EXPECT_EQ(input->LevelDensity(), 1);
+
+    EXPECT_EQ(input->AutoAdjust(), false);
     
     EXPECT_EQ(input->EntranceState(), 0);
     EXPECT_EQ(input->DecayerMaxL(), 8.);
