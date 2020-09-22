@@ -184,6 +184,7 @@ class SapphireInput{
         void ProtonChannel(bool x){protonChannel=x;}                /**<Setter for bool protonChannel*/
         void NeutronChannel(bool x){neutronChannel=x;}                /**<Setter for bool neutronChannel*/
         void GammaChannel(bool x){gammaChannel=x;}                /**<Setter for bool gammaChannel*/
+        void AutoAdjust(bool x){autoAdjust=x;}                /**<Setter for bool autoAdjust*/
 
         void EntranceState(int x){entranceState=x;}                  /**< Setter for entranceState*/
         void g_ExitStates(int x){               /**<Setter for g_exitStates*/ 
@@ -289,6 +290,7 @@ class SapphireInput{
         bool ProtonChannel() const {return protonChannel;}              /**<Getter for bool protonChannel*/
         bool NeutronChannel() const {return neutronChannel;}              /**<Getter for bool neutronChannel*/
         bool GammaChannel() const {return gammaChannel;}              /**<Getter for bool gammaChannel*/
+        bool AutoAdjust() const {return autoAdjust;}              /**<Getter for bool autoAdjust*/
 
         int EntranceState() const {return entranceState;}              /**<Getter for entranceState*/ 
         int g_ExitStates() const {return g_exitStates;}              /**<Getter for g_exitStates*/ 
@@ -373,6 +375,7 @@ class SapphireInput{
         bool protonChannel;          /**< Toggle proton channel*/
         bool neutronChannel;          /**< Toggle neutron channel*/
         bool gammaChannel;          /**< Toggle gamma channel*/
+        bool autoAdjust;            /** < Toggle autoAdjust for some microscopic NLD models*/
 
 
         int entranceState;          /**< Int for the number of level, which should be the entrance State*/

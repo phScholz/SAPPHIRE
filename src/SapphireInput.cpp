@@ -79,6 +79,8 @@
         SapphireInput::E2_Formalism(0);
         SapphireInput::LevelDensity(1);
 
+        SapphireInput::AutoAdjust(false);
+
         SapphireInput::EntranceState(0);
         SapphireInput::DecayerMaxL(8.);
         SapphireInput::PreEqMaxL(8.);
@@ -181,6 +183,7 @@
         std::cout << "\tProtonChannel        = "             << SapphireInput::ProtonChannel() << std::endl;
         std::cout << "\tAlphaChannel         = "             << SapphireInput::AlphaChannel() << std::endl;
         std::cout << "\tLevelDensity         = "             << SapphireInput::LevelDensity() << std::endl;
+        std::cout << "\tautoAdjust           = "             << SapphireInput::AutoAdjust() << std::endl;
         std::cout << "\tcTable               = "             << SapphireInput::CTable() << std::endl;
         std::cout << "\tdTable               = "             << SapphireInput::DTable() << std::endl;
         std::cout << "\teBinning             = "             << SapphireInput::EBinning() << std::endl;
@@ -272,6 +275,7 @@
         SapphireInput::E2_Formalism(pt.get<int>("General.E2Model", SapphireInput::E2_Formalism()));
         SapphireInput::Gnorm(pt.get<double>("General.gNorm", SapphireInput::Gnorm()));
         SapphireInput::LevelDensity(pt.get<int>("General.LevelDensity", SapphireInput::LevelDensity()));
+        SapphireInput::AutoAdjust(pt.get<bool>("General.AutoAdjust", SapphireInput::AutoAdjust()));
         SapphireInput::CTable(pt.get<double>("General.cTable", SapphireInput::CTable()));
         SapphireInput::DTable(pt.get<double>("General.dTable", SapphireInput::DTable()));
         SapphireInput::PorterThomas_p(pt.get<bool>("General.PorterThomasParticle", SapphireInput::PorterThomas_p()));
@@ -489,4 +493,5 @@
     void SapphireInput::SetInputLevelDensity() const{
         LevelDensityTable::SetCtable(CTable());
         LevelDensityTable::SetDtable(DTable());
+        LevelDensityTable::AutoAdjust(AutoAdjust());
     }

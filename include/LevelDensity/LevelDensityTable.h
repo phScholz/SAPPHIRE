@@ -22,6 +22,7 @@ class LevelDensityTable : public LevelDensity{
         void SetFilename(std::string x){filename=x;}
         static double c_;
         static double d_;
+        static bool autoAdjust_;
 
     public:
         LevelDensityTable(): LevelDensity(50,120,1,1){};
@@ -32,6 +33,9 @@ class LevelDensityTable : public LevelDensity{
 
         static void SetDtable(double x){d_=x;}; /**< Setter for cTable*/
         static double GetDtable(){return d_;}; /**< Getter for cTable*/
+      
+        static void AutoAdjust(double x){autoAdjust_=x;}; /**< Setter for cTable*/
+        static double AutoAdjust(){return autoAdjust_;}; /**< Getter for cTable*/
 
     protected:
         std::vector< std::pair<double, double> > DensityVector; /**< Densities will be read to this vector*/

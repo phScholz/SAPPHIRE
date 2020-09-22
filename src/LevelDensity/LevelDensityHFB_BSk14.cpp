@@ -258,12 +258,26 @@ double LevelDensityHFB_BSk14::CalculateDensity(double E){
     if(J_<0) return 0;
     if(E==0) return 0;
     
+    //Find corrections in the data files
     HFBCorrTable::const_iterator it = corrTable.find(MassKey(Z_,A_));
     double c = 0;
     double d = 0;
-    if(it!=corrTable.end()){
+
+    //apply corrections if autoAdjust is set to true
+    if(it!=corrTable.end() && autoAdjust_==true){
         c=it->second.c;
         d=it->second.d;
+    }
+
+    //if autoAdjust is set to false, apply cTable and dTable parameter
+    if(autoAdjust_==false){
+        c=c_;
+        d=d_;
+    }
+
+    if(verbose_){
+        std::cout << std::endl << "c:\t " << c <<std::endl
+                               << "d:\t " << d <<std::endl;
     }
 
     if(DensityVector.size()>0){
@@ -273,14 +287,15 @@ double LevelDensityHFB_BSk14::CalculateDensity(double E){
         double lowery=0;
         double upperx=0;
         double uppery=0;
+
         for(auto it = DensityVector.begin(); it != DensityVector.end(); ++it){
             if (it->first == U){
-                return it->second;
+                return it->second*exp(c*sqrt(U));
             }
+
             if(it->first > lowerx && it->first < U){
                 lowerx = it->first;
                 lowery = it->second;
-
             }
             
             if(it->first > U && upperx < U){
@@ -291,8 +306,7 @@ double LevelDensityHFB_BSk14::CalculateDensity(double E){
 
         //If the energy doenst exist in the DensityVector we need to interpolate
         double density =(U-lowerx)*(uppery-lowery)/(upperx-lowerx)+lowery;
-        density*=exp(c*sqrt(U));
-        density*=exp(c_*sqrt(U));
+        density*=exp(c*sqrt(U));       
 
         return density;
     }
@@ -305,16 +319,19 @@ double LevelDensityHFB_BSk14::CalculateDensity(double E){
 
 double LevelDensityHFB_BSk14::TotalLevelDensity(double E){
     HFBCorrTable::const_iterator it = corrTable.find(MassKey(Z_,A_));
-    if(it!=corrTable.end()){
-        c_=it->second.c;
-        d_=it->second.d;
+    double c = 0;
+    double d = 0;
+    
+    if(it!=corrTable.end() && autoAdjust_ == true){
+        c=it->second.c;
+        d=it->second.d;
     }
     else{
-        c_=0;
-        d_=0;
+        c=c_;
+        d=d_;
     }
     if(rows.size()>0){
-        double U=E-d_;
+        double U=E-d;
         //Looking for the energy in the DensityVector
         double lowerx=0;
         double lowery=0;
@@ -322,7 +339,7 @@ double LevelDensityHFB_BSk14::TotalLevelDensity(double E){
         double uppery=0;
         for(auto it = rows.begin(); it != rows.end(); ++it){
             if (it->U == U){
-                return it->RHOTOT;
+                return it->RHOTOT*exp(c*sqrt(U));
             }
             if(it->U > lowerx && it->U < U){
                 lowerx = it->U;
@@ -338,7 +355,7 @@ double LevelDensityHFB_BSk14::TotalLevelDensity(double E){
 
         //If the energy doenst exist in the DensityVector we need to interpolate
         double density =(U-lowerx)*(uppery-lowery)/(upperx-lowerx)+lowery;
-        density*=exp(c_*sqrt(U));
+        density*=exp(c*sqrt(U));
         return density;
     }
     else
