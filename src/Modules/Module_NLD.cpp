@@ -5,10 +5,9 @@
 #include "LevelDensity/LevelDensityHFB_BSk14.h"
 
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <sstream>
-
-
 
 namespace Module_NLD{
 
@@ -52,6 +51,7 @@ namespace Module_NLD{
     void Print(std::string isotope){
         int charge = atomicNumberIntFromString(isotope);
         int mass = massNumberIntFromString(isotope);
+        
 
         if(mass%2==0){
             LevelDensity * p0 = new T(charge, mass, 0, 1 );
@@ -63,25 +63,40 @@ namespace Module_NLD{
             LevelDensity * p3 = new T(charge, mass, 3, 1 );
             LevelDensity * n3 = new T(charge, mass, 3, -1 );
 
-            std::cout << std::endl  << "Energy\t "<< "p(0+) \t"
-                                    << "p(0-) \t"
-                                    << "p(1+) \t"
-                                    << "p(1-) \t"
-                                    << "p(2+) \t"
-                                    << "p(2-) \t"
-                                    << "p(3+) \t"
-                                    << "p(3-) \t"
-                                    << std::endl;
+            std::cout << std::endl  << std::setw(10) << "Energy"                                    
+                                    << std::setw(10) << "p(0+)"
+                                    << std::setw(10) << "p(0-)"
+                                    << std::setw(10) << "p(1+)"
+                                    << std::setw(10) << "p(1-)"
+                                    << std::setw(10) << "p(2+)"
+                                    << std::setw(10) << "p(2-)"
+                                    << std::setw(10) << "p(3+)"
+                                    << std::setw(10) << "p(3-)";                                   
             
+            std::cout << std::endl  << std::setw(10) << "[MeV]"                                    
+                                    << std::setw(10) << "[1/MeV]"
+                                    << std::setw(10) << "[1/MeV]"
+                                    << std::setw(10) << "[1/MeV]"
+                                    << std::setw(10) << "[1/MeV]"
+                                    << std::setw(10) << "[1/MeV]"
+                                    << std::setw(10) << "[1/MeV]"
+                                    << std::setw(10) << "[1/MeV]"
+                                    << std::setw(10) << "[1/MeV]"
+                                    << std::setw(10) << std::endl;
+
             std::cout.precision(2);
 
             for(double energy=0.0; energy <=20.0; energy+=0.5){
-                std::cout   << std::scientific << energy << " "
-                            << p0->operator()(energy) << " " << n0->operator()(energy) << " "
-                            << p1->operator()(energy) << " " << n1->operator()(energy) << " "
-                            << p2->operator()(energy) << " " << n2->operator()(energy) << " "
-                            << p3->operator()(energy) << " " << n3->operator()(energy) << " "
-                            << std::endl;
+                std::cout   <<  std::setw(10) << std::scientific << energy                            
+                            <<  std::setw(10) << p0->operator()(energy) 
+                            <<  std::setw(10) << n0->operator()(energy) 
+                            <<  std::setw(10) << p1->operator()(energy) 
+                            <<  std::setw(10) << n1->operator()(energy)
+                            <<  std::setw(10) << p2->operator()(energy) 
+                            <<  std::setw(10) << n2->operator()(energy)
+                            <<  std::setw(10) << p3->operator()(energy) 
+                            <<  std::setw(10) << n3->operator()(energy)
+                            <<  std::setw(10) << std::endl;
             }
         }
 
@@ -95,25 +110,40 @@ namespace Module_NLD{
             LevelDensity * p3 = new T(charge, mass, 3.5, 1 );
             LevelDensity * n3 = new T(charge, mass, 3.5, -1 );
 
-            std::cout << std::endl  << "Energy\t "<< "p(1/2+)\t"
-                                    << "p(1/2-)\t"
-                                    << "p(3/2+)\t"
-                                    << "p(3/2-)\t"
-                                    << "p(5/2+)\t"
-                                    << "p(5/2-)\t"
-                                    << "p(7/2+)\t"
-                                    << "p(7/2-)\t"
-                                    << std::endl;
+           std::cout << std::endl  << std::setw(10) << "Energy"                                    
+                                    << std::setw(10) << "p(1/2+)"
+                                    << std::setw(10) << "p(1/2-)"
+                                    << std::setw(10) << "p(3/2+)"
+                                    << std::setw(10) << "p(3/2-)"
+                                    << std::setw(10) << "p(5/2+)"
+                                    << std::setw(10) << "p(5/2-)"
+                                    << std::setw(10) << "p(7/2+)"
+                                    << std::setw(10) << "p(7/2-)";                                   
+            
+            std::cout << std::endl  << std::setw(10) << "[MeV]"                                    
+                                    << std::setw(10) << "[1/MeV]"
+                                    << std::setw(10) << "[1/MeV]"
+                                    << std::setw(10) << "[1/MeV]"
+                                    << std::setw(10) << "[1/MeV]"
+                                    << std::setw(10) << "[1/MeV]"
+                                    << std::setw(10) << "[1/MeV]"
+                                    << std::setw(10) << "[1/MeV]"
+                                    << std::setw(10) << "[1/MeV]"
+                                    << std::setw(10) << std::endl;
             
             std::cout.precision(2);
 
             for(double energy=0.0; energy <=20.0; energy+=0.5){
-                std::cout   << std::scientific << energy << " "
-                            << p0->operator()(energy) << " " << n0->operator()(energy) << " "
-                            << p1->operator()(energy) << " " << n1->operator()(energy) << " "
-                            << p2->operator()(energy) << " " << n2->operator()(energy) << " "
-                            << p3->operator()(energy) << " " << n3->operator()(energy) << " "
-                            << std::endl;
+                std::cout   <<  std::setw(10) << std::scientific << energy                            
+                            <<  std::setw(10) << p0->operator()(energy) 
+                            <<  std::setw(10) << n0->operator()(energy) 
+                            <<  std::setw(10) << p1->operator()(energy) 
+                            <<  std::setw(10) << n1->operator()(energy)
+                            <<  std::setw(10) << p2->operator()(energy) 
+                            <<  std::setw(10) << n2->operator()(energy)
+                            <<  std::setw(10) << p3->operator()(energy) 
+                            <<  std::setw(10) << n3->operator()(energy)
+                            <<  std::setw(10) << std::endl;
             }
         }
     }
