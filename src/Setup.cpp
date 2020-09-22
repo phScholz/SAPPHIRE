@@ -139,6 +139,10 @@ void Initialize() {
   ParticleTransmissionFunc::SetPnorm(1.0);
   ParticleTransmissionFunc::SetNnorm(1.0);
 
+  //Setting initial values of the NLDtable correction to 0.0
+  LevelDensityTable::SetCtable(0.0);
+  LevelDensityTable::SetDtable(0.0);
+
   gsl_set_error_handler (&CoulFunc::GSLErrorHandler);
 
   if(!(fs::exists("output"))){
