@@ -16,7 +16,7 @@ void NuclearMass::InitializeElements() {
 
 void NuclearMass::InitializeMasses(std::string filename) {
 
-  std::cout << "Reading atomic masses..." << std::endl;
+  //std::cout << "Reading atomic masses..." << std::endl;
 
   std::ifstream in(filename.c_str());
   if(!in) {

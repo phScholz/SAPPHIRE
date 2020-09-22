@@ -37,6 +37,7 @@ HFBCorrTable LevelDensityHFB_BSk14::corrTable;
 
 double LevelDensityTable::c_;
 double LevelDensityTable::d_;
+bool LevelDensityTable::autoAdjust_;
 
 QRPA_E1_Table D1MQRPA::e1Table;
 QRPA_M1_Table D1MQRPA::m1Table;
@@ -142,6 +143,7 @@ void Initialize() {
   //Setting initial values of the NLDtable correction to 0.0
   LevelDensityTable::SetCtable(0.0);
   LevelDensityTable::SetDtable(0.0);
+  LevelDensityTable::AutoAdjust(false);
 
   gsl_set_error_handler (&CoulFunc::GSLErrorHandler);
 

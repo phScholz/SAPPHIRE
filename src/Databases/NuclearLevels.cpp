@@ -41,7 +41,7 @@ LevelsContainer::LevelsContainer(std::istream& in, int numLevels, int numComplet
 void NuclearLevels::InitializeLevels(std::string levelsDirectory,
 				     std::string spinFile) {
 
-  std::cout << "Reading known nuclear levels..." << std::endl;
+  //std::cout << "Reading known nuclear levels..." << std::endl;
 
   for(int Z = 0; Z<=118; Z++) {
     char isotopeFile[256];

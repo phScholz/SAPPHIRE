@@ -38,7 +38,7 @@ namespace Module_NLD{
                 Print<RauscherLevelDensity>(isotope);
                 break;
             case 1:
-                std::cout << "NLD model:\t" << "HFB_BSk14" << std::endl;
+                std::cout << "NLD model:\t" << "HFB_BSk14" << std::endl;               
                 Print<LevelDensityHFB_BSk14>(isotope);
                 break;
             default:
@@ -51,7 +51,6 @@ namespace Module_NLD{
     void Print(std::string isotope){
         int charge = atomicNumberIntFromString(isotope);
         int mass = massNumberIntFromString(isotope);
-        
 
         if(mass%2==0){
             LevelDensity * p0 = new T(charge, mass, 0, 1 );

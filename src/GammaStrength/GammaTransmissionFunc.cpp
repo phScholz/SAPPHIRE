@@ -17,7 +17,7 @@
 extern unsigned int randomSeed[12];
 
 void GammaTransmissionFunc::InitializeGDRParameters(std::string filename) {
-  std::cout << "Reading GDR parameters file..." << std::endl;
+  //std::cout << "Reading GDR parameters file..." << std::endl;
   std::ifstream in(filename.c_str());
   if(!in) {
     std::cout << "Could not read GDR parameters file." << std::endl;
