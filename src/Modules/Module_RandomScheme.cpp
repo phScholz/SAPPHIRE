@@ -133,7 +133,7 @@ namespace Module_RandomScheme{
             std::cout << std::endl << "Writing Level Scheme to file ..." << input.RdOutputFile() <<std::endl;
             try
             {
-                scheme->WriteRandomScheme("output/"+input.RdOutputFile());    
+                scheme->WriteRandomScheme("sapphireOutput/"+input.RdOutputFile());    
             }
             catch(const std::exception& e)
             {

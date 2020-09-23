@@ -44,7 +44,7 @@
         /** Setting default configurations for the SapphireInput class. */
         //std::cout << "Setting default values..." << std::endl;
         std::string path(fs::current_path().string());
-        SapphireInput::OutputDir(path +"/output/");
+        SapphireInput::OutputDir(path +"/sapphireOutput/");
         SapphireInput::exitStates = std::vector<int>(4,-1);
 
         SapphireInput::g_ExitStates(-1);

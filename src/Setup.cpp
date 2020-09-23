@@ -147,8 +147,8 @@ void Initialize() {
 
   gsl_set_error_handler (&CoulFunc::GSLErrorHandler);
 
-  if(!(fs::exists("output"))){
-    fs::create_directory("output");
+  if(!(fs::exists("sapphireOutput"))){
+    fs::create_directory("sapphireOutput");
     std::cout << std::endl << "Output directory has been created ..." << std::endl << std::endl;
   }
 }

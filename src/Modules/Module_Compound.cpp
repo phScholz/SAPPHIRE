@@ -54,12 +54,12 @@ namespace Module_Compound{
         std::string energyFile;
         if(!fexists(energyFile.c_str())){
             std::ofstream fp;
-            fp.open("output/energyFile.dat");
+            fp.open("sapphireOutput/energyFile.dat");
             fp << energy << std::endl;
             fp.close();
         }
 
-        energyFile="output/energyFile.dat";
+        energyFile="sapphireOutput/energyFile.dat";
 
         bool forRates = false;
         int entranceState = 0;
@@ -85,12 +85,12 @@ namespace Module_Compound{
         std::string energyFile;
         if(!fexists(energyFile.c_str())){
             std::ofstream fp;
-            fp.open("output/energyFile.dat");
+            fp.open("sapphireOutput/energyFile.dat");
             fp << energy << std::endl;
             fp.close();
         }
 
-        energyFile="output/energyFile.dat";
+        energyFile="sapphireOutput/energyFile.dat";
 
         bool forRates = false;
         int entranceState = 0;

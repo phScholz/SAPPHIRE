@@ -19,6 +19,7 @@ doxygen_config/
 *.out
 doc/*
 output/*.*
+sapphireOutput/*.*
 *.html
 *.js
 .vscode/
