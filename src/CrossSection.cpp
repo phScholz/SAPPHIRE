@@ -559,7 +559,7 @@ void CrossSection::Calculate(){
     
     if(!CalcDecayerVector(E,decayerVector)) {
       for(int j = 0;j<decayerVector.size();j++) 
-	      delete decayerVector[j].first;
+	      //delete decayerVector[j].first;
       continue;
     }
 
@@ -683,7 +683,7 @@ void CrossSection::Calculate(){
 	      protonStellarSum+=(2.*decayer->jInitial_+1.)*compoundTransmission*protonExitTransmission/decayer->totalIntegral_;
 	      alphaStellarSum+=(2.*decayer->jInitial_+1.)*compoundTransmission*alphaExitTransmission/decayer->totalIntegral_;
       }
-      delete decayerVector[j].first;
+      //delete decayerVector[j].first;
     }
 
     double totalSum = gammaSum + neutronSum + protonSum + alphaSum;
