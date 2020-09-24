@@ -128,7 +128,7 @@ TransitionRateFunc::TransitionRateFunc(int z1, int m1, int z2, int m2,
   double groundStateTransmission = 0.;
 
 //calculate the product of leveldensity*transmissionCoefficient for each level in the known level scheme
-#pragma omp parallel for if(isCrossSection) reduction(+:sum,exclusiveSum,discreteSum)
+//#pragma omp parallel for if(isCrossSection) reduction(+:sum,exclusiveSum,discreteSum)
  for(int i=knownLevels.size()-1;i>=0;--i) {
 
     if(knownLevels[i].J_==jFinal&&knownLevels[i].Pi_==piFinal)

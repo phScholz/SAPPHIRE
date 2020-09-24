@@ -751,6 +751,7 @@ void CrossSection::PrintCrossSections(){
   /** 3. In a foor loop, write the content of crossSections_*/
   ProgressBar pg;
   pg.start(crossSections_.size());
+  #pragma omp parallel for
   for(int i = 0;i<crossSections_.size();i++) {
     
     //if(skipped_[i])
