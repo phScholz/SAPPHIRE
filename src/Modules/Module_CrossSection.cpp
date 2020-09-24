@@ -394,7 +394,7 @@ namespace Module_CrossSection{
     }
 
     void Go(int argc,char *argv[]){
-         
+         omp_set_num_threads(20);
         /** At the beginning of the Go() method a clock is started for the measurement of the total calculation time.*/
         auto start = std::chrono::steady_clock::now();
         std::cout << "Module: reaction" << std::endl;
