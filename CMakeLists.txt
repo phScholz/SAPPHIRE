@@ -1,5 +1,5 @@
 #CMakeLists.txt
-message("\nStart building SAPPHIRE\n")
+message("\nStart building SAPPHIRE ... \n")
 
 cmake_minimum_required(VERSION 3.1)
 project(Sapphire C CXX)
@@ -9,37 +9,56 @@ set(CMAKE_CXX_STANDARD 11)
 #Set optimization to 3
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 
-enable_testing()
-
 message("Using CMAKE version ${CMAKE_VERSION}")
 
-set(build_types None Debug Release Travis MinSizeRel)
+set(build_types None Debug Regulus Release Travis MinSizeRel)
+
+option(CODE_COVERAGE "Enable coverage reporting" OFF)
+option(USE_GCOV "Create a GCov-enabled build." OFF)
+option(BUILD_DOC "Build documentation" OFF)
+option(GTEST "Build unit tests" ON)
+
+message("CMAKE_CXX_COMPILER_ID     : ${CMAKE_CXX_COMPILER_ID}")
+message("CMAKE_CXX_COMPILER_VERSION: ${CMAKE_CXX_COMPILER_VERSION}")
+
 
 if(${CMAKE_BUILD_TYPE} MATCHES "Debug")
-  message("\nBuild type is set to ${CMAKE_BUILD_TYPE}")
-
+  message("\nBuild type is set to ${CMAKE_BUILD_TYPE}\n")
   option(CODE_COVERAGE "Enable coverage reporting" OFF)
   message("OPTION CODE_COVERAGE IS OFF")
-
   option(USE_GCOV "Create a GCov-enabled build." OFF)
   message("OPTION USE_GCOV IS OFF")
-
   option(BUILD_DOC "Build documentation" OFF)
-  message("OPTION BUILD_DOC IS OFF\n")
-
+  message("OPTION BUILD_DOC IS OFF")
+  option(GTEST "Build unit tests" ON)
+  message("OPTION GTEST IS ON\n")
+  enable_testing()  
 endif(${CMAKE_BUILD_TYPE} MATCHES "Debug")
 
+if(${CMAKE_BUILD_TYPE} MATCHES "Regulus")
+  message("\nBuild type is set to ${CMAKE_BUILD_TYPE}\n")
+  option(CODE_COVERAGE "Enable coverage reporting" OFF)
+  message("OPTION CODE_COVERAGE IS OFF")
+  option(USE_GCOV "Create a GCov-enabled build." OFF)
+  message("OPTION USE_GCOV IS OFF")
+  option(BUILD_DOC "Build documentation" OFF)
+  message("OPTION BUILD_DOC IS OFF")
+  option(GTEST "Build UNIT TESTS" OFF)
+  message("OPTION GTEST IS OFF\n")  
+endif(${CMAKE_BUILD_TYPE} MATCHES "Regulus")
+
 if(${CMAKE_BUILD_TYPE} MATCHES "Travis")
+  message("\nBuild type is set to ${CMAKE_BUILD_TYPE}\n")
   option(CODE_COVERAGE "Enable coverage reporting" ON)
   message("\nOPTION CODE_COVERAGE IS ON")
   option(USE_GCOV "Create a GCov-enabled build." ON)
   message("OPTION USE_GCOV IS ON")
   option(BUILD_DOC "Build documentation" ON)
-  message("OPTION BUILD_DOC IS ON\n")
+  message("OPTION BUILD_DOC IS ON")
+  option(GTEST "Build UNIT TESTS" ON)
+  message("OPTION GTEST IS ON\n")
+  enable_testing()  
 endif(${CMAKE_BUILD_TYPE} MATCHES "Travis")
-
-message("CMAKE_CXX_COMPILER_ID     : ${CMAKE_CXX_COMPILER_ID}")
-message("CMAKE_CXX_COMPILER_VERSION: ${CMAKE_CXX_COMPILER_VERSION}")
 
 
 if (GSL_PATH)
@@ -94,7 +113,7 @@ include_directories(${ROOT_INCLUDE_DIR})
 link_directories(${ROOT_LIBRARY_DIR})
 message(STATUS "CXX_FLAGS                ${CMAKE_CXX_FLAGS}")
 
-add_definitions(-DMPI_BUILD)
+#add_definitions(-DMPI_BUILD)
 message("\nChecking if Boost can be found ...")
 FIND_PACKAGE(Boost 1.65 COMPONENTS filesystem random REQUIRED)
 INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
@@ -110,6 +129,13 @@ configure_file(include/Sapphire_config.h.in ${CMAKE_BINARY_DIR}/generated/Sapphi
 include_directories( ${CMAKE_BINARY_DIR}/generated/ )
 
 add_subdirectory(src)
+
+if(${CMAKE_BUILD_TYPE} MATCHES "Travis" OR ${CMAKE_BUILD_TYPE} MATCHES "Release" OR ${CMAKE_BUILD_TYPE} MATCHES "Debug")
+  add_subdirectory(tst)
+endif(${CMAKE_BUILD_TYPE} MATCHES "Travis" OR ${CMAKE_BUILD_TYPE} MATCHES "Release" OR ${CMAKE_BUILD_TYPE} MATCHES "Debug")
+
+  
+
 
 if(BUILD_DOC MATCHES ON)
  # check if Doxygen is installed
@@ -136,5 +162,3 @@ if(BUILD_DOC MATCHES ON)
  endif(BUILD_DOC MATCHES ON)
 
 message("Building Done\n")
-
-add_subdirectory(tst)

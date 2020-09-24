@@ -7,8 +7,7 @@
 ######################################################
 #
 echo ""
-echo "##### BUILDING SAPPHIRE #####"
-echo  ""
+echo "##### SAPPHIRE #####"
 
 #check if the build and output directory exists or not
 #if not, then create the build directory
@@ -18,12 +17,19 @@ echo  ""
 #go into the build directory
 cd ./build
 
+if [ -z $1 ]; then 
+    buildtype="Debug";
+else
+    buildtype=$1;
+fi
+
+
 #run cmake and if sucessfull run make install 
-cmake -DCMAKE_BUILD_TYPE=$1 .. && make -j8 && make install
+cmake -DCMAKE_BUILD_TYPE=${buildtype} .. && make -j8 && make install
 
-echo ""
-echo "##### RUNNING UNIT TESTS #####"
-echo  ""
 #run unit tests
-./test_sapphire 
-
+if [ ${buildtype} != "Regulus" ]; then 
+    echo ""; echo "##### RUNNING UNIT TESTS #####"; echo  ""; ./test_sapphire;
+else
+    echo ""; echo "##### UNIT TESTS ARE DISABLED #####"; echo "";
+fi
