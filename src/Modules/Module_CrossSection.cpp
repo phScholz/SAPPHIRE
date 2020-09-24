@@ -26,7 +26,9 @@
 #include "LevelDensity/LevelDensityTable.h"
 #include "omp.h"
 #include "Progressbar.h"
+#include <boost/filesystem.hpp>
 
+namespace fs = boost::filesystem;
 
 namespace Module_CrossSection{
  
@@ -368,7 +370,10 @@ namespace Module_CrossSection{
         }
 
         CrossSection* xs = new CrossSection(Z,A,pType,energyFile,forRates,entranceState,exitStates);
-       
+
+        std::string path(fs::current_path().string());
+        xs->OutputDir(path +"/sapphireOutput/");
+
         if(verbose){
             std::cout << std::endl << "[DEBUG] !!! Checking whether the CrossSection object is valid or not !!!" << std::endl;
         }
