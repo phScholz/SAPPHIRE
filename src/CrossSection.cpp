@@ -543,7 +543,8 @@ void CrossSection::Calculate(){
   pg.start(numPoints);
   std::cout << std::endl << "Number of energies: " << numPoints << std::endl;  
   pg.update(0);
-
+  
+  #pragma omp parallel for
   for(unsigned int i=0; i < crossSections_.size(); i++){
     
     //std::cout << std::endl << "Thread: " << omp_get_thread_num() <<  " Energy: " << crossSections_[i].first << std::endl;
@@ -751,7 +752,7 @@ void CrossSection::PrintCrossSections(){
   /** 3. In a foor loop, write the content of crossSections_*/
   ProgressBar pg;
   pg.start(crossSections_.size());
-  #pragma omp parallel for
+  
   for(int i = 0;i<crossSections_.size();i++) {
     
     //if(skipped_[i])
