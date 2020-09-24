@@ -76,6 +76,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lm")
 #Disable compilation warnings
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w ")
 
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall ")
+
 # Code Coverage Configuration
 add_library(coverage_config INTERFACE)
 

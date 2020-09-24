@@ -359,7 +359,6 @@ Level RandomScheme<NLD>::GetGroundState(int Z_, int A_){
             }
         }
     }
-
 }
 
 template <class NLD>
