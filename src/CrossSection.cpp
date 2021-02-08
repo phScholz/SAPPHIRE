@@ -544,7 +544,7 @@ void CrossSection::Calculate(){
   std::cout << std::endl << "Number of energies: " << numPoints << std::endl;  
   pg.update(0);
   
-  #pragma omp parallel for shared(crossSections_)
+  //#pragma omp parallel for shared(crossSections_)
   for(unsigned int i=0; i < crossSections_.size(); i++){
     
     //std::cout << std::endl << "Thread: " << omp_get_thread_num() <<  " Energy: " << crossSections_[i].first << std::endl;
