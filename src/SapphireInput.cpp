@@ -293,7 +293,7 @@
         SapphireInput::ReactionFile(pt.get<std::string>("CrossSection.ReactionFile", SapphireInput::ReactionFile()));
         SapphireInput::CalcRates(pt.get<bool>("CrossSection.CalcRates", SapphireInput::CalcRates()));
         SapphireInput::CalcMACS(pt.get<bool>("CrossSection.CalcRates", SapphireInput::CalcMACS()));
-        SapphireInput::CalcXS(pt.get<bool>("CrossSection.CalcRates", SapphireInput::CalcXS()));
+        SapphireInput::CalcXS(pt.get<bool>("CrossSection.CalcXS", SapphireInput::CalcXS()));
         SapphireInput::CalcAverageWidth(pt.get<bool>("CrossSection.CalcAverageWidth", SapphireInput::CalcAverageWidth()));
         SapphireInput::ResidualGamma(pt.get<bool>("CrossSection.ResidualGamma", SapphireInput::ResidualGamma()));               
         SapphireInput::ResidualNeutron(pt.get<bool>("CrossSection.ResidualNeutron", SapphireInput::ResidualNeutron()));           
